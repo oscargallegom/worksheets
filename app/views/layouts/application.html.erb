@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NutrientNet</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+  <link rel="stylesheet" href="http://nutrientnet.mdnutrienttrading.com/inc/guideline.css" media="all" type="text/css">
+
+</head>
+<body>
+
+<div id="banner">
+  <div id="mdlogo">
+    <!--<a href="http://www.maryland.gov"><img src="/inc/MDlogo.gif" alt="maryland.gov" width="168" height="90" /></a>-->
+    <a href="http://nutrientnet.mdnutrienttrading.com/"><img src="http://nutrientnet.mdnutrienttrading.com/inc/MDlogo.gif" alt="maryland.gov" width="168" height="90"></a>
+  </div>
+
+  <div id="global">
+    <div>
+      <div style="font-family: arial,verdana,helvetica,sans-serif; font-size: xx-small; padding: 5px 10px 0px 0px; color: #FEEDB9;">
+        <a href="http://problemsolver.maryland.gov" style="text-decoration: none; padding: 0px 5px 0px 5px; color: #FEEDB9;">Problem
+          Solver</a>|
+        <a href="http://www.maryland.gov" style="text-decoration: none; padding: 0px 5px 0px 5px; color: #FEEDB9;">Maryland.gov</a>|
+        <a href="http://www.maryland.gov/onlineservices/Pages/onlineservices.aspx" style="text-decoration: none; padding: 0px 5px 0px 5px; color: #FEEDB9;">Online
+          Services</a>|
+        <a href="http://www.maryland.gov/government/Pages/Serving.aspx" style="text-decoration: none; padding: 0px 5px 0px 5px; color: #FEEDB9;">State
+          Agencies</a>|
+        <a href="http://www.maryland.gov/phonebook" style="text-decoration: none; padding: 0px 5px 0px 5px; color: #FEEDB9;">Phone
+          Directory</a>
+      </div>
+    </div>
+    <div class="hide">
+      <h1>Maryland Nutrient Trading</h1> <!-- banner text alt for accessibility -->
+      <a href="#content" title="skip to content" accesskey="1">skip to
+        content </a> <!--  change if using other anchor name -->
+    </div>
+  </div>
+
+  <div id="global2">
+    <form method="get" action="http://search.maryland.gov/search" id="Form2">
+      <fieldset>
+        <label for="q" style="display:none">Search:</label>
+        <input type="text" class="searchTextBox" accesskey="4" name="q" id="q" maxlength="256" value="Search" onfocus="if(this.value=='Search'){this.value='';this.style.color='#000';}else{this.select();}">
+        <!-- site collection name -->
+        <input type="hidden" name="site" value="AssignValueHere" id="site">
+        <input type="image" class="searchButton" name="btnG" id="search" title="Search" alt="Search" src="http://nutrientnet.mdnutrienttrading.com/inc/searchButton.gif">
+        <!-- gsa variables -->
+        <input type="hidden" name="entqr" value="0" id="entqr">
+        <input type="hidden" name="ud" value="1" id="ud">
+        <input type="hidden" name="sort" value="date:D:L:d1" id="sort">
+        <input type="hidden" name="output" value="xml_no_dtd" id="output">
+        <input type="hidden" name="oe" value="UTF-8" id="oe">
+        <input type="hidden" name="ie" value="UTF-8" id="ie">
+        <input type="hidden" name="client" value="search_md_1" id="client">
+        <input type="hidden" name="proxystylesheet" value="search_md_1" id="proxystylesheet">
+      </fieldset>
+    </form>
+  </div>
+
+  <div id="tools">
+    <ul>
+      <!--<li class="mail"><a href="mailto:?subject=Maryland Nutrient Trading &amp;body=http://mdnutrienttrading.org">Email Friend</a> </li>-->
+      <li class="mail"><a href="mailto:?subject=Maryland Nutrient Trading &amp;body=http://www.mda.state.md.us/nutrad/">Email
+        Friend</a></li>
+    </ul>
+  </div>
+</div>
+
+ <div id="page">
+<table border="0" width="100%">
+  <tr>
+    <td>
+      <% if user_signed_in? %>
+          Welcome <%= current_user.first_name %>, <%= current_user.last_name %>
+      <% end %>
+    </td>
+    <td>
+      <% if user_signed_in? %>
+
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+
+      <% else %>
+
+          <%= link_to('Login', new_user_session_path) %>
+
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<p class="notice"><%= notice %></p>
+
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+     </div>
+
+</body>
+</html>
