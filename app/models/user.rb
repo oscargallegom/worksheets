@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   # the account needs to be approved by an administrator
   def active_for_authentication?
-    super && approved?
+    super # && approved?                   # TODO: check why it fails in Heroku
   end
 
   def inactive_message
