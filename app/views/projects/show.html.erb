@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
+</p>
+
+<p>
+  <b>Tract number:</b>
+  <%= @project.tract_number %>
+</p>
+
+<p>
+  <b>Farm notes:</b>
+  <%= @project.farm_notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

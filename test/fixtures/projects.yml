@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  tract_number: MyString
+  farm_notes: MyString
+
+two:
+  name: MyString
+  tract_number: MyString
+  farm_notes: MyString

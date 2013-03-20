@@ -1,0 +1,53 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table>
+    <tr>
+      <td><%= f.label :name %>:</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :tract_number %>:</td>
+      <td><%= f.text_field :tract_number %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :farm_notes %>:</td>
+      <td><%= f.text_area :farm_notes, :cols => 20, :rows => 5  %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :site_name %>:</td>
+      <td><%= f.text_field :site_name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :site_address_1 %>:</td>
+      <td><%= f.text_field :site_address_1 %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :site_address_2 %>:</td>
+      <td><%= f.text_field :site_address_2 %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :site_city %>:</td>
+      <td><%= f.text_field :site_city %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :site_zip %>:</td>
+      <td><%= f.text_field :site_zip %></td>
+    </tr>
+</table>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
