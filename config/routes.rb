@@ -1,4 +1,9 @@
 NutrientNet::Application.routes.draw do
+  resources :projects
+
+
+  get "static_page/help"
+
   resources :cities
 
 
@@ -7,6 +12,15 @@ NutrientNet::Application.routes.draw do
   end
 
   devise_for :users, :controllers => {:registrations => "users/registrations", :sessions => "users/sessions"}
+  scope "/admin" do
+    resources :users do
+    collection do
+      put 'disable_multiple'
+    end
+      end
+  end
+
+  resources :projects
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -66,7 +80,11 @@ NutrientNet::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   # added by Olivier
-  root :to => "states#index"
+  devise_scope :user do
+    root :to => "users/sessions#new"
+  end
+
+  match "/help", to: "static_pages#help", as: "help"
 
   match "/404", to: "errors#not_found"
   match "/500", to: "errors#not_found"

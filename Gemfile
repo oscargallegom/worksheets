@@ -5,7 +5,6 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
 
 
 # Gems used only for assets and not required
@@ -23,8 +22,11 @@ end
 gem 'jquery-rails'
 
 # added by Olivier
+gem 'pg'
+gem 'activerecord-postgresql-adapter'
 gem 'devise'
 gem 'cancan'
+gem 'jquery-ui-rails'
 
 # end added by Olivier
 

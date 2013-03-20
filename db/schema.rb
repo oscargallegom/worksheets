@@ -11,13 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316022430) do
+ActiveRecord::Schema.define(:version => 20130319015757) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
     t.integer  "state_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "tract_number"
+    t.string   "farm_notes"
+    t.string   "site_name"
+    t.string   "site_address_1"
+    t.string   "site_address_2"
+    t.string   "site_city"
+    t.string   "site_zip"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "states", :force => true do |t|
@@ -49,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20130316022430) do
     t.string   "last_name"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.boolean  "approved"
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

@@ -1,9 +1,9 @@
 module ApplicationHelper
 
 
-  def my_test
+  def insert_tabs(tabs)
 
-    return "Hello! My very first helper!"
+
 
   end
 

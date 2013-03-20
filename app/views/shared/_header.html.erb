@@ -1,0 +1,19 @@
+<div id="pageHeader">
+  <div style="float: right;">
+    <ul id="accountnav">
+
+      <% if user_signed_in? %>
+          <li>Welcome, <%= current_user.first_name%> <%= current_user.last_name%>!</li>
+          <li>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          </li>
+      <% else %>
+          <li>
+            <%= link_to('Login', new_user_session_path)  %>
+          </li>
+      <% end %>
+      <li><a class="last" href="/help">Help</a></li>
+    </ul>
+  </div>
+  <h1><a href="/" id="nutrientnet-logo">Chesapeake Bay Nutrient Trading</a></h1>
+</div>

@@ -1,10 +1,10 @@
 class StatesController < ApplicationController
-  layout "test"
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
   # GET /states
   # GET /states.json
   def index
     @states = State.accessible_by(current_ability)
+    @title = "Here is my title"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +16,7 @@ class StatesController < ApplicationController
   # GET /states/1.json
   def show
     @state = State.accessible_by(current_ability).find(params[:id])
+    @title = "Here is my title"
 
     respond_to do |format|
       format.html # show.html.erb

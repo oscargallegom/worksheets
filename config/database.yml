@@ -9,13 +9,13 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: NutrientNet_WH
+  database: nutrientnet_development
   pool: 5
-  username: NutrientNet
-  password: NutrientNet
+  username: nutrientnet
+  password: nutrientnet
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -35,8 +35,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: NutrientNet_production
+  database: NutrientNet_WH
   pool: 5
-  username: root
-  password:
+  username: NutrientNet
+  password: NutrientNet
   host: localhost
