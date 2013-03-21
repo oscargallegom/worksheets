@@ -64,4 +64,16 @@ NutrientNet::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  # added by Olivier for devise
+  # TODO: find a long term solution (SMTP server/gmail)
+  config.action_mailer.default_url_options = { :host => 'nutrientnet.herokuapp.com' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      :address => 'smtp.gmail.com', #'localhost',
+      :port => 587,
+      :domain => 'mail.google.com',  # mail.customdomain.com if you use google apps
+      :authentication => "plain",
+      :user_name => 'oleblond@gmail.com',
+      :password => 'olliver11'
+  }
 end
