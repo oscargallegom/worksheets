@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all_enabled(params[:status])
+    @users = User.searchByStatus(params[:status])
+
         # User.search(params[:search]).disabled
 
     respond_to do |format|
@@ -23,7 +24,6 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user.soft_delete
 
     respond_to do |format|
       format.html { redirect_to users_url }
@@ -94,10 +94,11 @@ class UsersController < ApplicationController
   def disable_multiple
     @users = User.find(params[:user_ids_all])
     @users.each do |user|
-      if (params[:user_ids].include?(user.id.to_s)) then
-        user.update_attributes!(:deleted_at => Time.now)
+      if (params[:user_ids] && params[:user_ids].include?(user.id.to_s)) then
+        #user.update_attributes!(:deleted_at => Time.now)
+        user.update_attributes!(:approved => true)
       else
-        user.update_attributes!(:deleted_at => nil)
+        user.update_attributes!(:approved => false)
       end
     end
     flash[:notice] = "Updated users!"

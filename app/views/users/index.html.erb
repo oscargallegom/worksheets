@@ -1,7 +1,22 @@
+<div style="position:relative">
+  <ul id="tabNav">
+
+    <li <%= 'class=selected' if params[:status]=='notapproved'  %>><%= link_to 'Accounts not approved', users_path(:status => 'notapproved') %></li>
+    <li <%= 'class=selected' if params[:status]=='approved'  %>><%= link_to 'Accounts approved', users_path(:status => 'approved') %></li>
+    <li <%= 'class=selected' if params[:status]=='deleted'  %>><%= link_to 'Accounts deleted', users_path(:status => 'deleted') %></li>
+    <li <%= 'class=selected' unless params[:status]  %>><%= link_to 'All', users_path %></li>
+    <li class="shadow"></li>
+  </ul>
+</div>
+
+<br/>
+
 <h1>Listing users</h1>
 
 <%= form_tag users_path, :method => 'get'  do %>
-<p>
+
+
+    <p>
   <%= text_field_tag :search, params[:search], :placeholder => "Search here" %>
   <%= submit_tag "Search", :body => nil %>
 </p>
@@ -20,10 +35,13 @@
           <tr>
             <td class="option">
               <input type="hidden" name="user_ids_all[]" value="<%=user.id %>" checked>
-              <%= check_box_tag "user_ids[]", user.id, !user.deleted_at.nil? %>
+              <%= check_box_tag "user_ids[]", user.id, user.approved %>
 
             </td>
             <td><%= user.email %></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.deleted_at %></td>
 
             <td><%= link_to 'Show', user %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>

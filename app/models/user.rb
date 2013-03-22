@@ -6,30 +6,33 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable
 
-  scope :enabled, where(:deleted_at => nil)
-  scope :disabled, where("deleted_at IS NOT NULL")
-
   # just am example to filter
-  scope :user_filter, lambda {|user_id|
-    where(:id => user_id) unless user_id.nil?
-  }
-
-  scope :is_enabled_filter, lambda {|par|
-    where(:is_enabled => par) unless par.nil?
-  }
+  # scope :user_filter, lambda {|user_id|
+  #  where(:id => user_id) unless user_id.nil?
+  #}
 
   # Setup accessible (or protected) attributes for your model
+  has_many :projects
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :deleted_at
+  attr_accessible :approved     # TODO: for admin only
   # attr_accessible :title, :body
+
+  before_save :set_default
+
+  def set_default
+    set_default = false unless  :set_default
+  end
 
   # the account needs to be approved by an administrator
   def active_for_authentication?
-    super # && approved?                   # TODO: check why it fails in Heroku
+    super && !deleted_at && approved?
   end
 
   def inactive_message
     if !approved?
       :not_approved
+    elsif deleted_at
+      :deleted
     else
       super # Use whatever other message
     end
@@ -45,6 +48,21 @@ class User < ActiveRecord::Base
     recoverable
   end
 
+  def soft_delete
+    update_attribute(:deleted_at, Time.current)
+  end
+
+  def self.searchByStatus(status)
+    scoped = self.scoped
+    if status
+    scoped = scoped.where(:approved => true, :deleted_at => nil).order("updated_at desc") if status=='approved'
+    scoped = scoped.where(:approved => false, :deleted_at => nil).order("updated_at desc") if status=='notapproved'
+    scoped = scoped.where("deleted_at IS NOT NULL") if status=='deleted'
+    end
+      scoped
+
+  end
+
   def self.search(search)
     if search
       where 'email LIKE ?', "%#{search}%"
@@ -54,13 +72,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.all_enabled(par = nil)
-    if par.nil?
-      scoped
-    elsif par == 'true'
-      where(:deleted_at => nil)
-    else    par == 'false'
-           where("deleted_at IS NOT NULL")
-    end
-  end
+  #def self.all_enabled(par = nil)
+  #  if par.nil?
+  #    scoped
+  #  elsif par == 'true'
+  #    where(:deleted_at => nil)
+  #  else    par == 'false'
+  #         where("deleted_at IS NOT NULL")
+  #  end
+  #end
 end

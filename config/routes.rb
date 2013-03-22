@@ -1,4 +1,7 @@
 NutrientNet::Application.routes.draw do
+  resources :fields
+
+
   resources :projects
 
 

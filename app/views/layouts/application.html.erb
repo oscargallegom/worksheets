@@ -45,19 +45,18 @@
 
     <div id="pageContent" class="clearfix">
 
-      <h1 class="pageTitle">Agricultural Farm Worksheets</h1>
-      <br />
+      <h1 class="pageTitle"><%= link_to 'Agricultural Farm Worksheets', projects_path %> </h1>
+      <br/>
       <% if flash[:notice] %>
-      <p class="alert"><%= notice %></p>               <!-- # class: notice     -->
+          <p class="alert"><%= notice %></p> <!-- # class: notice     -->
       <% end %>
       <% if flash[:alert] %>
-      <p class="alert"><%= alert %></p>
+          <p class="alert"><%= alert %></p>
       <% end %>
 
-      <%= yield %>
+      <%= content_for?(:second_level_layout) ? yield(:second_level_layout) : yield %>
 
     </div>
-
 
 
   </div>

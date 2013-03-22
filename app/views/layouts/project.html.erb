@@ -1,0 +1,25 @@
+<% content_for :second_level_layout do %>
+
+    <div style="position:relative">
+      <ul id="tabNav">
+        <li><%= link_to 'Summary', project_path(@project) unless @project.id.nil? %></li>
+        <li class="selected"><a href="?show=enabled">Edit Details </a></li>
+        <li><a href="?show=disabled">Edit Location <em>-</em></a></li>
+        <li><a href="?show=disabled">Review <em>-</em></a></li>
+        <li class="shadow"></li>
+        <li><a href="?show=disabled">Submit <em>-</em></a></li>
+        <li class="shadow"></li>
+      </ul>
+    </div>
+
+    <br>
+
+    <%= yield %>
+
+<% end %>
+
+
+
+
+
+<%= render :template => 'layouts/application' %>

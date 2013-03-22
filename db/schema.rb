@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319015757) do
+ActiveRecord::Schema.define(:version => 20130322021046) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
     t.integer  "state_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "fields", :force => true do |t|
+    t.string   "name"
+    t.decimal  "area"
+    t.string   "baseline_load"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "project_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -41,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20130319015757) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -61,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20130319015757) do
     t.string   "authentication_token"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.boolean  "approved"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "approved",               :default => false
     t.datetime "deleted_at"
   end
 

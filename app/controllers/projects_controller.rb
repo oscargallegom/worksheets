@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  layout "project" , :except => [:index]
+
   # GET /projects
   # GET /projects.json
   def index
