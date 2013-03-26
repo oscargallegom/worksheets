@@ -26,6 +26,7 @@ gem 'pg'
 gem 'activerecord-postgresql-adapter'
 gem 'devise'
 gem 'cancan'
+gem 'will_paginate'
 gem 'jquery-ui-rails'
 
 # end added by Olivier

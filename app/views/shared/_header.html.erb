@@ -3,7 +3,7 @@
     <ul id="accountnav">
 
       <% if user_signed_in? %>
-          <li>Welcome, <%= current_user.first_name%> <%= current_user.last_name%>!</li>
+          <li>Welcome, <%= current_user.first_name%> <%= current_user.last_name%></li>
           <li>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
           </li>

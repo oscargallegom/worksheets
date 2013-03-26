@@ -1,8 +1,12 @@
 class FieldsController < ApplicationController
-  # GET /fields
-  # GET /fields.json
+  load_and_authorize_resource :project
+  load_and_authorize_resource :through => :project
+
+  # GET /projects/1/fields
+  # GET /projects/1/fields.json
   def index
-    @fields = Field.all
+    # @project = Project.find(params[:project_id])
+    # @fields = @project.fields
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +14,11 @@ class FieldsController < ApplicationController
     end
   end
 
-  # GET /fields/1
-  # GET /fields/1.json
+  # GET /projects/1/fields/1
+  # GET /projects/1/fields/1.json
   def show
-    @field = Field.find(params[:id])
+    # @project = Project.find(params[:project_id])
+    # @field = @project.fields.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +26,11 @@ class FieldsController < ApplicationController
     end
   end
 
-  # GET /fields/new
-  # GET /fields/new.json
+  # GET /projects/1/fields/new
+  # GET /projects/1/fields/new.json
   def new
-    @field = Field.new
+    # @project = Project.find(params[:project_id])
+    # @field =@project.fields.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,19 +38,23 @@ class FieldsController < ApplicationController
     end
   end
 
-  # GET /fields/1/edit
+  # GET /projects/1/fields/1/edit
   def edit
-    @field = Field.find(params[:id])
+    # @project= Project.find(params[:project_id])
+    # @field = @project.fields.find(params[:id])
+    @step = params[:step] || '1'
+
   end
 
-  # POST /fields
-  # POST /fields.json
+  # POST /projects/1/fields
+  # POST /projects/1/fields.json
   def create
-    @field = Field.new(params[:field])
+    #  @project = Project.find(params[:project_id])
+    # @field =@project.fields.build(params[:field])
 
     respond_to do |format|
       if @field.save
-        format.html { redirect_to @field, notice: 'Field was successfully created.' }
+        format.html { redirect_to project_field_url(@project, @field), notice: 'Field was successfully created.' }
         format.json { render json: @field, status: :created, location: @field }
       else
         format.html { render action: "new" }
@@ -53,14 +63,15 @@ class FieldsController < ApplicationController
     end
   end
 
-  # PUT /fields/1
-  # PUT /fields/1.json
+  # PUT /projects/1/fields/1
+  # PUT /projects/1/fields/1.json
   def update
-    @field = Field.find(params[:id])
+    # @project =Project.find(params[:project_id])
+    # field = @project.fields.find(params[:id])
 
     respond_to do |format|
       if @field.update_attributes(params[:field])
-        format.html { redirect_to @field, notice: 'Field was successfully updated.' }
+        format.html { redirect_to project_field_url(@project, @field), notice: 'Field was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,14 +80,15 @@ class FieldsController < ApplicationController
     end
   end
 
-  # DELETE /fields/1
-  # DELETE /fields/1.json
+  # DELETE /projects/1/fields/1
+  # DELETE /projects/1/fields/1.json
   def destroy
-    @field = Field.find(params[:id])
+    @project= Project.find(params[:project_id])
+    @field = @project.fields.find(params[:id])
     @field.destroy
 
     respond_to do |format|
-      format.html { redirect_to fields_url }
+      format.html { redirect_to project_path(@project) }
       format.json { head :no_content }
     end
   end

@@ -1,13 +1,10 @@
 NutrientNet::Application.routes.draw do
-  resources :fields
+  resources :dummies
 
 
-  resources :projects
-
-
-  get "static_page/help"
-
-  resources :cities
+    resources :projects  do
+      resources :fields
+    end
 
 
   resources :states do
@@ -22,8 +19,6 @@ NutrientNet::Application.routes.draw do
     end
       end
   end
-
-  resources :projects
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -89,6 +84,7 @@ NutrientNet::Application.routes.draw do
 
   match "/help", to: "static_pages#help", as: "help"
 
+  match "/401", to: "errors#not_authorized"
   match "/404", to: "errors#not_found"
   match "/500", to: "errors#not_found"
 end

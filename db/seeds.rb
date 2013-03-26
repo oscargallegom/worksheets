@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Role.delete_all
+Role.create!({:id => 1, :name => 'User Administrator'} , :without_protection => true)
+Role.create!({:id => 2, :name => 'Project Administrator'}, :without_protection => true)
+Role.create!({:id => 3, :name => 'Basic User'}, :without_protection => true)
+
 State.delete_all
 State.create!({:name => 'Virginia'}, :without_protection => true)
 State.create!({:name => 'Maryland'}, :without_protection => true)

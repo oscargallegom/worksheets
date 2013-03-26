@@ -11,6 +11,71 @@
     </div>
   <% end %>
 
+    <table>
+      <tr>
+        <td>
+         <label for="email">Email:</label>
+        </td>
+        <td>
+          <%= f.text_field :email  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="first_name">First name:</label>
+        </td>
+        <td>
+          <%= f.text_field :first_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="last_name">Last name:</label>
+        </td>
+        <td>
+          <%= f.text_field :last_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Approved:
+        </td>
+        <td>
+          <%= f.radio_button(:approved, "true") %>
+          <%= f.label(:approved_true, "Yes") %>
+          <%= f.radio_button(:approved, "false") %>
+          <%= f.label(:approved_false, "No") %>
+          <!-- TODO: radio buttons for enabled / deleted     -->
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Deleted:
+        </td>
+        <td>
+          <%= f.radio_button(:deleted, "true" ) %>
+          <%= f.label(:deleted_true, "Yes") %>
+          <%= f.radio_button(:deleted, "false") %>
+          <%= f.label(:deleted_false, "No") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Roles:
+        </td>
+        <td>
+          <ul>
+            <% @roles.each do |role| %>
+                <li>
+                  <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) -%>
+                  <%= h role.name -%>
+                </li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

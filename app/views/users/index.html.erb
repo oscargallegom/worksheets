@@ -1,58 +1,74 @@
 <div style="position:relative">
-  <ul id="tabNav">
 
-    <li <%= 'class=selected' if params[:status]=='notapproved'  %>><%= link_to 'Accounts not approved', users_path(:status => 'notapproved') %></li>
-    <li <%= 'class=selected' if params[:status]=='approved'  %>><%= link_to 'Accounts approved', users_path(:status => 'approved') %></li>
-    <li <%= 'class=selected' if params[:status]=='deleted'  %>><%= link_to 'Accounts deleted', users_path(:status => 'deleted') %></li>
-    <li <%= 'class=selected' unless params[:status]  %>><%= link_to 'All', users_path %></li>
+  <div style="position:absolute;top: 5px;right:0px;z-index:2">
+    <%= form_tag users_path, :method => 'get' do %>
+        <%= hidden_field_tag :tab, params[:tab] %>
+        <%= text_field_tag :search, params[:search], :placeholder => "Search here" %>
+        <%= submit_tag "Search", :body => nil %>
+    <% end %>
+  </div>
+
+  <ul id="tabNav">
+    <li <%= 'class=selected' if params[:tab]=='notapproved' %>><%= link_to 'Accounts not approved', users_path(:tab => 'notapproved') %></li>
+    <li <%= 'class=selected' if params[:tab]=='approved' %>><%= link_to 'Accounts approved', users_path(:tab => 'approved') %></li>
+    <li <%= 'class=selected' if params[:tab]=='deleted' %>><%= link_to 'Accounts deleted', users_path(:tab => 'deleted') %></li>
+    <li <%= 'class=selected' if params[:tab]=='all' %>><%= link_to 'All', users_path(:tab => 'all') %></li>
     <li class="shadow"></li>
   </ul>
-</div>
-
-<br/>
-
-<h1>Listing users</h1>
-
-<%= form_tag users_path, :method => 'get'  do %>
+  </div>
+    <br/>
 
 
-    <p>
-  <%= text_field_tag :search, params[:search], :placeholder => "Search here" %>
-  <%= submit_tag "Search", :body => nil %>
-</p>
-<% end %>
 
 <%= form_tag disable_multiple_users_path, :method => :put do %>
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+      <tr>
+        <th>Approved</th>
+        <th><%=  sortable 'email', 'Email' %></th>
+        <th><%= sortable 'first_name', 'First name' %></th>
+        <th><%= sortable 'last_name', 'Last name' %></th>
+        <% if params[:status]=='deleted' %>
+        <th><%= sortable 'deleted_at', 'Deleted on'  %></th>
+            <% end %>
+        <th class="actions">Action</th>
+
+      </tr>
 
 
       <% @users.each do |user| %>
           <tr>
             <td class="option">
-              <input type="hidden" name="user_ids_all[]" value="<%=user.id %>" checked>
+              <input type="hidden" name="user_ids_all[]" value="<%= user.id %>" checked>
               <%= check_box_tag "user_ids[]", user.id, user.approved %>
 
             </td>
             <td><%= user.email %></td>
             <td><%= user.first_name %></td>
             <td><%= user.last_name %></td>
-            <td><%= user.deleted_at %></td>
+            <% if params[:status]=='deleted' %>
+            <td><%= l user.deleted_at, :format => :datetime %></td>
+                <% end %>
 
-            <td><%= link_to 'Show', user %></td>
-            <td><%= link_to 'Edit', edit_user_path(user) %></td>
-            <td><%= link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <td>
+              <%= link_to image_tag('/images/view.png', :alt => 'Show'), user %>
+            <%= link_to image_tag('/images/edit.png', :alt => 'Edit'), edit_user_path(user) %>
+            <%= link_to image_tag('/images/delete.png', :alt => 'Delete'), user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+
           </tr>
       <% end %>
-      </table>
+    </table>
 
-      <br/>
+    <div style="position:relative">
+    <div style="position:absolute;top:3px;right:0px;z-index:2" >
 
-      <%= submit_tag "Edit Checked" %>
+        <%= page_entries_info @users, :model => 'Account' %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= will_paginate @users, :container => false %>
+      </div>
+      </div>
 
-      <%= link_to 'New User', new_user_path %>
+      <BR/>
+    <%= submit_tag "Update approved accounts" %>
+
+    <!-- %= link_to 'New User', new_user_path % -->
 <% end %>

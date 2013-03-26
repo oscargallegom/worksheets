@@ -1,16 +1,18 @@
 class UsersController < ApplicationController
+  authorize_resource
 
+  helper_method :sort_column, :sort_direction
 
   # if params[:user][:password].blank?
   #  params[:user].delete(:password)
   #  params[:user].delete(:password_confirmation)
   # end
 
-
   # GET /users
   # GET /users.json
   def index
-    @users = User.searchByStatus(params[:status])
+    params[:tab] ||= 'all'       # default tab
+    @users = User.searchByStatus(params[:tab]).search(params[:search]).page(params[:page]).order(sort_column + " " + sort_direction)
 
         # User.search(params[:search]).disabled
 
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @roles = Role.all
   end
 
   # POST /users
@@ -65,7 +68,10 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    params[:user][:role_ids] ||= []
+
     @user = User.find(params[:id])
+    @roles = Role.all
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -90,6 +96,8 @@ class UsersController < ApplicationController
     end
   end
 
+  private
+
   # PUT /users/disable_multiple
   def disable_multiple
     @users = User.find(params[:user_ids_all])
@@ -103,5 +111,15 @@ class UsersController < ApplicationController
     end
     flash[:notice] = "Updated users!"
     redirect_to users_path
+  end
+
+  private
+
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

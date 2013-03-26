@@ -15,13 +15,13 @@
     <td><%= field.name %></td>
     <td><%= field.area %></td>
     <td><%= field.baseline_load %></td>
-    <td><%= link_to 'Show', field %></td>
-    <td><%= link_to 'Edit', edit_field_path(field) %></td>
-    <td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', project_field_path(@project, field) %></td>
+    <td><%= link_to 'Edit', edit_project_field_path(@project, field) %></td>
+    <td><%= link_to 'Destroy',  project_field_path(@project, field), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Field', new_field_path %>
+<%= link_to 'New Field', new_project_field_path(@project) %>

@@ -1,3 +1,9 @@
+<%=  link_to @project.name, project_path(@project) %>
+>
+<%= link_to @field.name, project_field_path(@project, @field) %>
+
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -16,5 +22,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_field_path(@field) %> |
-<%= link_to 'Back', fields_path %>
+<%= link_to 'Edit', edit_project_field_path(@project, @field) %> |
+<%= link_to 'Back', project_fields_path(@project) %>

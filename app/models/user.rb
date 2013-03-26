@@ -12,26 +12,40 @@ class User < ActiveRecord::Base
   #}
 
   # Setup accessible (or protected) attributes for your model
+  has_and_belongs_to_many :roles
   has_many :projects
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :deleted_at
-  attr_accessible :approved     # TODO: for admin only
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
+  attr_accessible :role_ids, :approved, :deleted, :deleted_at     # TODO: for admin only
   # attr_accessible :title, :body
 
   before_save :set_default
+  after_create :default_role
+
+  def deleted
+     !deleted_at.nil?
+  end
+
+  def deleted=(isDeleted)
+    self.deleted_at = (isDeleted=='true') ? Time.current : nil
+  end
 
   def set_default
     set_default = false unless  :set_default
   end
 
+  def default_role
+    self.roles << Role.find_by_name('Basic User')
+  end
+
   # the account needs to be approved by an administrator
   def active_for_authentication?
-    super && !deleted_at && approved?
+    super && !deleted && approved?
   end
 
   def inactive_message
     if !approved?
       :not_approved
-    elsif deleted_at
+    elsif deleted
       :deleted
     else
       super # Use whatever other message
@@ -48,8 +62,20 @@ class User < ActiveRecord::Base
     recoverable
   end
 
+  # delete user
   def soft_delete
     update_attribute(:deleted_at, Time.current)
+  end
+
+  def destroy
+    resource.soft_delete
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :destroyed if is_navigational_format?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+  end
+
+  def role?(role)
+    return !!self.roles.find_by_name(role.to_s.titleize)
   end
 
   def self.searchByStatus(status)

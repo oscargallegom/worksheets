@@ -1,10 +1,8 @@
-class StatesController < ApplicationController
+class ErrorsController < ApplicationController
 
-  def not_found
-    i=0
-    j=1
+      def not_found
+      end
 
-  end
-
-
+      def not_authorized
+      end
 end

@@ -31,14 +31,23 @@ class Ability
 
     def initialize(user)
       user ||= User.new # guest user (not logged in)
-      #if user.admin?
-        #can :manage, :all
-        can :read, State, ['name in (?)', ['Virginia', 'Maryland'] ]       do state
-          ['Virginia', 'Maryland'].include? state.name
-        end
-      #else
-      #  cannot :manage, :all
-      #end
+      if user.role? :user_administrator
+        can :manage, User
+      end
+      if user.role? :project_administrator
+        can :manage, [Project, Field]
+      end
+      if user.role? :basic_user
+        # can :manage, [Project, Field]
+        # can :read, Project
+        # can :manage, Project do |project|
+        #   project.try(:id) == 1
+        # end
+         can :manage, Project, :owner_id => user.id
+        can :manage, Field, :project => {:owner_id => user.id}
+      end
+
+
     end
 
   end

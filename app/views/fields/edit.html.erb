@@ -1,6 +1,35 @@
-<h1>Editing field</h1>
+<%=  link_to @project.name, project_path(@project) %>
+>
+<%= link_to @field.name, project_field_path(@project, @field) %>
 
-<%= render 'form' %>
+<div style="position:relative">
+  <ul id="tabNav">
+    <li <%= 'class=selected' %>><%= link_to 'General', edit_project_field_path(@project, @field, :step => 1) %></li>
+    <li ><%= link_to 'Soil', edit_project_field_path(@project, @field, :step => 2) %></li>
+    <li ><%= link_to 'Baseline Crop Management', edit_project_field_path(@project, @field, :step => 3) %></li>
+    <li ><%= link_to 'Baseline BMPs', edit_project_field_path(@project, @field, :step => 4) %></li>
+    <li ><%= link_to 'Baseline Nutrient Load', edit_project_field_path(@project, @field, :step => 5) %></li>
+    <li><%= link_to 'Future Crop Management', edit_project_field_path(@project, @field, :step => 6) %></li>
+    <li ><%= link_to 'Future BMPs', edit_project_field_path(@project, @field, :step => 7) %></li>
+    <li ><%= link_to 'Future Nutrient Load', edit_project_field_path(@project, @field, :step => 8) %></li>
+    <li class="shadow"></li>
+  </ul>
 
-<%= link_to 'Show', @field %> |
-<%= link_to 'Back', fields_path %>
+</div>
+
+<br/>
+
+<%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
+<%= render 'fields/edit_steps/step_2' if @step=='2' %>
+<%= render 'fields/edit_steps/step_3' if @step=='3' %>
+<%= render 'fields/edit_steps/step_4' if @step=='4' %>
+<%= render 'fields/edit_steps/step_5' if @step=='5' %>
+<%= render 'fields/edit_steps/step_6' if @step=='6' %>
+<%= render 'fields/edit_steps/step_7' if @step=='7' %>
+<%= render 'fields/edit_steps/step_8' if @step=='8' %>
+
+
+<br/>
+
+<%= link_to 'Show', project_fields_path(@project, @field) %> |
+<%= link_to 'Back', project_fields_path(@project) %>

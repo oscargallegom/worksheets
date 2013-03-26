@@ -1,29 +1,30 @@
-<h1>Listing projects</h1>
+<%= link_to image_tag('/images/add.png', :alt => 'Add'), new_project_path %>
+<%= link_to 'Add new project', new_project_path %>
 
-<table cellspacing="10">
+<br/><br/>
+
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
   <tr>
-    <th>Project Name</th>
+    <th><%= link_to 'Project Name' %></th>
     <th>Created on</th>
     <th>Fields</th>
     <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Actions</th>
   </tr>
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.name %></td>
+    <td><%= link_to project.name, project   %></td>
     <td><%= l project.created_at, :format =>  :date %></td>
     <td>0</td>
     <td>Not Started</td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to image_tag('/images/view.png', :alt => 'Show'), project %>
+    <%= link_to image_tag('/images/edit.png', :alt => 'Edit'), edit_project_path(project) %>
+    <%= link_to image_tag('/images/delete.png', :alt => 'Delete'), project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+

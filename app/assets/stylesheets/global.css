@@ -667,7 +667,23 @@ ul#tabNav li a em {
     color: #fff;
     text-decoration: none;
     /*	padding: 5px; */
+    padding-right: 25px;
 }
+
+.listingTable th .current {
+    padding-right: 25px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.listingTable th .asc {
+    background-image: url('/images/sortasc.png');
+}
+
+.listingTable th .desc {
+    background-image: url('/images/sortdesc.png');
+}
+
 .listingTable td {
     vertical-align: top;
     padding: 6px;
@@ -1078,3 +1094,5 @@ a.sort.desc img {
     height: 4px;
     margin-top: 6px;
 }
+
+
