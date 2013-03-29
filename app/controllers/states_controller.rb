@@ -1,9 +1,9 @@
 class StatesController < ApplicationController
+  load_and_authorize_resource
   #before_filter :authenticate_user!
   # GET /states
   # GET /states.json
   def index
-    @states = State.accessible_by(current_ability)
     @title = "Here is my title"
 
     respond_to do |format|
@@ -15,7 +15,6 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
-    @state = State.accessible_by(current_ability).find(params[:id])
     @title = "Here is my title"
 
     respond_to do |format|
@@ -27,7 +26,7 @@ class StatesController < ApplicationController
   # GET /states/new
   # GET /states/new.json
   def new
-    @state = State.new
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,13 +36,13 @@ class StatesController < ApplicationController
 
   # GET /states/1/edit
   def edit
-    @state = State.find(params[:id])
+
   end
 
   # POST /states
   # POST /states.json
   def create
-    @state = State.new(params[:state])
+
 
     respond_to do |format|
       if @state.save

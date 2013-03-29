@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   load_and_authorize_resource
-  layout "project" , :except => [:index]
+  layout "project", :except => [:index]
 
   # GET /projects
   # GET /projects.json

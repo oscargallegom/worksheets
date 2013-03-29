@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  self.per_page = 5
+
   #:omniauthable
   #:token_authenticatable
   #:confirmable

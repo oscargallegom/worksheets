@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NutrientNet</title>
+  <title><%= content_for?(:title) ? content_for(:title) : 'NutrientNet' %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -46,19 +46,19 @@
     <div id="pageContent" class="clearfix">
 
       <h1 class="pageTitle"><%= link_to 'Agricultural Farm Worksheets', projects_path %> </h1>
-      <br/>
+
+      <%= render_breadcrumbs %>
       <% if flash[:notice] %>
+          <br/><br/>
           <p class="alert"><%= notice %></p> <!-- # class: notice     -->
       <% end %>
       <% if flash[:alert] %>
+          <br/><br/>
           <p class="alert"><%= alert %></p>
       <% end %>
 
       <%= content_for?(:second_level_layout) ? yield(:second_level_layout) : yield %>
-
     </div>
-
-
   </div>
   <%= render 'shared/footer' %>
 </div>

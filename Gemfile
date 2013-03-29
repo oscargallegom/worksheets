@@ -28,6 +28,7 @@ gem 'devise'
 gem 'cancan'
 gem 'will_paginate'
 gem 'jquery-ui-rails'
+gem 'breadcrumbs_on_rails'
 
 # end added by Olivier
 

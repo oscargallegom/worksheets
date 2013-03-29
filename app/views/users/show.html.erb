@@ -1,74 +1,55 @@
-<p id="notice"><%= notice %></p>
+<div class="nn-form sectionRest clearfix">
+  <div>
+    <fieldset>
+      <ol>
+        <li>
+          <label class='wide'>Email:</label>
+          <%= @user.email %>
+        </li>
+        <li>
+          <label class="wide">First name:</label>
+          <%= @user.first_name %>
+        </li>
 
-<table>
-  <tr>
-    <td>
-      Email:
-    </td>
-    <td>
-      <%= @user.email  %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      First name:
-    </td>
-    <td>
-      <%= @user.first_name %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Last name:
-    </td>
-    <td>
-      <%= @user.last_name %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Locked:
-    </td>
-    <td>
-      <%= !@user.locked_at.nil? %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Approved:
-    </td>
-    <td>
-      <%= @user.approved? %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Delete:
-    </td>
-    <td>
-      <%= !@user.deleted_at.nil? %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Number sign-ins:
-    </td>
-    <td>
-      <%= @user.sign_in_count %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-     Last login on:
-    </td>
-    <td>
-      <%= l @user.last_sign_in_at unless @user.last_sign_in_at.nil? %>
-      <!-- TODO: format data l datetime? -->
-    </td>
-  </tr>
-
-</table>
+        <li>
+          <label class="wide">Last name:</label>
+          <%= @user.last_name %>
+        </li>
+        <li>
+          <label class="wide">Approved:</label>
+          <%= radio_button_tag(:approved, 'true', @user.approved?, :disabled => 'true') %>
+          <%= label_tag(:approved, 'Yes', :value => 'true') %>
+          <%= radio_button_tag(:approved, 'false', !@user.approved?, :disabled => 'false') %>
+          <%= label_tag(:approved, 'No', :value => 'false') %>
+        </li>
+        <li>
+          <label class="wide">Roles:</label>
+          <div style="float: left;">
+            <% @roles.each do |role| %>
+                <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role), :id => 'user_role_' + role.id.to_s, :disabled => true %>
+                <%= label_tag('user_role_' + role.id.to_s, role.name) -%>
+                <br>
+            <% end %>
+          </div>
+        </li>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+      </ol>
+
+    </fieldset>
+    <fieldset>
+
+      <ol>
+        <li>
+          <label class='wide'>Sign-in count:</label>
+          <%= @user.sign_in_count %>
+        </li>
+      </ol>
+    </fieldset>
+  </div>
+  <div style="clear: both"></div>
+</div>
+
+<div class="actions">
+  <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{users_path}'" %>
+</div>

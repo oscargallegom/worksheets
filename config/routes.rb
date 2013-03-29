@@ -12,6 +12,7 @@ NutrientNet::Application.routes.draw do
   end
 
   devise_for :users, :controllers => {:registrations => "users/registrations", :sessions => "users/sessions"}
+
   scope "/admin" do
     resources :users do
     collection do

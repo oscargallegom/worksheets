@@ -32,11 +32,11 @@ test:
   host: localhost
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: NutrientNet_WH
+  database: nutrientnet_development
   pool: 5
-  username: NutrientNet
-  password: NutrientNet
+  username: nutrientnet
+  password: nutrientnet
   host: localhost

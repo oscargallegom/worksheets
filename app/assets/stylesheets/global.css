@@ -441,7 +441,7 @@ input.button {
 #pageContent {
     background: #fff;
     box-shadow: 0 2px 8px #999999;
-    padding: 15px 25px 50px;
+    padding: 15px 25px 15px;
 }
 #breadcrumbs {
     margin-bottom: 18px;
@@ -1094,5 +1094,4 @@ a.sort.desc img {
     height: 4px;
     margin-top: 6px;
 }
-
 

@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
 
   helper_method :sort_column, :sort_direction
+
+  add_breadcrumb 'Home', :projects_path
+  add_breadcrumb 'Accounts', :users_path
+
+  #add_breadcrumb 'home', root_path
+  #add_breadcrumb 'accounts', projects_path
 
   # if params[:user][:password].blank?
   #  params[:user].delete(:password)
@@ -11,10 +17,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    params[:tab] ||= 'all'       # default tab
-    @users = User.searchByStatus(params[:tab]).search(params[:search]).page(params[:page]).order(sort_column + " " + sort_direction)
+    params[:tab] ||= 'all' # default tab
 
-        # User.search(params[:search]).disabled
+    @users = @users.searchByStatus(params[:tab]).search(params[:search]).page(params[:page]).order(sort_column + ' ' + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +30,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    add_breadcrumb 'View'
+    @roles = Role.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -35,8 +41,7 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
-    @user = User.new
-
+    add_breadcrumb 'New'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -45,15 +50,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    add_breadcrumb 'Edit'
     @roles = Role.all
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -70,9 +73,6 @@ class UsersController < ApplicationController
   def update
     params[:user][:role_ids] ||= []
 
-    @user = User.find(params[:id])
-    @roles = Role.all
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -87,7 +87,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
     @user.soft_delete
 
     respond_to do |format|
@@ -96,10 +95,9 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
   # PUT /users/disable_multiple
   def disable_multiple
+    params[:user_ids_all] ||= []
     @users = User.find(params[:user_ids_all])
     @users.each do |user|
       if (params[:user_ids] && params[:user_ids].include?(user.id.to_s)) then
@@ -110,7 +108,7 @@ class UsersController < ApplicationController
       end
     end
     flash[:notice] = "Updated users!"
-    redirect_to users_path
+    redirect_to users_path(:tab => params[:tab])
   end
 
   private

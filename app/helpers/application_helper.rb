@@ -7,6 +7,10 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction, :tab => params[:tab] , :search => params[:search]}, {:class => css_class}
   end
 
+  def title(page_title, options={})
+    content_for(:title, 'NutrientNet - ' << page_title.to_s)
+  end
+
 
   def insert_tabs(tabs)
 

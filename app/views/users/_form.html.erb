@@ -1,82 +1,67 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for(@user, :html => {:class => 'nn-form'}) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@user.errors.count, 'error') %> prohibited this account from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-    <table>
-      <tr>
-        <td>
-         <label for="email">Email:</label>
-        </td>
-        <td>
-          <%= f.text_field :email  %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="first_name">First name:</label>
-        </td>
-        <td>
-          <%= f.text_field :first_name %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="last_name">Last name:</label>
-        </td>
-        <td>
-          <%= f.text_field :last_name %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Approved:
-        </td>
-        <td>
-          <%= f.radio_button(:approved, "true") %>
-          <%= f.label(:approved_true, "Yes") %>
-          <%= f.radio_button(:approved, "false") %>
-          <%= f.label(:approved_false, "No") %>
-          <!-- TODO: radio buttons for enabled / deleted     -->
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Deleted:
-        </td>
-        <td>
-          <%= f.radio_button(:deleted, "true" ) %>
-          <%= f.label(:deleted_true, "Yes") %>
-          <%= f.radio_button(:deleted, "false") %>
-          <%= f.label(:deleted_false, "No") %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Roles:
-        </td>
-        <td>
           <ul>
-            <% @roles.each do |role| %>
-                <li>
-                  <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) -%>
-                  <%= h role.name -%>
-                </li>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
             <% end %>
           </ul>
-        </td>
-      </tr>
-    </table>
+        </div>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="sectionRest clearfix">
+      <div>
+        <fieldset>
+          <ol>
+            <li>
+              <%= f.label :email, 'Email:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.email_field :email, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :first_name, 'First name:', :class => 'wide' %>
+              <%= f.text_field :first_name, :id => 'first_name' %>
+            </li>
+
+            <li>
+              <%= f.label :last_name, 'Last name:', :class => 'wide' %>
+              <%= f.text_field :last_name, :id => 'last_name' %>
+            </li>
+            <li>
+              <label class="wide">Approved:</label>
+              <%= f.radio_button(:approved, 'true') %>
+              <%= f.label(:approved, 'Yes', :value => 'true') %>
+              <%= f.radio_button(:approved, 'false') %>
+              <%= f.label(:approved, 'No', :value => 'false') %>
+            </li>
+            <li>
+              <label class="wide">Deleted:</label>
+              <%= f.radio_button(:deleted, 'true') %>
+              <%= f.label(:deleted, 'Yes', :value => 'true') %>
+              <%= f.radio_button(:deleted, 'false') %>
+              <%= f.label(:deleted, 'No', :value => 'false') %>
+            </li>
+            <li>
+              <label class="wide">Roles:</label>
+              <div style="float: left;">
+                <% @roles.each do |role| %>
+                    <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role), :id => 'user_role_' + role.id.to_s %>
+                    <%= label_tag('user_role_' + role.id.to_s, role.name) -%>
+                    <br>
+                <% end %>
+              </div>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+
+    <div class="actions">
+      <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{users_path}'" %>
+      <%= f.submit %>
+    </div>
 <% end %>
