@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
+    @roles = Role.all
     add_breadcrumb 'New'
     respond_to do |format|
       format.html # new.html.erb

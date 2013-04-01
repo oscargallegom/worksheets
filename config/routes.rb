@@ -1,11 +1,8 @@
 NutrientNet::Application.routes.draw do
-  resources :dummies
-
 
     resources :projects  do
       resources :fields
     end
-
 
   resources :states do
     resources :cities

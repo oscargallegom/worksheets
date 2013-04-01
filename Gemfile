@@ -22,8 +22,26 @@ end
 gem 'jquery-rails'
 
 # added by Olivier
-gem 'pg'
-gem 'activerecord-postgresql-adapter'
+
+# ruby
+ platforms :ruby_19 do
+ gem 'pg'
+ gem 'activerecord-postgresql-adapter'
+ end
+
+# for jruby
+platforms :jruby do
+ gem 'warbler'
+ gem 'activerecord-jdbc-adapter'
+ gem 'activerecord-jdbcpostgresql-adapter'
+gem 'jdbc-postgres'
+
+#gem 'trinidad'
+# gem 'ruby-debug-ide'
+# gem 'ruby-debug-base19x'
+
+end
+
 gem 'devise'
 gem 'cancan'
 gem 'will_paginate'

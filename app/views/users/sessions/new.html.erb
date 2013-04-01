@@ -9,7 +9,7 @@
       <tr>
 
         <td><%= f.label :password %></td>
-        <td><%= f.password_field :password %></td>
+        <td><%= f.password_field :password, :value => '123' %></td>
       </tr>
 
       <% if devise_mapping.rememberable? -%>
