@@ -12,7 +12,8 @@ Role.create!({:id => 2, :name => 'Project Administrator'}, :without_protection =
 Role.create!({:id => 3, :name => 'Basic User'}, :without_protection => true)
 
 # User.delete_all
-User.where(:email => 'admin@admin.com').first.destroy
+# User.where(:email => 'admin@admin.com').first.destroy
+User.delete_all
 User.create!({:email => 'admin@admin.com', :password => '123', :first_name => 'Admin', :last_name => '1', :approved => true , :roles => Role.where(:id => [1,2]) }, :without_protection => true)
 User.create!({:email => 'tester1@tester1.com', :password => '123', :first_name => 'Tester', :last_name => '1', :approved => true  }, :without_protection => true)
 User.create!({:email => 'tester2@tester2.com', :password => '123', :first_name => 'Tester', :last_name => '2', :approved => true  }, :without_protection => true)
