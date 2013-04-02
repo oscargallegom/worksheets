@@ -1021,10 +1021,11 @@ select.year {
     width: 60px;
 }
 
-/* Not working */
+/* Not working 2 */
+/* Not working 2 */
 #recaptcha_area {
     width: 50%;
-    margin: 0 auto !important;
+    /* margin: 0 auto !important;   -- modified to align left  */
 }
 
 /* Holds a section of a form or data display. */

@@ -5,8 +5,6 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -35,11 +33,6 @@ gem 'jquery-rails'
 # gem 'activerecord-jdbc-adapter'
 # gem 'activerecord-jdbcpostgresql-adapter'
 #gem 'jdbc-postgres'
-
-#gem 'trinidad'
-# gem 'ruby-debug-ide'
-# gem 'ruby-debug-base19x'
-
 #end
 
 gem 'devise'
@@ -47,6 +40,7 @@ gem 'cancan'
 gem 'will_paginate'
 gem 'jquery-ui-rails'
 gem 'breadcrumbs_on_rails'
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 # end added by Olivier
 

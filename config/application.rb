@@ -62,5 +62,8 @@ module NutrientNet
     # Addded by Olivier
     # config.force_ssl = true
 
+    # for 404 errors
+    config.exceptions_app = self.routes
+
   end
 end

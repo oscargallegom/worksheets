@@ -33,7 +33,7 @@ NutrientNet::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false     # default true # modified by Olivier
+  config.assets.debug = true     # default true # modified by Olivier
 
   # added by Olivier for devise
   # TODO: find a long term solution (SMTP server/gmail)
