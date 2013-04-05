@@ -15,14 +15,21 @@ class User < ActiveRecord::Base
   #}
 
   # Setup accessible (or protected) attributes for your model
+  belongs_to :user_type
   has_and_belongs_to_many :roles
+  belongs_to :state, :class_name => 'State', :foreign_key => 'state_id'
+  belongs_to :org_state, :class_name => 'State', :foreign_key => 'org_state_id'
   has_many :projects
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
-  attr_accessible :role_ids, :approved, :deleted, :deleted_at     # TODO: for admin only
-  # attr_accessible :title, :body
 
-  before_save :set_default
+
+  attr_accessible :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip
+  attr_accessible :role_ids, :approved, :deleted, :deleted_at, :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip,  :as => :admin
+
+  validates :username,:email, :user_type_id, :first_name, :last_name, :phone, :roles, :presence => true
+
+  #before_save :set_default
   after_create :default_role
+
 
   def deleted
      !deleted_at.nil?
@@ -32,9 +39,9 @@ class User < ActiveRecord::Base
     self.deleted_at = (isDeleted=='true') ? Time.current : nil
   end
 
-  def set_default
-    set_default = false unless  :set_default
-  end
+ # def set_default
+ #   set_default = false unless  :set_default
+ # end
 
   def default_role
     self.roles << Role.find_by_name('Basic User')
@@ -55,14 +62,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.send_reset_password_instructions(attributes={})
-    recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
-    if !recoverable.approved?
-      recoverable.errors[:base] << I18n.t("devise.failure.not_approved")
-    elsif recoverable.persisted?
-      recoverable.send_reset_password_instructions
+#   def self.send_reset_password_instructions(attributes={})
+#     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+#     if !recoverable.approved?
+#       recoverable.errors[:base] << I18n.t("devise.failure.not_approved")
+#     elsif recoverable.persisted?
+#       recoverable.send_reset_password_instructions
+#     end
+#     recoverable
+#   end
+
+  # allow updates without entering current password
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
     end
-    recoverable
+    update_attributes(params)
   end
 
   # delete user
@@ -94,7 +110,7 @@ class User < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where 'email LIKE ?', "%#{search}%"
+      where('username LIKE ? OR email LIKE ? OR last_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
       # find(:all, :conditions => ['title LIKE ? OR description LIKE ?', search_condition, search_condition])
     else
       scoped

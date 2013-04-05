@@ -11,10 +11,8 @@
   </div>
 
   <ul id="tabNav">
-    <li <%= 'class=selected' if params[:tab]=='notapproved' %>><%= link_to 'Accounts not approved', users_path(:tab => 'notapproved') %></li>
-    <li <%= 'class=selected' if params[:tab]=='approved' %>><%= link_to 'Accounts approved', users_path(:tab => 'approved') %></li>
-    <li <%= 'class=selected' if params[:tab]=='deleted' %>><%= link_to 'Accounts deleted', users_path(:tab => 'deleted') %></li>
     <li <%= 'class=selected' if params[:tab]=='all' %>><%= link_to 'All', users_path(:tab => 'all') %></li>
+    <li <%= 'class=selected' if params[:tab]=='deleted' %>><%= link_to 'Deleted accounts', users_path(:tab => 'deleted') %></li>
     <li class="shadow"></li>
   </ul>
 </div>
@@ -25,11 +23,12 @@
 <%= form_tag disable_multiple_users_path, :method => :put do %>
     <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
       <tr>
-        <th>Approved</th>
-        <th><%= sortable 'email', 'Email' %></th>
+        <th><%= sortable 'username', 'Username' %></th>
         <th><%= sortable 'first_name', 'First name' %></th>
         <th><%= sortable 'last_name', 'Last name' %></th>
-        <% if params[:status]=='deleted' %>
+        <th><%= sortable 'email', 'Email' %></th>
+        <th><%= sortable 'created_at', 'Created on' %></th>
+        <% if params[:tab]=='deleted' %>
             <th><%= sortable 'deleted_at', 'Deleted on' %></th>
         <% end %>
         <th class="actions">Action</th>
@@ -39,22 +38,19 @@
 
       <% @users.each do |user| %>
           <tr>
-            <td class="option">
-              <input type="hidden" name="user_ids_all[]" value="<%= user.id %>" checked>
-              <%= check_box_tag 'user_ids[]', user.id, user.approved %>
-
-            </td>
-            <td><%= user.email %></td>
+            <td><%= user.username %></td>
             <td><%= user.first_name %></td>
             <td><%= user.last_name %></td>
-            <% if params[:status]=='deleted' %>
-                <td><%= l user.deleted_at, :format => :datetime %></td>
+            <td><%= user.email %></td>
+            <td><%= l user.created_at %></td>
+            <% if params[:tab]=='deleted' %>
+                <td><%= l user.deleted_at %></td>
             <% end %>
 
             <td>
-              <%= link_to image_tag('/images/view.png', :alt => 'Show'), user %>
-              <%= link_to image_tag('/images/edit.png', :alt => 'Edit'), edit_user_path(user) %>
-              <%= link_to image_tag('/images/delete.png', :alt => 'Delete'), user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+              <%= link_to image_tag('/images/view.png', :alt => 'Show', :title => 'Show'), user %>
+              <%= link_to image_tag('/images/edit.png', :alt => 'Edit', :title => 'Edit'), edit_user_path(user) %>
+              <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete'), user, method: :delete, data: {confirm: 'Are you sure?'} unless user.deleted %></td>
 
           </tr>
       <% end %>
@@ -70,5 +66,4 @@
 
     <BR/>
     <%= hidden_field_tag :tab, params[:tab] %>
-    <%= submit_tag "Update approved accounts" %>
 <% end %>

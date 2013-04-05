@@ -6,14 +6,6 @@ class UsersController < ApplicationController
   add_breadcrumb 'Home', :projects_path
   add_breadcrumb 'Accounts', :users_path
 
-  #add_breadcrumb 'home', root_path
-  #add_breadcrumb 'accounts', projects_path
-
-  # if params[:user][:password].blank?
-  #  params[:user].delete(:password)
-  #  params[:user].delete(:password_confirmation)
-  # end
-
   # GET /users
   # GET /users.json
   def index
@@ -31,7 +23,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     add_breadcrumb 'View'
-    @roles = Role.all
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -40,42 +32,40 @@ class UsersController < ApplicationController
 
   # GET /users/new
   # GET /users/new.json
-  def new
-    @roles = Role.all
-    add_breadcrumb 'New'
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
-  end
+  # def new
+  #  @roles = Role.all
+  #  add_breadcrumb 'New'
+  #  respond_to do |format|
+  #    format.html # new.html.erb
+  #    format.json { render json: @user }
+  #  end
+  # end
 
   # GET /users/1/edit
   def edit
     add_breadcrumb 'Edit'
-    @roles = Role.all
   end
 
   # POST /users
   # POST /users.json
-  def create
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def create
+  #  respond_to do |format|
+  #    if @user.save
+  #      format.html { redirect_to @user, notice: 'User was successfully created.' }
+  #      format.json { render json: @user, status: :created, location: @user }
+  #    else
+  #      format.html { render action: "new" }
+  #      format.json { render json: @user.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # PUT /users/1
   # PUT /users/1.json
   def update
     params[:user][:role_ids] ||= []
-
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user], :as => :admin)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -97,25 +87,25 @@ class UsersController < ApplicationController
   end
 
   # PUT /users/disable_multiple
-  def disable_multiple
-    params[:user_ids_all] ||= []
-    @users = User.find(params[:user_ids_all])
-    @users.each do |user|
-      if (params[:user_ids] && params[:user_ids].include?(user.id.to_s)) then
-        #user.update_attributes!(:deleted_at => Time.now)
-        user.update_attributes!(:approved => true)
-      else
-        user.update_attributes!(:approved => false)
-      end
-    end
-    flash[:notice] = "Updated users!"
-    redirect_to users_path(:tab => params[:tab])
-  end
+  # def disable_multiple
+  #   params[:user_ids_all] ||= []
+  #   @users = User.find(params[:user_ids_all])
+  #   @users.each do |user|
+  #     if (params[:user_ids] && params[:user_ids].include?(user.id.to_s)) then
+  #       #user.update_attributes!(:deleted_at => Time.now)
+  #      user.update_attributes!(:approved => true)
+  #     else
+  #       user.update_attributes!(:approved => false)
+  #     end
+  #   end
+  #   flash[:notice] = "Updated users!"
+  #   redirect_to users_path(:tab => params[:tab])
+  # end
 
   private
 
   def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+    User.column_names.include?(params[:sort]) ? params[:sort] : "username"
   end
 
   def sort_direction

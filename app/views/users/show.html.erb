@@ -1,55 +1,138 @@
 <div class="nn-form sectionRest clearfix">
-  <div>
-    <fieldset>
-      <ol>
-        <li>
-          <label class='wide'>Email:</label>
-          <%= @user.email %>
-        </li>
-        <li>
-          <label class="wide">First name:</label>
-          <%= @user.first_name %>
-        </li>
-
-        <li>
-          <label class="wide">Last name:</label>
-          <%= @user.last_name %>
-        </li>
-        <li>
-          <label class="wide">Approved:</label>
-          <%= radio_button_tag(:approved, 'true', @user.approved?, :disabled => 'true') %>
-          <%= label_tag(:approved, 'Yes', :value => 'true') %>
-          <%= radio_button_tag(:approved, 'false', !@user.approved?, :disabled => 'false') %>
-          <%= label_tag(:approved, 'No', :value => 'false') %>
-        </li>
-        <li>
-          <label class="wide">Roles:</label>
-          <div style="float: left;">
-            <% @roles.each do |role| %>
-                <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role), :id => 'user_role_' + role.id.to_s, :disabled => true %>
-                <%= label_tag('user_role_' + role.id.to_s, role.name) -%>
-                <br>
-            <% end %>
-          </div>
-        </li>
 
 
-      </ol>
 
-    </fieldset>
-    <fieldset>
+    <div class="sectionRest clearfix">
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Login Information</h2></li>
+            <li>
+              <label class='wide'>Username:</label>
+              <%= @user.username %>
+            </li>
+            <li>
+              <label class='wide'>Count sign-ins:</label>
+              <%= @user.sign_in_count %>
+            </li>
+            <li>
+              <label class='wide'>Last sign-in:</label>
+              <%= l @user.last_sign_in_at if @user.last_sign_in_at %>
+            </li>
+            <li><h2 class='sectionHeading'>Contact Information</h2></li>
+            <li>
+              <label class='wide'>Type:</label>
+              <%= @user.user_type.name %>
+            </li>
+            <li>
+              <label class='wide'>First name:</label>
+              <%= @user.first_name %>
+            </li>
+            <li>
+              <label class='wide'>Last name:</label>
+              <%= @user.last_name %>
+            </li>
+            <li>
+              <label class='wide'>Email:</label>
+              <%= @user.email %>
+            </li>
+            <li>
+              <label class='wide'>Phone:</label>
+              <%= @user.phone %>
+            </li>
 
-      <ol>
-        <li>
-          <label class='wide'>Sign-in count:</label>
-          <%= @user.sign_in_count %>
-        </li>
-      </ol>
-    </fieldset>
-  </div>
-  <div style="clear: both"></div>
-</div>
+
+            <li>
+              <label class='wide'>Street 1:</label>
+              <%= @user.street1 %>
+            </li>
+            <li>
+              <label class='wide'>Street 2:</label>
+              <%= @user.street2 %>
+            </li>
+            <li>
+              <label class='wide'>City:</label>
+              <%= @user.city %>
+            </li>
+            <li>
+              <label class='wide'>State:</label>
+              <%= @user.state.name unless @user.state.nil?  %>
+            </li>
+            <li>
+              <label class='wide'>ZIP code:</label>
+              <%= @user.zip %>
+            </li>
+
+
+
+          </ol>
+        </fieldset>
+        <fieldset>
+          <ol>
+
+            <li>
+            </li>
+            <li>
+              <label class="wide">Deleted:</label>
+              <%= radio_button_tag(:deleted, 'true', @user.deleted, :disabled => 'true') %>
+              <%= label_tag(:deleted, 'Yes', :value => 'true') %>
+              <%= radio_button_tag(:deleted, 'false', !@user.deleted, :disabled => 'true') %>
+              <%= label_tag(:deleted, 'No', :value => 'false') %>
+            </li>
+            <li>
+              <label class="wide">Roles:</label>
+              <div style="float: left;">
+                <% Role.all.each do |role| %>
+                    <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role), :id => 'user_role_' + role.id.to_s, :disabled => true %>
+                    <%= label_tag('user_role_' + role.id.to_s, role.name) -%>
+                    <br>
+                <% end %>
+              </div>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li><h2 class='sectionHeading'>Organization/Business </h2></li>
+
+            <li>
+              <label class='wide'>Organization name:</label>
+              <%= @user.org_name %>
+            </li>
+            <li>
+              <label class='wide'>Job title:</label>
+              <%= @user.job_title %>
+            </li>
+
+
+            <li>
+              <label class='wide'>Street 1:</label>
+              <%= @user.org_street1 %>
+            </li>
+            <li>
+              <label class='wide'>Street 2:</label>
+              <%= @user.org_street2 %>
+            </li>
+            <li>
+              <label class='wide'>City:</label>
+              <%= @user.org_city %>
+            </li>
+            <li>
+              <label class='wide'>State:</label>
+              <%= @user.org_state.name unless @user.org_state.nil?  %>
+            </li>
+            <li>
+              <label class='wide'>ZIP code:</label>
+              <%= @user.org_zip %>
+            </li>
+          </ol>
+        </fieldset>
+
+      </div>
+      <div style="clear: both"></div>
+    </div>
 
 <div class="actions">
   <%= submit_tag 'Back', :type => 'button', :onclick => "location.href = '#{users_path}'" %>
 </div>
+    </div>
