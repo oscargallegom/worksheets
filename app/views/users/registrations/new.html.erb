@@ -22,7 +22,7 @@
             <li><h2 class='sectionHeading'>Contact Information</h2></li>
             <li>
               <%= f.label :user_type, 'Type:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :user_type_id, UserType.all, :id, :name, :prompt => 'Select type', :required => true %>
+              <%= f.collection_select :user_type_id, UserType.all, :id, :name, {:prompt => 'Select type'}, {:required => 'true'} %>
             </li>
             <li>
               <%= f.label :first_name, 'First name:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -109,12 +109,15 @@
             </li>
           </ol>
         </fieldset>
-        <%= recaptcha_tags %>
+
       </div>
+
       <div style="clear: both"></div>
     </div>
 
     <div class="actions">
+      <%= recaptcha_tags %>
+      <br/>.
       <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '/'" %>
       <%= f.submit %></div>
 
