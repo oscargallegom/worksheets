@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325194305) do
+ActiveRecord::Schema.define(:version => 20130404011511) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -60,9 +60,15 @@ ActiveRecord::Schema.define(:version => 20130325194305) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "user_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",    :null => false
-    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "username",               :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -81,16 +87,31 @@ ActiveRecord::Schema.define(:version => 20130325194305) do
     t.string   "authentication_token"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.boolean  "approved",               :default => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.boolean  "approved",               :default => true
     t.datetime "deleted_at"
+    t.integer  "user_type_id"
+    t.string   "phone"
+    t.string   "street1"
+    t.string   "street2"
+    t.string   "city"
+    t.integer  "state_id"
+    t.string   "zip"
+    t.string   "org_name"
+    t.string   "job_title"
+    t.string   "org_street1"
+    t.string   "org_street2"
+    t.string   "org_city"
+    t.integer  "org_state_id"
+    t.string   "org_zip"
+    t.string   "email",                                    :null => false
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_email", :unique => true
 
 end

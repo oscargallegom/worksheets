@@ -32,7 +32,7 @@ class Ability
     def initialize(user)
       user ||= User.new # guest user (not logged in)
       if user.role? :user_administrator
-        can :manage, User
+        can [:read, :update, :destroy], User
       end
       if user.role? :project_administrator
         can :manage, [Project, Field]

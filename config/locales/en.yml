@@ -8,3 +8,6 @@ en:
         default: "%Y-%m-%d"
         date: "%Y-%m-%d"
         datetime: "%Y-%m-%d %H:%M"
+  activerecord:
+      models:
+        user: "Account"

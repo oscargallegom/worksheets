@@ -8,7 +8,7 @@ NutrientNet::Application.routes.draw do
     resources :cities
   end
 
-  devise_for :users, :controllers => {:registrations => "users/registrations", :sessions => "users/sessions"}
+  devise_for :users, :path => 'account', :controllers => {:registrations => "users/registrations", :sessions => "users/sessions", :unlocks => 'users/unlocks', :passwords => 'users/passwords'}
 
   scope "/admin" do
     resources :users do
@@ -76,9 +76,10 @@ NutrientNet::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   # added by Olivier
-  devise_scope :user do
-    root :to => "users/sessions#new"
-  end
+  #devise_scope :user do
+  #  root :to => "projects#index" # "users/sessions#new"
+  #end
+    root :to => 'projects#index'
 
   match "/help", to: "static_pages#help", as: "help"
 
