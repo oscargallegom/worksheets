@@ -41,6 +41,7 @@ gem 'will_paginate'
 gem 'jquery-ui-rails'
 gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
+gem 'dynamic_form'
 
 # end added by Olivier
 
