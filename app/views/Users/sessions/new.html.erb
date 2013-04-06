@@ -3,7 +3,7 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
     <table>
       <tr>
-        <td><%= f.label :username %></td>
+        <td>!!<%= f.label :username %></td>
         <td><%= f.text_field :username, :autofocus => true, :required => true, :title => 'Enter a valid username.' %></td>
       </tr>
       <tr>
