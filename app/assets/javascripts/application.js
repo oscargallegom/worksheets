@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require html5
+
+
 
 // added by Olivier
-//= require jquery.ui.all
+// require jquery.ui.all

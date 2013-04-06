@@ -4,12 +4,12 @@
     <table>
       <tr>
         <td><%= f.label :username %></td>
-        <td><%= f.text_field :username, :autofocus => true %></td>
+        <td><%= f.text_field :username, :autofocus => true, :required => true, :title => 'Enter a valid username.' %></td>
       </tr>
       <tr>
 
         <td><%= f.label :password %></td>
-        <td><%= f.password_field :password, :value => '123' %></td>
+        <td><%= f.password_field :password, :value => '123', :required => true, :title => 'Enter a valid password.' %></td>
       </tr>
 
       <% if devise_mapping.rememberable? -%>

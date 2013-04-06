@@ -2,3 +2,16 @@
 <br />
 <!-- TODO: create the page   -->
 
+<script language="JavaScript">
+    if ($.browser.msie && $.browser.version < 10) {
+        $('#form_to_validate [required]').addClass('required').removeAttr('required');
+    }
+
+</script>
+
+<form action="dummy"  method="post">
+
+        <input  type='text'  name='dd' value="" required="required" class="required">
+
+    <input type="submit" value="Resend unlock instructions" />
+    </form>

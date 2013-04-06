@@ -6,7 +6,7 @@
 
     <div><%= f.label :username %>
       <br/>
-      <%= f.text_field :username, :autofocus => true, :required => true %></div>
+      <%= f.text_field :username, :autofocus => true, :required => true, :title => 'Enter a valid username.'  %></div>
 
     <div><%= f.submit "Resend unlock instructions" %></div>
 <% end %>

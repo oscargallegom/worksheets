@@ -38,10 +38,11 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'cancan'
 gem 'will_paginate'
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
+gem 'client_side_validations'
 
 # end added by Olivier
 
