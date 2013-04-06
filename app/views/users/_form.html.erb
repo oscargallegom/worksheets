@@ -1,0 +1,147 @@
+<%= form_for(@user, :html => {:class => 'nn-form'}) do |f| %>
+    <% if @user.errors.any? %>
+        <br/>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@user.errors.count, 'error') %> encountered:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="sectionRest clearfix">
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Login Information</h2></li>
+            <li>
+              <%= f.label :username, 'Username:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :username, :required => 'true' %>
+            </li>
+            <li>
+            </li>
+            <li>
+            </li>
+            <li><h2 class='sectionHeading'>Contact Information</h2></li>
+            <li>
+              <%= f.label :user_type, 'Type:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :user_type_id, UserType.all, :id, :name, :prompt => 'Select type', :required => true %>
+            </li>
+            <li>
+              <%= f.label :first_name, 'First name:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :first_name, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :last_name, 'Last name:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :last_name, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :email, 'Email:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.email_field :email, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :phone, 'Phone:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :phone, :required => 'true' %>
+            </li>
+
+
+            <li>
+              <%= f.label :street1, 'Street 1:', :class => 'wide' %>
+              <%= f.text_field :street1 %>
+            </li>
+            <li>
+              <%= f.label :street2, 'Street 2:', :class => 'wide' %>
+              <%= f.text_field :street2 %>
+            </li>
+            <li>
+              <%= f.label :city, 'City:', :class => 'wide' %>
+              <%= f.text_field :city %>
+            </li>
+            <li>
+              <%= f.label :state, 'State:', :class => 'wide' %>
+              <%= f.collection_select :state_id, State.all, :id, :name, :prompt => 'Select state' %>
+            </li>
+            <li>
+              <%= f.label :zip, 'ZIP code:', :class => 'wide' %>
+              <%= f.text_field :zip %>
+            </li>
+
+
+          </ol>
+        </fieldset>
+        <fieldset>
+          <ol>
+
+            <li>
+            </li>
+            <li>
+              <label class="wide">Deleted:</label>
+              <%= f.radio_button(:deleted, 'true') %>
+              <%= f.label(:deleted, 'Yes', :value => 'true') %>
+              <%= f.radio_button(:deleted, 'false') %>
+              <%= f.label(:deleted, 'No', :value => 'false') %>
+            </li>
+            <li>
+              <label class="wide">Roles:</label>
+
+              <div style="float: left;">
+                <% Role.all.each do |role| %>
+                    <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role), :id => 'user_role_' + role.id.to_s %>
+                    <%= label_tag('user_role_' + role.id.to_s, role.name) -%>
+                    <br>
+                <% end %>
+              </div>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li><h2 class='sectionHeading'>Organization/Business </h2></li>
+
+            <li>
+              <%= f.label :org_name, 'Organization name:', :class => 'wide' %>
+              <%= f.text_field :org_name %>
+            </li>
+            <li>
+              <%= f.label :job_title, 'Job title:', :class => 'wide' %>
+              <%= f.text_field :job_title %>
+            </li>
+
+
+            <li>
+              <%= f.label :org_street1, 'Street 1:', :class => 'wide' %>
+              <%= f.text_field :org_street1 %>
+            </li>
+            <li>
+              <%= f.label :org_street2, 'Street 2:', :class => 'wide' %>
+              <%= f.text_field :org_street2 %>
+            </li>
+            <li>
+              <%= f.label :org_city, 'City:', :class => 'wide' %>
+              <%= f.text_field :org_city %>
+            </li>
+            <li>
+              <%= f.label :org_state, 'State:', :class => 'wide' %>
+              <%= f.collection_select :org_state_id, State.all, :id, :name, :prompt => 'Select state' %>
+            </li>
+            <li>
+              <%= f.label :org_zip, 'ZIP code:', :class => 'wide' %>
+              <%= f.text_field :org_zip %>
+            </li>
+          </ol>
+        </fieldset>
+
+      </div>
+      <div style="clear: both"></div>
+    </div>
+
+    <div class="actions">
+      <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{users_path}'" %>
+      <%= f.submit 'Update User Account' %>
+    </div>
+
+
+<% end %>
