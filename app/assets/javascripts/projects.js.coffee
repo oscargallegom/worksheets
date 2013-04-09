@@ -12,7 +12,7 @@ test = (data) ->
 
 $(document).ready ->
   $("input,select,textarea").change ->
-    $.getJSON "http://localhost:3004/states/" + $("#project_site_state_id").val() + "/counties.json", (data) ->
+    $.getJSON "/states/" + $("#project_site_state_id").val() + "/counties.json", (data) ->
       test data
 
 
