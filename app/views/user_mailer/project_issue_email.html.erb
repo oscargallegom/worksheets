@@ -1,0 +1,26 @@
+<!-- update welcome email -->
+<!-- TODO: update email message -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<h1>An issue was reported by: <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<p>
+  Project ID: <%= @project_issue.project_id %>
+  <br/>
+  Project Name: <%= @project_issue.project_name %>
+  <br>
+  Message: <%= @project_issue.message %>
+</p>
+
+<p>
+  To login to the site, just follow this
+  link: <%= link_to url_for(:controller => 'projects', :action => 'show', :id => @project_issue.project_id, :only_path => false), :controller => 'projects', :action => 'show', :id => @project_issue.project_id %>
+  .
+</p>
+
+</body>
+</html>

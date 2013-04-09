@@ -26,17 +26,17 @@
 
   </tr>
 
-<% @project.fields.each do |field| %>
+  <% @project.fields.each do |field| %>
       <tr>
-        <td><%= link_to field.name, project_field_path(@project, field)  %></td>
+        <td><%= link_to field.name, project_field_path(@project, field) %></td>
         <td><%= field.area %></td>
         <td><%= field.baseline_load %></td>
         <td></td>
         <td></td>
         <td></td>
         <td><%= link_to image_tag('/images/delete.png', :alt => 'Delete'), project_field_path(@project, field), method: :delete, data: {confirm: 'Are you sure?'} %></td>
-        </tr>
-    <% end %>
+      </tr>
+  <% end %>
 </table>
 
 

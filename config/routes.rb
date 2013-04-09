@@ -1,22 +1,25 @@
 NutrientNet::Application.routes.draw do
 
-    resources :projects  do
-      resources :fields
-    end
+  resources :projects do
+    resources :fields
+    get :duplicate, on: :member
+  end
 
   resources :states do
-    resources :cities
+    resources :counties
   end
 
   devise_for :users, :path => 'account', :controllers => {:registrations => "users/registrations", :sessions => "users/sessions", :unlocks => 'users/unlocks', :passwords => 'users/passwords'}
 
   scope "/admin" do
     resources :users do
-    collection do
-      put 'disable_multiple'
-    end
+      collection do
+        put 'disable_multiple'
       end
+    end
   end
+
+  resources :project_issues, :only => [:new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -79,7 +82,7 @@ NutrientNet::Application.routes.draw do
   #devise_scope :user do
   #  root :to => "projects#index" # "users/sessions#new"
   #end
-    root :to => 'projects#index'
+  root :to => 'projects#index'
 
   match "/help", to: "static_pages#help", as: "help"
 

@@ -20,50 +20,48 @@
 
 
 
-<%= form_tag disable_multiple_users_path, :method => :put do %>
-    <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+  <tr>
+    <th><%= sortable 'username', 'Username' %></th>
+    <th><%= sortable 'first_name', 'First name' %></th>
+    <th><%= sortable 'last_name', 'Last name' %></th>
+    <th><%= sortable 'email', 'Email' %></th>
+    <th><%= sortable 'created_at', 'Created on' %></th>
+    <% if params[:tab]=='deleted' %>
+        <th><%= sortable 'deleted_at', 'Deleted on' %></th>
+    <% end %>
+    <th class="actions">Action</th>
+
+  </tr>
+
+
+  <% @users.each do |user| %>
       <tr>
-        <th><%= sortable 'username', 'Username' %></th>
-        <th><%= sortable 'first_name', 'First name' %></th>
-        <th><%= sortable 'last_name', 'Last name' %></th>
-        <th><%= sortable 'email', 'Email' %></th>
-        <th><%= sortable 'created_at', 'Created on' %></th>
+        <td><%= user.username %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= l user.created_at %></td>
         <% if params[:tab]=='deleted' %>
-            <th><%= sortable 'deleted_at', 'Deleted on' %></th>
+            <td><%= l user.deleted_at %></td>
         <% end %>
-        <th class="actions">Action</th>
+
+        <td>
+          <%= link_to image_tag('/images/view.png', :alt => 'Show', :title => 'Show'), user %>
+          <%= link_to image_tag('/images/edit.png', :alt => 'Edit', :title => 'Edit'), edit_user_path(user) %>
+          <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete'), user, method: :delete, data: {confirm: 'Are you sure?'} unless user.deleted %></td>
 
       </tr>
+  <% end %>
+</table>
 
+<div style="position:relative">
+  <div style="position:absolute;top:3px;right:0;z-index:2">
+    <%= page_entries_info @users, :model => 'Account' %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= will_paginate @users, :container => false %>
+  </div>
+</div>
 
-      <% @users.each do |user| %>
-          <tr>
-            <td><%= user.username %></td>
-            <td><%= user.first_name %></td>
-            <td><%= user.last_name %></td>
-            <td><%= user.email %></td>
-            <td><%= l user.created_at %></td>
-            <% if params[:tab]=='deleted' %>
-                <td><%= l user.deleted_at %></td>
-            <% end %>
+<BR/>
 
-            <td>
-              <%= link_to image_tag('/images/view.png', :alt => 'Show', :title => 'Show'), user %>
-              <%= link_to image_tag('/images/edit.png', :alt => 'Edit', :title => 'Edit'), edit_user_path(user) %>
-              <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete'), user, method: :delete, data: {confirm: 'Are you sure?'} unless user.deleted %></td>
-
-          </tr>
-      <% end %>
-    </table>
-
-    <div style="position:relative">
-      <div style="position:absolute;top:3px;right:0;z-index:2">
-        <%= page_entries_info @users, :model => 'Account' %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= will_paginate @users, :container => false %>
-      </div>
-    </div>
-
-    <BR/>
-    <%= hidden_field_tag :tab, params[:tab] %>
-<% end %>

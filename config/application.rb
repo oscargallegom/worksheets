@@ -65,5 +65,8 @@ module NutrientNet
     # for 404 errors
     config.exceptions_app = self.routes
 
+    # Added by Olivier
+    WillPaginate.per_page = 10
+
   end
 end

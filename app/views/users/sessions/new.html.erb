@@ -1,14 +1,15 @@
 <br/><br/>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= hidden_field_tag :next, params[:next] %>
     <table>
       <tr>
         <td><%= f.label :username %></td>
-        <td><%= f.text_field :username, :autofocus => true, :required => true, :title => 'Enter a valid username.' %></td>
+        <td><%= f.text_field :username, :autofocus => true, :required => true, :title => 'Enter your username.' %></td>
       </tr>
       <tr>
         <td><%= f.label :password %></td>
-        <td><%= f.password_field :password, :value => '123', :required => true, :title => 'Enter a valid password.' %></td>
+        <td><%= f.password_field :password, :value => '123', :required => true, :title => 'Enter your password.' %></td>
       </tr>
 
       <% if devise_mapping.rememberable? -%>

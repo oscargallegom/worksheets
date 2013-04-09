@@ -1,53 +1,77 @@
-<%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<%= form_for(@project, :html => {:class => 'nn-form'}) do |f| %>
+    <% if @project.errors.any? %>
+        <br/>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@project.errors.count, "error") %> encountered:</h2>
 
-      <ul>
-      <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @project.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="sectionRest clearfix">
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Worksheet and project information</h2></li>
+            <li>
+              <%= f.label :name, 'Farm name:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :name, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :tract_number, '(FSA) Tract number:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :tract_number, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :farm_notes, 'Farm notes:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_area :farm_notes, :required => 'true', :rows => 10 %>
+            </li>
+            <li><h2 class='sectionHeading'>Site Information</h2></li>
+            <li>
+              <%= f.label :site_name, 'Site name:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :site_name, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :site_street_1, 'Street 1:', :class => 'wide' %>
+              <%= f.text_field :site_street_1 %>
+            </li>
+            <li>
+              <%= f.label :site_street2, 'Street 2:', :class => 'wide' %>
+              <%= f.text_field :site_street_2 %>
+            </li>
+            <li>
+              <%= f.label :site_description, 'Location description:', :class => 'wide' %>
+              <%= f.text_area :site_description, :rows => 10 %>
+            </li>
+            <li>
+              <%= f.label :site_zip, 'ZIP code:', :class => 'wide' %>
+              <%= f.text_field :site_zip %>
+            </li>
+            <li><%= f.label :site_state_id, 'State:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :site_state_id, State.local_states, :id, :name, {:prompt => 'Select state'}, {:required => true} %></li>
+            <li>
+              <%= f.label :site_county_id, 'County:<em>*</em>'.html_safe, :class => 'wide' %>
+              <select id="project_site_county_id" name="project[site_county_id]" disabled="disabled" required='required'>
+                <option>First select a state</option>
+              </select></li>
+          </ol>
+        </fieldset>
+
+
+      </div>
+      <div style="clear: both"></div>
     </div>
-  <% end %>
 
-  <table>
-    <tr>
-      <td><%= f.label :name %>:</td>
-      <td><%= f.text_field :name %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :tract_number %>:</td>
-      <td><%= f.text_field :tract_number %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :farm_notes %>:</td>
-      <td><%= f.text_area :farm_notes, :cols => 20, :rows => 5  %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :site_name %>:</td>
-      <td><%= f.text_field :site_name %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :site_address_1 %>:</td>
-      <td><%= f.text_field :site_address_1 %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :site_address_2 %>:</td>
-      <td><%= f.text_field :site_address_2 %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :site_city %>:</td>
-      <td><%= f.text_field :site_city %></td>
-    </tr>
-    <tr>
-      <td><%= f.label :site_zip %>:</td>
-      <td><%= f.text_field :site_zip %></td>
-    </tr>
-</table>
+    <div class="actions">
+      <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{projects_path}'" %>
+      <%= f.submit 'Submit' %>
+    </div>
 
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+
+
+

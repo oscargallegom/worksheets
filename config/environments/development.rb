@@ -10,7 +10,7 @@ NutrientNet::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
@@ -33,18 +33,19 @@ NutrientNet::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false     # default true # modified by Olivier
+  config.assets.debug = false # default true # modified by Olivier
 
   # added by Olivier for devise
   # TODO: find a long term solution (SMTP server/gmail)
-  config.action_mailer.default_url_options = { :host => 'localhost:3003' }
+  config.action_mailer.default_url_options = {:host => 'localhost:3003'}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       :address => 'smtp.gmail.com', #'localhost',
       :port => 587,
-      :domain => 'mail.google.com',  # mail.customdomain.com if you use google apps
+      :domain => 'mail.google.com', # mail.customdomain.com if you use google apps
       :authentication => "plain",
       :user_name => ENV['email_login'],
       :password => ENV['email_password']
   }
+
 end

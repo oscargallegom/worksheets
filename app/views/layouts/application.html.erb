@@ -2,8 +2,13 @@
 <html>
 <head>
   <title><%= content_for?(:title) ? content_for(:title) : 'NutrientNet' %></title>
+
   <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag params[:controller] %>
+
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag params[:controller] %>
+
   <%= csrf_meta_tags %>
 </head>
 
@@ -47,12 +52,15 @@
       <h1 class="pageTitle"><%= link_to 'Agricultural Farm Worksheets', projects_path %> </h1>
 
       <%= render_breadcrumbs %>
+      <br/>
       <% if flash[:notice] %>
           <br/><br/>
+
           <p class="alert"><%= notice %></p> <!-- # class: notice     -->
       <% end %>
       <% if flash[:alert] %>
           <br/><br/>
+
           <p class="alert"><%= alert %></p>
       <% end %>
 

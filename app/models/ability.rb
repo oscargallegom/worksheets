@@ -31,6 +31,9 @@ class Ability
 
     def initialize(user)
       user ||= User.new # guest user (not logged in)
+
+      can :read, [State, County]
+
       if user.role? :user_administrator
         can [:read, :update, :destroy], User
       end
@@ -43,8 +46,9 @@ class Ability
         # can :manage, Project do |project|
         #   project.try(:id) == 1
         # end
-         can :manage, Project, :owner_id => user.id
+        can :manage, Project, :owner_id => user.id
         can :manage, Field, :project => {:owner_id => user.id}
+
       end
 
 

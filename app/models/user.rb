@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-
-  self.per_page = 5
-
   #:omniauthable
   #:token_authenticatable
   #:confirmable
@@ -23,28 +20,34 @@ class User < ActiveRecord::Base
 
 
   attr_accessible :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip
-  attr_accessible :role_ids, :approved, :deleted, :deleted_at, :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip,  :as => :admin
+  attr_accessible :role_ids, :approved, :deleted, :deleted_at, :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip, :as => :admin
 
-  validates_presence_of  :username,:email, :user_type_id, :first_name, :last_name, :phone
+  validates_presence_of :username, :email, :user_type_id, :first_name, :last_name, :phone
   validates_presence_of :roles, :on => :update, :message => '^Select at least one role.'
 
   #before_save :set_default
-  after_create :default_role
+  before_create :default_role
+  after_create :send_welcome_email
 
   def deleted
-     !deleted_at.nil?
+    !deleted_at.nil?
   end
 
   def deleted=(isDeleted)
     self.deleted_at = (isDeleted=='true') ? Time.current : nil
   end
 
- # def set_default
- #   set_default = false unless  :set_default
- # end
+  # def set_default
+  #   set_default = false unless  :set_default
+  # end
 
   def default_role
     self.roles << Role.find_by_name('Basic User')
+  end
+
+  def send_welcome_email
+    # TODO: to be un-commented
+    # UserMailer.welcome_email(self).deliver
   end
 
   # the account needs to be approved by an administrator
@@ -72,7 +75,7 @@ class User < ActiveRecord::Base
 #     recoverable
 #   end
 
-  # allow updates without entering current password
+# allow updates without entering current password
   def update_with_password(params={})
     if params[:password].blank?
       params.delete(:password)
@@ -90,7 +93,7 @@ class User < ActiveRecord::Base
     self.soft_delete
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed if is_navigational_format?
-    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    respond_with_navigational(resource) { redirect_to after_sign_out_path_for(resource_name) }
   end
 
   def role?(role)
@@ -100,11 +103,11 @@ class User < ActiveRecord::Base
   def self.searchByStatus(status)
     scoped = self.scoped
     if status
-    scoped = scoped.where(:approved => true, :deleted_at => nil).order("updated_at desc") if status=='approved'
-    scoped = scoped.where(:approved => false, :deleted_at => nil).order("updated_at desc") if status=='notapproved'
-    scoped = scoped.where("deleted_at IS NOT NULL") if status=='deleted'
+      scoped = scoped.where(:approved => true, :deleted_at => nil).order("updated_at desc") if status=='approved'
+      scoped = scoped.where(:approved => false, :deleted_at => nil).order("updated_at desc") if status=='notapproved'
+      scoped = scoped.where("deleted_at IS NOT NULL") if status=='deleted'
     end
-      scoped
+    scoped
 
   end
 

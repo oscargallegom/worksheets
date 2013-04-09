@@ -2,6 +2,10 @@ class Users::SessionsController < Devise::SessionsController
   # layout "login"
 
   def after_sign_in_path_for(resource)
-    projects_path
+    params[:next]
+  end
+
+  def after_sign_out_path_for(resource)
+    new_user_session_path
   end
 end
