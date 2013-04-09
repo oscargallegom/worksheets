@@ -5,18 +5,18 @@ NutrientNet::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   # modified by OL
-  config.serve_static_assets = true   #false
+  config.serve_static_assets = true #false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true # modified by OL   # false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -67,12 +67,12 @@ NutrientNet::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   # added by Olivier for devise
   # TODO: find a long term solution (SMTP server/gmail)
-  config.action_mailer.default_url_options = { :host => 'nutrientnet.herokuapp.com' }
+  config.action_mailer.default_url_options = {:host => 'nutrientnet.herokuapp.com'}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       :address => 'smtp.gmail.com', #'localhost',
       :port => 587,
-      :domain => 'mail.google.com',  # mail.customdomain.com if you use google apps
+      :domain => 'mail.google.com', # mail.customdomain.com if you use google apps
       :authentication => "plain",
       :user_name => ENV['email_login'],
       :password => ENV['email_password']
