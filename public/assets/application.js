@@ -2571,6 +2571,19 @@
     })
 }.call(this), function () {
 }.call(this), function () {
+    var e;
+    e = function (e) {
+        var t;
+        return t = [], $.each(e, function (e, n) {
+            return t.push('<option id="' + n.id + '">' + n.name + "</option>")
+        }), $("#project_site_county_id").html(t.join("")), $("#project_site_county_id").removeAttr("disabled")
+    }, $(document).ready(function () {
+        return $("input,select,textarea").change(function () {
+            return $.getJSON("/states/" + $("#project_site_state_id").val() + "/counties.json", function (t) {
+                return e(t)
+            })
+        })
+    })
 }.call(this), function () {
 }.call(this), function () {
 }.call(this);
