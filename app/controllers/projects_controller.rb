@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :receive_from_mapping_site
   helper_method :sort_column, :sort_direction
   layout "project", :except => [:index]
+
+  skip_before_filter :verify_authenticity_token,  :only => [:receive_from_mapping_site]           # turn off Cross-Site Request Forgery for receive_from_mapping_site
 
   add_breadcrumb 'Home', '/'
 
@@ -40,15 +42,23 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    add_breadcrumb 'Projects', :projects_path
+    @step = params[:step] || '1'
+    add_breadcrumb 'Edit details' if @step == '1'
+    add_breadcrumb 'Edit location' if @step == '2'
+
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project.owner_id = current_user.id
+    @step = params[:step] || 1
+
+    # params[:project][:animal_ids] ||= []               # TODO: remove commented out
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to edit_project_path(@project, :step => 2), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -61,6 +71,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.json
   def update
     @project = @project.find(params[:id])
+    @step = params[:step] || 1
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -97,6 +108,22 @@ class ProjectsController < ApplicationController
       end
     end
 
+  end
+
+  def send_to_mapping_site
+    render :send_to_mapping_site, :layout => false
+  end
+
+  # Note that this method is not protected by Cancan
+  def receive_from_mapping_site
+    # request.referer    TODO: check referrer for cross-site forgery
+    if (session[:session_id] == params[:source_id]) then
+      render :receive_from_mapping_site, :layout => false
+    elsif
+      # Something's not right. Assume security breach (CSRF).
+      sign_out :user
+      render 'errors/not_authorized', :layout => false
+    end
   end
 
 

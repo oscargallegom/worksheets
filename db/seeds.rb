@@ -107,3 +107,9 @@ County.create!({:id => 5, :name => 'WY 2', :state_id => 50}, :without_protection
 County.create!({:id => 6, :name => 'WY 3', :state_id => 50}, :without_protection => true)
 
 
+Animal.delete_all
+Animal.create!({:id => 1, :name => 'Cows'}, :without_protection => true)
+Animal.create!({:id => 2, :name => 'Horses'}, :without_protection => true)
+Animal.create!({:id => 3, :name => 'Pigs'}, :without_protection => true)
+Animal.create!({:id => 4, :name => 'Ducks'}, :without_protection => true)
+Animal.create!({:id => 5, :name => 'Donkeys'}, :without_protection => true)

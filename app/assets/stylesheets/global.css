@@ -797,7 +797,7 @@ form li {
     list-style: none;
 }
 .nn-form h2 {
-    margin: 0 0 10px;
+    margin: 10px 0px 0px 0px;
 }
 .nn-form fieldset {
     margin: 0 20px 0 0;
@@ -970,8 +970,8 @@ label { }
 }
 
 select {
-    width: 260px;
-    max-width: 260px;
+    width: 150px;
+    max-width: 150px;
 }
 
 p {
@@ -1096,3 +1096,15 @@ a.sort.desc img {
     margin-top: 6px;
 }
 
+.nn-form table {
+     margin: 0 20px 0 0;
+     padding: 0;
+     border: none;
+     color: #666;
+     float: left;
+     width: 400px;
+ }
+
+.nn-form table td {
+    vertical-align: top;
+}

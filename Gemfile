@@ -42,6 +42,12 @@ gem 'will_paginate'
 gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
 # gem 'client_side_validations'
 
 # end added by Olivier

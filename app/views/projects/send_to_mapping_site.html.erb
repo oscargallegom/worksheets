@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<form action='http://ims.missouri.edu/marylandNN/Default_seg.aspx' method='post'>
+
+  <input type='text' size='80' name='county' value='Dorchester County'>
+  <br/>
+  <input type='text' size='80' name='sometext' value='########################3'>
+  <br/>
+  <input type='text' size='80' name='source_id' value='<%= session[:session_id]%>'>
+  <br/>
+  <input type='text' size='80' name='return_url' value='http://127.0.0.1:3000/projects/<%= @project.id %>/receive_from_mapping_site'>
+  <br/>
+
+  <input type='submit' name='Click here' value='Submit' >
+
+
+</form>
+
+</body>
+</html>

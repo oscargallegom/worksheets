@@ -1,17 +1,19 @@
 <% content_for :second_level_layout do %>
-
+    <% if @project != nil && !@project.new_record?%>
     <div style="position:relative">
       <ul id="tabNav">
-        <li><%= link_to 'Summary', project_path(@project) unless @project.id.nil? %></li>
-        <li class="selected"><a href="?show=enabled">Edit Details </a></li>
-        <li><a href="?show=disabled">Edit Location <em>-</em></a></li>
-        <li><a href="?show=disabled">Review <em>-</em></a></li>
-        <li class="shadow"></li>
-        <li><a href="?show=disabled">Submit <em>-</em></a></li>
+
+        <li><%= link_to 'Summary', project_path(@project) %></li>
+        <li <% if (params[:step]=='1')  %> class="selected" <% end %> ><%= link_to 'Edit Details', edit_project_path(@project, :step => 1) %></li>
+        <li <% if (params[:step]=='2')  %> class="selected" <% end %> ><a <%= link_to 'Edit Location', edit_project_path(@project, :step => 2) %></li>
+
+        <li><a href="?show=disabled">Review</a></li>
+        <li><a href="?show=disabled">Submit</a></li>
+        <li><a href="#" title="We ask for your age only for statistical purposes.">Submit</a></li>
         <li class="shadow"></li>
       </ul>
     </div>
-
+        <% end %>
     <br>
 
     <%= yield %>

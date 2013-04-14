@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" compressed="false" hash="3597486453" />
+  <component name="DataSourceManagerImpl" format="xml" hash="2292210206">
+    <data-source source="LOCAL" name="Rails NutrientNet: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="757c98cf-2c8f-4e25-95c7-65e6b6244d76">
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/NutrientNet_test</jdbc-url>
+      <user-name>root</user-name>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails NutrientNet: production" product="PostgreSQL" version="9.2.3" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="f3d6e6e1-e8ab-42b8-84b0-80714ef38141">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/nutrientnet_development</jdbc-url>
+      <user-name>nutrientnet</user-name>
+      <user-password>dfc4dfdfdfdedfd8dfc3dfcfdfc4dfdedfc4dfcfdfde</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-driver-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Rails NutrientNet: development" product="PostgreSQL" version="9.2.3" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="e31a41e0-27b3-4de3-b264-fb27dfca4201">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/nutrientnet_development</jdbc-url>
+      <user-name>nutrientnet</user-name>
+      <user-password>dfc4dfdfdfdedfd8dfc3dfcfdfc4dfdedfc4dfcfdfde</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-driver-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
 </project>
 
