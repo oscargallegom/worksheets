@@ -9,7 +9,7 @@ gem 'rails', '3.2.12'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  # gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -44,6 +44,8 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
 gem 'deep_cloneable', '~> 1.5.0'
 gem "nested_form"
+
+gem 'coffee-rails', '~> 3.2.1'
 
 group :development do
   gem 'better_errors'
