@@ -19,8 +19,8 @@ updateCounties = (data) ->
 
 
 $(document).ready ->
-  $.getJSON "/states/" + $("#farm_site_state_id").val() + "/counties.json", (data) ->
-    updateCounties data
+  #$.getJSON "/states/" + $("#farm_site_state_id").val() + "/counties.json", (data) ->
+  #  updateCounties data
 
   $("#farm_site_state_id").change ->
     $.getJSON "/states/" + $("#farm_site_state_id").val() + "/counties.json", (data) ->
