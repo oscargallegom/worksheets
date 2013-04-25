@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410011947) do
+ActiveRecord::Schema.define(:version => 20130424004801) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
   end
 
-  create_table "animals_projects", :id => false, :force => true do |t|
-    t.integer "project_id"
+  create_table "animals_farms", :force => true do |t|
+    t.integer "farm_id"
     t.integer "animal_id"
+    t.decimal "animals_units"
   end
 
   create_table "counties", :force => true do |t|
@@ -29,16 +30,7 @@ ActiveRecord::Schema.define(:version => 20130410011947) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "fields", :force => true do |t|
-    t.string   "name"
-    t.decimal  "area"
-    t.string   "baseline_load"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "project_id"
-  end
-
-  create_table "projects", :force => true do |t|
+  create_table "farms", :force => true do |t|
     t.string   "name",             :null => false
     t.string   "tract_number"
     t.string   "farm_notes"
@@ -53,6 +45,25 @@ ActiveRecord::Schema.define(:version => 20130410011947) do
     t.integer  "site_state_id",    :null => false
     t.integer  "site_county_id",   :null => false
     t.text     "site_description"
+    t.text     "coordinates"
+    t.float    "acres"
+  end
+
+  create_table "fields", :force => true do |t|
+    t.string   "name"
+    t.decimal  "area"
+    t.string   "baseline_load"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "farm_id"
+    t.text     "coordinates"
+    t.float    "acres"
+  end
+
+  create_table "livestock", :force => true do |t|
+    t.decimal "animal_units"
+    t.integer "animal_id"
+    t.integer "farm_id"
   end
 
   create_table "roles", :force => true do |t|

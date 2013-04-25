@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   belongs_to :state, :class_name => 'State', :foreign_key => 'state_id'
   belongs_to :org_state, :class_name => 'State', :foreign_key => 'org_state_id'
-  has_many :projects
+  has_many :farms
 
 
   attr_accessible :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip

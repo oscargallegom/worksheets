@@ -1,17 +1,17 @@
-<%=  link_to @project.name, project_path(@project) %>
+<%=  link_to @farm.name, farm_path(@farm) %>
 >
-<%= link_to @field.name, project_field_path(@project, @field) %>
+<%= link_to @field.name, farm_field_path(@farm, @field) %>
 
 <div style="position:relative">
   <ul id="tabNav">
-    <li <%= 'class=selected' %>><%= link_to 'General', edit_project_field_path(@project, @field, :step => 1) %></li>
-    <li ><%= link_to 'Soil', edit_project_field_path(@project, @field, :step => 2) %></li>
-    <li ><%= link_to 'Baseline Crop Management', edit_project_field_path(@project, @field, :step => 3) %></li>
-    <li ><%= link_to 'Baseline BMPs', edit_project_field_path(@project, @field, :step => 4) %></li>
-    <li ><%= link_to 'Baseline Nutrient Load', edit_project_field_path(@project, @field, :step => 5) %></li>
-    <li><%= link_to 'Future Crop Management', edit_project_field_path(@project, @field, :step => 6) %></li>
-    <li ><%= link_to 'Future BMPs', edit_project_field_path(@project, @field, :step => 7) %></li>
-    <li ><%= link_to 'Future Nutrient Load', edit_project_field_path(@project, @field, :step => 8) %></li>
+    <li <%= 'class=selected' %>><%= link_to 'General', edit_project_field_path(@farm, @field, :step => 1) %></li>
+    <li ><%= link_to 'Soil', edit_project_field_path(@farm, @field, :step => 2) %></li>
+    <li ><%= link_to 'Baseline Crop Management', edit_project_field_path(@farm, @field, :step => 3) %></li>
+    <li ><%= link_to 'Baseline BMPs', edit_project_field_path(@farm, @field, :step => 4) %></li>
+    <li ><%= link_to 'Baseline Nutrient Load', edit_project_field_path(@farm, @field, :step => 5) %></li>
+    <li><%= link_to 'Future Crop Management', edit_project_field_path(@farm, @field, :step => 6) %></li>
+    <li ><%= link_to 'Future BMPs', edit_project_field_path(@farm, @field, :step => 7) %></li>
+    <li ><%= link_to 'Future Nutrient Load', edit_project_field_path(@farm, @field, :step => 8) %></li>
     <li class="shadow"></li>
   </ul>
 
@@ -31,5 +31,5 @@
 
 <br/>
 
-<%= link_to 'Show', project_fields_path(@project, @field) %> |
-<%= link_to 'Back', project_fields_path(@project) %>
+<%= link_to 'Show', farm_fields_path(@farm, @field) %> |
+<%= link_to 'Back', farm_fields_path(@farm) %>

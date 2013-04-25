@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
-  add_breadcrumb 'Home', :projects_path
+  add_breadcrumb 'Home', :farms_path
   # redirect after sign-up
 
   def new

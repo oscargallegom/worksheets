@@ -1,3 +1,4 @@
 class Animal < ActiveRecord::Base
-  has_and_belongs_to_many :projects
+  has_many :livestock
+  has_many :farms, :through => :livestock
 end

@@ -1,0 +1,67 @@
+<% title 'Projects' %>
+
+<div style="position:relative">
+  <div style="position:absolute;top: 5px;right:0;z-index:2">
+    <%= form_tag farms_path, :method => 'get' do %>
+        <%= hidden_field_tag :tab, params[:tab] %>
+        <%= text_field_tag :search, params[:search], :placeholder => 'Search here' %>
+        <%= submit_tag 'Search', :body => nil %>
+    <% end %>
+  </div>
+
+  <div style="position:absolute;top: 5px;left:0;z-index:2">
+    <%= link_to image_tag('/images/add.png', :alt => 'Add'), new_farm_path %>
+    <%= link_to 'Add new project', new_farm_path %>
+  </div>
+
+  <ul id="tabNav">
+    <li class="shadow"></li>
+  </ul>
+</div>
+
+
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+  <tr>
+    <th><%= sortable 'id', 'Code' %></th>
+    <th><%= sortable 'name', 'Project Name' %></th>
+    <th><%= sortable 'created_at', 'Created on' %></th>
+    <th>Fields</th>
+    <th>Status</th>
+    <th class="actions">Actions</th>
+  </tr>
+
+  <% @farms.each do |farm| %>
+      <tr>
+        <td><%= farm.code %></td>
+        <td><%= link_to farm.name, farm %></td>
+        <td><%= l farm.created_at, :format => :date %></td>
+        <td><%= farm.fields.size() %></td>
+        <td>
+          <!-- TODO: implement status bar -->
+          <div><%= rand(100) %>%&nbsp;complete</div>
+          <div class="progressbar5px_back">
+            <img src="/images/progressbar5px.gif" class="progressbar5px" style="width: <%= rand(100)  %>px" alt="progress bar denoting % complete">
+          </div>
+        </td>
+        <td>
+          <!--
+          <%= link_to image_tag('/images/view.png', :alt => 'Show', :title => 'View'), farm %>
+          <%= link_to image_tag('/images/edit.png', :alt => 'Edit'), edit_farm_path(farm) %>
+          -->
+          <%= link_to image_tag('/images/copy.png', :alt => 'Duplicate', :title => 'Duplicate project'), duplicate_farm_path(farm), :method => :post %>
+          <%= link_to image_tag('/images/email.png', :alt => 'Email issue', :title => 'Email issue'), new_farm_issue_path(:farm_id => farm.id, :farm_name => farm.name) %>
+          <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete'), farm, method: :delete, data: {confirm: 'Are you sure?'} %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<div style="position:relative">
+  <div style="position:absolute;top:3px;right:0;z-index:2">
+    <%= page_entries_info @farms, :model => 'Farm' %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= will_paginate @farms, :container => false %>
+  </div>
+</div>
+
+<BR/>

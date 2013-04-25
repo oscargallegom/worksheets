@@ -38,7 +38,7 @@ class Ability
         can [:read, :update, :destroy], User
       end
       if user.role? :project_administrator
-        can :manage, [Project, Field]
+        can :manage, [Farm, Field]
       end
       if user.role? :basic_user
         # can :manage, [Project, Field]
@@ -46,8 +46,8 @@ class Ability
         # can :manage, Project do |project|
         #   project.try(:id) == 1
         # end
-        can :manage, Project, :owner_id => user.id
-        can :manage, Field, :project => {:owner_id => user.id}
+        can :manage, Farm, :owner_id => user.id
+        can :manage, Field, :farm => {:owner_id => user.id}
 
       end
 

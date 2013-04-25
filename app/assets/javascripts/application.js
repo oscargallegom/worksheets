@@ -18,4 +18,5 @@
 
 
 // added by Olivier
-// require jquery.ui.all
+// ####require jquery.ui.all
+//= require jquery_nested_form

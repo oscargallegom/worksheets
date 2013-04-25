@@ -1,27 +1,35 @@
-<h1>Listing fields</h1>
-
-<table>
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
   <tr>
-    <th>Name</th>
-    <th>Area</th>
-    <th>Baseline load</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Field</th>
+    <th>Area (ac)</th>
+    <th>Baseline & Load</th>
+    <th>Reduction to Bay</th>
+    <th>Credits to Trade</th>
+    <th>Status</th>
+    <th class="actions">Actions</th>
   </tr>
 
 <% @fields.each do |field| %>
   <tr>
-    <td><%= field.name %></td>
-    <td><%= field.area %></td>
+    <td><%= link_to field.name, farm_field_path(@farm, field) %></td>
+    <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
     <td><%= field.baseline_load %></td>
-    <td><%= link_to 'Show', project_field_path(@project, field) %></td>
-    <td><%= link_to 'Edit', edit_project_field_path(@project, field) %></td>
-    <td><%= link_to 'Destroy',  project_field_path(@project, field), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td></td>
+    <td></td>
+    <td>
+      <!-- TODO: implement status bar -->
+      <div><%= rand(100) %>%&nbsp;complete</div>
+      <div class="progressbar5px_back">
+        <img src="/images/progressbar5px.gif" class="progressbar5px" style="width: <%= rand(100)  %>px" alt="progress bar denoting % complete">
+      </div>
+    </td>
+    <td>
+    <%= link_to image_tag('/images/delete.png', :alt => 'Delete'), farm_field_path(@farm, field), method: :delete, data: {confirm: 'Are you sure?'} %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Field', new_project_field_path(@project) %>
+<%= link_to 'New Field', new_farm_field_path(@farm) %>

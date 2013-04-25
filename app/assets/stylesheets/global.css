@@ -972,6 +972,7 @@ label { }
 select {
     width: 150px;
     max-width: 150px;
+    height: 21px;
 }
 
 p {
@@ -1096,7 +1097,7 @@ a.sort.desc img {
     margin-top: 6px;
 }
 
-.nn-form table {
+.nn-form .mainTable {
      margin: 0 20px 0 0;
      padding: 0;
      border: none;
@@ -1107,4 +1108,40 @@ a.sort.desc img {
 
 .nn-form table td {
     vertical-align: top;
+}
+
+
+
+ul#tabNav li.disabled2 a:link, ul#tabNav li.disabled2 a:visited, ul#tabNav li.disabled2 a:hover {
+    color: darkgrey;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(.2, #dedede),color-stop(.8, #fefefe));
+    cursor: default;
+    font-style: italic;
+}
+
+.icon-delete {
+    background-image: url('/images/delete.png');
+    display :block;
+    float: right;
+    height: 16px;
+    width: 16px;
+}
+
+.field_with_errors {
+    display: inline-block;
+}
+.field_with_errors input, .field_with_errors select {
+    background-color: #EED3D7;
+}
+
+.button {
+    font: 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
 }

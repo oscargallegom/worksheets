@@ -1,0 +1,29 @@
+<% content_for :second_level_layout do %>
+    <% if @farm != nil && !@farm.new_record?%>
+    <div style="position:relative">
+      <ul id="tabNav">
+
+        <li <% if (params[:action]=='show')  %> class="selected" <% end %> ><%= link_to 'Summary', farm_path(@farm) %></li>
+        <li <% if (params[:step]=='1')  %> class="selected" <% end %> ><%= link_to 'Edit Details', edit_farm_path(@farm, :step => 1) %></li>
+        <li <% if (params[:step]=='2')  %> class="selected" <% end %> ><a <%= link_to 'Edit Location', edit_farm_path(@farm, :step => 2) %></li>
+
+        <li <% if (params[:controller]=='fields')  %> class="selected" <% end %> ><%= link_to 'Fields', farm_fields_path(@farm) %></li>
+        <li><a href="?show=disabled">Review</a></li>
+        <li><a href="?show=disabled">Submit</a></li>
+        <li class='disabled2'><a href="#">Teeeeeeeeeeeest</a></li>
+        <li><a href="#">Submit</a></li>
+        <li class="shadow"></li>
+      </ul>
+    </div>
+        <% end %>
+    <br>
+
+    <%= yield %>
+
+<% end %>
+
+
+
+
+
+<%= render :template => 'layouts/application' %>

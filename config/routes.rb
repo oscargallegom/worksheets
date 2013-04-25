@@ -1,8 +1,8 @@
 NutrientNet::Application.routes.draw do
 
-  resources :projects do
+  resources :farms do
     resources :fields
-    get :duplicate, on: :member
+    post :duplicate, on: :member
     get :send_to_mapping_site, on: :member
     post :receive_from_mapping_site, on: :member
   end
@@ -21,7 +21,7 @@ NutrientNet::Application.routes.draw do
     end
   end
 
-  resources :project_issues, :only => [:new, :create]
+  resources :farm_issues, :only => [:new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -84,7 +84,7 @@ NutrientNet::Application.routes.draw do
   #devise_scope :user do
   #  root :to => "projects#index" # "users/sessions#new"
   #end
-  root :to => 'projects#index'
+  root :to => 'farms#index'
 
   match "/help", to: "static_pages#help", as: "help"
 

@@ -1,12 +1,18 @@
 class FieldsController < ApplicationController
-  load_and_authorize_resource :project
-  load_and_authorize_resource :through => :project
+  load_and_authorize_resource :farm
+  load_and_authorize_resource :through => :farm
+  layout 'farm', :only => [:index]
 
-  # GET /projects/1/fields
-  # GET /projects/1/fields.json
+  add_breadcrumb 'Home', '/'
+  add_breadcrumb 'Farms', :farms_path
+
+  # GET /farms/1/fields
+  # GET /farms/1/fields.json
   def index
-    # @project = Project.find(params[:project_id])
-    # @fields = @project.fields
+    # @farm = Project.find(params[:farm_id])
+    # @fields = @farm.fields
+    add_breadcrumb @farm.name, farm_path(@farm)
+    add_breadcrumb 'Fields'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,11 +20,14 @@ class FieldsController < ApplicationController
     end
   end
 
-  # GET /projects/1/fields/1
-  # GET /projects/1/fields/1.json
+  # GET /farms/1/fields/1
+  # GET /farms/1/fields/1.json
   def show
-    # @project = Project.find(params[:project_id])
-    # @field = @project.fields.find(params[:id])
+    # @farm = Project.find(params[:farm_id])
+    # @field = @farm.fields.find(params[:id])
+    add_breadcrumb @farm.name, farm_path(@farm)
+    add_breadcrumb 'Fields', farm_fields_path(@farm)
+    add_breadcrumb @field.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,11 +35,11 @@ class FieldsController < ApplicationController
     end
   end
 
-  # GET /projects/1/fields/new
-  # GET /projects/1/fields/new.json
+  # GET /farms/1/fields/new
+  # GET /farms/1/fields/new.json
   def new
-    # @project = Project.find(params[:project_id])
-    # @field =@project.fields.build
+    # @farm = Project.find(params[:farm_id])
+    # @field =@farm.fields.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,23 +47,23 @@ class FieldsController < ApplicationController
     end
   end
 
-  # GET /projects/1/fields/1/edit
+  # GET /farms/1/fields/1/edit
   def edit
-    # @project= Project.find(params[:project_id])
-    # @field = @project.fields.find(params[:id])
+    # @farm= Project.find(params[:farm_id])
+    # @field = @farm.fields.find(params[:id])
     @step = params[:step] || '1'
 
   end
 
-  # POST /projects/1/fields
-  # POST /projects/1/fields.json
+  # POST /farms/1/fields
+  # POST /farms/1/fields.json
   def create
-    #  @project = Project.find(params[:project_id])
-    # @field =@project.fields.build(params[:field])
+    #  @farm = Project.find(params[:farm_id])
+    # @field =@farm.fields.build(params[:field])
 
     respond_to do |format|
       if @field.save
-        format.html { redirect_to project_field_url(@project, @field), notice: 'Field was successfully created.' }
+        format.html { redirect_to farm_field_url(@farm, @field), notice: 'Field was successfully created.' }
         format.json { render json: @field, status: :created, location: @field }
       else
         format.html { render action: "new" }
@@ -63,15 +72,15 @@ class FieldsController < ApplicationController
     end
   end
 
-  # PUT /projects/1/fields/1
-  # PUT /projects/1/fields/1.json
+  # PUT /farms/1/fields/1
+  # PUT /farms/1/fields/1.json
   def update
-    # @project =Project.find(params[:project_id])
-    # field = @project.fields.find(params[:id])
+    # @farm =Project.find(params[:farm_id])
+    # field = @farm.fields.find(params[:id])
 
     respond_to do |format|
       if @field.update_attributes(params[:field])
-        format.html { redirect_to project_field_url(@project, @field), notice: 'Field was successfully updated.' }
+        format.html { redirect_to farm_field_url(@farm, @field), notice: 'Field was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,15 +89,15 @@ class FieldsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1/fields/1
-  # DELETE /projects/1/fields/1.json
+  # DELETE /farms/1/fields/1
+  # DELETE /farms/1/fields/1.json
   def destroy
-    @project= Project.find(params[:project_id])
-    @field = @project.fields.find(params[:id])
+    @farm= Farm.find(params[:farm_id])
+    @field = @farm.fields.find(params[:id])
     @field.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_path(@project) }
+      format.html { redirect_to farm_path(@farm) }
       format.json { head :no_content }
     end
   end

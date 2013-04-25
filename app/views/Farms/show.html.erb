@@ -1,0 +1,47 @@
+<p>
+  <b>Name:</b>
+  <%= @farm.name %>
+</p>
+
+<p>
+  <b>Tract number:</b>
+  <%= @farm.tract_number %>
+</p>
+
+<p>
+  <b>Farm notes:</b>
+  <%= @farm.farm_notes %>
+</p>
+
+
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+  <tr>
+    <th>Field</th>
+    <th>Area (ac)</th>
+    <th>Baseline & Load</th>
+    <th>Reduction to Bay</th>
+    <th>Credits to Trade</th>
+    <th>Reduction to Bay</th>
+    <th class="actions">Action</th>
+
+  </tr>
+
+  <% @farm.fields.each do |field| %>
+      <tr>
+        <td><%= link_to field.name, farm_field_path(@farm, field) %></td>
+        <td><%= field.area %></td>
+        <td><%= field.baseline_load %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= link_to image_tag('/images/delete.png', :alt => 'Delete'), farm_field_path(@farm, field), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+
+<!--
+<%= link_to 'Edit', edit_farm_path(@farm) %> |
+<%= link_to 'Back', farms_path %>
+-->

@@ -42,6 +42,8 @@ gem 'will_paginate'
 gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
+gem 'deep_cloneable', '~> 1.5.0'
+gem "nested_form"
 
 group :development do
   gem 'better_errors'

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
-  add_breadcrumb 'Home', :projects_path
+  add_breadcrumb 'Home', :farms_path
   add_breadcrumb 'User accounts', :users_path
 
   # GET /users
