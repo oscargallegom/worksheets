@@ -113,3 +113,18 @@ Animal.create!({:id => 2, :name => 'Horses'}, :without_protection => true)
 Animal.create!({:id => 3, :name => 'Pigs'}, :without_protection => true)
 Animal.create!({:id => 4, :name => 'Ducks'}, :without_protection => true)
 Animal.create!({:id => 5, :name => 'Donkeys'}, :without_protection => true)
+
+FieldType.delete_all
+FieldType.create!({:id => 1, :name => 'Crop/pasture'}, :without_protection => true)
+FieldType.create!({:id => 2, :name => 'TBD Animal'}, :without_protection => true)
+FieldType.create!({:id => 3, :name => 'TBD Land'}, :without_protection => true)
+
+Irrigation.delete_all
+Irrigation.create!({:id => 1, :name => 'Center Pivot Sprinkler'}, :without_protection => true)
+Irrigation.create!({:id => 2, :name => 'Drip irrigation'}, :without_protection => true)
+Irrigation.create!({:id => 3, :name => 'Surface Withdrawal'}, :without_protection => true)
+
+SoilType.delete_all
+SoilType.create!({:id => 1, :name => 'Soil type 1'}, :without_protection => true)
+SoilType.create!({:id => 2, :name => 'Soil type 2'}, :without_protection => true)
+SoilType.create!({:id => 3, :name => 'Soil type 3'}, :without_protection => true)

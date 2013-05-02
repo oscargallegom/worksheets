@@ -76,11 +76,11 @@ class FarmsController < ApplicationController
   # PUT /farms/1.json
   def update
     # @farm = @farm.find(params[:id])
-    @step = params[:step] || 1
+    @next_step = (params[:step] || 1).to_i + 1
 
     respond_to do |format|
       if @farm.update_attributes(params[:farm])
-        format.html { redirect_to @farm, notice: 'Farm was successfully updated.' }
+        format.html { redirect_to edit_farm_path(@farm, :step => @next_step), notice: 'Farm was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -144,7 +144,9 @@ class FarmsController < ApplicationController
         # find or create
         @field = @farm.fields.where(:name => params["field#{i}id"]).first || @farm.fields.build(:name => params["field#{i}id"])
         @field.coordinates = params["field#{i}coords"]
-        @field.acres = params["field#{i}acres"]
+        @field.acres_from_map = params["field#{i}acres"]
+        @field.segment_id = params["field#{i}segment"]
+        @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
         @field.save
       end
 

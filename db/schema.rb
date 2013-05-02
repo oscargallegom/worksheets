@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424004801) do
+ActiveRecord::Schema.define(:version => 20130502024038) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -46,24 +46,53 @@ ActiveRecord::Schema.define(:version => 20130424004801) do
     t.integer  "site_county_id",   :null => false
     t.text     "site_description"
     t.text     "coordinates"
-    t.float    "acres"
+    t.decimal  "acres"
+  end
+
+  create_table "field_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "fields", :force => true do |t|
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
-    t.float    "acres"
+    t.decimal  "acres"
+    t.boolean  "tmdl_watershed"
+    t.integer  "field_type_id"
+    t.text     "notes"
+    t.integer  "segment_id"
+    t.decimal  "acres_from_map"
+    t.boolean  "acres_use_map"
+    t.decimal  "tile_drainage_depth"
+    t.integer  "irrigation_id"
+    t.decimal  "fertigation_n"
+    t.integer  "p_test_method_id"
+    t.decimal  "p_test_value"
+  end
+
+  create_table "irrigations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "livestock", :force => true do |t|
     t.decimal "animal_units"
     t.integer "animal_id"
     t.integer "farm_id"
+  end
+
+  create_table "p_test_methods", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -75,6 +104,23 @@ ActiveRecord::Schema.define(:version => 20130424004801) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "soil_types", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "soils", :force => true do |t|
+    t.integer  "soil_type_id"
+    t.integer  "field_id"
+    t.decimal  "clay"
+    t.decimal  "sand"
+    t.decimal  "silt"
+    t.decimal  "bulk_density"
+    t.decimal  "organic_carbon"
+    t.decimal  "slope"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "states", :force => true do |t|

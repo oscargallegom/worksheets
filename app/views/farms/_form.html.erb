@@ -11,197 +11,168 @@
           </ul>
         </div>
     <% end %>
-    
+
     <%= hidden_field_tag :step, 1 %>
 
     <div class="sectionRest clearfix">
-    <div>
-    <table class='mainTable'>
-      <tr>
-        <td>
-          <%= f.label :name, 'Farm name:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.text_field :name, :required => 'true' %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan=2>
-          <h2 class='sectionHeading'>Worksheet and project information</h2>
-        </td>
-      </tr>
-      <tr>
-        <td colspan=2>
-          <%= f.label :farm_notes, 'Farm notes:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan=2>
-          <%= f.text_area :farm_notes, :required => 'true', :rows => 10 %>
-        </td>
-      </tr>
+      <div>
+        <table class='mainTable'>
+          <tr>
+            <td>
+              <%= f.label :name, 'Farm name:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :name, :required => 'true' %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=2>
+              <h2 class='sectionHeading'>Worksheet and project information</h2>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=2>
+              <%= f.label :farm_notes, 'Farm notes:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=2>
+              <%= f.text_area :farm_notes, :required => 'true', :rows => 10 %>
+            </td>
+          </tr>
 
-      <tr>
-        <td colspan=2>
-          <h2 class='sectionHeading'>Site information</h2>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :site_name, 'Site name:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.text_field :site_name, :required => 'true' %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :site_street_1, 'Street 1:', :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.text_field :site_street_1 %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :site_street2, 'Street 2:', :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.text_field :site_street_2 %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan='2'>
-          <%= f.label :site_description, 'Location description:', :class => 'wide' %>
-        </td>  </tr><tr>
-        <td colspan='2'>
-          <%= f.text_area :site_description, :rows => 10 %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :site_zip, 'ZIP code:', :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.text_field :site_zip %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :site_state_id, 'State:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.collection_select :site_state_id, State.local_states, :id, :name, {:prompt => 'Select state'}, {:required => true} %></td>
-      <tr>
-        <td>
-          <%= f.label :site_county_id, 'County:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-        <td>
-          <select id="farm_site_county_id" name="farm[site_county_id]" disabled="disabled" required='required'>
-            <option>First select a state</option>
-          </select>
-         </td>
-      </tr>
-      <tr id='tract_number2' style="display: none;">
-        <td>
-          <%= f.label :tract_number, '(FSA) Tract number:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-        <td>
-          <%= f.text_field :tract_number, :required => 'true' %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan=2>
-          <h2 class='sectionHeading'>Animals</h2>
-        </td>
-      </tr>
+          <tr>
+            <td colspan=2>
+              <h2 class='sectionHeading'>Site information</h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :site_name, 'Site name:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :site_name, :required => 'true' %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :site_street_1, 'Street 1:', :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :site_street_1 %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :site_street2, 'Street 2:', :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :site_street_2 %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2'>
+              <%= f.label :site_description, 'Location description:', :class => 'wide' %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan='2'>
+              <%= f.text_area :site_description, :rows => 10 %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :site_zip, 'ZIP code:', :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :site_zip %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :site_state_id, 'State:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.collection_select :site_state_id, State.local_states, :id, :name, {:prompt => 'Select state'}, {:required => true} %></td>
+          <tr>
+            <td>
+              <%= f.label :site_county_id, 'County:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <select id="farm_site_county_id" name="farm[site_county_id]" disabled="disabled" required='required'>
+                <option>First select a state</option>
+              </select>
+            </td>
+          </tr>
+          <tr id='tr_tract_number' style="display: none;">
+            <td>
+              <%= f.label :tract_number, '(FSA) Tract number:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :tract_number, :required => 'true' %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=2>
+              <h2 class='sectionHeading'>Animals</h2>
+            </td>
+          </tr>
 
-      <tr >
-        <td >
-          <%= f.label :site_zip, 'Does this project site include confined or pastured animals?', :class => 'wide' %>
-        </td>
-        <td>
-          <input type='radio' id='has_animals_yes' name='has_animals' value='true'
-                 <% if @farm.has_animals? %>
-                    checked='checked'
-                 <% end %> >
-          <label for='has_animals_yes'>Yes</label>
-          <input type='radio' id='has_animals_no' name='has_animals' value='false'
-                 <% if !@farm.has_animals? %>
-                    checked='checked'
-                 <% end %> >
-          <label for='has_animals_no'>No</label>
+          <tr>
+            <td>
+              <%= f.label :site_zip, 'Does this project site include confined or pastured animals?', :class => 'wide' %>
+            </td>
+            <td>
+              <input type='radio' id='has_animals_yes' name='has_animals' value='true'
+                     <% if @farm.has_animals? %>
+                     checked='checked'
+                     <% end %> >
+              <label for='has_animals_yes'>Yes</label>
+              <input type='radio' id='has_animals_no' name='has_animals' value='false'
+                     <% if !@farm.has_animals? %>
+                     checked='checked'
+                     <% end %> >
+              <label for='has_animals_no'>No</label>
 
-        </td>
-      </tr>
+            </td>
+          </tr>
 
-      <tr id='livestockSectiona'>
-        <td colspan='2'>
-          <%= f.label :animals, 'Total animal units:<em>*</em>'.html_safe, :class => 'wide' %>
-        </td>
-      </tr>
-                      <tr id='livestockSectionb'>
+          <tr id='livestockSectiona'>
+            <td colspan='2'>
+              <%= f.label :animals, 'Total animal units:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+          </tr>
+          <tr id='livestockSectionb'>
 
-        <td colspan='2' align='right' id='test' >
+            <td colspan='2' align='right' id='test'>
 
-          <%= f.fields_for :livestock  do |livestock_form| %>
-
-
-              <%= livestock_form.text_field :animal_units, :size => 5 %>
-
-              <%= livestock_form.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'} %>
-              &nbsp;
-              <%= livestock_form.link_to_remove ' ', :class => 'icon-delete' %>
+              <%= f.fields_for :livestock do |livestock_form| %>
 
 
-          <% end %>
-         </td>
-                      </tr>
-      <tr id='livestockSectionc'>
-        <td><p class='wide'></p></td>
-        <td>
-         <%= f.link_to_add "Add a livestock", :livestock, :class => 'button', :id => 'addLivestockBtn', :data => { :target => "#test" } %>
-        </td>
-      </tr>
+                  <%= livestock_form.text_field :animal_units, :size => 5 %>
+
+                  <%= livestock_form.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'} %>
+                  &nbsp;
+                  <%= livestock_form.link_to_remove ' ', :class => 'icon-delete' %>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </table>
-
-
-    </div>
-    <div style="clear: both"></div>
+              <% end %>
+            </td>
+          </tr>
+          <tr id='livestockSectionc'>
+            <td><p class='wide'></p></td>
+            <td>
+              <%= f.link_to_add "Add a livestock", :livestock, :class => 'button', :id => 'addLivestockBtn', :data => {:target => "#test"} %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div style="clear: both"></div>
     </div>
 
     <div class="actions">
-      <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{farms_path}'" %>
-      <%= f.submit 'Submit' %>
+      <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{farms_path}'", :class => 'button' %>
+      <%= f.submit 'Submit', :class => 'button' %>
     </div>
 
-
-
-
 <% end %>
-
-
-

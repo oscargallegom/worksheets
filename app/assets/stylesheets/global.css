@@ -50,7 +50,8 @@ a:hover {
 /* New CSS3 button! Please use for all refactoring. */
 .button {
     font-size: .9em;
-    color: #ffffff;
+    background-color: #fff;
+    color: #666;
     padding: 4px 9px;
     /*
         background: -moz-linear-gradient(top, #494949 0%, #1f1f1f);
@@ -79,6 +80,7 @@ a:hover {
 }
 .button:hover {
     text-decoration: none !important;
+    color: #62b9dd;
 }
 .button:active {
     text-decoration: none !important;
@@ -102,7 +104,7 @@ a:hover {
 input.button {
     /*padding-bottom: 1px;*/
     padding: 4px 8px;
-    margin: 0;
+    margin: 5px;
 }
 /* Apply if you want larger button */
 .large {
@@ -816,7 +818,7 @@ form li {
     margin-bottom: 5px;
     min-height: 29px;
 }
-.nn-form label em {
+.nn-form label em, .nn-form div em {
     color: #ff0000;
 }
 .fieldnote {
@@ -1036,8 +1038,11 @@ select.year {
 }
 .sectionRest {
     background: #f0f0f0;
-    padding: 20px;
-    margin-top: 5px;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    /* margin-top: 5px;  */
 }
 
 .popoverInfo {
@@ -1134,14 +1139,9 @@ ul#tabNav li.disabled2 a:link, ul#tabNav li.disabled2 a:visited, ul#tabNav li.di
     background-color: #EED3D7;
 }
 
-.button {
-    font: 11px Arial;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    padding: 2px 6px 2px 6px;
-    border-top: 1px solid #CCCCCC;
-    border-right: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #CCCCCC;
+div.wide {
+    display: block;
+    float: left;
+    width: 160px;
+    font-weight: bold;
 }

@@ -1,17 +1,124 @@
-<p>
-  <b>Name:</b>
-  <%= @farm.name %>
-</p>
+<div class="nn-form sectionRest clearfix">
+    <div>
+      <fieldset>
+        <ol>
+          <li><h2 class='sectionHeading'>Details</h2></li>
+          <li>
+            <div class='wide'>Farm name:</div>
+            <%= @farm.name %>
+          </li>
+          <li>
+            <div class='wide'>(FSA) Tract number:</div>
+            <%= @farm.tract_number %>
+          </li>
+          <li>
+            <div class='wide'>Farm notes:</div>
+            <%= @farm.farm_notes %>
+          </li>
+          <li>
+            <div class='wide'>Generator type:</div>
+            ?????
+          </li>
+          <li>
+            <div class='wide'>Site name:</div>
+            <%= @farm.site_name %>
+          </li>
+          <li>
+            <div class='wide'>Street 1:</div>
+            <%= @farm.site_street_1 %>
+          </li>
+          <li>
+            <div class='wide'>Street 2:</div>
+            <%= @farm.site_street_2 %>
+          </li>
+          <li>
+            <div class='wide'>Location description:</div>
+            <%= @farm.site_description %>
+          </li>
+          <li>
+            <div class='wide'>Farm notes:</div>
+            <%= @farm.farm_notes %>
+          </li>
+          <li>
+            <div class='wide'>ZIP code:</div>
+            <%= @farm.site_zip %>
+          </li>
+          <li>
+            <div class='wide'>State:</div>
+            <%= @farm.site_state.name %>
+          </li>
+          <li>
+            <div class='wide'>County:</div>
+            <%= @farm.site_county.name %>
+          </li>
 
-<p>
-  <b>Tract number:</b>
-  <%= @farm.tract_number %>
-</p>
+        </ol>
+      </fieldset>
+      <fieldset>
+        <ol>
+          <li><h2 class='sectionHeading'>Totals</h2></li>
+          <li>
+            <div class='wide'>Farm area (from map):</div>
+            <%= number_with_precision(@farm.acres, :precision => 2, :separator => '.', :delimiter => ',') %>
+          </li>
+          <li>
+            <div class='wide'>Farm area (sum of fields):</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>Number of fields:</div>
+            <%= @farm.fields.size %>
+          </li>
+          <li>
+            <div class='wide'>Percent complete:</div>
+            ?????
+          </li>
+          <li>
+            <div class='wide'>Buffered area:</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>Wetland area:</div>
+            <%= @farm.site_street_1 %>
+          </li>
+          <li>
+            <div class='wide'>Converted area:</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>Farm meets baseline:</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>N reduction (EOS):</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>N reduction to bay:</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>N credits generated:</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>P reduction (EOS):</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>P reduction to bay:</div>
+            TBD
+          </li>
+          <li>
+            <div class='wide'>P credits generated:</div>
+            TBD
+          </li>
 
-<p>
-  <b>Farm notes:</b>
-  <%= @farm.farm_notes %>
-</p>
+        </ol>
+      </fieldset>
+    </div>
+    <div style="clear: both"></div>
+</div>
 
 
 <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
@@ -40,8 +147,3 @@
 </table>
 
 
-
-<!--
-<%= link_to 'Edit', edit_farm_path(@farm) %> |
-<%= link_to 'Back', farms_path %>
--->
