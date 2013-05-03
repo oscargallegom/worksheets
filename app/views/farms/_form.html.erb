@@ -144,7 +144,7 @@
           </tr>
           <tr id='livestockSectionb'>
 
-            <td colspan='2' align='right' id='test'>
+            <td colspan='2' align='right' id='td_livestock'>
 
               <%= f.fields_for :livestock do |livestock_form| %>
 
@@ -162,7 +162,7 @@
           <tr id='livestockSectionc'>
             <td><p class='wide'></p></td>
             <td>
-              <%= f.link_to_add "Add a livestock", :livestock, :class => 'button', :id => 'addLivestockBtn', :data => {:target => "#test"} %>
+              <%= f.link_to_add "Add a livestock", :livestock, :class => 'button', :id => 'addLivestockBtn', :data => {:target => "#td_livestock"} %>
             </td>
           </tr>
         </table>

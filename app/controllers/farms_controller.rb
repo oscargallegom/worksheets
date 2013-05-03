@@ -147,6 +147,14 @@ class FarmsController < ApplicationController
         @field.acres_from_map = params["field#{i}acres"]
         @field.segment_id = params["field#{i}segment"]
         @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
+
+        if @field.soils.empty?
+          # add 3 soils
+          3.times do
+            @field.soils.build
+          end
+        end
+
         @field.save
       end
 

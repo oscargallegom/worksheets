@@ -9,17 +9,3 @@
 
 %>
 
-
-<%= form_for(@farm, :html => {:class => 'nn-form'}) do |f| %>
-
-    <%= hidden_field_tag :step, 2 %>
-
-    Parcel coordinates: <%= f.text_field :coordinates %>
-
-    <div class="actions">
-      <%= submit_tag 'Cancel', :type => 'button', :onclick => "location.href = '#{farms_path}'" %>
-      <%= f.submit 'Submit' %>
-    </div>
-
-<% end %>
-

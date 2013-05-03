@@ -6,12 +6,13 @@ class FieldsController < ApplicationController
   add_breadcrumb 'Home', '/'
   add_breadcrumb 'Farms', :farms_path
 
+
   # GET /farms/1/fields
   # GET /farms/1/fields.json
   def index
     # @farm = Project.find(params[:farm_id])
     # @fields = @farm.fields
-    add_breadcrumb @farm.name, farm_path(@farm)
+    add_breadcrumb @farm.code, farm_path(@farm)
     add_breadcrumb 'Fields'
 
     respond_to do |format|
@@ -49,6 +50,9 @@ class FieldsController < ApplicationController
 
   # GET /farms/1/fields/1/edit
   def edit
+    add_breadcrumb @farm.code, farm_path(@farm)
+    add_breadcrumb 'Fields', farm_fields_path(@farm)
+    add_breadcrumb @field.name
     # @farm= Project.find(params[:farm_id])
     # @field = @farm.fields.find(params[:id])
     @step = params[:step] || '1'
