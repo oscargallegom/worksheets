@@ -108,16 +108,22 @@ County.create!({:id => 6, :name => 'WY 3', :state_id => 50}, :without_protection
 
 
 Animal.delete_all
-Animal.create!({:id => 1, :name => 'Cows'}, :without_protection => true)
-Animal.create!({:id => 2, :name => 'Horses'}, :without_protection => true)
-Animal.create!({:id => 3, :name => 'Pigs'}, :without_protection => true)
-Animal.create!({:id => 4, :name => 'Ducks'}, :without_protection => true)
-Animal.create!({:id => 5, :name => 'Donkeys'}, :without_protection => true)
+Animal.create!({:id => 1, :name => 'Beef cows'}, :without_protection => true)
+Animal.create!({:id => 2, :name => 'Dairy cows'}, :without_protection => true)
+Animal.create!({:id => 3, :name => 'Swine'}, :without_protection => true)
+Animal.create!({:id => 4, :name => 'Horses'}, :without_protection => true)
+Animal.create!({:id => 5, :name => 'Sheep'}, :without_protection => true)
+Animal.create!({:id => 6, :name => 'Goats'}, :without_protection => true)
+Animal.create!({:id => 7, :name => 'Veal'}, :without_protection => true)
+Animal.create!({:id => 8, :name => 'Bison'}, :without_protection => true)
+Animal.create!({:id => 9, :name => 'Llamas'}, :without_protection => true)
+Animal.create!({:id => 10, :name => 'Alpacas'}, :without_protection => true)
+Animal.create!({:id => 11, :name => 'Emus'}, :without_protection => true)
 
 FieldType.delete_all
 FieldType.create!({:id => 1, :name => 'Crop/pasture'}, :without_protection => true)
-FieldType.create!({:id => 2, :name => 'TBD Animal'}, :without_protection => true)
-FieldType.create!({:id => 3, :name => 'TBD Land'}, :without_protection => true)
+FieldType.create!({:id => 2, :name => 'Animal confinement'}, :without_protection => true)
+FieldType.create!({:id => 3, :name => 'Non-managed land'}, :without_protection => true)
 
 Irrigation.delete_all
 Irrigation.create!({:id => 1, :name => 'Center Pivot Sprinkler'}, :without_protection => true)
@@ -128,3 +134,12 @@ SoilType.delete_all
 SoilType.create!({:id => 1, :name => 'Soil type 1'}, :without_protection => true)
 SoilType.create!({:id => 2, :name => 'Soil type 2'}, :without_protection => true)
 SoilType.create!({:id => 3, :name => 'Soil type 3'}, :without_protection => true)
+
+GeneratorType.delete_all
+GeneratorType.create!({:id => 1, :name => 'Landowner/Producer'}, :without_protection => true)
+GeneratorType.create!({:id => 2, :name => 'Agribusiness/Consultant'}, :without_protection => true)
+GeneratorType.create!({:id => 3, :name => 'NGO/Nonprofit'}, :without_protection => true)
+GeneratorType.create!({:id => 4, :name => 'Government'}, :without_protection => true)
+GeneratorType.create!({:id => 5, :name => 'Soil Conservation District'}, :without_protection => true)
+GeneratorType.create!({:id => 6, :name => 'Regulated Entity'}, :without_protection => true)
+GeneratorType.create!({:id => 7, :name => 'Other'}, :without_protection => true)

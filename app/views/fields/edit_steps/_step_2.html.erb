@@ -49,11 +49,11 @@
         </li>
         <li>
           <%= f.label :p_test_method_id, 'Soil P test method:<em>*</em>'.html_safe, :class => 'wide' %>
-          <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'} %>
+          <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'}, :required => true %>
         </li>
         <li>
-          <%= f.label :p_test_value, 'Soil P test value:', :class => 'wide' %>
-          <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')) , :size => 5 %> ppm
+          <%= f.label :p_test_value, 'Soil P test value:<em>*</em>'.html_safe, :class => 'wide' %>
+          <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')) , :size => 5, :required => true %> ppm
         </li>
         <li>
           <%= f.label :username, 'Override soil', :class => 'wide' %>

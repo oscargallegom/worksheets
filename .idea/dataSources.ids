@@ -21060,7 +21060,8 @@
       <column name="site_county_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="site_description" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
       <column name="coordinates" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
-      <column name="acres" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
+      <column name="acres" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="generator_type_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="projects_pkey" columns="id"/>
     </table>
     <table name="farms_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
@@ -21103,7 +21104,7 @@
       <column name="updated_at" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93"/>
       <column name="farm_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="coordinates" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
-      <column name="acres" sqlType="float8" length="17" precision="17" nullable="true" jdbcType="8"/>
+      <column name="acres" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
       <column name="tmdl_watershed" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
       <column name="field_type_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="notes" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
@@ -21118,6 +21119,22 @@
       <primary-key name="fields_pkey" columns="id"/>
     </table>
     <table name="fields_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="generator_types" schema="public" catalog="nutrientnet_development" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VuZXJhdG9yX3R5cGVzX2lkX3NlcSc6OnJlZ2NsYXNzKQ=="/>
+      <primary-key name="generator_types_pkey" columns="id"/>
+    </table>
+    <table name="generator_types_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>

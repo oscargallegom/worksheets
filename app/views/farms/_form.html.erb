@@ -48,6 +48,14 @@
           </tr>
           <tr>
             <td>
+              <%= f.label :generator_type, 'Generator type:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.collection_select :generator_type_id, GeneratorType.all, :id, :name, {:prompt => 'Select Generator Type'}, {:required => true} %></td>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <%= f.label :site_name, 'Site name:<em>*</em>'.html_safe, :class => 'wide' %>
             </td>
             <td>

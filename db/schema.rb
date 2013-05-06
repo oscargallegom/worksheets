@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502024038) do
+ActiveRecord::Schema.define(:version => 20130505220538) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -31,22 +31,23 @@ ActiveRecord::Schema.define(:version => 20130502024038) do
   end
 
   create_table "farms", :force => true do |t|
-    t.string   "name",             :null => false
+    t.string   "name",              :null => false
     t.string   "tract_number"
     t.string   "farm_notes"
-    t.string   "site_name",        :null => false
+    t.string   "site_name",         :null => false
     t.string   "site_street_1"
     t.string   "site_street_2"
     t.string   "site_city"
     t.string   "site_zip"
     t.integer  "owner_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.integer  "site_state_id",    :null => false
-    t.integer  "site_county_id",   :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "site_state_id",     :null => false
+    t.integer  "site_county_id",    :null => false
     t.text     "site_description"
     t.text     "coordinates"
     t.decimal  "acres"
+    t.integer  "generator_type_id"
   end
 
   create_table "field_types", :force => true do |t|
@@ -75,6 +76,10 @@ ActiveRecord::Schema.define(:version => 20130502024038) do
     t.decimal  "fertigation_n"
     t.integer  "p_test_method_id"
     t.decimal  "p_test_value"
+  end
+
+  create_table "generator_types", :force => true do |t|
+    t.string "name"
   end
 
   create_table "irrigations", :force => true do |t|
