@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505220538) do
+ActiveRecord::Schema.define(:version => 20130521024333) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -28,6 +28,30 @@ ActiveRecord::Schema.define(:version => 20130505220538) do
     t.integer  "state_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "crop_categories", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "crop_rotations", :force => true do |t|
+    t.integer  "crop_id"
+    t.integer  "planting_method_id"
+    t.decimal  "seeding_rate"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "strip_id"
+    t.integer  "plant_date_year"
+    t.integer  "plant_date_month"
+    t.integer  "plant_date_day"
+    t.integer  "end_of_season_year"
+    t.integer  "end_of_season_month"
+    t.integer  "end_of_season_day"
+  end
+
+  create_table "crops", :force => true do |t|
+    t.string  "name"
+    t.integer "crop_category_id"
   end
 
   create_table "farms", :force => true do |t|
@@ -82,6 +106,31 @@ ActiveRecord::Schema.define(:version => 20130505220538) do
     t.string "name"
   end
 
+  create_table "grazing_livestocks", :force => true do |t|
+    t.integer  "crop_rotation_id"
+    t.integer  "start_date_year"
+    t.integer  "start_date_month"
+    t.integer  "start_date_day"
+    t.integer  "end_date_year"
+    t.integer  "end_date_month"
+    t.integer  "end_date_day"
+    t.integer  "animal_id"
+    t.decimal  "animal_units"
+    t.decimal  "hours_grazed"
+    t.boolean  "precision_feeding"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "harvest_operations", :force => true do |t|
+    t.integer  "start_date_year"
+    t.integer  "start_date_month"
+    t.integer  "start_date_day"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "crop_rotation_id"
+  end
+
   create_table "irrigations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -133,6 +182,27 @@ ActiveRecord::Schema.define(:version => 20130505220538) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "abbreviation"
+  end
+
+  create_table "strips", :force => true do |t|
+    t.decimal  "length"
+    t.integer  "field_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tillage_operation_types", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "tillage_operations", :force => true do |t|
+    t.integer  "crop_rotation_id"
+    t.integer  "start_date_year"
+    t.integer  "start_date_month"
+    t.integer  "start_date_day"
+    t.integer  "tillage_operation_type_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "user_types", :force => true do |t|

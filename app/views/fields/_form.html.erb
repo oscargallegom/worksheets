@@ -1,29 +1,32 @@
-<%= form_for([@farm, @field])  do |f| %>
-  <% if @field.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h2>
+<%= form_for([@farm, @field]) do |f| %>
+    <% if @field.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</h2>
 
-      <ul>
-      <% @field.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @field.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :area %><br />
-    <%= f.text_field :area %>
-  </div>
-  <div class="field">
-    <%= f.label :baseline_load %><br />
-    <%= f.text_field :baseline_load %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :area %>
+      <br/>
+      <%= f.text_field :area %>
+    </div>
+    <div class="field">
+      <%= f.label :baseline_load %>
+      <br/>
+      <%= f.text_field :baseline_load %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

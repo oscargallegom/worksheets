@@ -21043,6 +21043,63 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
     </table>
+    <table name="crop_categories" schema="public" catalog="nutrientnet_development" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY3JvcF9jYXRlZ29yaWVzX2lkX3NlcSc6OnJlZ2NsYXNzKQ=="/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="crop_categories_pkey" columns="id"/>
+    </table>
+    <table name="crop_categories_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="crop_rotations" schema="public" catalog="nutrientnet_development" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY3JvcF9yb3RhdGlvbnNfaWRfc2VxJzo6cmVnY2xhc3Mp"/>
+      <column name="crop_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="plant_date" sqlType="date" length="13" precision="0" nullable="true" jdbcType="91"/>
+      <column name="planting_method_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="seeding_rate" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="created_at" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93"/>
+      <primary-key name="crop_rotations_pkey" columns="id"/>
+    </table>
+    <table name="crop_rotations_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="crops" schema="public" catalog="nutrientnet_development" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY3JvcHNfaWRfc2VxJzo6cmVnY2xhc3Mp"/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="crop_category_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="crops_pkey" columns="id"/>
+    </table>
+    <table name="crops_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="farms" schema="public" catalog="nutrientnet_development" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZmFybXNfaWRfc2VxJzo6cmVnY2xhc3Mp"/>
       <column name="name" sqlType="varchar" length="255" precision="0" nullable="false" jdbcType="12"/>
@@ -21132,6 +21189,7 @@
     </table>
     <table name="generator_types" schema="public" catalog="nutrientnet_development" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnZ2VuZXJhdG9yX3R5cGVzX2lkX3NlcSc6OnJlZ2NsYXNzKQ=="/>
+      <column name="name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="generator_types_pkey" columns="id"/>
     </table>
     <table name="generator_types_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
@@ -21282,6 +21340,26 @@
       <primary-key name="states_pkey" columns="id"/>
     </table>
     <table name="states_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="strips" schema="public" catalog="nutrientnet_development" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnc3RyaXBzX2lkX3NlcSc6OnJlZ2NsYXNzKQ=="/>
+      <column name="length" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="field_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93"/>
+      <primary-key name="strips_pkey" columns="id"/>
+    </table>
+    <table name="strips_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5"/>

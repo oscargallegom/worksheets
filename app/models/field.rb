@@ -5,6 +5,8 @@ class Field < ActiveRecord::Base
   belongs_to :field_type
   belongs_to :p_test_method
 
+  has_many :strips
+
   has_many :soil_types, :through => :soils
   has_many :soils, :dependent => :destroy
 
@@ -14,4 +16,10 @@ class Field < ActiveRecord::Base
 
   attr_accessible :soils_attributes
   accepts_nested_attributes_for :soils, :allow_destroy => true
+
+  attr_accessible :strips_attributes
+  accepts_nested_attributes_for :strips, :allow_destroy => true
+
+
+
 end

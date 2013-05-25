@@ -1,7 +1,13 @@
 NutrientNet::Application.routes.draw do
 
   resources :farms do
-    resources :fields
+    resources :fields do
+      resources :strips do
+        resources :crop_rotations do
+          post :duplicate, on: :member
+        end
+      end
+    end
     post :duplicate, on: :member
     get :send_to_mapping_site, on: :member
     post :receive_from_mapping_site, on: :member
@@ -9,6 +15,10 @@ NutrientNet::Application.routes.draw do
 
   resources :states do
     resources :counties
+  end
+
+  resources :crop_categories do
+    resources :crops
   end
 
   devise_for :users, :path => 'account', :controllers => {:registrations => "users/registrations", :sessions => "users/sessions", :unlocks => 'users/unlocks', :passwords => 'users/passwords'}

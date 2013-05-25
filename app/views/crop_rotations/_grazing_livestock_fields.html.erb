@@ -1,0 +1,30 @@
+<li><h1 class='sectionHeading'>Grazing livestock #<%= (grazing_livestock_index + 1) unless grazing_livestock_index == nil  %> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
+<li>
+  <%= f.label :start_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.select :start_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => f.object.start_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+  <%= f.select :start_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => f.object.start_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+  <%= f.select :start_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => f.object.start_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+</li>
+<li>
+  <%= f.label :end_date_year, 'End date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.select :end_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => f.object.end_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+  <%= f.select :end_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => f.object.end_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+  <%= f.select :end_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => f.object.end_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+</li>
+<li>
+  <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
+</li>
+<li class='li_precision_feeding' <% if f.object.animal_id != 2 %> style="display: none;" <% end %> >
+  <%= f.label :precision_feeding, 'Precision feeding:', :class => 'wide' %>
+  <%= f.check_box  :precision_feeding, :size => 5 %>
+</li>
+<li>
+  <%= f.label :animal_units, 'Animal units:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :animal_units, :required => 'true', :size => 5 %>
+</li>
+<li>
+  <%= f.label :hours_grazed, 'Hours grazed:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :hours_grazed, :required => 'true', :size => 5 %>
+  <hr/>
+</li>

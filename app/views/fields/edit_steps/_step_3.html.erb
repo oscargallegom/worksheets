@@ -1,3 +1,20 @@
-Step 3
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
-<br/>
+    <div class="sectionRest clearfix">
+
+      <%= hidden_field_tag :step, 3 %>
+
+      <div id="div_strip">
+
+
+        <%= f.fields_for :strips do |strips_form| %>
+            <%= render 'strip_fields', :f => strips_form, :strip_index => @field.strips.index(strips_form.object)  %>
+        <% end %>
+
+      </div>
+    </div>
+    <%= f.link_to_add "Add strip", :strips, :class => 'button', :id => 'addStripBtn', :data => {:target => "#div_strip"} %>
+
+    <%= f.submit 'Save and Continue', :class => 'button' %>
+
+<% end %>

@@ -1,4 +1,4 @@
-<%= form_for @field, :url => { :action => "update" }, :html => {:class => "nn-form"} do |f| %>
+<%= form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
     <% if @field.errors.any? %>
         <br/>
         <div id="error_explanation" class="alert">
@@ -12,40 +12,40 @@
         </div>
     <% end %>
     <div class="sectionRest clearfix">
-    <%= hidden_field_tag :step, 1 %>
+      <%= hidden_field_tag :step, 1 %>
 
-    <div>
-      <fieldset>
-        <ol>
-          <li><h2 class='sectionHeading'>Field Information</h2></li>
-          <li>Enter field information.</li>
-          <li>
-            <div class='wide'>Chesapeake Bay segment:</div>
-            <%= @field.segment_id %>
-          </li>
-          <li>
-            <div class='wide'>TMDL watershed:</div>
-            <%= @field.tmdl_watershed==true ? 'Yes' :'No' %>
-          </li>
-          <li>
-            <%= f.label :name, '(FSA) Field number:<em>*</em>'.html_safe, :class => 'wide' %>
-            <%= f.text_field :name, :required => 'true' %>
-          </li>
-          <li>
-            <%= f.label :name, 'Field type:<em>*</em>'.html_safe, :class => 'wide' %>
-            <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
-            <!-- TODO: remove previous line -->
-            <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, :required => true, :disabled => (@field.field_type!=nil) %>
-          </li>
-          <li>
-            <div class='wide'>Notes:</div>
-            <%= f.text_area :notes, :rows => 5 %>
-          </li>
-                </ol>
-          </fieldset>
-        </div>
-    <div style="clear: both"></div>
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Field Information</h2></li>
+            <li>Enter field information.</li>
+            <li>
+              <div class='wide'>Chesapeake Bay segment:</div>
+              <%= @field.segment_id %>
+            </li>
+            <li>
+              <div class='wide'>TMDL watershed:</div>
+              <%= @field.tmdl_watershed==true ? 'Yes' : 'No' %>
+            </li>
+            <li>
+              <%= f.label :name, '(FSA) Field number:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :name, :required => 'true' %>
+            </li>
+            <li>
+              <%= f.label :name, 'Field type:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
+              <!-- TODO: remove previous line -->
+              <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, :required => true, :disabled => (@field.field_type!=nil) %>
+            </li>
+            <li>
+              <div class='wide'>Notes:</div>
+              <%= f.text_area :notes, :rows => 5 %>
+            </li>
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
 
-    <%= f.submit 'Save and Continue', :class => 'button' %>
-        </div>
+      <%= f.submit 'Save and Continue', :class => 'button' %>
+    </div>
 <% end %>

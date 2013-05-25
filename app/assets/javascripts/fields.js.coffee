@@ -29,3 +29,7 @@ $(document).ready ->
   $("#field_acres_use_map_true").change ->
     acresRequired()
 
+$(document).on "nested:fieldRemoved", (event) ->
+  field = event.field
+  # remove the required field(otherwise Chrome complains)
+  field.find('input').prop('required', false)

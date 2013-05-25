@@ -1,4 +1,4 @@
-<%= nested_form_for @field, :url => { :action => "update" }, :html => {:class => "nn-form"} do |f| %>
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
     <% if @field.errors.any? %>
         <br/>
@@ -13,86 +13,91 @@
         </div>
     <% end %>
 
-<div class="sectionRest clearfix">
-  <%= hidden_field_tag :step, 2 %>
-  <div>
-    <fieldset>
-      <ol>
-        <li><h2 class='sectionHeading'>Soil Characteristics</h2></li>
-        <li>
-          Enter soil information. If the soil information below, derived from the farm's location, is incorrect, complete one or more of the soil characteristic survey questions below.
-
-        </li>
-        <li>
-          <div class='wide'>Field area:<em>*</em></div>
-          <%= f.radio_button :acres_use_map, true %>
-          <%= f.label :acres_use_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
-          <br/><div class='wide'>&nbsp;</div>
-          <%= f.radio_button :acres_use_map, false %>
-          <%= f.text_field :acres, :required => 'true', :size => 5 %>
-          <%= f.label :acres_use_map_false , 'ac' %>
-
-
-
-        </li>
-        <li>
-          <%= f.label :tile_drainage_depth, 'Tile drainage depth:', :class => 'wide' %>
-          <%= f.text_field :tile_drainage_depth, :value => (number_with_precision(@field.tile_drainage_depth, :precision => 2, :separator => '.', :delimiter => ',')) , :size => 5 %> ft
-        </li>
-        <li>
-          <%= f.label :irrigation_id, 'Irrigation:', :class => 'wide' %>
-          <%= f.collection_select :irrigation_id, Irrigation.all, :id, :name, {:prompt => 'Select irrigation'} %>
-        </li>
-        <li id='fertigation_n'>
-          <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>
-          <%= f.text_field :fertigation_n, :value => (number_with_precision(@field.fertigation_n, :precision => 2, :separator => '.', :delimiter => ',')) , :size => 5 %> ft
-        </li>
-        <li>
-          <%= f.label :p_test_method_id, 'Soil P test method:<em>*</em>'.html_safe, :class => 'wide' %>
-          <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'}, :required => true %>
-        </li>
-        <li>
-          <%= f.label :p_test_value, 'Soil P test value:<em>*</em>'.html_safe, :class => 'wide' %>
-          <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')) , :size => 5, :required => true %> ppm
-        </li>
-        <li>
-          <%= f.label :username, 'Override soil', :class => 'wide' %>
-
-        </li>
-
-        <div id='li_soil'>
-          <%= f.fields_for :soils do |soil_form| %>
-        <li><h2 class='sectionHeading'>Soil</h2></li>
-
+    <div class="sectionRest clearfix">
+      <%= hidden_field_tag :step, 2 %>
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Soil Characteristics</h2></li>
             <li>
-            <%= soil_form.label :clay, 'Clay, Sand, Silt:', :class => 'wide' %>
-            <%= soil_form.text_field :clay, :size => 5 %> %
-              </li>
-              <li>
-                <%= soil_form.label :bulk_density, 'Bulk density:', :class => 'wide' %>
-                <%= soil_form.text_field :bulk_density, :size => 5 %> g/cm3
-              </li>
-              <li>
-                <%= soil_form.label :organic_carbon, 'Organic carbon:', :class => 'wide' %>
-                <%= soil_form.text_field :organic_carbon, :size => 5 %> %
-              </li>
-              <li>
-                <%= soil_form.label :slope, 'Slope:', :class => 'wide' %>
-                <%= soil_form.text_field :slope, :size => 5 %> %
-              </li>
+              Enter soil information. If the soil information below, derived from the farm's location, is incorrect,
+              complete one or more of the soil characteristic survey questions below.
 
-            <% end %>
-        </div>
-        <li>
-          <%= f.link_to_add "Add soil", :soils, :class => 'button', :id => 'addSoilBtn', :data => {:target => "#li_soil"} %>
-        </li>
+            </li>
+            <li>
+              <div class='wide'>Field area:<em>*</em></div>
+              <%= f.radio_button :acres_use_map, true %>
+              <%= f.label :acres_use_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
+              <br/>
 
-      </ol>
-    </fieldset>
+              <div class='wide'>&nbsp;</div>
+              <%= f.radio_button :acres_use_map, false %>
+              <%= f.text_field :acres, :required => 'true', :size => 5 %>
+              <%= f.label :acres_use_map_false, 'ac' %>
 
-  </div>
-  <div style="clear: both"></div>
 
-  <%= f.submit 'Save and Continue', :class => 'button' %>
-</div>
+            </li>
+            <li>
+              <%= f.label :tile_drainage_depth, 'Tile drainage depth:', :class => 'wide' %>
+              <%= f.text_field :tile_drainage_depth, :value => (number_with_precision(@field.tile_drainage_depth, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5 %>
+              ft
+            </li>
+            <li>
+              <%= f.label :irrigation_id, 'Irrigation:', :class => 'wide' %>
+              <%= f.collection_select :irrigation_id, Irrigation.all, :id, :name, {:prompt => 'Select irrigation'} %>
+            </li>
+            <li id='fertigation_n'>
+              <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>
+              <%= f.text_field :fertigation_n, :value => (number_with_precision(@field.fertigation_n, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5 %>
+              ft
+            </li>
+            <li>
+              <%= f.label :p_test_method_id, 'Soil P test method:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'}, :required => true %>
+            </li>
+            <li>
+              <%= f.label :p_test_value, 'Soil P test value:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5, :required => true %>
+              ppm
+            </li>
+            <li>
+              <%= f.label :username, 'Override soil', :class => 'wide' %>
+
+            </li>
+
+            <div id='li_soil'>
+              <%= f.fields_for :soils do |soil_form| %>
+                  <li><h2 class='sectionHeading'>Soil</h2></li>
+
+                  <li>
+                    <%= soil_form.label :clay, 'Clay, Sand, Silt:', :class => 'wide' %>
+                    <%= soil_form.text_field :clay, :size => 5 %> %
+                  </li>
+                  <li>
+                    <%= soil_form.label :bulk_density, 'Bulk density:', :class => 'wide' %>
+                    <%= soil_form.text_field :bulk_density, :size => 5 %> g/cm3
+                  </li>
+                  <li>
+                    <%= soil_form.label :organic_carbon, 'Organic carbon:', :class => 'wide' %>
+                    <%= soil_form.text_field :organic_carbon, :size => 5 %> %
+                  </li>
+                  <li>
+                    <%= soil_form.label :slope, 'Slope:', :class => 'wide' %>
+                    <%= soil_form.text_field :slope, :size => 5 %> %
+                  </li>
+
+              <% end %>
+            </div>
+            <li>
+              <%= f.link_to_add "Add soil", :soils, :class => 'button', :id => 'addSoilBtn', :data => {:target => "#li_soil"} %>
+            </li>
+
+          </ol>
+        </fieldset>
+
+      </div>
+      <div style="clear: both"></div>
+
+      <%= f.submit 'Save and Continue', :class => 'button' %>
+    </div>
 <% end %>

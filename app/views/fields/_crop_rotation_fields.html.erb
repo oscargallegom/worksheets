@@ -1,0 +1,40 @@
+<%= f.text_field :seeding_rate, :size => 5 %>
+<br/>
+
+<div>
+  <fieldset>
+    <ol>
+      <li><h2 class='sectionHeading'>Crop Category</h2></li>
+      <li>Enter the following information for the entire life cycle of this crop or pasture, as applicable. Existing
+        pastures should be planted during the normal planting season in Year 1, and any grazing operations should also
+        begin in Year 1, irrespective of when the pasture is planted. Note that some BMPs such as enhanced nutrient
+        management, dairy feed management, conservation tillage, and cover crops will be credited automatically if the
+        information entered on this page reflects any of these practices.
+      </li>
+      <li></li>
+      <li>
+        <%= f.label :name, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
+        <%= collection_select :crop_category_id, CropCategory.all, :id, :name, {:prompt => 'Select crop category'}, {:required => true} %></td>
+      </li>
+      <li>
+        <%= f.label :name, 'Crop:<em>*</em>'.html_safe, :class => 'wide' %>
+        <select id="crop_rotation_crop_id" name="crop_rotation[crop_id]" disabled="disabled" required='required'>
+          <option>First select a crop category</option>
+        </select>
+      </li>
+      <li>
+        <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
+        @@
+      </li>
+      <li>
+        <%= f.label :name, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>
+        @@
+      </li>
+      <li>
+        <div class='wide'>Seeding rate:</div>
+        <%= f.text_field :seeding_rate, :size => 5 %> seeds/ac
+      </li>
+    </ol>
+  </fieldset>
+</div>
+<div style="clear: both"></div>

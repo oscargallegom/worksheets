@@ -1,0 +1,123 @@
+<div style="position:relative">
+  <ul id="tabNav">
+    <li><%= link_to 'General', edit_farm_field_path(@farm, @field, :step => 1) %></li>
+    <li><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
+    <li class="selected" ><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
+    <li><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
+    <li><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
+    <li><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
+    <li><%= link_to 'Future BMPs', edit_farm_field_path(@farm, @field, :step => 7) %></li>
+    <li><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
+    <li class="shadow"></li>
+  </ul>
+
+  <br/>
+
+</div>
+
+
+<%= nested_form_for([@farm, @field, @strip, @crop_rotation], :html => {:class => 'nn-form'}) do |f| %>
+    <% if @crop_rotation.errors.any? %>
+        <br/>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@crop_rotation.errors.count, "error") %> encountered:</h2>
+
+          <ul>
+            <% @crop_rotation.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="sectionRest clearfix">
+
+
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Crop Category</h2></li>
+            <li>Enter the following information for the entire life cycle of this crop or pasture, as applicable. Existing pastures should be planted during the normal planting season in Year 1, and any grazing operations should also begin in Year 1, irrespective of when the pasture is planted. Note that some BMPs such as enhanced nutrient management, dairy feed management, conservation tillage, and cover crops will be credited automatically if the information entered on this page reflects any of these practices.</li>
+            <li>
+              <%= f.label :name, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= collection_select :crop_category, :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.new_record?), :prompt => 'Select crop category'} , :required => true  %></td>
+            </li>
+            <li>
+              <%= f.label :name, 'Crop:<em>*</em>'.html_safe, :class => 'wide' %>
+              <select id="crop_rotation_crop_id" name="crop_rotation[crop_id]" disabled="disabled" required='required'>
+                <% if @crop_rotation.crop == nil %>
+                    <option>First select a crop category</option>
+                    <% else %>
+                <option value='<%= @crop_rotation.crop.id%>'><%= @crop_rotation.crop.name%></option>
+                <% end %>
+              </select>
+            </li>
+            <li>
+              <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
+
+              <%= f.select :plant_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+              <%= f.select :plant_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => @crop_rotation.plant_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+              <%= f.select :plant_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => @crop_rotation.plant_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:40px'}  %>
+            </li>
+            <li>
+              <%= f.label :name, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>
+              TBD
+              <!-- TODO planting method -->
+            </li>
+            <li>
+              <%= f.label :seeding_rate, 'Seeding rate:', :class => 'wide' %>
+              <%= f.text_field :seeding_rate, :size => 5 %> seeds/ac
+            </li>
+            <li><h2 class='sectionHeading'>Grazing Livestock</h2></li>
+            <li>Enter grazing livestock for the given year. If livestock graze annually, start at the appropriate time in Year 1, regardless of when the pasture was planted in Year 1.</li>
+
+              <div id='div_grazing_livestock'>
+
+                <%= f.fields_for :grazing_livestocks do |grazing_livestocks_form| %>
+                    <%= render 'grazing_livestock_fields', :f => grazing_livestocks_form, :grazing_livestock_index => @crop_rotation.grazing_livestocks.index(grazing_livestocks_form.object)  %>
+                <% end %>
+
+              </div>
+
+            <li><%= f.link_to_add "Add a Grazing Operation", :grazing_livestocks, :class => 'button', :id => 'addGrazingLivestockBtn', :data => {:target => "#div_grazing_livestock"} %></li>
+            <li><h2 class='sectionHeading'>Commercial Fertilizer Applications</h2></li>
+            <li>Enter all commercial fertilizer applications used on this field. Please enter the total nitrogen and total phosphorus values (not ammonium or phosphate).</li>
+            <li></li>
+
+
+            <li><h2 class='sectionHeading'>Other Tillage Operations</h2></li>
+            <li>Enter tillage operations here. Tillage operations for incorporated fertilizer entered in the previous two sections are already accounted for, so do not enter fertilizer incorporation tillage operations here.</li>
+            <div id='div_tillage_operation'>
+              <%= f.fields_for :tillage_operations do |tillage_operations_form| %>
+                  <%= render 'tillage_operation_fields', :f => tillage_operations_form, :tillage_operation_index => @crop_rotation.tillage_operations.index(tillage_operations_form.object)  %>
+              <% end %>
+            </div>
+            <li><%= f.link_to_add "Add a Tillage Operation", :tillage_operations, :class => 'button', :id => 'addTillageOperationBtn', :data => {:target => "#div_tillage_operation"} %></li>
+
+            <li><h2 class='sectionHeading'>Harvest Operations</h2></li>
+            <li>Enter harvest operations here.</li>
+            <div id='div_harvest_operation'>
+              <%= f.fields_for :harvest_operations do |harvest_operations_form| %>
+                  <%= render 'harvest_operation_fields', :f => harvest_operations_form, :harvest_operation_index => @crop_rotation.harvest_operations.index(harvest_operations_form.object)  %>
+              <% end %>
+            </div>
+            <li><%= f.link_to_add "Add a Harvest Operation", :harvest_operations, :class => 'button', :id => 'addHarvestOperationBtn', :data => {:target => "#div_harvest_operation"} %></li>
+
+            <li><h2 class='sectionHeading'>End of Season</h2></li>
+            <li>Enter the end-of-season date for this crop. If harvest operations are performed on this crop, this date should match the final harvest date. The kill date should generally occur on or after the final harvest date and before the plant date of any subsequent crop in this rotation (though in some instances aerial seeding might be used to plant a subsequent crop before the final harvest and kill dates of an existing crop in which case the harvest and kill dates of the existing crop would come after the plant date of the subsequent crop). A kill date is not required for perennial plants.</li>
+            <li>
+              <%= f.select :end_of_season_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => @crop_rotation.end_of_season_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+              <%= f.select :end_of_season_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => @crop_rotation.end_of_season_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+              <%= f.select :end_of_season_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => @crop_rotation.end_of_season_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:40px'}  %>
+            </li>
+
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Save & Continue', :class => 'button' %>
+    </div>
+
+<% end %>

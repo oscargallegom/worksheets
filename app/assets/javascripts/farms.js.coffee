@@ -2,12 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-updateCounties = (counties) ->
-  items = []
-  $.each counties, (key, county) ->
-    items.push "<option value=\"" + county.id + "\">" + county.name + "</option>"
-  $("#farm_site_county_id").html items.join("")
-  $("#farm_site_county_id").removeAttr("disabled")
+updateCounties = ->
+  $.getJSON "/states/" + $("#farm_site_state_id").val() + "/counties.json", (counties) ->
+    items = []
+    $.each counties, (key, county) ->
+      items.push "<option value=\"" + county.id + "\">" + county.name + "</option>"
+    $("#farm_site_county_id").html items.join("")
+    $("#farm_site_county_id").removeAttr("disabled")
 
 # add_animal = () ->
 #  $(".animal").first().prop('required', true)
@@ -34,12 +35,10 @@ hideAnimalSection = ->
 
 $(document).ready ->
   if typeof $("#farm_site_state_id").val() isnt 'undefined' and $("#farm_site_state_id").val().length > 0
-    $.getJSON "/states/" + $("#farm_site_state_id").val() + "/counties.json", (data) ->
-    updateCounties
+    updateCounties()
 
   $("#farm_site_state_id").change ->
-    $.getJSON "/states/" + $("#farm_site_state_id").val() + "/counties.json", (data) ->
-      updateCounties data
+    updateCounties()
     if $("#farm_site_state_id option:selected").text()=='Wyoming'   # TODO: replace Wyoming with Maryland
       $("#tr_tract_number").show()
     else

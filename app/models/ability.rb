@@ -32,13 +32,13 @@ class Ability
     def initialize(user)
       user ||= User.new # guest user (not logged in)
 
-      can :read, [State, County]
+      can :read, [State, County, CropCategory, Crop]
 
       if user.role? :user_administrator
         can [:read, :update, :destroy], User
       end
       if user.role? :project_administrator
-        can :manage, [Farm, Field]
+        can :manage, :all
       end
       if user.role? :basic_user
         # can :manage, [Project, Field]
@@ -48,6 +48,8 @@ class Ability
         # end
         can :manage, Farm, :owner_id => user.id
         can :manage, Field, :farm => {:owner_id => user.id}
+        can :manage, Strip, :field => {:farm => {:owner_id => user.id}}
+        can :manage, CropRotation, :strip => {:field => {:farm => {:owner_id => user.id}}}
 
       end
 

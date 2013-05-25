@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  category_id: 1
+  plant_date: 2013-05-06
+  planting_method_id: 1
+  seeding_rate: 9.99
+
+two:
+  name: MyString
+  category_id: 1
+  plant_date: 2013-05-06
+  planting_method_id: 1
+  seeding_rate: 9.99
