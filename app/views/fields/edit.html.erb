@@ -1,28 +1,28 @@
 <div style="position:relative">
   <ul id="tabNav">
     <li
-    <% if (params[:step]=='1') %> class="selected"
+    <% if (@step=='1') %> class="selected"
     <% end %> ><%= link_to 'General', edit_farm_field_path(@farm, @field, :step => 1) %></li>
     <li
-    <% if (params[:step]=='2') %> class="selected"
+    <% if (@step=='2') %> class="selected"
     <% end %> ><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
     <li
-    <% if (params[:step]=='3') %> class="selected"
+    <% if (@step=='3') %> class="selected"
     <% end %> ><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
     <li
-    <% if (params[:step]=='4') %> class="selected"
+    <% if (@step=='4') %> class="selected"
     <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
     <li
-    <% if (params[:step]=='5') %> class="selected"
+    <% if (@step=='5') %> class="selected"
     <% end %> ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
     <li
-    <% if (params[:step]=='6') %> class="selected"
+    <% if (@step=='6') %> class="selected"
     <% end %> ><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
     <li
-    <% if (params[:step]=='7') %> class="selected"
+    <% if (@step=='7') %> class="selected"
     <% end %> ><%= link_to 'Future BMPs', edit_farm_field_path(@farm, @field, :step => 7) %></li>
     <li
-    <% if (params[:step]=='8') %> class="selected"
+    <% if (@step=='8') %> class="selected"
     <% end %> ><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
     <li class="shadow"></li>
   </ul>

@@ -126,6 +126,7 @@ FieldType.create!({:id => 2, :name => 'Animal confinement'}, :without_protection
 FieldType.create!({:id => 3, :name => 'Non-managed land'}, :without_protection => true)
 
 Irrigation.delete_all
+Irrigation.create!({:id => 0, :name => 'None'}, :without_protection => true)
 Irrigation.create!({:id => 1, :name => 'Center Pivot Sprinkler'}, :without_protection => true)
 Irrigation.create!({:id => 2, :name => 'Drip irrigation'}, :without_protection => true)
 Irrigation.create!({:id => 3, :name => 'Surface Withdrawal'}, :without_protection => true)

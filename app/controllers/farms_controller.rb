@@ -148,14 +148,49 @@ class FarmsController < ApplicationController
         @field.segment_id = params["field#{i}segment"]
         @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 
-        if @field.soils.empty?
-          # add 3 soils
-          3.times do
-            @field.soils.build
-          end
+        # get the top 3 soils
+
+
+
+        arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
+        arrFieldmukey = params["field#{i}mukey"].split("|")
+        arrFieldcompname = params["field#{i}compname"].split("|")
+        arrFieldmuname  = params["field#{i}muname"].split("|")
+
+        @listSoils = Array.new
+
+        arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
+          @listSoils << {
+              :percent =>  arrFieldpctsoiltype[index],
+              :mukey =>  arrFieldmukey[index],
+              :compname => arrFieldcompname[index],
+              :muname => arrFieldmuname[index]
+          }
         end
 
-        @field.save
+        # sort by percentage in descending order
+        @listSoils = @listSoils.sort_by!{|e| e[:percent]}.reverse!
+
+        # at most 3 soils are displayed
+        @nbSoils = [3, @listSoils.length].min
+        @nbSoils = 2
+
+        # TODO: delete only if necessary
+        @field.soils.destroy_all
+
+        @nbSoils.times do
+          @field.soils.build
+        end
+
+
+        (0..@nbSoils-1).each do |i|
+          @field.soils[i].percent = @listSoils[i][:percent]
+          @field.soils[i].mukey = @listSoils[i][:mukey]
+          @field.soils[i].compname = @listSoils[i][:compname]
+          @field.soils[i].muname = @listSoils[i][:muname]
+        end
+
+        @field.save(:validate => false)
       end
 
       @farm.coordinates = params[:parcelcoords]

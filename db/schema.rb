@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521024333) do
+ActiveRecord::Schema.define(:version => 20130603022427) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20130521024333) do
     t.decimal  "fertigation_n"
     t.integer  "p_test_method_id"
     t.decimal  "p_test_value"
+    t.decimal  "efficiency"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -175,6 +176,10 @@ ActiveRecord::Schema.define(:version => 20130521024333) do
     t.decimal  "slope"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.decimal  "percent"
+    t.integer  "mukey"
+    t.string   "compname"
+    t.string   "muname"
   end
 
   create_table "states", :force => true do |t|

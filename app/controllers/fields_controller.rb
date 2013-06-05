@@ -81,15 +81,13 @@ class FieldsController < ApplicationController
   def update
     # @farm =Project.find(params[:farm_id])
     # field = @farm.fields.find(params[:id])
-    @next_step = (params[:step] || 1).to_i + 1
+    @step = params[:step] || '1'
 
     respond_to do |format|
       if @field.update_attributes(params[:field])
-        format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @next_step), notice: 'Field was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @field.errors, status: :unprocessable_entity }
+        format.html { render action: 'edit'}
       end
     end
   end
