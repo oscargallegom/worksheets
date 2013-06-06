@@ -32,12 +32,12 @@
           </tr>
           <tr>
             <td colspan=2>
-              <%= f.label :farm_notes, 'Farm notes:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.label :farm_notes, 'Farm notes:', :class => 'wide' %>
             </td>
           </tr>
           <tr>
             <td colspan=2>
-              <%= f.text_area :farm_notes, :required => 'true', :rows => 10 %>
+              <%= f.text_area :farm_notes, :rows => 10 %>
             </td>
           </tr>
 
@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <td>
-              <%= f.label :site_name, 'Site name:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.label :site_name, 'Name:<em>*</em>'.html_safe, :class => 'wide' %>
             </td>
             <td>
               <%= f.text_field :site_name, :required => 'true' %>

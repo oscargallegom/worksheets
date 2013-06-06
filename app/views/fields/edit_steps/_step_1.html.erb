@@ -20,8 +20,16 @@
             <li><h2 class='sectionHeading'>Field Information</h2></li>
             <li>Enter field information.</li>
             <li>
-              <div class='wide'>Chesapeake Bay segment:</div>
-              <%= @field.segment_id %>
+              <div class='wide'>Watershed:</div>
+              <%= @field.watershed_segment.trib_strat_basin %>
+                          </li>
+            <li>
+              <div class='wide'>Land river segment:</div>
+             <%= @field.watershed_segment.key %>
+            </li>
+            <li>
+              <div class='wide'>Major basin:</div>
+              <%= @field.watershed_segment.major_basin %>
             </li>
             <li>
               <div class='wide'>TMDL watershed:</div>

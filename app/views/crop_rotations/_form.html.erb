@@ -54,9 +54,9 @@
             <li>
               <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
 
-              <%= f.select :plant_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-              <%= f.select :plant_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => @crop_rotation.plant_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-              <%= f.select :plant_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => @crop_rotation.plant_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:40px'}  %>
+              <%= f.select :plant_date_year, options_for_select(listYears, :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+              <%= f.select :plant_date_month, options_for_select(listMonths, :selected => @crop_rotation.plant_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+              <%= f.select :plant_date_day, options_for_select(listDays, :selected => @crop_rotation.plant_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:40px'}  %>
             </li>
             <li>
               <%= f.label :name, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>

@@ -1,6 +1,7 @@
 class Field < ActiveRecord::Base
 
   belongs_to :farm
+  belongs_to :watershed_segment
   belongs_to :irrigation
   belongs_to :field_type
   belongs_to :p_test_method
@@ -20,6 +21,6 @@ class Field < ActiveRecord::Base
   attr_accessible :strips_attributes
   accepts_nested_attributes_for :strips, :allow_destroy => true
 
-
-
+  # TODO: natural sorting
+  default_scope :order => 'name ASC'
 end

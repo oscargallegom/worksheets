@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603022427) do
+ActiveRecord::Schema.define(:version => 20130606180747) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -84,15 +84,14 @@ ActiveRecord::Schema.define(:version => 20130603022427) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres"
     t.boolean  "tmdl_watershed"
     t.integer  "field_type_id"
     t.text     "notes"
-    t.integer  "segment_id"
     t.decimal  "acres_from_map"
     t.boolean  "acres_use_map"
     t.decimal  "tile_drainage_depth"
@@ -101,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20130603022427) do
     t.integer  "p_test_method_id"
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
+    t.integer  "watershed_segment_id"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -174,12 +174,13 @@ ActiveRecord::Schema.define(:version => 20130603022427) do
     t.decimal  "bulk_density"
     t.decimal  "organic_carbon"
     t.decimal  "slope"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.decimal  "percent"
-    t.integer  "mukey"
-    t.string   "compname"
-    t.string   "muname"
+    t.integer  "map_unit_key"
+    t.string   "component_name"
+    t.string   "map_unit_name"
+    t.string   "hydrologic_group"
   end
 
   create_table "states", :force => true do |t|
@@ -263,5 +264,18 @@ ActiveRecord::Schema.define(:version => 20130603022427) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_email", :unique => true
+
+  create_table "watershed_segments", :force => true do |t|
+    t.string   "key"
+    t.string   "description"
+    t.string   "hgmr_code"
+    t.string   "state_name"
+    t.string   "county_name"
+    t.integer  "fips"
+    t.string   "major_basin"
+    t.string   "trib_strat_basin"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
 end

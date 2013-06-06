@@ -14,4 +14,23 @@ module ApplicationHelper
   def insert_tabs(tabs)
   end
 
+  def listYears
+  [
+      ['Year 1', 1], ['Year 2', 2] , ['Year 3', 3], ['Year 4', 4], ['Year 5', 5], ['Year 6', 6], ['Year 7', 7], ['Year 8', 8], ['Year 9', 9], ['Year 10', 10]
+  ]
+  end
+
+  def listMonths
+    [
+        ['01 - January', 1], ['02 - February', 2] , ['03 - March', 3], ['04 - April', 4], ['05 - May', 5], ['06 - June', 6], ['07 - July', 7], ['08 - August', 8], ['09 - September', 9], ['10 - October', 10], ['11 - November', 11], ['12 - December', 12]
+    ]
+  end
+
+  def listDays
+    [
+        [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 11], [12, 12], [13, 13], [14, 14], [15, 15], [16, 16], [17, 17], [18, 18], [19, 19], [20, 20], [21, 21], [22, 22], [23, 23], [24, 24], [25, 25], [26, 26], [27, 27], [28, 28], [29, 29], [30, 30], [31, 31]
+    ]
+  end
+
+
 end

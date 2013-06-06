@@ -145,8 +145,12 @@ class FarmsController < ApplicationController
         @field = @farm.fields.where(:name => params["field#{i}id"]).first || @farm.fields.build(:name => params["field#{i}id"])
         @field.coordinates = params["field#{i}coords"]
         @field.acres_from_map = params["field#{i}acres"]
-        @field.segment_id = params["field#{i}segment"]
+
+        #@field.segment_id = params["field#{i}segment"]
         @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
+
+        # TODO: get param (field#segment)
+        @field.watershed_segment_id = 333
 
         # get the top 3 soils
 
@@ -173,7 +177,6 @@ class FarmsController < ApplicationController
 
         # at most 3 soils are displayed
         @nbSoils = [3, @listSoils.length].min
-        @nbSoils = 2
 
         # TODO: delete only if necessary
         @field.soils.destroy_all
@@ -185,9 +188,20 @@ class FarmsController < ApplicationController
 
         (0..@nbSoils-1).each do |i|
           @field.soils[i].percent = @listSoils[i][:percent]
-          @field.soils[i].mukey = @listSoils[i][:mukey]
-          @field.soils[i].compname = @listSoils[i][:compname]
-          @field.soils[i].muname = @listSoils[i][:muname]
+          @field.soils[i].map_unit_key = @listSoils[i][:mukey]
+          @field.soils[i].component_name = @listSoils[i][:compname]
+          @field.soils[i].map_unit_name = @listSoils[i][:muname]
+          @field.soils[i].hydrologic_group =params["field#{i}hydgrp"]
+
+          # getSoilData(1726303, 'Meadowville', 'B') #
+          data = getSoilData(@listSoils[i][:mukey], @listSoils[i][:compname], params["field#{i}hydgrp"])
+
+          if data
+            @field.soils[i].clay = data[:percent_clay]
+            @field.soils[i].sand = data[:percent_sand]
+            @field.soils[i].bulk_density = data[:bulc_density]
+          end
+
         end
 
         @field.save(:validate => false)
@@ -205,6 +219,21 @@ class FarmsController < ApplicationController
       # Something's not right. Assume security breach (CSRF).
     sign_out :user
       render 'errors/not_authorized', :layout => false
+    end
+  end
+
+# Web service call
+  def getSoilData(map_unit_key, component_name, hydrologic_group)
+
+    sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
+
+
+    # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
+    client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/test.xml" )
+
+    response = client.call(:run_query, message: { "Query" => sql } )
+    if response.success?
+      return response.to_array(:run_query_response, :run_query_result, :diffgram , :new_data_set, :table).first
     end
   end
 

@@ -6,7 +6,7 @@
 
       <div id="div_strip">
 
-
+         <!-- TODO: if one field only, no length, no field number -->
         <%= f.fields_for :strips do |strips_form| %>
             <%= render 'strip_fields', :f => strips_form, :strip_index => @field.strips.index(strips_form.object)  %>
         <% end %>

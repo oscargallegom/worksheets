@@ -64,12 +64,7 @@
               <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5, :required => true %>
               ppm
             </li>
-            <li>
-              <%= f.label :username, 'Override soil', :class => 'wide' %>
-
-            </li>
-
-            <div id='li_soil'>
+                      <div id='li_soil'>
 
               <%= f.fields_for :soils do |soils_form| %>
                   <%= render 'soil_fields', :f => soils_form, :soil_index => @field.soils.index(soils_form.object)  %>
