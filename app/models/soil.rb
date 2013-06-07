@@ -2,7 +2,7 @@ class Soil < ActiveRecord::Base
   belongs_to :soil_type
   belongs_to :field
 
-  attr_accessible :soil_type_id, :field_id, :clay, :sand, :silt, :bulk_density, :organic_carbon, :slope
+  attr_accessible :soil_type_id, :field_id, :percent_clay, :percent_sand, :percent_silt, :bulk_density, :organic_carbon, :slope
 
   validates_presence_of :field_id, :percent, :mukey, :compname, :muname, :clay, :sand, :bulk_density, :organic_carbon, :slope
 

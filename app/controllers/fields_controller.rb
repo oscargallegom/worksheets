@@ -15,6 +15,8 @@ class FieldsController < ApplicationController
     add_breadcrumb @farm.code, farm_path(@farm)
     add_breadcrumb 'Fields'
 
+    #@fields = Naturalsorter::Sorter.sort_by_method(@fields, :name, true)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @fields }
