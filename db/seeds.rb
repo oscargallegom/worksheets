@@ -52,60 +52,251 @@ states = [
     {:id => 5, :name => 'California', :abbreviation => 'CA'},
     {:id => 6, :name => 'Colorado', :abbreviation => 'CO'},
     {:id => 7, :name => 'Connecticut', :abbreviation => 'CT'},
-    {:id => 8, :name => 'Delaware', :abbreviation => 'DE'},
-    {:id => 9, :name => 'Florida', :abbreviation => 'FL'},
-    {:id => 10, :name => 'Georgia', :abbreviation => 'GA'},
-    {:id => 11, :name => 'Hawaii', :abbreviation => 'HI'},
-    {:id => 12, :name => 'Idaho', :abbreviation => 'ID'},
-    {:id => 13, :name => 'Illinois', :abbreviation => 'IL'},
-    {:id => 14, :name => 'Indiana', :abbreviation => 'IN'},
-    {:id => 15, :name => 'Iowa', :abbreviation => 'IA'},
-    {:id => 16, :name => 'Kansas', :abbreviation => 'KS'},
-    {:id => 17, :name => 'Kentucky', :abbreviation => 'KY'},
-    {:id => 18, :name => 'Louisiana', :abbreviation => 'LA'},
-    {:id => 19, :name => 'Maine', :abbreviation => 'ME'},
-    {:id => 20, :name => 'Maryland', :abbreviation => 'MD'},
-    {:id => 21, :name => 'Massachusetts', :abbreviation => 'MA'},
-    {:id => 22, :name => 'Michigan', :abbreviation => 'MI'},
-    {:id => 23, :name => 'Minnesota', :abbreviation => 'MN'},
-    {:id => 24, :name => 'Mississippi', :abbreviation => 'MS'},
-    {:id => 25, :name => 'Missouri', :abbreviation => 'MO'},
-    {:id => 26, :name => 'Montana', :abbreviation => 'MT'},
-    {:id => 27, :name => 'Nebraska', :abbreviation => 'NE'},
-    {:id => 28, :name => 'Nevada', :abbreviation => 'NV'},
-    {:id => 29, :name => 'New Hampshire', :abbreviation => 'NH'},
-    {:id => 30, :name => 'New Jersey', :abbreviation => 'NJ'},
-    {:id => 31, :name => 'New Mexico', :abbreviation => 'NM'},
-    {:id => 32, :name => 'New York', :abbreviation => 'NY'},
-    {:id => 33, :name => 'North Carolina', :abbreviation => 'NC'},
-    {:id => 34, :name => 'North Dakota', :abbreviation => 'ND'},
-    {:id => 35, :name => 'Ohio', :abbreviation => 'OH'},
-    {:id => 36, :name => 'Oklahoma', :abbreviation => 'OK'},
-    {:id => 37, :name => 'Oregon', :abbreviation => 'OR'},
-    {:id => 38, :name => 'Pennsylvania', :abbreviation => 'PA'},
-    {:id => 39, :name => 'Rhode Island', :abbreviation => 'RI'},
-    {:id => 40, :name => 'South Carolina', :abbreviation => 'SC'},
-    {:id => 41, :name => 'South Dakota', :abbreviation => 'SD'},
-    {:id => 42, :name => 'Tennessee', :abbreviation => 'TN'},
-    {:id => 43, :name => 'Texas', :abbreviation => 'TX'},
-    {:id => 44, :name => 'Utah', :abbreviation => 'UT'},
-    {:id => 45, :name => 'Vermont', :abbreviation => 'VT'},
-    {:id => 46, :name => 'Virginia', :abbreviation => 'VA'},
-    {:id => 47, :name => 'Washington', :abbreviation => 'WA'},
-    {:id => 48, :name => 'West Virginia', :abbreviation => 'WV'},
-    {:id => 49, :name => 'Wisconsin', :abbreviation => 'WI'},
-    {:id => 50, :name => 'Wyoming', :abbreviation => 'WY'}
+    {:id => 8, :name => 'District of Columbia', :abbreviation => 'DC'},
+    {:id => 9, :name => 'Delaware', :abbreviation => 'DE'},
+    {:id => 10, :name => 'Florida', :abbreviation => 'FL'},
+    {:id => 11, :name => 'Georgia', :abbreviation => 'GA'},
+    {:id => 12, :name => 'Hawaii', :abbreviation => 'HI'},
+    {:id => 13, :name => 'Idaho', :abbreviation => 'ID'},
+    {:id => 14, :name => 'Illinois', :abbreviation => 'IL'},
+    {:id => 15, :name => 'Indiana', :abbreviation => 'IN'},
+    {:id => 16, :name => 'Iowa', :abbreviation => 'IA'},
+    {:id => 17, :name => 'Kansas', :abbreviation => 'KS'},
+    {:id => 18, :name => 'Kentucky', :abbreviation => 'KY'},
+    {:id => 19, :name => 'Louisiana', :abbreviation => 'LA'},
+    {:id => 20, :name => 'Maine', :abbreviation => 'ME'},
+    {:id => 21, :name => 'Maryland', :abbreviation => 'MD'},
+    {:id => 22, :name => 'Massachusetts', :abbreviation => 'MA'},
+    {:id => 23, :name => 'Michigan', :abbreviation => 'MI'},
+    {:id => 24, :name => 'Minnesota', :abbreviation => 'MN'},
+    {:id => 25, :name => 'Mississippi', :abbreviation => 'MS'},
+    {:id => 26, :name => 'Missouri', :abbreviation => 'MO'},
+    {:id => 27, :name => 'Montana', :abbreviation => 'MT'},
+    {:id => 28, :name => 'Nebraska', :abbreviation => 'NE'},
+    {:id => 29, :name => 'Nevada', :abbreviation => 'NV'},
+    {:id => 30, :name => 'New Hampshire', :abbreviation => 'NH'},
+    {:id => 31, :name => 'New Jersey', :abbreviation => 'NJ'},
+    {:id => 32, :name => 'New Mexico', :abbreviation => 'NM'},
+    {:id => 33, :name => 'New York', :abbreviation => 'NY'},
+    {:id => 34, :name => 'North Carolina', :abbreviation => 'NC'},
+    {:id => 35, :name => 'North Dakota', :abbreviation => 'ND'},
+    {:id => 36, :name => 'Ohio', :abbreviation => 'OH'},
+    {:id => 37, :name => 'Oklahoma', :abbreviation => 'OK'},
+    {:id => 38, :name => 'Oregon', :abbreviation => 'OR'},
+    {:id => 39, :name => 'Pennsylvania', :abbreviation => 'PA'},
+    {:id => 40, :name => 'Rhode Island', :abbreviation => 'RI'},
+    {:id => 41, :name => 'South Carolina', :abbreviation => 'SC'},
+    {:id => 42, :name => 'South Dakota', :abbreviation => 'SD'},
+    {:id => 43, :name => 'Tennessee', :abbreviation => 'TN'},
+    {:id => 44, :name => 'Texas', :abbreviation => 'TX'},
+    {:id => 45, :name => 'Utah', :abbreviation => 'UT'},
+    {:id => 46, :name => 'Vermont', :abbreviation => 'VT'},
+    {:id => 47, :name => 'Virginia', :abbreviation => 'VA'},
+    {:id => 48, :name => 'Washington', :abbreviation => 'WA'},
+    {:id => 49, :name => 'West Virginia', :abbreviation => 'WV'},
+    {:id => 50, :name => 'Wisconsin', :abbreviation => 'WI'},
+    {:id => 51, :name => 'Wyoming', :abbreviation => 'WY'}
 ]
 states.each { |state| State.create state, :without_protection => true }
 
 County.delete_all
-County.create!({:id => 1, :name => 'Al 1', :state_id => 1}, :without_protection => true)
-County.create!({:id => 2, :name => 'Al 2', :state_id => 1}, :without_protection => true)
-County.create!({:id => 3, :name => 'Al 3', :state_id => 1}, :without_protection => true)
-County.create!({:id => 4, :name => 'WY 1', :state_id => 50}, :without_protection => true)
-County.create!({:id => 5, :name => 'WY 2', :state_id => 50}, :without_protection => true)
-County.create!({:id => 6, :name => 'WY 3', :state_id => 50}, :without_protection => true)
-
+County.create!({:id => 1, :name => 'Kent', :state_id => 9}, :without_protection => true)
+County.create!({:id => 2, :name => 'New Castle', :state_id => 9}, :without_protection => true)
+County.create!({:id => 3, :name => 'Sussex', :state_id => 9}, :without_protection => true)
+County.create!({:id => 4, :name => 'Washington, DC', :state_id => 8}, :without_protection => true)
+County.create!({:id => 5, :name => 'Allegany', :state_id => 21}, :without_protection => true)
+County.create!({:id => 6, :name => 'Anne Arundel', :state_id => 21}, :without_protection => true)
+County.create!({:id => 7, :name => 'Baltimore City', :state_id => 21}, :without_protection => true)
+County.create!({:id => 8, :name => 'Baltimore', :state_id => 21}, :without_protection => true)
+County.create!({:id => 9, :name => 'Calvert', :state_id => 21}, :without_protection => true)
+County.create!({:id => 10, :name => 'Caroline', :state_id => 21}, :without_protection => true)
+County.create!({:id => 11, :name => 'Carroll', :state_id => 21}, :without_protection => true)
+County.create!({:id => 12, :name => 'Cecil', :state_id => 21}, :without_protection => true)
+County.create!({:id => 13, :name => 'Charles', :state_id => 21}, :without_protection => true)
+County.create!({:id => 14, :name => 'Dorchester', :state_id => 21}, :without_protection => true)
+County.create!({:id => 15, :name => 'Frederick', :state_id => 21}, :without_protection => true)
+County.create!({:id => 16, :name => 'Garrett', :state_id => 21}, :without_protection => true)
+County.create!({:id => 17, :name => 'Harford', :state_id => 21}, :without_protection => true)
+County.create!({:id => 18, :name => 'Howard', :state_id => 21}, :without_protection => true)
+County.create!({:id => 19, :name => 'Kent', :state_id => 21}, :without_protection => true)
+County.create!({:id => 20, :name => 'Montgomery', :state_id => 21}, :without_protection => true)
+County.create!({:id => 21, :name => 'Prince Georges', :state_id => 21}, :without_protection => true)
+County.create!({:id => 22, :name => 'Queen Annes', :state_id => 21}, :without_protection => true)
+County.create!({:id => 23, :name => 'Somerset', :state_id => 21}, :without_protection => true)
+County.create!({:id => 24, :name => 'St. Marys', :state_id => 21}, :without_protection => true)
+County.create!({:id => 25, :name => 'Talbot', :state_id => 21}, :without_protection => true)
+County.create!({:id => 26, :name => 'Washington', :state_id => 21}, :without_protection => true)
+County.create!({:id => 27, :name => 'Wicomico', :state_id => 21}, :without_protection => true)
+County.create!({:id => 28, :name => 'Worcester', :state_id => 21}, :without_protection => true)
+County.create!({:id => 29, :name => 'Allegany', :state_id => 33}, :without_protection => true)
+County.create!({:id => 30, :name => 'Broome', :state_id => 33}, :without_protection => true)
+County.create!({:id => 31, :name => 'Chemung', :state_id => 33}, :without_protection => true)
+County.create!({:id => 32, :name => 'Chenango', :state_id => 33}, :without_protection => true)
+County.create!({:id => 33, :name => 'Cortland', :state_id => 33}, :without_protection => true)
+County.create!({:id => 34, :name => 'Delaware', :state_id => 33}, :without_protection => true)
+County.create!({:id => 35, :name => 'Herkimer', :state_id => 33}, :without_protection => true)
+County.create!({:id => 36, :name => 'Livingston', :state_id => 33}, :without_protection => true)
+County.create!({:id => 37, :name => 'Madison', :state_id => 33}, :without_protection => true)
+County.create!({:id => 38, :name => 'Oneida', :state_id => 33}, :without_protection => true)
+County.create!({:id => 39, :name => 'Onondaga', :state_id => 33}, :without_protection => true)
+County.create!({:id => 40, :name => 'Ontario', :state_id => 33}, :without_protection => true)
+County.create!({:id => 41, :name => 'Otsego', :state_id => 33}, :without_protection => true)
+County.create!({:id => 42, :name => 'Schoharie', :state_id => 33}, :without_protection => true)
+County.create!({:id => 43, :name => 'Schuyler', :state_id => 33}, :without_protection => true)
+County.create!({:id => 44, :name => 'Steuben', :state_id => 33}, :without_protection => true)
+County.create!({:id => 45, :name => 'Tioga', :state_id => 33}, :without_protection => true)
+County.create!({:id => 46, :name => 'Tompkins', :state_id => 33}, :without_protection => true)
+County.create!({:id => 47, :name => 'Yates', :state_id => 33}, :without_protection => true)
+County.create!({:id => 48, :name => 'Adams', :state_id => 39}, :without_protection => true)
+County.create!({:id => 49, :name => 'Bedford', :state_id => 39}, :without_protection => true)
+County.create!({:id => 50, :name => 'Berks', :state_id => 39}, :without_protection => true)
+County.create!({:id => 51, :name => 'Blair', :state_id => 39}, :without_protection => true)
+County.create!({:id => 52, :name => 'Bradford', :state_id => 39}, :without_protection => true)
+County.create!({:id => 53, :name => 'Cambria', :state_id => 39}, :without_protection => true)
+County.create!({:id => 54, :name => 'Cameron', :state_id => 39}, :without_protection => true)
+County.create!({:id => 55, :name => 'Carbon', :state_id => 39}, :without_protection => true)
+County.create!({:id => 56, :name => 'Centre', :state_id => 39}, :without_protection => true)
+County.create!({:id => 57, :name => 'Chester', :state_id => 39}, :without_protection => true)
+County.create!({:id => 58, :name => 'Clearfield', :state_id => 39}, :without_protection => true)
+County.create!({:id => 59, :name => 'Clinton', :state_id => 39}, :without_protection => true)
+County.create!({:id => 60, :name => 'Columbia', :state_id => 39}, :without_protection => true)
+County.create!({:id => 61, :name => 'Cumberland', :state_id => 39}, :without_protection => true)
+County.create!({:id => 62, :name => 'Dauphin', :state_id => 39}, :without_protection => true)
+County.create!({:id => 63, :name => 'Elk', :state_id => 39}, :without_protection => true)
+County.create!({:id => 64, :name => 'Franklin City', :state_id => 39}, :without_protection => true)
+County.create!({:id => 65, :name => 'Fulton', :state_id => 39}, :without_protection => true)
+County.create!({:id => 66, :name => 'Huntingdon', :state_id => 39}, :without_protection => true)
+County.create!({:id => 67, :name => 'Indiana', :state_id => 39}, :without_protection => true)
+County.create!({:id => 68, :name => 'Jefferson', :state_id => 39}, :without_protection => true)
+County.create!({:id => 69, :name => 'Juniata', :state_id => 39}, :without_protection => true)
+County.create!({:id => 70, :name => 'Lackawanna', :state_id => 39}, :without_protection => true)
+County.create!({:id => 71, :name => 'Lancaster', :state_id => 39}, :without_protection => true)
+County.create!({:id => 72, :name => 'Lebanon', :state_id => 39}, :without_protection => true)
+County.create!({:id => 73, :name => 'Luzerne', :state_id => 39}, :without_protection => true)
+County.create!({:id => 74, :name => 'Lycoming', :state_id => 39}, :without_protection => true)
+County.create!({:id => 75, :name => 'Mckean', :state_id => 39}, :without_protection => true)
+County.create!({:id => 76, :name => 'Mifflin', :state_id => 39}, :without_protection => true)
+County.create!({:id => 77, :name => 'Montour', :state_id => 39}, :without_protection => true)
+County.create!({:id => 78, :name => 'Northumberland', :state_id => 39}, :without_protection => true)
+County.create!({:id => 79, :name => 'Perry', :state_id => 39}, :without_protection => true)
+County.create!({:id => 80, :name => 'Potter', :state_id => 39}, :without_protection => true)
+County.create!({:id => 81, :name => 'Schuylkill', :state_id => 39}, :without_protection => true)
+County.create!({:id => 82, :name => 'Snyder', :state_id => 39}, :without_protection => true)
+County.create!({:id => 83, :name => 'Somerset', :state_id => 39}, :without_protection => true)
+County.create!({:id => 84, :name => 'Sullivan', :state_id => 39}, :without_protection => true)
+County.create!({:id => 85, :name => 'Susquehanna', :state_id => 39}, :without_protection => true)
+County.create!({:id => 86, :name => 'Tioga', :state_id => 39}, :without_protection => true)
+County.create!({:id => 87, :name => 'Union', :state_id => 39}, :without_protection => true)
+County.create!({:id => 88, :name => 'Wayne', :state_id => 39}, :without_protection => true)
+County.create!({:id => 89, :name => 'Wyoming', :state_id => 39}, :without_protection => true)
+County.create!({:id => 90, :name => 'York', :state_id => 39}, :without_protection => true)
+County.create!({:id => 91, :name => 'Accomack', :state_id => 47}, :without_protection => true)
+County.create!({:id => 92, :name => 'Albemarle', :state_id => 47}, :without_protection => true)
+County.create!({:id => 93, :name => 'Alleghany', :state_id => 47}, :without_protection => true)
+County.create!({:id => 94, :name => 'Amelia', :state_id => 47}, :without_protection => true)
+County.create!({:id => 95, :name => 'Amherst', :state_id => 47}, :without_protection => true)
+County.create!({:id => 96, :name => 'Appomattox', :state_id => 47}, :without_protection => true)
+County.create!({:id => 97, :name => 'Arlington', :state_id => 47}, :without_protection => true)
+County.create!({:id => 98, :name => 'Augusta', :state_id => 47}, :without_protection => true)
+County.create!({:id => 99, :name => 'Bath', :state_id => 47}, :without_protection => true)
+County.create!({:id => 100, :name => 'Bedford', :state_id => 47}, :without_protection => true)
+County.create!({:id => 101, :name => 'Botetourt', :state_id => 47}, :without_protection => true)
+County.create!({:id => 102, :name => 'Buckingham', :state_id => 47}, :without_protection => true)
+County.create!({:id => 103, :name => 'Buena Vista', :state_id => 47}, :without_protection => true)
+County.create!({:id => 104, :name => 'Campbell', :state_id => 47}, :without_protection => true)
+County.create!({:id => 105, :name => 'Caroline', :state_id => 47}, :without_protection => true)
+County.create!({:id => 106, :name => 'Charles City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 107, :name => 'Charlottesville City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 108, :name => 'Chesapeake City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 109, :name => 'Chesterfield', :state_id => 47}, :without_protection => true)
+County.create!({:id => 110, :name => 'City Of Alexandria', :state_id => 47}, :without_protection => true)
+County.create!({:id => 111, :name => 'Clarke', :state_id => 47}, :without_protection => true)
+County.create!({:id => 112, :name => 'Colonial Heights City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 113, :name => 'Covington City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 114, :name => 'Craig', :state_id => 47}, :without_protection => true)
+County.create!({:id => 115, :name => 'Culpeper', :state_id => 47}, :without_protection => true)
+County.create!({:id => 116, :name => 'Cumberland', :state_id => 47}, :without_protection => true)
+County.create!({:id => 117, :name => 'Dinwiddie', :state_id => 47}, :without_protection => true)
+County.create!({:id => 118, :name => 'Essex', :state_id => 47}, :without_protection => true)
+County.create!({:id => 119, :name => 'Fairfax City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 120, :name => 'Fairfax', :state_id => 47}, :without_protection => true)
+County.create!({:id => 121, :name => 'Falls Church City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 122, :name => 'Fauquier', :state_id => 47}, :without_protection => true)
+County.create!({:id => 123, :name => 'Fluvanna', :state_id => 47}, :without_protection => true)
+County.create!({:id => 124, :name => 'Frederick', :state_id => 47}, :without_protection => true)
+County.create!({:id => 125, :name => 'Fredericksburg City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 126, :name => 'Giles', :state_id => 47}, :without_protection => true)
+County.create!({:id => 127, :name => 'Gloucester', :state_id => 47}, :without_protection => true)
+County.create!({:id => 128, :name => 'Goochland', :state_id => 47}, :without_protection => true)
+County.create!({:id => 129, :name => 'Greene', :state_id => 47}, :without_protection => true)
+County.create!({:id => 130, :name => 'Hampton City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 131, :name => 'Hanover', :state_id => 47}, :without_protection => true)
+County.create!({:id => 132, :name => 'Harrisonburg City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 133, :name => 'Henrico', :state_id => 47}, :without_protection => true)
+County.create!({:id => 134, :name => 'Highland', :state_id => 47}, :without_protection => true)
+County.create!({:id => 135, :name => 'Hopewell City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 136, :name => 'Isle Of Wight', :state_id => 47}, :without_protection => true)
+County.create!({:id => 137, :name => 'James City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 138, :name => 'King And Queen', :state_id => 47}, :without_protection => true)
+County.create!({:id => 139, :name => 'King George', :state_id => 47}, :without_protection => true)
+County.create!({:id => 140, :name => 'King William', :state_id => 47}, :without_protection => true)
+County.create!({:id => 141, :name => 'Lancaster', :state_id => 47}, :without_protection => true)
+County.create!({:id => 142, :name => 'Lexington City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 143, :name => 'Loudoun', :state_id => 47}, :without_protection => true)
+County.create!({:id => 144, :name => 'Louisa', :state_id => 47}, :without_protection => true)
+County.create!({:id => 145, :name => 'Lynchburg City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 146, :name => 'Madison', :state_id => 47}, :without_protection => true)
+County.create!({:id => 147, :name => 'Manassas City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 148, :name => 'Manassas Park City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 149, :name => 'Mathews', :state_id => 47}, :without_protection => true)
+County.create!({:id => 150, :name => 'Middlesex', :state_id => 47}, :without_protection => true)
+County.create!({:id => 151, :name => 'Montgomery', :state_id => 47}, :without_protection => true)
+County.create!({:id => 152, :name => 'Nelson', :state_id => 47}, :without_protection => true)
+County.create!({:id => 153, :name => 'New Kent', :state_id => 47}, :without_protection => true)
+County.create!({:id => 154, :name => 'Newport News City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 155, :name => 'Norfolk City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 156, :name => 'Northampton', :state_id => 47}, :without_protection => true)
+County.create!({:id => 157, :name => 'Northumberland', :state_id => 47}, :without_protection => true)
+County.create!({:id => 158, :name => 'Nottoway', :state_id => 47}, :without_protection => true)
+County.create!({:id => 159, :name => 'Orange', :state_id => 47}, :without_protection => true)
+County.create!({:id => 160, :name => 'Page', :state_id => 47}, :without_protection => true)
+County.create!({:id => 161, :name => 'Petersburg City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 162, :name => 'Poquoson City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 163, :name => 'Portsmouth City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 164, :name => 'Powhatan', :state_id => 47}, :without_protection => true)
+County.create!({:id => 165, :name => 'Prince Edward', :state_id => 47}, :without_protection => true)
+County.create!({:id => 166, :name => 'Prince George', :state_id => 47}, :without_protection => true)
+County.create!({:id => 167, :name => 'Prince William', :state_id => 47}, :without_protection => true)
+County.create!({:id => 168, :name => 'Rappahannock', :state_id => 47}, :without_protection => true)
+County.create!({:id => 169, :name => 'Richmond City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 170, :name => 'Richmond', :state_id => 47}, :without_protection => true)
+County.create!({:id => 171, :name => 'Roanoke', :state_id => 47}, :without_protection => true)
+County.create!({:id => 172, :name => 'Rockbridge', :state_id => 47}, :without_protection => true)
+County.create!({:id => 173, :name => 'Rockingham', :state_id => 47}, :without_protection => true)
+County.create!({:id => 174, :name => 'Shenandoah', :state_id => 47}, :without_protection => true)
+County.create!({:id => 175, :name => 'Spotsylvania', :state_id => 47}, :without_protection => true)
+County.create!({:id => 176, :name => 'Stafford', :state_id => 47}, :without_protection => true)
+County.create!({:id => 177, :name => 'Staunton City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 178, :name => 'Suffolk City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 179, :name => 'Surry', :state_id => 47}, :without_protection => true)
+County.create!({:id => 180, :name => 'Virginia Beach City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 181, :name => 'Warren', :state_id => 47}, :without_protection => true)
+County.create!({:id => 182, :name => 'Waynesboro City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 183, :name => 'Westmoreland', :state_id => 47}, :without_protection => true)
+County.create!({:id => 184, :name => 'Williamsburg City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 185, :name => 'Winchester City', :state_id => 47}, :without_protection => true)
+County.create!({:id => 186, :name => 'York', :state_id => 47}, :without_protection => true)
+County.create!({:id => 187, :name => 'Berkeley', :state_id => 49}, :without_protection => true)
+County.create!({:id => 188, :name => 'Grant', :state_id => 49}, :without_protection => true)
+County.create!({:id => 189, :name => 'Hampshire', :state_id => 49}, :without_protection => true)
+County.create!({:id => 190, :name => 'Hardy', :state_id => 49}, :without_protection => true)
+County.create!({:id => 191, :name => 'Jefferson', :state_id => 49}, :without_protection => true)
+County.create!({:id => 192, :name => 'Mineral', :state_id => 49}, :without_protection => true)
+County.create!({:id => 193, :name => 'Monroe', :state_id => 49}, :without_protection => true)
+County.create!({:id => 194, :name => 'Morgan', :state_id => 49}, :without_protection => true)
+County.create!({:id => 195, :name => 'Pendleton', :state_id => 49}, :without_protection => true)
+County.create!({:id => 196, :name => 'Preston', :state_id => 49}, :without_protection => true)
+County.create!({:id => 197, :name => 'Tucker', :state_id => 49}, :without_protection => true)
 
 Animal.delete_all
 Animal.create!({:id => 1, :name => 'Beef cows'}, :without_protection => true)

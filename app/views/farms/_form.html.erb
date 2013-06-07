@@ -110,6 +110,7 @@
               <select id="farm_site_county_id" name="farm[site_county_id]" disabled="disabled" required='required'>
                 <option>First select a state</option>
               </select>
+              <%= f.hidden_field :site_county_id, :id => 'current_site_county_id', :name => 'current_site_county_id' %>
             </td>
           </tr>
           <tr id='tr_tract_number' style="display: none;">

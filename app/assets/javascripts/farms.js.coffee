@@ -9,6 +9,9 @@ updateCounties = ->
       items.push "<option value=\"" + county.id + "\">" + county.name + "</option>"
     $("#farm_site_county_id").html items.join("")
     $("#farm_site_county_id").removeAttr("disabled")
+    # alert $("#current_site_county_id").val()
+    $("#farm_site_county_id").val($("#current_site_county_id").val())
+
 
 # add_animal = () ->
 #  $(".animal").first().prop('required', true)
@@ -39,7 +42,7 @@ $(document).ready ->
 
   $("#farm_site_state_id").change ->
     updateCounties()
-    if $("#farm_site_state_id option:selected").text()=='Wyoming'   # TODO: replace Wyoming with Maryland
+    if $("#farm_site_state_id option:selected").text()=='Maryland'
       $("#tr_tract_number").show()
     else
       $("#tr_tract_number").hide()
@@ -79,5 +82,5 @@ $(document).ready ->
   # $("#addLivestockBtn").show() if $("#has_animals_yes").is(":checked")
 
   # show tract number if state is Maryland
-  $("#tr_tract_number").show() if $("#farm_site_state_id option:selected").text()=='Wyoming'
+  $("#tr_tract_number").show() if $("#farm_site_state_id option:selected").text()=='Maryland'
   hideAnimalSection() if $("#has_animals_no").is(":checked")

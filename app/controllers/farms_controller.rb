@@ -149,15 +149,15 @@ class FarmsController < ApplicationController
         #@field.segment_id = params["field#{i}segment"]
         @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 
-        # TODO: get param (field#segment)
-        @field.watershed_segment_id = 333
+        # get the watershed segment
+        watershed_segment = WatershedSegment.where(["key = :tag", {:tag => params["field#{i}segment"]}]).first
+        unless watershed_segment == nil
+         @field.watershed_segment_id = watershed_segment.id
+        end
 
         @field.hydrologic_group =params["field#{i}hydgrp"]
 
         # get the top 3 soils
-
-
-
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
         arrFieldmukey = params["field#{i}mukey"].split("|")
         arrFieldcompname = params["field#{i}compname"].split("|")

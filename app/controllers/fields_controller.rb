@@ -1,3 +1,4 @@
+
 class FieldsController < ApplicationController
   load_and_authorize_resource :farm
   load_and_authorize_resource :through => :farm
@@ -15,7 +16,8 @@ class FieldsController < ApplicationController
     add_breadcrumb @farm.code, farm_path(@farm)
     add_breadcrumb 'Fields'
 
-    #@fields = Naturalsorter::Sorter.sort_by_method(@fields, :name, true)
+    # natural sort fields
+    @fields = Naturalsorter::Sorter.sort_by_method(@fields, :name, true)
 
     respond_to do |format|
       format.html # index.html.erb
