@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606180747) do
+ActiveRecord::Schema.define(:version => 20130606210636) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20130606180747) do
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
+    t.string   "hydrologic_group"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -168,19 +169,18 @@ ActiveRecord::Schema.define(:version => 20130606180747) do
   create_table "soils", :force => true do |t|
     t.integer  "soil_type_id"
     t.integer  "field_id"
-    t.decimal  "clay"
-    t.decimal  "sand"
-    t.decimal  "silt"
+    t.decimal  "percent_clay"
+    t.decimal  "percent_sand"
+    t.decimal  "percent_silt"
     t.decimal  "bulk_density"
     t.decimal  "organic_carbon"
     t.decimal  "slope"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.decimal  "percent"
     t.integer  "map_unit_key"
     t.string   "component_name"
     t.string   "map_unit_name"
-    t.string   "hydrologic_group"
   end
 
   create_table "states", :force => true do |t|

@@ -2,9 +2,9 @@
 <li><b><%= f.object.map_unit_key %>, <%= f.object.component_name %>, <%= f.object.map_unit_name %> <a href="#" class='detailsLink<%= soil_index+1 %>'>(show details)</a> </b> </li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
   <%= f.label :clay, 'Clay, Sand, Silt:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :clay, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> % ,
-  <%= f.text_field :sand, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> % ,
-  <%= f.text_field :silt, :size => 5, :required => true, :readonly => true %> %
+  <%= f.text_field :percent_clay, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> % ,
+  <%= f.text_field :percent_sand, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> % ,
+  <%= f.text_field :percent_silt, :size => 5, :required => true, :readonly => true %> %
 </li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
   <%= f.label :bulk_density, 'Bulk density:<em>*</em>'.html_safe, :class => 'wide' %>

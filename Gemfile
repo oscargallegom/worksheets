@@ -48,6 +48,7 @@ gem "nested_form"
 gem 'coffee-rails', '~> 3.2.1'
 
 gem 'savon', '~> 2.2.0'
+gem 'naturalsorter', '2.0.5'
 
 group :development do
   gem 'better_errors'

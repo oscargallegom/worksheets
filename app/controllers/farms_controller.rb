@@ -152,6 +152,8 @@ class FarmsController < ApplicationController
         # TODO: get param (field#segment)
         @field.watershed_segment_id = 333
 
+        @field.hydrologic_group =params["field#{i}hydgrp"]
+
         # get the top 3 soils
 
 
@@ -191,15 +193,18 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_key = @listSoils[i][:mukey]
           @field.soils[i].component_name = @listSoils[i][:compname]
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
-          @field.soils[i].hydrologic_group =params["field#{i}hydgrp"]
+
 
           # getSoilData(1726303, 'Meadowville', 'B') #
-          data = getSoilData(@listSoils[i][:mukey], @listSoils[i][:compname], params["field#{i}hydgrp"])
+          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].component_name, @field.hydrologic_group)
 
           if data
-            @field.soils[i].clay = data[:percent_clay]
-            @field.soils[i].sand = data[:percent_sand]
+            @field.soils[i].percent_clay = data[:percent_clay]
+            @field.soils[i].percent_sand = data[:percent_sand]
+            @field.soils[i].percent_silt = data[:percent_silt]
             @field.soils[i].bulk_density = data[:bulc_density]
+            @field.soils[i].organic_carbon = data[:organic_carbon]
+            @field.soils[i].slope = data[:slope]
           end
 
         end
