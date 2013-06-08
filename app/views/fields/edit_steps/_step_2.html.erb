@@ -53,7 +53,7 @@
             <li id='fertigation_n'>
               <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>
               <%= f.text_field :fertigation_n, :value => (number_with_precision(@field.fertigation_n, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5 %>
-              ft
+              ppm
             </li>
             <li>
               <%= f.label :p_test_method_id, 'Soil P test method:<em>*</em>'.html_safe, :class => 'wide' %>

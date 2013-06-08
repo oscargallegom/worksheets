@@ -2,7 +2,7 @@ class Farm < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
   #belongs_to :site_state, :class_name => 'State', :foreign_key => 'site_state_id'
   #belongs_to :site_county, :class_name => 'State', :foreign_key => 'site_county_id'
-  # belongs_to :state, :foreign_key => 'site_state_id'
+  belongs_to :state, :foreign_key => 'site_state_id'
   belongs_to :county, :foreign_key => 'site_county_id'
   belongs_to :generator_type
 

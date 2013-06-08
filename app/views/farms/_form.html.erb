@@ -158,9 +158,9 @@
               <%= f.fields_for :livestock do |livestock_form| %>
 
 
-                  <%= livestock_form.text_field :animal_units, :size => 5 %>
+                  <%= livestock_form.text_field :animal_units, :size => 5, :required => false %>
 
-                  <%= livestock_form.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'} %>
+                  <%= livestock_form.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, :required => true %>
                   &nbsp;
                   <%= livestock_form.link_to_remove ' ', :class => 'icon-delete' %>
 

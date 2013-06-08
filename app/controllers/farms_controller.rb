@@ -76,13 +76,15 @@ class FarmsController < ApplicationController
   # PUT /farms/1.json
   def update
     # @farm = @farm.find(params[:id])
-    @next_step = (params[:step] || 1).to_i + 1
+    @step = (params[:step] || 1).to_i
+    #@next_step = (params[:step] || 1).to_i + 1
 
     respond_to do |format|
       if @farm.update_attributes(params[:farm])
-        format.html { redirect_to edit_farm_path(@farm, :step => @next_step), notice: 'Farm was successfully updated.' }
+        format.html { redirect_to edit_farm_path(@farm, :step => @step+1), notice: 'Farm was successfully updated.' }
         format.json { head :no_content }
       else
+
         format.html { render action: "edit" }
         format.json { render json: @farm.errors, status: :unprocessable_entity }
       end
