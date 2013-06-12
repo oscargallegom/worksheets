@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-# fertigation is only shown for option 1 and 2
+# fertigation is only shown for option 1 and 2:
 displayFertigation = ->
   if $("#field_irrigation_id option:selected").val() is '0' or $("#field_irrigation_id option:selected").val() is '3'
     $("#fertigation_n").hide()
