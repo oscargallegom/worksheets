@@ -83,7 +83,6 @@ updateIncorporatedForManure = (caller) ->
 
 updateLiquidUnits = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
-
   $("#total_n_concentration_unit_" + componentNumber).text('hello')
   # if liquid then show liquid units
   if caller.val() == '1'

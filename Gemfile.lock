@@ -147,8 +147,6 @@ GEM
       nokogiri (>= 1.4.0)
     will_paginate (3.0.4)
 
-PLATFORMS
-  x86-mingw32
 
 DEPENDENCIES
   activerecord-postgresql-adapter
