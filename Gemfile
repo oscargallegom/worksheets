@@ -45,7 +45,7 @@ gem 'dynamic_form'
 #gem 'deep_cloneable', '~> 1.5.2'                 #############################
 gem "nested_form"
 
-gem 'coffee-rails', '~> 3.2.1'
+# gem 'coffee-rails', '~> 3.2.1'
 
 gem 'savon', '~> 2.2.0'
 gem 'naturalsorter', '2.0.5'   # natural sort
@@ -53,6 +53,10 @@ gem 'naturalsorter', '2.0.5'   # natural sort
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :assets do
+  gem 'coffee-rails'
 end
 
 # gem 'client_side_validations'
