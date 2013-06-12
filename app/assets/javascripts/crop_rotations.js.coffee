@@ -82,7 +82,6 @@ updateIncorporatedForManure = (caller) ->
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").prop('required', false)
 
 updateLiquidUnits = (caller) ->
-
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
 
   $("#total_n_concentration_unit_" + componentNumber).text('hello')
