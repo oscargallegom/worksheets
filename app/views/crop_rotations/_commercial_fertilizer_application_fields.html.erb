@@ -1,9 +1,9 @@
 <li><h1 class='sectionHeading'>Commercial operation #<%= (commercial_fertilizer_application_index + 1) unless commercial_fertilizer_application_index == nil  %> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
 <li>
   <%= f.label :application_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :application_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => f.object.application_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :application_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => f.object.application_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :application_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => f.object.application_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+  <%= f.select :application_date_year, options_for_select(listYears, :selected => f.object.application_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+  <%= f.select :application_date_month, options_for_select(listMonths, :selected => f.object.application_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+  <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
 </li>
 <li>
   <%= f.label :total_n_applied, 'Total N applied:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -19,9 +19,9 @@
 </li>
 <li>
   <%= f.label :incorporation_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :incorporation_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => f.object.incorporation_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :incorporation_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => f.object.incorporation_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :incorporation_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => f.object.incorporation_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+  <%= f.select :incorporation_date_year, options_for_select(listYears, :selected => f.object.incorporation_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+  <%= f.select :incorporation_date_month, options_for_select(listMonths, :selected => f.object.incorporation_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+  <%= f.select :incorporation_date_day, options_for_select(listDays, :selected => f.object.incorporation_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
 </li>
 <li>
   <%= f.label :incorporation_depth, 'Depth:<em>*</em>'.html_safe, :class => 'wide' %>
