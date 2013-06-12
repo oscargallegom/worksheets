@@ -42,12 +42,12 @@ gem 'will_paginate'
 gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
-gem 'deep_cloneable', '~> 1.5.0'
+#gem 'deep_cloneable', '~> 1.5.0'
 gem "nested_form"
 
 #gem 'coffee-rails', '~> 3.2.1'
 
- gem 'savon', '~> 2.2.0'
+gem 'savon', '~> 2.2.0'
 gem 'naturalsorter', '2.0.5'   # natural sort
 
 group :development do
