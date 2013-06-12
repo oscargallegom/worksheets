@@ -73,3 +73,6 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+PLATFORMS
+  x86-mingw32

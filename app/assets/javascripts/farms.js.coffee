@@ -50,7 +50,6 @@ $(document).ready ->
   $("#has_animals_yes").change ->
     showAnimalSection()
 
-
   $("#has_animals_no").change ->
     hideAnimalSection()
 
