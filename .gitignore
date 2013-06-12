@@ -36,4 +36,3 @@ pickle-email-*.html
 .project
 /config/heroku_env.rb
 myKey
-Gemfile.lock
