@@ -152,6 +152,7 @@ GEM
 PLATFORMS
   x86-mingw32
 
+
 DEPENDENCIES
   activerecord-postgresql-adapter
   better_errors
