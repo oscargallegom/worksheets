@@ -186,3 +186,9 @@ $(document).on "nested:fieldAdded", (event) ->
     #test = $(this).attr('id').replace('crop_rotation_manure_fertilizer_applications_attributes_', '')
     #alert(test.substring(0, test.indexOf('_')))
     #alert(getComponentNumber($(this).attr('id'),'crop_rotation_manure_fertilizer_applications_attributes_' ))
+
+  # update the page
+  $("select").each (index) ->
+    selectListener($(this))
+  $(":checkbox").each (index) ->
+    checkboxListener($(this))

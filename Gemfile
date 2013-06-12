@@ -53,7 +53,7 @@ gem 'naturalsorter', '2.0.5'   # natural sort
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'deep_cloneable', '~> 1.5.2'
+  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
 end
 
 group :assets do
