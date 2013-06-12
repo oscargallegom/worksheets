@@ -133,7 +133,7 @@
 
   </tr>
 
-  <% @farm.fields.each do |field| %>
+  <% @fields.each do |field| %>
       <tr>
         <td><%= link_to field.name, farm_field_path(@farm, field) %></td>
         <td><%= field.area %></td>

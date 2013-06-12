@@ -16,16 +16,23 @@ displayEfficiency = ->
     $("#field_efficiency").prop('required', false)
   else
     $("#efficiency").show()
+    if $("#field_irrigation_id").val() is '500'
+      $("#default_efficiency").text('typically 70%-80%')
+    if $("#field_irrigation_id").val() is '530'
+      $("#default_efficiency").text('typically 80%-95%')
+    if $("#field_irrigation_id").val() is '502'
+      $("#default_efficiency").text('typically 50%-70%')
+
     $("#field_efficiency").prop('required', true)
 
 # update the silt percents
 updateSiltPercents = ->
-  if $.isNumeric($("#field_soils_attributes_0_clay").val()) and $.isNumeric($("#field_soils_attributes_0_sand").val())
-    $("#field_soils_attributes_0_silt").val(100 - $("#field_soils_attributes_0_clay").val() - $("#field_soils_attributes_0_sand").val())
-  if $.isNumeric($("#field_soils_attributes_1_clay").val()) and $.isNumeric($("#field_soils_attributes_1_sand").val())
-    $("#field_soils_attributes_1_silt").val(100 - $("#field_soils_attributes_0_clay").val() - $("#field_soils_attributes_1_sand").val())
-  if $.isNumeric($("#field_soils_attributes_2_clay").val()) and $.isNumeric($("#field_soils_attributes_2_sand").val())
-    $("#field_soils_attributes_2_silt").val(100 - $("#field_soils_attributes_2_clay").val() - $("#field_soils_attributes_2_sand").val())
+  if $.isNumeric($("#field_soils_attributes_0_percent_clay").val()) and $.isNumeric($("#field_soils_attributes_0_percent_sand").val())
+    $("#field_soils_attributes_0_percent_silt").val(100 - $("#field_soils_attributes_0_percent_clay").val() - $("#field_soils_attributes_0_percent_sand").val())
+  if $.isNumeric($("#field_soils_attributes_1_percent_clay").val()) and $.isNumeric($("#field_soils_attributes_1_percent_sand").val())
+    $("#field_soils_attributes_1_percent_silt").val(100 - $("#field_soils_attributes_0_percent_clay").val() - $("#field_soils_attributes_1_percent_sand").val())
+  if $.isNumeric($("#field_soils_attributes_2_percent_clay").val()) and $.isNumeric($("#field_soils_attributes_2_percent_sand").val())
+    $("#field_soils_attributes_2_percent_silt").val((100 - $("#field_soils_attributes_2_percent_clay").val() - $("#field_soils_attributes_2_percent_sand").val()).toFixed(1))
 
 # if not use default map, acres is required
 acresRequired = ->

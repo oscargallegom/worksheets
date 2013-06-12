@@ -1,8 +1,0 @@
-<li><h1 class='sectionHeading'>Harvest operation #<%= (harvest_operation_index + 1) unless harvest_operation_index == nil  %> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
-<li>
-  <%= f.label :start_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :start_date_year, options_for_select([['Year 1', 1], ['Year 2', 2],['Year 3', 3]], :selected => f.object.start_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :start_date_month, options_for_select([['01 - January', 1], ['02 - February', 2],['03 - March', 3]], :selected => f.object.start_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :start_date_day, options_for_select([[1, 1], [2, 2],[3, 3]], :selected => f.object.start_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
-  <hr/>
-</li>

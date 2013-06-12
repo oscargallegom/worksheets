@@ -26,6 +26,9 @@ class FarmsController < ApplicationController
     add_breadcrumb 'Farms', :farms_path
     add_breadcrumb @farm.code
 
+    # sort fields 'naturally'
+    @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @farm }
@@ -147,6 +150,7 @@ class FarmsController < ApplicationController
         @field = @farm.fields.where(:name => params["field#{i}id"]).first || @farm.fields.build(:name => params["field#{i}id"])
         @field.coordinates = params["field#{i}coords"]
         @field.acres_from_map = params["field#{i}acres"]
+        @field.acres_use_map = true
 
         #@field.segment_id = params["field#{i}segment"]
         @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')

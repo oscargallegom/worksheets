@@ -48,7 +48,7 @@
             </li>
             <li id='efficiency'>
               <%= f.label :efficiency, 'Efficiency<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.text_field :efficiency, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> %
+              <%= f.text_field :efficiency, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> % &nbsp;&nbsp;&nbsp;&nbsp;<span id='default_efficiency'></span>
             </li>
             <li id='fertigation_n'>
               <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>

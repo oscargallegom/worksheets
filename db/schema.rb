@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606210636) do
+ActiveRecord::Schema.define(:version => 20130612002312) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -23,11 +23,28 @@ ActiveRecord::Schema.define(:version => 20130606210636) do
     t.decimal "animals_units"
   end
 
+  create_table "commercial_fertilizer_applications", :force => true do |t|
+    t.integer  "crop_rotation_id"
+    t.integer  "application_date_year"
+    t.integer  "application_date_month"
+    t.integer  "application_date_day"
+    t.decimal  "total_n_applied"
+    t.decimal  "total_p_applied"
+    t.boolean  "is_incorporated"
+    t.integer  "incorporation_date_year"
+    t.integer  "incorporation_date_month"
+    t.integer  "incorporation_date_day"
+    t.decimal  "incorporation_depth"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
   create_table "counties", :force => true do |t|
     t.string   "name"
     t.integer  "state_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "fips"
   end
 
   create_table "crop_categories", :force => true do |t|
@@ -52,6 +69,20 @@ ActiveRecord::Schema.define(:version => 20130606210636) do
   create_table "crops", :force => true do |t|
     t.string  "name"
     t.integer "crop_category_id"
+  end
+
+  create_table "end_of_season_types", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "end_of_seasons", :force => true do |t|
+    t.integer  "end_of_season_type_id"
+    t.integer  "year"
+    t.integer  "month"
+    t.integer  "day"
+    t.integer  "crop_rotation_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "farms", :force => true do |t|
@@ -124,19 +155,14 @@ ActiveRecord::Schema.define(:version => 20130606210636) do
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "harvest_operations", :force => true do |t|
-    t.integer  "start_date_year"
-    t.integer  "start_date_month"
-    t.integer  "start_date_day"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.integer  "crop_rotation_id"
-  end
-
   create_table "irrigations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "liquid_unit_types", :force => true do |t|
+    t.string "name"
   end
 
   create_table "livestock", :force => true do |t|
@@ -145,10 +171,56 @@ ActiveRecord::Schema.define(:version => 20130606210636) do
     t.integer "farm_id"
   end
 
+  create_table "manure_consistencies", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "manure_fertilizer_applications", :force => true do |t|
+    t.integer  "crop_rotation_id"
+    t.integer  "application_date_year"
+    t.integer  "application_date_month"
+    t.integer  "application_date_day"
+    t.integer  "manure_type_id"
+    t.integer  "manure_consistency_id"
+    t.integer  "liquid_unit_type_id"
+    t.decimal  "total_n_concentration"
+    t.decimal  "p_concentration"
+    t.integer  "p_type_id"
+    t.decimal  "application_rate"
+    t.decimal  "moisture_content"
+    t.boolean  "is_precision_feeding"
+    t.boolean  "is_phytase_treatment"
+    t.boolean  "is_poultry_litter_treatment"
+    t.boolean  "is_incorporated"
+    t.integer  "incorporation_date_year"
+    t.integer  "incorporation_date_month"
+    t.integer  "incorporation_date_day"
+    t.decimal  "incorporation_depth"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "manure_type_categories", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "manure_types", :force => true do |t|
+    t.string  "name"
+    t.integer "manure_type_category_id"
+  end
+
   create_table "p_test_methods", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "p_types", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "planting_methods", :force => true do |t|
+    t.string "name"
   end
 
   create_table "roles", :force => true do |t|

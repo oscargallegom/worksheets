@@ -974,8 +974,8 @@ label { }
 }
 
 select {
-    width: 150px;
-    max-width: 150px;
+    width: 160px;
+    max-width: 250px;
     height: 21px;
 }
 

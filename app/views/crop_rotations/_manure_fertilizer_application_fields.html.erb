@@ -1,0 +1,66 @@
+<li><h1 class='sectionHeading'>Manure operation #<%= (manure_fertilizer_application_index + 1) unless manure_fertilizer_application_index == nil  %> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
+<li>
+  <%= f.label :application_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.select :application_date_year, options_for_select(listYears, :selected => f.object.application_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+  <%= f.select :application_date_month, options_for_select(listMonths, :selected => f.object.application_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+  <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>
+</li>
+<li>
+  <%= f.label :manure_type_id, 'Type:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.grouped_collection_select :manure_type_id, ManureTypeCategory.all, :manure_types, :name, :id, :name, {:prompt => 'Select manure type'}, {:required => true} %>
+</li>
+<li>
+  <%= f.label :manure_consistency_id, 'Consistency:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.collection_select :manure_consistency_id, ManureConsistency.all, :id, :name, {:prompt => 'Select consistency'}, {:required => true} %>
+</li>
+<li>
+  <%= f.label :liquid_unit_type_id, 'Liquid units:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.collection_select :liquid_unit_type_id, LiquidUnitType.all, :id, :name, {:prompt => 'Select units'}, {:required => true} %>
+</li>
+<li>
+  <%= f.label :total_n_concentration, 'Total N concentration:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :total_n_concentration, :required => 'true', :size => 5 %>
+  <span></span>
+</li>
+<li>
+  <%= f.label :p_concentration, 'P concentration:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :p_concentration, :required => 'true', :size => 5 %>
+  <span></span>
+  <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:required => true, :style => 'width:80px'} %>
+</li>
+<li>
+  <%= f.label :application_rate, 'Application rate:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :application_rate, :required => 'true', :size => 5 %>
+  <span></span>
+</li>
+<li>
+  <%= f.label :moisture_content, 'Moisture content:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :moisture_content, :required => 'true', :size => 5 %> %
+</li>
+<li>
+  <%= f.label :is_precision_feeding, 'Precision feeding:', :class => 'wide' %>
+  <%= f.check_box  :is_precision_feeding, :size => 5 %>
+</li>
+<li>
+  <%= f.label :is_phytase_treatment, 'Phytase treatment:', :class => 'wide' %>
+  <%= f.check_box  :is_phytase_treatment, :size => 5 %>
+</li>
+<li>
+  <%= f.label :is_poultry_litter_treatment, 'Poultry litter treatment:', :class => 'wide' %>
+  <%= f.check_box  :is_poultry_litter_treatment, :size => 5 %>
+</li>
+<li>
+  <%= f.label :is_incorporated, 'Incorporated/Injected:', :class => 'wide' %>
+  <%= f.check_box  :is_incorporated, :size => 5 %>
+</li>
+<li>
+  <%= f.label :incorporation_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.select :incorporation_date_year, options_for_select(listYears, :selected => f.object.incorporation_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
+  <%= f.select :incorporation_date_month, options_for_select(listMonths, :selected => f.object.incorporation_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
+  <%= f.select :incorporation_date_day, options_for_select(listDays, :selected => f.object.incorporation_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>
+</li>
+<li>
+  <%= f.label :incorporation_depth, 'Incorporation depth:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :incorporation_depth, :required => 'true', :size => 5 %> in
+  <hr/>
+</li>
