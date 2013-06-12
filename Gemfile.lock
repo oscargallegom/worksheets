@@ -172,7 +172,7 @@ DEPENDENCIES
   breadcrumbs_on_rails
   cancan
   coffee-rails
-  deep_cloneable (~> 1.5.0)
+  deep_cloneable (~> 1.5.2)
   devise
   dynamic_form
   jquery-rails
