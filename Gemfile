@@ -42,7 +42,7 @@ gem 'will_paginate'
 gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
-#gem 'deep_cloneable', '~> 1.5.2'                 #############################
+gem 'deep_cloneable', '~> 1.5.2'                 #############################
 gem "nested_form"
 
 # gem 'coffee-rails', '~> 3.2.1'
