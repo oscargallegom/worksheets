@@ -68,5 +68,8 @@ module NutrientNet
     # Added by Olivier
     WillPaginate.per_page = 10
 
+    # For Heroku
+    config.assets.initialize_on_precompile = false
+
   end
 end
