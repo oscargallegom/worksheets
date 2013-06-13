@@ -81,6 +81,7 @@ updateIncorporatedForManure = (caller) ->
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_day").prop('required', false)
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").prop('required', false)
 
+# update liquid units
 updateLiquidUnits = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
   $("#total_n_concentration_unit_" + componentNumber).text('hello')
@@ -125,8 +126,6 @@ updateEndOfSeason = (caller) ->
     if componentNumber is getComponentNumber($('#div_end_of_season').find('.class_end_of_season_type_id').get(i).id, 'crop_rotation_end_of_seasons_attributes_')
       deleteSection = true
     i++
-
-
 
 # select change listener
 selectListener = (caller) ->
@@ -174,7 +173,6 @@ $(document).on "nested:fieldRemoved", (event) ->
   field.find('select').prop('required', false)
 
 $(document).on "nested:fieldAdded", (event) ->
-  alert(JSON.stringify(event.field))
   # register new select
   $("select").change ->
     selectListener($(this))
