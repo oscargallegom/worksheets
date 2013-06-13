@@ -18,6 +18,12 @@ class Farm < ActiveRecord::Base
 
   validates_presence_of :name, :site_name, :site_state_id, :site_county_id
 
+  # allow duplication
+  amoeba do
+    enable
+    prepend :name => "Copy of "
+  end
+
   # TODO: validate presence of coordinates
 
   def has_animals?

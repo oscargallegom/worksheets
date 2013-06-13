@@ -24,6 +24,7 @@ updatePrecisionFeeding = (selectElement) ->
     else
       li_precision_feeding.hide()
 
+# checkboxes based on dairy, poultry or swine
 updateTreatmentTypesCheckboxes = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
   manure_type_category = $("option:selected", caller).closest('optgroup').prop('label')
@@ -39,6 +40,7 @@ updateTreatmentTypesCheckboxes = (caller) ->
   if (manure_type_category is 'Poultry')
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_poultry_litter_treatment").parent().show()
 
+# incorporated checked, show dates and depth
 updateIncorporatedForCommercial = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_commercial_fertilizer_applications_attributes_')
   if caller.is(":checked")
@@ -60,6 +62,7 @@ updateIncorporatedForCommercial = (caller) ->
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_day").prop('required', false)
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").prop('required', false)
 
+# incorporated checked, show dates and depth
 updateIncorporatedForManure = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
   if caller.is(":checked")
@@ -109,7 +112,7 @@ updateUnitsLabels = (caller) ->
 
 updateEndOfSeason = (caller) ->
 
-  return if caller.val() == '1'
+  return if caller.val() is '1' or caller.val() is ''
 
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_end_of_seasons_attributes_')
 

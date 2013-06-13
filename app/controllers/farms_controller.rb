@@ -107,14 +107,14 @@ class FarmsController < ApplicationController
 
   # POST /farms/1/duplicate
   def duplicate
-    @farm_dup = @farm.dup :include => [:fields, :animals]
-    @farm_dup.name << ' (duplicated)'
+    @farm_dup = @farm.amoeba_dup
+    # @farm_dup.name << ' (duplicated)'
 
     respond_to do |format|
       if @farm_dup.save
         format.html { redirect_to farms_url, notice: 'Farm was successfully duplicated.' }
       else
-        format.html { redirect_to farms_url, error: 'Could not duplicate farm.' }
+        format.html { redirect_to farms_url, notice: 'Could not duplicate farm.' }
       end
     end
 

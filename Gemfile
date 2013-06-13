@@ -43,17 +43,18 @@ gem 'breadcrumbs_on_rails'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'dynamic_form'
 # gem 'deep_cloneable', '~> 1.5.2'                 #############################      SQLLite issue with heroku
-gem "nested_form"
+gem 'nested_form'
 
 # gem 'coffee-rails', '~> 3.2.1'
 
 gem 'savon', '~> 2.2.0'
 gem 'naturalsorter', '2.0.5'   # natural sort
+gem 'amoeba', "~> 2.0.0"
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
+  #  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
 end
 
 group :assets do
