@@ -150,7 +150,7 @@ class FarmsController < ApplicationController
         @field = @farm.fields.where(:name => params["field#{i}id"]).first || @farm.fields.build(:name => params["field#{i}id"])
         @field.coordinates = params["field#{i}coords"]
         @field.acres_from_map = params["field#{i}acres"]
-        @field.acres_use_map = true
+        @field.is_acres_from_map = true
 
         #@field.segment_id = params["field#{i}segment"]
         @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
@@ -172,13 +172,15 @@ class FarmsController < ApplicationController
         @listSoils = Array.new
 
         arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
+          if !arrFieldcompname[index].eql?('Water')      # ignore soil if water
           @listSoils << {
               :percent =>  arrFieldpctsoiltype[index],
               :mukey =>  arrFieldmukey[index],
               :compname => arrFieldcompname[index],
               :muname => arrFieldmuname[index]
           }
-        end
+            end
+          end
 
         # sort by percentage in descending order
         @listSoils = @listSoils.sort_by!{|e| e[:percent]}.reverse!

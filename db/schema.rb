@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613012313) do
+ActiveRecord::Schema.define(:version => 20130614012239) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(:version => 20130613012313) do
     t.integer "farm_id"
     t.integer "animal_id"
     t.decimal "animals_units"
+  end
+
+  create_table "bmp_types", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "bmps", :force => true do |t|
+    t.integer "field_id"
+    t.integer "bmp_type_id"
+    t.decimal "acres"
+    t.boolean "is_planned"
   end
 
   create_table "commercial_fertilizer_applications", :force => true do |t|
@@ -118,16 +129,16 @@ ActiveRecord::Schema.define(:version => 20130613012313) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
-    t.decimal  "acres"
+    t.decimal  "acres_from_user"
     t.boolean  "tmdl_watershed"
     t.integer  "field_type_id"
     t.text     "notes"
     t.decimal  "acres_from_map"
-    t.boolean  "acres_use_map"
+    t.boolean  "is_acres_from_map"
     t.decimal  "tile_drainage_depth"
     t.integer  "irrigation_id"
     t.decimal  "fertigation_n"
@@ -136,6 +147,18 @@ ActiveRecord::Schema.define(:version => 20130613012313) do
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
     t.string   "hydrologic_group"
+    t.boolean  "is_forest_buffer"
+    t.decimal  "forest_buffer_average_width"
+    t.decimal  "forest_buffer_length"
+    t.boolean  "is_forest_buffer_planned"
+    t.boolean  "is_grass_buffer"
+    t.decimal  "grass_buffer_average_width"
+    t.decimal  "grass_buffer_length"
+    t.boolean  "is_grass_buffer_planned"
+    t.boolean  "is_wetland"
+    t.decimal  "wetland_area"
+    t.decimal  "wetland_treated_area"
+    t.boolean  "is_wetland_planned"
   end
 
   create_table "generator_types", :force => true do |t|

@@ -543,6 +543,11 @@ EndOfSeasonType.create!({:id => 1,  :name => 'Harvest Only'}, :without_protectio
 EndOfSeasonType.create!({:id => 2,  :name => 'Harvest and Terminate Crop'}, :without_protection => true)
 EndOfSeasonType.create!({:id => 3,  :name => 'Terminate Crop (No Harvest)'}, :without_protection => true)
 
+BmpType.delete_all
+BmpType.create!({:id => 1,  :name => 'BMP 1'}, :without_protection => true)
+BmpType.create!({:id => 2,  :name => 'BMP 2'}, :without_protection => true)
+BmpType.create!({:id => 3,  :name => 'BMP 3'}, :without_protection => true)
+
 WatershedSegment.delete_all
 WatershedSegment.create!({:id => 1,  :key => 'A10001EL2_4400_4590', :description => 'NANTICOKE RIVER-OLIGOHALINE REGION', :hgmr_code => 'CPUN', :state_name => 'Delaware', :county_name => 'Kent, DE', :fips => 10001,  :major_basin => 'Eastern Shore', :trib_strat_basin => 'DE, Marshyhope Creek' }, :without_protection => true)
 WatershedSegment.create!({:id => 2,  :key => 'A10001EL0_4560_4562', :description => 'NANTICOKE RIVER-TIDAL FRESH REGION - DE', :hgmr_code => 'CPUN', :state_name => 'Delaware', :county_name => 'Kent, DE', :fips => 10001,  :major_basin => 'Eastern Shore', :trib_strat_basin => 'DE, Nanticoke & Broad Creek' }, :without_protection => true)

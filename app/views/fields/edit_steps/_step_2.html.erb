@@ -26,13 +26,13 @@
             </li>
             <li>
               <div class='wide'>Field area:<em>*</em></div>
-              <%= f.radio_button :acres_use_map, true %>
+              <%= f.radio_button :is_acres_from_map, true %>
               <%= f.label :acres_use_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
               <br/>
 
               <div class='wide'>&nbsp;</div>
-              <%= f.radio_button :acres_use_map, false %>
-              <%= f.text_field :acres, :required => 'true', :size => 5 %>
+              <%= f.radio_button :is_acres_from_map, false %>
+              <%= f.text_field :acres_from_user, :required => 'true', :size => 5 %>
               <%= f.label :acres_use_map_false, 'ac' %>
 
 
