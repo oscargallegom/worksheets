@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614012239) do
+ActiveRecord::Schema.define(:version => 20130619013452) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130614012239) do
 
   create_table "bmp_types", :force => true do |t|
     t.string "name"
+    t.text   "abbreviation"
   end
 
   create_table "bmps", :force => true do |t|
@@ -80,6 +81,12 @@ ActiveRecord::Schema.define(:version => 20130614012239) do
     t.integer  "cover_crop_planting_method_id"
   end
 
+  create_table "crop_types", :force => true do |t|
+    t.text     "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "crops", :force => true do |t|
     t.string  "name"
     t.integer "crop_category_id"
@@ -129,8 +136,8 @@ ActiveRecord::Schema.define(:version => 20130614012239) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
@@ -159,6 +166,15 @@ ActiveRecord::Schema.define(:version => 20130614012239) do
     t.decimal  "wetland_area"
     t.decimal  "wetland_treated_area"
     t.boolean  "is_wetland_planned"
+    t.boolean  "is_streambank_restoration"
+    t.decimal  "streambank_restoration_length"
+    t.boolean  "is_streambank_restoration_planned"
+    t.integer  "crop_type_id"
+    t.boolean  "is_pasture_adjacent_to_stream"
+    t.boolean  "is_streambank_fencing_in_place"
+    t.decimal  "distance_fence_stream"
+    t.decimal  "fence_length"
+    t.integer  "vegetation_type_fence_stream_id"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -362,6 +378,10 @@ ActiveRecord::Schema.define(:version => 20130614012239) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_email", :unique => true
+
+  create_table "vegetation_types", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "watershed_segments", :force => true do |t|
     t.string   "key"

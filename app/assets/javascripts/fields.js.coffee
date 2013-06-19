@@ -41,6 +41,23 @@ acresRequired = ->
   else
     $("#field_acres").prop('required', true)
 
+# clicked forest buffer
+isForestBufferClicked = ->
+  $("#div_is_forest_buffer").toggle()
+
+# clicked forest buffer
+isGrassBufferClicked = ->
+  $("#div_is_grass_buffer").toggle()
+
+# clicked wetland
+isWetlandClicked = ->
+  $("#div_is_wetland").toggle()
+
+# clicked streambank
+isStreambankRestorationClicked = ->
+  $("#div_is_streambank_restoration").toggle()
+
+
 $(document).ready ->
 
   acresRequired()
@@ -55,6 +72,18 @@ $(document).ready ->
     acresRequired()
   $("#field_acres_use_map_true").change ->
     acresRequired()
+
+  $("#field_is_forest_buffer").change ->
+    isForestBufferClicked()
+
+  $("#field_is_grass_buffer").change ->
+    isGrassBufferClicked()
+
+  $("#field_is_wetland").change ->
+    isWetlandClicked()
+
+  $("#field_is_streambank_restoration").change ->
+    isStreambankRestorationClicked()
 
   # if data is changed, update the silt percent
   $("input").change ->

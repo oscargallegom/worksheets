@@ -27,16 +27,20 @@
             <li>
               <div class='wide'>Field area:<em>*</em></div>
               <%= f.radio_button :is_acres_from_map, true %>
-              <%= f.label :acres_use_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
+              <%= f.label :is_acres_from_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
               <br/>
 
               <div class='wide'>&nbsp;</div>
               <%= f.radio_button :is_acres_from_map, false %>
               <%= f.text_field :acres_from_user, :required => 'true', :size => 5 %>
-              <%= f.label :acres_use_map_false, 'ac' %>
-
-
+              <%= f.label :is_acres_from_map_false, 'ac' %>
             </li>
+            <% if (@field.field_type_id == 1) then %>
+                <li>
+                  <%= f.label :crop_type_id, 'Tillage type:<em>*</em>'.html_safe, :class => 'wide' %>
+                  <%= f.collection_select :crop_type_id, CropType.all, :id, :name, {:prompt => 'Select tillage type'}, :required => true %>
+                </li>
+            <% end %>
             <li>
               <%= f.label :tile_drainage_depth, 'Tile drainage depth:', :class => 'wide' %>
               <%= f.text_field :tile_drainage_depth, :value => (number_with_precision(@field.tile_drainage_depth, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5 %>
@@ -48,7 +52,8 @@
             </li>
             <li id='efficiency'>
               <%= f.label :efficiency, 'Efficiency<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.text_field :efficiency, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %> % &nbsp;&nbsp;&nbsp;&nbsp;<span id='default_efficiency'></span>
+              <%= f.text_field :efficiency, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %>
+              % &nbsp;&nbsp;&nbsp;&nbsp;<span id='default_efficiency'></span>
             </li>
             <li id='fertigation_n'>
               <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>
@@ -64,10 +69,10 @@
               <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5, :required => true %>
               ppm
             </li>
-                      <div id='li_soil'>
+            <div id='li_soil'>
 
               <%= f.fields_for :soils do |soils_form| %>
-                  <%= render 'soil_fields', :f => soils_form, :soil_index => @field.soils.index(soils_form.object)  %>
+                  <%= render 'soil_fields', :f => soils_form, :soil_index => @field.soils.index(soils_form.object) %>
               <% end %>
 
             </div>

@@ -318,6 +318,10 @@ FieldType.create!({:id => 3, :name => 'Continuous hay'}, :without_protection => 
 FieldType.create!({:id => 4, :name => 'Animal confinement'}, :without_protection => true)
 FieldType.create!({:id => 5, :name => 'Non-managed land'}, :without_protection => true)
 
+CropType.delete_all
+CropType.create!({:id => 1, :name => 'High Till'}, :without_protection => true)
+CropType.create!({:id => 2, :name => 'Low Till'}, :without_protection => true)
+
 Irrigation.delete_all
 Irrigation.create!({:id => 0, :name => 'None'}, :without_protection => true)
 Irrigation.create!({:id => 500, :name => 'Center Pivot Sprinkler'}, :without_protection => true)
@@ -543,10 +547,23 @@ EndOfSeasonType.create!({:id => 1,  :name => 'Harvest Only'}, :without_protectio
 EndOfSeasonType.create!({:id => 2,  :name => 'Harvest and Terminate Crop'}, :without_protection => true)
 EndOfSeasonType.create!({:id => 3,  :name => 'Terminate Crop (No Harvest)'}, :without_protection => true)
 
+VegetationType.delete_all
+VegetationType.create!({:id => 1,  :name => 'Forest'}, :without_protection => true)
+VegetationType.create!({:id => 2,  :name => 'Grass'}, :without_protection => true)
+
 BmpType.delete_all
-BmpType.create!({:id => 1,  :name => 'BMP 1'}, :without_protection => true)
-BmpType.create!({:id => 2,  :name => 'BMP 2'}, :without_protection => true)
-BmpType.create!({:id => 3,  :name => 'BMP 3'}, :without_protection => true)
+#BmpType.create!({:id => 1,  :abbreviation => 'CaptureReuse', :name => 'Irrigation Water Capture Reuse'}, :without_protection => true)
+BmpType.create!({:id => 2,  :abbreviation => 'Cropirrmgmt', :name => 'Cropland Irrigation Management'}, :without_protection => true)
+BmpType.create!({:id => 3,  :abbreviation => 'DecisionAg', :name => 'Decision Agriculture'}, :without_protection => true)
+BmpType.create!({:id => 4,  :abbreviation => 'DitchFilter', :name => 'Sorbing Materials in Ag Ditches'}, :without_protection => true)
+BmpType.create!({:id => 5,  :abbreviation => 'HorsePasMan', :name => 'Horse Pasture Management'}, :without_protection => true)
+BmpType.create!({:id => 6,  :abbreviation => 'OSWnoFence', :name => 'Off Stream Watering Without Fencing'}, :without_protection => true)
+BmpType.create!({:id => 7,  :abbreviation => 'WaterContStruc', :name => 'Water Control Structures'}, :without_protection => true)
+BmpType.create!({:id => 8,  :abbreviation => 'ConPlan', :name => 'Soil Conservation and Water Quality Plans'}, :without_protection => true)
+#BmpType.create!({:id => 9,  :abbreviation => 'ForestBuffers', :name => 'Forest Buffers'}, :without_protection => true)
+#BmpType.create!({:id => 10,  :abbreviation => 'GrassBuffers', :name => 'Grass Buffers; Vegetated Open Channel - Agriculture'}, :without_protection => true)
+BmpType.create!({:id => 11,  :abbreviation => 'PrecRotGrazing', :name => 'Prescribed Grazing'}, :without_protection => true)
+#BmpType.create!({:id => 12,  :abbreviation => 'WetlandRestore', :name => 'Wetland Restoration'}, :without_protection => true)
 
 WatershedSegment.delete_all
 WatershedSegment.create!({:id => 1,  :key => 'A10001EL2_4400_4590', :description => 'NANTICOKE RIVER-OLIGOHALINE REGION', :hgmr_code => 'CPUN', :state_name => 'Delaware', :county_name => 'Kent, DE', :fips => 10001,  :major_basin => 'Eastern Shore', :trib_strat_basin => 'DE, Marshyhope Creek' }, :without_protection => true)
