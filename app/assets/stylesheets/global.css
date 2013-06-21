@@ -1119,7 +1119,7 @@ a.sort.desc img {
 
 
 
-ul#tabNav li.disabled2 a:link, ul#tabNav li.disabled2 a:visited, ul#tabNav li.disabled2 a:hover {
+ul#tabNav li.disabledTab a:link, ul#tabNav li.disabled2 a:visited, ul#tabNav li.disabled2 a:hover {
     color: darkgrey;
     background: -webkit-gradient(linear,left bottom,left top,color-stop(.2, #dedede),color-stop(.8, #fefefe));
     cursor: default;

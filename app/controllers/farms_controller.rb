@@ -215,7 +215,12 @@ class FarmsController < ApplicationController
             @field.soils[i].slope = data[:slope]
           end
 
+          # TODO: how to display errors?
+
         end
+
+        # there should be at least one strip
+        @field.strips.build if @field.strips.empty?
 
         @field.save(:validate => false)
       end

@@ -135,8 +135,8 @@
 
   <% @fields.each do |field| %>
       <tr>
-        <td><%= link_to field.name, farm_field_path(@farm, field) %></td>
-        <td><%= field.area %></td>
+        <td><%= link_to field.name, edit_farm_field_path(@farm, field) %></td>
+        <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
         <td><%= field.baseline_load %></td>
         <td></td>
         <td></td>

@@ -2,6 +2,20 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+
+updateIndexes = ->
+  $(".fields:visible").find(".commercial_operation_index").each (index) ->
+    $(this).text(index+1)
+  $(".fields:visible").find(".end_of_season_index").each (index) ->
+    $(this).text(index+1)
+  $(".fields:visible").find(".grazing_livestock_index").each (index) ->
+    $(this).text(index+1)
+  $(".fields:visible").find(".manure_operation_index").each (index) ->
+    $(this).text(index+1)
+  $(".fields:visible").find(".tillage_operation_index").each (index) ->
+    $(this).text(index+1)
+
+
 # ajax call to retrieve list of crops given the crop category
 updateCrops = ->
   $.getJSON "/crop_categories/" + $("#crop_category_crop_category_id").val() + "/crops.json", (crops) ->
@@ -150,6 +164,9 @@ getComponentNumber = (componentId, prefix) ->
 
 
 $(document).ready ->
+
+  updateIndexes()
+
   if typeof $("#crop_category_crop_category_id").val() isnt 'undefined' and $("#crop_category_crop_category_id").val().length > 0
     updateCrops()
 
@@ -170,12 +187,14 @@ $(document).ready ->
 
 # when  removing extra sections
 $(document).on "nested:fieldRemoved", (event) ->
+  updateIndexes()
   field = event.field
   # remove the required field(otherwise Chrome complains)
   field.find('input').prop('required', false)
   field.find('select').prop('required', false)
 
 $(document).on "nested:fieldAdded", (event) ->
+  updateIndexes()
   # register new select
   $("select").change ->
     selectListener($(this))

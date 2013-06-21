@@ -1,12 +1,15 @@
 <div>
   <fieldset>
     <ol>
-      <li><h2 class='sectionHeading'>Strip #<%= (strip_index + 1 ) unless strip_index == nil %> <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %> </h2>
-
+      <div class='div_length'>
+      <li><h2 class='sectionHeading'>Strip <span class="strip_index" ></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %> </h2>
       </li>
+
       <li><%= f.label :length, 'Width:<em>*</em>'.html_safe, :class => 'wide' %>
         <%= f.text_field :length, :size => 5, :required => true, :class => 'test' %> ft
       </li>
+              </div>
+
     </ol>
   </fieldset>
 </div>

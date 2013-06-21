@@ -1,0 +1,45 @@
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
+
+    <% if @field.errors.any? %>
+        <br/>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@field.errors.count, "error") %> encountered:</h2>
+
+          <ul>
+            <% @field.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="sectionRest clearfix">
+      <%= hidden_field_tag :step, 10 %>
+
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Non-managed land</h2></li>
+            <li>Non-managed land does not require any data input and does not impact credit generation.</li>
+            <li>
+              <div class='wide'>Field area:<em>*</em></div>
+              <%= f.radio_button :is_acres_from_map, true %>
+              <%= f.label :is_acres_from_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
+              <br/>
+
+              <div class='wide'>&nbsp;</div>
+              <%= f.radio_button :is_acres_from_map, false %>
+              <%= f.text_field :acres_from_user, :required => 'true', :size => 5 %>
+              <%= f.label :is_acres_from_map_false, 'ac' %>
+            </li>
+
+
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+
+      <%= f.submit 'Save and Return to Farm Summary', :class => 'button' %>
+      <!-- TODO: navigation, got fields page -->
+    </div>
+<% end %>

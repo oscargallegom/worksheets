@@ -318,6 +318,21 @@ FieldType.create!({:id => 3, :name => 'Continuous hay'}, :without_protection => 
 FieldType.create!({:id => 4, :name => 'Animal confinement'}, :without_protection => true)
 FieldType.create!({:id => 5, :name => 'Non-managed land'}, :without_protection => true)
 
+FieldTypeBmpType.delete_all
+FieldTypeBmpType.create!({:id => 1, :field_type_id => 1, :bmp_type_id => 3}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 2, :field_type_id => 1, :bmp_type_id => 4}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 3, :field_type_id => 1, :bmp_type_id => 7}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 4, :field_type_id => 1, :bmp_type_id => 8}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 5, :field_type_id => 2, :bmp_type_id => 4}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 6, :field_type_id => 2, :bmp_type_id => 5}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 7, :field_type_id => 2, :bmp_type_id => 6}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 8, :field_type_id => 2, :bmp_type_id => 8}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 9, :field_type_id => 2, :bmp_type_id => 11}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 10, :field_type_id => 3, :bmp_type_id => 3}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 11, :field_type_id => 3, :bmp_type_id => 4}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 12, :field_type_id => 3, :bmp_type_id => 7}, :without_protection => true)
+FieldTypeBmpType.create!({:id => 13, :field_type_id => 3, :bmp_type_id => 8}, :without_protection => true)
+
 CropType.delete_all
 CropType.create!({:id => 1, :name => 'High Till'}, :without_protection => true)
 CropType.create!({:id => 2, :name => 'Low Till'}, :without_protection => true)
@@ -564,6 +579,13 @@ BmpType.create!({:id => 8,  :abbreviation => 'ConPlan', :name => 'Soil Conservat
 #BmpType.create!({:id => 10,  :abbreviation => 'GrassBuffers', :name => 'Grass Buffers; Vegetated Open Channel - Agriculture'}, :without_protection => true)
 BmpType.create!({:id => 11,  :abbreviation => 'PrecRotGrazing', :name => 'Prescribed Grazing'}, :without_protection => true)
 #BmpType.create!({:id => 12,  :abbreviation => 'WetlandRestore', :name => 'Wetland Restoration'}, :without_protection => true)
+BmpType.create!({:id => 13,  :abbreviation => 'biofilter', :name => 'Biofilters'}, :without_protection => true)
+BmpType.create!({:id => 14,  :abbreviation => 'LagoonCover', :name => 'Lagoon Cover'}, :without_protection => true)
+BmpType.create!({:id => 15,  :abbreviation => 'BrnydRunoff', :name => 'Barnyard Runoff Controls'}, :without_protection => true)
+BmpType.create!({:id => 16,  :abbreviation => 'MortCompost', :name => 'Mortality Composting'}, :without_protection => true)
+BmpType.create!({:id => 17,  :abbreviation => 'AWMS', :name => 'Animal Waste Management System'}, :without_protection => true)
+BmpType.create!({:id => 18,  :abbreviation => 'PLT', :name => 'Poultry Litter Treatment/Alum'}, :without_protection => true)
+BmpType.create!({:id => 19,  :abbreviation => 'HeavyUse', :name => 'Heavy Use Area Pads'}, :without_protection => true)
 
 WatershedSegment.delete_all
 WatershedSegment.create!({:id => 1,  :key => 'A10001EL2_4400_4590', :description => 'NANTICOKE RIVER-OLIGOHALINE REGION', :hgmr_code => 'CPUN', :state_name => 'Delaware', :county_name => 'Kent, DE', :fips => 10001,  :major_basin => 'Eastern Shore', :trib_strat_basin => 'DE, Marshyhope Creek' }, :without_protection => true)

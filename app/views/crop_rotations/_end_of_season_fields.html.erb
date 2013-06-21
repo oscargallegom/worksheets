@@ -1,4 +1,4 @@
-<li><h1 class='sectionHeading'>End Of Season #<%= (end_of_season_index + 1) unless end_of_season_index == nil  %> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
+<li><h1 class='sectionHeading'>End Of Season <span class="end_of_season_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
 <li>
   <%= f.label :end_of_season_type_id, 'End of season operation type:<em>*</em>'.html_safe, :class => 'wide' %>
 
