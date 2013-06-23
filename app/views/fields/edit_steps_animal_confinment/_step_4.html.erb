@@ -1,0 +1,115 @@
+<%= form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
+    <% if @field.errors.any? %>
+        <br/>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@field.errors.count, "error") %> encountered:</h2>
+
+          <ul>
+            <% @field.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="sectionRest clearfix">
+      <%= hidden_field_tag :step, 4 %>
+
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>BMPs</h2></li>
+            <li>Enter information for animal confinement best management practices.</li>
+            <li><h2 class='sectionHeading'>Livestock BMPs</h2></li>
+            <li>Select all livestock BMPs that are in place.</li>
+            <li><h3 class='sectionHeading'>Livestock Animal Waste Management System</h3></li>
+            <li>
+              <%= f.label :is_livestock_animal_waste_management_system, 'Animal Waste management system:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_animal_waste_management_system %>
+            </li>
+            <li>
+              <%= f.label :is_livestock_mortality_composting, 'Mortality composting:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_mortality_composting %>
+            </li>
+            <li><h3 class='sectionHeading'>Livestock Ammonia Reduction BMPs</h3></li>
+            <li>
+              <%= f.label :is_livestock_plastic_permeable_lagoon_cover, 'Plastic permeable lagoon cover:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_plastic_permeable_lagoon_cover %>
+            </li>
+            <li>
+              <%= f.label :is_livestock_phytase, 'Phytase:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_phytase %>
+            </li>
+            <li>
+              <%= f.label :is_livestock_dairy_precision_feeding, 'Dairy precision feeding:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_dairy_precision_feeding %>
+            </li>
+            <li><h3 class='sectionHeading'>Livestock runoff reduction BMPs</h3></li>
+            <li>
+              <%= f.label :is_livestock_barnyard_runoff_controls, 'Barnyard Runoff Controls / loafing lot management:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_barnyard_runoff_controls %>
+            </li>
+            <li>
+              <%= f.label :is_livestock_water_control_structure, 'Water control structure:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_water_control_structure %>
+            </li>
+            <li>
+              <%= f.label :is_livestock_treatment_wetland, 'Treatment Wetland:', :class => 'extrawide' %>
+              <%= f.check_box  :is_livestock_treatment_wetland %>
+            </li>
+
+            <li><h2 class='sectionHeading'>Poultry BMPs</h2></li>
+            <li>Select all poultry BMPs that are in place.</li>
+            <li><h3 class='sectionHeading'>Poultry Waste Management System</h3></li>
+            <li>
+              <%= f.label :is_poultry_animal_waste_management_system, 'Animal waste management system:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_animal_waste_management_system %>
+            </li>
+            <li>
+              <%= f.label :is_poultry_mortality_composting, 'Mortality composting:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_mortality_composting %>
+            </li>
+            <li><h3 class='sectionHeading'>Poultry Ammonia Reduction BMPs</h3></li>
+            <li>
+              <%= f.label :is_poultry_litter_treatment, 'Poultry Litter Treatment:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_litter_treatment %>
+            </li>
+            <li>
+              <%= f.label :is_poultry_biofilters, 'Biofilters:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_biofilters %>
+            </li>
+            <li>
+              <%= f.label :is_poultry_vegetated_environmental_buffer, 'Vegetated environmental buffer:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_vegetated_environmental_buffer %>
+            </li>
+            <li><h3 class='sectionHeading'>Feed Additives</h3></li>
+            <li>
+              <%= f.label :is_poultry_phytase, 'Pytase:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_phytase %>
+            </li>
+            <li><h3 class='sectionHeading'>Barnyard runoff controls</h3></li>
+            <li>
+              <%= f.label :is_poultry_heavy_use_pads, 'Heavy use pads:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_heavy_use_pads %>
+            </li>
+            <li>
+              <%= f.label :is_poultry_barnyard_runoff_controls, 'Barnyard runoff controls / clean water diversions:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_barnyard_runoff_controls %>
+            </li>
+            <li>
+              <%= f.label :is_poultry_water_control_structure, 'Water control structure:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_water_control_structure %>
+            </li>
+            <li>
+              <%= f.label :is_poultry_treatment_wetland, 'Treatment wetland:', :class => 'extrawide' %>
+              <%= f.check_box  :is_poultry_treatment_wetland %>
+            </li>
+
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+
+      <%= f.submit 'Save and Continue', :class => 'button' %>
+    </div>
+<% end %>

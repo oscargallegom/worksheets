@@ -7,6 +7,7 @@ class Field < ActiveRecord::Base
   belongs_to :crop_type
   belongs_to :p_test_method
   belongs_to :vegetation_type, :class_name => "VegetationType", :foreign_key => "vegetation_type_fence_stream_id"
+  belongs_to :livestock_input_method
 
   has_many :strips
 
@@ -14,6 +15,8 @@ class Field < ActiveRecord::Base
   has_many :soils, :dependent => :destroy
 
   has_many :bmps
+  has_many :field_livestocks
+  has_many :field_poultry
 
   attr_accessible :area, :baseline_load, :name, :coordinates
   attr_accessible :name, :field_type_id, :crop_type_id, :notes
@@ -25,19 +28,25 @@ class Field < ActiveRecord::Base
   attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
 
+  attr_accessible :is_livestock_animal_waste_management_system, :is_livestock_mortality_composting, :is_livestock_plastic_permeable_lagoon_cover, :is_livestock_phytase, :is_livestock_dairy_precision_feeding, :is_livestock_barnyard_runoff_controls, :is_livestock_water_control_structure, :is_livestock_treatment_wetland
+  attr_accessible :is_poultry_animal_waste_management_system, :is_poultry_mortality_composting, :is_poultry_litter_treatment, :is_poultry_biofilters, :is_poultry_vegetated_environmental_buffer, :is_poultry_phytase, :is_poultry_heavy_use_pads, :is_poultry_barnyard_runoff_controls, :is_poultry_water_control_structure, :is_poultry_treatment_wetland
+
   attr_accessible :soils_attributes
   accepts_nested_attributes_for :soils, :allow_destroy => true
 
   attr_accessible :strips_attributes
   accepts_nested_attributes_for :strips, :allow_destroy => true
 
-  #attr_accessible :bmp_type_ids
-  #attr_accessible :bmp_type
+  attr_accessible :livestock_input_method_id
 
+  attr_accessible :field_livestocks_attributes
+  accepts_nested_attributes_for :field_livestocks, :allow_destroy => true
+
+  attr_accessible :field_poultry_attributes
+  accepts_nested_attributes_for :field_poultry, :allow_destroy => true
 
   attr_accessible :bmps_attributes
   accepts_nested_attributes_for :bmps, :allow_destroy => true
-
 
   # TODO: natural sorting
   default_scope :order => 'name ASC'

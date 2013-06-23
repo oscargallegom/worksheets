@@ -492,6 +492,10 @@ h3 {
     color: #666;
     margin-bottom: 10px;
 }
+h3.sectionHeading {
+    color: #126AA3;
+    font-weight: normal;
+}
 #stepNav {
     margin-bottom: 15px;
     width: 100%;
@@ -964,6 +968,13 @@ label { }
     display: block;
     float: left;
     width: 160px;
+    font-weight: bold;
+}
+
+.nn-form label.extrawide {
+    display: block;
+    float: left;
+    width: 300px;
     font-weight: bold;
 }
 

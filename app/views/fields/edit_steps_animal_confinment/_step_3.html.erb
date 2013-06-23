@@ -1,0 +1,31 @@
+<%= form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
+    <% if @field.errors.any? %>
+        <br/>
+        <div id="error_explanation" class="alert">
+          <h2><%= pluralize(@field.errors.count, "error") %> encountered:</h2>
+
+          <ul>
+            <% @field.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="sectionRest clearfix">
+      <%= hidden_field_tag :step, 3 %>
+
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Requirements</h2></li>
+            <li>Landowners must have an implemented nutrient management plan and a soil and water conservation plan before being eligible to generate credits. For confined livestock, operators must have a properly sized and maintained manure storage and runoff system to be eligible to generate credits.</li>
+
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+
+      <%= f.submit 'Save and Continue', :class => 'button' %>
+    </div>
+<% end %>

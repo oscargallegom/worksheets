@@ -587,6 +587,10 @@ BmpType.create!({:id => 17,  :abbreviation => 'AWMS', :name => 'Animal Waste Man
 BmpType.create!({:id => 18,  :abbreviation => 'PLT', :name => 'Poultry Litter Treatment/Alum'}, :without_protection => true)
 BmpType.create!({:id => 19,  :abbreviation => 'HeavyUse', :name => 'Heavy Use Area Pads'}, :without_protection => true)
 
+LivestockInputMethod.delete_all
+LivestockInputMethod.create!({:id => 1,  :name => 'Totals per type'}, :without_protection => true)
+LivestockInputMethod.create!({:id => 2,  :name => 'Average per type'}, :without_protection => true)
+
 WatershedSegment.delete_all
 WatershedSegment.create!({:id => 1,  :key => 'A10001EL2_4400_4590', :description => 'NANTICOKE RIVER-OLIGOHALINE REGION', :hgmr_code => 'CPUN', :state_name => 'Delaware', :county_name => 'Kent, DE', :fips => 10001,  :major_basin => 'Eastern Shore', :trib_strat_basin => 'DE, Marshyhope Creek' }, :without_protection => true)
 WatershedSegment.create!({:id => 2,  :key => 'A10001EL0_4560_4562', :description => 'NANTICOKE RIVER-TIDAL FRESH REGION - DE', :hgmr_code => 'CPUN', :state_name => 'Delaware', :county_name => 'Kent, DE', :fips => 10001,  :major_basin => 'Eastern Shore', :trib_strat_basin => 'DE, Nanticoke & Broad Creek' }, :without_protection => true)

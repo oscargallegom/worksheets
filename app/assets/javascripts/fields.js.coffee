@@ -7,6 +7,10 @@
 updateIndexes = ->
   $(".fields:visible").find(".strip_index").each (index) ->
     $(this).text(index+1)
+  $(".fields:visible").find(".livestock_index").each (index) ->
+    $(this).text(index+1)
+  $(".fields:visible").find(".poultry_index").each (index) ->
+    $(this).text(index+1)
 
     if $(".fields:visible").length == 1   # hide the stip number and length  option
       $(".fields:visible").find(".div_length").hide()

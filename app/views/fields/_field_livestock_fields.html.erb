@@ -1,0 +1,33 @@
+<li><h1 class='sectionHeading'>Livestock #<span class="livestock_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
+<li>
+  <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
+</li>
+<li>
+  <%= f.label :total_manure, 'Total manure:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :total_manure, :required => 'true', :size => 5, :type => 'number', :step => 'any' %> T/yr
+</li>
+<li>
+  <%= f.label :quantity, 'Quantity:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :quantity, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Number of confined animals' %>
+</li>
+<li>
+  <%= f.label :days_per_year_confined, 'Days/year confined:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :days_per_year_confined, :required => 'true', :size => 5, :type => 'number', :step => '1', :min => 0, :max => 365 %> days
+</li>
+<li>
+  <%= f.label :hours_per_day_confined, 'Hours/day confined:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :hours_per_day_confined, :required => 'true', :size => 5, :type => 'number', :step => 'any' %> hr/day
+</li>
+<li>
+  <%= f.label :hours_per_day_confined, 'Average weight:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.text_field :hours_per_day_confined, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Typically ≈ 1000 lb' %> lb
+</li>
+<li>
+  <%= f.label :n_excreted, 'N excreted:'.html_safe, :class => 'wide' %>
+  <%= f.text_field :n_excreted, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Typically ≈ 10.95 lb/T' %> lb/T
+</li>
+<li>
+  <%= f.label :p205_excreted, 'P<sub>2</sub>O<sub>5</sub> excreted:'.html_safe, :class => 'wide' %>
+  <%= f.text_field :p205_excreted, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Typically ≈ 3.79 lb/T' %> lb/T
+</li>

@@ -161,13 +161,12 @@ class FarmsController < ApplicationController
          @field.watershed_segment_id = watershed_segment.id
         end
 
-        @field.hydrologic_group =params["field#{i}hydgrp"]
-
         # get the top 3 soils
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
         arrFieldmukey = params["field#{i}mukey"].split("|")
         arrFieldcompname = params["field#{i}compname"].split("|")
         arrFieldmuname  = params["field#{i}muname"].split("|")
+        arrFieldhydgrp = params["field#{i}hydgrp"].split("|")
 
         @listSoils = Array.new
 
@@ -177,7 +176,8 @@ class FarmsController < ApplicationController
               :percent =>  arrFieldpctsoiltype[index],
               :mukey =>  arrFieldmukey[index],
               :compname => arrFieldcompname[index],
-              :muname => arrFieldmuname[index]
+              :muname => arrFieldmuname[index],
+              :hydgrp => arrFieldhydgrp[index]
           }
             end
           end
@@ -201,10 +201,11 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_key = @listSoils[i][:mukey]
           @field.soils[i].component_name = @listSoils[i][:compname]
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
+          @field.soils[i].hydrologic_group = @listSoils[i][:hydgrp]
 
 
           # getSoilData(1726303, 'Meadowville', 'B') #
-          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].component_name, @field.hydrologic_group)
+          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].component_name, @field.soils[i].hydrologic_group)
 
           if data
             @field.soils[i].percent_clay = data[:percent_clay]
@@ -245,9 +246,8 @@ class FarmsController < ApplicationController
 
     sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
 
-
     # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
-    client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/test.xml" )
+    client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml" )
 
     response = client.call(:run_query, message: { "Query" => sql } )
     if response.success?

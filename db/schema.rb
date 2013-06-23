@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620002311) do
+ActiveRecord::Schema.define(:version => 20130623130622) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -126,6 +126,29 @@ ActiveRecord::Schema.define(:version => 20130620002311) do
     t.integer  "generator_type_id"
   end
 
+  create_table "field_livestocks", :force => true do |t|
+    t.integer "field_id"
+    t.integer "animal_id"
+    t.decimal "quantity"
+    t.integer "days_per_year_confined"
+    t.decimal "hours_per_day_confined"
+    t.decimal "n_excreted"
+    t.decimal "p205_excreted"
+    t.decimal "total_manure"
+  end
+
+  create_table "field_poultry", :force => true do |t|
+    t.integer  "field_id"
+    t.integer  "animal_id"
+    t.decimal  "quantity"
+    t.integer  "flocks_per_year"
+    t.decimal  "days_in_growing_cycle"
+    t.decimal  "n_excreted"
+    t.decimal  "p205_excreted"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
   create_table "field_type_bmp_types", :force => true do |t|
     t.integer "field_type_id"
     t.integer "bmp_type_id"
@@ -141,8 +164,8 @@ ActiveRecord::Schema.define(:version => 20130620002311) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
@@ -158,7 +181,6 @@ ActiveRecord::Schema.define(:version => 20130620002311) do
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
-    t.string   "hydrologic_group"
     t.boolean  "is_forest_buffer"
     t.decimal  "forest_buffer_average_width"
     t.decimal  "forest_buffer_length"
@@ -180,6 +202,25 @@ ActiveRecord::Schema.define(:version => 20130620002311) do
     t.decimal  "distance_fence_stream"
     t.decimal  "fence_length"
     t.integer  "vegetation_type_fence_stream_id"
+    t.integer  "livestock_input_method_id"
+    t.boolean  "is_livestock_animal_waste_management_system"
+    t.boolean  "is_livestock_mortality_composting"
+    t.boolean  "is_livestock_plastic_permeable_lagoon_cover"
+    t.boolean  "is_livestock_phytase"
+    t.boolean  "is_livestock_dairy_precision_feeding"
+    t.boolean  "is_livestock_barnyard_runoff_controls"
+    t.boolean  "is_livestock_water_control_structure"
+    t.boolean  "is_livestock_treatment_wetland"
+    t.boolean  "is_poultry_animal_waste_management_system"
+    t.boolean  "is_poultry_mortality_composting"
+    t.boolean  "is_poultry_biofilters"
+    t.boolean  "is_poultry_vegetated_environmental_buffer"
+    t.boolean  "is_poultry_phytase"
+    t.boolean  "is_poultry_heavy_use_pads"
+    t.boolean  "is_poultry_barnyard_runoff_controls"
+    t.boolean  "is_poultry_water_control_structure"
+    t.boolean  "is_poultry_treatment_wetland"
+    t.boolean  "is_poultry_litter_treatment"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -216,6 +257,10 @@ ActiveRecord::Schema.define(:version => 20130620002311) do
     t.decimal "animal_units"
     t.integer "animal_id"
     t.integer "farm_id"
+  end
+
+  create_table "livestock_input_methods", :force => true do |t|
+    t.string "name"
   end
 
   create_table "manure_consistencies", :force => true do |t|
@@ -294,12 +339,13 @@ ActiveRecord::Schema.define(:version => 20130620002311) do
     t.decimal  "bulk_density"
     t.decimal  "organic_carbon"
     t.decimal  "slope"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.decimal  "percent"
     t.integer  "map_unit_key"
     t.string   "component_name"
     t.string   "map_unit_name"
+    t.string   "hydrologic_group"
   end
 
   create_table "states", :force => true do |t|
