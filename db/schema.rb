@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623130622) do
+ActiveRecord::Schema.define(:version => 20130623141409) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -221,6 +221,9 @@ ActiveRecord::Schema.define(:version => 20130623130622) do
     t.boolean  "is_poultry_water_control_structure"
     t.boolean  "is_poultry_treatment_wetland"
     t.boolean  "is_poultry_litter_treatment"
+    t.boolean  "is_livestock_implemented_nutrient_plan"
+    t.boolean  "is_livestock_implemented_soil_water_plan"
+    t.boolean  "is_livestock_properly_sized_maintained"
   end
 
   create_table "generator_types", :force => true do |t|
