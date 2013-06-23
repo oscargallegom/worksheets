@@ -42,9 +42,7 @@
             <li>
               <%= f.label :name, 'Field type:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
-              <!-- TODO: remove previous line -->
-              <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, :required => true, :disabled => (@field.field_type!=nil) %>
-            </li>
+             </li>
             <li>
               <div class='wide'>Notes:</div>
               <%= f.text_area :notes, :rows => 5 %>
