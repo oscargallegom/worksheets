@@ -2,7 +2,7 @@
 
 class FieldsController < ApplicationController
 
-  include testolivier
+  include Testolivier
 
   load_and_authorize_resource :farm
   load_and_authorize_resource :through => :farm
