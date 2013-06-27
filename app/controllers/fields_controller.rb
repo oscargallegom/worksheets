@@ -2,7 +2,7 @@
 
 class FieldsController < ApplicationController
 
-  include Calculations
+  include Mycalculations
 
   load_and_authorize_resource :farm
   load_and_authorize_resource :through => :farm

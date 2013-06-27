@@ -1,4 +1,4 @@
-module Calculations
+module Mycalculations
   def calculations(field)
 
     fencing_acres = 0
@@ -67,9 +67,11 @@ module Calculations
     # fucntional acres * 2 * efficiency for sediment and phosphorus * non_converted_acre_load from NTT
     # for wetland use wetland_treated_area * non_converted_acre_load from NTT
     #
+    #
+    # something
 
 
-    raise 'Oh no! An error...'
+    raise 'Oh no! An error......'
 
   end
 end
