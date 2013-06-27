@@ -12,11 +12,11 @@ updateIndexes = ->
   $(".fields:visible").find(".poultry_index").each (index) ->
     $(this).text(index+1)
 
-    if $(".fields:visible").length == 1   # hide the stip number and length  option
-      $(".fields:visible").find(".div_length").hide()
-    else   # show length option
-      $(".fields:visible").find(".div_length").each ->
-        $(this).show()
+  if $(".fields:visible").length == 1   # hide the stip number and length  option
+    $(".fields:visible").find(".div_length").hide()
+  else   # show length option
+    $(".fields:visible").find(".div_length").each ->
+      $(this).show()
 
 # fertigation is only shown for option 1 and 2:
 displayFertigation = ->

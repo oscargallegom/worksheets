@@ -49,6 +49,10 @@ class Field < ActiveRecord::Base
   attr_accessible :bmps_attributes
   accepts_nested_attributes_for :bmps, :allow_destroy => true
 
+  # TODO: area of wetland < area of field
+  # TODO: area of buffers < area of field (forrest, grass and fence)
+  # TODO: sum of all buffers < area of field
+
   # TODO: natural sorting
   default_scope :order => 'name ASC'
 

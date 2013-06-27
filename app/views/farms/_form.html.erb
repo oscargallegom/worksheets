@@ -2,7 +2,7 @@
     <% if @farm.errors.any? %>
         <br/>
         <div id="error_explanation" class="alert">
-          <h2><%= pluralize(@farm.errors.count, "error") %> encountered:</h2>
+          <%= pluralize(@farm.errors.count, "error") %> encountered:
 
           <ul>
             <% @farm.errors.full_messages.each do |msg| %>

@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(:version => 20130623141409) do
 
   create_table "fields", :force => true do |t|
     t.string   "name"
-    t.decimal  "area"
+    t.decimal  "area"     # needed?????
     t.string   "baseline_load"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
