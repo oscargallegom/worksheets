@@ -16,10 +16,10 @@ updateCounties = ->
 updateTractNumber = ->
   if $("#farm_site_state_id option:selected").text()=='Maryland'
     $("#tr_tract_number").show()
-    $("#tr_tract_number").prop('required', true)
+    $("#farm_tract_number").prop('required', true)
   else
     $("#tr_tract_number").hide()
-    $("#tr_tract_number").prop('required', false)
+    $("#farm_tract_number").prop('required', false)
 
 # add_animal = () ->
 #  $(".animal").first().prop('required', true)
