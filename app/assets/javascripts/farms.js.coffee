@@ -45,9 +45,11 @@ hideAnimalSection = ->
     i--
 
 $(document).ready ->
+  # tract number is only shown for Maryland
+  updateTractNumber()
   if typeof $("#farm_site_state_id").val() isnt 'undefined' and $("#farm_site_state_id").val().length > 0
     updateCounties()
-    updateTractNumber()
+
 
   $("#farm_site_state_id").change ->
     updateCounties()
