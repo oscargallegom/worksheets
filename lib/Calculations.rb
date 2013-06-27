@@ -1,4 +1,4 @@
-module Testolivier
+module Calculations
   def calculations(field)
 
     fencing_acres = 0
@@ -66,7 +66,7 @@ module Testolivier
     # fucntional acres * 4 * efficiency for nitrogen * non_converted_acre_load from NTT
     # fucntional acres * 2 * efficiency for sediment and phosphorus * non_converted_acre_load from NTT
     # for wetland use wetland_treated_area * non_converted_acre_load from NTT
-
+    #
 
 
     raise 'Oh no! An error...'
