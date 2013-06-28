@@ -49,8 +49,8 @@ class Field < ActiveRecord::Base
   attr_accessible :bmps_attributes
   accepts_nested_attributes_for :bmps, :allow_destroy => true
 
-  validates_presence_of :name, :field_type_id, :crop_type_id, :irrigation_id, :efficiency, :p_test_method_id, :p_test_value
-  validates_presence_of :acres_from_user, :if => :is_acres_from_user?
+  #validates_presence_of :name, :field_type_id, :crop_type_id, :irrigation_id, :efficiency, :p_test_method_id, :p_test_value
+  #validates_presence_of :acres_from_user, :if => :is_acres_from_user?
 
   # TODO: area of wetland < area of field
   # TODO: area of buffers < area of field (forrest, grass and fence)
