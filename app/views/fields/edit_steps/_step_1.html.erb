@@ -21,15 +21,15 @@
             <li>Enter field information.</li>
             <li>
               <div class='wide'>Watershed:</div>
-              <%= @field.watershed_segment.trib_strat_basin %>
+              <%= @field.watershed_segment.trib_strat_basin unless @field.watershed_segment.nil? %>
             </li>
             <li>
               <div class='wide'>Land river segment:</div>
-              <%= @field.watershed_segment.key %>
+              <%= @field.watershed_segment.key unless @field.watershed_segment.nil? %>
             </li>
             <li>
               <div class='wide'>Major basin:</div>
-              <%= @field.watershed_segment.major_basin %>
+              <%= @field.watershed_segment.major_basin unless @field.watershed_segment.nil? %>
             </li>
             <li>
               <div class='wide'>TMDL watershed:</div>
@@ -40,9 +40,9 @@
               <%= f.text_field :name, :required => 'true' %>
             </li>
             <li>
-              <%= f.label :name, 'Field type:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.label :field_type_id, 'Field type:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
-             </li>
+            </li>
             <li>
               <div class='wide'>Notes:</div>
               <%= f.text_area :notes, :rows => 5 %>

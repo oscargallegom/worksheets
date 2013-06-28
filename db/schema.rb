@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623141409) do
+ActiveRecord::Schema.define(:version => 20130623154617) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(:version => 20130623141409) do
     t.integer "crop_category_id"
   end
 
+  create_table "efficiency_bmps", :force => true do |t|
+    t.integer "bmp_type_id"
+    t.integer "field_type_id"
+    t.string  "hgmr_code"
+    t.decimal "nitrogen_efficiency"
+    t.decimal "phosphorus_efficiency"
+    t.decimal "sediment_efficiency"
+  end
+
   create_table "end_of_season_types", :force => true do |t|
     t.string "name"
   end
@@ -162,7 +171,7 @@ ActiveRecord::Schema.define(:version => 20130623141409) do
 
   create_table "fields", :force => true do |t|
     t.string   "name"
-    t.decimal  "area"     # needed?????
+    t.decimal  "area"
     t.string   "baseline_load"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false

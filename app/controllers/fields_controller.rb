@@ -1,5 +1,3 @@
-
-
 class FieldsController < ApplicationController
 
   include Mycalculations
@@ -90,6 +88,10 @@ class FieldsController < ApplicationController
   # PUT /farms/1/fields/1.json
   def update
 
+    add_breadcrumb @farm.name, farm_path(@farm)
+    add_breadcrumb 'Fields', farm_fields_path(@farm)
+    add_breadcrumb @field.name
+
     # TODO: exception handling
     ################################################################
     ################################################################
@@ -107,7 +109,7 @@ class FieldsController < ApplicationController
     @step = params[:step] || '1'
 
     respond_to do |format|
-      if @field.update_attributes(params[:field]) and isOk
+      if @field.update_attributes(params[:field])
         format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
       else
         format.html { render action: 'edit'}

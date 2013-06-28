@@ -19,21 +19,23 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Requirements</h2></li>
-            <li>Landowners must have an implemented nutrient management plan and a soil and water conservation plan before being eligible to generate credits.<br/><br/>
-              For confined livestock, operators must have a properly sized and maintained manure storage and runoff system to be eligible to generate credits.
+            <li>Landowners must have an implemented nutrient management plan and a soil and water conservation plan
+              before being eligible to generate credits.<br/><br/>
+              For confined livestock, operators must have a properly sized and maintained manure storage and runoff
+              system to be eligible to generate credits.
               <br/><br/>
             </li>
             <li>
               <%= f.label :is_livestock_implemented_nutrient_plan, 'I have an implemented nutrient management plan:', :class => 'extrawide' %>
-              <%= f.check_box  :is_livestock_implemented_nutrient_plan %>
+              <%= f.check_box :is_livestock_implemented_nutrient_plan %>
             </li>
             <li>
               <%= f.label :is_livestock_implemented_soil_water_plan, 'I have an implemented soil and water conservation plan:', :class => 'extrawide' %>
-              <%= f.check_box  :is_livestock_implemented_soil_water_plan %>
+              <%= f.check_box :is_livestock_implemented_soil_water_plan %>
             </li>
             <li>
               <%= f.label :is_livestock_properly_sized_maintained, 'I have a properly sized and maintained manure storage and runoff system:', :class => 'extrawide' %>
-              <%= f.check_box  :is_livestock_properly_sized_maintained %>
+              <%= f.check_box :is_livestock_properly_sized_maintained %>
             </li>
 
           </ol>

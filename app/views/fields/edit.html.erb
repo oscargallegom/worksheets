@@ -1,57 +1,85 @@
-<% if  @field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3  %>
+<% if  @field.field_type_id.nil? %>
+    <%= @field.field_type_id %>
+    <div style="position:relative">
+      <ul id="tabNav">
+        <li
+        <% if (@step=='1') %> class="selected"
+        <% end %> ><%= link_to 'General', edit_farm_field_path(@farm, @field, :step => 1) %></li>
+        <li class="disabledTab"><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
+        <li class="disabledTab"><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
+        <li class="disabledTab"><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
+        <li class="disabledTab"><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
+        <li class="disabledTab"><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
+        <li class="disabledTab"><%= link_to 'Future BMPs', edit_farm_field_path(@farm, @field, :step => 7) %></li>
+        <li class="disabledTab"><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
+        <li class="disabledTab"><%= link_to 'Non-managed', edit_farm_field_path(@farm, @field, :step => 10) %></li>
 
-<div style="position:relative">
-  <ul id="tabNav">
-    <li
-    <% if (@step=='1') %> class="selected"
-    <% end %> ><%= link_to 'General', edit_farm_field_path(@farm, @field, :step => 1) %></li>
-    <li
-    <% if (@step=='2') %> class="selected"
-    <% end %> ><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
-    <li
-    <% if (@step=='3') %> class="selected"
-    <% end %> ><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
-    <li
-    <% if (@step=='4') %> class="selected"
-    <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
-    <li
-    <% if (@step=='5') %> class="selected"
-    <% end %> ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
-    <li
-    <% if (@step=='6') %> class="selected"
-    <% end %> ><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
-    <li
-    <% if (@step=='7') %> class="selected"
-    <% end %> ><%= link_to 'Future BMPs', edit_farm_field_path(@farm, @field, :step => 7) %></li>
-    <li
-    <% if (@step=='8') %> class="selected"
-    <% end %> ><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
-    <li
-    <% if (@step=='10') %> class="selected"
-    <% end %> ><%= link_to 'Non-managed', edit_farm_field_path(@farm, @field, :step => 10) %></li>
+        <li class="shadow"></li>
+      </ul>
 
-    <li class="shadow"></li>
-  </ul>
+    </div>
 
-</div>
+    <br/>
 
-<br/>
+    <%= render 'fields/edit_steps/step_1' %>
 
-<%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
-<%= render 'fields/edit_steps/step_2', :locals => {:field => @field} if @step=='2' %>
-<%= render 'fields/edit_steps/step_3' if @step=='3' %>
-<%= render 'fields/edit_steps/step_4' if @step=='4' %>
-<%= render 'fields/edit_steps/step_5' if @step=='5' %>
-<%= render 'fields/edit_steps/step_6' if @step=='6' %>
-<%= render 'fields/edit_steps/step_7' if @step=='7' %>
-<%= render 'fields/edit_steps/step_8' if @step=='8' %>
+<% end %>
 
- <% end %>
+<!-- if field type is crop, pasture,  -->
+<% if  @field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3 %>
+
+    <div style="position:relative">
+      <ul id="tabNav">
+        <li
+        <% if (@step=='1') %> class="selected"
+        <% end %> ><%= link_to 'General', edit_farm_field_path(@farm, @field, :step => 1) %></li>
+        <li
+        <% if (@step=='2') %> class="selected"
+        <% end %> ><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
+        <li
+        <% if (@step=='3') %> class="selected"
+        <% end %> ><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
+        <li
+        <% if (@step=='4') %> class="selected"
+        <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
+        <li
+        <% if (@step=='5') %> class="selected"
+        <% end %> ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
+        <li
+        <% if (@step=='6') %> class="selected"
+        <% end %> ><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
+        <li
+        <% if (@step=='7') %> class="selected"
+        <% end %> ><%= link_to 'Future BMPs', edit_farm_field_path(@farm, @field, :step => 7) %></li>
+        <li
+        <% if (@step=='8') %> class="selected"
+        <% end %> ><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
+        <li
+        <% if (@step=='10') %> class="selected"
+        <% end %> ><%= link_to 'Non-managed', edit_farm_field_path(@farm, @field, :step => 10) %></li>
+
+        <li class="shadow"></li>
+      </ul>
+
+    </div>
+
+    <br/>
+
+    <%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
+    <%= render 'fields/edit_steps/step_2', :locals => {:field => @field} if @step=='2' %>
+    <%= render 'fields/edit_steps/step_3' if @step=='3' %>
+    <%= render 'fields/edit_steps/step_4' if @step=='4' %>
+    <%= render 'fields/edit_steps/step_5' if @step=='5' %>
+    <%= render 'fields/edit_steps/step_6' if @step=='6' %>
+    <%= render 'fields/edit_steps/step_7' if @step=='7' %>
+    <%= render 'fields/edit_steps/step_8' if @step=='8' %>
+
+<% end %>
 
 <!-- if animal confinment -->
-<% if  @field.field_type_id == 4  %>
+<% if  @field.field_type_id == 4 %>
 
-<%= render 'fields/edit_steps/step_10' if @step=='10' %>
+    <%= render 'fields/edit_steps/step_10' if @step=='10' %>
     <div style="position:relative">
       <ul id="tabNav">
         <li
@@ -84,7 +112,7 @@
 <% end %>
 
 <!-- if non-managed land -->
-<% if  @field.field_type_id == 5  %>
+<% if  @field.field_type_id == 5 %>
     <div style="position:relative">
       <ul id="tabNav">
         <li

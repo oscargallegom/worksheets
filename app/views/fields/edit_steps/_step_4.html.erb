@@ -34,7 +34,8 @@
                 </li>
                 <li>
                   <%= f.label :fence_length, 'Linear feet of streabank fence:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.text_field :fence_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                  <%= f.text_field :fence_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                  ft
                 </li>
                 <li>
                   <label class="wide"><b>Is streambank fencing in place<em>*</em></b></label>
@@ -50,7 +51,8 @@
                 </li>
                 <li>
                   <%= f.label :distance_fence_stream, 'Average distance betweeen fence and stream:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.text_field :distance_fence_stream, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                  <%= f.text_field :distance_fence_stream, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                  ft
                 </li>
             <% end %>
             <!-- end only show if permanent pasture -->
@@ -68,14 +70,16 @@
                 </li>
                 <div id='div_is_forest_buffer'
                      <% if !@field.is_forest_buffer? %>style='display: none'
-                <% end %> >
+                     <% end %> >
                   <li>
                     <%= f.label :forest_buffer_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :forest_buffer_average_width, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                    <%= f.text_field :forest_buffer_average_width, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                    ft
                   </li>
                   <li>
                     <%= f.label :forest_buffer_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :forest_buffer_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                    <%= f.text_field :forest_buffer_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                    ft
                   </li>
                   <li>
                     <%= f.label :forest_buffer_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -96,14 +100,16 @@
 
                 <div id='div_is_grass_buffer'
                      <% if !@field.is_grass_buffer? %>style='display: none'
-                <% end %> >
+                     <% end %> >
                   <li>
                     <%= f.label :grass_buffer_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :grass_buffer_average_width, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                    <%= f.text_field :grass_buffer_average_width, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                    ft
                   </li>
                   <li>
                     <%= f.label :grass_buffer_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :grass_buffer_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                    <%= f.text_field :grass_buffer_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                    ft
                   </li>
                   <li>
                     <%= f.label :grass_buffer_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -126,14 +132,16 @@
             </li>
             <div id='div_is_wetland'
                  <% if !@field.is_wetland? %>style='display: none'
-            <% end %> >
+                 <% end %> >
               <li>
                 <%= f.label :wetland_area, 'Area of wetland:<em>*</em>'.html_safe, :class => 'wide' %>
-                <%= f.text_field :wetland_area, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                <%= f.text_field :wetland_area, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                ft
               </li>
               <li>
                 <%= f.label :wetland_treated_area, 'Upland area treated by wetland:<em>*</em>'.html_safe, :class => 'wide' %>
-                <%= f.text_field :wetland_treated_area, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                <%= f.text_field :wetland_treated_area, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                ft
               </li>
               <li>
                 <%= f.label :is_wetland_planned, 'Planned:', :class => 'wide' %>
@@ -161,10 +169,11 @@
             </li>
             <div id='div_is_streambank_restoration'
                  <% if !@field.is_streambank_restoration? %>style='display: none'
-            <% end %> >
+                 <% end %> >
               <li>
                 <%= f.label :streambank_restoration_length, 'Linear feet:<em>*</em>'.html_safe, :class => 'wide' %>
-                <%= f.text_field :streambank_restoration_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ft
+                <%= f.text_field :streambank_restoration_length, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %>
+                ft
               </li>
               <li>
                 <%= f.label :is_streambank_restoration_planned, 'Planned:', :class => 'wide' %>

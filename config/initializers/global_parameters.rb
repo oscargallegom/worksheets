@@ -3,7 +3,8 @@
 #######################################################
 
 # URL to the mapping application
-URL_MAP = 'http://ims.missouri.edu/marylandNN/Default2.aspx'  #http://ims.missouri.edu/marylandNN/MultiStates.aspx
+# URL_MAP = 'http://ims.missouri.edu/marylandNN/MultiStates.aspx'
+URL_MAP = 'http://ims.missouri.edu/marylandNN/Default2.aspx'
 
 case Rails.env
   when "development"

@@ -2,32 +2,34 @@
   <fieldset>
     <ol>
       <div class='div_length'>
-      <li><h2 class='sectionHeading'>Strip <span class="strip_index" ></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %> </h2>
-      </li>
+        <li><h2 class='sectionHeading'>Strip
+          <span class="strip_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'} %>
+        </h2>
+        </li>
 
-      <li><%= f.label :length, 'Width:<em>*</em>'.html_safe, :class => 'wide' %>
-        <%= f.text_field :length, :size => 5, :required => true, :class => 'test' %> ft
-      </li>
-              </div>
+        <li><%= f.label :length, 'Width:<em>*</em>'.html_safe, :class => 'wide' %>
+          <%= f.text_field :length, :size => 5, :required => true, :class => 'test' %> ft
+        </li>
+      </div>
 
     </ol>
   </fieldset>
 </div>
 <div style="clear: both"></div>
 
-    <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
-      <tr>
-        <th></th>
-        <th>Crop</th>
-        <th>Grazing Livestock</th>
-        <th>Commercial Fertilizer</th>
-        <th>Manure Fertilizer</th>
-        <th>Tillage Operations</th>
-        <th>Harvest Operations</th>
-        <th class="actions">Actions</th>
-      </tr>
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+  <tr>
+    <th></th>
+    <th>Crop</th>
+    <th>Grazing Livestock</th>
+    <th>Commercial Fertilizer</th>
+    <th>Manure Fertilizer</th>
+    <th>Tillage Operations</th>
+    <th>Harvest Operations</th>
+    <th class="actions">Actions</th>
+  </tr>
 
-      <% f.object.crop_rotations.each_with_index  do |crop_rotation, crop_rotation_index| %>
+  <% f.object.crop_rotations.each_with_index do |crop_rotation, crop_rotation_index| %>
 
       <tr>
         <td><%= link_to 'Crop ' + (crop_rotation_index + 1).to_s, farm_field_strip_crop_rotation_path(crop_rotation.strip.field.farm.id, crop_rotation.strip.field.id, crop_rotation.strip.id, crop_rotation.id) %></td>
@@ -44,16 +46,17 @@
         </td>
       </tr>
 
-      <% end %>
+  <% end %>
 
-    </table>
+</table>
 
-    <br/>
+<br/>
 
 <%= link_to 'Add a crop to rotation', new_farm_field_strip_crop_rotation_path(@farm.id, @field.id, f.object.id.to_s), :class => 'button' %>
 
 
 
-<br/><br/><hr/>
+<br/><br/>
+<hr/>
 
 
