@@ -912,6 +912,11 @@ PlantingMethod.create!({:id => 668,  :name => '30 inch Row Crop Planter'}, :with
 PlantingMethod.create!({:id => 767,  :name => '36 inch Row Crop Planter'}, :without_protection => true)
 PlantingMethod.create!({:id => 769,  :name => '15/30 inch Row Crop Planter (Splitter)'}, :without_protection => true)
 
+PTestMethod.delete_all
+PTestMethod.create!({:id => 1,  :name => 'Method 1'}, :without_protection => true)
+PTestMethod.create!({:id => 2,  :name => 'Method 2'}, :without_protection => true)
+PTestMethod.create!({:id => 3,  :name => 'Method 3'}, :without_protection => true)
+
 TillageOperationType.delete_all
 TillageOperationType.create!({:id => 1,  :name => 'Row Crop Cultivator'}, :without_protection => true)
 TillageOperationType.create!({:id => 2,  :name => 'Culti-Packer Pulverizer'}, :without_protection => true)
@@ -974,7 +979,7 @@ EndOfSeasonType.create!({:id => 2,  :name => 'Harvest and Terminate Crop'}, :wit
 EndOfSeasonType.create!({:id => 3,  :name => 'Terminate Crop (No Harvest)'}, :without_protection => true)
 
 VegetationType.delete_all
-VegetationType.create!({:id => 1,  :name => 'Forest'}, :without_protection => true)
+VegetationType.create!({:id => 1,  :name => 'Forrest'}, :without_protection => true)
 VegetationType.create!({:id => 2,  :name => 'Grass'}, :without_protection => true)
 
 BmpType.delete_all
@@ -986,7 +991,7 @@ BmpType.create!({:id => 5,  :abbreviation => 'HorsePasMan', :name => 'Horse Past
 BmpType.create!({:id => 6,  :abbreviation => 'OSWnoFence', :name => 'Off Stream Watering Without Fencing'}, :without_protection => true)
 BmpType.create!({:id => 7,  :abbreviation => 'WaterContStruc', :name => 'Water Control Structures'}, :without_protection => true)
 BmpType.create!({:id => 8,  :abbreviation => 'ConPlan', :name => 'Soil Conservation and Water Quality Plans'}, :without_protection => true)
-#BmpType.create!({:id => 9,  :abbreviation => 'ForestBuffers', :name => 'Forest Buffers'}, :without_protection => true)
+#BmpType.create!({:id => 9,  :abbreviation => 'ForrestBuffers', :name => 'Forrest Buffers'}, :without_protection => true)
 #BmpType.create!({:id => 10,  :abbreviation => 'GrassBuffers', :name => 'Grass Buffers; Vegetated Open Channel - Agriculture'}, :without_protection => true)
 BmpType.create!({:id => 11,  :abbreviation => 'PrecRotGrazing', :name => 'Prescribed Grazing'}, :without_protection => true)
 #BmpType.create!({:id => 12,  :abbreviation => 'WetlandRestore', :name => 'Wetland Restoration'}, :without_protection => true)

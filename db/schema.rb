@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130623154617) do
+ActiveRecord::Schema.define(:version => 20130630185223) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20130623154617) do
     t.integer  "crop_id"
     t.integer  "planting_method_id"
     t.decimal  "seeding_rate"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "strip_id"
     t.integer  "plant_date_year"
     t.integer  "plant_date_month"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20130623154617) do
     t.integer  "end_of_season_year"
     t.integer  "end_of_season_month"
     t.integer  "end_of_season_day"
-    t.boolean  "is_cover_crop"
+    t.boolean  "is_cover_crop",                 :default => false, :null => false
     t.integer  "cover_crop_id"
     t.integer  "cover_crop_planting_method_id"
   end
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20130623154617) do
     t.decimal "n_excreted"
     t.decimal "p205_excreted"
     t.decimal "total_manure"
+    t.decimal "average_weight"
   end
 
   create_table "field_poultry", :force => true do |t|
@@ -190,10 +191,10 @@ ActiveRecord::Schema.define(:version => 20130623154617) do
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
-    t.boolean  "is_forest_buffer"
-    t.decimal  "forest_buffer_average_width"
-    t.decimal  "forest_buffer_length"
-    t.boolean  "is_forest_buffer_planned"
+    t.boolean  "is_forresflockt_buffer"
+    t.decimal  "forrest_buffer_average_width"
+    t.decimal  "forrest_buffer_length"
+    t.boolean  "is_forrest_buffer_planned"
     t.boolean  "is_grass_buffer"
     t.decimal  "grass_buffer_average_width"
     t.decimal  "grass_buffer_length"

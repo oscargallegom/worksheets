@@ -8,7 +8,7 @@
 </li>
 <li>
   <%= f.label :acres, 'Area:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :acres, :size => 5, :type => 'number', :step => 'any', :min => 0, :required => true %> ac
+  <%= f.text_field :acres, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %> ac
 </li>
 <li>
   <%= f.label :is_planned, 'Planned:', :class => 'wide' %>

@@ -1,8 +1,7 @@
 <%= form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
     <% if @field.errors.any? %>
-        <br/>
         <div id="error_explanation" class="alert">
-          <h2><%= pluralize(@field.errors.count, "error") %> encountered:</h2>
+          <b><%= pluralize(@field.errors.count, "error") %> encountered:</b>
 
           <ul>
             <% @field.errors.full_messages.each do |msg| %>
@@ -12,7 +11,7 @@
         </div>
     <% end %>
     <div class="sectionRest clearfix">
-      <%= hidden_field_tag :step, 1 %>
+      <%= f.hidden_field :step, :value => '1' %>
 
       <div>
         <fieldset>
@@ -37,7 +36,7 @@
             </li>
             <li>
               <%= f.label :name, '(FSA) Field number:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.text_field :name, :required => 'true' %>
+              <%= f.text_field :name, :required => 'true', :class => 'textboxLarge' %>
             </li>
             <li>
               <%= f.label :field_type_id, 'Field type:<em>*</em>'.html_safe, :class => 'wide' %>

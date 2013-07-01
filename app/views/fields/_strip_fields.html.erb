@@ -8,7 +8,7 @@
         </li>
 
         <li><%= f.label :length, 'Width:<em>*</em>'.html_safe, :class => 'wide' %>
-          <%= f.text_field :length, :size => 5, :required => true, :class => 'test' %> ft
+          <%= f.text_field :length, :class => 'textboxMedium', :required => true, :type => 'number', :min => 0, :step => 'any' %> ft
         </li>
       </div>
 
@@ -52,8 +52,7 @@
 
 <br/>
 
-<%= link_to 'Add a crop to rotation', new_farm_field_strip_crop_rotation_path(@farm.id, @field.id, f.object.id.to_s), :class => 'button' %>
-
+<a class="button" id='addCropButton' href="#">Add a crop to rotation</a>
 
 
 <br/><br/>

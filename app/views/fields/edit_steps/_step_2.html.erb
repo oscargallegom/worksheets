@@ -1,9 +1,8 @@
 <%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
     <% if @field.errors.any? %>
-        <br/>
         <div id="error_explanation" class="alert">
-          <h2><%= pluralize(@field.errors.count, "error") %> encountered:</h2>
+          <b><%= pluralize(@field.errors.count, "error") %> encountered:</b>
 
           <ul>
             <% @field.errors.full_messages.each do |msg| %>
@@ -14,7 +13,7 @@
     <% end %>
 
     <div class="sectionRest clearfix">
-      <%= hidden_field_tag :step, 2 %>
+      <%= f.hidden_field :step, :value => '2' %>
       <div>
         <fieldset>
           <ol>
@@ -32,7 +31,7 @@
 
               <div class='wide'>&nbsp;</div>
               <%= f.radio_button :is_acres_from_map, false %>
-              <%= f.text_field :acres_from_user, :required => 'true', :size => 5 %>
+              <%= f.text_field :acres_from_user, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
               <%= f.label :is_acres_from_map_false, 'ac' %>
             </li>
             <% if (@field.field_type_id == 1) then %>
@@ -43,7 +42,7 @@
             <% end %>
             <li>
               <%= f.label :tile_drainage_depth, 'Tile drainage depth:', :class => 'wide' %>
-              <%= f.text_field :tile_drainage_depth, :value => (number_with_precision(@field.tile_drainage_depth, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5 %>
+              <%= f.text_field :tile_drainage_depth, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
               ft
             </li>
             <li>
@@ -52,21 +51,21 @@
             </li>
             <li id='efficiency'>
               <%= f.label :efficiency, 'Efficiency<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.text_field :efficiency, :type => 'number', :size => 5, :required => true, :min => 0, :max => 100 %>
+              <%= f.text_field :efficiency, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :max => 100, :step => 'any' %>
               % &nbsp;&nbsp;&nbsp;&nbsp;<span id='default_efficiency'></span>
             </li>
             <li id='fertigation_n'>
               <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>
-              <%= f.text_field :fertigation_n, :value => (number_with_precision(@field.fertigation_n, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5 %>
+              <%= f.text_field :fertigation_n, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
               ppm
             </li>
             <li>
               <%= f.label :p_test_method_id, 'Soil P test method:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'}, :required => false %>
+              <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'}, :required => true %>
             </li>
             <li>
               <%= f.label :p_test_value, 'Soil P test value:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.text_field :p_test_value, :value => (number_with_precision(@field.p_test_value, :precision => 2, :separator => '.', :delimiter => ',')), :size => 5, :required => true %>
+              <%= f.text_field :p_test_value, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :step => 'any' %>
               ppm
             </li>
             <div id='li_soil'>

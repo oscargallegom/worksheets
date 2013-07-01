@@ -1,4 +1,7 @@
 class CropRotation < ActiveRecord::Base
+
+  attr_accessor :crop_category_id
+
   belongs_to :crop
   belongs_to :strip
 
@@ -26,6 +29,18 @@ class CropRotation < ActiveRecord::Base
   attr_accessible :end_of_seasons_attributes
   accepts_nested_attributes_for :end_of_seasons, :allow_destroy => true
 
+  validates_presence_of :crop_category_id, :crop_id
+
+  # if not permanent pasture
+  validates_presence_of :plant_date_year, :plant_date_month, :plant_date_day, :planting_method_id, :unless => :isPermanentPasture?
+  validates_numericality_of :seeding_rate, :greater_than_or_equal_to => 0, :allow_blank => true, :unless => :isPermanentPasture?
+
+  validates_presence_of :cover_crop_id, :cover_crop_planting_method_id, :if => 'is_cover_crop?'
 
   default_scope :order => 'created_at ASC'
+
+  def isPermanentPasture?
+    self.strip.field.field_type.id == 2
+  end
+
 end

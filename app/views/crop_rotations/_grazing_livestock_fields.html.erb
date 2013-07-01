@@ -21,10 +21,10 @@
 </li>
 <li>
   <%= f.label :animal_units, 'Animal units:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :animal_units, :required => 'true', :size => 5 %>
+  <%= f.text_field :animal_units, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
 </li>
 <li>
   <%= f.label :hours_grazed, 'Hours grazed:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :hours_grazed, :required => 'true', :size => 5 %>
+  <%= f.text_field :hours_grazed, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
   <hr/>
 </li>

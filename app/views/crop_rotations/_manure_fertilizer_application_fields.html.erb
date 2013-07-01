@@ -19,23 +19,23 @@
 </li>
 <li>
   <%= f.label :total_n_concentration, 'Total N concentration:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :total_n_concentration, :required => 'true', :size => 5 %>
+  <%= f.text_field :total_n_concentration, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
   <span></span>
 </li>
 <li>
   <%= f.label :p_concentration, 'P concentration:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :p_concentration, :required => 'true', :size => 5 %>
+  <%= f.text_field :p_concentration, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
   <span></span>
-  <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:required => true, :style => 'width:80px'} %>
+  <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:required => true, :style => 'width:120px'} %>
 </li>
 <li>
   <%= f.label :application_rate, 'Application rate:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :application_rate, :required => 'true', :size => 5 %>
+  <%= f.text_field :application_rate, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
   <span></span>
 </li>
 <li>
   <%= f.label :moisture_content, 'Moisture content:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :moisture_content, :required => 'true', :size => 5 %> %
+  <%= f.text_field :moisture_content, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 100, :step => 'any' %> %
 </li>
 <li>
   <%= f.label :is_precision_feeding, 'Precision feeding:', :class => 'wide' %>
@@ -61,6 +61,6 @@
 </li>
 <li>
   <%= f.label :incorporation_depth, 'Incorporation depth:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :incorporation_depth, :required => 'true', :size => 5 %> in
+  <%= f.text_field :incorporation_depth, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %> in
   <hr/>
 </li>

@@ -188,7 +188,6 @@ class FarmsController < ApplicationController
         # at most 3 soils are displayed
         @nbSoils = [3, @listSoils.length].min
 
-        # TODO: delete only if necessary
         @field.soils.destroy_all
 
         @nbSoils.times do

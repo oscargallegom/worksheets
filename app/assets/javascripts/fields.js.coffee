@@ -7,6 +7,8 @@
 updateIndexes = ->
   $(".fields:visible").find(".strip_index").each (index) ->
     $(this).text(index+1)
+  $(".fields:visible").find('[id^="addCropButton"]').each (index) ->
+    $(this).attr('id', 'addCropButton_' + index)
   $(".fields:visible").find(".livestock_index").each (index) ->
     $(this).text(index+1)
   $(".fields:visible").find(".poultry_index").each (index) ->
@@ -50,6 +52,22 @@ updateSiltPercents = ->
   if $.isNumeric($("#field_soils_attributes_2_percent_clay").val()) and $.isNumeric($("#field_soils_attributes_2_percent_sand").val())
     $("#field_soils_attributes_2_percent_silt").val((100 - $("#field_soils_attributes_2_percent_clay").val() - $("#field_soils_attributes_2_percent_sand").val()).toFixed(1))
 
+# calculate forrest buffer area
+updateForrestBufferArea = ->
+  if $.isNumeric($("#field_forrest_buffer_average_width").val()) and $.isNumeric($("#field_forrest_buffer_length").val())
+    $("#forrest_buffer_area").val(($("#field_forrest_buffer_average_width").val() * $("#field_forrest_buffer_length").val() / 43560.0).toFixed(2))
+
+updateGrassBufferArea = ->
+  if $.isNumeric($("#field_grass_buffer_average_width").val()) and $.isNumeric($("#field_grass_buffer_length").val())
+    $("#grass_buffer_area").val(($("#field_grass_buffer_average_width").val() * $("#field_grass_buffer_length").val() / 43560.0).toFixed(2))
+
+# when the button add crop is called find out the strip, then submit form
+addCrop = (caller) ->
+  if (caller.attr('id') isnt undefined and caller.attr('id').indexOf('addCropButton')>=0)
+    $('#addCropForStrip').val(caller.attr('id').substring(caller.attr('id').indexOf('_')+1));
+    $("form").submit();
+    false;
+
 # if not use default map, acres is required
 acresRequired = ->
   if $("#field_acres_use_map_true").is(":checked")
@@ -57,17 +75,26 @@ acresRequired = ->
   else
     $("#field_acres").prop('required', true)
 
-# clicked forest buffer
-isForestBufferClicked = ->
-  $("#div_is_forest_buffer").toggle()
-  if $("#div_is_forest_buffer").is(":visible")
-    $("#field_forest_buffer_average_width").prop('required', true)
-    $("#field_forest_buffer_length").prop('required', true)
+isFencingInPlace = ->
+  $("#div_is_fencing_in_place").toggle()
+  if $("#div_is_fencing_in_place").is(":visible")
+    $("#field_vegetation_type_fence_stream_id").prop('required', true)
+    $("#field_distance_fence_stream").prop('required', true)
   else
-    $("#field_forest_buffer_average_width").prop('required', false)
-    $("#field_forest_buffer_length").prop('required', false)
+    $("#field_vegetation_type_fence_stream_id").prop('required', false)
+    $("#field_distance_fence_stream").prop('required', false)
 
-# clicked forest buffer
+# clicked forrest buffer
+isForrestBufferClicked = ->
+  $("#div_is_forrest_buffer").toggle()
+  if $("#div_is_forrest_buffer").is(":visible")
+    $("#field_forrest_buffer_average_width").prop('required', true)
+    $("#field_forrest_buffer_length").prop('required', true)
+  else
+    $("#field_forrest_buffer_average_width").prop('required', false)
+    $("#field_forrest_buffer_length").prop('required', false)
+
+# clicked grass buffer
 isGrassBufferClicked = ->
   $("#div_is_grass_buffer").toggle()
   if $("#div_is_grass_buffer").is(":visible")
@@ -113,8 +140,13 @@ $(document).ready ->
   $("#field_acres_use_map_true").change ->
     acresRequired()
 
-  $("#field_is_forest_buffer").change ->
-    isForestBufferClicked()
+  $("#field_is_streambank_fencing_in_place_true").change ->
+    isFencingInPlace()
+  $("#field_is_streambank_fencing_in_place_false").change ->
+    isFencingInPlace()
+
+  $("#field_is_forrest_buffer").change ->
+    isForrestBufferClicked()
 
   $("#field_is_grass_buffer").change ->
     isGrassBufferClicked()
@@ -128,6 +160,8 @@ $(document).ready ->
   # if data is changed, update the silt percent
   $("input").change ->
     updateSiltPercents()
+    updateForrestBufferArea()
+    updateGrassBufferArea()
 
   # show/hide details for soil 1
   $(".detailsLink1").click ->
@@ -147,6 +181,9 @@ $(document).ready ->
     $(this).text (if $(this).text() is "(show details)" then "(hide details)" else "(show details)")
     return false
 
+  $("a").click ->
+    addCrop($(this))
+
 $(document).on "nested:fieldRemoved", (event) ->
   updateIndexes()
   field = event.field
@@ -156,3 +193,5 @@ $(document).on "nested:fieldRemoved", (event) ->
 
 $(document).on "nested:fieldAdded", (event) ->
   updateIndexes()
+  $("a").click ->
+      addCrop($(this))

@@ -1,5 +1,7 @@
 class Field < ActiveRecord::Base
 
+  attr_writer :step
+
   belongs_to :farm
   belongs_to :watershed_segment
   belongs_to :irrigation
@@ -18,10 +20,11 @@ class Field < ActiveRecord::Base
   has_many :field_livestocks
   has_many :field_poultry
 
-  attr_accessible :area, :baseline_load, :name, :coordinates
+  attr_accessible :step
+  # , :area, :baseline_load, :coordinates        #  needed???
   attr_accessible :name, :field_type_id, :crop_type_id, :notes
   attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :p_test_method_id, :p_test_value
-  attr_accessible :is_forest_buffer, :forest_buffer_average_width, :forest_buffer_length, :is_forest_buffer_planned
+  attr_accessible :is_forrest_buffer, :forrest_buffer_average_width, :forrest_buffer_length, :is_forrest_buffer_planned
   attr_accessible :is_grass_buffer, :grass_buffer_average_width, :grass_buffer_length, :is_grass_buffer_planned
   attr_accessible :is_wetland, :wetland_area, :wetland_treated_area, :is_wetland_planned
 
@@ -49,8 +52,32 @@ class Field < ActiveRecord::Base
   attr_accessible :bmps_attributes
   accepts_nested_attributes_for :bmps, :allow_destroy => true
 
-  #validates_presence_of :name, :field_type_id, :crop_type_id, :irrigation_id, :efficiency, :p_test_method_id, :p_test_value
-  #validates_presence_of :acres_from_user, :if => :is_acres_from_user?
+  # step 1
+  validates_presence_of :name, :field_type_id,  :if => 'step?(1)'
+
+  # step 2 and crop or continuous hay
+  validates_presence_of :crop_type_id, :irrigation_id, :p_test_method_id, :p_test_value, :if => 'step?(2) && (field_type_id==1 || field_type_id==3)'
+  validates_inclusion_of :is_acres_from_map, :in => [true, false]
+  validates_numericality_of :tile_drainage_depth, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(2) && (field_type_id==1 || field_type_id==3)'
+  validates_inclusion_of :efficiency, :in => 0..100, :message => "must be between 0 and 100", :if => 'step?(2) && (field_type_id==1 || field_type_id==3) && irrigation_id!=0'
+  validates_numericality_of :fertigation_n, :greater_than_or_equal_to => 0, :if => 'step?(2) && (field_type_id==1 || field_type_id==3)'
+  # also for non-managed land
+  validates_numericality_of :acres_from_user, :greater_than_or_equal_to => 0, :if => '!is_acres_from_map? && step?(2) && (field_type_id==1 || field_type_id==3 || field_type_id==5)', :message => '^Acres is not a valid number.'
+
+  # step 2 and animal confinement
+  validates_presence_of :livestock_input_method_id, :if => 'step?(2)' #' && field_type_id==4'
+
+  # step 4 and permanent pasture
+  validates_presence_of :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :if => 'step?(4) && field_type_id==2'
+  validates_numericality_of :fence_length, :distance_fence_stream, :if => 'step?(4) && field_type_id==2'
+
+  # step 4 and crop or continuous hay
+  validates_numericality_of :forrest_buffer_average_width, :forrest_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forrest_buffer?'
+  validates_numericality_of :grass_buffer_average_width, :grass_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_grass_buffer?'
+
+  # step 4 for all
+  validates_numericality_of :wetland_area, :wetland_treated_area, :if => 'step?(4) && is_wetland?'
+  validates_numericality_of :streambank_restoration_length, :if => 'step?(4) && is_streambank_restoration?'
 
   # TODO: area of wetland < area of field
   # TODO: area of buffers < area of field (forrest, grass and fence)
@@ -64,12 +91,17 @@ class Field < ActiveRecord::Base
     is_acres_from_map ? acres_from_map : acres_from_user
   end
 
-  def is_acres_from_user?
-     !is_acres_from_map?
+  #def is_acres_from_user?
+  #   !is_acres_from_map?
+  #end
+
+  # required fields are based on the current step
+  def step?(step)
+    @step.to_i==step
   end
 
-  def forest_buffer_area
-    self.forest_buffer_average_width * self.forest_buffer_length / 43560.0 unless (self.forest_buffer_average_width.nil? or self.forest_buffer_length.nil?)
+  def forrest_buffer_area
+    self.forrest_buffer_average_width * self.forrest_buffer_length / 43560.0 unless (self.forrest_buffer_average_width.nil? or self.forrest_buffer_length.nil?)
   end
   def grass_buffer_area
     self.grass_buffer_average_width * self.grass_buffer_length / 43560.0 unless (self.grass_buffer_average_width.nil? or self.grass_buffer_length.nil?)

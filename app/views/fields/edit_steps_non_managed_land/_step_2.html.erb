@@ -1,9 +1,8 @@
 <%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
     <% if @field.errors.any? %>
-        <br/>
         <div id="error_explanation" class="alert">
-          <h2><%= pluralize(@field.errors.count, "error") %> encountered:</h2>
+          <b><%= pluralize(@field.errors.count, "error") %> encountered:</b>
 
           <ul>
             <% @field.errors.full_messages.each do |msg| %>
@@ -14,7 +13,7 @@
     <% end %>
 
     <div class="sectionRest clearfix">
-      <%= hidden_field_tag :step, 10 %>
+      <%= f.hidden_field :step, :value => '2' %>
 
       <div>
         <fieldset>
@@ -29,7 +28,7 @@
 
               <div class='wide'>&nbsp;</div>
               <%= f.radio_button :is_acres_from_map, false %>
-              <%= f.text_field :acres_from_user, :required => 'true', :size => 5 %>
+              <%= f.text_field :acres_from_user, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
               <%= f.label :is_acres_from_map_false, 'ac' %>
             </li>
 
@@ -40,6 +39,5 @@
       <div style="clear: both"></div>
 
       <%= f.submit 'Save and Return to Farm Summary', :class => 'button' %>
-      <!-- TODO: navigation, got fields page -->
     </div>
 <% end %>

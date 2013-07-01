@@ -19,15 +19,14 @@ class Farm < ActiveRecord::Base
 
   validates_presence_of :name, :message => '^Farm name can''t be blank'
   validates_presence_of :generator_type_id, :site_name, :site_state_id, :site_county_id
-  validates_presence_of :tract_number, :presence => true, :if => :is_maryland?
+  validates_format_of :site_zip, :allow_blank => true, :with => %r{\d{5}(-\d{4})?}, :message => "should be using the following format: 12345 or 12345-1234"
+  validates_numericality_of :tract_number, :if => :is_maryland?
 
   # allow duplication
   amoeba do
     enable
     prepend :name => "Copy of "
   end
-
-  # TODO: validate presence of coordinates
 
   def has_animals?
     self.new_record? ? false : !self.livestock.empty?

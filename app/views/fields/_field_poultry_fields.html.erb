@@ -7,24 +7,24 @@
 </li>
 <li>
   <%= f.label :quantity, 'Quantity/flock:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :quantity, :required => 'true', :size => 5, :type => 'number', :step => 'any' %> T/yr
+  <%= f.text_field :quantity, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %> T/yr
 </li>
 <li>
   <%= f.label :flocks_per_year, 'Flocks/yr:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :flocks_per_year, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Number of confined animals' %>
+  <%= f.text_field :flocks_per_year, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Number of confined animals' %>
 </li>
 <li>
   <%= f.label :days_in_growing_cycle, 'Days in growing cycle:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :days_in_growing_cycle, :required => 'true', :size => 5, :type => 'number', :step => '1', :min => 0, :max => 365 %>
+  <%= f.text_field :days_in_growing_cycle, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 365 %>
   days
 </li>
 <li>
   <%= f.label :n_excreted, 'N excreted:'.html_safe, :class => 'wide' %>
-  <%= f.text_field :n_excreted, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Typically ≈ 10.95 lb/T' %>
+  <%= f.text_field :n_excreted, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Typically ≈ 10.95 lb/T' %>
   lb/T
 </li>
 <li>
   <%= f.label :p205_excreted, 'P<sub>2</sub>O<sub>5</sub> excreted:'.html_safe, :class => 'wide' %>
-  <%= f.text_field :p205_excreted, :required => 'true', :size => 5, :type => 'number', :step => 'any', :title => 'Typically ≈ 3.79 lb/T' %>
+  <%= f.text_field :p205_excreted, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Typically ≈ 3.79 lb/T' %>
   lb/T
 </li>

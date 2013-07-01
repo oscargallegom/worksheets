@@ -18,9 +18,10 @@ updateIndexes = ->
 
 # ajax call to retrieve list of crops given the crop category
 updateCrops = ->
-  $.getJSON "/crop_categories/" + $("#crop_category_crop_category_id").val() + "/crops.json", (crops) ->
+  $.getJSON "/crop_categories/" + $("#crop_rotation_crop_category_id").val() + "/crops.json", (crops) ->
     crop_id = $("#crop_rotation_crop_id").val()
     items = []
+    items.push "<option value>Select Crop</option>"
     $.each crops, (key, crop) ->
       if crop.id is Number(crop_id)
         items.push "<option value=\"" + crop.id + "\" selected='selected'>" + crop.name + "</option>"
@@ -32,35 +33,59 @@ updateCrops = ->
 # the precision feeding checkbox is only available for dairy cows
 updatePrecisionFeeding = (selectElement) ->
   if selectElement.attr('id').indexOf("animal_id") > -1
-    li_precision_feeding = selectElement.parent().parent().find('.li_precision_feeding')
+    li_precision_feeding = selectElement.parent().parent().parent().find('.li_precision_feeding')
+    componentNumber = getComponentNumber(selectElement.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
     if selectElement.val() is '2'
       li_precision_feeding.show()
+      updateAnimalUnits($("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding"))
     else
       li_precision_feeding.hide()
+      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
+      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
+      # not required
+      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', false)
+      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', false)
+
+# update animal units, hours grazed
+updateAnimalUnits = (caller) ->
+  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
+  if caller.is(":checked")
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').show()
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').show()
+    # make them required
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', true)
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', true)
+  else
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
+    # not required
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', false)
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', false)
+
 
 # checkboxes based on dairy, poultry or swine
 updateTreatmentTypesCheckboxes = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
   manure_type_category = $("option:selected", caller).closest('optgroup').prop('label')
 
-  $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_precision_feeding").parent().hide()
-  $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_phytase_treatment").parent().hide()
-  $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_poultry_litter_treatment").parent().hide()
+  $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_precision_feeding").closest('li').hide()
+  $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_phytase_treatment").closest('li').hide()
+  $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_poultry_litter_treatment").closest('li').hide()
 
   if (manure_type_category is 'Dairy')
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_precision_feeding").parent().show()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_precision_feeding").closest('li').show()
   if (manure_type_category is 'Poultry') or (manure_type_category is 'Swine')
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_phytase_treatment").parent().show()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_phytase_treatment").closest('li').show()
   if (manure_type_category is 'Poultry')
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_poultry_litter_treatment").parent().show()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_is_poultry_litter_treatment").closest('li').show()
 
 # incorporated checked, show dates and depth
 updateIncorporatedForCommercial = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_commercial_fertilizer_applications_attributes_')
   if caller.is(":checked")
     # show options
-    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").parent().show()
-    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").parent().show()
+    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").closest('li').show()
+    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").closest('li').show()
     # make them required
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").prop('required', true)
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_month").prop('required', true)
@@ -68,8 +93,8 @@ updateIncorporatedForCommercial = (caller) ->
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").prop('required', true)
   else
     # hide options
-    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").parent().hide()
-    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").parent().hide()
+    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").closest('li').hide()
+    $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").closest('li').hide()
     # make them optional
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").prop('required', false)
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_month").prop('required', false)
@@ -81,8 +106,8 @@ updateIncorporatedForManure = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
   if caller.is(":checked")
     # show options
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").parent().show()
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").parent().show()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").closest('li').show()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").closest('li').show()
     # make them required
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").prop('required', true)
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_month").prop('required', true)
@@ -90,8 +115,8 @@ updateIncorporatedForManure = (caller) ->
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").prop('required', true)
   else
     # hide options
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").parent().hide()
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").parent().hide()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").closest('li').hide()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_depth").closest('li').hide()
     # make them optional
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").prop('required', false)
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_month").prop('required', false)
@@ -104,10 +129,10 @@ updateLiquidUnits = (caller) ->
   $("#total_n_concentration_unit_" + componentNumber).text('hello')
   # if liquid then show liquid units
   if caller.val() == '1'
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").parent().show()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").closest('li').show()
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").prop('required', true)
   else    # solids
-    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").parent().hide()
+    $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").closest('li').hide()
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").prop('required', false)
   updateUnitsLabels(caller)
 
@@ -156,21 +181,38 @@ selectListener = (caller) ->
 checkboxListener = (caller) ->
   updateIncorporatedForCommercial(caller) if (caller.attr('id').indexOf("is_incorporated") > -1) and (caller.attr('id').indexOf("crop_rotation_commercial_fertilizer_applications_attributes") > -1)
   updateIncorporatedForManure(caller) if (caller.attr('id').indexOf("is_incorporated") > -1) and (caller.attr('id').indexOf("crop_rotation_manure_fertilizer_applications_attributes") > -1)
+  updateAnimalUnits(caller) if (caller.attr('id').indexOf("precision_feeding") > -1) and (caller.attr('id').indexOf("crop_rotation_grazing_livestocks_attributes") > -1)
 
 # given the whole HTML id, return the extracted number
 getComponentNumber = (componentId, prefix) ->
   withoutPrefix = componentId.replace(prefix, '')
   withoutPrefix.substring(0, withoutPrefix.indexOf('_'))
 
+# only show the cover crop section if yes
+showCoverCropSection = ->
+  $("#li_cover_crop_id").show()
+  $("#li_cover_crop_planting_method_id").show()
+  $("#crop_rotation_cover_crop_id").prop('required', true)
+  $("#crop_rotation_cover_crop_planting_method_id").prop('required', true)
+
+hideCoverCropSection = ->
+  $("#li_cover_crop_id").hide()
+  $("#li_cover_crop_planting_method_id").hide()
+  $("#crop_rotation_cover_crop_id").prop('required', false)
+  $("#crop_rotation_cover_crop_planting_method_id").prop('required', false)
+
 
 $(document).ready ->
 
   updateIndexes()
 
-  if typeof $("#crop_category_crop_category_id").val() isnt 'undefined' and $("#crop_category_crop_category_id").val().length > 0
+  if typeof $("#crop_rotation_crop_category_id").val() isnt 'undefined' and $("#crop_rotation_crop_category_id").val().length > 0
     updateCrops()
 
-  $("#crop_category_crop_category_id").change ->
+  if ($('#crop_rotation_is_cover_crop_false').is(':checked'))
+    hideCoverCropSection()
+
+  $("#crop_rotation_crop_category_id").change ->
     updateCrops()
 
   $("select").change ->
@@ -179,11 +221,19 @@ $(document).ready ->
   $(":checkbox").change ->
     checkboxListener($(this))
 
-  # update the page
-  $("select").each (index) ->
-    selectListener($(this))
+  # update the page checkbox before select (see precision feeding)
   $(":checkbox").each (index) ->
     checkboxListener($(this))
+
+  $("select").each (index) ->
+    selectListener($(this))
+
+  $("#crop_rotation_is_cover_crop_true").change ->
+    showCoverCropSection()
+
+  $("#crop_rotation_is_cover_crop_false").change ->
+    hideCoverCropSection()
+
 
 # when  removing extra sections
 $(document).on "nested:fieldRemoved", (event) ->
@@ -212,3 +262,4 @@ $(document).on "nested:fieldAdded", (event) ->
     selectListener($(this))
   $(":checkbox").each (index) ->
     checkboxListener($(this))
+

@@ -106,12 +106,20 @@ class FieldsController < ApplicationController
 
     # @farm =Project.find(params[:farm_id])
     # field = @farm.fields.find(params[:id])
-    @step = params[:step] || '1'
+    @step = params[:field][:step] || '1'
 
     respond_to do |format|
       if @field.update_attributes(params[:field])
-        format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
-      else
+        # if step 2 and the user click 'add a crop to rotation'
+        if !params[:addCropForStrip].blank?
+          strip_index = params[:addCropForStrip].to_i
+          format.html { redirect_to new_farm_field_strip_crop_rotation_url(@farm, @field, @field.strips[strip_index]), notice: 'Field was successfully updated.' }
+        elsif (@step=='2' && @field.field_type.id == 5)     # non-managed land and step 2: got back to farm summary
+          format.html { redirect_to farm_url(@farm), notice: 'Field was successfully updated.' }
+        else
+          format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
+        end
+      else  # error
         format.html { render action: 'edit'}
       end
     end

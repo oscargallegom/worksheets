@@ -3,5 +3,4 @@ class EndOfSeasonType < ActiveRecord::Base
 
   scope :harvestOnly, where(:id => [1])
 
-
 end

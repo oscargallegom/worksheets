@@ -1,8 +1,23 @@
 <%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
+    <% if @field.errors.any? %>
+        <div id="error_explanation" class="alert">
+          <b><%= pluralize(@field.errors.count, "error") %> encountered:</b>
+
+          <ul>
+            <% @field.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
     <div class="sectionRest clearfix">
 
-      <%= hidden_field_tag :step, 3 %>
+      <%= f.hidden_field :step, :value => '3' %>
+
+      <input type='hidden' name='addCropForStrip' id='addCropForStrip'>
+
 
       <div id="div_strip">
 

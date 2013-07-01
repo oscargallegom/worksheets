@@ -40,8 +40,8 @@ module Mycalculations
         end
       end
       # if forrest buffer
-      if (field.is_forest_buffer?)
-        forrest_buffer_acres = field.forest_buffer_area.to_i
+      if (field.is_forrest_buffer?)
+        forrest_buffer_acres = field.frorest_buffer_area.to_i
 
         if (field.forrest_buffer_average_width > 35 && field.forrest_buffer_average_width <= 100)
           forrest_buffer_functional_acres = field.forrest_buffer_area.to_i

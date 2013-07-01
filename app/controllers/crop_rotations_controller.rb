@@ -13,8 +13,7 @@ class CropRotationsController < ApplicationController
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name, farm_field_path(@farm, @field)
     add_breadcrumb 'Baseline crop management', edit_farm_field_path(@farm, @field, :step => 3)
-    add_breadcrumb 'Strip ' + @strip.id.to_s
-    # TODO: strip id should be passed in URL
+    add_breadcrumb 'Strip ' + (@field.strips.find_index(@strip) + 1).to_s
     add_breadcrumb 'Crop ' + @crop_rotation.id.to_s
     respond_to do |format|
       format.html # new.html.erb
@@ -28,7 +27,7 @@ class CropRotationsController < ApplicationController
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name, farm_field_path(@farm, @field)
     add_breadcrumb 'Baseline crop management', edit_farm_field_path(@farm, @field, :step => 3)
-    add_breadcrumb 'Strip ' + @strip.id.to_s
+    add_breadcrumb 'Strip ' + (@field.strips.find_index(@strip) + 1).to_s
     add_breadcrumb 'Crop ' + @crop_rotation.id.to_s
 
 

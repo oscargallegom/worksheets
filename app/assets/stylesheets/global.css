@@ -1158,3 +1158,7 @@ div.wide {
     width: 160px;
     font-weight: bold;
 }
+
+.textboxMedium {
+    width: 80px;
+}
