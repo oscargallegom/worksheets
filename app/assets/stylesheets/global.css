@@ -727,6 +727,10 @@ input.text {
     margin-right: 10px;
     color: #666;
 }
+.readonlyInput {
+    background-color: #f0f0f0;
+    border: 0px;
+}
 select.text {
     padding: 4px;
     border: 1px solid #ccc;

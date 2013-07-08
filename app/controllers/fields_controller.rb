@@ -1,6 +1,7 @@
 class FieldsController < ApplicationController
 
   include Mycalculations
+  include Ntt
 
   load_and_authorize_resource :farm
   load_and_authorize_resource :through => :farm
@@ -22,6 +23,8 @@ class FieldsController < ApplicationController
     # natural sort fields
     @fields = Naturalsorter::Sorter.sort_by_method(@fields, :name, true)
 
+    #test()
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @fields }
@@ -31,16 +34,19 @@ class FieldsController < ApplicationController
   # GET /farms/1/fields/1
   # GET /farms/1/fields/1.json
   def show
+
+    # there is no screen to show a field, just edit
+    redirect_to :action => 'edit'
+
     # @farm = Project.find(params[:farm_id])
     # @field = @farm.fields.find(params[:id])
-    add_breadcrumb @farm.name, farm_path(@farm)
-    add_breadcrumb 'Fields', farm_fields_path(@farm)
-    add_breadcrumb @field.name
+    #add_breadcrumb @farm.name, farm_path(@farm)
+    #add_breadcrumb 'Fields', farm_fields_path(@farm)
+    #add_breadcrumb @field.name
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @field }
-    end
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #end
   end
 
   # GET /farms/1/fields/new
@@ -51,7 +57,6 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @field }
     end
   end
 
@@ -76,10 +81,8 @@ class FieldsController < ApplicationController
     respond_to do |format|
       if @field.save
         format.html { redirect_to farm_field_url(@farm, @field), notice: 'Field was successfully created.' }
-        format.json { render json: @field, status: :created, location: @field }
       else
         format.html { render action: "new" }
-        format.json { render json: @field.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -134,7 +137,6 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to farm_path(@farm) }
-      format.json { head :no_content }
     end
   end
 

@@ -3,7 +3,7 @@
     <ol>
       <div class='div_length'>
         <li><h2 class='sectionHeading'>Strip
-          <span class="strip_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'} %>
+          <span class="strip_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete strip' %>
         </h2>
         </li>
 
@@ -42,7 +42,7 @@
         <td>
           <%= link_to image_tag('/images/copy.png', :alt => 'Duplicate', :title => 'Duplicate crop'), duplicate_farm_field_strip_crop_rotation_path(crop_rotation.strip.field.farm.id, crop_rotation.strip.field.id, crop_rotation.strip.id, crop_rotation.id), :method => :post %>
           &nbsp;
-          <%= link_to image_tag('/images/delete.png', :alt => 'Delete'), farm_field_strip_crop_rotation_path(crop_rotation.strip.field.farm.id, crop_rotation.strip.field.id, crop_rotation.strip.id, crop_rotation.id), method: :delete, data: {confirm: 'Are you sure?'} %>
+          <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete field'), farm_field_strip_crop_rotation_path(crop_rotation.strip.field.farm.id, crop_rotation.strip.field.id, crop_rotation.strip.id, crop_rotation.id), method: :delete, data: {confirm: 'Are you sure?'} %>
         </td>
       </tr>
 

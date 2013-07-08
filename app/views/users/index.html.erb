@@ -51,7 +51,7 @@
           &nbsp;
           <%= link_to image_tag('/images/edit.png', :alt => 'Edit', :title => 'Edit'), edit_user_path(user) %>
           &nbsp;
-          <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete'), user, method: :delete, data: {confirm: 'Are you sure?'} unless user.deleted %></td>
+          <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete user'), user, method: :delete, data: {confirm: 'Are you sure?'} unless user.deleted %></td>
 
       </tr>
   <% end %>

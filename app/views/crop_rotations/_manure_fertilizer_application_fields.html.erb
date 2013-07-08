@@ -1,6 +1,6 @@
-<li><h1 class='sectionHeading'>Manure operation <span class="manure_operation_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
+<li><h1 class='sectionHeading'>Manure operation <span class="manure_operation_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete manure operation' %></h1></li>
 <li>
-  <%= f.label :application_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :application_date_year, 'Application date:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.select :application_date_year, options_for_select(listYears, :selected => f.object.application_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
   <%= f.select :application_date_month, options_for_select(listMonths, :selected => f.object.application_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
   <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>
@@ -54,7 +54,7 @@
   <%= f.check_box  :is_incorporated, :size => 5 %>
 </li>
 <li>
-  <%= f.label :incorporation_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :incorporation_date_year, 'Incorporation date:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.select :incorporation_date_year, options_for_select(listYears, :selected => f.object.incorporation_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
   <%= f.select :incorporation_date_month, options_for_select(listMonths, :selected => f.object.incorporation_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
   <%= f.select :incorporation_date_day, options_for_select(listDays, :selected => f.object.incorporation_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>

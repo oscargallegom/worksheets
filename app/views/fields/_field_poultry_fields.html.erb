@@ -1,9 +1,9 @@
 <li><h1 class='sectionHeading'>Poultry
-  #<span class="poultry_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'} %>
+  #<span class="poultry_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete poultry' %>
 </h1></li>
 <li>
-  <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
+  <%= f.label :poultry_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.collection_select :poultry_id, Poultry.all, :id, :name, {:prompt => 'Select poultry'}, {:required => true} %>
 </li>
 <li>
   <%= f.label :quantity, 'Quantity/flock:<em>*</em>'.html_safe, :class => 'wide' %>

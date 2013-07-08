@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130630185223) do
+ActiveRecord::Schema.define(:version => 20130707222935) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20130630185223) do
 
   create_table "field_poultry", :force => true do |t|
     t.integer  "field_id"
-    t.integer  "animal_id"
+    t.integer  "poultry_id"
     t.decimal  "quantity"
     t.integer  "flocks_per_year"
     t.decimal  "days_in_growing_cycle"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20130630185223) do
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
-    t.boolean  "is_forresflockt_buffer"
+    t.boolean  "is_forrest_buffer"
     t.decimal  "forrest_buffer_average_width"
     t.decimal  "forrest_buffer_length"
     t.boolean  "is_forrest_buffer_planned"
@@ -325,6 +325,10 @@ ActiveRecord::Schema.define(:version => 20130630185223) do
   end
 
   create_table "planting_methods", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "poultry", :force => true do |t|
     t.string "name"
   end
 

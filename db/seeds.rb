@@ -299,17 +299,24 @@ County.create!({:id => 196, :name => 'Preston', :state_id => 49,  :fips=>54077},
 County.create!({:id => 197, :name => 'Tucker', :state_id => 49,  :fips=>54093}, :without_protection => true)
 
 Animal.delete_all
-Animal.create!({:id => 1, :name => 'Beef cows'}, :without_protection => true)
-Animal.create!({:id => 2, :name => 'Dairy cows'}, :without_protection => true)
-Animal.create!({:id => 3, :name => 'Swine'}, :without_protection => true)
-Animal.create!({:id => 4, :name => 'Horses'}, :without_protection => true)
-Animal.create!({:id => 5, :name => 'Sheep'}, :without_protection => true)
-Animal.create!({:id => 6, :name => 'Goats'}, :without_protection => true)
-Animal.create!({:id => 7, :name => 'Veal'}, :without_protection => true)
-Animal.create!({:id => 8, :name => 'Bison'}, :without_protection => true)
-Animal.create!({:id => 9, :name => 'Llamas'}, :without_protection => true)
-Animal.create!({:id => 10, :name => 'Alpacas'}, :without_protection => true)
-Animal.create!({:id => 11, :name => 'Emus'}, :without_protection => true)
+Animal.create!({:id => 0, :name => 'Beef cows'}, :without_protection => true)
+Animal.create!({:id => 1, :name => 'Dairy cows'}, :without_protection => true)
+Animal.create!({:id => 2, :name => 'Swine'}, :without_protection => true)
+Animal.create!({:id => 3, :name => 'Horses'}, :without_protection => true)
+Animal.create!({:id => 4, :name => 'Sheep'}, :without_protection => true)
+Animal.create!({:id => 5, :name => 'Goats'}, :without_protection => true)
+Animal.create!({:id => 6, :name => 'Veal'}, :without_protection => true)
+Animal.create!({:id => 7, :name => 'Bison'}, :without_protection => true)
+Animal.create!({:id => 8, :name => 'Llamas'}, :without_protection => true)
+Animal.create!({:id => 9, :name => 'Alpacas'}, :without_protection => true)
+Animal.create!({:id => 10, :name => 'Emus'}, :without_protection => true)
+
+Poultry.delete_all
+Poultry.create!({:id => 1, :name => 'Broilers'}, :without_protection => true)
+Poultry.create!({:id => 2, :name => 'Layers'}, :without_protection => true)
+Poultry.create!({:id => 3, :name => 'Turkeys for slaughter'}, :without_protection => true)
+Poultry.create!({:id => 4, :name => 'Turkeys for breeding'}, :without_protection => true)
+Poultry.create!({:id => 5, :name => 'Ducks'}, :without_protection => true)
 
 FieldType.delete_all
 FieldType.create!({:id => 1, :name => 'Crop'}, :without_protection => true)
@@ -746,7 +753,7 @@ EfficiencyBmp.create!({:id => 406,  :bmp_type_id => '3', :field_type_id => '11',
 
 CropType.delete_all
 CropType.create!({:id => 1, :name => 'High Till'}, :without_protection => true)
-CropType.create!({:id => 2, :name => 'Low Till'}, :without_protection => true)
+CropType.create!({:id => 2, :name => 'Low Till / No till'}, :without_protection => true)
 
 Irrigation.delete_all
 Irrigation.create!({:id => 0, :name => 'None'}, :without_protection => true)
@@ -774,7 +781,7 @@ CropCategory.create!({:id => 2, :name => 'Corn, Grains, Cereal Grains'}, :withou
 CropCategory.create!({:id => 3, :name => 'Corn Silage'}, :without_protection => true)
 CropCategory.create!({:id => 4, :name => 'Pasture, Pasture Grasses'}, :without_protection => true)
 CropCategory.create!({:id => 5, :name => 'Hay, Hay Grasses'}, :without_protection => true)
-CropCategory.create!({:id => 6, :name => 'Cover Crops'}, :without_protection => true)
+CropCategory.create!({:id => 6, :name => 'Commodity Cover Crops'}, :without_protection => true)
 CropCategory.create!({:id => 7, :name => 'Sunflowers'}, :without_protection => true)
 CropCategory.create!({:id => 8, :name => 'Tobacco'}, :without_protection => true)
 CropCategory.create!({:id => 9, :name => 'Turf Grasses, Sod'}, :without_protection => true)
@@ -918,21 +925,21 @@ PTestMethod.create!({:id => 2,  :name => 'Method 2'}, :without_protection => tru
 PTestMethod.create!({:id => 3,  :name => 'Method 3'}, :without_protection => true)
 
 TillageOperationType.delete_all
-TillageOperationType.create!({:id => 1,  :name => 'Row Crop Cultivator'}, :without_protection => true)
-TillageOperationType.create!({:id => 2,  :name => 'Culti-Packer Pulverizer'}, :without_protection => true)
-TillageOperationType.create!({:id => 3,  :name => 'Harrow'}, :without_protection => true)
-TillageOperationType.create!({:id => 4,  :name => 'Field Cultivator'}, :without_protection => true)
-TillageOperationType.create!({:id => 5,  :name => 'Chisel Plow'}, :without_protection => true)
-TillageOperationType.create!({:id => 6,  :name => 'Subsoil Chisel Plow'}, :without_protection => true)
-TillageOperationType.create!({:id => 7,  :name => 'Moldboard Plow'}, :without_protection => true)
-TillageOperationType.create!({:id => 8,  :name => 'Deep Ripper-Subsoiler'}, :without_protection => true)
-TillageOperationType.create!({:id => 9,  :name => 'Offset Disk'}, :without_protection => true)
-TillageOperationType.create!({:id => 10,  :name => 'Tandem Disk Regular'}, :without_protection => true)
-TillageOperationType.create!({:id => 11,  :name => 'Vertical Tiller'}, :without_protection => true)
+TillageOperationType.create!({:id => 157,  :name => 'Row Crop Cultivator'}, :without_protection => true)
+TillageOperationType.create!({:id => 165,  :name => 'Culti-Packer Pulverizer'}, :without_protection => true)
+TillageOperationType.create!({:id => 190,  :name => 'Harrow'}, :without_protection => true)
+TillageOperationType.create!({:id => 160,  :name => 'Field Cultivator'}, :without_protection => true)
+TillageOperationType.create!({:id => 211,  :name => 'Chisel Plow'}, :without_protection => true)
+TillageOperationType.create!({:id => 223,  :name => 'Subsoil Chisel Plow'}, :without_protection => true)
+TillageOperationType.create!({:id => 215,  :name => 'Moldboard Plow'}, :without_protection => true)
+TillageOperationType.create!({:id => 230,  :name => 'Deep Ripper-Subsoiler'}, :without_protection => true)
+TillageOperationType.create!({:id => 356,  :name => 'Offset Disk'}, :without_protection => true)
+TillageOperationType.create!({:id => 250,  :name => 'Tandem Disk Regular'}, :without_protection => true)
+TillageOperationType.create!({:id => 196,  :name => 'Vertical Tiller'}, :without_protection => true)
 
 ManureConsistency.delete_all
-ManureConsistency.create!({:id => 1,  :name => 'Liquid'}, :without_protection => true)
-ManureConsistency.create!({:id => 2,  :name => 'Solid'}, :without_protection => true)
+ManureConsistency.create!({:id => 265,  :name => 'Liquid'}, :without_protection => true)
+ManureConsistency.create!({:id => 266,  :name => 'Solid'}, :without_protection => true)
 
 ManureTypeCategory.delete_all
 ManureTypeCategory.create!({:id => 1,  :name => 'Beef'}, :without_protection => true)
@@ -974,9 +981,9 @@ LiquidUnitType.create!({:id => 1,  :name => 'Gallons'}, :without_protection => t
 LiquidUnitType.create!({:id => 2,  :name => 'Tons'}, :without_protection => true)
 
 EndOfSeasonType.delete_all
-EndOfSeasonType.create!({:id => 1,  :name => 'Harvest Only'}, :without_protection => true)
-EndOfSeasonType.create!({:id => 2,  :name => 'Harvest and Terminate Crop'}, :without_protection => true)
-EndOfSeasonType.create!({:id => 3,  :name => 'Terminate Crop (No Harvest)'}, :without_protection => true)
+EndOfSeasonType.create!({:id => 626,  :name => 'Harvest Only'}, :without_protection => true)
+EndOfSeasonType.create!({:id => 626451,  :name => 'Harvest and Terminate Crop'}, :without_protection => true)
+EndOfSeasonType.create!({:id => 451,  :name => 'Terminate Crop (No Harvest)'}, :without_protection => true)
 
 VegetationType.delete_all
 VegetationType.create!({:id => 1,  :name => 'Forrest'}, :without_protection => true)

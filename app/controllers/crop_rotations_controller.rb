@@ -39,6 +39,7 @@ class CropRotationsController < ApplicationController
   # POST /farms/1/fields/1/strips/1/crop_rotations/1
   def create
     respond_to do |format|
+      # TODO: handle second button
       if @crop_rotation.save
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully created.' }
       else
@@ -49,6 +50,7 @@ class CropRotationsController < ApplicationController
 
   # PUT /farms/1/fields/1/strips/1/crop_rotations/1
   def update
+    # TODO: handle second button
     respond_to do |format|
       if @crop_rotation.update_attributes(params[:crop_rotation])
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully updated.' }

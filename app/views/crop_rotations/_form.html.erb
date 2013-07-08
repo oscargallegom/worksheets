@@ -29,6 +29,10 @@
           </ul>
         </div>
     <% end %>
+
+    <input type='hidden' id='field_type_id' value='<%= @field.field_type_id%>'>
+
+
     <div class="sectionRest clearfix">
 
 
@@ -39,7 +43,7 @@
             <li>Enter the following information for the entire life cycle of this crop or pasture, as applicable. Existing pastures should be planted during the normal planting season in Year 1, and any grazing operations should also begin in Year 1, irrespective of when the pasture is planted. Note that some BMPs such as enhanced nutrient management, dairy feed management, conservation tillage, and cover crops will be credited automatically if the information entered on this page reflects any of these practices.</li>
             <li>
               <%= f.label :crop_rotation, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.new_record? || @crop_rotation.crop.nil?), :prompt => 'Select crop category'} , :required => true  %>
+              <%= f.collection_select :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.crop.nil?), :prompt => 'Select crop category'} , :required => true  %>
             </li>
             <li>
               <%= f.label :name, 'Crop:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -58,7 +62,7 @@
 
                   <%= f.select :plant_date_year, options_for_select(listYears, :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
                   <%= f.select :plant_date_month, options_for_select(listMonths, :selected => @crop_rotation.plant_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-                  <%= f.select :plant_date_day, options_for_select(listDays, :selected => @crop_rotation.plant_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:40px'}  %>
+                  <%= f.select :plant_date_day, options_for_select(listDays, :selected => @crop_rotation.plant_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
                 </li>
                 <li>
                   <%= f.label :planting_method_id, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -118,7 +122,7 @@
             <li><%= f.link_to_add "Add a Tillage Operation", :tillage_operations, :class => 'button', :id => 'addTillageOperationBtn', :data => {:target => "#div_tillage_operation"} %></li>
 
 
-            <li><h2 class='sectionHeading'>Harvest / End of Season</h2></li>
+            <li><h2 class='sectionHeading'>Harvest / End of Season Operations</h2></li>
             <li>Enter the end-of-season date for this crop. If harvest operations are performed on this crop, this date should match the final harvest date. The kill date should generally occur on or after the final harvest date and before the plant date of any subsequent crop in this rotation (though in some instances aerial seeding might be used to plant a subsequent crop before the final harvest and kill dates of an existing crop in which case the harvest and kill dates of the existing crop would come after the plant date of the subsequent crop). A kill date is not required for perennial plants.</li>
             <div id='div_end_of_season'>
               <%= f.fields_for :end_of_seasons do |end_of_seasons_form| %>
@@ -157,6 +161,7 @@
     </div>
 
     <div class="actions">
+      <%= f.submit 'Save & Add New Crop', :class => 'button' %>
       <%= f.submit 'Save & Continue', :class => 'button' %>
     </div>
 

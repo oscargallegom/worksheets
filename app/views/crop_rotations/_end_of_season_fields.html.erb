@@ -1,4 +1,4 @@
-<li><h1 class='sectionHeading'>End Of Season <span class="end_of_season_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'} %></h1></li>
+<li><h1 class='sectionHeading'>End Of Season <span class="end_of_season_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete end of season' %></h1></li>
 <li>
   <%= f.label :end_of_season_type_id, 'End of season operation type:<em>*</em>'.html_safe, :class => 'wide' %>
 
@@ -12,5 +12,5 @@
   <%= f.label :year, 'Date:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.select :year, options_for_select(listYears, :selected => f.object.year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
   <%= f.select :month, options_for_select(listMonths, :selected => f.object.month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :day, options_for_select(listDays, :selected => f.object.day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>
+  <%= f.select :day, options_for_select(listDays, :selected => f.object.day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
 </li>

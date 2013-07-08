@@ -16,20 +16,24 @@ updateIndexes = ->
 
   if $(".fields:visible").length == 1   # hide the stip number and length  option
     $(".fields:visible").find(".div_length").hide()
+    $(".fields:visible").find(".textboxMedium").each ->
+      $(this).prop('required', false)
   else   # show length option
     $(".fields:visible").find(".div_length").each ->
       $(this).show()
+    $(".fields:visible").find(".textboxMedium").each ->
+      $(this).prop('required', true)
 
-# fertigation is only shown for option 1 and 2:
+# fertigation is only shown for option 500 and 530 (center pivot or drip):
 displayFertigation = ->
-  if $("#field_irrigation_id option:selected").val() is '0' or $("#field_irrigation_id option:selected").val() is '3'
+  if $("#field_irrigation_id option:selected").val() isnt '500' and $("#field_irrigation_id option:selected").val() isnt '530'
     $("#fertigation_n").hide()
   else
     $("#fertigation_n").show()
 
 # fertigation is only shown for any option selected
 displayEfficiency = ->
-  if $("#field_irrigation_id option:selected").val() is '0'
+  if ($("#field_irrigation_id option:selected").val() is '' or $("#field_irrigation_id option:selected").val() is '0')
     $("#efficiency").hide()
     $("#field_efficiency").prop('required', false)
   else
@@ -75,8 +79,30 @@ acresRequired = ->
   else
     $("#field_acres").prop('required', true)
 
+isPastureAdjacentToStream = ->
+  if ($("#field_is_pasture_adjacent_to_stream_true").is(':checked'))
+    $("#div_is_pasture_adjacent_to_stream").show()
+  else
+    $("#div_is_pasture_adjacent_to_stream").hide()
+  if $("#div_is_pasture_adjacent_to_stream").is(":visible")
+    $("#field_fence_length").prop('required', true)
+    $("#field_is_streambank_fencing_in_place_true").prop('required', true)
+    $("#field_is_streambank_fencing_in_place_false").prop('required', true)
+    if $("#div_is_fencing_in_place").is(":visible")
+      $("#field_vegetation_type_fence_stream_id").prop('required', true)
+      $("#field_distance_fence_stream").prop('required', true)
+  else
+    $("#field_fence_length").prop('required', false)
+    $("#field_is_streambank_fencing_in_place_true").prop('required', false)
+    $("#field_is_streambank_fencing_in_place_false").prop('required', false)
+    $("#field_vegetation_type_fence_stream_id").prop('required', false)
+    $("#field_distance_fence_stream").prop('required', false)
+
 isFencingInPlace = ->
-  $("#div_is_fencing_in_place").toggle()
+  if ($("#field_is_streambank_fencing_in_place_true").is(':checked'))
+    $("#div_is_fencing_in_place").show()
+  else
+    $("#div_is_fencing_in_place").hide()
   if $("#div_is_fencing_in_place").is(":visible")
     $("#field_vegetation_type_fence_stream_id").prop('required', true)
     $("#field_distance_fence_stream").prop('required', true)
@@ -140,6 +166,11 @@ $(document).ready ->
   $("#field_acres_use_map_true").change ->
     acresRequired()
 
+  $("#field_is_pasture_adjacent_to_stream_true").change ->
+    isPastureAdjacentToStream()
+  $("#field_is_pasture_adjacent_to_stream_false").change ->
+    isPastureAdjacentToStream()
+
   $("#field_is_streambank_fencing_in_place_true").change ->
     isFencingInPlace()
   $("#field_is_streambank_fencing_in_place_false").change ->
@@ -158,7 +189,7 @@ $(document).ready ->
     isStreambankRestorationClicked()
 
   # if data is changed, update the silt percent
-  $("input").change ->
+  $("input").keyup ->
     updateSiltPercents()
     updateForrestBufferArea()
     updateGrassBufferArea()

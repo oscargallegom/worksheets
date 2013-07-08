@@ -5,6 +5,7 @@
 # URL to the mapping application
 # URL_MAP = 'http://ims.missouri.edu/marylandNN/MultiStates.aspx'
 URL_MAP = 'http://ims.missouri.edu/marylandNN/Default2.aspx'
+URL_NTT = 'http://3444nn.tarleton.edu/nnmultiplestates/NNRestService.ashx'
 
 case Rails.env
   when "development"

@@ -53,6 +53,10 @@ gem 'savon', '~> 2.2.0'
 gem 'naturalsorter', '2.0.5'   # natural sort
 gem 'amoeba', "~> 2.0.0"
 
+# rest API for NTT call
+gem "nokogiri"
+gem "rest-client", "~> 1.6.7"
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

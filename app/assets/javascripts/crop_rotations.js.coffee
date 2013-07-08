@@ -15,6 +15,14 @@ updateIndexes = ->
   $(".fields:visible").find(".tillage_operation_index").each (index) ->
     $(this).text(index+1)
 
+# if the field type is permanent pasture or hay then the crop category is determined
+updateCropCategory = ->
+  if ($("#field_type_id").val() is '2')
+    $("#crop_rotation_crop_category_id").val('4')
+    $("#crop_rotation_crop_category_id").attr('disabled', true)
+  else if($("#field_type_id").val() is '3')
+    $("#crop_rotation_crop_category_id").val('5')
+    $("#crop_rotation_crop_category_id").attr('disabled', true)
 
 # ajax call to retrieve list of crops given the crop category
 updateCrops = ->
@@ -34,33 +42,33 @@ updateCrops = ->
 updatePrecisionFeeding = (selectElement) ->
   if selectElement.attr('id').indexOf("animal_id") > -1
     li_precision_feeding = selectElement.parent().parent().parent().find('.li_precision_feeding')
-    componentNumber = getComponentNumber(selectElement.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
+    #componentNumber = getComponentNumber(selectElement.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
     if selectElement.val() is '2'
       li_precision_feeding.show()
-      updateAnimalUnits($("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding"))
+      #updateAnimalUnits($("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding"))
     else
       li_precision_feeding.hide()
-      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
-      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
+      #$("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
+      #$("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
       # not required
-      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', false)
-      $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', false)
+      #$("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', false)
+      #$("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', false)
 
 # update animal units, hours grazed
-updateAnimalUnits = (caller) ->
-  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
-  if caller.is(":checked")
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').show()
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').show()
-    # make them required
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', true)
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', true)
-  else
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
-    # not required
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', false)
-    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', false)
+#updateAnimalUnits = (caller) ->
+#  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
+#  if caller.is(":checked")
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').show()
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').show()
+#    # make them required
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', true)
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', true)
+#  else
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
+#    # not required
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').prop('required', false)
+#    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').prop('required', false)
 
 
 # checkboxes based on dairy, poultry or swine
@@ -181,7 +189,7 @@ selectListener = (caller) ->
 checkboxListener = (caller) ->
   updateIncorporatedForCommercial(caller) if (caller.attr('id').indexOf("is_incorporated") > -1) and (caller.attr('id').indexOf("crop_rotation_commercial_fertilizer_applications_attributes") > -1)
   updateIncorporatedForManure(caller) if (caller.attr('id').indexOf("is_incorporated") > -1) and (caller.attr('id').indexOf("crop_rotation_manure_fertilizer_applications_attributes") > -1)
-  updateAnimalUnits(caller) if (caller.attr('id').indexOf("precision_feeding") > -1) and (caller.attr('id').indexOf("crop_rotation_grazing_livestocks_attributes") > -1)
+  #updateAnimalUnits(caller) if (caller.attr('id').indexOf("precision_feeding") > -1) and (caller.attr('id').indexOf("crop_rotation_grazing_livestocks_attributes") > -1)
 
 # given the whole HTML id, return the extracted number
 getComponentNumber = (componentId, prefix) ->
@@ -205,6 +213,8 @@ hideCoverCropSection = ->
 $(document).ready ->
 
   updateIndexes()
+
+  updateCropCategory()
 
   if typeof $("#crop_rotation_crop_category_id").val() isnt 'undefined' and $("#crop_rotation_crop_category_id").val().length > 0
     updateCrops()

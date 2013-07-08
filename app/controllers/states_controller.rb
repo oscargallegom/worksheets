@@ -1,4 +1,7 @@
 class StatesController < ApplicationController
+
+=begin
+
   load_and_authorize_resource
   #before_filter :authenticate_user!
   # GET /states
@@ -82,4 +85,7 @@ class StatesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+=end
+
 end

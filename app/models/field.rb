@@ -60,16 +60,19 @@ class Field < ActiveRecord::Base
   validates_inclusion_of :is_acres_from_map, :in => [true, false]
   validates_numericality_of :tile_drainage_depth, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(2) && (field_type_id==1 || field_type_id==3)'
   validates_inclusion_of :efficiency, :in => 0..100, :message => "must be between 0 and 100", :if => 'step?(2) && (field_type_id==1 || field_type_id==3) && irrigation_id!=0'
-  validates_numericality_of :fertigation_n, :greater_than_or_equal_to => 0, :if => 'step?(2) && (field_type_id==1 || field_type_id==3)'
+  validates_numericality_of :fertigation_n, :greater_than_or_equal_to => 0, :if => 'step?(2) && (field_type_id==1 || field_type_id==3) && (irrigation_id == 500 or irrigation_id == 530)'
   # also for non-managed land
   validates_numericality_of :acres_from_user, :greater_than_or_equal_to => 0, :if => '!is_acres_from_map? && step?(2) && (field_type_id==1 || field_type_id==3 || field_type_id==5)', :message => '^Acres is not a valid number.'
 
   # step 2 and animal confinement
-  validates_presence_of :livestock_input_method_id, :if => 'step?(2)' #' && field_type_id==4'
+  validates_presence_of :livestock_input_method_id, :if => 'step?(2) && field_type_id==4'
 
   # step 4 and permanent pasture
-  validates_presence_of :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :if => 'step?(4) && field_type_id==2'
-  validates_numericality_of :fence_length, :distance_fence_stream, :if => 'step?(4) && field_type_id==2'
+  validates_inclusion_of :is_pasture_adjacent_to_stream, :in => [true, false], :if => 'step?(4) && field_type_id==2'
+  validates_numericality_of :fence_length, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
+  validates_inclusion_of :is_streambank_fencing_in_place, :in => [true, false], :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
+  validates_presence_of :vegetation_type_fence_stream_id, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'
+  validates_numericality_of :distance_fence_stream, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'
 
   # step 4 and crop or continuous hay
   validates_numericality_of :forrest_buffer_average_width, :forrest_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forrest_buffer?'

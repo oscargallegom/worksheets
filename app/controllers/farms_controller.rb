@@ -16,7 +16,6 @@ class FarmsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @farms }
     end
   end
 
@@ -31,7 +30,6 @@ class FarmsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @farm }
     end
   end
 
@@ -42,7 +40,6 @@ class FarmsController < ApplicationController
     add_breadcrumb 'New farm'
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @farm }
     end
   end
 
@@ -54,7 +51,6 @@ class FarmsController < ApplicationController
     @step = params[:step] || '1'
     add_breadcrumb 'Edit details' if @step == '1'
     add_breadcrumb 'Edit location' if @step == '2'
-
   end
 
   # POST /farms
@@ -67,10 +63,8 @@ class FarmsController < ApplicationController
     respond_to do |format|
       if @farm.save
         format.html { redirect_to edit_farm_path(@farm, :step => 2), notice: 'Farm was successfully created.' }
-        format.json { render json: @farm, status: :created, location: @farm }
       else
         format.html { render action: "new" }
-        format.json { render json: @farm.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -85,11 +79,8 @@ class FarmsController < ApplicationController
     respond_to do |format|
       if @farm.update_attributes(params[:farm])
         format.html { redirect_to edit_farm_path(@farm, :step => @step+1), notice: 'Farm was successfully updated.' }
-        format.json { head :no_content }
       else
-
         format.html { render action: "edit" }
-        format.json { render json: @farm.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -101,7 +92,6 @@ class FarmsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to farms_url }
-      format.json { head :no_content }
     end
   end
 
