@@ -18,11 +18,14 @@ updateIndexes = ->
 # if the field type is permanent pasture or hay then the crop category is determined
 updateCropCategory = ->
   if ($("#field_type_id").val() is '2')
-    $("#crop_rotation_crop_category_id").val('4')
-    $("#crop_rotation_crop_category_id").attr('disabled', true)
+    $('#crop_rotation_crop_category_id option').each () ->
+      if $(this).val() isnt '4'
+        $(this).remove()
   else if($("#field_type_id").val() is '3')
-    $("#crop_rotation_crop_category_id").val('5')
-    $("#crop_rotation_crop_category_id").attr('disabled', true)
+    $('#crop_rotation_crop_category_id option').each () ->
+      if $(this).val() isnt '5'
+        $(this).remove()
+    #$("#crop_rotation_crop_category_id").attr('disabled', true)
 
 # ajax call to retrieve list of crops given the crop category
 updateCrops = ->
@@ -39,15 +42,18 @@ updateCrops = ->
     $("#crop_rotation_crop_id").removeAttr("disabled")
 
 # the precision feeding checkbox is only available for dairy cows
-updatePrecisionFeeding = (selectElement) ->
-  if selectElement.attr('id').indexOf("animal_id") > -1
-    li_precision_feeding = selectElement.parent().parent().parent().find('.li_precision_feeding')
+updatePrecisionFeeding = (caller) ->
+  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
+    #li_precision_feeding = selectElement.closest('.li_precision_feeding')
     #componentNumber = getComponentNumber(selectElement.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
-    if selectElement.val() is '2'
-      li_precision_feeding.show()
+  if caller.val() is '1'
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding").closest('li').show()
+      #li_precision_feeding.show()
       #updateAnimalUnits($("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding"))
-    else
-      li_precision_feeding.hide()
+  else
+    $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding").closest('li').hide()
+
+      #li_precision_feeding.hide()
       #$("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_animal_units").closest('li').hide()
       #$("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_hours_grazed").closest('li').hide()
       # not required

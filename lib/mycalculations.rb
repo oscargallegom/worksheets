@@ -57,7 +57,7 @@ module Mycalculations
     # for lookup use LandRiverSegment, Landuse
     # if fence use dropdown to find out if forrest or grass
 
-    converted_acres =  fencing_acres + grass_buffer_acres + forrest_buffer_acres + field.wetland_area
+    converted_acres = fencing_acres + grass_buffer_acres + forrest_buffer_acres + field.wetland_area
     trp_acres = degraded_pasture_acres
     non_converted_acres = field.acres - converted_acres - trp_acres
 

@@ -23,11 +23,8 @@ class FieldsController < ApplicationController
     # natural sort fields
     @fields = Naturalsorter::Sorter.sort_by_method(@fields, :name, true)
 
-    #test()
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @fields }
     end
   end
 
@@ -69,6 +66,8 @@ class FieldsController < ApplicationController
     # @farm= Project.find(params[:farm_id])
     # @field = @farm.fields.find(params[:id])
     @step = params[:step] || '1'
+
+    @xml = test(@field)    # TODO: remove/change
 
   end
 

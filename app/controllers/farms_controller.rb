@@ -157,6 +157,7 @@ class FarmsController < ApplicationController
         arrFieldcompname = params["field#{i}compname"].split("|")
         arrFieldmuname  = params["field#{i}muname"].split("|")
         arrFieldhydgrp = params["field#{i}hydgrp"].split("|")
+        arrFieldmusym = params["field#{i}musym"].split("|")
 
         @listSoils = Array.new
 
@@ -167,7 +168,8 @@ class FarmsController < ApplicationController
               :mukey =>  arrFieldmukey[index],
               :compname => arrFieldcompname[index],
               :muname => arrFieldmuname[index],
-              :hydgrp => arrFieldhydgrp[index]
+              :hydgrp => arrFieldhydgrp[index],
+              :musym => arrFieldmusym[index]
           }
             end
           end
@@ -191,7 +193,7 @@ class FarmsController < ApplicationController
           @field.soils[i].component_name = @listSoils[i][:compname]
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
           @field.soils[i].hydrologic_group = @listSoils[i][:hydgrp]
-
+          @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
 
           # getSoilData(1726303, 'Meadowville', 'B') #
           data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].component_name, @field.soils[i].hydrologic_group)

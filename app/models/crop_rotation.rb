@@ -29,7 +29,8 @@ class CropRotation < ActiveRecord::Base
   attr_accessible :end_of_seasons_attributes
   accepts_nested_attributes_for :end_of_seasons, :allow_destroy => true
 
-  validates_presence_of :crop_category_id, :crop_id
+  validates_presence_of :crop_category_id
+  validates_presence_of :crop_id
 
   # if not permanent pasture
   validates_presence_of :plant_date_year, :plant_date_month, :plant_date_day, :planting_method_id, :unless => :isPermanentPasture?
