@@ -10,9 +10,9 @@ module Ntt
     attempts=0
 
     doc = nil
-    begin
-      #xml = 'file'
-      #xml = buildXml(field)
+
+    #xml = 'file'
+    xml = buildXml(field)
 
 =begin
 
@@ -29,7 +29,6 @@ module Ntt
       @hash = Hash.from_xml((doc.xpath('//Results')).to_s)['Results']
       pp @hash['ID']
 =end
-    end
 
 
   end
@@ -40,6 +39,8 @@ module Ntt
     fips = field.watershed_segment.fips
     customer = current_user.id
 
+    mid = 0 # management info id
+
     xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Navigation><StartInfo><SIID>start</SIID><State>#{state}</State><County>#{fips}</County><Customer>#{customer}</Customer></StartInfo>"
 
     # sum length of all strips
@@ -48,8 +49,8 @@ module Ntt
       fieldsWidth = fieldsWidth + strip.length unless strip.length == nil
     end
 
-    field.strips.each do |strip|
-      fiid = '001'
+    field.strips.each_with_index do |strip, strip_index|
+      strip_id = (strip_index+1).to_s
 
       fieldArea = field.is_acres_from_map ? field.acres_from_map : field.acres_from_user
 
@@ -65,7 +66,7 @@ module Ntt
       fertigation_n = (field.irrigation_id==0 || field.irrigation_id==502) ? '' : field.fertigation_n
       width = field.strips.length==1 ? '' : strip.length * 0.3048
 
-      xml = xml + "<FieldInfo><FIID>#{fiid}</FIID><Area>#{area}</Area><TileDrainD>#{tileDrainDepth}</TileDrainD><Irrigation>#{irrigation}</Irrigation><IrrEff>#{efficiency}</IrrEff><NFertInIrrg>#{fertigation_n}</NFertInIrrg><Width>#{width}</Width></FieldInfo>"
+      xml = xml + "<FieldInfo><FIID>#{strip_id}</FIID><Area>#{area}</Area><TileDrainD>#{tileDrainDepth}</TileDrainD><Irrigation>#{irrigation}</Irrigation><IrrEff>#{efficiency}</IrrEff><NFertInIrrg>#{fertigation_n}</NFertInIrrg><Width>#{width}</Width></FieldInfo>"
 
       # SoilInfo section
       field.soils.each do |soil|
@@ -88,32 +89,99 @@ module Ntt
 
       end
 
-      # grazingInfo section
+      strip.crop_rotations.each_with_index do |crop_rotation, crop_rotation_index|
+        crop_id = crop_rotation.crop_id
 
-      field_id = '001'
-      mid = 'TBD' # TODO: Mindy to find out what it is
+        # grazingInfo section only available for permanent pasture
+        if (field.field_type_id == 2)
+          grazing_operation = '426'
 
 
-      stip.crop_rotations do |crop_rotation|
-        crop_rotation.grazing_livestocks do |grazing_livestock|
+          crop_rotation.grazing_livestocks.each_with_index do |grazing_livestock, grazing_livestock_index|
 
-          animal_units = grazing_livestock.animal_units
-          animal_id = grazing_livestock.animal_id
-          hours_grazed = grazing_livestock.hours_grazed
-          days_grazed = grazing_livestock.days_grazed
-          precision_feeding = grazing_livestock.precision_feeding ? 1 : 0
+            mid = mid + 1
 
-          xml = xml + "<grazingInfo><Mid>#{mid}</Mid><fieldId>#{field_id}</fieldId><OpVal2>#{animal_units}</OpVal2><OpVal3>#{animal_id}</OpVal3><OpVal5>#{hours_grazed}</OpVal5><OpVal7>#{days_grazed}</OpVal7><OpVal8>#{precision_feeding}</OpVal8></grazingInfo>"
+            animal_units = grazing_livestock.animal_units
+
+            start_date_year = grazing_livestock.start_date_year
+            start_date_month = grazing_livestock.start_date_month
+            start_date_day = grazing_livestock.start_date_day
+
+
+            xml = xml + "<ManagementInfo><Operation>#{grazing_operation}</Operation><OpVal2>#{animal_units}</OpVal2><Year>#{start_date_year}</Year><Month>#{start_date_month}</Month><Day>#{start_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+
+            animal_id = grazing_livestock.animal_id
+            hours_grazed = grazing_livestock.hours_grazed
+            days_grazed = grazing_livestock.days_grazed
+            precision_feeding = grazing_livestock.precision_feeding ? 1 : 0
+
+            xml = xml + " <grazingInfo><FieldId>#{strip_id}</FieldId><MID>#{grazing_mid}</MID><OpVal1>0</OpVal1><OpVal2>#{animal_units}</OpVal2><OpVal3>#{animal_id}</OpVal3><OpVal4>0</OpVal4><OpVal5>#{hours_grazed}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{days_grazed}</OpVal7><OpVal8>#{precision_feeding}</OpVal8></grazingInfo>"
+
+          end
+
 
         end
 
+        # Planting section applicable to pasture, hay and crop only
+        if (field.field_type_id <= 3)
+          mid = mid + 1
+
+          planting_operation = field.field_type_id != 2 ? crop_rotation.planting_method_id : 146 # TODO: Mindy to confirm 146 number for permanent pasture
+
+          plant_date_year = field.field_type_id != 2 ? crop_rotation.plant_date_year : 0
+          plant_date_month = field.field_type_id != 2 ? crop_rotation.plant_date_month : 0
+          plant_date_day = field.field_type_id != 2 ? crop_rotation.plant_date_day : 0
+
+          seeding_rate = field.field_type_id != 2 ? crop_rotation.seeding_rate : 0
+          cover_crop_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_id : 0
+          cover_crop_planting_method_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_planting_method_id : 0
+          is_permanent_pasture = field.field_type_id == 2 ? 1 : 0
+
+          xml = xml + " <ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_id}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+          # Commercial fertilizer
+          crop_rotation.commercial_fertilizer_applications.each do |commercial_fertilizer_application|
+
+            mid = mid + 1
+            commercial_fertilizer_operation = 580
+
+            application_date_year = commercial_fertilizer_application.application_date_year
+            application_date_month = commercial_fertilizer_application.application_date_month
+            application_date_day = commercial_fertilizer_application.application_date_day
+
+            total_n_applied = commercial_fertilizer_application.total_n_applied * 1.12
+            total_p_applied = commercial_fertilizer_application.total_p_applied *1.12
+
+            incorporation_depth = commercial_fertilizer_application.is_incorporated ? (commercial_fertilizer_application.incorporation_depth * 25.4) : 0
+
+            # for nitrogen
+            xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>1</OpVal1><OpVal2>#{total_n_applied}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+            # for phosphorus
+            xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+          end
+
+          # Other tillage operation
+
+          crop_rotation.tillage_operations.each do |tillage_operation|
+            mid = mid + 1
+            operation_code = tillage_operation.tillage_operation_type_id
+
+            start_date_year = tillage_operation.start_date_year
+            start_date_month = tillage_operation.start_date_month
+            start_date_day = tillage_operation.start_date_day
+
+            xml = xml + " <ManagementInfo><Operation>#{operation_code}</Operation><Year>#{start_date_year}</Year><Month>#{start_date_month}</Month><Day>#{start_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+          end
+
+        end
       end
-
-      # ManagementInfo section
-
-
-
     end
+    xml << "</Navigation>"
+
   end
 
 

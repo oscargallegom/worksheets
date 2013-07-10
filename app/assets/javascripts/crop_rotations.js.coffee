@@ -20,11 +20,11 @@ updateCropCategory = ->
   if ($("#field_type_id").val() is '2')
     $('#crop_rotation_crop_category_id option').each () ->
       if $(this).val() isnt '4'
-        $(this).remove()
+        $(this).remove() # remove all other options
   else if($("#field_type_id").val() is '3')
     $('#crop_rotation_crop_category_id option').each () ->
       if $(this).val() isnt '5'
-        $(this).remove()
+        $(this).remove()  # remove all other options
     #$("#crop_rotation_crop_category_id").attr('disabled', true)
 
 # ajax call to retrieve list of crops given the crop category
@@ -164,8 +164,13 @@ updateUnitsLabels = (caller) ->
 
 
 updateEndOfSeason = (caller) ->
+  if caller.val() is '626' or caller.val() is ''
+    $("#addEndOFSeasonBtn").show()      # could add more
+    return
 
-  return if caller.val() is '1' or caller.val() is ''
+
+  # kill so no button to add more
+  $("#addEndOFSeasonBtn").hide()
 
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_end_of_seasons_attributes_')
 
@@ -274,8 +279,9 @@ $(document).on "nested:fieldAdded", (event) ->
     #alert(getComponentNumber($(this).attr('id'),'crop_rotation_manure_fertilizer_applications_attributes_' ))
 
   # update the page
-  $("select").each (index) ->
-    selectListener($(this))
   $(":checkbox").each (index) ->
     checkboxListener($(this))
+  $("select").each (index) ->
+    selectListener($(this))
+
 
