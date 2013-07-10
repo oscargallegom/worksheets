@@ -151,6 +151,7 @@ isStreambankRestorationClicked = ->
 
 
 $(document).ready ->
+  # TODO: remove
   $("#nttxml").val(vkbeautify.xml($("#nttxml").val()))
 
   updateIndexes()

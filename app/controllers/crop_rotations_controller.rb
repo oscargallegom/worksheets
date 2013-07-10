@@ -1,4 +1,7 @@
 class CropRotationsController < ApplicationController
+
+  include Ntt
+
   load_and_authorize_resource :farm
   load_and_authorize_resource :field, :through => :farm
   load_and_authorize_resource :strip, :through => :field
@@ -22,6 +25,8 @@ class CropRotationsController < ApplicationController
 
   # GET /farms/1/fields/1/strips/1/crop_rotations/1
   def show
+
+    @xml = test(@field)    # TODO: remove/change
 
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
