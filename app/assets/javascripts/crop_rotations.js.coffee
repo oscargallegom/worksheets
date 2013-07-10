@@ -164,10 +164,9 @@ updateUnitsLabels = (caller) ->
 
 
 updateEndOfSeason = (caller) ->
-  if caller.val() is '626' or caller.val() is ''
+  if caller.val() is '626' or caller.val() is ''      # 'harvest only'
     $("#addEndOFSeasonBtn").show()      # could add more
     return
-
 
   # kill so no button to add more
   $("#addEndOFSeasonBtn").hide()

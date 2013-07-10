@@ -116,7 +116,7 @@ module Ntt
             days_grazed = grazing_livestock.days_grazed
             precision_feeding = grazing_livestock.precision_feeding ? 1 : 0
 
-            xml = xml + " <grazingInfo><FieldId>#{strip_id}</FieldId><MID>#{grazing_mid}</MID><OpVal1>0</OpVal1><OpVal2>#{animal_units}</OpVal2><OpVal3>#{animal_id}</OpVal3><OpVal4>0</OpVal4><OpVal5>#{hours_grazed}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{days_grazed}</OpVal7><OpVal8>#{precision_feeding}</OpVal8></grazingInfo>"
+            xml = xml + " <grazingInfo><FieldId>#{strip_id}</FieldId><MID>#{mid}</MID><OpVal1>0</OpVal1><OpVal2>#{animal_units}</OpVal2><OpVal3>#{animal_id}</OpVal3><OpVal4>0</OpVal4><OpVal5>#{hours_grazed}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{days_grazed}</OpVal7><OpVal8>#{precision_feeding}</OpVal8></grazingInfo>"
 
           end
 
