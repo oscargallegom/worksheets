@@ -151,7 +151,7 @@ isStreambankRestorationClicked = ->
 
 
 $(document).ready ->
-  $("#nttxml").val(formatXml($("#nttxml").val()))
+  $("#nttxml").val(vkbeautify.xml($("#nttxml").val()))
 
   updateIndexes()
   acresRequired()
