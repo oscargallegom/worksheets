@@ -223,7 +223,10 @@ hideCoverCropSection = ->
 $(document).ready ->
 
   # TODO: remove
-  $("#nttxml").val(vkbeautify.xml($("#nttxml").val()))
+  $("#nttxml").text(vkbeautify.xml($("#nttxml").text().trim()))
+  prettyPrint()
+
+
 
   updateIndexes()
 
