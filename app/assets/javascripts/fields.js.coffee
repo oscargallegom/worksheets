@@ -151,6 +151,7 @@ isStreambankRestorationClicked = ->
 
 
 $(document).ready ->
+  $("#nttxml").val(formatXml($("#nttxml").val()))
 
   updateIndexes()
   acresRequired()
@@ -226,3 +227,31 @@ $(document).on "nested:fieldAdded", (event) ->
   updateIndexes()
   $("a").click ->
       addCrop($(this))
+
+
+formatXml = (xml) ->
+  formatted = ""
+  reg = /(>)(<)(\/*)/g
+  xml = xml.replace(reg, "$1\r\n$2$3")
+  pad = 0
+  jQuery.each xml.split("\r\n"), (index, node) ->
+    indent = 0
+    if node.match(/.+<\/\w[^>]*>$/)
+      indent = 0
+    else if node.match(/^<\/\w/)
+      pad -= 1  unless pad is 0
+    else if node.match(/^<\w[^>]*[^\/]>.*$/)
+      indent = 1
+    else
+      indent = 0
+    padding = ""
+    i = 0
+
+    while i < pad
+      padding += "  "
+      i++
+    formatted += padding + node + "\r\n"
+    pad += indent
+
+  formatted
+
