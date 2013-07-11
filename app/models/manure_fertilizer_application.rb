@@ -17,6 +17,6 @@ class ManureFertilizerApplication < ActiveRecord::Base
   validates_inclusion_of :moisture_content, :in => 0..100, :message => 'must be between 0 and 100'
 
   validates_presence_of :incorporation_date_year, :incorporation_date_month, :incorporation_date_day, :if => :is_incorporated?
-  validates_numericality_of :incorporation_depth, :greater_than_or_equal_to => 0 # , :if => :is_incorporated?
+  validates_numericality_of :incorporation_depth, :greater_than_or_equal_to => 0, :if => :is_incorporated?
 
 end
