@@ -26,7 +26,8 @@ class CropRotationsController < ApplicationController
   # GET /farms/1/fields/1/strips/1/crop_rotations/1
   def show
 
-    @xml = test(@field)    # TODO: remove/change
+    @xml = buildXml(@field)    # TODO: remove/change
+    #test(@field)    # TODO: remove/change
 
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)

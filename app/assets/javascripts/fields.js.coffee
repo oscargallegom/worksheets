@@ -151,9 +151,11 @@ isStreambankRestorationClicked = ->
 
 
 $(document).ready ->
+
   # TODO: remove
   $("#nttxml").text(vkbeautify.xml($("#nttxml").text().trim()))
-  prettyPrint()
+  if typeof(prettyPrint) is 'function'
+    prettyPrint()
 
   updateIndexes()
   acresRequired()
@@ -217,6 +219,7 @@ $(document).ready ->
 
   $("a").click ->
     addCrop($(this))
+
 
 $(document).on "nested:fieldRemoved", (event) ->
   updateIndexes()

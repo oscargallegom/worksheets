@@ -67,7 +67,7 @@ class FieldsController < ApplicationController
     # @field = @farm.fields.find(params[:id])
     @step = params[:step] || '1'
 
-    @xml = test(@field)    # TODO: remove/change
+    @xml = buildXml(@field)    # TODO: remove/change
 
   end
 

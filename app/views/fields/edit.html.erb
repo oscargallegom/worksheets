@@ -133,7 +133,8 @@
 
 <% end %>
 
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=false&skin=default"></script>
+<% if session[:debug] %>
 <pre class="prettyprint linenums lang-xml" id='nttxml'>                   <!--  style="overflow: scroll; height: 500px;" -->
   <%= @xml %>
 </pre>
+<% end %>

@@ -224,7 +224,8 @@ $(document).ready ->
 
   # TODO: remove
   $("#nttxml").text(vkbeautify.xml($("#nttxml").text().trim()))
-  prettyPrint()
+  if typeof(prettyPrint) is 'function'
+    prettyPrint()
 
 
 

@@ -20,7 +20,11 @@ class User < ActiveRecord::Base
 
 
   attr_accessible :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip
-  attr_accessible :role_ids, :approved, :deleted, :deleted_at, :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip, :as => :admin
+  attr_accessible :role_ids, :approved, :deleted_at, :username, :email, :password, :password_confirmation, :user_type_id, :remember_me, :first_name, :last_name, :phone, :street1, :street2, :city, :state_id, :zip, :org_name, :job_title, :org_street1, :org_street2, :org_city, :org_state_id, :org_zip # , :as => :admin
+
+  attr_accessible :deleted
+
+  # validates_inclusion_of :deleted, :in => [true, false]
 
   validates_presence_of :username, :email, :user_type_id, :first_name, :last_name, :phone
   validates_presence_of :roles, :on => :update, :message => '^Select at least one role.'

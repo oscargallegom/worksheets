@@ -15,11 +15,19 @@
 //= require_tree .
 //= require html5
 
-
-
 // added by Olivier
 // ####require jquery.ui.all
 //= require jquery_nested_form
+
+
+
+
+
+
+
+
+
+
 
 /**
  * vkBeautify - javascript plugin to pretty-print or minify text in XML, JSON, CSS and SQL formats.
@@ -378,5 +386,6 @@
     window.vkbeautify = new vkbeautify();
 
 })();
+
 
 
