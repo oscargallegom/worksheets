@@ -26,8 +26,24 @@ class CropRotationsController < ApplicationController
   # GET /farms/1/fields/1/strips/1/crop_rotations/1
   def show
 
-    @xml = buildXml(@field)    # TODO: remove/change
-    #test(@field)    # TODO: remove/change
+
+    ################  TEST
+    @input_xml = buildXml(@field)    # TODO: remove/change
+
+    success, content =  callNtt(@field)    # TODO: remove/change
+    if (success)
+      @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
+      @output_xml = content
+      flash[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes']     # TODO: check for error!
+    else
+      flash[:error] = 'Could not contact NTT: ' << content.to_s
+    end
+
+
+
+
+
+    ################  END TEST
 
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
@@ -59,7 +75,11 @@ class CropRotationsController < ApplicationController
     # TODO: handle second button
     respond_to do |format|
       if @crop_rotation.update_attributes(params[:crop_rotation])
+        if (params[:nextPage] == 'save_continue')
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully updated.' }
+        else
+          format.html { redirect_to new_farm_field_strip_crop_rotation_path(@farm, @field, @strip), notice: 'Crop was successfully updated.' }
+        end
       else
         format.html { render action: "edit" }
       end

@@ -6,41 +6,40 @@ module Ntt
 
   MAX_ATTEMPTS = 0
 
-  def test(field)
-
-
-
+  def callNtt(field)
 
     attempts=0
     doc = nil
 
     begin
-      #xml = 'file'
-      xml = buildXml(field)
 
-      params = {'input' => xml }
-      url = URI.parse(URL_NTT)
-      resp, data = Net::HTTP.post_form(url, params)
-      puts resp.inspect
-      puts data.inspect
+      xml = URI.escape(buildXml(field).gsub('<', '[').gsub('>', ']'))
+
+      #params = {'input' => xml }
+      #url = URI.parse(URL_NTT)
+      #resp, data = Net::HTTP.post_form(url, params)
+      #puts resp.inspect
+      #puts data.inspect
 
 
-      doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
+      doc = Nokogiri::XML(open(URL_NTT + '?input=' + 'file'))
 
 
       if (!doc.nil?)
         # Do something about the persistent error
         # so that you don't try to access a nil
         # doc later on.
-        @hash = Hash.from_xml((doc.xpath('//Results')).to_s)['Results']
-        pp @hash['ID']
+        #@hash = Hash.from_xml((doc.xpath('//Results')).to_s)['Results']
+        #pp @hash['ID']
 
+        return [true, doc]
 
       end
 
     rescue Exception => ex
       attempts = attempts + 1
       retry if (attempts < MAX_ATTEMPTS)
+      return [false, ex]
     end
   end
 

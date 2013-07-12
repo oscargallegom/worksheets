@@ -153,7 +153,8 @@ isStreambankRestorationClicked = ->
 $(document).ready ->
 
   # TODO: remove
-  $("#nttxml").text(vkbeautify.xml($("#nttxml").text().trim()))
+  $("#input_xml").text(vkbeautify.xml($("#input_xml").text().trim()))
+  $("#output_xml").text(vkbeautify.xml($("#output_xml").text().trim()))
   if typeof(prettyPrint) is 'function'
     prettyPrint()
 

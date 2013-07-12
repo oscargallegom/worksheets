@@ -3,11 +3,11 @@
   <a href="#" class='detailsLink<%= soil_index+1 %>'>(show details)</a> </b></li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
   <%= f.label :clay, 'Clay, Sand, Silt:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :percent_clay, :type => 'number', :class => 'textboxMedium', :required => true, :min => 0, :max => 100, :step => 'any' %>
+  <%= f.text_field :percent_clay, :type => 'number', :class => 'textboxSmall', :required => true, :min => 0, :max => 100, :step => 'any' %>
   % ,
-  <%= f.text_field :percent_sand, :type => 'number', :class => 'textboxMedium', :required => true, :min => 0, :max => 100, :step => 'any' %>
+  <%= f.text_field :percent_sand, :type => 'number', :class => 'textboxSmall', :required => true, :min => 0, :max => 100, :step => 'any' %>
   % ,
-  <%= f.text_field :percent_silt, :class => 'textboxMedium', :required => true, :readonly => true, :type => 'number', :min => 0, :max => 100, :step => 'any' %> %
+  <%= f.text_field :percent_silt, :class => 'textboxSmall', :required => true, :readonly => true, :type => 'number', :min => 0, :max => 100, :step => 'any' %> %
 </li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
   <%= f.label :bulk_density, 'Bulk density:<em>*</em>'.html_safe, :class => 'wide' %>

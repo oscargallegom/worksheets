@@ -10,15 +10,11 @@
     <li><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
     <li class="shadow"></li>
   </ul>
-
-  <br/>
-
 </div>
 
 
 <%= nested_form_for([@farm, @field, @strip, @crop_rotation], :html => {:class => 'nn-form'}) do |f| %>
     <% if @crop_rotation.errors.any? %>
-        <br/>
         <div id="error_explanation" class="alert">
           <b><%= pluralize(@crop_rotation.errors.count, "error") %> encountered:</b>
 
@@ -161,8 +157,8 @@
     </div>
 
     <div class="actions">
-      <%= f.submit 'Save & Add New Crop', :class => 'button' %>
-      <%= f.submit 'Save & Continue', :class => 'button' %>
+      <%= f.submit 'Save & Add New Crop', :class => 'button', :name => 'nextPage', :value => 'save_add_new_crop' %>
+      <%= f.submit 'Save & Continue', :class => 'button', :name => 'nextPage', :value => 'save_continue' %>
     </div>
 
 
