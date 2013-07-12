@@ -19,8 +19,6 @@
 
     </div>
 
-    <br/>
-
     <%= render 'fields/edit_steps/step_1' %>
 
 <% end %>
@@ -63,8 +61,6 @@
 
     </div>
 
-    <br/>
-
     <%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
     <%= render 'fields/edit_steps/step_2', :locals => {:field => @field} if @step=='2' %>
     <%= render 'fields/edit_steps/step_3' if @step=='3' %>
@@ -98,8 +94,6 @@
       </ul>
     </div>
 
-    <br/>
-
     <%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
     <%= render 'fields/edit_steps_animal_confinment/step_2', :locals => {:field => @field} if @step=='2' %>
     <%= render 'fields/edit_steps_animal_confinment/step_3' if @step=='3' %>
@@ -124,8 +118,6 @@
         <li class="shadow"></li>
       </ul>
     </div>
-
-    <br/>
 
     <%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
     <%= render 'fields/edit_steps_non_managed_land/step_2', :locals => {:field => @field} if @step=='2' %>

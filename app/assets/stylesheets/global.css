@@ -224,7 +224,7 @@ input.button {
     border: 1px solid #FBEED5;
     border-radius: 4px 4px 4px 4px;
     color: #C09853;
-    margin-bottom: 15px;
+    margin-bottom: 4px;
     margin-top: 10px;
     padding: 8px 35px 8px 14px;
     text-shadow: none !important;
@@ -570,6 +570,7 @@ ul#tabNav {
     position: relative;
     overflow: hidden;
     list-style: none;
+    margin-bottom: 10px;
 }
 ul#tabNav li {
     -webkit-border-radius: 3px;
