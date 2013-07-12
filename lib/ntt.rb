@@ -89,7 +89,9 @@ module Ntt
 
         xml = xml + "<FieldInfo><FIID>#{strip_id}</FIID><Area>#{area}</Area><TileDrainD>#{tileDrainDepth}</TileDrainD><Irrigation>#{irrigation}</Irrigation><IrrEff>#{efficiency}</IrrEff><NFertInIrrg>#{fertigation_n}</NFertInIrrg><Width>#{width}</Width></FieldInfo>"
 
+        ########################################################
         # SoilInfo section
+        ########################################################
         field.soils.each do |soil|
 
           soil_area = soil.percent * area
@@ -143,8 +145,9 @@ module Ntt
 
 
           end
-
+          ########################################################
           # Planting section applicable to pasture, hay and crop only
+          ########################################################
           if (field.field_type_id <= 3)
             mid = mid + 1
 
@@ -161,7 +164,9 @@ module Ntt
 
             xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_id}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
+            ########################################################
             # Commercial fertilizer
+            ########################################################
             crop_rotation.commercial_fertilizer_applications.each do |commercial_fertilizer_application|
 
               mid = mid + 1
@@ -184,7 +189,9 @@ module Ntt
 
             end
 
+            ########################################################
             # Other tillage operation
+            ########################################################
 
             crop_rotation.tillage_operations.each do |tillage_operation|
               mid = mid + 1
@@ -198,7 +205,9 @@ module Ntt
 
             end
 
+            ########################################################
             # end of season
+            ########################################################
             crop_rotation.end_of_seasons.each do |end_of_season|
 
               mid = mid + 1
@@ -215,7 +224,9 @@ module Ntt
 
             end
 
+            ########################################################
             # manure fertilizer application
+            ########################################################
             crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
 
               mid = mid + 1
@@ -242,7 +253,7 @@ module Ntt
 
 
               # need to get the last 2 digits of the ID since they are shared by several animals
-              manure_type_id = manure_fertilizer_application.manure_type_id.to_s[12]
+              manure_type_id = manure_fertilizer_application.manure_type_id.to_s[1..2]
 
 
               # only for swine and poultry
