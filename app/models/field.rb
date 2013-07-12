@@ -57,7 +57,8 @@ class Field < ActiveRecord::Base
 
   # step 2 and crop or permanent pasture or continuous hay
   # TODO: check field type id
-  validates_presence_of :crop_type_id, :irrigation_id, :p_test_method_id, :p_test_value, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
+  validates_presence_of :irrigation_id, :p_test_method_id, :p_test_value, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
+  validates_presence_of :crop_type_id, :if => 'step?(2) && field_type_id==1'
   validates_inclusion_of :is_acres_from_map, :in => [true, false], :if => 'step?(2) && field_type_id!=4', :message => '^Specify field area'
   validates_numericality_of :tile_drainage_depth, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
   validates_inclusion_of :efficiency, :in => 0..100, :message => "must be between 0 and 100", :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3) && irrigation_id!=nil && irrigation_id!=0'
