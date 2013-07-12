@@ -13,7 +13,11 @@ module Ntt
 
     begin
 
-      xml = URI.escape(buildXml(field).gsub('<', '[').gsub('>', ']'))
+      success, content = buildXml(field)
+
+      if (success)
+
+      xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
       #params = {'input' => xml }
       #url = URI.parse(URL_NTT)
@@ -35,6 +39,10 @@ module Ntt
         return [true, doc]
 
       end
+      else
+        return [false, content]
+      end
+
 
     rescue Exception => ex
       attempts = attempts + 1
@@ -263,8 +271,10 @@ module Ntt
     end
     xml << "</Navigation>"
 
+      return [true, xml]
+
     rescue Exception => ex
-      xml = 'Error generating xml: ' << ex.to_s
+      return [false, ex]
     end
 
     end

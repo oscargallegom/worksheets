@@ -2,6 +2,7 @@
     <% if @field.errors.any? %>
         <div id="error_explanation">
           <b><%= pluralize(@field.errors.count, "error") %> prohibited this field from being saved:</b>
+
           <ul>
             <% @field.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>

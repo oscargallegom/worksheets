@@ -29,16 +29,16 @@ class CropRotationsController < ApplicationController
 
     ################  TEST
     if session[:debug]
-    @input_xml = buildXml(@field)    # TODO: remove/change
-
-    success, content =  callNtt(@field)    # TODO: remove/change
-    if (success)
-      @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
-      @output_xml = content
-      flash[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes']     # TODO: check for error!
-    else
-      flash[:error] = 'Could not contact NTT: ' << content.to_s
-    end
+      success, content = buildXml(@field)    # TODO: remove/change
+      @input_xml = content    # TODO: remove/change
+      success, content =  callNtt(@field)    # TODO: remove/change
+      if (success)
+        @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
+        @output_xml = content
+        flash[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes']     # TODO: check for error!
+      else
+        flash[:error] = 'Could not contact NTT: ' << content.to_s
+      end
     end
 
 
