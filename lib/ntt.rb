@@ -48,8 +48,6 @@ module Ntt
 
     begin
 
-      xml = 0/0
-
     state = field.farm.state.abbreviation
     fips = field.watershed_segment.fips
     customer = current_user.id
