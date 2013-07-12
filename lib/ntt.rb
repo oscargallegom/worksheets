@@ -46,6 +46,10 @@ module Ntt
 
   def buildXml(field)
 
+    begin
+
+      xml = 0/0
+
     state = field.farm.state.abbreviation
     fips = field.watershed_segment.fips
     customer = current_user.id
@@ -162,7 +166,7 @@ module Ntt
             application_date_day = commercial_fertilizer_application.application_date_day
 
             total_n_applied = commercial_fertilizer_application.total_n_applied.to_f * 1.12
-            total_p_applied = commercial_fertilizer_application.total_p_applied.to_f *1.12
+            total_p_applied = commercial_fertilizer_application.total_p_applied.to_f * 1.12
 
             incorporation_depth = commercial_fertilizer_application.is_incorporated ? (commercial_fertilizer_application.incorporation_depth * 25.4) : 0
 
@@ -261,7 +265,12 @@ module Ntt
     end
     xml << "</Navigation>"
 
-  end
+    rescue Exception => ex
+      xml = 'Error generating xml: ' << ex.to_s
+    end
+
+    end
+
 
 
 end
