@@ -32,7 +32,7 @@
             </li>
             <li>
               <div class='wide'>TMDL watershed:</div>
-              <%= @field.tmdl_watershed==true ? 'Yes' : 'No' %>
+              <%= @field.tmdl != nil ? @field.tmdl.name : 'N/A' %>
             </li>
             <li>
               <%= f.label :name, '(FSA) Field number:<em>*</em>'.html_safe, :class => 'wide' %>

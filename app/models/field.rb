@@ -6,6 +6,7 @@ class Field < ActiveRecord::Base
   belongs_to :watershed_segment
   belongs_to :irrigation
   belongs_to :field_type
+  belongs_to :tmdl
   belongs_to :crop_type
   belongs_to :p_test_method
   belongs_to :vegetation_type, :class_name => "VegetationType", :foreign_key => "vegetation_type_fence_stream_id"

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: 
+  total_n: 
+  total_p: 9.99
+
+two:
+  name: 
+  total_n: 
+  total_p: 9.99

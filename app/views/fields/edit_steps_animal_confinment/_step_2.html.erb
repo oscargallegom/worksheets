@@ -19,7 +19,8 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Livestock</h2></li>
-            <li>Enter information for the entire life cycle of this operation.</li>
+            <li>Enter information for the entire life cycle of this operation. First, select a method with which to enter your animal confinement data. Select the Totals per type method to enter nutrient totals or select the Average per type method to list average per-animal attributes.</li>
+            <li></li>
             <li>
               <%= f.label :livestock_input_method_id, 'Input method:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.collection_select :livestock_input_method_id, LivestockInputMethod.all, :id, :name, {:prompt => 'Select input method'}, {:required => true} %>

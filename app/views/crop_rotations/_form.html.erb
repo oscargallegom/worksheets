@@ -36,7 +36,15 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Crop Category</h2></li>
-            <li>Enter the following information for the entire life cycle of this crop or pasture, as applicable. Existing pastures should be planted during the normal planting season in Year 1, and any grazing operations should also begin in Year 1, irrespective of when the pasture is planted. Note that some BMPs such as enhanced nutrient management, dairy feed management, conservation tillage, and cover crops will be credited automatically if the information entered on this page reflects any of these practices.</li>
+            <% if (@field.field_type_id == 1) # if crop %>
+            <li>Enter the following information for the entire growing cycle of this crop, as applicable. Note that some BMPs such as enhanced nutrient management, dairy feed management, and conservation tillage will be credited automatically if the information entered on this page reflects any of these practices. If you plant commodity cover crops, they should be added as a crop to be included in your rotation. If you plant conservation cover crops, enter this information at the bottom of the page for the crop preceding the cover crop. Enter crop management information for as many years as your crop rotation is long.</li>
+            <% end %>
+            <% if (@field.field_type_id == 2) # if permanent pasture %>
+            <li>Enter the following information for this pasture, as applicable. Note that some BMPs such as enhanced nutrient management will be credited automatically if the information entered on this page reflects any of these practices.</li>
+<% end %>
+            <% if (@field.field_type_id == 3) # if hay %>
+            <li>Enter the following information for the entire growing cycle of this hay field, as applicable. Note that some BMPs such as enhanced nutrient management and conservation tillage will be credited automatically if the information entered on this page reflects any of these practices.</li>
+<% end %>
             <li>
               <%= f.label :crop_rotation, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.collection_select :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.crop.nil?), :prompt => 'Select crop category'} , :required => true  %>
@@ -72,7 +80,7 @@
 
             <% if (@field.field_type_id == 2) # only show if  field type is pasture %>
                 <li><h2 class='sectionHeading'>Grazing Livestock</h2></li>
-                <li>Enter grazing livestock for the given year. If livestock graze annually, start at the appropriate time in Year 1, regardless of when the pasture was planted in Year 1.</li>
+                <li>Enter grazing livestock for the given year.</li>
 
                 <div id='div_grazing_livestock'>
 
@@ -119,7 +127,7 @@
 
 
             <li><h2 class='sectionHeading'>Harvest / End of Season Operations</h2></li>
-            <li>Enter the end-of-season date for this crop. If harvest operations are performed on this crop, this date should match the final harvest date. The kill date should generally occur on or after the final harvest date and before the plant date of any subsequent crop in this rotation (though in some instances aerial seeding might be used to plant a subsequent crop before the final harvest and kill dates of an existing crop in which case the harvest and kill dates of the existing crop would come after the plant date of the subsequent crop). A kill date is not required for perennial plants.</li>
+            <li>Enter the end-of-season harvest and/or termination date(s) for this crop. For annual crops such as corn, you should select ‘Harvest and Terminate Crop.’ Generally, a termination date should occur before the plant date of any subsequent crop in this rotation, though in some instances aerial seeding might be used to plant a subsequent crop before the final harvest and kill dates of an existing crop in which case the harvest and kill dates of the existing crop would come after the plant date of the subsequent crop.</li>
             <div id='div_end_of_season'>
               <%= f.fields_for :end_of_seasons do |end_of_seasons_form| %>
                   <%= render 'end_of_season_fields', :f => end_of_seasons_form, :end_of_season_index => @crop_rotation.end_of_seasons.index(end_of_seasons_form.object)  %>
@@ -130,7 +138,7 @@
 
             <% if (@field.field_type_id == 1) # only show if  field type is crop %>
                 <li><h2 class='sectionHeading'>Cover Crop</h2></li>
-                <li>Please indicate whether an non-commercial cover crop will be planted following this crop. For commercial cover crop, please add a crop to your rotation.</li>
+                <li>Please indicate whether a conservation (i.e., non-commodity) cover crop will be planted following this crop. For commodity cover crops, please add a crop to your rotation.</li>
                 <li>
                   <%= f.label :is_cover_crop_true, 'Cover crop:<em>*</em>'.html_safe, :class => 'wide' %>
                   <%= f.radio_button :is_cover_crop, true %>

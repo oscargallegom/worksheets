@@ -18,16 +18,16 @@
       <div>
         <table class='mainTable'>
           <tr>
+            <td colspan=2>
+              <h2 class='sectionHeading'>Worksheet and project information</h2>
+            </td>
+          </tr>
+          <tr>
             <td>
               <%= f.label :name, 'Farm name:<em>*</em>'.html_safe, :class => 'wide' %>
             </td>
             <td>
               <%= f.text_field :name, :required => 'true' %>
-            </td>
-          </tr>
-          <tr>
-            <td colspan=2>
-              <h2 class='sectionHeading'>Worksheet and project information</h2>
             </td>
           </tr>
           <tr>
@@ -42,10 +42,11 @@
           </tr>
 
           <tr>
-            <td colspan=2>
+            <td colspan='2'>
               <h2 class='sectionHeading'>Site information</h2>
             </td>
           </tr>
+          <tr><td colspan='2'>Enter credit-generating site information. Enter the address of the site you are implementing BMPs on, not your mailing address, if different.</td></tr>
           <tr>
             <td>
               <%= f.label :generator_type_id, 'Generator type:<em>*</em>'.html_safe, :class => 'wide' %>

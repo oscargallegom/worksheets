@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709015005) do
+ActiveRecord::Schema.define(:version => 20130713022631) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -179,7 +179,6 @@ ActiveRecord::Schema.define(:version => 20130709015005) do
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
-    t.boolean  "tmdl_watershed"
     t.integer  "field_type_id"
     t.text     "notes"
     t.decimal  "acres_from_map"
@@ -234,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20130709015005) do
     t.boolean  "is_livestock_implemented_nutrient_plan"
     t.boolean  "is_livestock_implemented_soil_water_plan"
     t.boolean  "is_livestock_properly_sized_maintained"
+    t.integer  "tmdl_id"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -393,6 +393,13 @@ ActiveRecord::Schema.define(:version => 20130709015005) do
     t.integer  "tillage_operation_type_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+  end
+
+  create_table "tmdls", :force => true do |t|
+    t.string  "name"
+    t.decimal "total_n"
+    t.decimal "total_p"
+    t.integer "code",    :limit => 8
   end
 
   create_table "user_types", :force => true do |t|

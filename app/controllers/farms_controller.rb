@@ -143,13 +143,14 @@ class FarmsController < ApplicationController
         @field.is_acres_from_map = true
 
         #@field.segment_id = params["field#{i}segment"]
-        @field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
+
+        @field.tmdl = Tmdl.where(:code => params["field#{i}tmdl"].to_i).first
+            # (params.has_key?("field#{i}tmdl") || Tmdl.where(:code => params["field#{i}tmdl"].to_i).first == nil) ? false : true
+        #@field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 
         # get the watershed segment
         watershed_segment = WatershedSegment.where(["key = :tag", {:tag => params["field#{i}segment"]}]).first
-        unless watershed_segment == nil
-         @field.watershed_segment_id = watershed_segment.id
-        end
+        @field.watershed_segment_id = watershed_segment.id unless watershed_segment == nil
 
         # get the top 3 soils
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
