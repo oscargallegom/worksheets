@@ -60,8 +60,18 @@
               ppm
             </li>
             <li>
-              <%= f.label :p_test_method_id, 'Soil P test method:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :p_test_method_id, PTestMethod.all, :id, :name, {:prompt => 'Select P test method'}, :required => true %>
+              <%= f.label :soil_test_laboratory_id, 'Soil Test Laboratory:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :soil_test_laboratory_id, @soil_test_laboratories, :id, :name, {:prompt => 'Select Test Laboratory'}, {:required => true} %>
+            </li>
+            <li>
+              <%= f.label :soil_p_extractant_id, 'Soil P Extractant:<em>*</em>'.html_safe, :class => 'wide' %>
+              <div id="div_field_soil_p_extractant_id">
+              <select id="field_soil_p_extractant_id" name="field[soil_p_extractant_id]" disabled="disabled" required='required'>
+                <option>N/A</option>
+              </select>
+                </div>
+              <%= f.hidden_field :soil_p_extractant_id, :id => 'current_soil_p_extractant_id', :name => 'current_soil_p_extractant_id', :required => false %>
+
             </li>
             <li>
               <%= f.label :p_test_value, 'Soil P test value:<em>*</em>'.html_safe, :class => 'wide' %>

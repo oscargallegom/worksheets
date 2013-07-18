@@ -1,6 +1,5 @@
 <%= nested_form_for(@farm, :html => {:class => 'nn-form'}) do |f| %>
     <% if @farm.errors.any? %>
-        <br/>
         <div id="error_explanation" class="alert">
           <b><%= pluralize(@farm.errors.count, "error") %> encountered:</b>
 

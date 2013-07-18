@@ -1,6 +1,7 @@
 class Field < ActiveRecord::Base
 
   attr_writer :step
+  attr_accessor :soil_test_laboratory_id
 
   belongs_to :farm
   belongs_to :watershed_segment
@@ -24,7 +25,7 @@ class Field < ActiveRecord::Base
   attr_accessible :step
   # , :area, :baseline_load, :coordinates        #  needed???
   attr_accessible :name, :field_type_id, :crop_type_id, :notes
-  attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :p_test_method_id, :p_test_value
+  attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value
   attr_accessible :is_forrest_buffer, :forrest_buffer_average_width, :forrest_buffer_length, :is_forrest_buffer_planned
   attr_accessible :is_grass_buffer, :grass_buffer_average_width, :grass_buffer_length, :is_grass_buffer_planned
   attr_accessible :is_wetland, :wetland_area, :wetland_treated_area, :is_wetland_planned
@@ -58,7 +59,7 @@ class Field < ActiveRecord::Base
 
   # step 2 and crop or permanent pasture or continuous hay
   # TODO: check field type id
-  validates_presence_of :irrigation_id, :p_test_method_id, :p_test_value, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
+  validates_presence_of :irrigation_id, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
   validates_presence_of :crop_type_id, :if => 'step?(2) && field_type_id==1'
   validates_inclusion_of :is_acres_from_map, :in => [true, false], :if => 'step?(2) && field_type_id!=4', :message => '^Specify field area'
   validates_numericality_of :tile_drainage_depth, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
@@ -104,6 +105,15 @@ class Field < ActiveRecord::Base
   # required fields are based on the current step
   def step?(step)
     @step.to_i==step
+  end
+
+
+  def soil_test_laboratory_id
+    if @soil_test_laboratory_id == nil
+      SoilPExtractant.where(:id => soil_p_extractant_id).first.soil_test_laboratory_id unless self.soil_p_extractant_id==nil
+    else
+      @soil_test_laboratory_id             # if already entered by end user
+      end
   end
 
   def forrest_buffer_area

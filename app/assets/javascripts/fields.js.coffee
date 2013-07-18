@@ -3,6 +3,17 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
+updateSoilPExtractants = ->
+  $.getJSON "/soil_test_laboratories/" + $("#field_soil_test_laboratory_id").val() + "/soil_p_extractants.json", (soil_p_extractants) ->
+    items = []
+    items.push "<option value>Select P Test Method</option>"
+    $.each soil_p_extractants, (key, soil_p_extractant) ->
+      items.push "<option value=\"" + soil_p_extractant.id + "\">" + soil_p_extractant.name + "</option>"
+    $("#field_soil_p_extractant_id").html items.join("")
+    $("#field_soil_p_extractant_id").removeAttr("disabled")
+    $("#field_soil_p_extractant_id").val($("#current_soil_p_extractant_id").val())
+    $("#current_soil_p_extractant_id").val('')   # reset value - only needed on page load
+
 # update the strip indexes and show/hide length option
 updateIndexes = ->
   $(".fields:visible").find(".strip_index").each (index) ->
@@ -163,6 +174,11 @@ $(document).ready ->
   displayFertigation()
   displayEfficiency()
 
+  if typeof $("#field_soil_test_laboratory_id").val() isnt 'undefined' and $("#field_soil_test_laboratory_id").val().length > 0
+    updateSoilPExtractants()
+    if $("#field_soil_p_extractant_id").val() == 0          # the user didn't select a P extractant
+      $("#div_field_soil_p_extractant_id").addClass("field_with_errors")
+
   $("#field_irrigation_id").change ->
     displayFertigation()
     displayEfficiency()
@@ -220,6 +236,9 @@ $(document).ready ->
 
   $("a").click ->
     addCrop($(this))
+
+  $("#field_soil_test_laboratory_id").change ->
+    updateSoilPExtractants()
 
 
 $(document).on "nested:fieldRemoved", (event) ->

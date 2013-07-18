@@ -67,6 +67,8 @@ class FieldsController < ApplicationController
     # @field = @farm.fields.find(params[:id])
     @step = params[:step] || '1'
 
+    @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
+
     if session[:debug]
     success, content = buildXml(@field)    # TODO: remove/change
     @input_xml = content    # TODO: remove/change
@@ -135,6 +137,7 @@ class FieldsController < ApplicationController
           format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
         end
       else  # error
+        @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
         format.html { render action: 'edit'}
       end
     end

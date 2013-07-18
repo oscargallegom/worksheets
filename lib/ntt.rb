@@ -187,6 +187,15 @@ module Ntt
               # for phosphorus
               xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
+              # if the incorporation date is different from the application date, add extra management info
+              if commercial_fertilizer_application.is_incorporated && (commercial_fertilizer_application.application_date_year != commercial_fertilizer_application.incorporation_date_year || commercial_fertilizer_application.application_date_month != commercial_fertilizer_application.incorporation_date_month || commercial_fertilizer_application.application_date_day != commercial_fertilizer_application.incorporation_date_day)
+                operation_code = 250
+                incorporation_date_year = commercial_fertilizer_application.incorporation_date_year
+                incorporation_date_month = commercial_fertilizer_application.incorporation_date_month
+                incorporation_date_day = commercial_fertilizer_application.incorporation_date_day
+                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{incorporation_date_year}</Year><Month>#{incorporation_date_month}</Month><Day>#{incorporation_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              end
+
             end
 
             ########################################################
@@ -274,6 +283,14 @@ module Ntt
 
               xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{manure_application_code}</OpVal1><OpVal2>#{application_rate}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>#{n_fraction}</OpVal4><OpVal5>#{manure_type_id}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{p_fraction}</OpVal7><OpVal8>#{manure_treatment}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
+              # if the incorporation date is different from the application date, add extra management info
+              if manure_fertilizer_application.is_incorporated && (manure_fertilizer_application.application_date_year != manure_fertilizer_application.incorporation_date_year || manure_fertilizer_application.application_date_month != manure_fertilizer_application.incorporation_date_month || manure_fertilizer_application.application_date_day != manure_fertilizer_application.incorporation_date_day)
+                operation_code = 250
+                incorporation_date_year = manure_fertilizer_application.incorporation_date_year
+                incorporation_date_month = manure_fertilizer_application.incorporation_date_month
+                incorporation_date_day = manure_fertilizer_application.incorporation_date_day
+                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{incorporation_date_year}</Year><Month>#{incorporation_date_month}</Month><Day>#{incorporation_date_day}</Day><Crop>#{crop_id}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              end
             end
 
 

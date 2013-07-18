@@ -4,5 +4,7 @@ class Crop < ActiveRecord::Base
 
   belongs_to :crop_category
 
+  default_scope :order => 'name ASC'
   scope :coverCrops, where(:crop_category_id => [6]).order("name asc")
+
 end

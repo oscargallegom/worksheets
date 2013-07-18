@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713022631) do
+ActiveRecord::Schema.define(:version => 20130718005829) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -186,7 +186,6 @@ ActiveRecord::Schema.define(:version => 20130713022631) do
     t.decimal  "tile_drainage_depth"
     t.integer  "irrigation_id"
     t.decimal  "fertigation_n"
-    t.integer  "p_test_method_id"
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
@@ -234,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20130713022631) do
     t.boolean  "is_livestock_implemented_soil_water_plan"
     t.boolean  "is_livestock_properly_sized_maintained"
     t.integer  "tmdl_id"
+    t.integer  "soil_p_extractant_id"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -342,6 +342,22 @@ ActiveRecord::Schema.define(:version => 20130713022631) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "soil_p_extractants", :force => true do |t|
+    t.string  "name"
+    t.string  "unit"
+    t.decimal "m_value"
+    t.decimal "p_value"
+    t.integer "formula_code"
+    t.integer "soil_test_laboratory_id"
+    t.decimal "h_value"
+    t.decimal "g_value"
+  end
+
+  create_table "soil_test_laboratories", :force => true do |t|
+    t.string  "name"
+    t.integer "state_id"
   end
 
   create_table "soil_types", :force => true do |t|
