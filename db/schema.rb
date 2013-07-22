@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722011243) do
+ActiveRecord::Schema.define(:version => 20130722021830) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20130722011243) do
   end
 
   create_table "bmp_efficiency_lookups", :force => true do |t|
-    t.integer "bm_type_id"
+    t.integer "bmp_type_id"
     t.integer "field_type_id"
     t.string  "hgmr_code"
     t.decimal "n_reduction"
