@@ -2,6 +2,7 @@ NutrientNet::Application.routes.draw do
 
   resources :farms do
     resources :fields do
+      post :export, on: :member
       resources :strips do
         resources :crop_rotations do
           post :duplicate, on: :member

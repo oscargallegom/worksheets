@@ -1,5 +1,5 @@
 class Livestock < ActiveRecord::Base
-  belongs_to :farm
+  belongs_to :farm#, :inverse_of => :livestock
   belongs_to :animal
 
   attr_accessible :animal_id, :animal_units, :farm_id

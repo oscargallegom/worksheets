@@ -32,7 +32,7 @@
                 </li>
                 <div id='div_is_pasture_adjacent_to_stream' <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none' <% end %>>
                 <li>
-                  <%= f.label :fence_length, 'Linear feet of streabank fence:<em>*</em>'.html_safe, :class => 'wide' %>
+                  <%= f.label :fence_length, 'Linear feet of streabank:<em>*</em>'.html_safe, :class => 'wide' %>
                   <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
                   ft
                 </li>
@@ -66,30 +66,37 @@
                   for buffers, it will be used instead.
                 </li>
                 <li>
-                  <%= f.label :is_forrest_buffer, 'Forrest buffer in place:', :class => 'wide' %>
-                  <%= f.check_box :is_forrest_buffer %>
+                  <%= f.label :is_field_adjacent_water, 'Field adjacent to a water body:', :class => 'wide' %>
+                  <%= f.radio_button :is_field_adjacent_water, true %>
+                  <%= f.label :is_field_adjacent_water_true, 'Yes' %>
+                  <%= f.radio_button :is_field_adjacent_water, false %>
+                  <%= f.label :is_field_adjacent_water_false, 'No' %>
                 </li>
-                <div id='div_is_forrest_buffer'
-                     <% if !@field.is_forrest_buffer? %>style='display: none'
+                <li>
+                  <%= f.label :is_forest_buffer, 'Forest buffer in place:', :class => 'wide' %>
+                  <%= f.check_box :is_forest_buffer %>
+                </li>
+                <div id='div_is_forest_buffer'
+                     <% if !@field.is_forest_buffer? %>style='display: none'
                      <% end %> >
                   <li>
-                    <%= f.label :forrest_buffer_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :forrest_buffer_average_width, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+                    <%= f.label :forest_buffer_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+                    <%= f.text_field :forest_buffer_average_width, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
                     ft
                   </li>
                   <li>
-                    <%= f.label :forrest_buffer_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :forrest_buffer_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+                    <%= f.label :forest_buffer_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+                    <%= f.text_field :forest_buffer_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
                     ft
                   </li>
                   <li>
-                    <%= f.label :forrest_buffer_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <input type='text' id='forrest_buffer_area' size='10' class='readonlyInput' value='<%= (number_with_precision(@field.forrest_buffer_area, :precision => 2, :separator => '.', :delimiter => ',')) %>' readonly='readonly'>
+                    <%= f.label :forest_buffer_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+                    <input type='text' id='forest_buffer_area' size='10' class='readonlyInput' value='<%= (number_with_precision(@field.forest_buffer_area, :precision => 2, :separator => '.', :delimiter => ',')) %>' readonly='readonly'>
                     ac
                   </li>
                   <li>
-                    <%= f.label :is_forrest_buffer_planned, 'Planned:', :class => 'wide' %>
-                    <%= f.check_box :is_forrest_buffer_planned %>
+                    <%= f.label :is_forest_buffer_planned, 'Planned:', :class => 'wide' %>
+                    <%= f.check_box :is_forest_buffer_planned %>
                     <hr/>
                   </li>
                 </div>
@@ -122,6 +129,36 @@
                     <%= f.check_box :is_grass_buffer_planned %>
                   </li>
                 </div>
+
+  <li>
+                <%= f.label :is_fertilizer_application_setback, 'Fertilizer application setback in place:', :class => 'wide' %>
+                <%= f.check_box :is_fertilizer_application_setback %>
+              </li>
+                <div id='div_is_fertilizer_application_setback'
+                     <% if !@field.is_fertilizer_application_setback? %>style='display: none'
+                     <% end %> >
+                  <li>
+                    <%= f.label :fertilizer_application_setback_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+                    <%= f.text_field :fertilizer_application_setback_average_width, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+                    ft
+                  </li>
+                  <li>
+                    <%= f.label :fertilizer_application_setback_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+                    <%= f.text_field :fertilizer_application_setback_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+                    ft
+                  </li>
+                  <li>
+                    <%= f.label :fertilizer_application_setback_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+                    <input type='text' id='fertilizer_application_setback_area' size='10' class='readonlyInput' value='<%= (number_with_precision(@field.fertilizer_application_setback_area, :precision => 2, :separator => '.', :delimiter => ',')) %>' readonly='readonly'>
+                    ac
+                  </li>
+                  <li>
+                    <%= f.label :is_fertilizer_application_setback_planned, 'Planned:', :class => 'wide' %>
+                    <%= f.check_box :is_fertilizer_application_setback_planned %>
+                  </li>
+               </div>
+
+
 
             <% end %>
             <!-- end only show if crop or continuous hay -->
@@ -182,6 +219,13 @@
               </li>
             </div>
 
+            <li><h2 class='sectionHeading'>Planned changes to crop management</h2></li>
+            <li>If any aspects of your crop management are not yet implemented and were entered in order to meet baseline, please explain below.
+            </li>
+            <li>
+              <%= f.label :streambank_restoration_length, 'Details if applicable:', :class => 'wide' %>
+              <%= f.text_area :planned_management_details, :rows => 5 %>
+            </li>
 
           </ol>
         </fieldset>

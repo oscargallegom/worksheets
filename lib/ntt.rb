@@ -220,7 +220,16 @@ module Ntt
             crop_rotation.end_of_seasons.each do |end_of_season|
 
               mid = mid + 1
-              operation_code = end_of_season.end_of_season_type_id
+
+              if (end_of_season.end_of_season_type_id==626 && end_of_season.is_harvest_as_silage)         # harvest only
+                operation_code = 310
+              elsif (end_of_season.end_of_season_type_id==626451 && end_of_season.is_harvest_as_silage)   # harvest and terminate crop
+                operation_code = 310451
+              else
+                operation_code = end_of_season.end_of_season_type_id
+              end
+
+
 
               year = end_of_season.year
               month = end_of_season.month
@@ -257,7 +266,7 @@ module Ntt
               if (manure_fertilizer_application.p_type_id == 1)
                 p_fraction = manure_fertilizer_application.p_concentration.to_f / 2000.0 / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
               else # P205
-                p_fraction = manure_fertilizer_application.p_concentration.to_f / 0.74 / 2000.0 / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) # TODO:  Mindy to check 0.74
+                p_fraction = manure_fertilizer_application.p_concentration.to_f / manure_fertilizer_application.manure_type.p_fraction.to_f / 2000.0 / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) # TODO:  Mindy to check 0.74
               end
 
 

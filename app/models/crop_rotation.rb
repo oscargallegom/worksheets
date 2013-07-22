@@ -1,9 +1,11 @@
 class CropRotation < ActiveRecord::Base
 
+  before_validation :test
+
   attr_accessor :crop_category_id
 
-  belongs_to :crop
-  belongs_to :strip
+  belongs_to :crop #, :inverse_of => :crop_rotations
+  belongs_to :strip #, :inverse_of => :crop_rotations
 
   has_many :grazing_livestocks
   has_many :tillage_operations
@@ -41,7 +43,16 @@ class CropRotation < ActiveRecord::Base
   default_scope :order => 'created_at ASC'
 
   def isPermanentPasture?
-    self.strip.field.field_type.id == 2
+    self.strip==nil ? false : (self.strip.field.field_type.id == 2)   # could be nil when duplicating
+  end
+
+  def test
+    i=9
+  end
+
+  # allow duplication
+  amoeba do
+    enable
   end
 
 end

@@ -34,3 +34,12 @@
     <%= f.submit 'Save and Continue', :class => 'button' %>
 
 <% end %>
+
+<div class="sectionRest clearfix">
+  <br/>
+    <= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do >
+    Export to <%= select_tag 'export_to_field_id', options_from_collection_for_select(@farm.fields.all, 'id', 'name') %>
+        <= button_tag 'Export'>
+        < end >
+    </div>
+

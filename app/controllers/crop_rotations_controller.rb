@@ -101,12 +101,12 @@ class CropRotationsController < ApplicationController
 
   # /farms/1/fields/1/strips/1/crop_rotations/1
   def duplicate
-    @crop_rotation_dup = @crop_rotation.dup #:include => [:fields, :animals]
+    @crop_rotation_dup = @crop_rotation.amoeba_dup
     respond_to do |format|
-      if @crop_rotation_dup.save
+      if @crop_rotation_dup.save(:validate => false)
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully duplicated.' }
       else
-        format.html { redirect_to farms_url, error: 'Could not duplicate crop.' }
+        format.html { redirect_to farms_url, notice: 'Could not duplicate crop rotation.' }
       end
     end
 

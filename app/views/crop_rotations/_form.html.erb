@@ -133,7 +133,7 @@
                   <%= render 'end_of_season_fields', :f => end_of_seasons_form, :end_of_season_index => @crop_rotation.end_of_seasons.index(end_of_seasons_form.object)  %>
               <% end %>
             </div>
-            <li><%= f.link_to_add "Add End Of Season", :end_of_seasons, :class => 'button', :id => 'addEndOFSeasonBtn', :data => {:target => "#div_end_of_season"} %></li>
+            <li id='li_end_of_season_button'><%= f.link_to_add "Add End Of Season", :end_of_seasons, :class => 'button', :id => 'addEndOFSeasonBtn', :data => {:target => "#div_end_of_season"} %></li>
 
 
             <% if (@field.field_type_id == 1) # only show if  field type is crop %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718005829) do
+ActiveRecord::Schema.define(:version => 20130722011243) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
     t.integer "farm_id"
     t.integer "animal_id"
     t.decimal "animals_units"
+  end
+
+  create_table "bmp_efficiency_lookups", :force => true do |t|
+    t.integer "bm_type_id"
+    t.integer "field_type_id"
+    t.string  "hgmr_code"
+    t.decimal "n_reduction"
+    t.decimal "p_reduction"
+    t.decimal "sediment_reduction"
   end
 
   create_table "bmp_types", :force => true do |t|
@@ -113,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
     t.integer  "crop_rotation_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.boolean  "is_harvest_as_silage"
   end
 
   create_table "farms", :force => true do |t|
@@ -174,8 +184,8 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
@@ -189,10 +199,10 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
     t.decimal  "p_test_value"
     t.decimal  "efficiency"
     t.integer  "watershed_segment_id"
-    t.boolean  "is_forrest_buffer"
-    t.decimal  "forrest_buffer_average_width"
-    t.decimal  "forrest_buffer_length"
-    t.boolean  "is_forrest_buffer_planned"
+    t.boolean  "is_forest_buffer"
+    t.decimal  "forest_buffer_average_width"
+    t.decimal  "forest_buffer_length"
+    t.boolean  "is_forest_buffer_planned"
     t.boolean  "is_grass_buffer"
     t.decimal  "grass_buffer_average_width"
     t.decimal  "grass_buffer_length"
@@ -234,6 +244,12 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
     t.boolean  "is_livestock_properly_sized_maintained"
     t.integer  "tmdl_id"
     t.integer  "soil_p_extractant_id"
+    t.boolean  "is_field_adjacent_water"
+    t.boolean  "is_fertilizer_application_setback"
+    t.decimal  "fertilizer_application_setback_average_width"
+    t.decimal  "fertilizer_application_setback_length"
+    t.boolean  "is_fertilizer_application_setback_planned"
+    t.text     "planned_management_details"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -313,6 +329,7 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
   create_table "manure_types", :force => true do |t|
     t.string  "name"
     t.integer "manure_type_category_id"
+    t.decimal "p_fraction"
   end
 
   create_table "p_test_methods", :force => true do |t|
@@ -485,8 +502,20 @@ ActiveRecord::Schema.define(:version => 20130718005829) do
     t.integer  "fips"
     t.string   "major_basin"
     t.string   "trib_strat_basin"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.decimal  "total_n_forest"
+    t.decimal  "total_n_hyo"
+    t.decimal  "total_n_trp"
+    t.decimal  "total_p_forest"
+    t.decimal  "total_p_hyo"
+    t.decimal  "total_p_trp"
+    t.decimal  "total_sediment_forest"
+    t.decimal  "total_sediment_hyo"
+    t.decimal  "total_sediment_trp"
+    t.decimal  "n_delivery_factor"
+    t.decimal  "p_delivery_factor"
+    t.decimal  "sediment_delivery_total"
   end
 
 end

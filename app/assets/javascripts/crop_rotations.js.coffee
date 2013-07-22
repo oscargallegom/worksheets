@@ -164,12 +164,19 @@ updateUnitsLabels = (caller) ->
 
 
 updateEndOfSeason = (caller) ->
+  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_end_of_seasons_attributes_')
   if caller.val() is '626' or caller.val() is ''      # 'harvest only'
-    $("#addEndOFSeasonBtn").show()      # could add more
+    $("#li_end_of_season_button").show()      # could add more
+    $("#li_is_harvest_as_silage").show()     # show option for harvest
+    $("#crop_rotation_end_of_seasons_attributes_" + componentNumber + "_is_harvest_as_silage").closest('li').show()
     return
-
-  # kill so no button to add more
-  $("#addEndOFSeasonBtn").hide()
+  if caller.val() is '626451'
+    $("#li_end_of_season_button").hide()
+    $("#crop_rotation_end_of_seasons_attributes_" + componentNumber + "_is_harvest_as_silage").closest('li').show()     # show option for harvest and kill
+  else if caller.val() is '451'
+    # kill so no button to add more
+    $("#li_end_of_season_button").hide()
+    $("#crop_rotation_end_of_seasons_attributes_" + componentNumber + "_is_harvest_as_silage").closest('li').hide()
 
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_end_of_seasons_attributes_')
 
@@ -200,6 +207,7 @@ checkboxListener = (caller) ->
   updateIncorporatedForCommercial(caller) if (caller.attr('id').indexOf("is_incorporated") > -1) and (caller.attr('id').indexOf("crop_rotation_commercial_fertilizer_applications_attributes") > -1)
   updateIncorporatedForManure(caller) if (caller.attr('id').indexOf("is_incorporated") > -1) and (caller.attr('id').indexOf("crop_rotation_manure_fertilizer_applications_attributes") > -1)
   #updateAnimalUnits(caller) if (caller.attr('id').indexOf("precision_feeding") > -1) and (caller.attr('id').indexOf("crop_rotation_grazing_livestocks_attributes") > -1)
+  #updateEndOfSeason(caller) #if (caller.attr('id').indexOf("is_harvest_as_silage") > -1) and (caller.attr('id').indexOf("crop_rotation_end_of_seasons_attributes") > -1)
 
 # given the whole HTML id, return the extracted number
 getComponentNumber = (componentId, prefix) ->
@@ -228,10 +236,7 @@ $(document).ready ->
   if typeof(prettyPrint) is 'function'
     prettyPrint()
 
-
-
   updateIndexes()
-
   updateCropCategory()
 
   if typeof $("#crop_rotation_crop_category_id").val() isnt 'undefined' and $("#crop_rotation_crop_category_id").val().length > 0

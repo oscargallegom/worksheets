@@ -100,10 +100,38 @@ class FarmsController < ApplicationController
     @farm_dup = @farm.amoeba_dup
     # @farm_dup.name << ' (duplicated)'
 
+    @is_duplicate = true
+
+    #Farm.skip_callback(:create)
+    #Field.skip_callback(:create)
+    #Soil.skip_callback(:create)
+
+    #Farm.skip_callback(:update)
+    #Field.skip_callback(:update)
+    #Soil.skip_callback(:update)
+
+    #Farm.skip_callback(:save)
+    #Field.skip_callback(:save)
+    #Soil.skip_callback(:save)
+
+    #Farm.send(:create_without_callbacks)
+    #@farm_dup.save(:validate => false)
+
+
     respond_to do |format|
-      if @farm_dup.save
+      if @farm_dup.save!(:validate => false)    # TODO: remove !
+        #Farm.set_callback(:create)
+        #Field.set_callback(:create)
+        #Soil.set_callback(:create)
+        #Farm.set_callback(:update)
+        #Field.set_callback(:update)
+        #Soil.set_callback(:update)
+        #Farm.set_callback(:save)
+        #Field.set_callback(:save)
+        #Soil.set_callback(:save)
         format.html { redirect_to farms_url, notice: 'Farm was successfully duplicated.' }
       else
+        #Farm.set_callback(:create)
         format.html { redirect_to farms_url, notice: 'Could not duplicate farm.' }
       end
     end

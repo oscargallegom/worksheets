@@ -67,14 +67,24 @@ updateSiltPercents = ->
   if $.isNumeric($("#field_soils_attributes_2_percent_clay").val()) and $.isNumeric($("#field_soils_attributes_2_percent_sand").val())
     $("#field_soils_attributes_2_percent_silt").val((100 - $("#field_soils_attributes_2_percent_clay").val() - $("#field_soils_attributes_2_percent_sand").val()).toFixed(1))
 
-# calculate forrest buffer area
-updateForrestBufferArea = ->
-  if $.isNumeric($("#field_forrest_buffer_average_width").val()) and $.isNumeric($("#field_forrest_buffer_length").val())
-    $("#forrest_buffer_area").val(($("#field_forrest_buffer_average_width").val() * $("#field_forrest_buffer_length").val() / 43560.0).toFixed(2))
+# calculate forest buffer area
+updateForestBufferArea = ->
+  if $.isNumeric($("#field_forest_buffer_average_width").val()) and $.isNumeric($("#field_forest_buffer_length").val())
+    $("#forest_buffer_area").val(($("#field_forest_buffer_average_width").val() * $("#field_forest_buffer_length").val() / 43560.0).toFixed(2))
+  else
+    $("#forest_buffer_area").val('N/A')
 
 updateGrassBufferArea = ->
   if $.isNumeric($("#field_grass_buffer_average_width").val()) and $.isNumeric($("#field_grass_buffer_length").val())
     $("#grass_buffer_area").val(($("#field_grass_buffer_average_width").val() * $("#field_grass_buffer_length").val() / 43560.0).toFixed(2))
+  else
+    $("#grass_buffer_area").val('N/A')
+
+updateFertilizerApplicationSetbackArea = ->
+  if $.isNumeric($("#field_fertilizer_application_setback_average_width").val()) and $.isNumeric($("#field_fertilizer_application_setback_length").val())
+    $("#fertilizer_application_setback_area").val(($("#field_fertilizer_application_setback_average_width").val() * $("#field_fertilizer_application_setback_length").val() / 43560.0).toFixed(2))
+  else
+    $("#fertilizer_application_setback_area").val('N/A')
 
 # when the button add crop is called find out the strip, then submit form
 addCrop = (caller) ->
@@ -122,14 +132,14 @@ isFencingInPlace = ->
     $("#field_distance_fence_stream").prop('required', false)
 
 # clicked forrest buffer
-isForrestBufferClicked = ->
-  $("#div_is_forrest_buffer").toggle()
-  if $("#div_is_forrest_buffer").is(":visible")
-    $("#field_forrest_buffer_average_width").prop('required', true)
-    $("#field_forrest_buffer_length").prop('required', true)
+isForestBufferClicked = ->
+  $("#div_is_forest_buffer").toggle()
+  if $("#div_is_forest_buffer").is(":visible")
+    $("#field_forest_buffer_average_width").prop('required', true)
+    $("#field_forest_buffer_length").prop('required', true)
   else
-    $("#field_forrest_buffer_average_width").prop('required', false)
-    $("#field_forrest_buffer_length").prop('required', false)
+    $("#field_forest_buffer_average_width").prop('required', false)
+    $("#field_forest_buffer_length").prop('required', false)
 
 # clicked grass buffer
 isGrassBufferClicked = ->
@@ -140,6 +150,16 @@ isGrassBufferClicked = ->
   else
     $("#field_grass_buffer_average_width").prop('required', false)
     $("#field_grass_buffer_length").prop('required', false)
+
+# clicked grass buffer
+isFertilizerApplicationSetbackClicked = ->
+  $("#div_is_fertilizer_application_setback").toggle()
+  if $("#div_is_fertilizer_application_setback").is(":visible")
+    $("#field_fertilizer_application_setback_average_width").prop('required', true)
+    $("#field_fertilizer_application_setback_length").prop('required', true)
+  else
+    $("#field_fertilizer_application_setback_average_width").prop('required', false)
+    $("#field_fertilizer_application_setback_length").prop('required', false)
 
 
 # clicked wetland
@@ -199,10 +219,13 @@ $(document).ready ->
     isFencingInPlace()
 
   $("#field_is_forrest_buffer").change ->
-    isForrestBufferClicked()
+    isForestBufferClicked()
 
   $("#field_is_grass_buffer").change ->
     isGrassBufferClicked()
+
+  $("#field_is_fertilizer_application_setback").change ->
+    isFertilizerApplicationSetbackClicked()
 
   $("#field_is_wetland").change ->
     isWetlandClicked()
@@ -213,8 +236,16 @@ $(document).ready ->
   # if data is changed, update the silt percent
   $("input").keyup ->
     updateSiltPercents()
-    updateForrestBufferArea()
+    updateForestBufferArea()
     updateGrassBufferArea()
+    updateFertilizerApplicationSetbackArea()
+
+  # if data is changed, update the silt percent
+  $("input").change ->
+    updateSiltPercents()
+    updateForestBufferArea()
+    updateGrassBufferArea()
+    updateFertilizerApplicationSetbackArea()
 
   # show/hide details for soil 1
   $(".detailsLink1").click ->

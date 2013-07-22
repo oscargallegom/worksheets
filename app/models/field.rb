@@ -13,25 +13,29 @@ class Field < ActiveRecord::Base
   belongs_to :vegetation_type, :class_name => "VegetationType", :foreign_key => "vegetation_type_fence_stream_id"
   belongs_to :livestock_input_method
 
-  has_many :strips
+  has_many :strips, :dependent => :destroy, autosave: true
 
-  has_many :soil_types, :through => :soils
-  has_many :soils, :dependent => :destroy
+  #has_many :soil_types, :through => :soils
+  has_many :soils, :dependent => :destroy, autosave: true
 
-  has_many :bmps
-  has_many :field_livestocks
-  has_many :field_poultry
+  has_many :bmps, :dependent => :destroy, autosave: true
+  has_many :field_livestocks, :dependent => :destroy, autosave: true
+  has_many :field_poultry, :dependent => :destroy, autosave: true
 
   attr_accessible :step
   # , :area, :baseline_load, :coordinates        #  needed???
   attr_accessible :name, :field_type_id, :crop_type_id, :notes
   attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value
-  attr_accessible :is_forrest_buffer, :forrest_buffer_average_width, :forrest_buffer_length, :is_forrest_buffer_planned
+  attr_accessible :is_field_adjacent_water
+  attr_accessible :is_forest_buffer, :forest_buffer_average_width, :forest_buffer_length, :is_forest_buffer_planned
   attr_accessible :is_grass_buffer, :grass_buffer_average_width, :grass_buffer_length, :is_grass_buffer_planned
+  attr_accessible :is_fertilizer_application_setback, :fertilizer_application_setback_average_width, :fertilizer_application_setback_length, :is_fertilizer_application_setback_planned
   attr_accessible :is_wetland, :wetland_area, :wetland_treated_area, :is_wetland_planned
 
   attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
+
+  attr_accessible :planned_management_details
 
   attr_accessible :is_livestock_implemented_nutrient_plan, :is_livestock_implemented_soil_water_plan, :is_livestock_properly_sized_maintained
   attr_accessible :is_livestock_animal_waste_management_system, :is_livestock_mortality_composting, :is_livestock_plastic_permeable_lagoon_cover, :is_livestock_phytase, :is_livestock_dairy_precision_feeding, :is_livestock_barnyard_runoff_controls, :is_livestock_water_control_structure, :is_livestock_treatment_wetland
@@ -79,15 +83,18 @@ class Field < ActiveRecord::Base
   validates_numericality_of :distance_fence_stream, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'
 
   # step 4 and crop or continuous hay
-  validates_numericality_of :forrest_buffer_average_width, :forrest_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forrest_buffer?'
+  validates_numericality_of :forest_buffer_average_width, :forest_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forest_buffer?'
   validates_numericality_of :grass_buffer_average_width, :grass_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_grass_buffer?'
+  validates_numericality_of :fertilizer_application_setback_average_width, :fertilizer_application_setback_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_fertilizer_application_setback?'
 
   # step 4 for all
   validates_numericality_of :wetland_area, :wetland_treated_area, :if => 'step?(4) && is_wetland?'
   validates_numericality_of :streambank_restoration_length, :if => 'step?(4) && is_streambank_restoration?'
 
+  validates_inclusion_of :is_acres_from_map, :in => [true, false], :allow_blank => true, :if => 'step?(4)'
+
   # TODO: area of wetland < area of field
-  # TODO: area of buffers < area of field (forrest, grass and fence)
+  # TODO: area of buffers < area of field (forest, grass and fence)
   # TODO: sum of all buffers < area of field
 
   # TODO: natural sorting
@@ -113,14 +120,17 @@ class Field < ActiveRecord::Base
       SoilPExtractant.where(:id => soil_p_extractant_id).first.soil_test_laboratory_id unless self.soil_p_extractant_id==nil
     else
       @soil_test_laboratory_id             # if already entered by end user
-      end
+    end
   end
 
-  def forrest_buffer_area
-    self.forrest_buffer_average_width * self.forrest_buffer_length / 43560.0 unless (self.forrest_buffer_average_width.nil? or self.forrest_buffer_length.nil?)
+  def forest_buffer_area
+    self.forest_buffer_average_width * self.forest_buffer_length / 43560.0 unless (self.forest_buffer_average_width.nil? or self.forest_buffer_length.nil?)
   end
   def grass_buffer_area
     self.grass_buffer_average_width * self.grass_buffer_length / 43560.0 unless (self.grass_buffer_average_width.nil? or self.grass_buffer_length.nil?)
+  end
+  def fertilizer_application_setback_area
+    self.fertilizer_application_setback_average_width * self.fertilizer_application_setback_length / 43560.0 unless (self.fertilizer_application_setback_average_width.nil? or self.fertilizer_application_setback_length.nil?)
   end
 
 
@@ -134,6 +144,11 @@ class Field < ActiveRecord::Base
         end
       end
     end
+  end
+
+  # allow duplication
+  amoeba do
+    enable
   end
 
 end

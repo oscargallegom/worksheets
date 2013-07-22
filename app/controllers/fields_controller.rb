@@ -4,7 +4,7 @@ class FieldsController < ApplicationController
   include Ntt
 
   load_and_authorize_resource :farm
-  load_and_authorize_resource :through => :farm
+  load_and_authorize_resource :field, :through => :farm
   layout 'farm', :only => [:index]
 
   add_breadcrumb 'Home', '/'
@@ -153,6 +153,35 @@ class FieldsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to farm_path(@farm) }
     end
+  end
+
+  # POST /farms/1/fields/1/export
+  def export
+    # copy all the strips from field A to field B
+    @to_field_id = params[:export_to_field_id].to_i
+
+    # delete all the existing strips for field B
+    @to_field = @farm.fields.find{|f| f["id"] == @to_field_id}
+    @to_field.strips.destroy_all
+
+    # copy strips from A to B
+    is_success = true
+      @field.strips.each do |strip|
+        @strip_dup = strip.amoeba_dup
+        @strip_dup.field_id = @to_field_id
+        if !@strip_dup.save!(:validate => false)
+          is_success = false
+        end
+
+      end
+
+    respond_to do |format|
+    if is_success
+      format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Export successful.' }
+    else
+      format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Error: could not export.' }
+    end
+      end
   end
 
 end

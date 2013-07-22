@@ -7,10 +7,11 @@ class Farm < ActiveRecord::Base
   belongs_to :county, :foreign_key => 'site_county_id'
   belongs_to :generator_type
 
-  has_many :fields, :dependent => :destroy
+  has_many :fields, :dependent => :destroy, autosave: true
 
   has_many :animals, :through => :livestock
-  has_many :livestock, :dependent => :destroy
+  has_many :livestock, :dependent => :destroy, :inverse_of => :farm
+
 
   attr_accessible :name, :farm_notes, :tract_number, :generator_type_id, :site_name, :site_street_1, :site_street_2, :site_description, :site_city, :site_zip, :site_state_id, :site_county_id, :coordinates
 

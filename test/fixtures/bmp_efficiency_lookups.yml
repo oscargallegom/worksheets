@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bm_type_id: 1
+  field_type_id: 
+
+two:
+  bm_type_id: 1
+  field_type_id: 
