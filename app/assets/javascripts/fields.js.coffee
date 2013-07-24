@@ -88,9 +88,10 @@ updateFertilizerApplicationSetbackArea = ->
 
 # when the button add crop is called find out the strip, then submit form
 addCrop = (caller) ->
+
   if (caller.attr('id') isnt undefined and caller.attr('id').indexOf('addCropButton')>=0)
     $('#addCropForStrip').val(caller.attr('id').substring(caller.attr('id').indexOf('_')+1));
-    $("form").submit();
+    $(".nn-form").submit();
     false;
 
 # if not use default map, acres is required

@@ -1,6 +1,6 @@
 class FieldsController < ApplicationController
 
-  include Mycalculations
+  include BmpCalculations
   include Ntt
 
   load_and_authorize_resource :farm
@@ -15,8 +15,8 @@ class FieldsController < ApplicationController
   # GET /farms/1/fields.json
   def index
 
-    # @farm = Project.find(params[:farm_id])
-    # @fields = @farm.fields
+    #@farm = Project.find(params[:farm_id])
+    #@fields = @farm.fields
     add_breadcrumb @farm.code, farm_path(@farm)
     add_breadcrumb 'Fields'
 
@@ -69,6 +69,13 @@ class FieldsController < ApplicationController
 
     @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
 
+
+    @other_fields = []
+    @farm.fields.each do |field|
+      @other_fields.push(field) if field.id != @field.id
+    end
+
+
     if session[:debug]
     success, content = buildXml(@field)    # TODO: remove/change
     @input_xml = content    # TODO: remove/change
@@ -109,21 +116,12 @@ class FieldsController < ApplicationController
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name
 
-    # TODO: exception handling
-    ################################################################
-    ################################################################
-    isOk = true
-    begin
-    calculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    rescue
-      isOk = false
-    end
-    ################################################################
-    ################################################################
-
     # @farm =Project.find(params[:farm_id])
     # field = @farm.fields.find(params[:id])
     @step = params[:field][:step] || '1'
+
+    @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '1'
+
 
     respond_to do |format|
       if @field.update_attributes(params[:field])
@@ -134,7 +132,25 @@ class FieldsController < ApplicationController
         elsif (@step=='2' && @field.field_type.id == 5)     # non-managed land and step 2: got back to farm summary
           format.html { redirect_to farm_url(@farm), notice: 'Field was successfully updated.' }
         else
-          format.html { redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
+          #format.html #{ redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
+          @step = (@step.to_i+1).to_s
+
+          if (@step =='5')      # perform calculations
+            # TODO: exception handling
+            ################################################################
+            ################################################################
+            isOk = true
+            begin
+              @new_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            rescue
+              isOk = false
+              @new_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
+            end
+            ################################################################
+            ################################################################
+          end
+
+          format.html {render :edit, notice: 'Field was successfully updated.'}
         end
       else  # error
         @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
@@ -157,27 +173,44 @@ class FieldsController < ApplicationController
 
   # POST /farms/1/fields/1/export
   def export
+
+    @to_field = nil
+    @from_field= nil
+
     # copy all the strips from field A to field B
-    @to_field_id = params[:export_to_field_id].to_i
+    if (params[:isExport] == 'true')
+
+      @from_field = @field
+
+      @to_field_id = params[:target_field_id].to_i
+      @to_field = @farm.fields.find{|f| f["id"] == @to_field_id}
+
+    else   # import
+      @from_field_id = params[:target_field_id].to_i
+      @from_field = @farm.fields.find{|f| f["id"] == @from_field_id}
+
+      @to_field = @field
+
+      end
 
     # delete all the existing strips for field B
-    @to_field = @farm.fields.find{|f| f["id"] == @to_field_id}
+
     @to_field.strips.destroy_all
 
     # copy strips from A to B
     is_success = true
-      @field.strips.each do |strip|
-        @strip_dup = strip.amoeba_dup
-        @strip_dup.field_id = @to_field_id
-        if !@strip_dup.save!(:validate => false)
-          is_success = false
-        end
+      @from_field.strips.each do |strip|
+        @from_strip_dup = strip.amoeba_dup
+        @from_strip_dup.field_id = @to_field.id
+        #if !@from_strip_dup.save!(:validate => false)
+        #  is_success = false
+        #end
 
       end
 
     respond_to do |format|
     if is_success
-      format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Export successful.' }
+      format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Copy successful.' }
     else
       format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Error: could not export.' }
     end

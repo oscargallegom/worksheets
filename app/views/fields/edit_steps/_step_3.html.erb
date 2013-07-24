@@ -35,11 +35,21 @@
 
 <% end %>
 
+
+<% if !@other_fields.empty? %>
 <div class="sectionRest clearfix">
   <br/>
-    <= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do >
-    Export to <%= select_tag 'export_to_field_id', options_from_collection_for_select(@farm.fields.all, 'id', 'name') %>
-        <= button_tag 'Export'>
-        < end >
+
+
+    <%= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do %>
+      <select name='isExport' id='isExport'>
+         <option value='true'>Copy data into </option>
+        <option value='false'>Copy data from </option>
+        </select>
+     <%= select_tag 'target_field_id', options_from_collection_for_select(@other_fields, 'id', 'name') %>
+        <%= button_tag 'Submit'%>
+        <% end %>
     </div>
+
+<% end %>
 

@@ -221,14 +221,13 @@ module Ntt
 
               mid = mid + 1
 
-              if (end_of_season.end_of_season_type_id==626 && end_of_season.is_harvest_as_silage)         # harvest only
+              if (end_of_season.end_of_season_type_id==626 && end_of_season.is_harvest_as_silage) # harvest only
                 operation_code = 310
-              elsif (end_of_season.end_of_season_type_id==626451 && end_of_season.is_harvest_as_silage)   # harvest and terminate crop
+              elsif (end_of_season.end_of_season_type_id==626451 && end_of_season.is_harvest_as_silage) # harvest and terminate crop
                 operation_code = 310451
               else
                 operation_code = end_of_season.end_of_season_type_id
               end
-
 
 
               year = end_of_season.year
