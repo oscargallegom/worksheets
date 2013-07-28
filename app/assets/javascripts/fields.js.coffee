@@ -138,7 +138,7 @@ isFencingInPlace = ->
     $("#field_vegetation_type_fence_stream_id").prop('required', false)
     $("#field_distance_fence_stream").prop('required', false)
 
-# clicked forrest buffer
+# clicked forest buffer
 isForestBufferClicked = ->
   $("#div_is_forest_buffer").toggle()
   if $("#div_is_forest_buffer").is(":visible")
@@ -275,7 +275,7 @@ $(document).ready ->
   $("#field_is_streambank_fencing_in_place_false").change ->
     isFencingInPlace()
 
-  $("#field_is_forrest_buffer").change ->
+  $("#field_is_forest_buffer").change ->
     isForestBufferClicked()
 
   $("#field_is_grass_buffer").change ->
