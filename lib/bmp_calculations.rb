@@ -11,7 +11,7 @@ module BmpCalculations
     # call NTT to get the latest values
     total_n_per_acre = 0
     total_p_per_acre = 0
-    sediment_per_acre = 0
+    total_sediment_per_acre = 0
 
     success, content =  callNtt(field)    # TODO: error handling
 
@@ -19,6 +19,12 @@ module BmpCalculations
       @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
       if (@results['ErrorCode'] != '0')
         # error
+
+        # TODO: remove test values
+        total_n_per_acre = 25
+        total_p_per_acre = 25
+        total_sediment_per_acre =25
+
       else
         total_n_per_acre = @results['OrganicN'].to_f + @results['NO3'].to_f + @results['TileDrainN'].to_f
         total_p_per_acre = @results['OrganicP'].to_f + @results['SolubleP'].to_f + @results['TileDrainP'].to_f
@@ -48,13 +54,13 @@ module BmpCalculations
       fencing_acres = field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
 
       if (field.vegetation_type_fence_stream_id == 1)    # if forest
-        stream_forest_n_conversion = field.watershedsegment.total_n_forest * fencing_acres
-        stream_forest_p_conversion = field.watershedsegment.total_p_forest * fencing_acres
-        stream_forest_sediment_conversion = field.watershedsegment.total_sediment_forest * fencing_acres
+        stream_forest_n_conversion = field.watershed_segment.total_n_forest * fencing_acres
+        stream_forest_p_conversion = field.watershed_segment.total_p_forest * fencing_acres
+        stream_forest_sediment_conversion = field.watershed_segment.total_sediment_forest * fencing_acres
       else      # grass
-        stream_hyo_n_conversion = field.watershedsegment.total_n_hyo * fencing_acres
-        stream_hyo_p_conversion = field.watershedsegment.total_p_hyo * fencing_acres
-        stream_hyo_sediment_conversion = field.watershedsegment.total_sediment_hyo * fencing_acres
+        stream_hyo_n_conversion = field.watershed_segment.total_n_hyo * fencing_acres
+        stream_hyo_p_conversion = field.watershed_segment.total_p_hyo * fencing_acres
+        stream_hyo_sediment_conversion = field.watershed_segment.total_sediment_hyo * fencing_acres
       end
 
       if (field.distance_fence_stream > 35 && field.distance_fence_stream <= 100)
@@ -206,9 +212,9 @@ module BmpCalculations
     upland_wetland_sediment_reduction = field.wetland_treated_area.to_f * efficiency_sediment * total_adjusted_sediment_per_acre
 
 
-    new_total_n_per_acre = ((total_unconverted_acres * total_adjusted_n_per_acre) - upland_streambank_grass_n_reduction - upland_streambank_forest_n_reduction - upland_grass_buffer_n_reduction - upland_forest_buffer_n_reduction - upland_wetland_n_reduction) / (total_unconverted_acres)
-    new_total_p_per_acre = ((total_unconverted_acres * total_adjusted_p_per_acre) - upland_streambank_grass_p_reduction - upland_streambank_forest_p_reduction - upland_grass_buffer_p_reduction - upland_forest_buffer_p_reduction - upland_wetland_p_reduction) / (total_unconverted_acres)
-    new_total_sediment_per_acre = ((total_unconverted_acres * total_adjusted_sediment_per_acre) - upland_streambank_grass_sediment_reduction - upland_streambank_forest_sediment_reduction - upland_grass_buffer_sediment_reduction - upland_forest_buffer_sediment_reduction - upland_wetland_sediment_reduction) / (total_unconverted_acres)
+    new_total_n_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_n_per_acre) - upland_streambank_grass_n_reduction - upland_streambank_forest_n_reduction - upland_grass_buffer_n_reduction - upland_forest_buffer_n_reduction - upland_wetland_n_reduction) / (total_unconverted_acres)
+    new_total_p_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_p_per_acre) - upland_streambank_grass_p_reduction - upland_streambank_forest_p_reduction - upland_grass_buffer_p_reduction - upland_forest_buffer_p_reduction - upland_wetland_p_reduction) / (total_unconverted_acres)
+    new_total_sediment_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_sediment_per_acre) - upland_streambank_grass_sediment_reduction - upland_streambank_forest_sediment_reduction - upland_grass_buffer_sediment_reduction - upland_forest_buffer_sediment_reduction - upland_wetland_sediment_reduction) / (total_unconverted_acres)
 
     # TODO: data check
 

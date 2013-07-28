@@ -8,5 +8,5 @@
 <li>
   <%= f.label :tillage_operation_type_id, 'Operation:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.collection_select :tillage_operation_type_id, TillageOperationType.all, :id, :name, {:prompt => 'Select tillage operation'}, {:required => true} %>
-  <hr/>
 </li>
+<br/>

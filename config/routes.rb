@@ -36,7 +36,7 @@ NutrientNet::Application.routes.draw do
     end
   end
 
-  resources :farm_issues, :only => [:new, :create]
+  resources :project_issues, :only => [:new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

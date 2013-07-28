@@ -10,7 +10,7 @@ class FarmsController < ApplicationController
   # GET /farms
   # GET /farms.json
   def index
-    add_breadcrumb 'Farms'
+    add_breadcrumb 'Projects'
 
     @farms = @farms.search(params[:search]).page(params[:page]).order(sort_column + ' ' + sort_direction)
 
@@ -23,7 +23,7 @@ class FarmsController < ApplicationController
   # GET /farms/1.json
   def show
     add_breadcrumb 'Farms', :farms_path
-    add_breadcrumb @farm.code
+    add_breadcrumb @farm.name
 
     # sort fields 'naturally'
     @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
@@ -46,7 +46,7 @@ class FarmsController < ApplicationController
   # GET /farms/1/edit
   def edit
     add_breadcrumb 'Farms', :farms_path
-    add_breadcrumb @farm.code
+    add_breadcrumb @farm.name
 
     @step = params[:step] || '1'
     add_breadcrumb 'Edit details' if @step == '1'

@@ -32,7 +32,7 @@
               <div class='wide'>&nbsp;</div>
               <%= f.radio_button :is_acres_from_map, false %>
               <%= f.text_field :acres_from_user, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
-              <%= f.label :is_acres_from_map_false, 'ac' %>
+              &nbsp;<%= f.label :is_acres_from_map_false, 'ac' %>
             </li>
             <% if (@field.field_type_id == 1) then %>
                 <li>
@@ -43,7 +43,7 @@
             <li>
               <%= f.label :tile_drainage_depth, 'Tile drainage depth:', :class => 'wide' %>
               <%= f.text_field :tile_drainage_depth, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
-              ft
+              &nbsp;ft
             </li>
             <li>
               <%= f.label :irrigation_id, 'Irrigation:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -52,12 +52,12 @@
             <li id='efficiency'>
               <%= f.label :efficiency, 'Efficiency<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.text_field :efficiency, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :max => 100, :step => 'any' %>
-              % &nbsp;&nbsp;&nbsp;&nbsp;<span id='default_efficiency'></span>
+              &nbsp;% &nbsp;&nbsp;&nbsp;&nbsp;<span id='default_efficiency'></span>
             </li>
             <li id='fertigation_n'>
               <%= f.label :fertigation_n, 'N concentration in irrigation water (for fertigation)', :class => 'wide' %>
               <%= f.text_field :fertigation_n, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
-              ppm
+              &nbsp;ppm
             </li>
             <li>
               <%= f.label :soil_test_laboratory_id, 'Soil Test Laboratory:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -65,18 +65,14 @@
             </li>
             <li>
               <%= f.label :soil_p_extractant_id, 'Soil P Extractant:<em>*</em>'.html_safe, :class => 'wide' %>
-              <div id="div_field_soil_p_extractant_id">
-              <select id="field_soil_p_extractant_id" name="field[soil_p_extractant_id]" disabled="disabled" required='required'>
-                <option>N/A</option>
-              </select>
-                </div>
-              <%= f.hidden_field :soil_p_extractant_id, :id => 'current_soil_p_extractant_id', :name => 'current_soil_p_extractant_id', :required => false %>
+                <%= f.hidden_field :soil_p_extractant_id %>
+                <span id='soil_p_extractant_id' style="display: table">N/A</span>
 
             </li>
             <li>
               <%= f.label :p_test_value, 'Soil P test value:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.text_field :p_test_value, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :step => 'any' %>
-              ppm
+              &nbsp;<span id='p_test_value_unit'></span>
             </li>
             <div id='li_soil'>
 

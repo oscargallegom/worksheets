@@ -1,4 +1,4 @@
-class FarmIssue
+class ProjectIssue
 
   include ActiveModel::Validations
   include ActiveModel::Conversion

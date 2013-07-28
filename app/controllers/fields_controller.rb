@@ -8,7 +8,7 @@ class FieldsController < ApplicationController
   layout 'farm', :only => [:index]
 
   add_breadcrumb 'Home', '/'
-  add_breadcrumb 'Farms', :farms_path
+  add_breadcrumb 'Projects', :farms_path
 
 
   # GET /farms/1/fields
@@ -17,7 +17,7 @@ class FieldsController < ApplicationController
 
     #@farm = Project.find(params[:farm_id])
     #@fields = @farm.fields
-    add_breadcrumb @farm.code, farm_path(@farm)
+    add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields'
 
     # natural sort fields
@@ -60,7 +60,7 @@ class FieldsController < ApplicationController
   # GET /farms/1/fields/1/edit
   def edit
 
-    add_breadcrumb @farm.code, farm_path(@farm)
+    add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name
     # @farm= Project.find(params[:farm_id])
@@ -68,6 +68,21 @@ class FieldsController < ApplicationController
     @step = params[:step] || '1'
 
     @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
+
+    if (@step =='5')      # perform calculations
+                          # TODO: exception handling
+                          ################################################################
+                          ################################################################
+      isOk = true
+      begin
+        @new_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      rescue
+        isOk = false
+        @new_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
+      end
+                          ################################################################
+                          ################################################################
+    end
 
 
     @other_fields = []
@@ -121,6 +136,10 @@ class FieldsController < ApplicationController
     @step = params[:field][:step] || '1'
 
     @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '1'
+    @other_fields = []
+    @farm.fields.each do |field|
+      @other_fields.push(field) if field.id != @field.id
+    end
 
 
     respond_to do |format|

@@ -8,7 +8,7 @@ class CropRotationsController < ApplicationController
   load_and_authorize_resource :crop_rotation, :through => :strip
 
   add_breadcrumb 'Home', '/'
-  add_breadcrumb 'Farms', :farms_path
+  add_breadcrumb 'Projects', :farms_path
 
   # GET /farms/1/fields/1/strips/1/crop_rotations/1
   def new
@@ -55,6 +55,8 @@ class CropRotationsController < ApplicationController
     add_breadcrumb 'Baseline crop management', edit_farm_field_path(@farm, @field, :step => 3)
     add_breadcrumb 'Strip ' + (@field.strips.find_index(@strip) + 1).to_s
     add_breadcrumb 'Crop ' + @crop_rotation.id.to_s
+
+    @crop_categories = CropCategory.all
 
 
     respond_to do |format|

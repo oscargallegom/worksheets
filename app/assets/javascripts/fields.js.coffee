@@ -5,18 +5,24 @@
 
 updateSoilPExtractants = ->
   $.getJSON "/soil_test_laboratories/" + $("#field_soil_test_laboratory_id").val() + "/soil_p_extractants.json", (soil_p_extractants) ->
-    items = []
-    items.push "<option value>Select P Test Method</option>"
-    $.each soil_p_extractants, (key, soil_p_extractant) ->
-      items.push "<option value=\"" + soil_p_extractant.id + "\">" + soil_p_extractant.name + "</option>"
-    $("#field_soil_p_extractant_id").html items.join("")
-    $("#field_soil_p_extractant_id").removeAttr("disabled")
-    $("#field_soil_p_extractant_id").val($("#current_soil_p_extractant_id").val())
-    $("#current_soil_p_extractant_id").val('')   # reset value - only needed on page load
+    #alert(soil_p_extractants[0].name)
+    $("#soil_p_extractant_id").text(soil_p_extractants[0].name)
+    $("#p_test_value_unit").text(soil_p_extractants[0].unit)    # unit
+    $("#field_soil_p_extractant_id").val(soil_p_extractants[0].id)        # hidden field
+    #items = []
+    #items.push "<option value>Select P Test Method</option>"
+    #$.each soil_p_extractants, (key, soil_p_extractant) ->
+    #  items.push "<option value=\"" + soil_p_extractant.id + "\">" + soil_p_extractant.name + "</option>"
+    #$("#field_soil_p_extractant_id").html items.join("")
+    #$("#field_soil_p_extractant_id").removeAttr("disabled")
+    #$("#field_soil_p_extractant_id").val($("#current_soil_p_extractant_id").val())
+    #$("#current_soil_p_extractant_id").val('')   # reset value - only needed on page load
 
 # update the strip indexes and show/hide length option
 updateIndexes = ->
   $(".fields:visible").find(".strip_index").each (index) ->
+    $(this).text(index+1)
+  $(".fields:visible").find(".bmp_index").each (index) ->
     $(this).text(index+1)
   $(".fields:visible").find('[id^="addCropButton"]').each (index) ->
     $(this).attr('id', 'addCropButton_' + index)

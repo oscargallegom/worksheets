@@ -115,10 +115,11 @@ module Ntt
         strip.crop_rotations.each_with_index do |crop_rotation, crop_rotation_index|
           crop_id = crop_rotation.crop_id
 
-          # grazingInfo section only available for permanent pasture
+          ########################################################
+          # Grazing, section only available for permanent pasture
+          ########################################################
           if (field.field_type_id == 2)
             grazing_operation = '426'
-
 
             crop_rotation.grazing_livestocks.each_with_index do |grazing_livestock, grazing_livestock_index|
 

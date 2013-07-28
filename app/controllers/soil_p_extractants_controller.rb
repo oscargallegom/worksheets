@@ -9,7 +9,7 @@ load_and_authorize_resource :soil_test_laboratory
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @soil_p_extractants, :only => [:id, :name] }
+      format.json { render json: @soil_p_extractants, :only => [:id, :name, :unit] }
       #format.js
     end
   end

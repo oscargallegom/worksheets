@@ -1,4 +1,4 @@
-<%= form_for(@farm_issue, :html => {:class => 'nn-form'}) do |f| %>
+<%= form_for(@project_issue, :html => {:class => 'nn-form'}) do |f| %>
     <%= f.hidden_field :farm_id %>
     <%= f.hidden_field :farm_name %>
     <div class="sectionRest clearfix">
@@ -10,7 +10,7 @@
               problems you are experiencing.<br/><br/></li>
             <li>
               <%= f.label :farm_name, 'Farm Name:', :class => 'wide' %>
-              <%= @farm_issue.farm_name %>
+              <%= @project_issue.farm_name %>
             <li>
               <%= f.label :message, 'Message:<em>*</em>'.html_safe, :class => 'wide' %>
               <br/><br/>
