@@ -178,8 +178,6 @@ updateEndOfSeason = (caller) ->
     $("#li_end_of_season_button").hide()
     $("#crop_rotation_end_of_seasons_attributes_" + componentNumber + "_is_harvest_as_silage").closest('li').hide()
 
-  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_end_of_seasons_attributes_')
-
   # delete all end of season after the one just modified
   i=0
   deleteSection = false

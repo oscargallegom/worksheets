@@ -188,6 +188,51 @@ isStreambankRestorationClicked = ->
     $("#field_streambank_restoration_length").prop('required', false)
 
 
+
+changeBmpListener = (caller) ->
+  componentNumber = getComponentNumber(caller.attr('id'), 'field_bmps_attributes_')
+
+  # delete all end of season after the one just modified
+  i=0
+  deleteSection = false
+  while i<$('#div_bmp').find('.class_bmp_type_id').length
+    if deleteSection
+      # turn off warning message
+      $('#div_bmp').find('.icon-delete')[i].removeAttribute('data-confirm')
+      # simulate click
+      $('#div_bmp').find('.icon-delete')[i].click()
+    if componentNumber is getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id, 'field_bmps_attributes_')
+      deleteSection = true
+    i++
+
+updateBmpList = (caller) ->
+  i=0
+  while i<$('#div_bmp').find('.class_bmp_type_id').length
+    curentSelect = $('#div_bmp').find('.class_bmp_type_id').get(i)
+
+    currentValue =  curentSelect.options[curentSelect.selectedIndex].value
+    #selectedIndex = curentSelect.selectedIndex
+
+    j = i+1
+    while j<$('#div_bmp').find('.class_bmp_type_id').length
+      nextSelect = $('#div_bmp').find('.class_bmp_type_id').get(j)
+      k=0
+      while k<nextSelect.options.length
+        if (nextSelect.options[k].value == currentValue)
+          nextSelect.remove(k)
+        k++
+        #alert(selectOptions.options[selectOptions.selectedIndex].value)
+      j++
+    i++
+
+
+
+# given the whole HTML id, return the extracted number
+getComponentNumber = (componentId, prefix) ->
+  withoutPrefix = componentId.replace(prefix, '')
+  withoutPrefix.substring(0, withoutPrefix.indexOf('_'))
+
+
 $(document).ready ->
 
   # TODO: remove
@@ -200,6 +245,11 @@ $(document).ready ->
   acresRequired()
   displayFertigation()
   displayEfficiency()
+
+  $("select").change ->
+    changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
+
+  updateBmpList()
 
   if typeof $("#field_soil_test_laboratory_id").val() isnt 'undefined' and $("#field_soil_test_laboratory_id").val().length > 0
     updateSoilPExtractants()
@@ -290,6 +340,11 @@ $(document).on "nested:fieldAdded", (event) ->
   updateIndexes()
   $("a").click ->
       addCrop($(this))
+
+  $("select").change ->
+    changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
+
+  updateBmpList()
 
 
 formatXml = (xml) ->

@@ -875,7 +875,7 @@ Crop.create!({:id => 69,  :name => 'Orchard', :crop_category_id => 22}, :without
 Crop.create!({:id => 70,  :name => 'Deciduous Trees', :crop_category_id => 99}, :without_protection => true)
 Crop.create!({:id => 71,  :name => 'Deciduous Shrubs', :crop_category_id => 99}, :without_protection => true)
 #Crop.create!({:id => 72,  :name => 'Hay', :crop_category_id => 4}, :without_protection => true)
-#Crop.create!({:id => 73,  :name => 'Hay', :crop_category_id => 5}, :without_protection => true)
+Crop.create!({:id => 73,  :name => 'Hay', :crop_category_id => 5}, :without_protection => true)
 Crop.create!({:id => 74,  :name => 'Squash', :crop_category_id => 12}, :without_protection => true)
 Crop.create!({:id => 75,  :name => 'Tomatillos', :crop_category_id => 14}, :without_protection => true)
 Crop.create!({:id => 76,  :name => 'Zucchini', :crop_category_id => 12}, :without_protection => true)

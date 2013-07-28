@@ -4,7 +4,7 @@
 
 <li>
   <%= f.label :bmp_type_id, 'BMP type:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.collection_select :bmp_type_id, @field.field_type.bmp_types.all, :id, :name, {:prompt => 'Select BMP type'}, {:required => true} %>
+  <%= f.collection_select :bmp_type_id, @field.field_type.bmp_types.all, :id, :name, {:prompt => 'Select BMP type'}, {:required => true, :class=> 'class_bmp_type_id'} %>
 </li>
 <li>
   <%= f.label :acres, 'Area:<em>*</em>'.html_safe, :class => 'wide' %>
