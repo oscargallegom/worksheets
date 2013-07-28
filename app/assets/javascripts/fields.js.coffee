@@ -188,11 +188,11 @@ isStreambankRestorationClicked = ->
     $("#field_streambank_restoration_length").prop('required', false)
 
 
-
+# when a BMP type is selected, delete all the following BMP sections
 changeBmpListener = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'field_bmps_attributes_')
 
-  # delete all end of season after the one just modified
+  # delete all BMP after the one just modified
   i=0
   deleteSection = false
   while i<$('#div_bmp').find('.class_bmp_type_id').length
@@ -205,6 +205,7 @@ changeBmpListener = (caller) ->
       deleteSection = true
     i++
 
+# when a new BMP section is added, the list of BMP types should not contain the ones already selected
 updateBmpList = (caller) ->
   i=0
   while i<$('#div_bmp').find('.class_bmp_type_id').length
@@ -221,9 +222,13 @@ updateBmpList = (caller) ->
         if (nextSelect.options[k].value == currentValue)
           nextSelect.remove(k)
         k++
-        #alert(selectOptions.options[selectOptions.selectedIndex].value)
       j++
     i++
+
+  # if only one option left, then hide add BMP button
+  if($('#div_bmp').find('.class_bmp_type_id').length) > 0
+    if ($('#div_bmp').find('.class_bmp_type_id').get($('#div_bmp').find('.class_bmp_type_id').length-1).options.length == 2)
+      $('#addBmpBtn').hide()
 
 
 
@@ -245,11 +250,12 @@ $(document).ready ->
   acresRequired()
   displayFertigation()
   displayEfficiency()
+  updateBmpList()
 
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
 
-  updateBmpList()
+
 
   if typeof $("#field_soil_test_laboratory_id").val() isnt 'undefined' and $("#field_soil_test_laboratory_id").val().length > 0
     updateSoilPExtractants()
