@@ -47,7 +47,7 @@
 <% end %>
             <li>
               <%= f.label :crop_rotation, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :crop_category_id, @crop_categories, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.crop.nil?), :prompt => 'Select crop category'} , :required => true  %>
+              <%= f.collection_select :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.crop.nil?), :prompt => 'Select crop category'} , :required => true  %>
             </li>
             <li>
               <%= f.label :name, 'Crop:<em>*</em>'.html_safe, :class => 'wide' %>

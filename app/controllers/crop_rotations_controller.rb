@@ -56,9 +56,6 @@ class CropRotationsController < ApplicationController
     add_breadcrumb 'Strip ' + (@field.strips.find_index(@strip) + 1).to_s
     add_breadcrumb 'Crop ' + @crop_rotation.id.to_s
 
-    @crop_categories = CropCategory.all
-
-
     respond_to do |format|
       format.html # show.html.erb
     end

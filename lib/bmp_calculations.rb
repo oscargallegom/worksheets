@@ -102,7 +102,7 @@ module BmpCalculations
     buffer_forest_sediment_conversion =0
 
     # if crop or hay
-    if (field.field_type_id == 1 && field.field_type_id == 3)
+    if (field.field_type_id == 1 || field.field_type_id == 3)
       # if grass buffer
       if (field.is_grass_buffer?)
 
@@ -118,8 +118,8 @@ module BmpCalculations
           grass_buffer_functional_acres = grass_buffer_length * 100.0 / 43560.0
         end
       end
-      # if forrest buffer
-      if (field.is_forrest_buffer?)
+      # if forest buffer
+      if (field.is_forest_buffer?)
         forest_buffer_acres = field.forest_buffer_area.to_f
 
         buffer_forest_n_conversion = field.watershed_segment.total_n_forest * forest_buffer_acres
@@ -127,7 +127,7 @@ module BmpCalculations
         buffer_forest_sediment_conversion = field.watershed_segment.total_sediment_forest * forest_buffer_acres
 
         if (field.forest_buffer_average_width > 35 && field.forest_buffer_average_width <= 100)
-          forest_buffer_functional_acres = field.forrest_buffer_area.to_f
+          forest_buffer_functional_acres = field.forest_buffer_area.to_f
         elsif (field.forest_buffer_average_width > 100)
           forest_buffer_functional_acres = forest_buffer_length * 100.0 / 43560.0
         end
