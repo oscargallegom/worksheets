@@ -32,6 +32,11 @@ module BmpCalculations
       end
     end
 
+    # TODO: remove test values
+    total_n_per_acre = 25
+    total_p_per_acre = 25
+    total_sediment_per_acre =25
+
     # otherwise throw error
     # TODO: Mindy to find out about adjustment factor
     total_adjusted_n_per_acre = total_n_per_acre
@@ -63,7 +68,7 @@ module BmpCalculations
         stream_hyo_sediment_conversion = field.watershed_segment.total_sediment_hyo * fencing_acres
       end
 
-      if (field.distance_fence_stream > 35 && field.distance_fence_stream <= 100)
+      if (field.distance_fence_stream >= 35 && field.distance_fence_stream <= 100)
         fencing_functional_acres = fencing_acres
       elsif (field.distance_fence_stream > 100)
         fencing_functional_acres = field.fence_length.to_f * 100.0 / 43560.0
@@ -112,7 +117,7 @@ module BmpCalculations
         buffer_hyo_p_conversion = field.watershed_segment.total_p_hyo * grass_buffer_acres
         buffer_hyo_sediment_conversion = field.watershed_segment.total_sediment_hyo * grass_buffer_acres
 
-        if (field.grass_buffer_average_width > 35 && field.grass_buffer_average_width <= 100)
+        if (field.grass_buffer_average_width >= 35 && field.grass_buffer_average_width <= 100)
           grass_buffer_functional_acres = field.grass_buffer_area.to_f
         elsif (field.grass_buffer_average_width > 100)
           grass_buffer_functional_acres = grass_buffer_length * 100.0 / 43560.0
@@ -126,7 +131,7 @@ module BmpCalculations
         buffer_forest_p_conversion = field.watershed_segment.total_p_forest * forest_buffer_acres
         buffer_forest_sediment_conversion = field.watershed_segment.total_sediment_forest * forest_buffer_acres
 
-        if (field.forest_buffer_average_width > 35 && field.forest_buffer_average_width <= 100)
+        if (field.forest_buffer_average_width >= 35 && field.forest_buffer_average_width <= 100)
           forest_buffer_functional_acres = field.forest_buffer_area.to_f
         elsif (field.forest_buffer_average_width > 100)
           forest_buffer_functional_acres = forest_buffer_length * 100.0 / 43560.0
@@ -152,7 +157,7 @@ module BmpCalculations
 
     total_n_for_converted_acre = stream_forest_n_conversion + stream_hyo_n_conversion + trp_n_conversion + buffer_hyo_n_conversion + buffer_forest_n_conversion + wetland_forest_n_conversion
     total_p_for_converted_acre = stream_forest_p_conversion + stream_hyo_p_conversion + trp_p_conversion + buffer_hyo_p_conversion + buffer_forest_p_conversion + wetland_forest_p_conversion
-    total_sediment_for_converted_acre = stream_forest_sediment_conversion + stream_hyo_sediment_conversion + trp_sediment_conversion + buffer_hyo_sediment_conversion + buffer_forest_sediment_conversion + wetland_forest_sediment_conversion
+    total_sediment_for_converted_acre = (stream_forest_sediment_conversion + stream_hyo_sediment_conversion + trp_sediment_conversion + buffer_hyo_sediment_conversion + buffer_forest_sediment_conversion + wetland_forest_sediment_conversion) / 2000.0
 
 
     ###################################################
@@ -230,21 +235,21 @@ module BmpCalculations
       sediment_reduction = bmp_efficiency[:sediment_reduction].to_f
 
       new_total_n_per_acre = ((new_total_n_per_acre * total_unconverted_acres) - (bmp.acres * new_total_n_per_acre * n_reduction)) / total_unconverted_acres
-      new_total_p_per_acre = ((new_total_p_per_acre * total_unconverted_acres) - (bmp.acres * new_total_p_per_acre * n_reduction)) / total_unconverted_acres
-      new_total_sediment_per_acre = ((new_total_sediment_per_acre * total_unconverted_acres) - (bmp.acres * new_total_sediment_per_acre * n_reduction)) / total_unconverted_acres
+      new_total_p_per_acre = ((new_total_p_per_acre * total_unconverted_acres) - (bmp.acres * new_total_p_per_acre * p_reduction)) / total_unconverted_acres
+      new_total_sediment_per_acre = ((new_total_sediment_per_acre * total_unconverted_acres) - (bmp.acres * new_total_sediment_per_acre * sediment_reduction)) / total_unconverted_acres
 
     end
     end
 
-    total_n_for_unconverted_acre =0
-    total_p_for_unconverted_acre =0
-    total_sediment_for_unconverted_acre =0
+    total_n_for_unconverted_acre = new_total_n_per_acre * total_unconverted_acres
+    total_p_for_unconverted_acre = new_total_p_per_acre * total_unconverted_acres
+    total_sediment_for_unconverted_acre = new_total_sediment_per_acre * total_unconverted_acres
 
     # if streambank restoration in place
     if (field.is_streambank_restoration)
-      total_n_for_unconverted_acre = ((new_total_n_per_acre * total_unconverted_acres) - (field.streambank_restoration_length * 0.2))
-      total_p_for_unconverted_acre = ((new_total_p_per_acre * total_unconverted_acres) - (field.streambank_restoration_length * 0.2))
-      total_sediment_for_unconverted_acre = ((new_total_sediment_per_acre * total_unconverted_acres) - (field.streambank_restoration_length * 0.2))
+      total_n_for_unconverted_acre = total_n_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
+      total_p_for_unconverted_acre = total_p_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
+      total_sediment_for_unconverted_acre = total_sediment_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
     end
 
 

@@ -26,7 +26,7 @@ module Ntt
         #puts data.inspect
 
 
-        doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
+        doc = Nokogiri::XML(open(URL_NTT + '?input=' + 'file'))
 
 
         if (!doc.nil?)
