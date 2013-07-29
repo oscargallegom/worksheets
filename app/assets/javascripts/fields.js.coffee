@@ -210,8 +210,8 @@ updateBmpList = () ->
 
   # remove all disabled options
   i=0
-  while i<$('#div_bmp').find('.class_bmp_type_id').length
-    curentSelect = $('#div_bmp').find('.class_bmp_type_id').get(i)
+  while i<$('#div_bmp').find('.class_bmp_type_id:visible').length
+    curentSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(i)
     # none of the options should be disabled in the first select
     k = 0
     while k<curentSelect.options.length
@@ -221,7 +221,7 @@ updateBmpList = () ->
 
   # now disabled appropriate options
   i=0
-  while i<$('#div_bmp').find('.class_bmp_type_id').length
+  while i<$('#div_bmp').find('.class_bmp_type_id:visible').length
     curentSelect = $('#div_bmp').find('.class_bmp_type_id').get(i)
     currentValue =  curentSelect.options[curentSelect.selectedIndex].value
 
