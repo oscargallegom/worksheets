@@ -207,7 +207,6 @@ changeBmpListener = (caller) ->
 
 # when a new BMP section is added, the list of BMP types should not contain the ones already selected
 updateBmpList = () ->
-
   # remove all disabled options
   i=0
   while i<$('#div_bmp').find('.class_bmp_type_id:visible').length
@@ -222,12 +221,12 @@ updateBmpList = () ->
   # now disabled appropriate options
   i=0
   while i<$('#div_bmp').find('.class_bmp_type_id:visible').length
-    curentSelect = $('#div_bmp').find('.class_bmp_type_id').get(i)
+    curentSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(i)
     currentValue =  curentSelect.options[curentSelect.selectedIndex].value
 
     j = i+1
-    while j<$('#div_bmp').find('.class_bmp_type_id').length
-      nextSelect = $('#div_bmp').find('.class_bmp_type_id').get(j)
+    while j<$('#div_bmp').find('.class_bmp_type_id:visible').length
+      nextSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(j)
       k=0
       while k<nextSelect.options.length
         if (nextSelect.options[k].value == currentValue)
