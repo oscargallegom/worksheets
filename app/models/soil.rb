@@ -9,7 +9,7 @@ class Soil < ActiveRecord::Base
 
   validates_presence_of :percent, :map_unit_key, :component_name, :map_unit_name, :slope
 
-  validates_inclusion_of :percent_clay, :in => 200..200, :message => 'must be between 0 and 100'
+  validates_inclusion_of :percent_clay, :in => 0..100, :message => 'must be between 0 and 100'
   validates_inclusion_of :percent_sand, :in => 0..100, :message => 'must be between 0 and 100'
 
   validates_numericality_of :bulk_density, :greater_than_or_equal_to => 1.10, :less_than_or_equal_to => 1.79

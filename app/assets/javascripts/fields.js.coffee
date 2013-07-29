@@ -206,13 +206,24 @@ changeBmpListener = (caller) ->
     i++
 
 # when a new BMP section is added, the list of BMP types should not contain the ones already selected
-updateBmpList = (caller) ->
+updateBmpList = () ->
+
+  # remove all disabled options
   i=0
   while i<$('#div_bmp').find('.class_bmp_type_id').length
     curentSelect = $('#div_bmp').find('.class_bmp_type_id').get(i)
+    # none of the options should be disabled in the first select
+    k = 0
+    while k<curentSelect.options.length
+      curentSelect.options[k].disabled = false
+      k++
+    i++
 
+  # now disabled appropriate options
+  i=0
+  while i<$('#div_bmp').find('.class_bmp_type_id').length
+    curentSelect = $('#div_bmp').find('.class_bmp_type_id').get(i)
     currentValue =  curentSelect.options[curentSelect.selectedIndex].value
-    #selectedIndex = curentSelect.selectedIndex
 
     j = i+1
     while j<$('#div_bmp').find('.class_bmp_type_id').length
@@ -220,7 +231,8 @@ updateBmpList = (caller) ->
       k=0
       while k<nextSelect.options.length
         if (nextSelect.options[k].value == currentValue)
-          nextSelect.remove(k)
+          #nextSelect.remove(k)
+          nextSelect.options[k].disabled = true
         k++
       j++
     i++
@@ -337,6 +349,8 @@ $(document).ready ->
 
 $(document).on "nested:fieldRemoved", (event) ->
   updateIndexes()
+  updateBmpList()
+
   field = event.field
   # remove the required field(otherwise Chrome complains)
   field.find('input').prop('required', false)
@@ -344,14 +358,13 @@ $(document).on "nested:fieldRemoved", (event) ->
 
 $(document).on "nested:fieldAdded", (event) ->
   updateIndexes()
+  updateBmpList()
+
   $("a").click ->
       addCrop($(this))
 
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
-
-  updateBmpList()
-
 
 formatXml = (xml) ->
   formatted = ""

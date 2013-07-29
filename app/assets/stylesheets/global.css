@@ -723,6 +723,9 @@ input, fieldset select, option, textarea {
     color: #666;
     background-color: #fff;
 }
+option:disabled {
+    color: darkgrey;
+}
 input.text {
     height: 25px;
     border: 1px solid #ccc;
