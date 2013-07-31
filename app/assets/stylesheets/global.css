@@ -831,7 +831,7 @@ form li {
 .nn-form ol li {
     list-style: none;
     margin-bottom: 5px;
-    min-height: 29px;
+    min-height: 25px;
 }
 .nn-form label em, .nn-form div em {
     color: #ff0000;
@@ -985,6 +985,29 @@ label { }
     float: left;
     width: 300px;
     font-weight: bold;
+}
+
+.nn-form span.span {
+    display: block;
+    float: left;
+    font-weight: bold;
+}
+.nn-form span.wide {
+    display: block;
+    float: left;
+    width: 160px;
+    font-weight: bold;
+}
+.nn-form span.extrawide {
+    display: block;
+    float: left;
+    width: 300px;
+    font-weight: bold;
+}
+.nn-form span.extrawide_not_bold {
+    display: block;
+    float: left;
+    width: 300px;
 }
 
 .nn-form label.checkbox { }

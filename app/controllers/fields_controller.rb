@@ -75,10 +75,10 @@ class FieldsController < ApplicationController
                           ################################################################
       isOk = true
       begin
-        @new_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        @current_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       rescue
         isOk = false
-        @new_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
+        @current_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
       end
                           ################################################################
                           ################################################################
@@ -160,10 +160,10 @@ class FieldsController < ApplicationController
             ################################################################
             isOk = true
             begin
-              @new_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+              @current_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             rescue
               isOk = false
-              @new_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
+              @current_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
             end
             ################################################################
             ################################################################
