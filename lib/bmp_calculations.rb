@@ -18,13 +18,7 @@ module BmpCalculations
     if (success)
       @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
       if (@results['ErrorCode'] != '0')
-        # error
-
-        # TODO: remove test values
-        total_n_per_acre = 25
-        total_p_per_acre = 25
-        total_sediment_per_acre =25
-
+        # TODO: error
       else
         total_n_per_acre = @results['OrganicN'].to_f + @results['NO3'].to_f + @results['TileDrainN'].to_f
         total_p_per_acre = @results['OrganicP'].to_f + @results['SolubleP'].to_f + @results['TileDrainP'].to_f
@@ -33,9 +27,11 @@ module BmpCalculations
     end
 
     # TODO: remove test values
+    if (session[:debug])
     total_n_per_acre = 25
     total_p_per_acre = 25
     total_sediment_per_acre =25
+    end
 
     # otherwise throw error
     # TODO: Mindy to find out about adjustment factor
@@ -207,15 +203,17 @@ module BmpCalculations
 
     # wetland lookup
     wetland_ratio = field.wetland_area.to_f / (field.wetland_area.to_f + field.wetland_treated_area.to_f)
-    # TODO: do lookup
-    efficiency_n = 123
-    efficiency_p = 123
-    efficiency_sediment = 123
 
-    upland_wetland_n_reduction = field.wetland_treated_area.to_f * efficiency_n * total_adjusted_n_per_acre
-    upland_wetland_p_reduction = field.wetland_treated_area.to_f * efficiency_p * total_adjusted_p_per_acre
-    upland_wetland_sediment_reduction = field.wetland_treated_area.to_f * efficiency_sediment * total_adjusted_sediment_per_acre
+    # 12 = wetland
+    bmp_efficiency_for_wetland = BmpEfficiencyLookup.where(:bmp_type_id => 12, :hgmr_code => field.watershed_segment.hgmr_code).first
 
+    n_reduction_for_wetland = bmp_efficiency_for_wetland[:n_reduction].to_f
+    p_reduction_for_wetland = bmp_efficiency_for_wetland[:p_reduction].to_f
+    sediment_reduction_for_wetland = bmp_efficiency_for_wetland[:sediment_reduction].to_f
+
+    upland_wetland_n_reduction = field.is_wetland ? 0 : field.wetland_treated_area.to_f * n_reduction_for_wetland * total_adjusted_n_per_acre
+    upland_wetland_p_reduction = field.is_wetland ? 0 : field.wetland_treated_area.to_f * p_reduction_for_wetland * total_adjusted_p_per_acre
+    upland_wetland_sediment_reduction = field.is_wetland ? 0 : field.wetland_treated_area.to_f * sediment_reduction_for_wetland * total_adjusted_sediment_per_acre
 
     new_total_n_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_n_per_acre) - upland_streambank_grass_n_reduction - upland_streambank_forest_n_reduction - upland_grass_buffer_n_reduction - upland_forest_buffer_n_reduction - upland_wetland_n_reduction) / (total_unconverted_acres)
     new_total_p_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_p_per_acre) - upland_streambank_grass_p_reduction - upland_streambank_forest_p_reduction - upland_grass_buffer_p_reduction - upland_forest_buffer_p_reduction - upland_wetland_p_reduction) / (total_unconverted_acres)
