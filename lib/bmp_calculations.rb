@@ -255,7 +255,7 @@ module BmpCalculations
     new_total_p = total_p_for_converted_acre + total_p_for_unconverted_acre
     new_total_sediment = total_sediment_for_converted_acre + total_sediment_for_unconverted_acre
 
-    {:ntt_results => @ntt_results, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment}
+    {:ntt_results => @ntt_results, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :error_message => 'No error'}
 
 
     # raise 'Oh no! An error......'

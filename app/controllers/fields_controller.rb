@@ -76,15 +76,15 @@ class FieldsController < ApplicationController
       isOk = true
       begin
         @current_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      rescue
+      rescue Exception => e
+        flash[:exception] = e.message
         isOk = false
-        @current_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
+        @current_totals = {:new_total_n => -99999, :new_total_p => -99999, :new_total_sediment => -99999, :error_message => e.message }
       end
-                          ################################################################
-                          ################################################################
+
       @ntt_results = @current_totals[:ntt_results]
       @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
-      @baseline_lookup = {:total_n_baseline => 'Not found', :total_p_baseline => 'Not found', :total_sediment_baseline => 'Not found'} if @baseline_lookup.nil?
+      @baseline_lookup = {:total_n_baseline =>  -99999, :total_p_baseline =>  -99999, :total_sediment_baseline =>  -99999}  if @baseline_lookup.nil?
     end
 
 
@@ -172,7 +172,7 @@ class FieldsController < ApplicationController
 
             @ntt_results = @current_totals[:ntt_results]
            @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
-            @baseline_lookup = {:total_n_baseline => 'Not found', :total_p_baseline => 'Not found', :total_sediment_baseline => 'Not found'}  if @baseline_lookup.nil?
+            @baseline_lookup = {:total_n_baseline =>  -99999, :total_p_baseline =>  -99999, :total_sediment_baseline =>  -99999}  if @baseline_lookup.nil?
             ################################################################
             ################################################################
           end
