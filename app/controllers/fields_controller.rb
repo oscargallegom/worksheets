@@ -84,7 +84,7 @@ class FieldsController < ApplicationController
                           ################################################################
       @ntt_results = @current_totals[:ntt_results]
       @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
-
+      @baseline_lookup = {:total_n_baseline => 'Not found', :total_p_baseline => 'Not found', :total_sediment_baseline => 'Not found'} if @baseline_lookup.nil?
     end
 
 
@@ -170,8 +170,8 @@ class FieldsController < ApplicationController
             end
 
             @ntt_results = @current_totals[:ntt_results]
-            @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
-
+           @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
+            @baseline_lookup = {:total_n_baseline => 'Not found', :total_p_baseline => 'Not found', :total_sediment_baseline => 'Not found'}  if @baseline_lookup.nil?
             ################################################################
             ################################################################
           end
