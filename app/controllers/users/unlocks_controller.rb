@@ -1,2 +1,2 @@
-class Users::UnlocksController  < Devise::UnlocksController
+class Users::UnlocksController < Devise::UnlocksController
 end

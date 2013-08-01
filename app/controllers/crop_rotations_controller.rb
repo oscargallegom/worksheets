@@ -29,22 +29,19 @@ class CropRotationsController < ApplicationController
 
     ################  TEST
     if session[:debug]
-      success, content = buildXml(@field)    # TODO: remove/change
-      @input_xml = content    # TODO: remove/change
-      success, content =  callNtt(@field)    # TODO: remove/change
+      success, content = buildXml(@field) # TODO: remove/change
+      @input_xml = content # TODO: remove/change
+      success, content = callNtt(@field) # TODO: remove/change
       if (success)
         @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
         @output_xml = content
         if (@results['ErrorCode'] != '0')
-        flash[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes']     # TODO: check for error!
-          end
+          flash[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
+        end
       else
         flash[:error] = 'Could not contact NTT: ' << content.to_s
       end
     end
-
-
-
 
 
     ################  END TEST
@@ -79,7 +76,7 @@ class CropRotationsController < ApplicationController
     respond_to do |format|
       if @crop_rotation.update_attributes(params[:crop_rotation])
         if (params[:nextPage] == 'Save & Continue')
-        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully updated.' }
+          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully updated.' }
         else
           format.html { redirect_to new_farm_field_strip_crop_rotation_path(@farm, @field, @strip), notice: 'Crop was successfully updated.' }
         end

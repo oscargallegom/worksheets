@@ -1,6 +1,6 @@
 class SoilPExtractantsController < ApplicationController
 
-load_and_authorize_resource :soil_test_laboratory
+  load_and_authorize_resource :soil_test_laboratory
   load_and_authorize_resource :through => :soil_test_laboratory
 
   # GET /soil_test_laboratory

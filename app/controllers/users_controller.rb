@@ -32,14 +32,14 @@ class UsersController < ApplicationController
 
   # GET /users/new
   # GET /users/new.json
-   def new
-  #  @roles = Role.all
-  #  add_breadcrumb 'New'
-  #  respond_to do |format|
-  #    format.html # new.html.erb
-  #    format.json { render json: @user }
-  #  end
-   end
+  def new
+    #  @roles = Role.all
+    #  add_breadcrumb 'New'
+    #  respond_to do |format|
+    #    format.html # new.html.erb
+    #    format.json { render json: @user }
+    #  end
+  end
 
   # GET /users/1/edit
   def edit
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
-   def create
+  def create
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

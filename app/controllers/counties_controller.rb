@@ -1,6 +1,6 @@
 class CountiesController < ApplicationController
 
-load_and_authorize_resource :state
+  load_and_authorize_resource :state
   load_and_authorize_resource :through => :state
 
   # GET /counties

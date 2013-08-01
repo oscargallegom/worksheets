@@ -119,16 +119,16 @@ class FarmsController < ApplicationController
 
 
     respond_to do |format|
-      if @farm_dup.save!(:validate => false)    # TODO: remove !
-        #Farm.set_callback(:create)
-        #Field.set_callback(:create)
-        #Soil.set_callback(:create)
-        #Farm.set_callback(:update)
-        #Field.set_callback(:update)
-        #Soil.set_callback(:update)
-        #Farm.set_callback(:save)
-        #Field.set_callback(:save)
-        #Soil.set_callback(:save)
+      if @farm_dup.save!(:validate => false) # TODO: remove !
+                                             #Farm.set_callback(:create)
+                                             #Field.set_callback(:create)
+                                             #Soil.set_callback(:create)
+                                             #Farm.set_callback(:update)
+                                             #Field.set_callback(:update)
+                                             #Soil.set_callback(:update)
+                                             #Farm.set_callback(:save)
+                                             #Field.set_callback(:save)
+                                             #Soil.set_callback(:save)
         format.html { redirect_to farms_url, notice: 'Farm was successfully duplicated.' }
       else
         #Farm.set_callback(:create)
@@ -173,7 +173,7 @@ class FarmsController < ApplicationController
         #@field.segment_id = params["field#{i}segment"]
 
         @field.tmdl = Tmdl.where(:code => params["field#{i}huc12"].to_i).first
-            # (params.has_key?("field#{i}tmdl") || Tmdl.where(:code => params["field#{i}tmdl"].to_i).first == nil) ? false : true
+        # (params.has_key?("field#{i}tmdl") || Tmdl.where(:code => params["field#{i}tmdl"].to_i).first == nil) ? false : true
         #@field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 
         # get the watershed segment
@@ -184,27 +184,27 @@ class FarmsController < ApplicationController
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
         arrFieldmukey = params["field#{i}mukey"].split("|")
         arrFieldcompname = params["field#{i}compname"].split("|")
-        arrFieldmuname  = params["field#{i}muname"].split("|")
+        arrFieldmuname = params["field#{i}muname"].split("|")
         arrFieldhydgrp = params["field#{i}hydgrp"].split("|")
         arrFieldmusym = params["field#{i}musym"].split("|")
 
         @listSoils = Array.new
 
         arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
-          if !arrFieldcompname[index].eql?('Water')      # ignore soil if water
-          @listSoils << {
-              :percent =>  arrFieldpctsoiltype[index],
-              :mukey =>  arrFieldmukey[index],
-              :compname => arrFieldcompname[index],
-              :muname => arrFieldmuname[index],
-              :hydgrp => arrFieldhydgrp[index],
-              :musym => arrFieldmusym[index]
-          }
-            end
+          if !arrFieldcompname[index].eql?('Water') # ignore soil if water
+            @listSoils << {
+                :percent => arrFieldpctsoiltype[index],
+                :mukey => arrFieldmukey[index],
+                :compname => arrFieldcompname[index],
+                :muname => arrFieldmuname[index],
+                :hydgrp => arrFieldhydgrp[index],
+                :musym => arrFieldmusym[index]
+            }
           end
+        end
 
         # sort by percentage in descending order
-        @listSoils = @listSoils.sort_by!{|e| e[:percent]}.reverse!
+        @listSoils = @listSoils.sort_by! { |e| e[:percent] }.reverse!
 
         # at most 3 soils are displayed
         @nbSoils = [3, @listSoils.length].min
@@ -267,11 +267,11 @@ class FarmsController < ApplicationController
     sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
 
     # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
-    client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml" )
+    client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
 
-    response = client.call(:run_query, message: { "Query" => sql } )
+    response = client.call(:run_query, message: {"Query" => sql})
     if response.success?
-      return response.to_array(:run_query_response, :run_query_result, :diffgram , :new_data_set, :table).first
+      return response.to_array(:run_query_response, :run_query_result, :diffgram, :new_data_set, :table).first
     end
   end
 

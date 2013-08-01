@@ -138,4 +138,8 @@
       <%= @output_xml %>
 </pre>
 
+    <br/><br/><br/><br/>
+
+    <%= URI.escape(@input_xml.gsub('<', '[').gsub('>', ']')) %>
+
 <% end %>

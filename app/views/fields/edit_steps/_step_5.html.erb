@@ -1,4 +1,8 @@
-<%= @current_totals[:error_message]%>
+<% if !flash[:error].nil? %>
+
+    <br/><br/>Please contact your administrator.
+
+   <% else %>
 
 <div class="sectionRest clearfix nn-form">
 
@@ -7,8 +11,8 @@
       <ol>
         <li><h2 class='sectionHeading'>Nitrogen</h2></li>
         <li><span class='wide'>Baseline Load (EOS):</span>
-          <%= number_with_precision(@baseline_lookup[:total_n_baseline].to_f * @field.acres, :precision => 2, delimiter: '.') %> lb
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_n_baseline].to_f, :precision => 2, delimiter: '.') %> lb/ac)
+          <%= number_with_precision(@baseline_lookup[:total_n_baseline] * @field.acres, :precision => 2, delimiter: '.') %> lb
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_n_baseline], :precision => 2, delimiter: '.') %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
           <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: '.') %> lb
@@ -18,8 +22,8 @@
 
         <li><h2 class='sectionHeading'>Phosphorus</h2></li>
         <li><span class='wide'>Baseline Load (EOS):</span>
-          <%= number_with_precision(@baseline_lookup[:total_p_baseline].to_f * @field.acres, :precision => 2, delimiter: '.') %> lb
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_p_baseline].to_f, :precision => 2, delimiter: '.') %> lb/ac)
+          <%= number_with_precision(@baseline_lookup[:total_p_baseline] * @field.acres, :precision => 2, delimiter: '.') %> lb
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_p_baseline], :precision => 2, delimiter: '.') %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
           <%= number_with_precision(@current_totals[:new_total_p], :precision => 2) %> lb
@@ -29,8 +33,8 @@
 
         <li><h2 class='sectionHeading'>Sediment</h2></li>
         <li><span class='wide'>Baseline Load (EOS):</span>
-          <%= number_with_precision(@baseline_lookup[:total_sediment_baseline].to_f * @field.acres, :precision => 2) %> lb
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_sediment_baseline].to_f, :precision => 2) %> lb/ac)
+          <%= number_with_precision(@baseline_lookup[:total_sediment_baseline] * @field.acres, :precision => 2) %> lb
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_sediment_baseline], :precision => 2) %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
           <%= number_with_precision(@current_totals[:new_total_sediment] / 2000.0, :precision => 2) %> tons
@@ -59,7 +63,7 @@
         <li><span class='extrawide'>Flow</span><b>123</b></li>
 
         <li><span class='extrawide'>Sediment</span><b>
-<%= number_with_precision(@ntt_results['Sediment'].to_f, :precision => 2, delimiter: '.') %> t/ac
+<%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: '.') %> t/ac
         </b></li>
 
         <li><span class='extrawide'>Carbon</span><b>123</b></li>
@@ -74,3 +78,5 @@
   </div>
   <div style="clear: both"></div>
 </div>
+
+<% end %>
