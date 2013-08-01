@@ -5,17 +5,19 @@
       <ol>
         <li><h2 class='sectionHeading'>Nitrogen</h2></li>
         <li><span class='wide'>Baseline Load (EOS):</span>
-          123 lb
+          <%= number_with_precision(@baseline_lookup[:total_n_baseline].to_f * @field.acres, :precision => 2, delimiter: '.') %> lb
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_n_baseline].to_f, :precision => 2, delimiter: '.') %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
-          <%= number_with_precision(@current_totals[:new_total_n], :precision => 2) %> lb
+          <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: '.') %> lb
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2) %> lb/ac)
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2, delimiter: '.') %> lb/ac)
         </li>
 
         <li><h2 class='sectionHeading'>Phosphorus</h2></li>
         <li><span class='wide'>Baseline Load (EOS):</span>
-          123 lb
+          <%= number_with_precision(@baseline_lookup[:total_p_baseline].to_f * @field.acres, :precision => 2, delimiter: '.') %> lb
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_p_baseline].to_f, :precision => 2, delimiter: '.') %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
           <%= number_with_precision(@current_totals[:new_total_p], :precision => 2) %> lb
@@ -25,10 +27,11 @@
 
         <li><h2 class='sectionHeading'>Sediment</h2></li>
         <li><span class='wide'>Baseline Load (EOS):</span>
-          123 lb
+          <%= number_with_precision(@baseline_lookup[:total_sediment_baseline].to_f * @field.acres, :precision => 2) %> lb
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_sediment_baseline].to_f, :precision => 2) %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
-          <%= number_with_precision(@current_totals[:new_total_sediment], :precision => 2) %> lb
+          <%= number_with_precision(@current_totals[:new_total_sediment], :precision => 2) %> t
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres, :precision => 2) %> lb/ac)
         </li>

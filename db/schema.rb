@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730131715) do
+ActiveRecord::Schema.define(:version => 20130801004112) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(:version => 20130730131715) do
     t.integer "farm_id"
     t.integer "animal_id"
     t.decimal "animals_units"
+  end
+
+  create_table "baseline_lookups", :force => true do |t|
+    t.integer "state_id"
+    t.string  "major_basin"
+    t.integer "field_type_id"
+    t.decimal "total_n_baseline"
+    t.decimal "total_p_baseline"
+    t.decimal "total_sediment_baseline"
+    t.decimal "n_adjustment_factor"
+    t.decimal "p_adjustment_factor"
+    t.decimal "sediment_adjustment_factor"
   end
 
   create_table "bmp_efficiency_lookups", :force => true do |t|

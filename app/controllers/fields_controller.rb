@@ -82,6 +82,9 @@ class FieldsController < ApplicationController
       end
                           ################################################################
                           ################################################################
+
+      @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
+
     end
 
 
