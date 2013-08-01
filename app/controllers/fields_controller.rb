@@ -164,9 +164,10 @@ class FieldsController < ApplicationController
             isOk = true
             begin
               @current_totals = computeBmpCalculations(@field)    # TEST@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            rescue
+            rescue Exception => e
+              flash[:exception] = e.message
               isOk = false
-              @current_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
+              @current_totals = {:new_total_n => -99999, :new_total_p => -99999, :new_total_sediment => -99999, :error_message => e.message }
             end
 
             @ntt_results = @current_totals[:ntt_results]
