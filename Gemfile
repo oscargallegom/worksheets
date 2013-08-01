@@ -63,6 +63,13 @@ group :development do
   #  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
 end
 
+# TODO: remove - just to test heroku
+group :production do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  #  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
+end
+
 group :assets do
   gem 'coffee-rails'
 end
