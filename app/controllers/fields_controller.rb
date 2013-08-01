@@ -82,7 +82,7 @@ class FieldsController < ApplicationController
       end
                           ################################################################
                           ################################################################
-
+      @ntt_results = @current_totals[:ntt_results]
       @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
 
     end
@@ -168,6 +168,10 @@ class FieldsController < ApplicationController
               isOk = false
               @current_totals = {:new_total_n => 'Error', :new_total_p => 'Error', :new_total_sediment => 'Error'}
             end
+
+            @ntt_results = @current_totals[:ntt_results]
+            @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
+
             ################################################################
             ################################################################
           end

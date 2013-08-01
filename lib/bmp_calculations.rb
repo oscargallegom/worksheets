@@ -16,13 +16,13 @@ module BmpCalculations
     success, content =  callNtt(field)    # TODO: error handling
 
     if (success)
-      @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
-      if (@results['ErrorCode'] != '0')
+      @ntt_results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
+      if (@ntt_results['ErrorCode'] != '0')
         # TODO: error
       else
-        total_n_per_acre = @results['OrganicN'].to_f + @results['NO3'].to_f + @results['TileDrainN'].to_f
-        total_p_per_acre = @results['OrganicP'].to_f + @results['SolubleP'].to_f + @results['TileDrainP'].to_f
-        total_sediment_per_acre = @results['Sediment'].to_f
+        total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
+        total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
+        total_sediment_per_acre = @ntt_results['Sediment'].to_f
       end
     end
 
@@ -246,8 +246,8 @@ module BmpCalculations
     # if streambank restoration in place
     if (field.is_streambank_restoration)
       total_n_for_unconverted_acre = total_n_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
-      total_p_for_unconverted_acre = total_p_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
-      total_sediment_for_unconverted_acre = total_sediment_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
+      total_p_for_unconverted_acre = total_p_for_unconverted_acre - (field.streambank_restoration_length * 0.068)
+      total_sediment_for_unconverted_acre = total_sediment_for_unconverted_acre - (field.streambank_restoration_length * 0.027125)
     end
 
 
@@ -255,7 +255,7 @@ module BmpCalculations
     new_total_p = total_p_for_converted_acre + total_p_for_unconverted_acre
     new_total_sediment = total_sediment_for_converted_acre + total_sediment_for_unconverted_acre
 
-    {:new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment}
+    {:ntt_results => @ntt_results, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment}
 
 
     # raise 'Oh no! An error......'

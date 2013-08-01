@@ -31,9 +31,9 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_sediment_baseline].to_f, :precision => 2) %> lb/ac)
         </li>
         <li><span class='wide'>Current Load (EOS):</span>
-          <%= number_with_precision(@current_totals[:new_total_sediment], :precision => 2) %> t
+          <%= number_with_precision(@current_totals[:new_total_sediment] / 2000.0, :precision => 2) %> tons
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres, :precision => 2) %> lb/ac)
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres / 2000.0, :precision => 2) %> t/ac)
         </li>
 
         <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>
@@ -42,7 +42,9 @@
 
         <li><span class='extrawide'>Total N (before BMPs applied)</span><b>123</b></li>
 
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>123</li>
+        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
+
+        </li>
         <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
         <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
 
@@ -54,7 +56,9 @@
 
         <li><span class='extrawide'>Flow</span><b>123</b></li>
 
-        <li><span class='extrawide'>Sediment</span><b>123</b></li>
+        <li><span class='extrawide'>Sediment</span><b>
+<%= number_with_precision(@ntt_results['Sediment'].to_f, :precision => 2, delimiter: '.') %> t/ac
+        </b></li>
 
         <li><span class='extrawide'>Carbon</span><b>123</b></li>
 
