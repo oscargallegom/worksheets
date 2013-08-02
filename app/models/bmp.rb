@@ -1,6 +1,6 @@
 class Bmp < ActiveRecord::Base
   belongs_to :bmp_type
-  belongs_to :field#, :inverse_of => :bmps
+  belongs_to :field #, :inverse_of => :bmps
 
   attr_accessible :field_id, :bmp_type_id, :acres, :is_planned
 

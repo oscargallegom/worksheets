@@ -7,7 +7,8 @@
 </li>
 <li>
   <%= f.label :total_manure, 'Total manure:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :total_manure, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %> T/yr
+  <%= f.text_field :total_manure, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+  T/yr
 </li>
 <li>
   <%= f.label :quantity, 'Quantity:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -20,7 +21,8 @@
 </li>
 <li>
   <%= f.label :hours_per_day_confined, 'Hours/day confined:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :hours_per_day_confined, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24, :step => 'any' %> hr/day
+  <%= f.text_field :hours_per_day_confined, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24, :step => 'any' %>
+  hr/day
 </li>
 <li>
   <%= f.label :average_weight, 'Average weight:<em>*</em>'.html_safe, :class => 'wide' %>

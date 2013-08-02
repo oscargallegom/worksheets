@@ -1,9 +1,11 @@
-<li><h1 class='sectionHeading'>Tillage operation <span class="tillage_operation_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete tillage operation' %></h1></li>
+<li><h1 class='sectionHeading'>Tillage operation
+  <span class="tillage_operation_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete tillage operation' %>
+</h1></li>
 <li>
   <%= f.label :start_date_year, 'Operation date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :start_date_year, options_for_select(listYears, :selected => f.object.start_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :start_date_month, options_for_select(listMonths, :selected => f.object.start_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :start_date_day, options_for_select(listDays, :selected => f.object.start_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+  <%= f.select :start_date_year, options_for_select(listYears, :selected => f.object.start_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+  <%= f.select :start_date_month, options_for_select(listMonths, :selected => f.object.start_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+  <%= f.select :start_date_day, options_for_select(listDays, :selected => f.object.start_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
   <%= f.label :tillage_operation_type_id, 'Operation:<em>*</em>'.html_safe, :class => 'wide' %>

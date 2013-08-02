@@ -2,7 +2,7 @@
   <ul id="tabNav">
     <li><%= link_to 'General', edit_farm_field_path(@farm, @field, :step => 1) %></li>
     <li><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
-    <li class="selected" ><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
+    <li class="selected"><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
     <li><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
     <li><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
     <li><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
@@ -26,7 +26,7 @@
         </div>
     <% end %>
 
-    <input type='hidden' id='field_type_id' value='<%= @field.field_type_id%>'>
+    <input type='hidden' id='field_type_id' value='<%= @field.field_type_id %>'>
 
 
     <div class="sectionRest clearfix">
@@ -36,18 +36,31 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Crop Category</h2></li>
-            <% if (@field.field_type_id == 1) # if crop %>
-            <li>Enter the following information for the entire growing cycle of this crop, as applicable. Note that some BMPs such as enhanced nutrient management, dairy feed management, and conservation tillage will be credited automatically if the information entered on this page reflects any of these practices. If you plant commodity cover crops, they should be added as a crop to be included in your rotation. If you plant conservation cover crops, enter this information at the bottom of the page for the crop preceding the cover crop. Enter crop management information for as many years as your crop rotation is long.</li>
+            <% if (@field.field_type_id == 1) # if crop  %>
+                <li>Enter the following information for the entire growing cycle of this crop, as applicable. Note that
+                  some BMPs such as enhanced nutrient management, dairy feed management, and conservation tillage will
+                  be credited automatically if the information entered on this page reflects any of these practices. If
+                  you plant commodity cover crops, they should be added as a crop to be included in your rotation. If
+                  you plant conservation cover crops, enter this information at the bottom of the page for the crop
+                  preceding the cover crop. Enter crop management information for as many years as your crop rotation is
+                  long.
+                </li>
             <% end %>
-            <% if (@field.field_type_id == 2) # if permanent pasture %>
-            <li>Enter the following information for this pasture, as applicable. Note that some BMPs such as enhanced nutrient management will be credited automatically if the information entered on this page reflects any of these practices.</li>
-<% end %>
-            <% if (@field.field_type_id == 3) # if hay %>
-            <li>Enter the following information for the entire growing cycle of this hay field, as applicable. Note that some BMPs such as enhanced nutrient management and conservation tillage will be credited automatically if the information entered on this page reflects any of these practices.</li>
-<% end %>
+            <% if (@field.field_type_id == 2) # if permanent pasture  %>
+                <li>Enter the following information for this pasture, as applicable. Note that some BMPs such as
+                  enhanced nutrient management will be credited automatically if the information entered on this page
+                  reflects any of these practices.
+                </li>
+            <% end %>
+            <% if (@field.field_type_id == 3) # if hay  %>
+                <li>Enter the following information for the entire growing cycle of this hay field, as applicable. Note
+                  that some BMPs such as enhanced nutrient management and conservation tillage will be credited
+                  automatically if the information entered on this page reflects any of these practices.
+                </li>
+            <% end %>
             <li>
               <%= f.label :crop_rotation, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.crop.nil?), :prompt => 'Select crop category'} , :required => true  %>
+              <%= f.collection_select :crop_category_id, CropCategory.all, :id, :name, {:selected => (@crop_rotation.crop.crop_category.id unless @crop_rotation.crop.nil?), :prompt => 'Select crop category'}, :required => true %>
             </li>
             <li>
               <%= f.label :name, 'Crop:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -55,37 +68,38 @@
                 <% if @crop_rotation.crop == nil %>
                     <option>First select a crop category</option>
                 <% else %>
-                    <option value='<%= @crop_rotation.crop.id%>'><%= @crop_rotation.crop.name%></option>
+                    <option value='<%= @crop_rotation.crop.id %>'><%= @crop_rotation.crop.name %></option>
                 <% end %>
               </select>
             </li>
 
-            <% if (@field.field_type_id != 2) # hide if  field type is permanent pasture %>
+            <% if (@field.field_type_id != 2) # hide if  field type is permanent pasture  %>
                 <li>
                   <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
 
-                  <%= f.select :plant_date_year, options_for_select(listYears, :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-                  <%= f.select :plant_date_month, options_for_select(listMonths, :selected => @crop_rotation.plant_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-                  <%= f.select :plant_date_day, options_for_select(listDays, :selected => @crop_rotation.plant_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+                  <%= f.select :plant_date_year, options_for_select(listYears, :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+                  <%= f.select :plant_date_month, options_for_select(listMonths, :selected => @crop_rotation.plant_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+                  <%= f.select :plant_date_day, options_for_select(listDays, :selected => @crop_rotation.plant_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
                 </li>
                 <li>
                   <%= f.label :planting_method_id, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.collection_select :planting_method_id, PlantingMethod.all, :id, :name, {:prompt => 'Select planting method'} , :required => true  %>
+                  <%= f.collection_select :planting_method_id, PlantingMethod.all, :id, :name, {:prompt => 'Select planting method'}, :required => true %>
                 </li>
                 <li>
                   <%= f.label :seeding_rate, 'Seeding rate:', :class => 'wide' %>
-                  <%= f.text_field :seeding_rate, :class => 'textboxMedium', :type => 'number', :min => 0, :step =>'any' %> seeds/ac
+                  <%= f.text_field :seeding_rate, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+                  seeds/ac
                 </li>
             <% end %>
 
-            <% if (@field.field_type_id == 2) # only show if  field type is pasture %>
+            <% if (@field.field_type_id == 2) # only show if  field type is pasture  %>
                 <li><h2 class='sectionHeading'>Grazing Livestock</h2></li>
                 <li>Enter grazing livestock for the given year.</li>
 
                 <div id='div_grazing_livestock'>
 
                   <%= f.fields_for :grazing_livestocks do |grazing_livestocks_form| %>
-                      <%= render 'grazing_livestock_fields', :f => grazing_livestocks_form, :grazing_livestock_index => @crop_rotation.grazing_livestocks.index(grazing_livestocks_form.object)  %>
+                      <%= render 'grazing_livestock_fields', :f => grazing_livestocks_form, :grazing_livestock_index => @crop_rotation.grazing_livestocks.index(grazing_livestocks_form.object) %>
                   <% end %>
 
                 </div>
@@ -93,11 +107,13 @@
             <% end %>
 
             <li><h2 class='sectionHeading'>Commercial Fertilizer Applications</h2></li>
-            <li>Enter all commercial fertilizer applications used on this field. Please enter the total nitrogen and total phosphorus values (not ammonium or phosphate).</li>
+            <li>Enter all commercial fertilizer applications used on this field. Please enter the total nitrogen and
+              total phosphorus values (not ammonium or phosphate).
+            </li>
             <div id='div_commercial_fertilizer_application'>
 
               <%= f.fields_for :commercial_fertilizer_applications do |commercial_fertilizer_applications_form| %>
-                  <%= render 'commercial_fertilizer_application_fields', :f => commercial_fertilizer_applications_form, :commercial_fertilizer_application_index => @crop_rotation.commercial_fertilizer_applications.index(commercial_fertilizer_applications_form.object)  %>
+                  <%= render 'commercial_fertilizer_application_fields', :f => commercial_fertilizer_applications_form, :commercial_fertilizer_application_index => @crop_rotation.commercial_fertilizer_applications.index(commercial_fertilizer_applications_form.object) %>
               <% end %>
 
             </div>
@@ -105,11 +121,15 @@
 
 
             <li><h2 class='sectionHeading'>Manure Fertilizer Applications</h2></li>
-            <li>Enter animal manure applications for the given year. Manure generated by livestock must be entered in the grazing livestock section.<br/>If neither nitrogen nor phosphorus values are entered then default values will be substituted. For some manure types, such as biosolids, no common default values are available so both nutrients must be entered. In no case may only one nutrient be entered.</li>
+            <li>Enter animal manure applications for the given year. Manure generated by livestock must be entered in
+              the grazing livestock section.<br/>If neither nitrogen nor phosphorus values are entered then default
+              values will be substituted. For some manure types, such as biosolids, no common default values are
+              available so both nutrients must be entered. In no case may only one nutrient be entered.
+            </li>
             <div id='div_manure_fertilizer_application'>
 
               <%= f.fields_for :manure_fertilizer_applications do |manure_fertilizer_applications_form| %>
-                  <%= render 'manure_fertilizer_application_fields', :f => manure_fertilizer_applications_form, :manure_fertilizer_application_index => @crop_rotation.manure_fertilizer_applications.index(manure_fertilizer_applications_form.object)  %>
+                  <%= render 'manure_fertilizer_application_fields', :f => manure_fertilizer_applications_form, :manure_fertilizer_application_index => @crop_rotation.manure_fertilizer_applications.index(manure_fertilizer_applications_form.object) %>
               <% end %>
 
             </div>
@@ -117,28 +137,37 @@
 
 
             <li><h2 class='sectionHeading'>Other Tillage Operations</h2></li>
-            <li>Enter tillage operations here. Tillage operations for incorporated fertilizer entered in the previous two sections are already accounted for, so do not enter fertilizer incorporation tillage operations here.</li>
+            <li>Enter tillage operations here. Tillage operations for incorporated fertilizer entered in the previous
+              two sections are already accounted for, so do not enter fertilizer incorporation tillage operations here.
+            </li>
             <div id='div_tillage_operation'>
               <%= f.fields_for :tillage_operations do |tillage_operations_form| %>
-                  <%= render 'tillage_operation_fields', :f => tillage_operations_form, :tillage_operation_index => @crop_rotation.tillage_operations.index(tillage_operations_form.object)  %>
+                  <%= render 'tillage_operation_fields', :f => tillage_operations_form, :tillage_operation_index => @crop_rotation.tillage_operations.index(tillage_operations_form.object) %>
               <% end %>
             </div>
             <li><%= f.link_to_add "Add a Tillage Operation", :tillage_operations, :class => 'button', :id => 'addTillageOperationBtn', :data => {:target => "#div_tillage_operation"} %></li>
 
 
             <li><h2 class='sectionHeading'>Harvest / End of Season Operations</h2></li>
-            <li>Enter the end-of-season harvest and/or termination date(s) for this crop. For annual crops such as corn, you should select ‘Harvest and Terminate Crop.’ Generally, a termination date should occur before the plant date of any subsequent crop in this rotation, though in some instances aerial seeding might be used to plant a subsequent crop before the final harvest and kill dates of an existing crop in which case the harvest and kill dates of the existing crop would come after the plant date of the subsequent crop.</li>
+            <li>Enter the end-of-season harvest and/or termination date(s) for this crop. For annual crops such as corn,
+              you should select ‘Harvest and Terminate Crop.’ Generally, a termination date should occur before the
+              plant date of any subsequent crop in this rotation, though in some instances aerial seeding might be used
+              to plant a subsequent crop before the final harvest and kill dates of an existing crop in which case the
+              harvest and kill dates of the existing crop would come after the plant date of the subsequent crop.
+            </li>
             <div id='div_end_of_season'>
               <%= f.fields_for :end_of_seasons do |end_of_seasons_form| %>
-                  <%= render 'end_of_season_fields', :f => end_of_seasons_form, :end_of_season_index => @crop_rotation.end_of_seasons.index(end_of_seasons_form.object)  %>
+                  <%= render 'end_of_season_fields', :f => end_of_seasons_form, :end_of_season_index => @crop_rotation.end_of_seasons.index(end_of_seasons_form.object) %>
               <% end %>
             </div>
             <li id='li_end_of_season_button'><%= f.link_to_add "Add End Of Season", :end_of_seasons, :class => 'button', :id => 'addEndOFSeasonBtn', :data => {:target => "#div_end_of_season"} %></li>
 
 
-            <% if (@field.field_type_id == 1) # only show if  field type is crop %>
+            <% if (@field.field_type_id == 1) # only show if  field type is crop  %>
                 <li><h2 class='sectionHeading'>Cover Crop</h2></li>
-                <li>Please indicate whether a conservation (i.e., non-commodity) cover crop will be planted following this crop. For commodity cover crops, please add a crop to your rotation.</li>
+                <li>Please indicate whether a conservation (i.e., non-commodity) cover crop will be planted following
+                  this crop. For commodity cover crops, please add a crop to your rotation.
+                </li>
                 <li>
                   <%= f.label :is_cover_crop_true, 'Cover crop:<em>*</em>'.html_safe, :class => 'wide' %>
                   <%= f.radio_button :is_cover_crop, true %>
@@ -150,11 +179,11 @@
 
                 <li id='li_cover_crop_id'>
                   <%= f.label :cover_crop_id, 'Cover crop type:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.collection_select :cover_crop_id, Crop.coverCrops, :id, :name, {:prompt => 'Select crop type'} , :required => true  %>
+                  <%= f.collection_select :cover_crop_id, Crop.coverCrops, :id, :name, {:prompt => 'Select crop type'}, :required => true %>
                 </li>
                 <li id='li_cover_crop_planting_method_id'>
                   <%= f.label :cover_crop_planting_method_id, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.collection_select :cover_crop_planting_method_id, PlantingMethod.all, :id, :name, {:prompt => 'Select planting method'} , :required => true  %>
+                  <%= f.collection_select :cover_crop_planting_method_id, PlantingMethod.all, :id, :name, {:prompt => 'Select planting method'}, :required => true %>
                 </li>
             <% end %>
 

@@ -1,20 +1,39 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
-    # if user not signed in, then go to login page
+  if Rails.env.production?
+    unless Rails.application.config.consider_all_requests_local
+    rescue_from Exception, :with => :render_500
+   rescue_from CanCan::AccessDenied , with: :render_401
+    rescue_from ActiveRecord::RecordNotFound,
+                ActionController::UnknownController,
+                ActionController::MethodNotAllowed do |exception|
+      render_500(exception)
+    end
+    end
+  end
+
+
+    def render_500(exception)
+      flash.now[:error] = 'An error has occurred.'
+      flash.now[:debug] = exception.message
+      respond_to do |format|
+        format.html { render 'errors/server_error', status: 500 }
+      end
+    end
+
+  # not authorized
+  def render_401(exception)
+    flash.now[:error] = exception.message
     if !user_signed_in?
       redirect_to new_user_session_path(:next => request.fullpath)
     elsif redirect_to '/401'
     end
-
   end
 
 
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    flash[:alert] = exception.message
-    # TODO: remove exception message in production (security) - also should be 404, not 401 (just here to display messages in dev)
-    redirect_to '/401'
-  end
+
+
+
+
 end

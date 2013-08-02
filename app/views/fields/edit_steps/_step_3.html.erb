@@ -18,7 +18,8 @@
 
       <input type='hidden' name='addCropForStrip' id='addCropForStrip'>
 
-      <br/>The crops in this field's current crop rotation are listed below. You may add a crop to the rotation or click on a specific crop to edit it.<br/><br/>
+      <br/>The crops in this field's current crop rotation are listed below. You may add a crop to the rotation or click
+      on a specific crop to edit it.<br/><br/>
 
 
       <div id="div_strip">
@@ -37,18 +38,18 @@
 
 
 <% if !@other_fields.empty? %>
-<div class="sectionRest clearfix">
-  <br/>
+    <div class="sectionRest clearfix">
+      <br/>
 
 
-    <%= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do %>
-      <select name='isExport' id='isExport'>
-         <option value='true'>Copy data into </option>
-        <option value='false'>Copy data from </option>
-        </select>
-     <%= select_tag 'target_field_id', options_from_collection_for_select(@other_fields, 'id', 'name') %>
-        <%= button_tag 'Submit'%>
-        <% end %>
+      <%= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do %>
+          <select name='isExport' id='isExport'>
+            <option value='true'>Copy data into</option>
+            <option value='false'>Copy data from</option>
+          </select>
+          <%= select_tag 'target_field_id', options_from_collection_for_select(@other_fields, 'id', 'name') %>
+          <%= button_tag 'Submit' %>
+      <% end %>
     </div>
 
 <% end %>

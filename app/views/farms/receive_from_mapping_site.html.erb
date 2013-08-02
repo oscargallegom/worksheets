@@ -1,9 +1,9 @@
 <html>
 <head>
   <script type="text/javascript">
-    function reLoad() {
-      window.top.location = '<%=farm_fields_url(@farm) %>';
-    }
+      function reLoad() {
+          window.top.location = '<%=farm_fields_url(@farm) %>';
+      }
   </script>
 </head>
 
@@ -13,23 +13,23 @@
 <% if !session[:debug] %>
 
     <body onload="reLoad();">
-</body>
+    </body>
 
-   <% else %>
-<body>
+<% else %>
+    <body>
 
-<%
-   params.each do |key, value|
-%>
+    <%
+       params.each do |key, value|
+    %>
 
-    <%= key %> = <%= value %>  <br/>
+        <%= key %> = <%= value %>  <br/>
 
-<%
-   end
+    <%
+       end
 
-%>
+    %>
 
-</body>
+    </body>
 
 <% end %>
 

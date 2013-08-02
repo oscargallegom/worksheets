@@ -59,7 +59,7 @@ class Field < ActiveRecord::Base
   accepts_nested_attributes_for :bmps, :allow_destroy => true
 
   # step 1
-  validates_presence_of :name, :field_type_id,  :if => 'step?(1)'
+  validates_presence_of :name, :field_type_id, :if => 'step?(1)'
 
   # step 2 and crop or permanent pasture or continuous hay
   # TODO: check field type id
@@ -119,26 +119,28 @@ class Field < ActiveRecord::Base
     if @soil_test_laboratory_id == nil
       SoilPExtractant.where(:id => soil_p_extractant_id).first.soil_test_laboratory_id unless self.soil_p_extractant_id==nil
     else
-      @soil_test_laboratory_id             # if already entered by end user
+      @soil_test_laboratory_id # if already entered by end user
     end
   end
 
   def forest_buffer_area
     self.forest_buffer_average_width * self.forest_buffer_length / 43560.0 unless (self.forest_buffer_average_width.nil? or self.forest_buffer_length.nil?)
   end
+
   def grass_buffer_area
     self.grass_buffer_average_width * self.grass_buffer_length / 43560.0 unless (self.grass_buffer_average_width.nil? or self.grass_buffer_length.nil?)
   end
+
   def fertilizer_application_setback_area
     self.fertilizer_application_setback_average_width * self.fertilizer_application_setback_length / 43560.0 unless (self.fertilizer_application_setback_average_width.nil? or self.fertilizer_application_setback_length.nil?)
   end
 
 
-  def initialized_bmps     # this is the key method
+  def initialized_bmps # this is the key method
     [].tap do |o|
       BmpType.all.each do |bmp_type|
         if c = bmps.find { |c| c.bmp_type_id == bmp_type.id }
-          o << c.tap { |c|  }
+          o << c.tap { |c|}
         else
           o << Bmp.new(bmp_type: bmp_type)
         end

@@ -14,7 +14,7 @@ updateCounties = ->
     $("#farm_site_county_id").val($("#current_site_county_id").val())
 
 updateTractNumber = ->
-  if $("#farm_site_state_id option:selected").text()=='Maryland'
+  if $("#farm_site_state_id option:selected").text() == 'Maryland'
     $("#tr_tract_number").show()
     $("#farm_tract_number").prop('required', true)
   else
@@ -24,10 +24,10 @@ updateTractNumber = ->
 # add_animal = () ->
 #  $(".animal").first().prop('required', true)
 #  $(".animal").first().clone().appendTo("#animals")
-  #$(".span_list").last().append($(".span_list").first().clone())
+#$(".span_list").last().append($(".span_list").first().clone())
 
-  # $("#animals img").first().clone().appendTo("#animals")
-  # $("#add_animal").before('<li>' + $('#original').html() + '</li>')
+# $("#animals img").first().clone().appendTo("#animals")
+# $("#add_animal").before('<li>' + $('#original').html() + '</li>')
 
 showAnimalSection = ->
   $("#livestockSectiona").show()
@@ -39,7 +39,7 @@ hideAnimalSection = ->
   $("#livestockSectiona").hide()
   #$("#livestockSectionb").hide()
   #$("#livestockSectionc").hide()
-  i = $(".icon-delete").size()-1
+  i = $(".icon-delete").size() - 1
   while i >= 0
     $(".icon-delete")[i].click()
     i--
@@ -83,12 +83,12 @@ $(document).ready ->
 
   $(document).on "nested:fieldRemoved", (event) ->
     if ($(".fields:visible").size() is 0)
-      $("#livestockSectiona").hide()    # hide 'total animal unit'
+      $("#livestockSectiona").hide() # hide 'total animal unit'
 
   # $("body").on "click", ".icon-deletetttttttttttt", (e) ->
-    # alert('')
-    # $(".add_nested_fields").hide()  if $(".icon-delete").size() is 1
-    # $('#has_animals_yes').prop('checked',true) if $(".animal").size() is 0
+  # alert('')
+  # $(".add_nested_fields").hide()  if $(".icon-delete").size() is 1
+  # $('#has_animals_yes').prop('checked',true) if $(".animal").size() is 0
   #  false
 
   # $("#addLivestockBtn").show() if $("#has_animals_yes").is(":checked")

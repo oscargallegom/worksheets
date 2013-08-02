@@ -1,6 +1,6 @@
 class ProjectIssuesController < ApplicationController
 
-  add_breadcrumb 'Home', '/'
+  add_breadcrumb 'Home', :farms_path
 
   def new
     add_breadcrumb params[:farm_name], farm_path(params[:farm_id])

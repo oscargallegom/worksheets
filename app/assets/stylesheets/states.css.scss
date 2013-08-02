@@ -2,27 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-#navcontainer ul
-  {
+#navcontainer ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
   text-align: center;
 }
 
-#navcontainer ul li { display: inline; }
+#navcontainer ul li {
+  display: inline;
+}
 
-#navcontainer ul li a
-  {
+#navcontainer ul li a {
   text-decoration: none;
   padding: .2em 1em;
   color: #fff;
   background-color: #036;
 }
 
-#navcontainer ul li a:hover
-  {
+#navcontainer ul li a:hover {
   color: #fff;
   background-color: #369;
 }

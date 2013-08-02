@@ -316,5 +316,4 @@ module Ntt
 
   end
 
-
 end

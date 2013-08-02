@@ -5,7 +5,7 @@ class FarmsController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:receive_from_mapping_site] # turn off Cross-Site Request Forgery for receive_from_mapping_site
 
-  add_breadcrumb 'Home', '/'
+  add_breadcrumb 'Home', :farms_path
 
   # GET /farms
   # GET /farms.json

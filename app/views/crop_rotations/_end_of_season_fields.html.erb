@@ -1,21 +1,23 @@
-<li><h1 class='sectionHeading'>End Of Season <span class="end_of_season_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete end of season' %></h1></li>
+<li><h1 class='sectionHeading'>End Of Season
+  <span class="end_of_season_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete end of season' %>
+</h1></li>
 <li>
   <%= f.label :end_of_season_type_id, 'End of season operation type:<em>*</em>'.html_safe, :class => 'wide' %>
 
-  <% if (@field.field_type_id == 1 or @field.field_type_id == 3) # show all options %>
-  <%= f.collection_select :end_of_season_type_id, EndOfSeasonType.all, :id, :name, {:prompt => 'Select end of season operation type'}, {:required => true, :style => 'width:250px', :class=> 'class_end_of_season_type_id'}  %>
+  <% if (@field.field_type_id == 1 or @field.field_type_id == 3) # show all options  %>
+      <%= f.collection_select :end_of_season_type_id, EndOfSeasonType.all, :id, :name, {:prompt => 'Select end of season operation type'}, {:required => true, :style => 'width:250px', :class => 'class_end_of_season_type_id'} %>
   <% else %>
-      <%= f.collection_select :end_of_season_type_id, EndOfSeasonType.harvestOnly, :id, :name, {:prompt => 'Select end of season operation type'}, {:required => true, :style => 'width:250px', :class=> 'class_end_of_season_type_id'}  %>
+      <%= f.collection_select :end_of_season_type_id, EndOfSeasonType.harvestOnly, :id, :name, {:prompt => 'Select end of season operation type'}, {:required => true, :style => 'width:250px', :class => 'class_end_of_season_type_id'} %>
   <% end %>
-      </li>
+</li>
 <li>
   <%= f.label :year, 'Date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :year, options_for_select(listYears, :selected => f.object.year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :month, options_for_select(listMonths, :selected => f.object.month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :day, options_for_select(listDays, :selected => f.object.day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+  <%= f.select :year, options_for_select(listYears, :selected => f.object.year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+  <%= f.select :month, options_for_select(listMonths, :selected => f.object.month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+  <%= f.select :day, options_for_select(listDays, :selected => f.object.day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li id="li_is_harvest_as_silage">
   <%= f.label :end_of_season_type_id, 'Harvest as silage:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.check_box  :is_harvest_as_silage, :size => 5 %>
+  <%= f.check_box :is_harvest_as_silage, :size => 5 %>
 </li>
 <br/>

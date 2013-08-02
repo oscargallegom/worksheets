@@ -7,7 +7,7 @@ class FieldsController < ApplicationController
   load_and_authorize_resource :field, :through => :farm
   layout 'farm', :only => [:index]
 
-  add_breadcrumb 'Home', '/'
+  add_breadcrumb 'Home', :farms_path
   add_breadcrumb 'Projects', :farms_path
 
 
@@ -59,7 +59,6 @@ class FieldsController < ApplicationController
 
   # GET /farms/1/fields/1/edit
   def edit
-
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name
@@ -74,14 +73,14 @@ class FieldsController < ApplicationController
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
       rescue Exception => e
-        flash[:notice] = "Error: " + e.message
+        flash[:error] = e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
       @baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
       if (@baseline_lookup.nil?)
         flash[:error] = "Could not retrieve baseline data." if @baseline_lookup.nil?
-        end
-end
+      end
+    end
 
 
     @other_fields = []
@@ -214,5 +213,4 @@ end
   end
 
 
-
-  end
+end

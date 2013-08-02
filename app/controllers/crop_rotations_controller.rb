@@ -7,7 +7,7 @@ class CropRotationsController < ApplicationController
   load_and_authorize_resource :strip, :through => :field
   load_and_authorize_resource :crop_rotation, :through => :strip
 
-  add_breadcrumb 'Home', '/'
+  add_breadcrumb 'Home', :farms_path
   add_breadcrumb 'Projects', :farms_path
 
   # GET /farms/1/fields/1/strips/1/crop_rotations/1

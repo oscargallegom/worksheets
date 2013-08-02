@@ -1,123 +1,123 @@
 <div class="nn-form sectionRest clearfix">
-    <div>
-      <fieldset>
-        <ol>
-          <li><h2 class='sectionHeading'>Details</h2></li>
-          <li>
-            <div class='wide'>Project name:</div>
-            <%= @farm.name %>
-          </li>
-          <li>
-            <div class='wide'>(FSA) Tract number:</div>
-            <%= @farm.tract_number %>
-          </li>
-          <li>
-            <div class='wide'>Project notes:</div>
-            <%= @farm.farm_notes %>
-          </li>
-          <li>
-            <div class='wide'>Generator type:</div>
-            <%= @farm.generator_type.name unless @farm.generator_type == nil %>
-          </li>
-          <li>
-            <div class='wide'>Site name:</div>
-            <%= @farm.site_name %>
-          </li>
-          <li>
-            <div class='wide'>Street 1:</div>
-            <%= @farm.site_street_1 %>
-          </li>
-          <li>
-            <div class='wide'>Street 2:</div>
-            <%= @farm.site_street_2 %>
-          </li>
-          <li>
-            <div class='wide'>Location description:</div>
-            <%= @farm.site_description %>
-          </li>
-          <li>
-            <div class='wide'>Farm notes:</div>
-            <%= @farm.farm_notes %>
-          </li>
-          <li>
-            <div class='wide'>ZIP code:</div>
-            <%= @farm.site_zip %>
-          </li>
-          <li>
-            <div class='wide'>State:</div>
-            <%= @farm.state.name %>
-          </li>
-          <li>
-            <div class='wide'>County:</div>
-            <%= @farm.county.name %>
-          </li>
+  <div>
+    <fieldset>
+      <ol>
+        <li><h2 class='sectionHeading'>Details</h2></li>
+        <li>
+          <div class='wide'>Project name:</div>
+          <%= @farm.name %>
+        </li>
+        <li>
+          <div class='wide'>(FSA) Tract number:</div>
+          <%= @farm.tract_number %>
+        </li>
+        <li>
+          <div class='wide'>Project notes:</div>
+          <%= @farm.farm_notes %>
+        </li>
+        <li>
+          <div class='wide'>Generator type:</div>
+          <%= @farm.generator_type.name unless @farm.generator_type == nil %>
+        </li>
+        <li>
+          <div class='wide'>Site name:</div>
+          <%= @farm.site_name %>
+        </li>
+        <li>
+          <div class='wide'>Street 1:</div>
+          <%= @farm.site_street_1 %>
+        </li>
+        <li>
+          <div class='wide'>Street 2:</div>
+          <%= @farm.site_street_2 %>
+        </li>
+        <li>
+          <div class='wide'>Location description:</div>
+          <%= @farm.site_description %>
+        </li>
+        <li>
+          <div class='wide'>Farm notes:</div>
+          <%= @farm.farm_notes %>
+        </li>
+        <li>
+          <div class='wide'>ZIP code:</div>
+          <%= @farm.site_zip %>
+        </li>
+        <li>
+          <div class='wide'>State:</div>
+          <%= @farm.state.name %>
+        </li>
+        <li>
+          <div class='wide'>County:</div>
+          <%= @farm.county.name %>
+        </li>
 
-        </ol>
-      </fieldset>
-      <fieldset>
-        <ol>
-          <li><h2 class='sectionHeading'>Totals</h2></li>
-          <li>
-            <div class='wide'>Farm area (from map):</div>
-            <%= number_with_precision(@farm.acres, :precision => 2, :separator => '.', :delimiter => ',') %>
-          </li>
-          <li>
-            <div class='wide'>Farm area (sum of fields):</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>Number of fields:</div>
-            <%= @farm.fields.size %>
-          </li>
-          <li>
-            <div class='wide'>Percent complete:</div>
-            ?????
-          </li>
-          <li>
-            <div class='wide'>Buffered area:</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>Wetland area:</div>
-            <%= @farm.site_street_1 %>
-          </li>
-          <li>
-            <div class='wide'>Converted area:</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>Farm meets baseline:</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>N reduction (EOS):</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>N reduction to bay:</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>N credits generated:</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>P reduction (EOS):</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>P reduction to bay:</div>
-            TBD
-          </li>
-          <li>
-            <div class='wide'>P credits generated:</div>
-            TBD
-          </li>
+      </ol>
+    </fieldset>
+    <fieldset>
+      <ol>
+        <li><h2 class='sectionHeading'>Totals</h2></li>
+        <li>
+          <div class='wide'>Farm area (from map):</div>
+          <%= number_with_precision(@farm.acres, :precision => 2, :separator => '.', :delimiter => ',') %>
+        </li>
+        <li>
+          <div class='wide'>Farm area (sum of fields):</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>Number of fields:</div>
+          <%= @farm.fields.size %>
+        </li>
+        <li>
+          <div class='wide'>Percent complete:</div>
+          ?????
+        </li>
+        <li>
+          <div class='wide'>Buffered area:</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>Wetland area:</div>
+          <%= @farm.site_street_1 %>
+        </li>
+        <li>
+          <div class='wide'>Converted area:</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>Farm meets baseline:</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>N reduction (EOS):</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>N reduction to bay:</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>N credits generated:</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>P reduction (EOS):</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>P reduction to bay:</div>
+          TBD
+        </li>
+        <li>
+          <div class='wide'>P credits generated:</div>
+          TBD
+        </li>
 
-        </ol>
-      </fieldset>
-    </div>
-    <div style="clear: both"></div>
+      </ol>
+    </fieldset>
+  </div>
+  <div style="clear: both"></div>
 </div>
 
 

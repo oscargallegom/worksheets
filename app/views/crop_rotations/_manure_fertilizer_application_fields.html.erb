@@ -1,9 +1,11 @@
-<li><h1 class='sectionHeading'>Manure operation <span class="manure_operation_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete manure operation' %></h1></li>
+<li><h1 class='sectionHeading'>Manure operation
+  <span class="manure_operation_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-280px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete manure operation' %>
+</h1></li>
 <li>
   <%= f.label :application_date_year, 'Application date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :application_date_year, options_for_select(listYears, :selected => f.object.application_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :application_date_month, options_for_select(listMonths, :selected => f.object.application_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>
+  <%= f.select :application_date_year, options_for_select(listYears, :selected => f.object.application_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+  <%= f.select :application_date_month, options_for_select(listMonths, :selected => f.object.application_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+  <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:60px'} %>
 </li>
 <li>
   <%= f.label :manure_type_id, 'Type:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -35,32 +37,34 @@
 </li>
 <li>
   <%= f.label :moisture_content, 'Moisture content:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :moisture_content, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 100, :step => 'any' %> %
+  <%= f.text_field :moisture_content, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 100, :step => 'any' %>
+  %
 </li>
 <li>
   <%= f.label :is_precision_feeding, 'Precision feeding:', :class => 'wide' %>
-  <%= f.check_box  :is_precision_feeding, :size => 5 %>
+  <%= f.check_box :is_precision_feeding, :size => 5 %>
 </li>
 <li>
   <%= f.label :is_phytase_treatment, 'Phytase treatment:', :class => 'wide' %>
-  <%= f.check_box  :is_phytase_treatment, :size => 5 %>
+  <%= f.check_box :is_phytase_treatment, :size => 5 %>
 </li>
 <li>
   <%= f.label :is_poultry_litter_treatment, 'Poultry litter treatment:', :class => 'wide' %>
-  <%= f.check_box  :is_poultry_litter_treatment, :size => 5 %>
+  <%= f.check_box :is_poultry_litter_treatment, :size => 5 %>
 </li>
 <li>
   <%= f.label :is_incorporated, 'Incorporated/Injected:', :class => 'wide' %>
-  <%= f.check_box  :is_incorporated, :size => 5 %>
+  <%= f.check_box :is_incorporated, :size => 5 %>
 </li>
 <li>
   <%= f.label :incorporation_date_year, 'Incorporation date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :incorporation_date_year, options_for_select(listYears, :selected => f.object.incorporation_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :incorporation_date_month, options_for_select(listMonths, :selected => f.object.incorporation_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :incorporation_date_day, options_for_select(listDays, :selected => f.object.incorporation_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:60px'}  %>
+  <%= f.select :incorporation_date_year, options_for_select(listYears, :selected => f.object.incorporation_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+  <%= f.select :incorporation_date_month, options_for_select(listMonths, :selected => f.object.incorporation_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+  <%= f.select :incorporation_date_day, options_for_select(listDays, :selected => f.object.incorporation_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:60px'} %>
 </li>
 <li>
   <%= f.label :incorporation_depth, 'Incorporation depth:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :incorporation_depth, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %> in
+  <%= f.text_field :incorporation_depth, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+  in
 </li>
 <br/>

@@ -1,82 +1,97 @@
 <% if !flash[:error].nil? %>
+    <div class="sectionRest clearfix nn-form">
 
-    <br/><br/>Please contact your administrator.<br/><br/>
+      <div>
+        <fieldset>   <ol>
+          <li></li><li>
+   Please contact your administrator.<br/>    </li></ol>
+            </fieldset></div> <div style="clear: both"></div>
+    </div>
 
-   <% else %>
+<% else %>
 
-<div class="sectionRest clearfix nn-form">
+    <div class="sectionRest clearfix nn-form">
 
-  <div>
-    <fieldset>
-      <ol>
-        <li><h2 class='sectionHeading'>Nitrogen</h2></li>
-        <li><span class='wide'>Baseline Load (EOS):</span>
-          <%= number_with_precision(@baseline_lookup[:total_n_baseline] * @field.acres, :precision => 2, delimiter: '.') %> lb
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_n_baseline], :precision => 2, delimiter: '.') %> lb/ac)
-        </li>
-        <li><span class='wide'>Current Load (EOS):</span>
-          <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: '.') %> lb
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Nitrogen</h2></li>
+            <li><span class='wide'>Baseline Load (EOS):</span>
+              <%= number_with_precision(@baseline_lookup[:total_n_baseline] * @field.acres, :precision => 2, delimiter: '.') %>
+              lb
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_n_baseline], :precision => 2, delimiter: '.') %>
+              lb/ac)
+            </li>
+            <li><span class='wide'>Current Load (EOS):</span>
+              <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: '.') %> lb
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2, delimiter: '.') %> lb/ac)
-        </li>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2, delimiter: '.') %>
+              lb/ac)
+            </li>
 
-        <li><h2 class='sectionHeading'>Phosphorus</h2></li>
-        <li><span class='wide'>Baseline Load (EOS):</span>
-          <%= number_with_precision(@baseline_lookup[:total_p_baseline] * @field.acres, :precision => 2, delimiter: '.') %> lb
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_p_baseline], :precision => 2, delimiter: '.') %> lb/ac)
-        </li>
-        <li><span class='wide'>Current Load (EOS):</span>
-          <%= number_with_precision(@current_totals[:new_total_p], :precision => 2) %> lb
+            <li><h2 class='sectionHeading'>Phosphorus</h2></li>
+            <li><span class='wide'>Baseline Load (EOS):</span>
+              <%= number_with_precision(@baseline_lookup[:total_p_baseline] * @field.acres, :precision => 2, delimiter: '.') %>
+              lb
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_p_baseline], :precision => 2, delimiter: '.') %>
+              lb/ac)
+            </li>
+            <li><span class='wide'>Current Load (EOS):</span>
+              <%= number_with_precision(@current_totals[:new_total_p], :precision => 2) %> lb
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2) %> lb/ac)
-        </li>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2) %>
+              lb/ac)
+            </li>
 
-        <li><h2 class='sectionHeading'>Sediment</h2></li>
-        <li><span class='wide'>Baseline Load (EOS):</span>
-          <%= number_with_precision(@baseline_lookup[:total_sediment_baseline] * @field.acres, :precision => 2) %> lb
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_sediment_baseline], :precision => 2) %> lb/ac)
-        </li>
-        <li><span class='wide'>Current Load (EOS):</span>
-          <%= number_with_precision(@current_totals[:new_total_sediment] / 2000.0, :precision => 2) %> tons
+            <li><h2 class='sectionHeading'>Sediment</h2></li>
+            <li><span class='wide'>Baseline Load (EOS):</span>
+              <%= number_with_precision(@baseline_lookup[:total_sediment_baseline] * @field.acres, :precision => 2) %>
+              lb
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@baseline_lookup[:total_sediment_baseline], :precision => 2) %>
+              lb/ac)
+            </li>
+            <li><span class='wide'>Current Load (EOS):</span>
+              <%= number_with_precision(@current_totals[:new_total_sediment] / 2000.0, :precision => 2) %> tons
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres / 2000.0, :precision => 2) %> t/ac)
-        </li>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres / 2000.0, :precision => 2) %>
+              t/ac)
+            </li>
 
-        <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>
-        <li>Some text   #################</li>
-        <li><span class='extrawide'>&nbsp;</span><b>Baseline</b></li>
+            <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>
+            <li>Some text #################</li>
+            <li><span class='extrawide'>&nbsp;</span><b>Baseline</b></li>
 
-        <li><span class='extrawide'>Total N (before BMPs applied)</span><b>123</b></li>
+            <li><span class='extrawide'>Total N (before BMPs applied)</span><b>123</b></li>
 
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
 
-        </li>
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
+            </li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
 
-        <li><span class='extrawide'>Total P (before BMPs applied)</span><b>123</b></li>
+            <li><span class='extrawide'>Total P (before BMPs applied)</span><b>123</b></li>
 
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>123</li>
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>123</li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
 
-        <li><span class='extrawide'>Flow</span><b>123</b></li>
+            <li><span class='extrawide'>Flow</span><b>123</b></li>
 
-        <li><span class='extrawide'>Sediment</span><b>
-<%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: '.') %> t/ac
-        </b></li>
+            <li><span class='extrawide'>Sediment</span><b>
+              <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: '.') %> t/ac
+            </b></li>
 
-        <li><span class='extrawide'>Carbon</span><b>123</b></li>
+            <li><span class='extrawide'>Carbon</span><b>123</b></li>
 
-        <li><span class='extrawide'>Crop Yield</span><b>123</b></li>
+            <li><span class='extrawide'>Crop Yield</span><b>123</b></li>
 
-        <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Corn</span>123</li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Corn</span>123</li>
 
 
-      </ol>
-    </fieldset>
-  </div>
-  <div style="clear: both"></div>
-</div>
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+    </div>
 
 <% end %>

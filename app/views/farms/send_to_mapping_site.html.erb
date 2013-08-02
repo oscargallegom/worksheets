@@ -10,25 +10,25 @@
 
     Loading map...
 
-<form action='<%= URL_MAP %>' method='post'>
+    <form action='<%= URL_MAP %>' method='post'>
 
-  <input type='hidden' size='80' name='county' value='<%= @farm.county.fips %>'>
-  <br/>
-  <input type='hidden' size='80' name='source_id' value='<%= session[:session_id] %>'>
-  <br/>
-  <input type='hidden' size='80' name='return_url' value='<%= farm_url(@farm) %>/receive_from_mapping_site'>
-  <br/>
-
- <input type='hidden' size='80' name='parcelcoords' value='<%= @farm.coordinates %>'>
-  <br/>
-
-  <% @farm.fields.each_with_index do |field, index| %>
-      <input type='hidden' size='80' name='<%= "field#{index+1}id" %>' value='<%= field.name %>'>
+      <input type='hidden' size='80' name='county' value='<%= @farm.county.fips %>'>
       <br/>
-      <input type='hidden' size='80' name='<%= "field#{index+1}coords" %>' value='<%= field.coordinates %>'>
+      <input type='hidden' size='80' name='source_id' value='<%= session[:session_id] %>'>
       <br/>
-  <% end %>
-</form>
+      <input type='hidden' size='80' name='return_url' value='<%= farm_url(@farm) %>/receive_from_mapping_site'>
+      <br/>
+
+      <input type='hidden' size='80' name='parcelcoords' value='<%= @farm.coordinates %>'>
+      <br/>
+
+      <% @farm.fields.each_with_index do |field, index| %>
+          <input type='hidden' size='80' name='<%= "field#{index+1}id" %>' value='<%= field.name %>'>
+          <br/>
+          <input type='hidden' size='80' name='<%= "field#{index+1}coords" %>' value='<%= field.coordinates %>'>
+          <br/>
+      <% end %>
+    </form>
     </body>
 
 <% else %>
@@ -41,7 +41,8 @@
       <br/>
       Source id: <input type='text' size='80' name='source_id' value='<%= session[:session_id] %>'>
       <br/>
-      return_url: <input type='text' size='80' name='return_url' value='<%= farm_url(@farm) %>/receive_from_mapping_site'>
+      return_url:
+      <input type='text' size='80' name='return_url' value='<%= farm_url(@farm) %>/receive_from_mapping_site'>
       <br/>
 
       parcelcoords: <input type='text' size='80' name='parcelcoords' value='<%= @farm.coordinates %>'>

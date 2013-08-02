@@ -96,14 +96,15 @@ NutrientNet::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   # added by Olivier
-  #devise_scope :user do
+  devise_scope :user do
+    root :to => 'users/sessions#new'
   #  root :to => "projects#index" # "users/sessions#new"
-  #end
-  root :to => 'farms#index'
+  end
+  #root :to => 'users/sessions#new'
 
   match "/help", to: "static_pages#help", as: "help"
 
   match "/401", to: "errors#not_authorized"
   match "/404", to: "errors#not_found"
-  match "/500", to: "errors#not_found"
+  #match "/500", to: "errors#server_error"
 end

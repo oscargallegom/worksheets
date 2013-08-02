@@ -1,15 +1,17 @@
-<li><h1 class='sectionHeading'>Grazing livestock <span class="grazing_livestock_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;',  :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete grazing livestock' %></h1></li>
+<li><h1 class='sectionHeading'>Grazing livestock
+  <span class="grazing_livestock_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete grazing livestock' %>
+</h1></li>
 <li>
   <%= f.label :start_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :start_date_year, options_for_select(listYears, :selected => f.object.start_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :start_date_month, options_for_select(listMonths, :selected => f.object.start_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :start_date_day, options_for_select(listDays, :selected => f.object.start_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+  <%= f.select :start_date_year, options_for_select(listYears, :selected => f.object.start_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+  <%= f.select :start_date_month, options_for_select(listMonths, :selected => f.object.start_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+  <%= f.select :start_date_day, options_for_select(listDays, :selected => f.object.start_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
   <%= f.label :end_date_year, 'End date:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.select :end_date_year, options_for_select(listYears, :selected => f.object.end_date_year), {:prompt => 'Year'}, { :required => true, :style => 'width:70px'}  %>
-  <%= f.select :end_date_month, options_for_select(listMonths, :selected => f.object.end_date_month ),  {:prompt => 'Month'}, { :required => true, :style => 'width:100px'}  %>
-  <%= f.select :end_date_day, options_for_select(listDays, :selected => f.object.end_date_day ),  {:prompt => 'Day'}, { :required => true, :style => 'width:50px'}  %>
+  <%= f.select :end_date_year, options_for_select(listYears, :selected => f.object.end_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+  <%= f.select :end_date_month, options_for_select(listMonths, :selected => f.object.end_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+  <%= f.select :end_date_day, options_for_select(listDays, :selected => f.object.end_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
   <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -27,8 +29,10 @@
   <%= f.label :days_grazed, 'Days grazed:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :days_grazed, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 365, :step => 1 %>
 </li>
-<li class='li_precision_feeding' <% if f.object.animal_id != 2 %> style="display: none;" <% end %> >
+<li class='li_precision_feeding'
+    <% if f.object.animal_id != 2 %> style="display: none;"
+    <% end %> >
   <%= f.label :precision_feeding, 'Precision feeding:', :class => 'wide' %>
-  <%= f.check_box  :precision_feeding, :size => 5 %>
+  <%= f.check_box :precision_feeding, :size => 5 %>
 </li>
 <br/>

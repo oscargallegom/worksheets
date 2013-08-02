@@ -18,7 +18,7 @@ class Farm < ActiveRecord::Base
   attr_accessible :livestock_attributes
   accepts_nested_attributes_for :livestock, :allow_destroy => true
 
-  validates_presence_of :name, :message => '^Farm name can''t be blank'
+  validates_presence_of :name, :message => '^Farm name can' 't be blank'
   validates_presence_of :generator_type_id, :site_name, :site_state_id, :site_county_id
   validates_format_of :site_zip, :allow_blank => true, :with => %r{\d{5}(-\d{4})?}, :message => "should be using the following format: 12345 or 12345-1234"
   validates_numericality_of :tract_number, :if => :is_maryland?
@@ -46,7 +46,7 @@ class Farm < ActiveRecord::Base
   # search by code or name
   def self.search(search)
     if search
-      where(' id || \'\' like ? OR name LIKE ? ', "%#{search}%", "%#{search}%" )
+      where(' id || \'\' like ? OR name LIKE ? ', "%#{search}%", "%#{search}%")
       # find(:all, :conditions => ['id' LIKE ? OR title LIKE ? OR description LIKE ?', search_condition, search_condition, search_condition])
     else
       scoped
@@ -75,12 +75,12 @@ class Farm < ActiveRecord::Base
     end
 
 
-      percentCompleted = 25   if is_one_crop_done
-    percentCompleted = 50   if is_all_crop_done
+    percentCompleted = 25 if is_one_crop_done
+    percentCompleted = 50 if is_all_crop_done
 
     # TODO: finish %
     #  At least one field completed through “future load summary” 75 percent
-  # All fields completed through “future load summary” 100 percent
+    # All fields completed through “future load summary” 100 percent
 
     return percentCompleted
 

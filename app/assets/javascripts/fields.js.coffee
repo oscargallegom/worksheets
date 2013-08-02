@@ -7,29 +7,29 @@ updateSoilPExtractants = ->
   $.getJSON "/soil_test_laboratories/" + $("#field_soil_test_laboratory_id").val() + "/soil_p_extractants.json", (soil_p_extractants) ->
     #alert(soil_p_extractants[0].name)
     $("#soil_p_extractant_id").text(soil_p_extractants[0].name)
-    $("#p_test_value_unit").text(soil_p_extractants[0].unit)    # unit
-    $("#field_soil_p_extractant_id").val(soil_p_extractants[0].id)        # hidden field
-    #items = []
-    #items.push "<option value>Select P Test Method</option>"
-    #$.each soil_p_extractants, (key, soil_p_extractant) ->
-    #  items.push "<option value=\"" + soil_p_extractant.id + "\">" + soil_p_extractant.name + "</option>"
-    #$("#field_soil_p_extractant_id").html items.join("")
-    #$("#field_soil_p_extractant_id").removeAttr("disabled")
-    #$("#field_soil_p_extractant_id").val($("#current_soil_p_extractant_id").val())
-    #$("#current_soil_p_extractant_id").val('')   # reset value - only needed on page load
+    $("#p_test_value_unit").text(soil_p_extractants[0].unit) # unit
+    $("#field_soil_p_extractant_id").val(soil_p_extractants[0].id) # hidden field
+#items = []
+#items.push "<option value>Select P Test Method</option>"
+#$.each soil_p_extractants, (key, soil_p_extractant) ->
+#  items.push "<option value=\"" + soil_p_extractant.id + "\">" + soil_p_extractant.name + "</option>"
+#$("#field_soil_p_extractant_id").html items.join("")
+#$("#field_soil_p_extractant_id").removeAttr("disabled")
+#$("#field_soil_p_extractant_id").val($("#current_soil_p_extractant_id").val())
+#$("#current_soil_p_extractant_id").val('')   # reset value - only needed on page load
 
 # update the strip indexes and show/hide length option
 updateIndexes = ->
   $(".fields:visible").find(".strip_index").each (index) ->
-    $(this).text(index+1)
+    $(this).text(index + 1)
   $(".fields:visible").find(".bmp_index").each (index) ->
-    $(this).text(index+1)
+    $(this).text(index + 1)
   $(".fields:visible").find('[id^="addCropButton"]').each (index) ->
     $(this).attr('id', 'addCropButton_' + index)
   $(".fields:visible").find(".livestock_index").each (index) ->
-    $(this).text(index+1)
+    $(this).text(index + 1)
   $(".fields:visible").find(".poultry_index").each (index) ->
-    $(this).text(index+1)
+    $(this).text(index + 1)
 
   if $(".fields:visible").length == 1   # hide the stip number and length  option
     $(".fields:visible").find(".div_length").hide()
@@ -94,9 +94,8 @@ updateFertilizerApplicationSetbackArea = ->
 
 # when the button add crop is called find out the strip, then submit form
 addCrop = (caller) ->
-
-  if (caller.attr('id') isnt undefined and caller.attr('id').indexOf('addCropButton')>=0)
-    $('#addCropForStrip').val(caller.attr('id').substring(caller.attr('id').indexOf('_')+1));
+  if (caller.attr('id') isnt undefined and caller.attr('id').indexOf('addCropButton') >= 0)
+    $('#addCropForStrip').val(caller.attr('id').substring(caller.attr('id').indexOf('_') + 1));
     $(".nn-form").submit();
     false;
 
@@ -193,42 +192,43 @@ changeBmpListener = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'field_bmps_attributes_')
 
   # delete all BMP after the one just modified
-  i=0
+  i = 0
   deleteSection = false
-  while i<$('#div_bmp').find('.class_bmp_type_id').length
+  while i < $('#div_bmp').find('.class_bmp_type_id').length
     if deleteSection
       # turn off warning message
       $('#div_bmp').find('.icon-delete')[i].removeAttribute('data-confirm')
       # simulate click
       $('#div_bmp').find('.icon-delete')[i].click()
-    if componentNumber is getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id, 'field_bmps_attributes_')
+    if componentNumber is getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id,
+      'field_bmps_attributes_')
       deleteSection = true
     i++
 
 # when a new BMP section is added, the list of BMP types should not contain the ones already selected
 updateBmpList = () ->
   # remove all disabled options
-  i=0
-  while i<$('#div_bmp').find('.class_bmp_type_id:visible').length
+  i = 0
+  while i < $('#div_bmp').find('.class_bmp_type_id:visible').length
     curentSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(i)
     # none of the options should be disabled in the first select
     k = 0
-    while k<curentSelect.options.length
+    while k < curentSelect.options.length
       curentSelect.options[k].disabled = false
       k++
     i++
 
   # now disabled appropriate options
-  i=0
-  while i<$('#div_bmp').find('.class_bmp_type_id:visible').length
+  i = 0
+  while i < $('#div_bmp').find('.class_bmp_type_id:visible').length
     curentSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(i)
-    currentValue =  curentSelect.options[curentSelect.selectedIndex].value
+    currentValue = curentSelect.options[curentSelect.selectedIndex].value
 
-    j = i+1
-    while j<$('#div_bmp').find('.class_bmp_type_id:visible').length
+    j = i + 1
+    while j < $('#div_bmp').find('.class_bmp_type_id:visible').length
       nextSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(j)
-      k=0
-      while k<nextSelect.options.length
+      k = 0
+      while k < nextSelect.options.length
         if (nextSelect.options[k].value == currentValue)
           #nextSelect.remove(k)
           nextSelect.options[k].disabled = true
@@ -238,9 +238,8 @@ updateBmpList = () ->
 
   # if only one option left, then hide add BMP button
   if($('#div_bmp').find('.class_bmp_type_id').length) > 0
-    if ($('#div_bmp').find('.class_bmp_type_id').get($('#div_bmp').find('.class_bmp_type_id').length-1).options.length == 2)
+    if ($('#div_bmp').find('.class_bmp_type_id').get($('#div_bmp').find('.class_bmp_type_id').length - 1).options.length == 2)
       $('#addBmpBtn').hide()
-
 
 
 # given the whole HTML id, return the extracted number
@@ -265,7 +264,6 @@ $(document).ready ->
 
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
-
 
 
   if typeof $("#field_soil_test_laboratory_id").val() isnt 'undefined' and $("#field_soil_test_laboratory_id").val().length > 0
@@ -360,7 +358,7 @@ $(document).on "nested:fieldAdded", (event) ->
   updateBmpList()
 
   $("a").click ->
-      addCrop($(this))
+    addCrop($(this))
 
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
