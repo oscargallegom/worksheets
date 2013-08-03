@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130801004112) do
+ActiveRecord::Schema.define(:version => 20130803161112) do
 
   create_table "animals", :force => true do |t|
     t.string "name"
@@ -515,8 +515,8 @@ ActiveRecord::Schema.define(:version => 20130801004112) do
     t.integer  "fips"
     t.string   "major_basin"
     t.string   "trib_strat_basin"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.decimal  "total_n_forest"
     t.decimal  "total_n_hyo"
     t.decimal  "total_n_trp"
@@ -529,6 +529,18 @@ ActiveRecord::Schema.define(:version => 20130801004112) do
     t.decimal  "n_delivery_factor"
     t.decimal  "p_delivery_factor"
     t.decimal  "sediment_delivery_total"
+    t.decimal  "n_crop_baseline"
+    t.decimal  "n_pasture_baseline"
+    t.decimal  "n_hay_baseline"
+    t.decimal  "p_crop_baseline"
+    t.decimal  "p_pasture_baseline"
+    t.decimal  "p_hay_baseline"
+    t.decimal  "sediment_crop_baseline"
+    t.decimal  "sediment_pasture_baseline"
+    t.decimal  "sediment_hay_baseline"
+    t.decimal  "n_adjust"
+    t.decimal  "p_adjust"
+    t.decimal  "sediment_adjust"
   end
 
 end

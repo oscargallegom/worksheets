@@ -37,6 +37,8 @@ class CropRotation < ActiveRecord::Base
   # if not permanent pasture
   validates_presence_of :plant_date_year, :plant_date_month, :plant_date_day, :planting_method_id, :unless => :isPermanentPasture?
   validates_numericality_of :seeding_rate, :greater_than_or_equal_to => 0, :allow_blank => true, :unless => :isPermanentPasture?
+  validates_numericality_of :plant_date_day, :less_than_or_equal_to => 28, :if => 'plant_date_month==2', :message => '^Date incorrect for February', :unless => :isPermanentPasture?
+
 
   validates_presence_of :cover_crop_id, :cover_crop_planting_method_id, :if => 'is_cover_crop?'
 

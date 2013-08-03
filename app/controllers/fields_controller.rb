@@ -149,6 +149,7 @@ class FieldsController < ApplicationController
         end
 
       else # error
+        @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
         format.html { render action: 'edit' }
       end
     end
@@ -197,9 +198,9 @@ class FieldsController < ApplicationController
     @from_field.strips.each do |strip|
       @from_strip_dup = strip.amoeba_dup
       @from_strip_dup.field_id = @to_field.id
-      #if !@from_strip_dup.save!(:validate => false)
-      #  is_success = false
-      #end
+      if !@from_strip_dup.save!(:validate => false)
+        is_success = false
+      end
 
     end
 

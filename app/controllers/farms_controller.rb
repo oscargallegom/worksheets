@@ -7,6 +7,7 @@ class FarmsController < ApplicationController
 
   add_breadcrumb 'Home', :farms_path
 
+
   # GET /farms
   # GET /farms.json
   def index

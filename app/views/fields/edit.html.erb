@@ -41,8 +41,9 @@
         <% if (@step=='4') %> class="selected"
         <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
         <li
-        <% if (@step=='5') %> class="selected"
-        <% end %> ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
+        <% if (@step=='5') %> class="selected"  <% end %>
+                                                <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"  <% end %>
+        ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
         <li
         <% if (@step=='6') %> class="selected"
         <% end %> ><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>

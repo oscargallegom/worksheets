@@ -9,5 +9,10 @@ class GrazingLivestock < ActiveRecord::Base
   validates_numericality_of :animal_units, :greater_than_or_equal_to => 0
   validates_numericality_of :hours_grazed, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 24
   validates_numericality_of :days_grazed, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 365, :only_integer => true
+  validates_numericality_of :start_date_day, :less_than_or_equal_to => 28, :if => 'start_date_month==2', :message => '^Date incorrect for February'
+  validates_numericality_of :end_date_day, :less_than_or_equal_to => 28, :if => 'end_date_month==2', :message => '^Date incorrect for February'
+
+
+
 
 end

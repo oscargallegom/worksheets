@@ -157,9 +157,8 @@ updateIncorporatedForManure = (caller) ->
 # update liquid units
 updateLiquidUnits = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
-  $("#total_n_concentration_unit_" + componentNumber).text('hello')
   # if liquid then show liquid units
-  if caller.val() == '1'
+  if caller.val() == '265'
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").closest('li').show()
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").prop('required',
       true)
@@ -172,11 +171,11 @@ updateLiquidUnits = (caller) ->
 # update the units tons or gallons
 updateUnitsLabels = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_manure_fertilizer_applications_attributes_')
-  if ($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_manure_consistency_id").val() is '1') and ($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").val() is '1')
+  if ($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_manure_consistency_id").val() is '265') and ($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").val() is '1')
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_total_n_concentration").next().text('lb/1000 gallons')
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_p_concentration").next().text('lb/1000 gallons')
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_application_rate").next().text('1000 gallons/ac')
-  if (($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_manure_consistency_id").val() is '2') or (($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_manure_consistency_id").val() is '1') and ($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").val() is '2')))
+  if (($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_manure_consistency_id").val() is '266') or (($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_manure_consistency_id").val() is '265') and ($("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_liquid_unit_type_id").val() is '2')))
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_total_n_concentration").next().text('lb/T')
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_p_concentration").next().text('lb/T')
     $("#crop_rotation_manure_fertilizer_applications_attributes_" + componentNumber + "_application_rate").next().text('T/ac')
@@ -273,10 +272,10 @@ $(document).ready ->
     checkboxListener($(this))
 
   # update the page checkbox before select (see precision feeding)
-  $(":checkbox").each (index) ->
+  $(":checkbox:visible").each (index) ->
     checkboxListener($(this))
 
-  $("select").each (index) ->
+  $("select:visible").each (index) ->
     selectListener($(this))
 
   $("#crop_rotation_is_cover_crop_true").change ->
@@ -293,6 +292,9 @@ $(document).on "nested:fieldRemoved", (event) ->
   # remove the required field(otherwise Chrome complains)
   field.find('input').prop('required', false)
   field.find('select').prop('required', false)
+  # if removed all end of season, make sure the Add button is shown
+  if ($(".fields:visible").find(".end_of_season_index").length==0)
+    $("#li_end_of_season_button").show()
 
 $(document).on "nested:fieldAdded", (event) ->
   updateIndexes()
@@ -309,9 +311,9 @@ $(document).on "nested:fieldAdded", (event) ->
   #alert(getComponentNumber($(this).attr('id'),'crop_rotation_manure_fertilizer_applications_attributes_' ))
 
   # update the page
-  $(":checkbox").each (index) ->
+  $(":checkbox:visible").each (index) ->
     checkboxListener($(this))
-  $("select").each (index) ->
+  $("select:visible").each (index) ->
     selectListener($(this))
 
 
