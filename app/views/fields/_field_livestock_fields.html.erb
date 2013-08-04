@@ -1,3 +1,4 @@
+<%= f.hidden_field :livestock_input_method_id, :class => 'livestock_input_method_id' %>
 <li><h1 class='sectionHeading'>Livestock
   #<span class="livestock_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete livestock' %>
 </h1></li>
@@ -5,37 +6,37 @@
   <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
 </li>
-<li>
+<li class='li_total_manure'>
   <%= f.label :total_manure, 'Total manure:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :total_manure, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
-  T/yr
+  &nbsp; T/yr
 </li>
-<li>
+<li class='li_quantity'>
   <%= f.label :quantity, 'Quantity:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :quantity, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Number of confined animals' %>
 </li>
-<li>
+<li class='days_per_year_confined'>
   <%= f.label :days_per_year_confined, 'Days/year confined:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :days_per_year_confined, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 365 %>
-  days
+  &nbsp; days
 </li>
-<li>
+<li class='hours_per_day_confined'>
   <%= f.label :hours_per_day_confined, 'Hours/day confined:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :hours_per_day_confined, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24, :step => 'any' %>
-  hr/day
+  &nbsp; hr/day
 </li>
-<li>
+<li class='average_weight'>
   <%= f.label :average_weight, 'Average weight:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :average_weight, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Typically ≈ 1000 lb' %>
-  lb
+  &nbsp; lb
 </li>
 <li>
   <%= f.label :n_excreted, 'N excreted:'.html_safe, :class => 'wide' %>
   <%= f.text_field :n_excreted, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Typically ≈ 10.95 lb/T' %>
-  lb/T
+  &nbsp; lb/T
 </li>
 <li>
   <%= f.label :p205_excreted, 'P<sub>2</sub>O<sub>5</sub> excreted:'.html_safe, :class => 'wide' %>
   <%= f.text_field :p205_excreted, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :title => 'Typically ≈ 3.79 lb/T' %>
-  lb/T
+  &nbsp; lb/T
 </li>

@@ -187,6 +187,22 @@ isStreambankRestorationClicked = ->
     $("#field_streambank_restoration_length").prop('required', false)
 
 
+changeLivestockInputMethodClicked = ->
+  # the children need to know the value for the validation
+  $(".livestock_input_method_id").val($("#field_livestock_input_method_id").val())
+  if $("#field_livestock_input_method_id").val() is '1'
+    $(".li_total_manure").show()
+    $(".li_quantity").hide()
+    $(".days_per_year_confined").hide()
+    $(".hours_per_day_confined").hide()
+    $(".average_weight").hide()
+  if $("#field_livestock_input_method_id").val() is '2'
+    $(".li_total_manure").hide()
+    $(".li_quantity").show()
+    $(".days_per_year_confined").show()
+    $(".hours_per_day_confined").show()
+    $(".average_weight").show()
+
 # when a BMP type is selected, delete all the following BMP sections
 changeBmpListener = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'field_bmps_attributes_')
@@ -261,6 +277,7 @@ $(document).ready ->
   displayFertigation()
   displayEfficiency()
   updateBmpList()
+  changeLivestockInputMethodClicked()
 
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
@@ -304,6 +321,9 @@ $(document).ready ->
 
   $("#field_is_streambank_restoration").change ->
     isStreambankRestorationClicked()
+
+  $("#field_livestock_input_method_id").change ->
+    changeLivestockInputMethodClicked()
 
   # if data is changed, update the silt percent
   $("input").keyup ->
@@ -356,6 +376,7 @@ $(document).on "nested:fieldRemoved", (event) ->
 $(document).on "nested:fieldAdded", (event) ->
   updateIndexes()
   updateBmpList()
+  changeLivestockInputMethodClicked()
 
   $("a").click ->
     addCrop($(this))
