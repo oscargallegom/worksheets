@@ -263,5 +263,81 @@ module BmpCalculations
     # raise 'Oh no! An error......'
 
   end
+
+
+  def computeLivestockBmpCalculations(field)
+
+    total_n_livestock = 0
+    total_nh3_livestock = 0
+    total_org_n_livestock = 0
+    total_p_livestock = 0
+    total_org_p_livestock = 0
+    total_po4p_livestock = 0
+
+      field.field_livestocks.each do |animal|
+
+        animal_lookup = AnimalLookup.where(:animal_id => animal.id).first
+
+        animal_manure = (field.livestock_input_method_id == 1) ? animal.total_manure : animal.quantity * animal.average_weight / 1000.0 * animal_lookup[:daily_manure_production_lbs_per_au] * (animal.days_per_year_confined * hours_per_day_confined) / 24.0
+
+        total_n_livestock = total_n_livestock + (animal_manure * animal.n_excreted)
+
+
+        total_org_n_livestock = total_org_n_livestock + (animal_manure * animal.n_excreted) * animal_lookup[:fraction_org_n]
+        total_nh3_livestock = total_nh3_livestock + (animal.n_excreted * animal_lookup[:fraction_nh3])
+
+        total_p_livestock = total_p_livestock + (animal_manure * animal.p205_excreted / animal_lookup[:fraction_p2o5])
+        total_org_p_livestock = total_org_p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p]
+
+        total_po4p_livestock = total_po4p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p]
+
+      end
+
+    total_n_poultry = 0
+    total_nh3_poultry = 0
+    total_org_n_poultry = 0
+    total_p_poultry = 0
+    total_org_p_poultry = 0
+    total_po4p_poultry = 0
+
+    field.field_poultry.each do |poultry|
+
+      animal_lookup = AnimalLookup.where(:animal_id => poultry.id).first
+
+      poultry_manure = poultry.quantity / animal_lookup[:animals_per_au] * poultry.days_in_growing_cycle * (poultry.flocks_per_year / 365.0) * (animal_lookup[:daily_manure_production_lbs_per_au] /2000.0)
+
+      total_n_poultry = total_n_poultry + (poultry_manure * poultry.n_excreted)
+
+
+      total_org_n_poultry = total_org_n_poultry + (poultry_manure * poultry.n_excreted) * animal_lookup[:fraction_org_n]
+      total_nh3_poultry = total_nh3_poultry + (poultry.n_excreted * animal_lookup[:fraction_nh3])
+
+      total_p_poultry = total_p_poultry + (poultry_manure * poultry.p205_excreted / animal_lookup[:fraction_p2o5])
+      total_org_p_poultry = total_org_p_poultry + (poultry.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p]
+
+      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p]
+
+
+    end
+
+    {:total_n_livestock => total_n_livestock,
+     :total_nh3_livestock => total_nh3_livestock,
+     :total_org_n_livestock => total_org_n_livestock,
+     :total_p_livestock => total_p_livestock,
+     :total_org_p_livestock => total_org_p_livestock,
+     :total_po4p_livestock => total_po4p_livestock,
+
+     :total_n_poultry => total_n_poultry,
+     :total_nh3_poultry => total_nh3_poultry,
+     :total_org_n_poultry => total_org_n_poultry,
+     :total_p_poultry => total_p_poultry,
+     :total_org_p_poultry => total_org_p_poultry,
+     :total_po4p_poultry => total_po4p_poultry,
+
+     :error_message => 'No error'}
+
+
+  end
+
 end
 

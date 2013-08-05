@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803161112) do
+ActiveRecord::Schema.define(:version => 20130804235036) do
+
+  create_table "animal_lookups", :force => true do |t|
+    t.integer "animal_id"
+    t.decimal "typical_live_weight"
+    t.decimal "animals_per_au"
+    t.decimal "daily_manure_production_lbs_per_au"
+    t.decimal "mortality_rate"
+    t.decimal "fraction_p2o5"
+    t.decimal "fraction_nh3"
+    t.decimal "fraction_org_n"
+    t.decimal "fraction_no3"
+    t.decimal "fraction_org_p"
+    t.decimal "fraction_po4p"
+  end
 
   create_table "animals", :force => true do |t|
     t.string "name"

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  animal_id: 1
+  typical_live_weight: 9.99
+  animals_per_au: 9.99
+  daily_manure_production_lbs_per_au: 9.99
+  mortality_rate: 9.99
+  fraction_p2o5: 9.99
+  fraction_nh3: 9.99
+  fraction_org_n: 9.99
+  fraction_no3: 9.99
+  fraction_org_p: 9.99
+  fraction_po4p: 9.99
+
+two:
+  animal_id: 1
+  typical_live_weight: 9.99
+  animals_per_au: 9.99
+  daily_manure_production_lbs_per_au: 9.99
+  mortality_rate: 9.99
+  fraction_p2o5: 9.99
+  fraction_nh3: 9.99
+  fraction_org_n: 9.99
+  fraction_no3: 9.99
+  fraction_org_p: 9.99
+  fraction_po4p: 9.99

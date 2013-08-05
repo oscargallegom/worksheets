@@ -92,6 +92,10 @@
         <% if (@step=='4') %> class="selected"
         <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
         <li class="shadow"></li>
+        <li
+        <% if (@step=='5') %> class="selected"  <% end %>
+        <% if @field.livestock_input_method_id.nil? %>   class="disabledTab"  <% end %>
+        ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
       </ul>
     </div>
 
@@ -99,7 +103,7 @@
     <%= render 'fields/edit_steps_animal_confinment/step_2', :locals => {:field => @field} if @step=='2' %>
     <%= render 'fields/edit_steps_animal_confinment/step_3' if @step=='3' %>
     <%= render 'fields/edit_steps_animal_confinment/step_4' if @step=='4' %>
-    <%= render 'fields/edit_steps/step_5' if @step=='5' %>
+    <%= render 'fields/edit_steps_animal_confinment/step_5' if @step=='5' %>
     <%= render 'fields/edit_steps/step_6' if @step=='6' %>
     <%= render 'fields/edit_steps/step_7' if @step=='7' %>
     <%= render 'fields/edit_steps/step_8' if @step=='8' %>
