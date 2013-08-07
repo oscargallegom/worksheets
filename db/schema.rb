@@ -11,10 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804235036) do
+ActiveRecord::Schema.define(:version => 20130807020453) do
 
-  create_table "animal_lookups", :force => true do |t|
-    t.integer "animal_id"
+  create_table "animals", :force => true do |t|
+    t.string  "name"
+    t.integer "category_id"
     t.decimal "typical_live_weight"
     t.decimal "animals_per_au"
     t.decimal "daily_manure_production_lbs_per_au"
@@ -25,28 +26,18 @@ ActiveRecord::Schema.define(:version => 20130804235036) do
     t.decimal "fraction_no3"
     t.decimal "fraction_org_p"
     t.decimal "fraction_po4p"
-  end
-
-  create_table "animals", :force => true do |t|
-    t.string "name"
+    t.decimal "volatilization_fraction"
+    t.decimal "default_nh3_lbs"
+    t.decimal "default_org_n_lbs"
+    t.decimal "default_org_p_lbs"
+    t.decimal "default_po4_lbs"
+    t.decimal "storage_loss_fraction"
   end
 
   create_table "animals_farms", :force => true do |t|
     t.integer "farm_id"
     t.integer "animal_id"
     t.decimal "animals_units"
-  end
-
-  create_table "baseline_lookups", :force => true do |t|
-    t.integer "state_id"
-    t.string  "major_basin"
-    t.integer "field_type_id"
-    t.decimal "total_n_baseline"
-    t.decimal "total_p_baseline"
-    t.decimal "total_sediment_baseline"
-    t.decimal "n_adjustment_factor"
-    t.decimal "p_adjustment_factor"
-    t.decimal "sediment_adjustment_factor"
   end
 
   create_table "bmp_efficiency_lookups", :force => true do |t|
@@ -277,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20130804235036) do
     t.decimal  "fertilizer_application_setback_length"
     t.boolean  "is_fertilizer_application_setback_planned"
     t.text     "planned_management_details"
+    t.string   "watershed_name"
   end
 
   create_table "generator_types", :force => true do |t|
@@ -370,10 +362,6 @@ ActiveRecord::Schema.define(:version => 20130804235036) do
   end
 
   create_table "planting_methods", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "poultry", :force => true do |t|
     t.string "name"
   end
 

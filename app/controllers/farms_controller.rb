@@ -173,7 +173,11 @@ class FarmsController < ApplicationController
 
         #@field.segment_id = params["field#{i}segment"]
 
-        @field.tmdl = Tmdl.where(:code => params["field#{i}huc12"].to_i).first
+       # @field.tmdl = Tmdl.where(:code => params["field#{i}huc12"].to_i).first
+        @field.tmdl = Tmdl.where(:code => params["field#{i}tmdl_md"]).first
+
+        @field.watershed_name = params["field#{i}huc12name"]
+
         # (params.has_key?("field#{i}tmdl") || Tmdl.where(:code => params["field#{i}tmdl"].to_i).first == nil) ? false : true
         #@field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 

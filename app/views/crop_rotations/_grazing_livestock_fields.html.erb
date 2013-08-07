@@ -15,7 +15,7 @@
 </li>
 <li>
   <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
+  <%= f.collection_select :animal_id, Animal.animal, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
 </li>
 <li>
   <%= f.label :animal_units, 'Animal units:<em>*</em>'.html_safe, :class => 'wide' %>

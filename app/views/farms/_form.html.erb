@@ -164,7 +164,7 @@
 
                   <%= livestock_form.text_field :animal_units, :required => true, :class => 'textboxMedium', :type => 'number', :min => '0', :step => 'any' %>
 
-                  <%= livestock_form.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, :required => true %>
+                  <%= livestock_form.collection_select :animal_id, Animal.animal, :id, :name, {:prompt => 'Select animal'}, :required => true %>
                   &nbsp;
                   <%= livestock_form.link_to_remove ' ', :class => 'icon-delete' %>
 

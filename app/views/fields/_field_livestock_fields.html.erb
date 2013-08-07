@@ -4,7 +4,7 @@
 </h1></li>
 <li>
   <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.collection_select :animal_id, Animal.all, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
+  <%= f.collection_select :animal_id, Animal.animal, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
 </li>
 <li class='li_total_manure'>
   <%= f.label :total_manure, 'Total manure:<em>*</em>'.html_safe, :class => 'wide' %>

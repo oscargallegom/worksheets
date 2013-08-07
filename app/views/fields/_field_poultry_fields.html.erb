@@ -3,7 +3,7 @@
 </h1></li>
 <li>
   <%= f.label :poultry_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.collection_select :poultry_id, Poultry.all, :id, :name, {:prompt => 'Select poultry'}, {:required => true} %>
+  <%= f.collection_select :poultry_id, Animal.poultry, :id, :name, {:prompt => 'Select poultry'}, {:required => true} %>
 </li>
 <li>
   <%= f.label :quantity, 'Quantity/flock:<em>*</em>'.html_safe, :class => 'wide' %>
