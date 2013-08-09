@@ -60,26 +60,43 @@
         <li>
           <div class='wide'>Farm area (from map):</div>
           <%= number_with_precision(@farm.acres, :precision => 2, :separator => '.', :delimiter => ',') %>
+          <%= 'ac' unless @farm.acres.nil? %>
         </li>
         <li>
           <div class='wide'>Farm area (sum of fields):</div>
-          TBD
+          <%= number_with_precision(@farm.acres_from_fields, :precision => 2, :separator => '.', :delimiter => ',') %>
+          <%= 'ac' unless @farm.acres_from_fields == 0 %>
         </li>
         <li>
-          <div class='wide'>Number of fields:</div>
-          <%= @farm.fields.size %>
+          <div class='wide'>Animal headquarters:</div>
+          <%= @farm.animal_headquarters %>
+        </li>
+        <li>
+          <div class='wide'>Nonmanaged land:</div>
+          <%= @farm.nonmanaged_land %>
+        </li>
+        <li>
+          <div class='wide'>Number of fields (crop/pasture/hay):</div>
+          <%= @farm.number_of_fields %>
         </li>
         <li>
           <div class='wide'>Percent complete:</div>
-          ?????
+          <%= @farm.percentCompleted %> %
         </li>
         <li>
           <div class='wide'>Buffered area:</div>
-          TBD
+          <%= @farm.buffered_area %>
+          <%= 'ac' unless @farm.buffered_area == 'N/A' %>
         </li>
         <li>
           <div class='wide'>Wetland area:</div>
-          <%= @farm.site_street_1 %>
+          <%= @farm.wetland_area %>
+          <%= 'ac' unless @farm.wetland_area == 'N/A' %>
+        </li>
+        <li>
+          <div class='wide'>Streambank fencing area:</div>
+          <%= @farm.streambank_fencing_area %>
+          <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %>
         </li>
         <li>
           <div class='wide'>Converted area:</div>

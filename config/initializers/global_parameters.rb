@@ -3,8 +3,7 @@
 #######################################################
 
 # URL to the mapping application
-# URL_MAP = 'http://ims.missouri.edu/marylandNN/MultiStates.aspx'
-URL_MAP = 'http://ims.missouri.edu/marylandNN/Default2.aspx'
+URL_MAP = 'http://ims.missouri.edu/marylandNN/MultiStates.aspx'
 URL_NTT = 'http://nn.tarleton.edu/nnmultiplestates/NNRestService.ashx'
 
 case Rails.env

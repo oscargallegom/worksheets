@@ -53,6 +53,65 @@ class Farm < ActiveRecord::Base
     end
   end
 
+  def acres_from_fields
+    field_acres = 0
+    fields.each do |field|
+      field_acres = field_acres +field.acres
+      end
+  return(field_acres)
+  end
+
+  def animal_headquarters
+    nb_fields = 0
+    fields.each do |field|
+      nb_fields = nb_fields + 1 if field.field_type_id == 4
+    end
+    nb_fields == 0 ? 'N/A' : nb_fields
+  end
+
+  def nonmanaged_land
+    nb_fields = 0
+    fields.each do |field|
+      nb_fields = nb_fields + 1 if field.field_type_id == 5
+    end
+    nb_fields == 0 ? 'N/A' : nb_fields
+  end
+
+  def number_of_fields
+    nb_fields = 0
+    fields.each do |field|
+      nb_fields = nb_fields + 1 if (!field.field_type_id.nil? && field.field_type_id <= 3)
+    end
+    nb_fields == 0 ? 'N/A' : nb_fields
+  end
+
+  def buffered_area
+    buffered_area = 0
+    fields.each do |field|
+      buffered_area = buffered_area + field.forest_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer)
+      buffered_area = buffered_area + field.grass_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer)
+    end
+    buffered_area == 0 ? 'N/A' : buffered_area
+  end
+
+  def wetland_area
+    wetland_area = 0
+    fields.each do |field|
+      wetland_area = wetland_area + field.wetland_area if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland)
+    end
+    wetland_area == 0 ? 'N/A' : wetland_area
+  end
+
+  def streambank_fencing_area
+    streambank_fencing_area = 0
+    #fields.each do |field|
+    #  streambank_fencing_area = wetland_area + field.wetland_area if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland)
+    #end
+    #streambank_fencing_area == 0 ? 'N/A' : wetland_area
+    'TODO'
+  end
+
+
   def percentCompleted
 
     percentCompleted = 0
