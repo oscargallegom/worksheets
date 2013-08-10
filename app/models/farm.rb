@@ -104,11 +104,20 @@ class Farm < ActiveRecord::Base
 
   def streambank_fencing_area
     streambank_fencing_area = 0
-    #fields.each do |field|
-    #  streambank_fencing_area = wetland_area + field.wetland_area if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland)
-    #end
-    #streambank_fencing_area == 0 ? 'N/A' : wetland_area
-    'TODO'
+    fields.each do |field|
+    if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
+      streambank_fencing_area = streambank_fencing_area + field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
+    end
+    end
+    streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
+  end
+
+  def converted_area
+    converted_area = 0
+    converted_area = converted_area + buffered_area unless buffered_area == 'N/A'
+    converted_area = converted_area + wetland_area unless wetland_area == 'N/A'
+    converted_area = converted_area + streambank_fencing_area unless streambank_fencing_area == 'N/A'
+    converted_area == 0 ? 'N/A' : converted_area
   end
 
 

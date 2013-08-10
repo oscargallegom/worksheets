@@ -47,7 +47,7 @@ module BmpCalculations
     stream_hyo_sediment_conversion = 0
 
     # if permanent pasture and fencing in place
-    if (field.field_type_id == 2 && field.is_streambank_fencing_in_place?)
+    if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
       fencing_acres = field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
 
       if (field.vegetation_type_fence_stream_id == 1)    # if forest
@@ -261,6 +261,10 @@ module BmpCalculations
 
   def computeLivestockBmpCalculations(field)
 
+    ####################
+    # Animal
+    ####################
+
     total_n_livestock = 0
     total_nh3_livestock = 0
     total_org_n_livestock = 0
@@ -292,7 +296,7 @@ module BmpCalculations
 
         total_po4p_livestock = total_po4p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p]
 
-        tmp_confined_ammonia = field.is_livestock_plastic_permeable_lagoon_cover ? 123 : (animal.n_excreted * animal_lookup[:fraction_nh3]) * (1 - animal_lookup[:volatilization_fraction])
+        tmp_confined_ammonia = field.is_livestock_plastic_permeable_lagoon_cover ? (tmp_confined_ammonia * (1 - animal_lookup[:fraction_nh3] * 0.85)) : (animal.n_excreted * animal_lookup[:fraction_nh3]) * (1 - animal_lookup[:volatilization_fraction])
         animal_v_ammonia = animal_v_ammonia + (animal.n_excreted * animal_lookup[:fraction_nh3]) - tmp_confined_ammonia
 
         tmp_eof_confined_nh3 = tmp_confined_ammonia * animal_lookup[:storage_loss_fraction]
@@ -316,7 +320,8 @@ module BmpCalculations
         animal_eof_confined_po4p = animal_eof_confined_po4p + tmp_eof_confined_po4p
       end
 
-    animal_eos_nh3 = (animal_eof_confined_org_n < (animal_eof_confined_org_p / 0.01384)) ? animal_eof_confined_nh3 * 99999 : (animal_eof_confined_nh3 + animal_eof_confined_org_n - animal_eof_confined_org_p / 0.01384) * 99999
+    animal_eos_nh3 = (animal_eof_confined_org_n < (animal_eof_confined_org_p / 0.01384)) ? animal_eof_confined_nh3 : (animal_eof_confined_nh3 + animal_eof_confined_org_n - animal_eof_confined_org_p / 0.01384)
+    animal_eos_nh3 = animal_eos_nh3 * field.watershed_segment.cafo_n_rf
 
     animal_eos_po4p = 0
     if (animal_eof_confined_org_n < (animal_eof_confined_org_p / 0.01384))
@@ -328,15 +333,15 @@ module BmpCalculations
     else
       animal_eos_po4p = animal_eof_confined_po4p
     end
-    animal_eos_po4p  = animal_eos_po4p * 9999
+    animal_eos_po4p  = animal_eos_po4p * field.watershed_segment.cafo_p_rf
 
     animal_eos_org_n = (animal_eof_confined_org_n < animal_eof_confined_po4p / 0.01384) ? animal_eof_confined_org_n * 22.95 * 0.0436 : animal_eof_confined_org_p / 0.01384 * 22.95 * 0.0436
-    animal_eos_org_n = animal_eos_org_n * (9999 + 9999) / 2
+    animal_eos_org_n = animal_eos_org_n * (field.watershed_segment.cafo_n_rf + field.watershed_segment.cafo_p_rf) / 2
 
     animal_eos_org_p = (animal_eof_confined_org_n < animal_eof_confined_po4p / 0.01384) ? animal_eof_confined_org_n * 22.95 * 0.00603 : animal_eof_confined_org_p / 0.01384 * 22.95 * 0.00603
-    animal_eos_org_p = animal_eos_org_p * (9999 + 9999) / 2
+    animal_eos_org_p = animal_eos_org_p * (field.watershed_segment.cafo_n_rf + field.watershed_segment.cafo_p_rf) / 2
 
-    animal_eos_dry_ammonia = (animal_v_ammonia * 0.1) * 9999
+    animal_eos_dry_ammonia = (animal_v_ammonia * 0.1) * field.watershed_segment.cafo_n_rf
 
     animal_eos_nitrogen = (animal_eos_org_n + animal_eos_nh3)
     animal_eos_nitrogen = animal_eos_nitrogen * 0.8 if field.is_livestock_barnyard_runoff_controls
@@ -348,12 +353,13 @@ module BmpCalculations
     animal_eos_phosphorus = animal_eos_phosphorus * 0.8 if field.is_livestock_barnyard_runoff_controls
     animal_eos_phosphorus = animal_eos_phosphorus * 0.55 if field.is_livestock_treatment_wetland
 
-    animal_eos_sediment = 9999 * field.acres
+    animal_eos_sediment = field.acres * field.watershed_segment.cafo_eos_sediment
     animal_eos_sediment = animal_eos_phosphorus * 0.6 if field.is_livestock_barnyard_runoff_controls
     animal_eos_sediment = animal_eos_phosphorus * 0.4 if field.is_livestock_treatment_wetland
 
-
+    ####################
     # Poultry
+    ####################
 
     total_n_poultry = 0
     total_nh3_poultry = 0
@@ -363,60 +369,61 @@ module BmpCalculations
     total_po4p_poultry = 0
 
     poultry_v_ammonia = 0
-    poultry_animal_eof_confined_nh3 = 0
-    poultry_animal_eof_confined_org_n = 0
-    poultry_animal_eof_confined_org_p = 0
-    poultry_animal_eof_confined_po4p = 0
+    poultry_eof_confined_nh3 = 0
+    poultry_eof_confined_org_n = 0
+    poultry_eof_confined_org_p = 0
+    poultry_eof_confined_po4p = 0
 
     field.field_poultry.each do |poultry|
 
-      animal_lookup = Animal.where(:id => poultry.id).first
+      poultry_lookup = Animal.where(:id => poultry.id).first
 
-      poultry_manure = poultry.quantity / animal_lookup[:animals_per_au] * poultry.days_in_growing_cycle * (poultry.flocks_per_year / 365.0) * (animal_lookup[:daily_manure_production_lbs_per_au] /2000.0)
+      poultry_manure = poultry.quantity / poultry_lookup[:animals_per_au] * poultry.days_in_growing_cycle * (poultry.flocks_per_year / 365.0) * (poultry_lookup[:daily_manure_production_lbs_per_au] /2000.0)
 
       total_n_poultry = total_n_poultry + (poultry_manure * poultry.n_excreted)
 
 
-      total_org_n_poultry = total_org_n_poultry + (poultry_manure * poultry.n_excreted) * animal_lookup[:fraction_org_n]
-      total_nh3_poultry = total_nh3_poultry + (poultry.n_excreted * animal_lookup[:fraction_nh3])
+      total_org_n_poultry = total_org_n_poultry + (poultry_manure * poultry.n_excreted) * poultry_lookup[:fraction_org_n]
+      total_nh3_poultry = total_nh3_poultry + (poultry.n_excreted * poultry_lookup[:fraction_nh3])
 
-      total_p_poultry = total_p_poultry + (poultry_manure * poultry.p205_excreted / animal_lookup[:fraction_p2o5])
-      total_org_p_poultry = total_org_p_poultry + (poultry.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p]
+      total_p_poultry = total_p_poultry + (poultry_manure * poultry.p205_excreted / poultry_lookup[:fraction_p2o5])
+      total_org_p_poultry = total_org_p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_org_p]
 
-      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p]
+      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) / poultry_lookup[:fraction_po4p]
 
 
-      tmp_confined_ammonia = field.is_poultry_litter_treatment ? (poultry.n_excreted * animal_lookup[:fraction_nh3]) * (1 - (animal_lookup[:volatilization_fraction] * (1 - 0.6))) : (poultry.n_excreted * animal_lookup[:fraction_nh3]) * (1 - animal_lookup[:volatilization_fraction])
-      tmp_v_ammonia = (poultry.n_excreted * animal_lookup[:fraction_nh3]) - tmp_confined_ammonia
+      tmp_confined_ammonia = field.is_poultry_litter_treatment ? (poultry.n_excreted * poultry_lookup[:fraction_nh3]) * (1 - (poultry_lookup[:volatilization_fraction] * (1 - 0.6))) : (poultry.n_excreted * poultry_lookup[:fraction_nh3]) * (1 - poultry_lookup[:volatilization_fraction])
+      tmp_v_ammonia = (poultry.n_excreted * poultry_lookup[:fraction_nh3]) - tmp_confined_ammonia
       tmp_v_ammonia = tmp_v_ammonia * 0.5  if (field.is_poultry_biofilters)
       tmp_v_ammonia = tmp_v_ammonia * 0.5  if (field.is_poultry_vegetated_environmental_buffer)
       poultry_v_ammonia = poultry_v_ammonia + tmp_v_ammonia
 
-      tmp_eof_confined_nh3 = tmp_confined_ammonia * animal_lookup[:storage_loss_fraction]
+      tmp_eof_confined_nh3 = tmp_confined_ammonia * poultry_lookup[:storage_loss_fraction]
       tmp_eof_confined_nh3 = tmp_eof_confined_nh3 * 0.25 if field.is_poultry_animal_waste_management_system
-      tmp_eof_confined_nh3 = tmp_eof_confined_nh3 * (1 - animal_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
+      tmp_eof_confined_nh3 = tmp_eof_confined_nh3 * (1 - poultry_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
       poultry_eof_confined_nh3 = poultry_eof_confined_nh3 + tmp_eof_confined_nh3
 
-      tmp_eof_confined_org_n = (animal_manure * animal.n_excreted) * animal_lookup[:fraction_org_n] * animal_lookup[:storage_loss_fraction]
+      tmp_eof_confined_org_n = (poultry_manure * poultry.n_excreted) * poultry_lookup[:fraction_org_n] * poultry_lookup[:storage_loss_fraction]
       tmp_eof_confined_org_n = tmp_eof_confined_org_n * 0.25 if field.is_poultry_animal_waste_management_system
-      tmp_eof_confined_org_n = tmp_eof_confined_org_n * (1 - animal_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
+      tmp_eof_confined_org_n = tmp_eof_confined_org_n * (1 - poultry_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
       poultry_eof_confined_org_n = poultry_eof_confined_org_n + tmp_eof_confined_org_n
 
-      tmp_eof_confined_org_p =  (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p] * animal_lookup[:storage_loss_fraction]
+      tmp_eof_confined_org_p =  (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_org_p] * poultry_lookup[:storage_loss_fraction]
       tmp_eof_confined_org_p = tmp_eof_confined_org_p * 0.25 if field.is_poultry_animal_waste_management_system
-      tmp_eof_confined_org_p = tmp_eof_confined_org_p * (1 - animal_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
+      tmp_eof_confined_org_p = tmp_eof_confined_org_p * (1 - poultry_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
       poultry_eof_confined_org_p = poultry_eof_confined_org_p + tmp_eof_confined_org_p
 
-      tmp_eof_confined_po4p =  (animal.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p] * animal_lookup[:fraction_org_p] * animal_lookup[:storage_loss_fraction]
+      tmp_eof_confined_po4p =  (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) / poultry_lookup[:fraction_po4p] * poultry_lookup[:fraction_org_p] * poultry_lookup[:storage_loss_fraction]
       tmp_eof_confined_po4p = tmp_eof_confined_po4p * 0.25 if field.is_poultry_animal_waste_management_system
-      tmp_eof_confined_po4p = tmp_eof_confined_po4p * (1 - animal_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
+      tmp_eof_confined_po4p = tmp_eof_confined_po4p * (1 - poultry_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
       poultry_eof_confined_po4p = poultry_eof_confined_po4p + tmp_eof_confined_po4p
 
 
     end
 
 
-    poultry_eos_nh3 = (poultry_eof_confined_org_n < (poultry_eof_confined_org_p / 0.01384)) ? poultry_eof_confined_nh3 * 99999 : (poultry_eof_confined_nh3 + poultry_eof_confined_org_n - poultry_eof_confined_org_p / 0.01384) * 99999
+    poultry_eos_nh3 = (poultry_eof_confined_org_n < (poultry_eof_confined_org_p / 0.01384)) ? poultry_eof_confined_nh3 : (poultry_eof_confined_nh3 + poultry_eof_confined_org_n - poultry_eof_confined_org_p / 0.01384)
+    poultry_eos_nh3 =poultry_eos_nh3 * field.watershed_segment.cafo_n_rf
 
     poultry_eos_po4p = 0
     if (poultry_eof_confined_org_n < (poultry_eof_confined_org_p / 0.01384))
@@ -428,15 +435,15 @@ module BmpCalculations
     else
       poultry_eos_po4p = poultry_eof_confined_po4p
     end
-    poultry_eos_po4p  = poultry_eos_po4p * 9999
+    poultry_eos_po4p  = poultry_eos_po4p * field.watershed_segment.cafo_p_rf
 
     poultry_eos_org_n = (poultry_eof_confined_org_n < poultry_eof_confined_po4p / 0.01384) ? poultry_eof_confined_org_n * 22.95 * 0.0436 : poultry_eof_confined_org_p / 0.01384 * 22.95 * 0.0436
-    poultry_eos_org_n = poultry_eos_org_n * (9999 + 9999) / 2
+    poultry_eos_org_n = poultry_eos_org_n * (field.watershed_segment.cafo_n_rf + field.watershed_segment.cafo_p_rf) / 2
 
     poultry_eos_org_p = (poultry_eof_confined_org_n < poultry_eof_confined_po4p / 0.01384) ? poultry_eof_confined_org_n * 22.95 * 0.00603 : poultry_eof_confined_org_p / 0.01384 * 22.95 * 0.00603
-    poultry_eos_org_p = poultry_eos_org_p * (9999 + 9999) / 2
+    poultry_eos_org_p = poultry_eos_org_p * (field.watershed_segment.cafo_n_rf + field.watershed_segment.cafo_p_rf) / 2
 
-    poultry_eos_dry_ammonia = (poultry_v_ammonia * 0.1) * 9999
+    poultry_eos_dry_ammonia = (poultry_v_ammonia * 0.1) * field.watershed_segment.cafo_n_rf
 
     poultry_eos_nitrogen = (poultry_eos_org_n + poultry_eos_nh3)
     poultry_eos_nitrogen = poultry_eos_nitrogen * 0.8 if field.is_poultry_barnyard_runoff_controls
@@ -450,7 +457,7 @@ module BmpCalculations
     poultry_eos_phosphorus = poultry_eos_phosphorus * 0.55 if field.is_poultry_treatment_wetland
     poultry_eos_phosphorus = poultry_eos_phosphorus * 0.9 if field.is_poultry_heavy_use_pads
 
-    poultry_eos_sediment = 9999 * field.acres
+    poultry_eos_sediment = field.acres * field.watershed_segment.cafo_eos_sediment
     poultry_eos_sediment = poultry_eos_phosphorus * 0.6 if field.is_poultry_barnyard_runoff_controls
     poultry_eos_sediment = poultry_eos_phosphorus * 0.4 if field.is_poultry_treatment_wetland
     poultry_eos_sediment = poultry_eos_sediment * 0.9 if field.is_poultry_heavy_use_pads
@@ -467,12 +474,24 @@ module BmpCalculations
      :total_org_p_livestock => total_org_p_livestock,
      :total_po4p_livestock => total_po4p_livestock,
 
+     :animal_v_ammonia => animal_v_ammonia,
+    :animal_eof_confined_nh3 => animal_eof_confined_nh3,
+    :animal_eof_confined_org_n => animal_eof_confined_org_n,
+    :animal_eof_confined_org_p => animal_eof_confined_org_p,
+    :animal_eof_confined_po4p => animal_eof_confined_po4p,
+
      :total_n_poultry => total_n_poultry,
      :total_nh3_poultry => total_nh3_poultry,
      :total_org_n_poultry => total_org_n_poultry,
      :total_p_poultry => total_p_poultry,
      :total_org_p_poultry => total_org_p_poultry,
      :total_po4p_poultry => total_po4p_poultry,
+
+        :poultry_v_ammonia => poultry_v_ammonia,
+    :poultry_eof_confined_nh3 => poultry_eof_confined_nh3,
+    :poultry_eof_confined_org_n => poultry_eof_confined_org_n,
+    :poultry_eof_confined_org_p => poultry_eof_confined_org_p,
+    :poultry_eof_confined_po4p => poultry_eof_confined_po4p,
 
      :error_message => 'No error'}
 

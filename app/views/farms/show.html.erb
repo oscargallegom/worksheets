@@ -52,6 +52,73 @@
           <%= @farm.county.name %>
         </li>
 
+        <li><h2 class='sectionHeading'>N Load Information</h2></li>
+        <li>
+          <div class='wide'>Farm meets N baseline:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Current N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Current P load for Animal HQ:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Baseline N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Planned N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+
+        <li><h2 class='sectionHeading'>P Load Information</h2></li>
+        <li>
+          <div class='wide'>Farm meets N baseline:</div>
+          <%= @farm.state.name %>
+        </li>
+        <li>
+          <div class='wide'>Current N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Current N load for Animal HQ:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Baseline N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Planned N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+
+        <li><h2 class='sectionHeading'>Sediment Load Information</h2></li>
+        <li>
+          <div class='wide'>Farm meets N baseline:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Current N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Current N load for Animal HQ:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Baseline N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Planned N load fields:</div>
+          <%= 'TBD' %>
+        </li>
+
+
       </ol>
     </fieldset>
     <fieldset>
@@ -100,36 +167,77 @@
         </li>
         <li>
           <div class='wide'>Converted area:</div>
-          TBD
+          <%= @farm.converted_area %>
+          <%= 'ac' unless @farm.converted_area == 'N/A' %>
+        </li>
+        <li></li>
+        <li></li>
+        <li><h2 class='sectionHeading'>&nbsp;</h2></li>
+        <li>
+          <div class='wide'>Planned N load for animal HQ:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>Farm meets baseline:</div>
-          TBD
+          <div class='wide'>Total Reductions:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>N reduction (EOS):</div>
-          TBD
+          <div class='wide'>Eligible reductions:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>N reduction to bay:</div>
-          TBD
+          <div class='wide'>Delivery factor:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>N credits generated:</div>
-          TBD
+          <div class='wide'>Credits:</div>
+          <%= 'TBD' %>
+        </li>
+
+        <li><h2 class='sectionHeading'>&nbsp;</h2></li>
+        <li>
+          <div class='wide'>Planned N load for animal HQ:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>P reduction (EOS):</div>
-          TBD
+          <div class='wide'>Total Reductions:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>P reduction to bay:</div>
-          TBD
+          <div class='wide'>Eligible reductions:</div>
+          <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>P credits generated:</div>
-          TBD
+          <div class='wide'>Delivery factor:</div>
+          <%= 'TBD' %>
         </li>
+        <li>
+          <div class='wide'>Credits:</div>
+          <%= 'TBD' %>
+        </li>
+
+        <li><h2 class='sectionHeading'>&nbsp;</h2></li>
+        <li>
+          <div class='wide'>Planned N load for animal HQ:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Total Reductions:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Eligible reductions:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Delivery factor:</div>
+          <%= 'TBD' %>
+        </li>
+        <li>
+          <div class='wide'>Credits:</div>
+          <%= 'TBD' %>
+        </li>
+
 
       </ol>
     </fieldset>
