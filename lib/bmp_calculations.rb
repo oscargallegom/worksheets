@@ -468,7 +468,13 @@ module BmpCalculations
 
 
 
-    {:total_n_livestock => total_n_livestock,
+    {
+        :current_load_nitrogen =>  current_load_nitrogen,
+    :current_load_phosphorus => current_load_phosphorus,
+    :current_load_sediment =>  current_load_sediment,
+
+
+        :total_n_livestock => total_n_livestock,
      :total_nh3_livestock => total_nh3_livestock,
      :total_org_n_livestock => total_org_n_livestock,
      :total_p_livestock => total_p_livestock,
