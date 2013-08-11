@@ -327,7 +327,7 @@ module BmpCalculations
     animal_eos_po4p = 0
     if (animal_eof_confined_org_n < (animal_eof_confined_org_p / 0.01384))
       if (animal_eof_confined_po4p + animal_eof_confined_org_p - animal_eof_confined_org_n * 0.01384 > 0)
-        animal_eos_po4p =  animal_eof_confined_po4p + animal_eof_confined_po4p - animal_eof_confined_org_n * 0.01384
+        animal_eos_po4p =  animal_eof_confined_po4p + animal_eof_confined_org_p - animal_eof_confined_org_n * 0.01384
       else
         animal_eos_po4p = 0
       end
@@ -354,8 +354,8 @@ module BmpCalculations
     animal_eos_phosphorus = animal_eos_phosphorus * 0.55 if field.is_livestock_treatment_wetland
 
     animal_eos_sediment = field.acres * field.watershed_segment.cafo_eos_sediment
-    animal_eos_sediment = animal_eos_phosphorus * 0.6 if field.is_livestock_barnyard_runoff_controls
-    animal_eos_sediment = animal_eos_phosphorus * 0.4 if field.is_livestock_treatment_wetland
+    animal_eos_sediment = animal_eos_sediment * 0.6 if field.is_livestock_barnyard_runoff_controls
+    animal_eos_sediment = animal_eos_sediment * 0.4 if field.is_livestock_treatment_wetland
 
     ####################
     # Poultry
@@ -435,6 +435,7 @@ module BmpCalculations
     else
       poultry_eos_po4p = poultry_eof_confined_po4p
     end
+
     poultry_eos_po4p  = poultry_eos_po4p * field.watershed_segment.cafo_p_rf
 
     poultry_eos_org_n = (poultry_eof_confined_org_n < poultry_eof_confined_po4p / 0.01384) ? poultry_eof_confined_org_n * 22.95 * 0.0436 : poultry_eof_confined_org_p / 0.01384 * 22.95 * 0.0436
@@ -457,14 +458,14 @@ module BmpCalculations
     poultry_eos_phosphorus = poultry_eos_phosphorus * 0.9 if field.is_poultry_heavy_use_pads
 
     poultry_eos_sediment = field.acres * field.watershed_segment.cafo_eos_sediment
-    poultry_eos_sediment = poultry_eos_phosphorus * 0.6 if field.is_poultry_barnyard_runoff_controls
-    poultry_eos_sediment = poultry_eos_phosphorus * 0.4 if field.is_poultry_treatment_wetland
+    poultry_eos_sediment = poultry_eos_sediment * 0.6 if field.is_poultry_barnyard_runoff_controls
+    poultry_eos_sediment = poultry_eos_sediment * 0.4 if field.is_poultry_treatment_wetland
     poultry_eos_sediment = poultry_eos_sediment * 0.9 if field.is_poultry_heavy_use_pads
 
 
     current_load_nitrogen = animal_eos_nitrogen + poultry_eos_nitrogen
     current_load_phosphorus = animal_eos_phosphorus + poultry_eos_phosphorus
-    current_load_sediment = animal_eos_sediment + poultry_eos_sediment
+    current_load_sediment = (animal_eos_sediment + poultry_eos_sediment) / 2000.0
 
 
 
