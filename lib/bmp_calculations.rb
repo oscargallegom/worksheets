@@ -283,7 +283,7 @@ module BmpCalculations
 
         animal_lookup = Animal.where(:id => animal.animal_id).first
 
-        animal_manure = (field.livestock_input_method_id == 1) ? animal.total_manure : animal.quantity * animal.average_weight / 1000.0 * animal_lookup[:daily_manure_production_lbs_per_au] * (animal.days_per_year_confined * hours_per_day_confined) / 24.0
+        animal_manure = (field.livestock_input_method_id == 1) ? animal.total_manure : animal.quantity * animal.average_weight / 1000.0 * animal_lookup[:daily_manure_production_lbs_per_au] * (animal.days_per_year_confined * hours_per_day_confined) / 24.0 / 2000.0
 
         total_n_livestock = total_n_livestock + (animal_manure * animal.n_excreted)
 
@@ -344,11 +344,10 @@ module BmpCalculations
 
     animal_eos_dry_ammonia = (animal_v_ammonia * 0.1) * field.watershed_segment.cafo_n_rf
 
-    animal_eos_nitrogen = (animal_eos_org_n + animal_eos_nh3)
+    animal_eos_nitrogen = animal_eos_org_n + animal_eos_nh3 + animal_eos_dry_ammonia
     animal_eos_nitrogen = animal_eos_nitrogen * 0.8 if field.is_livestock_barnyard_runoff_controls
     animal_eos_nitrogen = animal_eos_nitrogen * 0.67 if field.is_livestock_water_control_structure
     animal_eos_nitrogen = animal_eos_nitrogen * 0.8 if field.is_livestock_treatment_wetland
-    animal_eos_nitrogen = animal_eos_nitrogen + animal_eos_dry_ammonia
 
     animal_eos_phosphorus = (animal_eos_org_p + animal_eos_po4p)
     animal_eos_phosphorus = animal_eos_phosphorus * 0.8 if field.is_livestock_barnyard_runoff_controls
@@ -379,7 +378,7 @@ module BmpCalculations
 
       poultry_lookup = Animal.where(:id => poultry.animal_id).first
 
-      poultry_manure = poultry.quantity / poultry_lookup[:animals_per_au] * poultry.days_in_growing_cycle * (poultry.flocks_per_year / 365.0) * (poultry_lookup[:daily_manure_production_lbs_per_au] /2000.0)
+      poultry_manure = poultry.quantity / poultry_lookup[:animals_per_au] * poultry.days_in_growing_cycle * poultry.flocks_per_year * (poultry_lookup[:daily_manure_production_lbs_per_au] / 2000.0)
 
       total_n_poultry = total_n_poultry + (poultry_manure * poultry.n_excreted)
 
@@ -446,12 +445,11 @@ module BmpCalculations
 
     poultry_eos_dry_ammonia = (poultry_v_ammonia * 0.1) * field.watershed_segment.cafo_n_rf
 
-    poultry_eos_nitrogen = (poultry_eos_org_n + poultry_eos_nh3)
+    poultry_eos_nitrogen = poultry_eos_org_n + poultry_eos_nh3 + poultry_eos_dry_ammonia
     poultry_eos_nitrogen = poultry_eos_nitrogen * 0.8 if field.is_poultry_barnyard_runoff_controls
     poultry_eos_nitrogen = poultry_eos_nitrogen * 0.67 if field.is_poultry_water_control_structure
     poultry_eos_nitrogen = poultry_eos_nitrogen * 0.8 if field.is_poultry_treatment_wetland
     poultry_eos_nitrogen = poultry_eos_nitrogen * 0.9 if field.is_poultry_heavy_use_pads
-    poultry_eos_nitrogen = poultry_eos_nitrogen + poultry_eos_dry_ammonia
 
     poultry_eos_phosphorus = (poultry_eos_org_p + poultry_eos_po4p)
     poultry_eos_phosphorus = poultry_eos_phosphorus * 0.8 if field.is_poultry_barnyard_runoff_controls
@@ -464,7 +462,9 @@ module BmpCalculations
     poultry_eos_sediment = poultry_eos_sediment * 0.9 if field.is_poultry_heavy_use_pads
 
 
-
+    current_load_nitrogen = animal_eos_nitrogen + poultry_eos_nitrogen
+    current_load_phosphorus = animal_eos_phosphorus + poultry_eos_phosphorus
+    current_load_sediment = animal_eos_sediment + poultry_eos_sediment
 
 
 
