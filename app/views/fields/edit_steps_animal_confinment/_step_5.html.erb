@@ -11,11 +11,31 @@
 
 <% else %>
 
-    current_load_nitrogen: <%= @current_totals[:current_load_nitrogen]%> <br/>
-    current_load_phosphorus: <%= @current_totals[:current_load_phosphorus]%> <br/>
-    current_load_sediment: <%= @current_totals[:current_load_sediment]%> <br/>
-    <br/>
+    <div class="sectionRest clearfix nn-form">
 
+      <div>
+        <fieldset>
+          <ol>
+            <li><h2 class='sectionHeading'>Current Load (EOS):</h2></li>
+            <li><span class='wide'>Nitrogen:</span>
+              <%= number_with_precision(@current_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
+              lbs per year
+            </li>
+            <li><span class='wide'>Phosphorus:</span>
+              <%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
+              lbs per year
+            </li>
+            <li><span class='wide'>Sediment:</span>
+              <%= number_with_precision(@current_totals[:current_load_sediment], :precision => 2, delimiter: ',') %>
+              tons per year
+            </li>
+            </ol>
+          </fieldset>
+        </div>
+      <div style="clear: both"></div>
+      </div>
+
+    <br/><br/>
 
 total_n_livestock: <%= @current_totals[:total_n_livestock]%> <br/>
 total_nh3_livestock: <%= @current_totals[:total_nh3_livestock]%> <br/>

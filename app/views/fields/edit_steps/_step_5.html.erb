@@ -17,60 +17,60 @@
           <ol>
             <li><h2 class='sectionHeading'>Nitrogen</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
-              <%= number_with_precision(@watershed_segment[:n_crop_baseline] * @field.acres, :precision => 2, delimiter: '.') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:n_pasture_baseline] * @field.acres, :precision => 2, delimiter: '.') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:n_hay_baseline] * @field.acres, :precision => 2, delimiter: '.') if @field.field_type_id == 3 %>
+              <%= number_with_precision(@watershed_segment[:n_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@watershed_segment[:n_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@watershed_segment[:n_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: '.')  if @field.field_type_id == 1 %>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: '.')  if @field.field_type_id == 2 %>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: '.')  if @field.field_type_id == 3 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 1 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 2 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 3 %>
               lb/ac)
             </li>
             <li><span class='wide'>Current Load (EOS):</span>
               <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: '.') %> lb
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2, delimiter: '.') %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2, delimiter: ',') %>
               lb/ac)
             </li>
 
             <li><h2 class='sectionHeading'>Phosphorus</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
-              <%= number_with_precision(@watershed_segment[:p_crop_baseline] * @field.acres, :precision => 2, delimiter: '.') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:p_pasture_baseline] * @field.acres, :precision => 2, delimiter: '.') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:p_hay_baseline] * @field.acres, :precision => 2, delimiter: '.') if @field.field_type_id == 3 %>
+              <%= number_with_precision(@watershed_segment[:p_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@watershed_segment[:p_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@watershed_segment[:p_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@watershed_segment[:p_crop_baseline], :precision => 2, delimiter: '.') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:p_pasture_baseline], :precision => 2, delimiter: '.') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:p_hay_baseline], :precision => 2, delimiter: '.') if @field.field_type_id == 3 %>
+              <%= number_with_precision(@watershed_segment[:p_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@watershed_segment[:p_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@watershed_segment[:p_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
             </li>
             <li><span class='wide'>Current Load (EOS):</span>
-              <%= number_with_precision(@current_totals[:new_total_p], :precision => 2) %> lb
+              <%= number_with_precision(@current_totals[:new_total_p], :precision => 2, delimiter: ',') %> lb
 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2) %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2) %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2) %>
+              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') %>
               lb/ac)
             </li>
 
             <li><h2 class='sectionHeading'>Sediment</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
-              <%= number_with_precision(@watershed_segment[:sediment_crop_baseline] * @field.acres, :precision => 2) if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline] * @field.acres, :precision => 2) if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:sediment_hay_baseline] * @field.acres, :precision => 2) if @field.field_type_id == 3 %>
+              <%= number_with_precision(@watershed_segment[:sediment_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@watershed_segment[:sediment_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@watershed_segment[:sediment_crop_baseline], :precision => 2) if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline], :precision => 2) if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:sediment_hay_baseline], :precision => 2) if @field.field_type_id == 3 %>
+              <%= number_with_precision(@watershed_segment[:sediment_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@watershed_segment[:sediment_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
             </li>
             <li><span class='wide'>Current Load (EOS):</span>
-              <%= number_with_precision(@current_totals[:new_total_sediment] / 2000.0, :precision => 2) %> tons
+              <%= number_with_precision(@current_totals[:new_total_sediment] / 2000.0, :precision => 2, delimiter: ',') %> tons
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres / 2000.0, :precision => 2) %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres / 2000.0, :precision => 2, delimiter: ',') %>
               t/ac)
             </li>
 
@@ -95,7 +95,7 @@
             <li><span class='extrawide'>Flow</span><b>123</b></li>
 
             <li><span class='extrawide'>Sediment</span><b>
-              <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: '.') %> t/ac
+              <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: ',') %> t/ac
             </b></li>
 
             <li><span class='extrawide'>Carbon</span><b>123</b></li>
