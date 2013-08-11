@@ -281,7 +281,7 @@ module BmpCalculations
 
       field.field_livestocks.each do |animal|
 
-        animal_lookup = Animal.where(:id => animal.id).first
+        animal_lookup = Animal.where(:id => animal.animal_id).first
 
         animal_manure = (field.livestock_input_method_id == 1) ? animal.total_manure : animal.quantity * animal.average_weight / 1000.0 * animal_lookup[:daily_manure_production_lbs_per_au] * (animal.days_per_year_confined * hours_per_day_confined) / 24.0
 
@@ -289,15 +289,16 @@ module BmpCalculations
 
 
         total_org_n_livestock = total_org_n_livestock + (animal_manure * animal.n_excreted) * animal_lookup[:fraction_org_n]
-        total_nh3_livestock = total_nh3_livestock + (animal.n_excreted * animal_lookup[:fraction_nh3])
+        tmp_nh3_livestock = animal.n_excreted * animal_lookup[:fraction_nh3] * animal_manure
+        total_nh3_livestock = total_nh3_livestock + tmp_nh3_livestock
 
         total_p_livestock = total_p_livestock + (animal_manure * animal.p205_excreted / animal_lookup[:fraction_p2o5])
-        total_org_p_livestock = total_org_p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p]
+        total_org_p_livestock = total_org_p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p] * animal_manure
 
-        total_po4p_livestock = total_po4p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p]
+        total_po4p_livestock = total_po4p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_po4p] * animal_manure
 
-        tmp_confined_ammonia = field.is_livestock_plastic_permeable_lagoon_cover ? (tmp_confined_ammonia * (1 - animal_lookup[:fraction_nh3] * 0.85)) : (animal.n_excreted * animal_lookup[:fraction_nh3]) * (1 - animal_lookup[:volatilization_fraction])
-        animal_v_ammonia = animal_v_ammonia + (animal.n_excreted * animal_lookup[:fraction_nh3]) - tmp_confined_ammonia
+        tmp_confined_ammonia = field.is_livestock_plastic_permeable_lagoon_cover ? (tmp_nh3_livestock * (1 - animal_lookup[:fraction_nh3] * 0.85)) : tmp_nh3_livestock * (1 - animal_lookup[:volatilization_fraction])
+        animal_v_ammonia = animal_v_ammonia + tmp_nh3_livestock - tmp_confined_ammonia
 
         tmp_eof_confined_nh3 = tmp_confined_ammonia * animal_lookup[:storage_loss_fraction]
         tmp_eof_confined_nh3 = tmp_eof_confined_nh3 * 0.25 if field.is_livestock_animal_waste_management_system
@@ -309,12 +310,12 @@ module BmpCalculations
         tmp_eof_confined_org_n = tmp_eof_confined_org_n * (1 - animal_lookup[:mortality_rate]) if field.is_livestock_mortality_composting
         animal_eof_confined_org_n = animal_eof_confined_org_n + tmp_eof_confined_org_n
 
-        tmp_eof_confined_org_p =  (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_org_p] * animal_lookup[:storage_loss_fraction]
+        tmp_eof_confined_org_p = animal_manure * animal.p205_excreted / animal_lookup[:fraction_p2o5] * animal_lookup[:fraction_org_p] * animal_lookup[:storage_loss_fraction]
         tmp_eof_confined_org_p = tmp_eof_confined_org_p * 0.25 if field.is_livestock_animal_waste_management_system
         tmp_eof_confined_org_p = tmp_eof_confined_org_p * (1 - animal_lookup[:mortality_rate]) if field.is_livestock_mortality_composting
         animal_eof_confined_org_p = animal_eof_confined_org_p + tmp_eof_confined_org_p
 
-        tmp_eof_confined_po4p =  (animal.p205_excreted / animal_lookup[:fraction_p2o5]) / animal_lookup[:fraction_po4p] * animal_lookup[:fraction_org_p] * animal_lookup[:storage_loss_fraction]
+        tmp_eof_confined_po4p =  animal_manure * animal.p205_excreted / animal_lookup[:fraction_p2o5] * animal_lookup[:fraction_po4p] * animal_lookup[:storage_loss_fraction]
         tmp_eof_confined_po4p = tmp_eof_confined_po4p * 0.25 if field.is_livestock_animal_waste_management_system
         tmp_eof_confined_po4p = tmp_eof_confined_po4p * (1 - animal_lookup[:mortality_rate]) if field.is_livestock_mortality_composting
         animal_eof_confined_po4p = animal_eof_confined_po4p + tmp_eof_confined_po4p
@@ -376,7 +377,7 @@ module BmpCalculations
 
     field.field_poultry.each do |poultry|
 
-      poultry_lookup = Animal.where(:id => poultry.id).first
+      poultry_lookup = Animal.where(:id => poultry.animal_id).first
 
       poultry_manure = poultry.quantity / poultry_lookup[:animals_per_au] * poultry.days_in_growing_cycle * (poultry.flocks_per_year / 365.0) * (poultry_lookup[:daily_manure_production_lbs_per_au] /2000.0)
 

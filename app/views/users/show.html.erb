@@ -68,14 +68,20 @@
       <fieldset>
         <ol>
 
-          <li>
-          </li>
+          <li><h2 class='sectionHeading'>&nbsp;</h2></li>
           <li>
             <label class="wide">Deleted:</label>
             <%= radio_button_tag(:deleted, 'true', @user.deleted, :disabled => 'true') %>
             <%= label_tag(:deleted, 'Yes', :value => 'true') %>
             <%= radio_button_tag(:deleted, 'false', !@user.deleted, :disabled => 'true') %>
             <%= label_tag(:deleted, 'No', :value => 'false') %>
+          </li>
+          <li>
+            <label class="wide">Debug mode:</label>
+            <%= radio_button_tag(:is_debug_mode, 'true', @user.is_debug_mode, :disabled => 'true') %>
+            <%= label_tag(:is_debug_mode, 'Yes', :value => 'true') %>
+            <%= radio_button_tag(:is_debug_mode, 'false', !@user.is_debug_mode, :disabled => 'true') %>
+            <%= label_tag(:is_debug_mode, 'No', :value => 'false') %>
           </li>
           <li>
             <label class="wide">Roles:</label>
@@ -88,8 +94,6 @@
               <% end %>
             </div>
           </li>
-          <li></li>
-          <li></li>
           <li></li>
           <li></li>
           <li><h2 class='sectionHeading'>Organization/Business </h2></li>

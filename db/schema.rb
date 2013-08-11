@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130810005805) do
+ActiveRecord::Schema.define(:version => 20130810023002) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -457,8 +457,8 @@ ActiveRecord::Schema.define(:version => 20130810005805) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",               :default => "",   :null => false
-    t.string   "encrypted_password",     :default => "",   :null => false
+    t.string   "username",               :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -477,8 +477,8 @@ ActiveRecord::Schema.define(:version => 20130810005805) do
     t.string   "authentication_token"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.boolean  "approved",               :default => true
     t.datetime "deleted_at"
     t.integer  "user_type_id"
@@ -495,7 +495,8 @@ ActiveRecord::Schema.define(:version => 20130810005805) do
     t.string   "org_city"
     t.integer  "org_state_id"
     t.string   "org_zip"
-    t.string   "email",                                    :null => false
+    t.string   "email",                                     :null => false
+    t.boolean  "is_debug_mode",          :default => false
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

@@ -3,10 +3,9 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
 
-    # TODO: to be removed
-    session[:debug] = (!params[:user].nil? && params[:user][:username].index('debug')!=nil) ? true : false
+    # used to show some debug information
+    session[:debug] = current_user.is_debug_mode
 
-    #params[:next]. || farms_path
     params[:next].blank? ? farms_path : params[:next]
 
   end
