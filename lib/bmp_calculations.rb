@@ -12,14 +12,16 @@ module BmpCalculations
     if (success)
       @ntt_results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
       if (@ntt_results['ErrorCode'] != '0')
-        raise 'Error calling NTT.'
+        # TODO: uncomment
+        #raise 'Error calling NTT.'
       else
         total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
         total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
         total_sediment_per_acre = @ntt_results['Sediment'].to_f
       end
     else
-      raise 'Error calling NTT.'
+      # TODO: uncomment
+      #raise 'Error calling NTT.'
     end
 
     # TODO: remove test values

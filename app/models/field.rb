@@ -153,9 +153,9 @@ class Field < ActiveRecord::Base
 
   def sediment_baseline
     sediment_baseline = nil
-    sediment_baseline = self.watershed_segment[:sediment_crop_baseline] if field_type_id == 1
-    sediment_baseline = self.watershed_segment[:sediment_pasture_baseline] if field_type_id == 2
-    sediment_baseline = self.watershed_segment[:sediment_hay_baseline] if field_type_id == 3
+    sediment_baseline = self.watershed_segment[:sediment_crop_baseline] / 2000.0 if field_type_id == 1
+    sediment_baseline = self.watershed_segment[:sediment_pasture_baseline] / 2000.0 if field_type_id == 2
+    sediment_baseline = self.watershed_segment[:sediment_hay_baseline] / 2000.0 if field_type_id == 3
     return sediment_baseline
   end
 

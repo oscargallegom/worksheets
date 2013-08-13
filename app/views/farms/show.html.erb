@@ -267,11 +267,11 @@
         </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
         <td>
-          <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
+          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
           <br/>
-          <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
+          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
           <br/>
-          <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
+          S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> t/a
         </td>
         <td></td>
         <td></td>
