@@ -135,6 +135,30 @@ class Field < ActiveRecord::Base
     self.fertilizer_application_setback_average_width * self.fertilizer_application_setback_length / 43560.0 unless (self.fertilizer_application_setback_average_width.nil? or self.fertilizer_application_setback_length.nil?)
   end
 
+  def n_baseline
+    n_baseline = nil
+    n_baseline = self.watershed_segment[:n_crop_baseline] if field_type_id == 1
+    n_baseline = self.watershed_segment[:n_pasture_baseline] if field_type_id == 2
+    n_baseline = self.watershed_segment[:n_hay_baseline] if field_type_id == 3
+    return n_baseline
+  end
+
+  def p_baseline
+    p_baseline = nil
+    p_baseline = self.watershed_segment[:p_crop_baseline] if field_type_id == 1
+    p_baseline = self.watershed_segment[:p_pasture_baseline] if field_type_id == 2
+    p_baseline = self.watershed_segment[:p_hay_baseline] if field_type_id == 3
+    return p_baseline
+  end
+
+  def sediment_baseline
+    sediment_baseline = nil
+    sediment_baseline = self.watershed_segment[:sediment_crop_baseline] if field_type_id == 1
+    sediment_baseline = self.watershed_segment[:sediment_pasture_baseline] if field_type_id == 2
+    sediment_baseline = self.watershed_segment[:sediment_hay_baseline] if field_type_id == 3
+    return sediment_baseline
+  end
+
 
   def initialized_bmps # this is the key method
     [].tap do |o|

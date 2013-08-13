@@ -19,6 +19,8 @@
           <ol>
             <li><h2 class='sectionHeading'>BMPs</h2></li>
             <li>Check the boxes next to all of the BMPs that are currently in place in the animal confinement area.</li>
+
+            <% if !@field.field_livestocks.empty? %>
             <li><h2 class='sectionHeading'>Livestock BMPs</h2></li>
             <li>Select all livestock BMPs that are in place.</li>
             <li><h3 class='sectionHeading'>Livestock Animal Waste Management System</h3></li>
@@ -48,6 +50,7 @@
               <%= f.label :is_livestock_barnyard_runoff_controls, 'Barnyard runoff controls / loafing lot management:', :class => 'extrawide' %>
               <%= f.check_box :is_livestock_barnyard_runoff_controls %>
             </li>
+                <% if @farm.site_state_id == 21 # only for Maryland %>
             <li>
               <%= f.label :is_livestock_water_control_structure, 'Water control structure:', :class => 'extrawide' %>
               <%= f.check_box :is_livestock_water_control_structure %>
@@ -56,6 +59,9 @@
               <%= f.label :is_livestock_treatment_wetland, 'Treatment wetland:', :class => 'extrawide' %>
               <%= f.check_box :is_livestock_treatment_wetland %>
             </li>
+                       <% end %>
+                <% end%>
+            <% if !@field.field_poultry.empty? %>
 
             <li><h2 class='sectionHeading'>Poultry BMPs</h2></li>
             <li>Select all poultry BMPs that are in place.</li>
@@ -77,10 +83,12 @@
               <%= f.label :is_poultry_biofilters, 'Biofilters:', :class => 'extrawide' %>
               <%= f.check_box :is_poultry_biofilters %>
             </li>
+                <% if @farm.site_state_id == 21 # only for Maryland %>
             <li>
               <%= f.label :is_poultry_vegetated_environmental_buffer, 'Vegetated environmental buffer:', :class => 'extrawide' %>
               <%= f.check_box :is_poultry_vegetated_environmental_buffer %>
             </li>
+                    <% end %>
             <li><h3 class='sectionHeading'>Feed Additives</h3></li>
             <li>
               <%= f.label :is_poultry_phytase, 'Pytase:', :class => 'extrawide' %>
@@ -95,6 +103,7 @@
               <%= f.label :is_poultry_barnyard_runoff_controls, 'Barnyard runoff controls / clean water diversions:', :class => 'extrawide' %>
               <%= f.check_box :is_poultry_barnyard_runoff_controls %>
             </li>
+                <% if @farm.site_state_id == 21 # only for Maryland %>
             <li>
               <%= f.label :is_poultry_water_control_structure, 'Water control structure:', :class => 'extrawide' %>
               <%= f.check_box :is_poultry_water_control_structure %>
@@ -103,6 +112,8 @@
               <%= f.label :is_poultry_treatment_wetland, 'Treatment wetland:', :class => 'extrawide' %>
               <%= f.check_box :is_poultry_treatment_wetland %>
             </li>
+                    <% end %>
+                <% end %>
 
           </ol>
         </fieldset>

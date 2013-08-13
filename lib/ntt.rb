@@ -159,11 +159,11 @@ module Ntt
             plant_date_day = field.field_type_id != 2 ? crop_rotation.plant_date_day : 0
 
             seeding_rate = field.field_type_id != 2 ? crop_rotation.seeding_rate : 0
-            cover_crop_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_id : 0
+            cover_crop_code = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
             cover_crop_planting_method_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_planting_method_id : 0
             is_permanent_pasture = field.field_type_id == 2 ? 1 : 0
 
-            xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_id}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+            xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_code}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
             ########################################################
             # Commercial fertilizer
@@ -236,9 +236,10 @@ module Ntt
               day = end_of_season.day
 
               # if cover crop (only for crop)
-              is_cover_crop = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? 10 : 0
+              cover_crop = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
+              planting_method = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.planting_method_id : 0
 
-              xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{year}</Year><Month>#{month}</Month><Day>#{day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>#{is_cover_crop}</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{year}</Year><Month>#{month}</Month><Day>#{day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>#{cover_crop}</OpVal6><OpVal7>#{planting_method}</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
             end
 
