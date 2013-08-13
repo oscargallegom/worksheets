@@ -2,18 +2,28 @@
   <tr>
     <th>Field</th>
     <th>Area (ac)</th>
-    <th>Baseline & Load</th>
-    <th>Reduction to Bay</th>
-    <th>Credits to Trade</th>
+    <th>Baseline</th>
+    <th>Current</th>
+    <th>Planned</th>
     <th>Status</th>
     <th class="actions">Actions</th>
   </tr>
 
   <% @fields.each do |field| %>
       <tr>
-        <td><%= link_to field.name, edit_farm_field_path(@farm, field, :step => 1) %></td>
+        <td>
+          <%= link_to field.name, edit_farm_field_path(@farm, field, :step => 1) %>
+          <br/>
+          <%= field.field_type.name %>
+        </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
-        <td><%= field.baseline_load %></td>
+        <td>
+          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+          <br/>
+          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+          <br/>
+          S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> t/a
+        </td>
         <td></td>
         <td></td>
         <td>
