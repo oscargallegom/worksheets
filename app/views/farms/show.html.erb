@@ -263,7 +263,7 @@
         <td>
           <%= link_to field.name, edit_farm_field_path(@farm, field) %>
           <br/>
-          <%= field.field_type.name %>
+          <%= field.field_type.name unless field.field_type.nil? %>
         </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
         <td>
