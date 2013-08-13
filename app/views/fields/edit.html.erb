@@ -145,6 +145,6 @@
 
     <br/><br/><br/><br/>
 
-    <%= URI.escape(@input_xml.gsub('<', '[').gsub('>', ']')) %>
+    <%= URI.escape(@input_xml.gsub('<', '[').gsub('>', ']')) unless@input_xml.nil?  %>
 
 <% end %>

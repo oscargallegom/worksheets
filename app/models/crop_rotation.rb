@@ -7,6 +7,8 @@ class CropRotation < ActiveRecord::Base
   belongs_to :crop #, :inverse_of => :crop_rotations
   belongs_to :strip #, :inverse_of => :crop_rotations
 
+  belongs_to :crop, :foreign_key => :cover_crop_id
+
   has_many :grazing_livestocks
   has_many :tillage_operations
   has_many :manure_fertilizer_applications

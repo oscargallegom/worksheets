@@ -21,9 +21,10 @@
               <%= number_with_precision(@watershed_segment[:n_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
               <%= number_with_precision(@watershed_segment[:n_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 1 %>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 2 %>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 3 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
+              <%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 1 %>
+              <%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 2 %>
+              <%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: ',')  if @field.field_type_id == 3 %>
               lb/ac)
             </li>
             <li><span class='wide'>Current Load (EOS):</span>
@@ -49,9 +50,9 @@
               <%= number_with_precision(@current_totals[:new_total_p], :precision => 2, delimiter: ',') %> lb
 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
             </li>
 
