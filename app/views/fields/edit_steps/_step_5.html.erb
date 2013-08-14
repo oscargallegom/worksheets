@@ -76,34 +76,53 @@
             </li>
 
             <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>
-            <li>Some text #################</li>
+            <li>TBD: Mindy to provide some text.</li>
             <li><span class='extrawide'>&nbsp;</span><b>Baseline</b></li>
 
-            <li><span class='extrawide'>Total N (before BMPs applied)</span><b>123</b></li>
-
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
-
-            </li>
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
-
-            <li><span class='extrawide'>Total P (before BMPs applied)</span><b>123</b></li>
-
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>123</li>
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>123</li>
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>123</li>
-
-            <li><span class='extrawide'>Flow</span><b>123</b></li>
-
-            <li><span class='extrawide'>Sediment</span><b>
-
+            <li><span class='extrawide'>Total N (before BMPs applied)</span><b>
+              <%= number_with_precision((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f), :precision => 2, delimiter: ',') %>
             </b></li>
 
-            <li><span class='extrawide'>Carbon</span><b>123</b></li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
+              <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') %> lbs
+            </li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>
+              <%= number_with_precision(@ntt_results['NO3'], :precision => 2, delimiter: ',') %>
+            </li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>
+              <%= number_with_precision(@ntt_results['TileDrainN'], :precision => 2, delimiter: ',') %>
+            </li>
 
-            <li><span class='extrawide'>Crop Yield</span><b>123</b></li>
 
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Corn</span>123</li>
+            <li><span class='extrawide'>Total P (before BMPs applied)</span><b>
+              <%= number_with_precision((@ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
+            </b></li>
+
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic P)</span>
+              <%= number_with_precision(@ntt_results['OrganicP'], :precision => 2, delimiter: ',') %>
+            </li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble P (NO3)</span>
+              <%= number_with_precision(@ntt_results['SolubleP'], :precision => 2, delimiter: ',') %>
+            </li>
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained P</span>
+              <%= number_with_precision(@ntt_results['TileDrainP'], :precision => 2, delimiter: ',') %>
+            </li>
+
+            <li><span class='extrawide'>Flow</span><b>
+              <%= number_with_precision(@ntt_results['Flow'], :precision => 2, delimiter: ',') %>
+            </b></li>
+
+            <li><span class='extrawide'>Sediment</span><b>
+              <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: ',') %>
+            </b></li>
+
+            <li><span class='extrawide'>Carbon</span><b>
+              <%= number_with_precision(@ntt_results['Carbon'], :precision => 2, delimiter: ',') %>
+            </b></li>
+
+            <li><span class='extrawide'>Crop Yield</span><b>TBD</b></li>
+
+            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Corn</span>TBD</li>
 
 
           </ol>

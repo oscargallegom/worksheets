@@ -938,6 +938,10 @@ Crop.create!({:id => 109, :code => 41,  :name => 'Ryegrass', :crop_category_id =
 Crop.create!({:id => 110, :code => 150,  :name => 'Radishes', :crop_category_id => 6}, :without_protection => true)
 Crop.create!({:id => 111, :code => 9,  :name => 'Fallow', :crop_category_id => 23}, :without_protection => true)
 
+Crop.create!({:id => 112, :code => 128,  :name => 'ForrestEvergreen', :crop_category_id => 20}, :without_protection => true)
+Crop.create!({:id => 113, :code => 144,  :name => 'Nursery Evergreen Tree Stock', :crop_category_id => 20}, :without_protection => true)
+
+
 
 PlantingMethod.delete_all
 PlantingMethod.create!({:id => 146,  :name => 'Broadcast'}, :without_protection => true)

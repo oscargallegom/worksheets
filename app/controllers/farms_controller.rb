@@ -239,6 +239,13 @@ class FarmsController < ApplicationController
             @field.soils[i].bulk_density = data[:bulc_density]
             @field.soils[i].organic_carbon = data[:organic_carbon]
             @field.soils[i].slope = data[:slope]
+          else
+            @field.soils[i].percent_clay = 0
+            @field.soils[i].percent_sand = 0
+            @field.soils[i].percent_silt = 0
+            @field.soils[i].bulk_density = 0
+            @field.soils[i].organic_carbon = 0
+            @field.soils[i].slope = 0
           end
 
           # TODO: how to display errors?
