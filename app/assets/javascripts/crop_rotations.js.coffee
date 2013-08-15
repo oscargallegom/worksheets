@@ -46,7 +46,7 @@ updatePrecisionFeeding = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
   #li_precision_feeding = selectElement.closest('.li_precision_feeding')
   #componentNumber = getComponentNumber(selectElement.attr('id'), 'crop_rotation_grazing_livestocks_attributes_')
-  if caller.val() is '1'
+  if caller.val() is '2'
     $("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding").closest('li').show()
     #li_precision_feeding.show()
     #updateAnimalUnits($("#crop_rotation_grazing_livestocks_attributes_" + componentNumber + "_precision_feeding"))

@@ -81,7 +81,7 @@ module Ntt
           area = strip.length * fieldArea / fieldsWidth * 0.405
         end
 
-        tileDrainDepth = field.tile_drainage_depth==nil ? '' : field.tile_drainage_depth * 25.4
+        tileDrainDepth = field.tile_drainage_depth==nil ? '' : field.tile_drainage_depth * 304.8
         irrigation = field.irrigation_id
         efficiency = (field.irrigation_id==0) ? '' : field.efficiency
         fertigation_n = (field.irrigation_id==0 || field.irrigation_id==502) ? '' : field.fertigation_n
@@ -119,7 +119,8 @@ module Ntt
           # Grazing, section only available for permanent pasture
           ########################################################
           if (field.field_type_id == 2)
-            grazing_operation = '426'
+            start_grazing_operation = '426'
+            end_grazing_operation = '427'
 
             crop_rotation.grazing_livestocks.each_with_index do |grazing_livestock, grazing_livestock_index|
 
@@ -132,7 +133,13 @@ module Ntt
               start_date_day = grazing_livestock.start_date_day
 
 
-              xml = xml + "<ManagementInfo><Operation>#{grazing_operation}</Operation><OpVal2>#{animal_units}</OpVal2><Year>#{start_date_year}</Year><Month>#{start_date_month}</Month><Day>#{start_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              xml = xml + "<ManagementInfo><Operation>#{start_grazing_operation}</Operation><OpVal2>#{animal_units}</OpVal2><Year>#{start_date_year}</Year><Month>#{start_date_month}</Month><Day>#{start_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+              end_date_year = grazing_livestock.end_date_year
+              end_date_month = grazing_livestock.end_date_month
+              end_date_day = grazing_livestock.end_date_day
+
+              xml = xml + "<ManagementInfo><Operation>#{end_grazing_operation}</Operation><Year>#{end_date_year}</Year><Month>#{end_date_month}</Month><Day>#{end_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
 
               animal_id = grazing_livestock.animal_id
@@ -257,7 +264,13 @@ module Ntt
 
               manure_application_code = '56'
 
-              application_rate = (manure_fertilizer_application.application_rate.to_f * 2000.0) * ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) * 1.121
+              application_rate = 0
+              # if liquid and gallons
+              if (operation_code == 265 && manure_fertilizer_application.liquid_unit_type_id == 1)    # liquid and gallons
+                application_rate = manure_fertilizer_application.application_rate.to_f * 1000.0 * 8.34 * ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) * 1.121
+              else
+                application_rate = (manure_fertilizer_application.application_rate.to_f * 2000.0) * ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) * 1.121
+              end
 
               incorporation_depth = manure_fertilizer_application.is_incorporated ? (manure_fertilizer_application.incorporation_depth.to_f * 25.4) : 0
 
