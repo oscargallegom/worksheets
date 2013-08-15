@@ -107,6 +107,13 @@ module BmpCalculations
     buffer_forest_p_conversion = 0
     buffer_forest_sediment_conversion =0
 
+    fertilizer_buffer_acres = 0
+    fertilizer_buffer_functional_acres = 0
+
+    buffer_fertilizer_n_conversion=0
+    buffer_fertilizer_p_conversion = 0
+    buffer_fertilizer_sediment_conversion =0
+
     # if crop or hay
     if (field.field_type_id == 1 || field.field_type_id == 3)
       # if grass buffer
@@ -139,26 +146,44 @@ module BmpCalculations
         end
 
       end
+
+      # if fertilizer setback
+      if (field.is_fertilizer_application_setback?)
+        fertilizer_buffer_acres = field.fertilizer_application_setback_area.to_f
+
+        buffer_fertilizer_n_conversion = field.watershed_segment.total_n_hyo * fertilizer_buffer_acres
+        buffer_fertilizer_p_conversion = field.watershed_segment.total_p_hyo * fertilizer_buffer_acres
+        buffer_fertilizer_sediment_conversion = field.watershed_segment.total_sediment_hyo * fertilizer_buffer_acres
+
+        if (field.fertilizer_application_setback_average_width >= 35 && field.fertilizer_application_setback_average_width <= 100)
+          fertilizer_buffer_functional_acres = field.fertilizer_buffer_acres.to_f
+        elsif (field.fertilizer_application_setback_average_width > 100)
+          fertilizer_buffer_functional_acres = fertilizer_application_setback_length * 100.0 / 43560.0
+        end
+      end
+
     end
 
+    wetland_acres = 0
     wetland_forest_n_conversion= 0
     wetland_forest_p_conversion = 0
     wetland_forest_sediment_conversion = 0
 
     # for all if wetland
     if (field.is_wetland)
+      wetland_acres = field.wetland_area.to_f
       wetland_forest_n_conversion = field.watershed_segment.total_n_forest * field.wetland_area.to_f
       wetland_forest_p_conversion = field.watershed_segment.total_p_forest * field.wetland_area.to_f
       wetland_forest_sediment_conversion = field.watershed_segment.total_sediment_forest * field.wetland_area.to_f
     end
 
     # total converted land
-    total_converted_acres = [fencing_acres + degraded_pasture_acres + grass_buffer_acres + forest_buffer_acres, field.acres].min
+    total_converted_acres = [fencing_acres + degraded_pasture_acres + grass_buffer_acres + forest_buffer_acres + fertilizer_buffer_acres + wetland_acres, field.acres].min
     total_unconverted_acres = field.acres.to_f - total_converted_acres
 
-    total_n_for_converted_acre = stream_forest_n_conversion + stream_hyo_n_conversion + trp_n_conversion + buffer_hyo_n_conversion + buffer_forest_n_conversion + wetland_forest_n_conversion
-    total_p_for_converted_acre = stream_forest_p_conversion + stream_hyo_p_conversion + trp_p_conversion + buffer_hyo_p_conversion + buffer_forest_p_conversion + wetland_forest_p_conversion
-    total_sediment_for_converted_acre = (stream_forest_sediment_conversion + stream_hyo_sediment_conversion + trp_sediment_conversion + buffer_hyo_sediment_conversion + buffer_forest_sediment_conversion + wetland_forest_sediment_conversion) / 2000.0
+    total_n_for_converted_acre = stream_forest_n_conversion + stream_hyo_n_conversion + trp_n_conversion + buffer_hyo_n_conversion + buffer_forest_n_conversion + buffer_fertilizer_n_conversion + wetland_forest_n_conversion
+    total_p_for_converted_acre = stream_forest_p_conversion + stream_hyo_p_conversion + trp_p_conversion + buffer_hyo_p_conversion + buffer_forest_p_conversion + buffer_fertilizer_p_conversion + wetland_forest_p_conversion
+    total_sediment_for_converted_acre = (stream_forest_sediment_conversion + stream_hyo_sediment_conversion + trp_sediment_conversion + buffer_hyo_sediment_conversion + buffer_forest_sediment_conversion + buffer_fertilizer_sediment_conversion + wetland_forest_sediment_conversion) / 2000.0
 
 
     ###################################################
@@ -206,6 +231,11 @@ module BmpCalculations
     upland_forest_buffer_p_reduction = 2 * total_adjusted_p_per_acre * forest_buffer_functional_acres * p_reduction_for_forest
     upland_forest_buffer_sediment_reduction = 2 * total_adjusted_sediment_per_acre * forest_buffer_functional_acres * sediment_reduction_for_forest
 
+    # fertilizer buffer
+    upland_fertilizer_buffer_n_reduction = 4 * total_adjusted_n_per_acre* fertilizer_buffer_functional_acres * n_reduction_for_grass
+    upland_fertilizer_buffer_p_reduction = 2 * total_adjusted_p_per_acre * fertilizer_buffer_functional_acres * p_reduction_for_grass
+    upland_fertilizer_buffer_sediment_reduction = 2 * total_adjusted_sediment_per_acre * fertilizer_buffer_functional_acres * sediment_reduction_for_grass
+
     # wetland lookup
     wetland_ratio = field.wetland_area.to_f / (field.wetland_area.to_f + field.wetland_treated_area.to_f)
 
@@ -220,9 +250,9 @@ module BmpCalculations
     upland_wetland_p_reduction = field.is_wetland ? 0 : field.wetland_treated_area.to_f * p_reduction_for_wetland * total_adjusted_p_per_acre
     upland_wetland_sediment_reduction = field.is_wetland ? 0 : field.wetland_treated_area.to_f * sediment_reduction_for_wetland * total_adjusted_sediment_per_acre
 
-    new_total_n_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_n_per_acre) - upland_streambank_grass_n_reduction - upland_streambank_forest_n_reduction - upland_grass_buffer_n_reduction - upland_forest_buffer_n_reduction - upland_wetland_n_reduction) / (total_unconverted_acres)
-    new_total_p_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_p_per_acre) - upland_streambank_grass_p_reduction - upland_streambank_forest_p_reduction - upland_grass_buffer_p_reduction - upland_forest_buffer_p_reduction - upland_wetland_p_reduction) / (total_unconverted_acres)
-    new_total_sediment_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_sediment_per_acre) - upland_streambank_grass_sediment_reduction - upland_streambank_forest_sediment_reduction - upland_grass_buffer_sediment_reduction - upland_forest_buffer_sediment_reduction - upland_wetland_sediment_reduction) / (total_unconverted_acres)
+    new_total_n_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_n_per_acre) - upland_streambank_grass_n_reduction - upland_streambank_forest_n_reduction - upland_grass_buffer_n_reduction - upland_forest_buffer_n_reduction - upland_fertilizer_buffer_n_reduction - upland_wetland_n_reduction) / (total_unconverted_acres)
+    new_total_p_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_p_per_acre) - upland_streambank_grass_p_reduction - upland_streambank_forest_p_reduction - upland_grass_buffer_p_reduction - upland_forest_buffer_p_reduction - upland_fertilizer_buffer_p_reduction - upland_wetland_p_reduction) / (total_unconverted_acres)
+    new_total_sediment_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_sediment_per_acre) - upland_streambank_grass_sediment_reduction - upland_streambank_forest_sediment_reduction - upland_grass_buffer_sediment_reduction - upland_forest_buffer_sediment_reduction - upland_fertilizer_buffer_sediment_reduction - upland_wetland_sediment_reduction) / (total_unconverted_acres)
 
     # TODO: data check
 
