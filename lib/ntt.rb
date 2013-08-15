@@ -264,29 +264,26 @@ module Ntt
 
               manure_application_code = '56'
 
-              application_rate = 0
+
               # if liquid and gallons
-              if (operation_code == 265 && manure_fertilizer_application.liquid_unit_type_id == 1)    # liquid and gallons
-                application_rate = manure_fertilizer_application.application_rate.to_f * 1000.0 * 8.34 * ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) * 1.121
-              else
-                application_rate = (manure_fertilizer_application.application_rate.to_f * 2000.0) * ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) * 1.121
-              end
+              conversion_rate = (operation_code == 265 && manure_fertilizer_application.liquid_unit_type_id == 1) ? (1000.0 * 8.34) : 2000
+
+              application_rate = manure_fertilizer_application.application_rate.to_f * conversion_rate * ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) * 1.121
+              n_fraction = manure_fertilizer_application.total_n_concentration.to_f / conversion_rate / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
 
               incorporation_depth = manure_fertilizer_application.is_incorporated ? (manure_fertilizer_application.incorporation_depth.to_f * 25.4) : 0
 
-              n_fraction = manure_fertilizer_application.total_n_concentration.to_f / 2000.0 / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
-
               # if total p
               if (manure_fertilizer_application.p_type_id == 1)
-                p_fraction = manure_fertilizer_application.p_concentration.to_f / 2000.0 / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
+                p_fraction = manure_fertilizer_application.p_concentration.to_f / conversion_rate / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
               else # P205
-                p_fraction = manure_fertilizer_application.p_concentration.to_f / manure_fertilizer_application.manure_type.p_fraction.to_f / 2000.0 / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0) # TODO:  Mindy to check 0.74
+                # if liquid
+                lookup_p_fraction = (operation_code == 265 && manure_fertilizer_application.liquid_unit_type_id == 1) ? 0.5 : manure_fertilizer_application.manure_type.p_fraction.to_f
+                p_fraction = manure_fertilizer_application.p_concentration.to_f / lookup_p_fraction / conversion_rate / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
               end
-
 
               # need to get the last 2 digits of the ID since they are shared by several animals
               manure_type_id = manure_fertilizer_application.manure_type_id.to_s[1..2]
-
 
               # only for swine and poultry
               manure_treatment = 0

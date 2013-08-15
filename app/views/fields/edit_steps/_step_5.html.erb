@@ -120,11 +120,12 @@
               <%= number_with_precision(@ntt_results['Carbon'], :precision => 2, delimiter: ',') %>
             </b></li>
 
-            <li><span class='extrawide'>Crop Yield</span><b>TBD</b></li>
-
-            <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Corn</span>TBD</li>
-
-
+            <li><span class='extrawide'>Crop Yield</span><b></b></li>
+              <% @ntt_results[:crops].each do |crop| %>
+                <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name]  %></span>
+                  <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
+                </li>
+              <% end %>
           </ol>
         </fieldset>
       </div>
