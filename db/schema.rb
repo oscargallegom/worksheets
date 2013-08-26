@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130810023002) do
+ActiveRecord::Schema.define(:version => 20130816005403) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(:version => 20130810023002) do
     t.boolean  "is_fertilizer_application_setback_planned"
     t.text     "planned_management_details"
     t.string   "watershed_name"
+    t.string   "tmdl_va"
   end
 
   create_table "generator_types", :force => true do |t|

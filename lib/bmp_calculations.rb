@@ -336,7 +336,7 @@ module BmpCalculations
 
       total_po4p_livestock = total_po4p_livestock + (animal.p205_excreted / animal_lookup[:fraction_p2o5]) * animal_lookup[:fraction_po4p] * animal_manure
 
-      tmp_confined_ammonia = field.is_livestock_plastic_permeable_lagoon_cover ? (tmp_nh3_livestock * (1 - animal_lookup[:fraction_nh3] * 0.85)) : tmp_nh3_livestock * (1 - animal_lookup[:volatilization_fraction])
+      tmp_confined_ammonia = field.is_livestock_plastic_permeable_lagoon_cover ? (tmp_nh3_livestock * (1 - animal_lookup[:volatilization_fraction] * 0.85)) : tmp_nh3_livestock * (1 - animal_lookup[:volatilization_fraction])
       animal_v_ammonia = animal_v_ammonia + tmp_nh3_livestock - tmp_confined_ammonia
 
       tmp_eof_confined_nh3 = tmp_confined_ammonia * animal_lookup[:storage_loss_fraction]
@@ -421,18 +421,19 @@ module BmpCalculations
 
       total_n_poultry = total_n_poultry + (poultry_manure * poultry.n_excreted)
 
-
       total_org_n_poultry = total_org_n_poultry + (poultry_manure * poultry.n_excreted) * poultry_lookup[:fraction_org_n]
-      total_nh3_poultry = total_nh3_poultry + (poultry.n_excreted * poultry_lookup[:fraction_nh3])
+
+      tmp_nh3_poultry = poultry_manure * poultry.n_excreted * poultry_lookup[:fraction_nh3]
+      total_nh3_poultry = total_nh3_poultry + tmp_nh3_poultry
 
       total_p_poultry = total_p_poultry + (poultry_manure * poultry.p205_excreted / poultry_lookup[:fraction_p2o5])
-      total_org_p_poultry = total_org_p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_org_p]
+      total_org_p_poultry = total_org_p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_org_p] * poultry_manure
 
-      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) / poultry_lookup[:fraction_po4p]
+      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_po4p]  * poultry_manure
 
 
-      tmp_confined_ammonia = field.is_poultry_litter_treatment ? (poultry.n_excreted * poultry_lookup[:fraction_nh3]) * (1 - (poultry_lookup[:volatilization_fraction] * (1 - 0.6))) : (poultry.n_excreted * poultry_lookup[:fraction_nh3]) * (1 - poultry_lookup[:volatilization_fraction])
-      tmp_v_ammonia = (poultry.n_excreted * poultry_lookup[:fraction_nh3]) - tmp_confined_ammonia
+      tmp_confined_ammonia = field.is_poultry_litter_treatment ? (tmp_nh3_poultry * (1 - (poultry_lookup[:volatilization_fraction] * (1 - 0.6)))) : (tmp_nh3_poultry * (1 - poultry_lookup[:volatilization_fraction]))
+      tmp_v_ammonia = tmp_nh3_poultry - tmp_confined_ammonia
       tmp_v_ammonia = tmp_v_ammonia * 0.5 if (field.is_poultry_biofilters)
       tmp_v_ammonia = tmp_v_ammonia * 0.5 if (field.is_poultry_vegetated_environmental_buffer)
       poultry_v_ammonia = poultry_v_ammonia + tmp_v_ammonia
@@ -467,7 +468,7 @@ module BmpCalculations
     poultry_eos_po4p = 0
     if (poultry_eof_confined_org_n < (poultry_eof_confined_org_p / 0.01384))
       if (poultry_eof_confined_po4p + poultry_eof_confined_org_p - poultry_eof_confined_org_n * 0.01384 > 0)
-        poultry_eos_po4p = poultry_eof_confined_po4p + poultry_eof_confined_po4p - poultry_eof_confined_org_n * 0.01384
+        poultry_eos_po4p = poultry_eof_confined_po4p + poultry_eof_confined_org_p - poultry_eof_confined_org_n * 0.01384
       else
         poultry_eos_po4p = 0
       end

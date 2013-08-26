@@ -229,13 +229,16 @@ module Ntt
 
               mid = mid + 1
 
-              if (end_of_season.end_of_season_type_id==626 && end_of_season.is_harvest_as_silage) # harvest only
-                operation_code = 310
-              elsif (end_of_season.end_of_season_type_id==626451 && end_of_season.is_harvest_as_silage) # harvest and terminate crop
-                operation_code = 310451
-              else
-                operation_code = end_of_season.end_of_season_type_id
-              end
+              operation_code = end_of_season.end_of_season_type_id
+              opVal1 = end_of_season.is_harvest_as_silage ? 1 : 0
+
+              #if (end_of_season.end_of_season_type_id==626 && end_of_season.is_harvest_as_silage) # harvest only
+              #  operation_code = 310
+              #elsif (end_of_season.end_of_season_type_id==626451 && end_of_season.is_harvest_as_silage) # harvest and terminate crop
+              #  operation_code = 626451
+              #else
+              #  operation_code = end_of_season.end_of_season_type_id
+              #end
 
 
               year = end_of_season.year
@@ -246,7 +249,7 @@ module Ntt
               cover_crop = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
               planting_method = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.planting_method_id : 0
 
-              xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{year}</Year><Month>#{month}</Month><Day>#{day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>#{cover_crop}</OpVal6><OpVal7>#{planting_method}</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{year}</Year><Month>#{month}</Month><Day>#{day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{opVal1}</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>#{cover_crop}</OpVal6><OpVal7>#{planting_method}</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
             end
 

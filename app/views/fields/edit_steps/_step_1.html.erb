@@ -32,7 +32,11 @@
             </li>
             <li>
               <div class='wide'>TMDL watershed:</div>
-              <%= @field.tmdl != nil ? @field.tmdl.name : 'N/A' %>
+              <% if @farm.site_state_id == 21 %>
+                <%= @field.tmdl != nil ? @field.tmdl.name : 'N/A' %>
+                  <% else %>
+              <%= @field.tmdl_va %>
+              <% end %>
             </li>
             <li>
               <%= f.label :name, '(FSA) Field number:<em>*</em>'.html_safe, :class => 'wide' %>
