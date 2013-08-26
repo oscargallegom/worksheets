@@ -3,24 +3,24 @@ class ApplicationController < ActionController::Base
 
   if Rails.env.production?
     unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, :with => :render_500
-   rescue_from CanCan::AccessDenied , with: :render_401
-    rescue_from ActiveRecord::RecordNotFound,
-                ActionController::UnknownController,
-                ActionController::MethodNotAllowed do |exception|
-      render_500(exception)
-    end
+      rescue_from Exception, :with => :render_500
+      rescue_from CanCan::AccessDenied, with: :render_401
+      rescue_from ActiveRecord::RecordNotFound,
+                  ActionController::UnknownController,
+                  ActionController::MethodNotAllowed do |exception|
+        render_500(exception)
+      end
     end
   end
 
 
-    def render_500(exception)
-      flash.now[:error] = 'An error has occurred.'
-      flash.now[:debug] = exception.message
-      respond_to do |format|
-        format.html { render 'errors/server_error', status: 500 }
-      end
+  def render_500(exception)
+    flash.now[:error] = 'An error has occurred.'
+    flash.now[:debug] = exception.message
+    respond_to do |format|
+      format.html { render 'errors/server_error', status: 500 }
     end
+  end
 
   # not authorized
   def render_401(exception)
@@ -30,10 +30,6 @@ class ApplicationController < ActionController::Base
     elsif redirect_to '/401'
     end
   end
-
-
-
-
 
 
 end

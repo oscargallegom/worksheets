@@ -67,6 +67,9 @@
       <% if flash[:error] %>
           <p class="error"><%= flash[:error] %></p>
       <% end %>
+      <% if flash[:meet_baseline] %>
+          <p class="alert"><%= flash[:meet_baseline].join("<br>").html_safe %></p>
+      <% end %>
 
       <%= content_for?(:second_level_layout) ? yield(:second_level_layout) : yield %>
     </div>

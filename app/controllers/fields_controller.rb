@@ -80,6 +80,45 @@ class FieldsController < ApplicationController
       if (@watershed_segment.nil?)
         flash[:error] = "Could not retrieve baseline data." if @watershed_segment.nil?
       end
+
+      # does the field meet baseline - only for Maryland
+      if (@farm.site_state_id == 21)
+        flash.now[:meet_baseline] ||= []
+        # check if at least one manure fertilizer incorporated
+        is_manure_fertilizer_incorporated = false
+        @field.strips.each do |strip|
+          strip.crop_rotations.each do |crop_rotation|
+            crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+              if (manure_fertilizer_application.is_incorporated)
+                is_manure_fertilizer_incorporated = true
+              end
+            end
+          end
+        end
+        if (!is_manure_fertilizer_incorporated)
+          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless all manure applications are incorporated.'
+        end
+        # if field is pasture
+        if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
+          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless pastured animals are excluded from the stream.'
+        end
+        # if crop or hay
+        if (@field.field_type_id == 1 || @field.field_type_id == 3)
+          is_commercial_or_manure_fertilizer = false
+          @field.strips.each do |strip|
+            strip.crop_rotations.each do |crop_rotation|
+              if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
+                is_commercial_or_manure_fertilizer = true
+              end
+            end
+          end
+          if (is_commercial_or_manure_fertilizer && @field.is_field_adjacent_water && (!@field.is_forest_buffer && !@field.is_grass_buffer && !@field.is_fertilizer_application_setback))
+            flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless you have a fertilizer setback or buffer in place where field is adjacent to water body.'
+          end
+        end
+      end
+
+
     end
 
     if (@step =='5' && (@field.field_type.id == 4)) # perform calculations for animal confinement
@@ -93,8 +132,15 @@ class FieldsController < ApplicationController
       #if (@baseline_lookup.nil?)
       #  flash[:error] = "Could not retrieve baseline data." if @baseline_lookup.nil?
       #end
-    end
 
+      # does the field meet baseline - only for Maryland
+      if (@farm.site_state_id == 21)
+        flash.now[:meet_baseline] ||= []
+        if (@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system && !@field.is_livestock_mortality_composting) || (@field.field_poultry.empty? && !@field.is_poultry_animal_waste_management_system && !@field.is_poultry_mortality_composting)
+          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has a proper system in place'
+        end
+      end
+    end
 
 
     @other_fields = []
