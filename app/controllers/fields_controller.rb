@@ -137,7 +137,7 @@ class FieldsController < ApplicationController
       if (@farm.site_state_id == 21)
         flash.now[:meet_baseline] ||= []
         if (@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system && !@field.is_livestock_mortality_composting) || (@field.field_poultry.empty? && !@field.is_poultry_animal_waste_management_system && !@field.is_poultry_mortality_composting)
-          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has a proper system in place'
+          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland''s Nutrient Management Regulations and CAFO rule.'
         end
       end
     end
