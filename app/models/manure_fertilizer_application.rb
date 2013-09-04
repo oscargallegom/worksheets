@@ -10,7 +10,7 @@ class ManureFertilizerApplication < ActiveRecord::Base
 
   validates_presence_of :application_date_year, :application_date_month, :application_date_day, :manure_type_id, :manure_consistency_id, :p_type_id
 
-  validates_presence_of :liquid_unit_type_id, :if => 'manure_consistency_id == 1'
+  validates_presence_of :liquid_unit_type_id, :if => 'manure_consistency_id == 265'
   validates_numericality_of :application_date_day, :less_than_or_equal_to => 28, :if => 'application_date_month==2', :message => '^Date incorrect for February'
 
 

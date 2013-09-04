@@ -28,6 +28,9 @@
   <%= f.label :p_concentration, 'P concentration:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :p_concentration, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
   <span></span>
+</li>
+<li>
+  <div class='wide'>&nbsp;</div>
   <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:required => true, :style => 'width:120px'} %>
 </li>
 <li>
