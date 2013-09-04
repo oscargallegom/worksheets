@@ -84,6 +84,9 @@ class FieldsController < ApplicationController
       # does the field meet baseline - only for Maryland
       if (@farm.site_state_id == 21)
         flash.now[:meet_baseline] ||= []
+
+        # if crop or hay
+        if (@field.field_type_id == 1 || @field.field_type_id == 3)
         # check if at least one manure fertilizer incorporated
         is_manure_fertilizer_incorporated = false
         @field.strips.each do |strip|
@@ -95,15 +98,16 @@ class FieldsController < ApplicationController
             end
           end
         end
-        if (!is_manure_fertilizer_incorporated)
+        if (is_manure_fertilizer_incorporated && !is_manure_fertilizer_incorporated)
           flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless all manure applications are incorporated.'
+        end
         end
         # if field is pasture
         if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
           flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless pastured animals are excluded from the stream.'
         end
-        # if crop or hay
-        if (@field.field_type_id == 1 || @field.field_type_id == 3)
+        # if crop or pasture or hay
+        if (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)
           is_commercial_or_manure_fertilizer = false
           @field.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
@@ -114,6 +118,16 @@ class FieldsController < ApplicationController
           end
           if (is_commercial_or_manure_fertilizer && @field.is_field_adjacent_water && (!@field.is_forest_buffer && !@field.is_grass_buffer && !@field.is_fertilizer_application_setback))
             flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless you have a fertilizer setback or buffer in place where field is adjacent to water body.'
+          end
+          # also soil conservation BMP needs to be checked
+          is_soil_conservation = false
+          @field.bmps.each do |bmp|
+              if (bmp.bmp_type_id == 8)       # Soil Conservation and Water Quality Plans
+                is_soil_conservation = true
+              end
+            end
+          if (!is_soil_conservation)
+            flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless you have an updated soil and water conservation plan.'
           end
         end
       end
@@ -136,7 +150,7 @@ class FieldsController < ApplicationController
       # does the field meet baseline - only for Maryland
       if (@farm.site_state_id == 21)
         flash.now[:meet_baseline] ||= []
-        if (@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system && !@field.is_livestock_mortality_composting) || (@field.field_poultry.empty? && !@field.is_poultry_animal_waste_management_system && !@field.is_poultry_mortality_composting)
+        if (!@field.field_livestocks.empty? && (!@field.is_livestock_animal_waste_management_system || !@field.is_livestock_mortality_composting)) || (!@field.field_poultry.empty? && (!@field.is_poultry_animal_waste_management_system || !@field.is_poultry_mortality_composting))
           flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland''s Nutrient Management Regulations and CAFO rule.'
         end
       end

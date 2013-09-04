@@ -59,6 +59,65 @@
             </li>
           </div>
         </div>
+
+        <li>
+          <%= f.label :is_forest_buffer, 'Forest buffer in place:', :class => 'wide' %>
+          <%= f.check_box :is_forest_buffer %>
+        </li>
+        <div id='div_is_forest_buffer'
+             <% if !@field.is_forest_buffer? %>style='display: none'
+             <% end %> >
+          <li>
+            <%= f.label :forest_buffer_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.text_field :forest_buffer_average_width, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+            ft
+          </li>
+          <li>
+            <%= f.label :forest_buffer_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.text_field :forest_buffer_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+            ft
+          </li>
+          <li>
+            <%= f.label :forest_buffer_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <input type='text' id='forest_buffer_area' size='10' class='readonlyInput' value='<%= (number_with_precision(@field.forest_buffer_area, :precision => 2, :separator => '.', :delimiter => ',')) %>' readonly='readonly'>
+            ac
+          </li>
+          <li>
+            <%= f.label :is_forest_buffer_planned, 'Planned:', :class => 'wide' %>
+            <%= f.check_box :is_forest_buffer_planned %>
+            <hr/>
+          </li>
+        </div>
+
+        <li>
+          <%= f.label :is_grass_buffer, 'Grass buffer in place:', :class => 'wide' %>
+          <%= f.check_box :is_grass_buffer %>
+        </li>
+
+        <div id='div_is_grass_buffer'
+             <% if !@field.is_grass_buffer? %>style='display: none'
+             <% end %> >
+          <li>
+            <%= f.label :grass_buffer_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.text_field :grass_buffer_average_width, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+            ft
+          </li>
+          <li>
+            <%= f.label :grass_buffer_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.text_field :grass_buffer_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+            ft
+          </li>
+          <li>
+            <%= f.label :grass_buffer_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <input type='text' id='grass_buffer_area' size='10' class='readonlyInput' value='<%= (number_with_precision(@field.grass_buffer_area, :precision => 2, :separator => '.', :delimiter => ',')) %>' readonly='readonly'>
+            ac
+          </li>
+          <li>
+            <%= f.label :is_grass_buffer_planned, 'Planned:', :class => 'wide' %>
+            <%= f.check_box :is_grass_buffer_planned %>
+          </li>
+        </div>
+
     <% end %>
     <!-- end only show if permanent pasture -->
 
@@ -177,12 +236,12 @@
       <li>
         <%= f.label :wetland_area, 'Area of wetland:<em>*</em>'.html_safe, :class => 'wide' %>
         <%= f.text_field :wetland_area, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
-        ft
+        ac
       </li>
       <li>
         <%= f.label :wetland_treated_area, 'Upland area treated by wetland:<em>*</em>'.html_safe, :class => 'wide' %>
         <%= f.text_field :wetland_treated_area, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
-        ft
+        ac
       </li>
       <li>
         <%= f.label :is_wetland_planned, 'Planned:', :class => 'wide' %>

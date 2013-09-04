@@ -35,6 +35,7 @@
       <div style="clear: both"></div>
       </div>
 
+    <% if session[:debug] %>
     <br/><br/>
 
 total_n_livestock: <%= @current_totals[:total_n_livestock]%> <br/>
@@ -62,5 +63,6 @@ poultry_eof_confined_nh3: <%= @current_totals[:poultry_eof_confined_nh3]%> <br/>
 poultry_eof_confined_org_n: <%= @current_totals[:poultry_eof_confined_org_n]%> <br/>
 poultry_eof_confined_org_p: <%= @current_totals[:poultry_eof_confined_org_p]%> <br/>
 poultry_eof_confined_po4p: <%= @current_totals[:poultry_eof_confined_po4p]%> <br/>
+        <% end %>
 
 <% end %>

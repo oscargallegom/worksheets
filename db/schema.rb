@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816005403) do
+ActiveRecord::Schema.define(:version => 20130903000157) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -202,8 +202,8 @@ ActiveRecord::Schema.define(:version => 20130816005403) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
@@ -262,7 +262,7 @@ ActiveRecord::Schema.define(:version => 20130816005403) do
     t.boolean  "is_livestock_properly_sized_maintained"
     t.integer  "tmdl_id"
     t.integer  "soil_p_extractant_id"
-    t.boolean  "is_field_adjacent_water"
+    t.boolean  "is_field_adjacent_water",                      :default => false
     t.boolean  "is_fertilizer_application_setback"
     t.decimal  "fertilizer_application_setback_average_width"
     t.decimal  "fertilizer_application_setback_length"

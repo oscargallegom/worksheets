@@ -133,7 +133,8 @@
 
           <tr>
             <td>
-              <%= f.label :site_zip, 'Does this project site include pastured animals?', :class => 'wide' %>
+              <%= @string = 'Does this project site include pastured animals?'
+                  f.label :site_zip, @string, :class => 'wide' %>
             </td>
             <td>
               <input type='radio' id='has_animals_yes' name='has_animals' value='true'

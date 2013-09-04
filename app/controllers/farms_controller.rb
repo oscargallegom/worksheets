@@ -1,4 +1,8 @@
 class FarmsController < ApplicationController
+
+  include BmpCalculations
+  include Ntt
+
   load_and_authorize_resource
   helper_method :sort_column, :sort_direction
   layout "farm", :except => [:index]
@@ -28,6 +32,28 @@ class FarmsController < ApplicationController
 
     # sort fields 'naturally'
     @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
+
+    # check if the farm meets baseline or not
+    @baseline_n_load_fields = 0
+    @current_n_load_fields = 0
+    @fields.each do |field|
+      if ((!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3))
+        @current_totals = computeBmpCalculations(field)
+        @current_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n]
+
+        if field.tmdl.nil?
+          watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
+          @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
+          @baseline_n_load_fields += watershed_segment[:n_pasture_baseline] * field.acres if field.field_type_id == 2
+          @baseline_n_load_fields += watershed_segment[:n_hay_baseline] * field.acres if field.field_type_id == 3
+
+        else # use Maryland TMDL
+          @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
+             end
+      end
+
+    end
+
 
     respond_to do |format|
       format.html # show.html.erb

@@ -114,8 +114,8 @@ module BmpCalculations
     buffer_fertilizer_p_conversion = 0
     buffer_fertilizer_sediment_conversion =0
 
-    # if crop or hay
-    if (field.field_type_id == 1 || field.field_type_id == 3)
+    # if crop or pasture or hay
+    if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
       # if grass buffer
       if (field.is_grass_buffer?)
 
@@ -144,7 +144,6 @@ module BmpCalculations
         elsif (field.forest_buffer_average_width > 100)
           forest_buffer_functional_acres = forest_buffer_length * 100.0 / 43560.0
         end
-
       end
 
       # if fertilizer setback
@@ -415,7 +414,7 @@ module BmpCalculations
 
     field.field_poultry.each do |poultry|
 
-      poultry_lookup = Animal.where(:id => poultry.animal_id).first
+      poultry_lookup = Animal.where(:id => poultry.poultry_id).first
 
       poultry_manure = poultry.quantity / poultry_lookup[:animals_per_au] * poultry.days_in_growing_cycle * poultry.flocks_per_year * (poultry_lookup[:daily_manure_production_lbs_per_au] / 2000.0)
 
