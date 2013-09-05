@@ -243,8 +243,16 @@ updateBmpList = () ->
     j = i + 1
     while j < $('#div_bmp').find('.class_bmp_type_id:visible').length
       nextSelect = $('#div_bmp').find('.class_bmp_type_id:visible').get(j)
+
       k = 0
       while k < nextSelect.options.length
+
+        # Horse pasture management (5) and Prescribed grazing (11) are mutually exclusive
+        if (currentValue=='5' && nextSelect.options[k].value=='11')
+          nextSelect.options[k].disabled = true
+        if (currentValue=='11' && nextSelect.options[k].value=='5')
+          nextSelect.options[k].disabled = true
+
         if (nextSelect.options[k].value == currentValue)
           #nextSelect.remove(k)
           nextSelect.options[k].disabled = true
@@ -265,7 +273,6 @@ getComponentNumber = (componentId, prefix) ->
 
 
 $(document).ready ->
-
   # TODO: remove
   $("#input_xml").text(vkbeautify.xml($("#input_xml").text().trim()))
   $("#output_xml").text(vkbeautify.xml($("#output_xml").text().trim()))

@@ -57,9 +57,16 @@
               <%= f.text_field :distance_fence_stream, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
               ft
             </li>
+            <li>
+              <%= f.label :exclusion_description, 'If the above describes an alternative to fencing that is used to exclude animals from the stream, please describe exclusion method here:' %>
+              </li>
+            <li>
+              <%= f.text_area :exclusion_description, :rows => 5 %>
+            </li>
           </div>
         </div>
 
+        <li><h2 class='sectionHeading'>Riparian/Conservation Buffer BMPs</h2></li>
         <li>
           <%= f.label :is_forest_buffer, 'Forest buffer in place:', :class => 'wide' %>
           <%= f.check_box :is_forest_buffer %>
@@ -201,17 +208,17 @@
              <% if !@field.is_fertilizer_application_setback? %>style='display: none'
              <% end %> >
           <li>
-            <%= f.label :fertilizer_application_setback_average_width, 'Average width of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.label :fertilizer_application_setback_average_width, 'Average width of setback:<em>*</em>'.html_safe, :class => 'wide' %>
             <%= f.text_field :fertilizer_application_setback_average_width, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
             ft
           </li>
           <li>
-            <%= f.label :fertilizer_application_setback_length, 'Linear feet of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.label :fertilizer_application_setback_length, 'Linear feet of setback:<em>*</em>'.html_safe, :class => 'wide' %>
             <%= f.text_field :fertilizer_application_setback_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
             ft
           </li>
           <li>
-            <%= f.label :fertilizer_application_setback_area, 'Area of buffer:<em>*</em>'.html_safe, :class => 'wide' %>
+            <%= f.label :fertilizer_application_setback_area, 'Area of setback:<em>*</em>'.html_safe, :class => 'wide' %>
             <input type='text' id='fertilizer_application_setback_area' size='10' class='readonlyInput' value='<%= (number_with_precision(@field.fertilizer_application_setback_area, :precision => 2, :separator => '.', :delimiter => ',')) %>' readonly='readonly'>
             ac
           </li>
@@ -286,7 +293,7 @@
       please explain below.
     </li>
     <li>
-      <%= f.label :streambank_restoration_length, 'Details if applicable:', :class => 'wide' %>
+      <%= f.label :planned_management_details, 'Details if applicable:', :class => 'wide' %>
       <%= f.text_area :planned_management_details, :rows => 5 %>
     </li>
 

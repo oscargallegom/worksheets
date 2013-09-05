@@ -62,8 +62,8 @@
           <%= number_with_precision(@current_n_load_fields, :precision => 2, delimiter: ',') %>
         </li>
         <li>
-          <div class='wide'>Current P load for Animal HQ:</div>
-          <%= 'TBD' %>
+          <div class='wide'>Current N load for Animal HQ:</div>
+          <%= number_with_precision(@current_n_load_animals, :precision => 2, delimiter: ',') %>
         </li>
         <li>
           <div class='wide'>Baseline N load fields:</div>
@@ -87,7 +87,7 @@
         </li>
         <li>
           <div class='wide'>Current P load for Animal HQ:</div>
-          <%= 'TBD' %>
+          <%= number_with_precision(@current_p_load_animals, :precision => 2, delimiter: ',') %>
         </li>
         <li>
           <div class='wide'>Baseline P load fields:</div>
@@ -101,23 +101,25 @@
 
         <li><h2 class='sectionHeading'>Sediment Load Information</h2></li>
         <li>
-          <div class='wide'>Farm meets N baseline:</div>
+          <div class='wide'>Farm meets sediment baseline:</div>
           <%= 'TBD' %>
         </li>
         <li>
-          <div class='wide'>Current N load fields:</div>
-          <%= 'TBD' %>
+          <div class='wide'>Current sediment load fields:</div>
+          <%= number_with_precision(@current_sediment_load_fields, :precision => 2, delimiter: ',') %>
+          tons
         </li>
         <li>
-          <div class='wide'>Current N load for Animal HQ:</div>
-          <%= 'TBD' %>
+          <div class='wide'>Current sediment load for Animal HQ:</div>
+          <%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
         </li>
         <li>
-          <div class='wide'>Baseline N load fields:</div>
-          <%= 'TBD' %>
+          <div class='wide'>Baseline sediment load fields:</div>
+          <%= number_with_precision(@baseline_sediment_load_fields, :precision => 2, delimiter: ',') %>
+          tons
         </li>
         <li>
-          <div class='wide'>Planned N load fields:</div>
+          <div class='wide'>Planned sediment load fields:</div>
           <%= 'TBD' %>
         </li>
 

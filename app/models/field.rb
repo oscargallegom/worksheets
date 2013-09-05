@@ -32,7 +32,7 @@ class Field < ActiveRecord::Base
   attr_accessible :is_fertilizer_application_setback, :fertilizer_application_setback_average_width, :fertilizer_application_setback_length, :is_fertilizer_application_setback_planned
   attr_accessible :is_wetland, :wetland_area, :wetland_treated_area, :is_wetland_planned
 
-  attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream
+  attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream, :exclusion_description
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
 
   attr_accessible :planned_management_details

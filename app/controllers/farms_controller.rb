@@ -38,11 +38,19 @@ class FarmsController < ApplicationController
     @current_n_load_fields = 0
     @baseline_p_load_fields = 0
     @current_p_load_fields = 0
+    @baseline_sediment_load_fields = 0
+    @current_sediment_load_fields = 0
+
+    @current_n_load_animals = 0
+    @current_p_load_animals = 0
+    @current_sediment_load_animals = 0
+
     @fields.each do |field|
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         @current_totals = computeBmpCalculations(field)
         @current_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n]
         @current_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p]
+        @current_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment]
 
         if field.tmdl.nil?
           watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
@@ -54,13 +62,25 @@ class FarmsController < ApplicationController
           @baseline_p_load_fields += watershed_segment[:p_pasture_baseline] * field.acres if field.field_type_id == 2
           @baseline_p_load_fields += watershed_segment[:p_hay_baseline] * field.acres if field.field_type_id == 3
 
+          @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
+          @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
+          @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
+
         else # use Maryland TMDL
           @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
           @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
+          @baseline_sediment_load_fields += field.tmdl[:total_sediment] * field.acres
              end
       end
+      # animals
+        if (!field.field_type.nil?) && (field.field_type.id == 4)
+          @current_totals = computeLivestockBmpCalculations(field)
+          @current_n_load_animals += @current_totals[:current_load_nitrogen]
+          @current_p_load_animals += @current_totals[:current_load_phosphorus]
+          @current_sediment_load_animals += @current_totals[:current_load_sediment]
+        end
 
-    end
+        end
 
 
     respond_to do |format|
