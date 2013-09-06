@@ -8,7 +8,7 @@
   <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:60px'} %>
 </li>
 <li>
-  <%= f.label :manure_type_id, 'Type:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :manure_type_id, 'Manure type:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.grouped_collection_select :manure_type_id, ManureTypeCategory.all, :manure_types, :name, :id, :name, {:prompt => 'Select manure type'}, {:required => true} %>
 </li>
 <li>
@@ -39,18 +39,22 @@
   <span></span>
 </li>
 <li>
-  <%= f.label :moisture_content, 'Moisture content:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :moisture_content, 'Moisture content (wet manure):<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :moisture_content, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 100, :step => 'any' %>
   &nbsp; %
 </li>
 <li>
   <%= f.label :is_precision_feeding, 'Precision feeding:', :class => 'wide' %>
   <%= f.check_box :is_precision_feeding, :size => 5 %>
+  <br/>Manure P concentrations should reflect dairy precision feeding.
 </li>
+
 <li>
   <%= f.label :is_phytase_treatment, 'Phytase treatment:', :class => 'wide' %>
   <%= f.check_box :is_phytase_treatment, :size => 5 %>
+  <br/>Manure P concentrations should reflect use of phytase.
 </li>
+
 <li>
   <%= f.label :is_poultry_litter_treatment, 'Poultry litter treatment:', :class => 'wide' %>
   <%= f.check_box :is_poultry_litter_treatment, :size => 5 %>

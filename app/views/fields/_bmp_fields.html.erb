@@ -8,11 +8,6 @@
   <%= f.collection_select :bmp_type_id, @field.field_type.bmp_types.all, :id, :name, {:prompt => 'Select BMP type'}, {:required => true, :class => 'class_bmp_type_id'} %>
 </li>
 <li>
-  <%= f.label :acres, 'Area:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :acres, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
-  ac
-</li>
-<li>
   <%= f.label :is_planned, 'Planned:', :class => 'wide' %>
   <%= f.check_box :is_planned %>
 </li>

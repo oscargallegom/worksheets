@@ -14,7 +14,7 @@
   <%= f.select :end_date_day, options_for_select(listDays, :selected => f.object.end_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
-  <%= f.label :animal_id, 'Animal:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :animal_id, 'Animal type:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.collection_select :animal_id, Animal.animal, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
 </li>
 <li>
@@ -34,5 +34,6 @@
     <% end %> >
   <%= f.label :precision_feeding, 'Precision feeding:', :class => 'wide' %>
   <%= f.check_box :precision_feeding, :size => 5 %>
+  <br/>Manure P concentrations should reflect dairy precision feeding.
 </li>
 <br/>

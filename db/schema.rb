@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905012118) do
+ActiveRecord::Schema.define(:version => 20130906005912) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(:version => 20130905012118) do
   create_table "bmps", :force => true do |t|
     t.integer "field_id"
     t.integer "bmp_type_id"
-    t.decimal "acres"
     t.boolean "is_planned"
   end
 
@@ -271,6 +270,9 @@ ActiveRecord::Schema.define(:version => 20130905012118) do
     t.string   "watershed_name"
     t.string   "tmdl_va"
     t.text     "exclusion_description"
+    t.decimal  "other_land_use_conversion_acres"
+    t.integer  "other_land_use_conversion_vegetation_type_id"
+    t.boolean  "is_other_land_use_conversion_planned"
   end
 
   create_table "generator_types", :force => true do |t|

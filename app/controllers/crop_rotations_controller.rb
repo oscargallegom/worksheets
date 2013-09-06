@@ -76,7 +76,7 @@ class CropRotationsController < ApplicationController
     respond_to do |format|
       if @crop_rotation.update_attributes(params[:crop_rotation])
         if (params[:nextPage] == 'Save & Continue')
-          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully updated.' }
+          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 4), notice: 'Crop was successfully updated.' }
         else
           format.html { redirect_to new_farm_field_strip_crop_rotation_path(@farm, @field, @strip), notice: 'Crop was successfully updated.' }
         end

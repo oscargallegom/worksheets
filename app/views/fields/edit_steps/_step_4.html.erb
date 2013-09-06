@@ -39,7 +39,7 @@
             ft
           </li>
           <li>
-            <label class="wide"><b>Is streambank fencing in place<em>*</em></b></label>
+            <label class="wide"><b>Is fencing/exclusion in place<em>*</em></b></label>
             <%= f.radio_button :is_streambank_fencing_in_place, true, :required => true %>
             <%= f.label :is_streambank_fencing_in_place_true, 'Yes' %>
             <%= f.radio_button :is_streambank_fencing_in_place, false, :required => true %>
@@ -49,14 +49,15 @@
                <% if !@field.is_streambank_fencing_in_place? %>style='display: none'
                <% end %>>
             <li>
-              <%= f.label :name, 'Type of vegetation between fence and stream:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :vegetation_type_fence_stream_id, VegetationType.all, :id, :name, {:prompt => 'Select vegetation type'}, {:required => true} %></td>
+              <%= f.label :name, 'Vegetation type:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :vegetation_type_fence_stream_id, VegetationType.all, :id, :name, {:prompt => 'Select vegetation type'}, {:required => true} %>
             </li>
             <li>
-              <%= f.label :distance_fence_stream, 'Average distance betweeen fence and stream:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.label :distance_fence_stream, 'Distance between fence/exclusion and stream:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.text_field :distance_fence_stream, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
               ft
             </li>
+            <li></li>
             <li>
               <%= f.label :exclusion_description, 'If the above describes an alternative to fencing that is used to exclude animals from the stream, please describe exclusion method here:' %>
               </li>
@@ -200,8 +201,9 @@
           </li>
         </div>
 
+        <li><h2 class='sectionHeading'>Fertilizer application setback</h2></li>
         <li>
-          <%= f.label :is_fertilizer_application_setback, 'Fertilizer application setback in place:', :class => 'wide' %>
+          <%= f.label :is_fertilizer_application_setback, 'Setback in place:', :class => 'wide' %>
           <%= f.check_box :is_fertilizer_application_setback %>
         </li>
         <div id='div_is_fertilizer_application_setback'
@@ -256,8 +258,23 @@
       </li>
     </div>
 
+    <li><h2 class='sectionHeading'>Other land use conversion</h2></li>
+    <li>Please indicate any non-riperian land conversion in place or planned on this field.</li>
+    <li>
+      <%= f.label :other_land_use_conversion_acres, 'Acres converted:', :class => 'wide' %>
+      <%= f.text_field :other_land_use_conversion_acres, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+      ac
+    </li>
+    <li>
+      <%= f.label :other_land_use_conversion_vegetation_type_id, 'Converted to:', :class => 'wide' %>
+      <%= f.collection_select :other_land_use_conversion_vegetation_type_id, VegetationType.all, :id, :name, {:prompt => 'Select vegetation type'}, {:required => true} %></td>
+    </li>
+    <li>
+      <%= f.label :is_other_land_use_conversion_planned, 'Planned:', :class => 'wide' %>
+      <%= f.check_box :is_other_land_use_conversion_planned %>
+    </li>
 
-    <li><h2 class='sectionHeading'>Other Best management practices</h2></li>
+    <li><h2 class='sectionHeading'>Other best management practices</h2></li>
 
     <div id='div_bmp'>
 

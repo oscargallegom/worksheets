@@ -31,6 +31,7 @@ class Field < ActiveRecord::Base
   attr_accessible :is_grass_buffer, :grass_buffer_average_width, :grass_buffer_length, :is_grass_buffer_planned
   attr_accessible :is_fertilizer_application_setback, :fertilizer_application_setback_average_width, :fertilizer_application_setback_length, :is_fertilizer_application_setback_planned
   attr_accessible :is_wetland, :wetland_area, :wetland_treated_area, :is_wetland_planned
+  attr_accessible :other_land_use_conversion_acres, :other_land_use_conversion_vegetation_type_id, :is_other_land_use_conversion_planned
 
   attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream, :exclusion_description
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
@@ -88,8 +89,9 @@ class Field < ActiveRecord::Base
   validates_numericality_of :fertilizer_application_setback_average_width, :fertilizer_application_setback_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_fertilizer_application_setback?'
 
   # step 4 for all
-  validates_numericality_of :wetland_area, :wetland_treated_area, :if => 'step?(4) && is_wetland?'
-  validates_numericality_of :streambank_restoration_length, :if => 'step?(4) && is_streambank_restoration?'
+  validates_numericality_of :wetland_area, :wetland_treated_area, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_wetland?'
+  validates_numericality_of :streambank_restoration_length, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_streambank_restoration?'
+  validates_numericality_of :other_land_use_conversion_acres, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(4)'
 
   validates_inclusion_of :is_acres_from_map, :in => [true, false], :allow_blank => true, :if => 'step?(4)'
 
