@@ -189,22 +189,22 @@ module BmpCalculations
     other_land_use_conversion_hyo_sediment_conversion = 0
 
     if (field.other_land_use_conversion_vegetation_type_id == 1) # if forest
-      other_land_use_conversion_n_conversion = field.watershed_segment.total_n_forest * other_land_use_conversion_acres
-      other_land_use_conversion_p_conversion = field.watershed_segment.total_p_forest * other_land_use_conversion_acres
-      other_land_use_conversion_sediment_conversion = field.watershed_segment.total_sediment_forest * other_land_use_conversion_acres
+      other_land_use_conversion_forest_n_conversion = field.watershed_segment.total_n_forest * other_land_use_conversion_acres
+      other_land_use_conversion_forest_p_conversion = field.watershed_segment.total_p_forest * other_land_use_conversion_acres
+      other_land_use_conversion_forest_sediment_conversion = field.watershed_segment.total_sediment_forest * other_land_use_conversion_acres
     else # grass
-      other_land_use_conversion_n_conversion_hyo_n_conversion = field.watershed_segment.total_n_hyo * other_land_use_conversion_acres
-      other_land_use_conversion_n_conversion_hyo_p_conversion = field.watershed_segment.total_p_hyo * other_land_use_conversion_acres
-      other_land_use_conversion_n_conversion_hyo_sediment_conversion = field.watershed_segment.total_sediment_hyo * other_land_use_conversion_acres
+      other_land_use_conversion_hyo_n_conversion = field.watershed_segment.total_n_hyo * other_land_use_conversion_acres
+      other_land_use_conversion_hyo_p_conversion = field.watershed_segment.total_p_hyo * other_land_use_conversion_acres
+      other_land_use_conversion_hyo_sediment_conversion = field.watershed_segment.total_sediment_hyo * other_land_use_conversion_acres
     end
 
     # total converted land
     total_converted_acres = [fencing_acres + degraded_pasture_acres + grass_buffer_acres + forest_buffer_acres + fertilizer_buffer_acres + wetland_acres + other_land_use_conversion_acres, field.acres].min
     total_unconverted_acres = field.acres.to_f - total_converted_acres
 
-    total_n_for_converted_acre = stream_forest_n_conversion + stream_hyo_n_conversion + other_land_use_conversion_n_conversion + other_land_use_conversion_n_conversion_hyo_n_conversion + trp_n_conversion + buffer_hyo_n_conversion + buffer_forest_n_conversion + buffer_fertilizer_n_conversion + wetland_forest_n_conversion
-    total_p_for_converted_acre = stream_forest_p_conversion + stream_hyo_p_conversion + other_land_use_conversion_p_conversion + other_land_use_conversion_n_conversion_hyo_p_conversion + trp_p_conversion + buffer_hyo_p_conversion + buffer_forest_p_conversion + buffer_fertilizer_p_conversion + wetland_forest_p_conversion
-    total_sediment_for_converted_acre = (stream_forest_sediment_conversion + stream_hyo_sediment_conversion + other_land_use_conversion_sediment_conversion + other_land_use_conversion_n_conversion_hyo_sediment_conversion + trp_sediment_conversion + buffer_hyo_sediment_conversion + buffer_forest_sediment_conversion + buffer_fertilizer_sediment_conversion + wetland_forest_sediment_conversion) / 2000.0
+    total_n_for_converted_acre = stream_forest_n_conversion + stream_hyo_n_conversion + other_land_use_conversion_forest_n_conversion + other_land_use_conversion_hyo_n_conversion + trp_n_conversion + buffer_hyo_n_conversion + buffer_forest_n_conversion + buffer_fertilizer_n_conversion + wetland_forest_n_conversion
+    total_p_for_converted_acre = stream_forest_p_conversion + stream_hyo_p_conversion + other_land_use_conversion_forest_p_conversion + other_land_use_conversion_hyo_p_conversion + trp_p_conversion + buffer_hyo_p_conversion + buffer_forest_p_conversion + buffer_fertilizer_p_conversion + wetland_forest_p_conversion
+    total_sediment_for_converted_acre = (stream_forest_sediment_conversion + stream_hyo_sediment_conversion + other_land_use_conversion_forest_sediment_conversion + other_land_use_conversion_hyo_sediment_conversion + trp_sediment_conversion + buffer_hyo_sediment_conversion + buffer_forest_sediment_conversion + buffer_fertilizer_sediment_conversion + wetland_forest_sediment_conversion) / 2000.0
 
     ###################################################
     # Upland acres reduction

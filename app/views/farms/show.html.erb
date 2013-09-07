@@ -167,12 +167,14 @@
         </li>
         <li>
           <div class='wide'>Streambank fencing area:</div>
-          <%= @farm.streambank_fencing_area %>
+          <%= number_with_precision(@farm.streambank_fencing_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.streambank_fencing_area == 'N/A' %>
+          <%= 'N/A' if @farm.streambank_fencing_area == 'N/A' %>
           <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %>
         </li>
         <li>
           <div class='wide'>Converted area:</div>
-          <%= @farm.converted_area %>
+          <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
+          <%= 'N/A' if @farm.converted_area == 'N/A' %>
           <%= 'ac' unless @farm.converted_area == 'N/A' %>
         </li>
         <li></li>
