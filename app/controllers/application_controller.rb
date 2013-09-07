@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  if Rails.env.production?
+  #if Rails.env.production?
     unless Rails.application.config.consider_all_requests_local
       rescue_from Exception, :with => :render_500
       rescue_from CanCan::AccessDenied, with: :render_401
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
         render_500(exception)
       end
     end
-  end
+  #end
 
 
   def render_500(exception)
