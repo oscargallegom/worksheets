@@ -33,9 +33,9 @@
             <li>
               <div class='wide'>TMDL watershed:</div>
               <% if @farm.site_state_id == 21 %>
-                <%= @field.tmdl != nil ? @field.tmdl.name : 'N/A' %>
-                  <% else %>
-              <%= @field.tmdl_va %>
+                  <%= @field.tmdl != nil ? @field.tmdl.name : 'N/A' %>
+              <% else %>
+                  <%= @field.tmdl_va %>
               <% end %>
             </li>
             <li>

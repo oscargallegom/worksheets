@@ -41,8 +41,10 @@
         <% if (@step=='4') %> class="selected"
         <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
         <li
-        <% if (@step=='5') %> class="selected"  <% end %>
-                                                <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"  <% end %>
+        <% if (@step=='5') %> class="selected"
+        <% end %>
+        <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"
+        <% end %>
         ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
         <li
         <% if (@step=='6') %> class="selected"
@@ -93,8 +95,10 @@
         <% end %> ><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
         <li class="shadow"></li>
         <li
-        <% if (@step=='5') %> class="selected"  <% end %>
-        <% if @field.livestock_input_method_id.nil? %>   class="disabledTab"  <% end %>
+        <% if (@step=='5') %> class="selected"
+        <% end %>
+        <% if @field.livestock_input_method_id.nil? %>   class="disabledTab"
+        <% end %>
         ><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
       </ul>
     </div>
@@ -145,6 +149,6 @@
 
     <br/><br/><br/><br/>
 
-    <%= URI.escape(@input_xml.gsub('<', '[').gsub('>', ']')) unless @input_xml.nil?  %>
+    <%= URI.escape(@input_xml.gsub('<', '[').gsub('>', ']')) unless @input_xml.nil? %>
 
 <% end %>

@@ -2,10 +2,15 @@
     <div class="sectionRest clearfix nn-form">
 
       <div>
-        <fieldset>   <ol>
-          <li></li><li>
-          Please contact your administrator.<br/>    </li></ol>
-        </fieldset></div> <div style="clear: both"></div>
+        <fieldset>
+          <ol>
+            <li></li>
+            <li>
+              Please contact your administrator.<br/></li>
+          </ol>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
     </div>
 
 
@@ -29,40 +34,40 @@
               <%= number_with_precision(@current_totals[:current_load_sediment], :precision => 2, delimiter: ',') %>
               tons per year
             </li>
-            </ol>
-          </fieldset>
-        </div>
-      <div style="clear: both"></div>
+          </ol>
+        </fieldset>
       </div>
+      <div style="clear: both"></div>
+    </div>
 
     <% if session[:debug] %>
-    <br/><br/>
+        <br/><br/>
 
-total_n_livestock: <%= @current_totals[:total_n_livestock]%> <br/>
-total_nh3_livestock: <%= @current_totals[:total_nh3_livestock]%> <br/>
-total_n_livestock: <%= @current_totals[:total_n_livestock]%> <br/>
-total_p_livestock: <%= @current_totals[:total_p_livestock]%> <br/>
-total_org_p_livestock: <%= @current_totals[:total_org_p_livestock]%> <br/>
-total_po4p_livestock: <%= @current_totals[:total_po4p_livestock]%> <br/>
+        total_n_livestock: <%= @current_totals[:total_n_livestock] %> <br/>
+        total_nh3_livestock: <%= @current_totals[:total_nh3_livestock] %> <br/>
+        total_n_livestock: <%= @current_totals[:total_n_livestock] %> <br/>
+        total_p_livestock: <%= @current_totals[:total_p_livestock] %> <br/>
+        total_org_p_livestock: <%= @current_totals[:total_org_p_livestock] %> <br/>
+        total_po4p_livestock: <%= @current_totals[:total_po4p_livestock] %> <br/>
 
-animal_v_ammonia: <%= @current_totals[:animal_v_ammonia]%> <br/>
-animal_eof_confined_nh3: <%= @current_totals[:animal_eof_confined_nh3]%> <br/>
-animal_eof_confined_org_n: <%= @current_totals[:animal_eof_confined_org_n]%> <br/>
-animal_eof_confined_org_p: <%= @current_totals[:animal_eof_confined_org_p]%> <br/>
-animal_eof_confined_po4p: <%= @current_totals[:animal_eof_confined_po4p]%> <br/>
+        animal_v_ammonia: <%= @current_totals[:animal_v_ammonia] %> <br/>
+        animal_eof_confined_nh3: <%= @current_totals[:animal_eof_confined_nh3] %> <br/>
+        animal_eof_confined_org_n: <%= @current_totals[:animal_eof_confined_org_n] %> <br/>
+        animal_eof_confined_org_p: <%= @current_totals[:animal_eof_confined_org_p] %> <br/>
+        animal_eof_confined_po4p: <%= @current_totals[:animal_eof_confined_po4p] %> <br/>
 
-total_n_poultry: <%= @current_totals[:total_n_poultry]%> <br/>
-total_nh3_poultry: <%= @current_totals[:total_nh3_poultry]%> <br/>
-total_org_n_poultry: <%= @current_totals[:total_org_n_poultry]%> <br/>
-total_p_poultry: <%= @current_totals[:total_p_poultry]%> <br/>
-total_org_p_poultry: <%= @current_totals[:total_org_p_poultry]%> <br/>
-total_po4p_poultry: <%= @current_totals[:total_po4p_poultry]%> <br/>
+        total_n_poultry: <%= @current_totals[:total_n_poultry] %> <br/>
+        total_nh3_poultry: <%= @current_totals[:total_nh3_poultry] %> <br/>
+        total_org_n_poultry: <%= @current_totals[:total_org_n_poultry] %> <br/>
+        total_p_poultry: <%= @current_totals[:total_p_poultry] %> <br/>
+        total_org_p_poultry: <%= @current_totals[:total_org_p_poultry] %> <br/>
+        total_po4p_poultry: <%= @current_totals[:total_po4p_poultry] %> <br/>
 
-poultry_v_ammonia: <%= @current_totals[:poultry_v_ammonia]%> <br/>
-poultry_eof_confined_nh3: <%= @current_totals[:poultry_eof_confined_nh3]%> <br/>
-poultry_eof_confined_org_n: <%= @current_totals[:poultry_eof_confined_org_n]%> <br/>
-poultry_eof_confined_org_p: <%= @current_totals[:poultry_eof_confined_org_p]%> <br/>
-poultry_eof_confined_po4p: <%= @current_totals[:poultry_eof_confined_po4p]%> <br/>
-        <% end %>
+        poultry_v_ammonia: <%= @current_totals[:poultry_v_ammonia] %> <br/>
+        poultry_eof_confined_nh3: <%= @current_totals[:poultry_eof_confined_nh3] %> <br/>
+        poultry_eof_confined_org_n: <%= @current_totals[:poultry_eof_confined_org_n] %> <br/>
+        poultry_eof_confined_org_p: <%= @current_totals[:poultry_eof_confined_org_p] %> <br/>
+        poultry_eof_confined_po4p: <%= @current_totals[:poultry_eof_confined_po4p] %> <br/>
+    <% end %>
 
 <% end %>
