@@ -1,7 +1,5 @@
 class CropRotation < ActiveRecord::Base
 
-  before_validation :test
-
   attr_accessor :crop_category_id
 
   belongs_to :crop #, :inverse_of => :crop_rotations

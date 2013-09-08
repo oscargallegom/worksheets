@@ -1,7 +1,7 @@
 class Field < ActiveRecord::Base
 
   attr_writer :step
-  attr_accessor :soil_test_laboratory_id, :update_p_test_value
+  attr_accessor :soil_test_laboratory_id, :modified_p_test_value
 
   belongs_to :farm
   belongs_to :watershed_segment
@@ -66,12 +66,12 @@ class Field < ActiveRecord::Base
   # TODO: check field type id
   validates_presence_of :irrigation_id, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
   validates_presence_of :crop_type_id, :if => 'step?(2) && field_type_id==1'
-  validates_inclusion_of :is_acres_from_map, :in => [true, false], :if => 'step?(2) && field_type_id!=4', :message => '^Specify field area'
+  validates_inclusion_of :is_acres_from_map, :in => [true, false], :if => 'step?(2)', :message => '^Specify field area'
   validates_numericality_of :tile_drainage_depth, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3)'
   validates_inclusion_of :efficiency, :in => 0..100, :message => "must be between 0 and 100", :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3) && irrigation_id!=nil && irrigation_id!=0'
   validates_numericality_of :fertigation_n, :allow_blank => true, :greater_than_or_equal_to => 0, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3) && (irrigation_id == 500 or irrigation_id == 530)'
   # also for non-managed land
-  validates_numericality_of :acres_from_user, :greater_than_or_equal_to => 0, :if => '!is_acres_from_map? && step?(2) && (field_type_id==1 || field_type_id==3 || field_type_id==5)', :message => '^Acres is not a valid number.'
+  validates_numericality_of :acres_from_user, :greater_than_or_equal_to => 0, :if => '!is_acres_from_map? && step?(2)', :message => '^Acres is not a valid number.'
 
   # step 2 and animal confinement
   validates_presence_of :livestock_input_method_id, :if => 'step?(2) && field_type_id==4'
@@ -161,7 +161,7 @@ class Field < ActiveRecord::Base
     return sediment_baseline
   end
 
-  def update_p_test_value
+  def modified_p_test_value
     modified_p_test_value = 0
       soil_p_extractant = SoilPExtractant.where(:id => self.soil_p_extractant_id).first
       if (soil_p_extractant.formula_code == 1)

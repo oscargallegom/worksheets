@@ -18,6 +18,20 @@
       <div>
         <fieldset>
           <ol>
+
+            <li><h2 class='sectionHeading'>Area</h2></li>
+            <li>
+              <div class='wide'>Field area:<em>*</em></div>
+              <%= f.radio_button :is_acres_from_map, true %>
+              <%= f.label :is_acres_from_map_true, number_with_precision(@field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac (from map)' %>
+              <br/>
+
+              <div class='wide'>&nbsp;</div>
+              <%= f.radio_button :is_acres_from_map, false %>
+              <%= f.text_field :acres_from_user, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+              &nbsp;<%= f.label :is_acres_from_map_false, 'ac' %>
+            </li>
+
             <li><h2 class='sectionHeading'>Livestock</h2></li>
             <li>Enter information for the entire life cycle of this operation. First, select a method with which to
               enter your animal confinement data. Select the Totals per type method to enter nutrient totals or select

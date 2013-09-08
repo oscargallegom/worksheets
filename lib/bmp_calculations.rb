@@ -449,7 +449,7 @@ module BmpCalculations
       total_p_poultry = total_p_poultry + (poultry_manure * poultry.p205_excreted / poultry_lookup[:fraction_p2o5])
       total_org_p_poultry = total_org_p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_org_p] * poultry_manure
 
-      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_po4p]  * poultry_manure
+      total_po4p_poultry = total_po4p_poultry + (poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_po4p] * poultry_manure
 
 
       tmp_confined_ammonia = field.is_poultry_litter_treatment ? (tmp_nh3_poultry * (1 - (poultry_lookup[:volatilization_fraction] * (1 - 0.6)))) : (tmp_nh3_poultry * (1 - poultry_lookup[:volatilization_fraction]))
