@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906005912) do
+ActiveRecord::Schema.define(:version => 20130908184517) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -355,12 +355,6 @@ ActiveRecord::Schema.define(:version => 20130906005912) do
     t.decimal "p_fraction"
   end
 
-  create_table "p_test_methods", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "p_types", :force => true do |t|
     t.string "name"
   end
@@ -384,7 +378,7 @@ ActiveRecord::Schema.define(:version => 20130906005912) do
     t.string  "name"
     t.string  "unit"
     t.decimal "m_value"
-    t.decimal "p_value"
+    t.decimal "b_value"
     t.integer "formula_code"
     t.integer "soil_test_laboratory_id"
     t.decimal "h_value"

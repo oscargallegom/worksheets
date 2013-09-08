@@ -9,7 +9,7 @@ class FieldLivestock < ActiveRecord::Base
 
   validates_presence_of :animal_id
   # if input method is average per type, no total manure
-  validates_numericality_of :total_manure, :n_excreted, :p205_excreted,  :greater_than_or_equal_to => 0, :if => :totals_per_type?
+  validates_numericality_of :total_manure, :n_excreted, :p205_excreted, :greater_than_or_equal_to => 0, :if => :totals_per_type?
   # if input method is totals per type, no quantity, day, hour, average
   validates_numericality_of :quantity, :average_weight, :greater_than_or_equal_to => 0, :if => :average_per_type?
   validates_numericality_of :days_per_year_confined, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 365, :if => :average_per_type?

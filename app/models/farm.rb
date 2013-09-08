@@ -57,8 +57,8 @@ class Farm < ActiveRecord::Base
     field_acres = 0
     fields.each do |field|
       field_acres = field_acres +field.acres
-      end
-  return(field_acres)
+    end
+    return(field_acres)
   end
 
   def animal_headquarters
@@ -105,9 +105,9 @@ class Farm < ActiveRecord::Base
   def streambank_fencing_area
     streambank_fencing_area = 0
     fields.each do |field|
-    if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
-      streambank_fencing_area = streambank_fencing_area + field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
-    end
+      if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
+        streambank_fencing_area = streambank_fencing_area + field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
+      end
     end
     streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
   end

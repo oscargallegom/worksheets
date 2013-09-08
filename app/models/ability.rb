@@ -29,31 +29,31 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-      user ||= User.new # guest user (not logged in)
+    user ||= User.new # guest user (not logged in)
 
-      can :read, [State, County, CropCategory, Crop]
+    can :read, [State, County, CropCategory, Crop]
 
-      if user.role? :user_administrator
-        can [:read, :update, :destroy], User
-      end
-      if user.role? :project_administrator
-        can :manage, :all
-      end
-      if user.role? :basic_user
-        # can :manage, [Project, Field]
-        # can :read, Project
-        # can :manage, Project do |project|
-        #   project.try(:id) == 1
-        # end
-        can :manage, Farm, :owner_id => user.id
-        can :manage, Field, :farm => {:owner_id => user.id}
-        can :manage, Strip, :field => {:farm => {:owner_id => user.id}}
-        can :manage, CropRotation, :strip => {:field => {:farm => {:owner_id => user.id}}}
-
-      end
-
+    if user.role? :user_administrator
+      can [:read, :update, :destroy], User
+    end
+    if user.role? :project_administrator
+      can :manage, :all
+    end
+    if user.role? :basic_user
+      # can :manage, [Project, Field]
+      # can :read, Project
+      # can :manage, Project do |project|
+      #   project.try(:id) == 1
+      # end
+      can :manage, Farm, :owner_id => user.id
+      can :manage, Field, :farm => {:owner_id => user.id}
+      can :manage, Strip, :field => {:farm => {:owner_id => user.id}}
+      can :manage, CropRotation, :strip => {:field => {:farm => {:owner_id => user.id}}}
 
     end
 
+
   end
+
+end
 

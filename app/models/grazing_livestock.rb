@@ -13,6 +13,4 @@ class GrazingLivestock < ActiveRecord::Base
   validates_numericality_of :end_date_day, :less_than_or_equal_to => 28, :if => 'end_date_month==2', :message => '^Date incorrect for February'
 
 
-
-
 end

@@ -1,7 +1,7 @@
 class Field < ActiveRecord::Base
 
   attr_writer :step
-  attr_accessor :soil_test_laboratory_id
+  attr_accessor :soil_test_laboratory_id, :update_p_test_value
 
   belongs_to :farm
   belongs_to :watershed_segment
@@ -159,6 +159,19 @@ class Field < ActiveRecord::Base
     sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2
     sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3
     return sediment_baseline
+  end
+
+  def update_p_test_value
+    modified_p_test_value = 0
+      soil_p_extractant = SoilPExtractant.where(:id => self.soil_p_extractant_id).first
+      if (soil_p_extractant.formula_code == 1)
+        modified_p_test_value = (self.p_test_value + 54.145) / 4.6438
+      elsif (soil_p_extractant.formula_code == 2)
+        modified_p_test_value = (((((self.p_test_value + soil_p_extractant.b_value) / (soil_p_extractant.m_value)) + soil_p_extractant.g_value) / soil_p_extractant.h_value) + 54.145) / 4.6438
+      else
+        modified_p_test_value = (((self.p_test_value + soil_p_extractant.b_value) / soil_p_extractant.m_value) + 54.145) / 4.6438
+      end
+    return modified_p_test_value
   end
 
 
