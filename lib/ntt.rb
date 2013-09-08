@@ -99,7 +99,7 @@ module Ntt
           map_unit_symbol = soil.map_unit_symbol
           hydrologic_group = soil.hydrologic_group
           component_name = soil.component_name
-          p_test = field.p_test_value        # TODO: correct value?
+          p_test = field.modified_p_test_value
           slope = soil.slope
           percent_sand = soil.percent_sand
           percent_silt = soil.percent_silt
