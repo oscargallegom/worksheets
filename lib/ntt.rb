@@ -57,7 +57,11 @@ module Ntt
     begin
 
       state = field.farm.state.abbreviation
-      fips = field.watershed_segment.fips
+      fips = field.watershed_segment.fips unless field.watershed_segment.nil?
+      if field.watershed_segment.nil?
+      raise "Field '#{field.name}' is not in watershed."
+      end
+
       customer = current_user.id
 
       mid = 0 # management info id
