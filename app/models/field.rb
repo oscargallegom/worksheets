@@ -140,25 +140,25 @@ class Field < ActiveRecord::Base
 
   def n_baseline
     n_baseline = nil
-    n_baseline = self.watershed_segment[:n_crop_baseline].to_f if field_type_id == 1
-    n_baseline = self.watershed_segment[:n_pasture_baseline].to_f if field_type_id == 2
-    n_baseline = self.watershed_segment[:n_hay_baseline].to_f if field_type_id == 3
+    n_baseline = self.watershed_segment[:n_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
+    n_baseline = self.watershed_segment[:n_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
+    n_baseline = self.watershed_segment[:n_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
     return n_baseline
   end
 
   def p_baseline
     p_baseline = nil
-    p_baseline = self.watershed_segment[:p_crop_baseline].to_f if field_type_id == 1
-    p_baseline = self.watershed_segment[:p_pasture_baseline].to_f if field_type_id == 2
-    p_baseline = self.watershed_segment[:p_hay_baseline].to_f if field_type_id == 3
+    p_baseline = self.watershed_segment[:p_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
+    p_baseline = self.watershed_segment[:p_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
+    p_baseline = self.watershed_segment[:p_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
     return p_baseline
   end
 
   def sediment_baseline
     sediment_baseline = nil
-    sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f / 2000.0 if field_type_id == 1
-    sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2
-    sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3
+    sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f / 2000.0 if field_type_id == 1 && !self.watershed_segment.nil?
+    sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2 && !self.watershed_segment.nil?
+    sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3 && !self.watershed_segment.nil?
     return sediment_baseline
   end
 
