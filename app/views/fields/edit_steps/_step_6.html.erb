@@ -1,3 +1,57 @@
-Step 6
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
-<br/>
+    <% if @field.errors.any? %>
+        <div id="error_explanation" class="alert">
+          <b><%= pluralize(@field.errors.count, "error") %> encountered:</b>
+
+          <ul>
+            <% @field.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="sectionRest clearfix">
+
+      <%= f.hidden_field :step, :value => '6' %>
+
+      <input type='hidden' name='addCropForStrip' id='addCropForStrip'>
+
+      <br/>The crops in this field's current crop rotation are listed below. You may add a crop to the rotation or click
+      on a specific crop to edit it.<br/><br/>
+
+
+      <div id="div_strip">
+
+        <%= f.fields_for :strips do |strips_form| %>
+            <%= render 'future_strip_fields', :f => strips_form if strips_form.object.is_future? || strips_form.object.id.nil? %>
+        <% end %>
+
+      </div>
+    </div>
+    <%= f.link_to_add "Add strip for strip cropping", :strips, :class => 'button', :id => 'addStripBtn', :data => {:target => "#div_strip"} %>
+
+    <%= f.submit 'Save and Continue', :class => 'button' %>
+
+<% end %>
+
+
+<% if !@other_fields.empty? %>
+    <div class="sectionRest clearfix">
+      <br/>
+
+
+      <%= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do %>
+          <%= hidden_field_tag :step, 6 %>
+          <select name='isExport' id='isExport'>
+            <option value='true'>Copy data into</option>
+            <option value='false'>Copy data from</option>
+          </select>
+          <%= select_tag 'target_field_id', options_from_collection_for_select(@other_fields, 'id', 'name') %>
+          <%= button_tag 'Submit' %>
+      <% end %>
+    </div>
+
+<% end %>
+

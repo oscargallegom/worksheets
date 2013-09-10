@@ -62,6 +62,8 @@ class Field < ActiveRecord::Base
 
   # step 1
   validates_presence_of :name, :field_type_id, :if => 'step?(1)'
+  validates_inclusion_of :is_pasture_adjacent_to_stream, :in => [true, false], :if => 'step?(1)'
+  validates_numericality_of :fence_length, :if => 'step?(1) && is_pasture_adjacent_to_stream?'
 
   # step 2 and crop or permanent pasture or continuous hay
   # TODO: check field type id
@@ -78,8 +80,6 @@ class Field < ActiveRecord::Base
   validates_presence_of :livestock_input_method_id, :if => 'step?(2) && field_type_id==4'
 
   # step 4 and permanent pasture
-  validates_inclusion_of :is_pasture_adjacent_to_stream, :in => [true, false], :if => 'step?(4) && field_type_id==2'
-  validates_numericality_of :fence_length, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
   validates_inclusion_of :is_streambank_fencing_in_place, :in => [true, false], :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
   validates_presence_of :vegetation_type_fence_stream_id, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'
   validates_numericality_of :distance_fence_stream, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'

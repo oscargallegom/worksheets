@@ -22,22 +22,10 @@
 
     <!-- only show if permanent pasture -->
     <% if (@field.field_type_id == 2) then %>
-        <li><h2 class='sectionHeading'>Streambank fencing / Exclusion</h2></li>
-        <li>
-          <label class="wide"><b>Pasture is adjacent to stream<em>*</em></b></label>
-          <%= f.radio_button :is_pasture_adjacent_to_stream, true, :required => true %>
-          <%= f.label :is_pasture_adjacent_to_stream_true, 'Yes' %>
-          <%= f.radio_button :is_pasture_adjacent_to_stream, false, :required => true %>
-          <%= f.label :is_pasture_adjacent_to_stream_false, 'No' %>
-        </li>
         <div id='div_is_pasture_adjacent_to_stream'
              <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none'
              <% end %>>
-          <li>
-            <%= f.label :fence_length, 'Linear feet of streabank:<em>*</em>'.html_safe, :class => 'wide' %>
-            <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
-            ft
-          </li>
+        <li><h2 class='sectionHeading'>Streambank fencing / Exclusion</h2></li>
           <li>
             <label class="wide"><b>Is fencing/exclusion in place<em>*</em></b></label>
             <%= f.radio_button :is_streambank_fencing_in_place, true, :required => true %>

@@ -69,17 +69,17 @@ class FarmsController < ApplicationController
           @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
           @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
           @baseline_sediment_load_fields += field.tmdl[:total_sediment] * field.acres
-             end
+        end
       end
       # animals
-        if (!field.field_type.nil?) && (field.field_type.id == 4)
-          @current_totals = computeLivestockBmpCalculations(field)
-          @current_n_load_animals += @current_totals[:current_load_nitrogen]
-          @current_p_load_animals += @current_totals[:current_load_phosphorus]
-          @current_sediment_load_animals += @current_totals[:current_load_sediment]
-        end
+      if (!field.field_type.nil?) && (field.field_type.id == 4)
+        @current_totals = computeLivestockBmpCalculations(field)
+        @current_n_load_animals += @current_totals[:current_load_nitrogen]
+        @current_p_load_animals += @current_totals[:current_load_phosphorus]
+        @current_sediment_load_animals += @current_totals[:current_load_sediment]
+      end
 
-        end
+    end
 
 
     respond_to do |format|
@@ -237,7 +237,9 @@ class FarmsController < ApplicationController
 
         # get the watershed segment
         watershed_segment = WatershedSegment.where(["key = :tag", {:tag => params["field#{i}segment"]}]).first
-        @field.watershed_segment_id = watershed_segment.id unless watershed_segment == nil
+        if !watershed_segment.nil?
+        @field.watershed_segment_id = watershed_segment.id
+          end
 
         # get the top 3 soils
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")

@@ -50,7 +50,7 @@
 
                 <li><h2 class='sectionHeading'>Streambank fencing / Exclusion</h2></li>
                 <li>
-                  <label class="wide"><b>Pasture is adjacent to stream<em>*</em></b></label>
+                  <label class="wide"><b>Field is adjacent to stream/water body<em>*</em></b></label>
                   <%= f.radio_button :is_pasture_adjacent_to_stream, true, :required => true %>
                   <%= f.label :is_pasture_adjacent_to_stream_true, 'Yes' %>
                   <%= f.radio_button :is_pasture_adjacent_to_stream, false, :required => true %>
@@ -64,33 +64,7 @@
                     <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
                     ft
                   </li>
-                  <li>
-                    <label class="wide"><b>Is fencing/exclusion in place<em>*</em></b></label>
-                    <%= f.radio_button :is_streambank_fencing_in_place, true, :required => true %>
-                    <%= f.label :is_streambank_fencing_in_place_true, 'Yes' %>
-                    <%= f.radio_button :is_streambank_fencing_in_place, false, :required => true %>
-                    <%= f.label :is_streambank_fencing_in_place_false, 'No' %>
-                  </li>
-                  <div id='div_is_fencing_in_place'
-                       <% if !@field.is_streambank_fencing_in_place? %>style='display: none'
-                       <% end %>>
-                    <li>
-                      <%= f.label :name, 'Vegetation type:<em>*</em>'.html_safe, :class => 'wide' %>
-                      <%= f.collection_select :vegetation_type_fence_stream_id, VegetationType.all, :id, :name, {:prompt => 'Select vegetation type'}, {:required => true} %>
-                    </li>
-                    <li>
-                      <%= f.label :distance_fence_stream, 'Distance between fence/exclusion and stream:<em>*</em>'.html_safe, :class => 'wide' %>
-                      <%= f.text_field :distance_fence_stream, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
-                      ft
-                    </li>
-                    <li></li>
-                    <li>
-                      <%= f.label :exclusion_description, 'If the above describes an alternative to fencing that is used to exclude animals from the stream, please describe exclusion method here:' %>
-                    </li>
-                    <li>
-                      <%= f.text_area :exclusion_description, :rows => 5 %>
-                    </li>
-                  </div>
+
                 </div>
 
             <li>

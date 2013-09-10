@@ -25,7 +25,7 @@
       <div id="div_strip">
 
         <%= f.fields_for :strips do |strips_form| %>
-            <%= render 'strip_fields', :f => strips_form %>
+            <%= render 'strip_fields', :f => strips_form if !strips_form.object.is_future? %>
         <% end %>
 
       </div>
@@ -43,6 +43,7 @@
 
 
       <%= form_tag(export_farm_field_path(@field.farm.id, @field.id), :name => 'exportForm', method: "post") do %>
+          <%= hidden_field_tag :step, 3 %>
           <select name='isExport' id='isExport'>
             <option value='true'>Copy data into</option>
             <option value='false'>Copy data from</option>

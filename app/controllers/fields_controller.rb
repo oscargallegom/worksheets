@@ -87,20 +87,20 @@ class FieldsController < ApplicationController
 
         # if crop or hay
         if (@field.field_type_id == 1 || @field.field_type_id == 3)
-        # check if at least one manure fertilizer incorporated
-        is_manure_fertilizer_incorporated = false
-        @field.strips.each do |strip|
-          strip.crop_rotations.each do |crop_rotation|
-            crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-              if (manure_fertilizer_application.is_incorporated)
-                is_manure_fertilizer_incorporated = true
+          # check if at least one manure fertilizer incorporated
+          is_manure_fertilizer_incorporated = false
+          @field.strips.each do |strip|
+            strip.crop_rotations.each do |crop_rotation|
+              crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+                if (manure_fertilizer_application.is_incorporated)
+                  is_manure_fertilizer_incorporated = true
+                end
               end
             end
           end
-        end
-        if (is_manure_fertilizer_incorporated && !is_manure_fertilizer_incorporated)
-          flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
-        end
+          if (is_manure_fertilizer_incorporated && !is_manure_fertilizer_incorporated)
+            flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
+          end
         end
         # if field is pasture
         if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
@@ -122,10 +122,10 @@ class FieldsController < ApplicationController
           # also soil conservation BMP needs to be checked
           is_soil_conservation = false
           @field.bmps.each do |bmp|
-              if (bmp.bmp_type_id == 8)       # Soil Conservation and Water Quality Plans
-                is_soil_conservation = true
-              end
+            if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
+              is_soil_conservation = true
             end
+          end
           if (!is_soil_conservation)
             flash.now[:meet_baseline] << 'Field cannot meet baseline unless both a current and valid Nutrient Management Plan and Soil and Water Conservation Plan have been checked on the BMP page.'
           end
@@ -149,7 +149,7 @@ class FieldsController < ApplicationController
       if (@farm.site_state_id == 21)
         flash.now[:meet_baseline] ||= []
         if (!@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system) || (!@field.field_poultry.empty? && (!@field.is_poultry_animal_waste_management_system || !@field.is_poultry_mortality_composting))
-          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland''s Nutrient Management Regulations and CAFO rule.'
+          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule.'
         end
         if (!@field.field_poultry.empty? && !@field.is_poultry_heavy_use_pads)
           flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place'
@@ -245,6 +245,8 @@ class FieldsController < ApplicationController
   # POST /farms/1/fields/1/export
   def export
 
+    @step =params[:step]
+
     @to_field = nil
     @from_field= nil
 
@@ -267,23 +269,30 @@ class FieldsController < ApplicationController
     # delete all the existing strips for field B
 
     @to_field.strips.destroy_all
+    @to_field.strips.each do |strip|
+      if ((@step == '6' && strip.is_future?) || (@step == '3' && !strip.is_future?))
+             @to_field.strips.delete(strip)
+      end
+    end
 
     # copy strips from A to B
     is_success = true
     @from_field.strips.each do |strip|
-      @from_strip_dup = strip.amoeba_dup
-      @from_strip_dup.field_id = @to_field.id
-      if !@from_strip_dup.save!(:validate => false)
-        is_success = false
+      if ((@step == '6' && strip.is_future?) || (@step == '3' && !strip.is_future?))
+        @from_strip_dup = strip.amoeba_dup
+        @from_strip_dup.field_id = @to_field.id
+        if !@from_strip_dup.save!(:validate => false)
+          is_success = false
+        end
       end
 
     end
 
     respond_to do |format|
       if is_success
-        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Copy successful.' }
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Copy successful.' }
       else
-        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Error: could not export.' }
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Error: could not export.' }
       end
     end
   end

@@ -4,7 +4,7 @@ class Strip < ActiveRecord::Base
 
   belongs_to :field #, :inverse_of => :strips
 
-  attr_accessible :length
+  attr_accessible :length, :is_future
 
   #validates_numericality_of :length, :greater_than_or_equal_to => 0, :unless => 'field.strips.length == 0'
 

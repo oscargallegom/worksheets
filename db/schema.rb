@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908184517) do
+ActiveRecord::Schema.define(:version => 20130909010429) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -423,8 +423,9 @@ ActiveRecord::Schema.define(:version => 20130908184517) do
   create_table "strips", :force => true do |t|
     t.decimal  "length"
     t.integer  "field_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_future",  :default => false
   end
 
   create_table "tillage_operation_types", :force => true do |t|
