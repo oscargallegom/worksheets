@@ -57,11 +57,11 @@ gem 'amoeba', "~> 2.0.0"
 gem "nokogiri"
 gem "rest-client", "~> 1.6.7"
 
-group :development do
+#group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   #  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
-end
+#end
 
 group :assets do
   gem 'coffee-rails'
