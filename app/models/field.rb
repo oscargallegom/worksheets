@@ -164,16 +164,17 @@ class Field < ActiveRecord::Base
 
   def modified_p_test_value
     modified_p_test_value = 0
-      soil_p_extractant = SoilPExtractant.where(:id => self.soil_p_extractant_id).first
+    soil_p_extractant = SoilPExtractant.where(:id => self.soil_p_extractant_id).first
     if (!soil_p_extractant.nil?)
       if (soil_p_extractant.nil? && soil_p_extractant.formula_code == 1)
         modified_p_test_value = (self.p_test_value + 54.145) / 4.6438
       elsif (soil_p_extractant.formula_code == 2)
-        modified_p_test_value = (((((self.p_test_value + soil_p_extractant.b_value) / soil_p_extractant.m_value) + soil_p_extractant.g_value) / soil_p_extractant.h_value) + 54.145) / 4.6438
+        modified_p_test_value = (((((self.p_test_value + soil_p_extractant.b_value.to_f) / soil_p_extractant.m_value.to_f) + soil_p_extractant.g_value.to_f) / soil_p_extractant.h_value.to_f) + 54.145) / 4.6438
       else
-        modified_p_test_value = (((self.p_test_value + soil_p_extractant.b_value) / soil_p_extractant.m_value) + 54.145) / 4.6438
+        modified_p_test_value = (((self.p_test_value + soil_p_extractant.b_value.to_f) / soil_p_extractant.m_value.to_f) + 54.145) / 4.6438
       end
       end
+
     return modified_p_test_value
   end
 
