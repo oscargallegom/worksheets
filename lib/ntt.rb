@@ -98,7 +98,7 @@ module Ntt
         ########################################################
         field.soils.each do |soil|
 
-          soil_area = soil.percent * area
+          soil_area = soil.percent.to_f * area
           map_unit_key = soil.map_unit_key
           map_unit_symbol = soil.map_unit_symbol
           hydrologic_group = soil.hydrologic_group
