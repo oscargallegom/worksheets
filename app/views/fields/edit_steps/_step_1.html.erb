@@ -47,8 +47,6 @@
               <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
             </li>
 
-
-                <li><h2 class='sectionHeading'>Streambank fencing / Exclusion</h2></li>
                 <li>
                   <label class="wide"><b>Field is adjacent to stream/water body<em>*</em></b></label>
                   <%= f.radio_button :is_pasture_adjacent_to_stream, true, :required => true %>
