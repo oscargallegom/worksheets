@@ -14,7 +14,6 @@ class Field < ActiveRecord::Base
   belongs_to :livestock_input_method
 
   has_many :strips, :dependent => :destroy, autosave: true
-  has_many :future_strips, :dependent => :destroy, autosave: true
 
   #has_many :soil_types, :through => :soils
   has_many :soils, :dependent => :destroy, autosave: true
