@@ -112,7 +112,7 @@ module Ntt
           organic_carbon = soil.organic_carbon
 
 
-          xml = xml + "<SoilInfo><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+          xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
 
         end
 
