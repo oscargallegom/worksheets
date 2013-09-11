@@ -474,7 +474,7 @@ module BmpCalculations
       tmp_eof_confined_org_p = tmp_eof_confined_org_p * (1 - poultry_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
       poultry_eof_confined_org_p = poultry_eof_confined_org_p + tmp_eof_confined_org_p
 
-      tmp_eof_confined_po4p = (poultry_manure * poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) / poultry_lookup[:fraction_po4p] * poultry_lookup[:fraction_org_p] * poultry_lookup[:storage_loss_fraction]
+      tmp_eof_confined_po4p = (poultry_manure * poultry.p205_excreted / poultry_lookup[:fraction_p2o5]) * poultry_lookup[:fraction_po4p] * poultry_lookup[:storage_loss_fraction]
       tmp_eof_confined_po4p = tmp_eof_confined_po4p * 0.25 if field.is_poultry_animal_waste_management_system
       tmp_eof_confined_po4p = tmp_eof_confined_po4p * (1 - poultry_lookup[:mortality_rate]) if field.is_poultry_mortality_composting
       poultry_eof_confined_po4p = poultry_eof_confined_po4p + tmp_eof_confined_po4p
