@@ -21,6 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
     build_resource
+
+    puts resource
+
     if !resource.valid?
       clean_up_passwords resource
       respond_with resource
