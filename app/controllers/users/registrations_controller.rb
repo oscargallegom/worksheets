@@ -15,6 +15,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     # first validate form
+    puts "###############################"
+    puts resource_name
+    puts "###############################"
+
+
     build_resource
     if !resource.valid?
       clean_up_passwords resource
