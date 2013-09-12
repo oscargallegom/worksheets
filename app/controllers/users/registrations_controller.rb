@@ -23,6 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
     puts "###############################"
     puts resource
+    puts resource.username
     puts "###############################"
 
     if !resource.valid?
