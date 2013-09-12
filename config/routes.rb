@@ -27,7 +27,7 @@ NutrientNet::Application.routes.draw do
   end
 
   #devise_for :users    # added on 09/11
-  resources :users  # added on 09/11
+  #resources :users  # added on 09/11
   devise_for :users, :path => 'account', :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :unlocks => 'users/unlocks', :passwords => 'users/passwords'}
 
   scope "/admin" do
