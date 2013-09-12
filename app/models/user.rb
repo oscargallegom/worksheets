@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     # TODO: to be un-commented
-    # UserMailer.welcome_email(self).deliver
+    UserMailer.welcome_email(self).deliver
   end
 
   # the account needs to be approved by an administrator

@@ -1,6 +1,5 @@
 <%= form_for(@user, :html => {:class => 'nn-form'}) do |f| %>
     <% if @user.errors.any? %>
-        <br/>
         <div id="error_explanation" class="alert">
           <h2><%= pluralize(@user.errors.count, 'error') %> encountered:</h2>
 
