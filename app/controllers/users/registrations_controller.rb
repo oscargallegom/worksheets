@@ -21,8 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
     build_resource
-
+    puts "###############################"
     puts resource
+    puts "###############################"
 
     if !resource.valid?
       clean_up_passwords resource
