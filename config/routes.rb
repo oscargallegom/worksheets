@@ -26,7 +26,9 @@ NutrientNet::Application.routes.draw do
     resources :crops
   end
 
-  devise_for :users, :path => 'account', :controllers => {:registrations => "users/registrations", :sessions => "users/sessions", :unlocks => 'users/unlocks', :passwords => 'users/passwords'}
+  devise_for :users    # added on 09/11
+  resources :users  # added on 09/11
+  devise_for :users, :path => 'account', :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions', :unlocks => 'users/unlocks', :passwords => 'users/passwords'}
 
   scope "/admin" do
     resources :users do
