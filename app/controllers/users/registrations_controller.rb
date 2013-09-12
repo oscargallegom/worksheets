@@ -23,6 +23,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
     puts "###############################"
     puts resource
+
+    self.resource = resource_class.new_with_session(params[resource_name], session)
+
     puts 'Username = ' + resource.username
     puts "###############################"
 
