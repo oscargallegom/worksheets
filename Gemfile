@@ -37,7 +37,7 @@ gem 'activerecord-postgresql-adapter'
 #gem 'jdbc-postgres'
 #end
 
-gem 'devise'
+gem 'devise', '~> 3.1.0'
 gem 'cancan'
 gem 'will_paginate'
 # gem 'jquery-ui-rails'

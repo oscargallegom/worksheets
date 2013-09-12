@@ -15,20 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     # first validate form
-    puts "###############################"
-    puts resource_name
-    puts "###############################"
-    puts params[resource_name]
-
-    build_resource
-    puts "###############################"
-    puts resource
-
-    self.resource = resource_class.new_with_session(params[resource_name], session)
-
-    puts 'Username = ' + resource.username
-    puts "###############################"
-
+    build_resource params[:user]
     if !resource.valid?
       clean_up_passwords resource
       respond_with resource
