@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts "###############################"
     puts resource_name
     puts "###############################"
-
+    puts params[resource_name]
 
     build_resource
     puts "###############################"
