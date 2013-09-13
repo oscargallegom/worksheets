@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: ADMIN_EMAIL
+  default from: ENV['email_login']
 
   def welcome_email(user)
     @user = user
@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @project_issue = project_issue
     @url = root_url
-    mail(:to => ADMIN_EMAIL, :subject => "Issue with project")
+    mail(:to => ENV['email_login'], :subject => "Issue with project")
   end
 
 end
