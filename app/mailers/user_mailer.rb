@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   def welcome_email(user)
     @user = user
     @url = root_url
-    mail(:to => 'oleblond@gmail.com', :subject => "Welcome to NutrientNet") # TODO: replace with user.email instead of hard-coded value
+    mail(:to => user.email, :subject => "Welcome to NutrientNet") # TODO: replace with user.email instead of hard-coded value
   end
 
   def project_issue_email(user, project_issue)
