@@ -50,7 +50,7 @@ class Ability
       can :manage, Strip, :field => {:farm => {:owner_id => user.id}}
       can :manage, CropRotation, :strip => {:field => {:farm => {:owner_id => user.id}}}
 
-      can :read, SoilTestLaboratory
+      can :read, SoilPExtractant
 
     end
 

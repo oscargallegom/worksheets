@@ -4,11 +4,10 @@
 
 
 updateSoilPExtractants = ->
-  $.getJSON "/soil_test_laboratories/" + $("#field_soil_test_laboratory_id").val() + "/soil_p_extractants.json", (soil_p_extractants) ->
-    alert(soil_p_extractants[0].name)
-    $("#soil_p_extractant_id").text(soil_p_extractants[0].name)
-    $("#p_test_value_unit").text(soil_p_extractants[0].unit) # unit
-    $("#field_soil_p_extractant_id").val(soil_p_extractants[0].id) # hidden field
+  $.getJSON "/soil_p_extractants/" + $("#field_soil_test_laboratory_id").val() + ".json", (soil_p_extractant) ->
+    $("#soil_p_extractant_id").text(soil_p_extractant.name)
+    $("#p_test_value_unit").text(soil_p_extractant.unit) # unit
+    $("#field_soil_p_extractant_id").val(soil_p_extractant.id) # hidden field
 #items = []
 #items.push "<option value>Select P Test Method</option>"
 #$.each soil_p_extractants, (key, soil_p_extractant) ->
@@ -102,9 +101,9 @@ addCrop = (caller) ->
 # if not use default map, acres is required
 acresRequired = ->
   if $("#field_is_acres_from_map_true").is(":checked")
-    $("#field_acres").prop('required', false)
+    $("#field_acres_from_user").prop('required', false)
   else
-    $("#field_acres").prop('required', true)
+    $("#field_acres_from_user").prop('required', true)
 
 isPastureAdjacentToStream = ->
   if ($("#field_is_pasture_adjacent_to_stream_true").is(':checked'))

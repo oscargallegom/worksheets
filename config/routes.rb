@@ -19,9 +19,7 @@ NutrientNet::Application.routes.draw do
     resources :counties
   end
 
-  resources :soil_test_laboratories do
-    resources :soil_p_extractants
-  end
+  resources :soil_p_extractants
 
   resources :crop_categories do
     resources :crops

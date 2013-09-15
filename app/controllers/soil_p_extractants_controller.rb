@@ -1,16 +1,12 @@
 class SoilPExtractantsController < ApplicationController
 
-  load_and_authorize_resource :soil_test_laboratory
-  load_and_authorize_resource :through => :soil_test_laboratory
+  load_and_authorize_resource
 
-  # GET /soil_test_laboratory
-  # GET /soil_test_laboratory.soil_p_extractant.json
-  def index
-
+  # GET /soil_p_extractants/1.json
+  def show
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @soil_p_extractants, :only => [:id, :name, :unit] }
-      #format.js
+      format.json { render json: @soil_p_extractant, :only => [:id, :name, :unit] }
     end
   end
+
 end
