@@ -250,12 +250,12 @@
     <li>Please indicate any non-riperian land conversion in place or planned on this field.</li>
     <li>
       <%= f.label :other_land_use_conversion_acres, 'Acres converted:', :class => 'wide' %>
-      <%= f.text_field :other_land_use_conversion_acres, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => true %>
+      <%= f.text_field :other_land_use_conversion_acres, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => false %>
       ac
     </li>
     <li>
       <%= f.label :other_land_use_conversion_vegetation_type_id, 'Converted to:', :class => 'wide' %>
-      <%= f.collection_select :other_land_use_conversion_vegetation_type_id, VegetationType.all, :id, :name, {:prompt => 'Select vegetation type'}, {:required => true} %></td>
+      <%= f.collection_select :other_land_use_conversion_vegetation_type_id, VegetationType.all, :id, :name, {:prompt => 'Select vegetation type'}, {:required => false} %></td>
     </li>
     <li>
       <%= f.label :is_other_land_use_conversion_planned, 'Planned:', :class => 'wide' %>

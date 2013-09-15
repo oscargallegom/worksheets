@@ -137,8 +137,8 @@ isFencingInPlace = ->
     $("#field_distance_fence_stream").prop('required', false)
 
 # clicked forest buffer
-isForestBufferClicked = ->
-  $("#div_is_forest_buffer").toggle()
+isForestBufferClicked = (true_click) ->
+  $("#div_is_forest_buffer").toggle() if true_click
   if $("#div_is_forest_buffer").is(":visible")
     $("#field_forest_buffer_average_width").prop('required', true)
     $("#field_forest_buffer_length").prop('required', true)
@@ -147,8 +147,8 @@ isForestBufferClicked = ->
     $("#field_forest_buffer_length").prop('required', false)
 
 # clicked grass buffer
-isGrassBufferClicked = ->
-  $("#div_is_grass_buffer").toggle()
+isGrassBufferClicked = (true_click) ->
+  $("#div_is_grass_buffer").toggle() if true_click
   if $("#div_is_grass_buffer").is(":visible")
     $("#field_grass_buffer_average_width").prop('required', true)
     $("#field_grass_buffer_length").prop('required', true)
@@ -157,8 +157,8 @@ isGrassBufferClicked = ->
     $("#field_grass_buffer_length").prop('required', false)
 
 # clicked grass buffer
-isFertilizerApplicationSetbackClicked = ->
-  $("#div_is_fertilizer_application_setback").toggle()
+isFertilizerApplicationSetbackClicked = (true_click) ->
+  $("#div_is_fertilizer_application_setback").toggle() if true_click
   if $("#div_is_fertilizer_application_setback").is(":visible")
     $("#field_fertilizer_application_setback_average_width").prop('required', true)
     $("#field_fertilizer_application_setback_length").prop('required', true)
@@ -168,8 +168,8 @@ isFertilizerApplicationSetbackClicked = ->
 
 
 # clicked wetland
-isWetlandClicked = ->
-  $("#div_is_wetland").toggle()
+isWetlandClicked = (true_click) ->
+  $("#div_is_wetland").toggle() if true_click
   if $("#div_is_wetland").is(":visible")
     $("#field_wetland_area").prop('required', true)
     $("#field_wetland_treated_area").prop('required', true)
@@ -178,8 +178,8 @@ isWetlandClicked = ->
     $("#field_wetland_treated_area").prop('required', false)
 
 # clicked streambank
-isStreambankRestorationClicked = ->
-  $("#div_is_streambank_restoration").toggle()
+isStreambankRestorationClicked = (true_click) ->
+  $("#div_is_streambank_restoration").toggle() if true_click
   if $("#div_is_streambank_restoration").is(":visible")
     $("#field_streambank_restoration_length").prop('required', true)
   else
@@ -187,6 +187,17 @@ isStreambankRestorationClicked = ->
 
 
 changeLivestockInputMethodClicked = ->
+  $(".li_total_manure").each ->
+    $(this).find('input').prop('required', false)
+  $(".li_quantity").each ->
+    $(this).find('input').prop('required', true)
+  $(".days_per_year_confined").each ->
+    $(this).find('input').prop('required', true)
+  $(".hours_per_day_confined").each ->
+    $(this).find('input').prop('required', true)
+  $(".average_weight").each ->
+    $(this).find('input').prop('required', true)
+
   # the children need to know the value for the validation
   $(".livestock_input_method_id").val($("#field_livestock_input_method_id").val())
   if $("#field_livestock_input_method_id").val() is '1'
@@ -195,12 +206,35 @@ changeLivestockInputMethodClicked = ->
     $(".days_per_year_confined").hide()
     $(".hours_per_day_confined").hide()
     $(".average_weight").hide()
+
+    $(".li_total_manure").each ->
+      $(this).find('input').prop('required', true)
+    $(".li_quantity").each ->
+      $(this).find('input').prop('required', false)
+    $(".days_per_year_confined").each ->
+      $(this).find('input').prop('required', false)
+    $(".hours_per_day_confined").each ->
+      $(this).find('input').prop('required', false)
+    $(".average_weight").each ->
+      $(this).find('input').prop('required', false)
+
   if $("#field_livestock_input_method_id").val() is '2'
     $(".li_total_manure").hide()
     $(".li_quantity").show()
     $(".days_per_year_confined").show()
     $(".hours_per_day_confined").show()
     $(".average_weight").show()
+
+    $(".li_total_manure").each ->
+      $(this).find('input').prop('required', false)
+    $(".li_quantity").each ->
+      $(this).find('input').prop('required', true)
+    $(".days_per_year_confined").each ->
+      $(this).find('input').prop('required', true)
+    $(".hours_per_day_confined").each ->
+      $(this).find('input').prop('required', true)
+    $(".average_weight").each ->
+      $(this).find('input').prop('required', true)
 
 # when a BMP type is selected, delete all the following BMP sections
 changeBmpListener = (caller) ->
@@ -283,7 +317,14 @@ $(document).ready ->
   displayFertigation()
   displayEfficiency()
   updateBmpList()
-  changeLivestockInputMethodClicked()
+
+  isPastureAdjacentToStream()
+  isForestBufferClicked(false)
+  isGrassBufferClicked(false)
+  isFertilizerApplicationSetbackClicked(false)
+  isWetlandClicked(false)
+  isStreambankRestorationClicked(false)
+  changeLivestockInputMethodClicked(false)
 
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
@@ -313,19 +354,19 @@ $(document).ready ->
     isFencingInPlace()
 
   $("#field_is_forest_buffer").change ->
-    isForestBufferClicked()
+    isForestBufferClicked(true)
 
   $("#field_is_grass_buffer").change ->
-    isGrassBufferClicked()
+    isGrassBufferClicked(true)
 
   $("#field_is_fertilizer_application_setback").change ->
-    isFertilizerApplicationSetbackClicked()
+    isFertilizerApplicationSetbackClicked(true)
 
   $("#field_is_wetland").change ->
-    isWetlandClicked()
+    isWetlandClicked(true)
 
   $("#field_is_streambank_restoration").change ->
-    isStreambankRestorationClicked()
+    isStreambankRestorationClicked(true)
 
   $("#field_livestock_input_method_id").change ->
     changeLivestockInputMethodClicked()
