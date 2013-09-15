@@ -22,9 +22,8 @@
 
     <!-- only show if permanent pasture -->
     <% if (@field.field_type_id == 2) then %>
-        <div id='div_is_pasture_adjacent_to_stream'
-             <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none'
-             <% end %>>
+        <% if !@field.is_pasture_adjacent_to_stream? %>
+        <div id='div_is_pasture_adjacent_to_stream'>
         <li><h2 class='sectionHeading'>Streambank fencing / Exclusion</h2></li>
           <li>
             <label class="wide"><b>Is fencing/exclusion in place<em>*</em></b></label>
@@ -54,6 +53,7 @@
             </li>
           </div>
         </div>
+            <% end %>
 
         <li><h2 class='sectionHeading'>Riparian/Conservation Buffer BMPs</h2></li>
         <li>
