@@ -5,7 +5,7 @@
 
 updateSoilPExtractants = ->
   $.getJSON "/soil_test_laboratories/" + $("#field_soil_test_laboratory_id").val() + "/soil_p_extractants.json", (soil_p_extractants) ->
-    #alert(soil_p_extractants[0].name)
+    alert(soil_p_extractants[0].name)
     $("#soil_p_extractant_id").text(soil_p_extractants[0].name)
     $("#p_test_value_unit").text(soil_p_extractants[0].unit) # unit
     $("#field_soil_p_extractant_id").val(soil_p_extractants[0].id) # hidden field
@@ -101,7 +101,7 @@ addCrop = (caller) ->
 
 # if not use default map, acres is required
 acresRequired = ->
-  if $("#field_acres_use_map_true").is(":checked")
+  if $("#field_is_acres_from_map_true").is(":checked")
     $("#field_acres").prop('required', false)
   else
     $("#field_acres").prop('required', true)
@@ -289,7 +289,6 @@ $(document).ready ->
   $("select").change ->
     changeBmpListener($(this)) if $(this).attr('id').indexOf("bmp_type_id") > -1
 
-
   if typeof $("#field_soil_test_laboratory_id").val() isnt 'undefined' and $("#field_soil_test_laboratory_id").val().length > 0
     updateSoilPExtractants()
     if $("#field_soil_p_extractant_id").val() == 0          # the user didn't select a P extractant
@@ -299,9 +298,9 @@ $(document).ready ->
     displayFertigation()
     displayEfficiency()
 
-  $("#field_acres_use_map_false").change ->
+  $("#field_is_acres_from_map_false").change ->
     acresRequired()
-  $("#field_acres_use_map_true").change ->
+  $("#field_is_acres_from_map_true").change ->
     acresRequired()
 
   $("#field_is_pasture_adjacent_to_stream_true").change ->
