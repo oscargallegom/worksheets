@@ -28,7 +28,7 @@ module BmpCalculations
       end
     else
       # TODO: uncomment
-      raise 'Error calling NTT: ' + content.to_s
+      #raise 'Error calling NTT: ' + content.to_s
     end
 
     # TODO: remove test values

@@ -31,7 +31,7 @@ updateIndexes = ->
   $(".fields:visible").find(".poultry_index").each (index) ->
     $(this).text(index + 1)
 
-  if $(".fields:visible").length == 1   # hide the stip number and length  option
+  if $(".fields:visible").find(".div_length").length == 1   # hide the stip number and length  option
     $(".fields:visible").find(".div_length").hide()
     $(".fields:visible").find(".textboxMedium").each ->
       $(this).prop('required', false)
@@ -95,7 +95,7 @@ updateFertilizerApplicationSetbackArea = ->
 # when the button add crop is called find out the strip, then submit form
 addCrop = (caller) ->
   if (caller.attr('id') isnt undefined and caller.attr('id').indexOf('addCropButton') >= 0)
-    $('#addCropForStrip').val(caller.attr('id').substring(caller.attr('id').indexOf('_') + 1));
+    $('#addCropForStrip').val(caller.attr('strip_id'));
     $(".nn-form").submit();
     false;
 
@@ -113,17 +113,17 @@ isPastureAdjacentToStream = ->
     $("#div_is_pasture_adjacent_to_stream").hide()
   if $("#div_is_pasture_adjacent_to_stream").is(":visible")
     $("#field_fence_length").prop('required', true)
-    $("#field_is_streambank_fencing_in_place_true").prop('required', true)
-    $("#field_is_streambank_fencing_in_place_false").prop('required', true)
-    if $("#div_is_fencing_in_place").is(":visible")
-      $("#field_vegetation_type_fence_stream_id").prop('required', true)
-      $("#field_distance_fence_stream").prop('required', true)
+    #$("#field_is_streambank_fencing_in_place_true").prop('required', true)
+    #$("#field_is_streambank_fencing_in_place_false").prop('required', true)
+    #if $("#div_is_fencing_in_place").is(":visible")
+    #  $("#field_vegetation_type_fence_stream_id").prop('required', true)
+    #  $("#field_distance_fence_stream").prop('required', true)
   else
     $("#field_fence_length").prop('required', false)
-    $("#field_is_streambank_fencing_in_place_true").prop('required', false)
-    $("#field_is_streambank_fencing_in_place_false").prop('required', false)
-    $("#field_vegetation_type_fence_stream_id").prop('required', false)
-    $("#field_distance_fence_stream").prop('required', false)
+    #$("#field_is_streambank_fencing_in_place_true").prop('required', false)
+    #$("#field_is_streambank_fencing_in_place_false").prop('required', false)
+    #$("#field_vegetation_type_fence_stream_id").prop('required', false)
+    #$("#field_distance_fence_stream").prop('required', false)
 
 isFencingInPlace = ->
   if ($("#field_is_streambank_fencing_in_place_true").is(':checked'))

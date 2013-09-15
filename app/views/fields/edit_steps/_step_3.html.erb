@@ -1,4 +1,4 @@
-<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form", :novalidate => 'novalidate'} do |f| %>
 
     <% if @field.errors.any? %>
         <div id="error_explanation" class="alert">
@@ -25,7 +25,7 @@
       <div id="div_strip">
 
         <%= f.fields_for :strips do |strips_form| %>
-            <%= render 'strip_fields', :f => strips_form if !strips_form.object.is_future? %>
+            <%= render 'strip_fields', :f => strips_form if !strips_form.object.is_future %>
         <% end %>
 
       </div>
@@ -37,7 +37,7 @@
 <% end %>
 
 
-<% if !@other_fields.empty? %>
+<% if !@other_fields.nil? && !@other_fields.empty? %>
     <div class="sectionRest clearfix">
       <br/>
 

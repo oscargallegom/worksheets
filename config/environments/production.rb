@@ -67,7 +67,7 @@ NutrientNet::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   # added by Olivier for devise
   # TODO: find a long term solution (SMTP server/gmail)
-  config.action_mailer.default_url_options = {:host => 'nutrientnet.herokuapp.com'}
+  config.action_mailer.default_url_options = {:host => ENV['host']}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       :address => 'smtp.gmail.com', #'localhost',

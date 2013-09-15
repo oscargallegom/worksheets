@@ -9,7 +9,7 @@
         </li>
 
         <li><%= f.label :length, 'Width:<em>*</em>'.html_safe, :class => 'wide' %>
-          <%= f.text_field :length, :class => 'textboxMedium', :required => true, :type => 'number', :min => 0, :step => 'any' %>
+          <%= f.text_field :length, :class => 'textboxMedium', :required => false, :type => 'number', :min => 0, :step => 'any' %>
           ft
         </li>
 
@@ -55,8 +55,7 @@
 
 <br/>
 
-<a class="button" id='addCropButton' href="#">Add a crop to rotation</a>
-
+<a class="button" id='addCropButton' strip_id='<%= f.object.id %>' href="#">Add a crop to rotation</a>
 
 <br/><br/>
 <hr/>

@@ -21,7 +21,7 @@ class ProjectIssuesController < ApplicationController
 
     if @project_issue.valid?
       UserMailer.project_issue_email(current_user, @project_issue).deliver
-      redirect_to(root_path, :notice => "Message was successfully sent.")
+      redirect_to(farms_path, :notice => "Your message was successfully sent.")
     else
       add_breadcrumb @project_issue.farm_name, farm_path(@project_issue.farm_id)
       add_breadcrumb 'Email issue'

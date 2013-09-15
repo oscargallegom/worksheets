@@ -14,12 +14,12 @@
   Project Name: <%= @project_issue.farm_name %>
   <br>
   Message: <%= @project_issue.message %>
+
 </p>
 
 <p>
   To login to the site, just follow this
-  link: <%= link_to url_for(:controller => 'farms', :action => 'show', :id => @project_issue.farm_id, :only_path => false), :controller => 'farms', :action => 'show', :id => @project_issue.farm_id %>
-  .
+  link: <%= url_for(:controller => 'farms', :action => 'show', :id => @project_issue.farm_id, :only_path => false, :host => @host) %>
 </p>
 
 </body>

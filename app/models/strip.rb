@@ -6,7 +6,8 @@ class Strip < ActiveRecord::Base
 
   attr_accessible :length, :is_future
 
-  #validates_numericality_of :length, :greater_than_or_equal_to => 0, :unless => 'field.strips.length == 0'
+  validates_presence_of :length, :unless => 'field.strips.length == 1'
+  validates_numericality_of :length, :greater_than_or_equal_to => 0, :allow_blank => true, :unless => 'field.strips.length == 1'
 
   default_scope :order => 'created_at ASC'
 

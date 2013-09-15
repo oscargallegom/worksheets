@@ -237,8 +237,8 @@ class FarmsController < ApplicationController
         # get the watershed segment
         watershed_segment = WatershedSegment.where(["key = :tag", {:tag => params["field#{i}segment"]}]).first
         if !watershed_segment.nil?
-        @field.watershed_segment_id = watershed_segment.id
-          end
+          @field.watershed_segment_id = watershed_segment.id
+        end
 
         # get the top 3 soils
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")

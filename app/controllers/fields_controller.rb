@@ -213,7 +213,7 @@ class FieldsController < ApplicationController
         # if step 2 and the user click 'add a crop to rotation'
         if !params[:addCropForStrip].blank?
           strip_index = params[:addCropForStrip].to_i
-          format.html { redirect_to new_farm_field_strip_crop_rotation_url(@farm, @field, @field.strips[strip_index]), notice: 'Field was successfully updated.' }
+          format.html { redirect_to new_farm_field_strip_crop_rotation_url(@farm, @field, strip_index, :step => @step), notice: 'Field was successfully updated.' }
         elsif (@step=='2' && @field.field_type.id == 5) # non-managed land and step 2: got back to farm summary
           format.html { redirect_to farm_url(@farm), notice: 'Field was successfully updated.' }
         else
@@ -271,7 +271,7 @@ class FieldsController < ApplicationController
     @to_field.strips.destroy_all
     @to_field.strips.each do |strip|
       if ((@step == '6' && strip.is_future?) || (@step == '3' && !strip.is_future?))
-             @to_field.strips.delete(strip)
+        @to_field.strips.delete(strip)
       end
     end
 
@@ -297,5 +297,27 @@ class FieldsController < ApplicationController
     end
   end
 
+  # POST /farms/1/fields/1/populateFutureCropManagement
+  def populateFutureCropManagement
+    # TODO: save delete fields first
+    @step =params[:step]
 
+    is_success = true
+    @field.strips.each do |strip|
+      if (!strip.is_future?)
+        @future_strip_dup = strip.amoeba_dup
+        @future_strip_dup.is_future = true
+        if !@future_strip_dup.save!(:validate => false)
+          is_success = false
+        end
+      end
+    end
+    respond_to do |format|
+      if is_success
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Copy successful.' }
+      else
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Error: could not import data.' }
+      end
+    end
+  end
 end
