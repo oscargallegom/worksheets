@@ -22,7 +22,7 @@
 
     <!-- only show if permanent pasture -->
     <% if (@field.field_type_id == 2) then %>
-        <% if !@field.is_pasture_adjacent_to_stream? %>
+        <% if @field.is_pasture_adjacent_to_stream? %>
         <div id='div_is_pasture_adjacent_to_stream'>
         <li><h2 class='sectionHeading'>Streambank fencing / Exclusion</h2></li>
           <li>
