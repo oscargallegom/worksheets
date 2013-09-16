@@ -3688,7 +3688,6 @@ SoilTestLaboratory.create!({:id => 35, :name => 'Mehlich-1 (lbs/A)', :state_id =
 SoilTestLaboratory.create!({:id => 36, :name => 'All Labs', :state_id => 33}, :without_protection => true)
 
 SoilPExtractant.delete_all
-
 SoilPExtractant.create!({:id => 1, :name => 'Mehlich-3 (20 mL:1.7 cm3)',  :soil_test_laboratory_id => 1, :unit => 'ppm', :m_value => 1.09, :b_value => 2, :h_value => nil, :g_value => nil, :formula_code => 1}, :without_protection => true)
 SoilPExtractant.create!({:id => 2, :name => 'Bray P & ammonium acetate bases (Discontinued in 9/05)',  :soil_test_laboratory_id => 2, :unit => 'ppm', :m_value => 1.69, :b_value => 6, :h_value => 1.09, :g_value => 2, :formula_code => 2}, :without_protection => true)
 SoilPExtractant.create!({:id => 3, :name => 'Mehlich-3 (20 mL:1.7 cm3)',  :soil_test_laboratory_id => 3, :unit => 'lbs/A, reported as P2O5', :m_value => 0.22, :b_value => 7, :h_value => 1.09, :g_value => 2, :formula_code => 2}, :without_protection => true)

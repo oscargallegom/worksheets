@@ -1,4 +1,4 @@
-<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form", :novalidate => 'novalidate'} do |f| %>
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
 
     <% if @field.errors.any? %>
         <div id="error_explanation" class="alert">

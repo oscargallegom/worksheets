@@ -110,12 +110,12 @@
             <li><span class='extrawide'>&nbsp;</span><b>Baseline</b></li>
 
             <li><span class='extrawide'>Total N (before BMPs applied)</span><b>
-              <%= number_with_precision((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f), :precision => 2, delimiter: ',') %>
+              <%= number_with_precision((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results.key?('OrganicN') && @ntt_results.key?('NO3') && @ntt_results.key?('TileDrainN')) %>
               lbs/ac
             </b></li>
 
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
-              <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results.key?('OrganicN') %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>

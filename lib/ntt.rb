@@ -25,9 +25,7 @@ module Ntt
         #puts resp.inspect
         #puts data.inspect
 
-
         doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
-
 
         if (!doc.nil?)
           # Do something about the persistent error

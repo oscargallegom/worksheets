@@ -32,13 +32,15 @@ updateIndexes = ->
 
   if $(".fields:visible").find(".div_length").length == 1   # hide the stip number and length  option
     $(".fields:visible").find(".div_length").hide()
-    $(".fields:visible").find(".textboxMedium").each ->
-      $(this).prop('required', false)
+    $(".fields:visible").find("input").each ->
+      if $(this).prop("id").indexOf("_length") > 0
+        $(this).prop('required', false)
   else   # show length option
     $(".fields:visible").find(".div_length").each ->
       $(this).show()
-    $(".fields:visible").find(".textboxMedium").each ->
-      $(this).prop('required', true)
+    $(".fields:visible").find("input").each ->
+      if $(this).prop("id").indexOf("_length") > 0
+        $(this).prop('required', true)
 
 # fertigation is only shown for option 500 and 530 (center pivot or drip):
 displayFertigation = ->

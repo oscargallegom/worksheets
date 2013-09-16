@@ -95,8 +95,7 @@ updateTreatmentTypesCheckboxes = (caller) ->
 
 # incorporated checked, show dates and depth
 updateIncorporatedForCommercial = (caller) ->
-  componentNumber = getComponentNumber(caller.attr('id'),
-    'crop_rotation_commercial_fertilizer_applications_attributes_')
+  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_commercial_fertilizer_applications_attributes_')
   if caller.is(":checked")
     # show options
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").closest('li').show()
@@ -305,10 +304,6 @@ $(document).on "nested:fieldAdded", (event) ->
   # register new checkboxes
   $(":checkbox").change ->
     checkboxListener($(this))
-  #alert($(this).attr('id'))
-  #test = $(this).attr('id').replace('crop_rotation_manure_fertilizer_applications_attributes_', '')
-  #alert(test.substring(0, test.indexOf('_')))
-  #alert(getComponentNumber($(this).attr('id'),'crop_rotation_manure_fertilizer_applications_attributes_' ))
 
   # update the page
   $(":checkbox:visible").each (index) ->
