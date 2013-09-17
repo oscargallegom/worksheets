@@ -19,6 +19,7 @@ class Field < ActiveRecord::Base
   has_many :soils, :dependent => :destroy, autosave: true
 
   has_many :bmps, :dependent => :destroy, autosave: true
+  has_many :future_bmps, :dependent => :destroy, autosave: true
   has_many :field_livestocks, :dependent => :destroy, autosave: true
   has_many :field_poultry, :dependent => :destroy, autosave: true
 
@@ -43,7 +44,10 @@ class Field < ActiveRecord::Base
   attr_accessible :other_land_use_conversion_acres_future, :other_land_use_conversion_vegetation_type_id_future, :is_other_land_use_conversion_planned_future
 
 
-  attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream, :exclusion_description
+  attr_accessible :is_pasture_adjacent_to_stream, :fence_length
+
+  attr_accessible :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :distance_fence_stream, :exclusion_description
+  attr_accessible :is_streambank_fencing_in_place_future, :vegetation_type_fence_stream_id_future, :distance_fence_stream_future, :exclusion_description_future
 
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
   attr_accessible :is_streambank_restoration_future, :streambank_restoration_length_future, :is_streambank_restoration_planned_future
@@ -70,8 +74,12 @@ class Field < ActiveRecord::Base
   attr_accessible :field_poultry_attributes
   accepts_nested_attributes_for :field_poultry, :allow_destroy => true
 
+
   attr_accessible :bmps_attributes
   accepts_nested_attributes_for :bmps, :allow_destroy => true
+
+  attr_accessible :future_bmps_attributes
+  accepts_nested_attributes_for :future_bmps, :allow_destroy => true
 
   # step 1
   validates_presence_of :name, :field_type_id, :if => 'step?(1)'
@@ -220,17 +228,17 @@ class Field < ActiveRecord::Base
   end
 
 
-  def initialized_bmps # this is the key method
-    [].tap do |o|
-      BmpType.all.each do |bmp_type|
-        if c = bmps.find { |c| c.bmp_type_id == bmp_type.id }
-          o << c.tap { |c|}
-        else
-          o << Bmp.new(bmp_type: bmp_type)
-        end
-      end
-    end
-  end
+  #def initialized_bmps # this is the key method
+  #  [].tap do |o|
+  #    BmpType.all.each do |bmp_type|
+  #      if c = bmps.find { |c| c.bmp_type_id == bmp_type.id }
+  #        o << c.tap { |c|}
+  #      else
+  #        o << Bmp.new(bmp_type: bmp_type)
+  #      end
+  #    end
+  #  end
+  #end
 
   def percentCompleted
 

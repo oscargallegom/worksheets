@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  field_id: 1
+  bmp_type_id: 1
+  is_planned: false
+
+two:
+  field_id: 1
+  bmp_type_id: 1
+  is_planned: false

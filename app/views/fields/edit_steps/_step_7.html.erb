@@ -257,12 +257,12 @@
 
     <div id='div_bmp'>
 
-      <%= f.fields_for :bmps do |bmps_form| %>
-          <%= render 'bmp_fields', :f => bmps_form, :bmp_index => @field.bmps.index(bmps_form.object) %>
+      <%= f.fields_for :future_bmps do |future_bmps_form| %>
+          <%= render 'bmp_fields', :f => future_bmps_form, :bmp_index => @field.future_bmps.index(future_bmps_form.object) %>
       <% end %>
 
     </div>
-    <li><%= f.link_to_add "Add BMP", :bmps, :class => 'button', :id => 'addBmpBtn', :data => {:target => "#div_bmp"} %></li>
+    <li><%= f.link_to_add "Add BMP", :future_bmps, :class => 'button', :id => 'addBmpBtn', :data => {:target => "#div_bmp"} %></li>
 
 
     <li><h2 class='sectionHeading'>Streambank restoration</h2></li>

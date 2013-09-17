@@ -10,5 +10,4 @@ class Bmp < ActiveRecord::Base
   amoeba do
     enable
   end
-
 end
