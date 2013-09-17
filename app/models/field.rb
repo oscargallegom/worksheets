@@ -26,17 +26,31 @@ class Field < ActiveRecord::Base
   # , :area, :baseline_load, :coordinates        #  needed???
   attr_accessible :name, :field_type_id, :crop_type_id, :notes
   attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value
-  attr_accessible :is_field_adjacent_water
+
   attr_accessible :is_forest_buffer, :forest_buffer_average_width, :forest_buffer_length, :is_forest_buffer_planned
+  attr_accessible :is_forest_buffer_future, :forest_buffer_average_width_future, :forest_buffer_length_future, :is_forest_buffer_planned_future
+
   attr_accessible :is_grass_buffer, :grass_buffer_average_width, :grass_buffer_length, :is_grass_buffer_planned
+  attr_accessible :is_grass_buffer_future, :grass_buffer_average_width_future, :grass_buffer_length_future, :is_grass_buffer_planned_future
+
   attr_accessible :is_fertilizer_application_setback, :fertilizer_application_setback_average_width, :fertilizer_application_setback_length, :is_fertilizer_application_setback_planned
+  attr_accessible :is_fertilizer_application_setback_future, :fertilizer_application_setback_average_width_future, :fertilizer_application_setback_length_future, :is_fertilizer_application_setback_planned_future
+
   attr_accessible :is_wetland, :wetland_area, :wetland_treated_area, :is_wetland_planned
+  attr_accessible :is_wetland_future, :wetland_area_future, :wetland_treated_area_future, :is_wetland_planned_future
+
   attr_accessible :other_land_use_conversion_acres, :other_land_use_conversion_vegetation_type_id, :is_other_land_use_conversion_planned
+  attr_accessible :other_land_use_conversion_acres_future, :other_land_use_conversion_vegetation_type_id_future, :is_other_land_use_conversion_planned_future
+
 
   attr_accessible :is_pasture_adjacent_to_stream, :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :fence_length, :distance_fence_stream, :exclusion_description
+
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
+  attr_accessible :is_streambank_restoration_future, :streambank_restoration_length_future, :is_streambank_restoration_planned_future
+
 
   attr_accessible :planned_management_details
+  attr_accessible :planned_management_details_future
 
   attr_accessible :is_livestock_implemented_nutrient_plan, :is_livestock_implemented_soil_water_plan, :is_livestock_properly_sized_maintained
   attr_accessible :is_livestock_animal_waste_management_system, :is_livestock_mortality_composting, :is_livestock_plastic_permeable_lagoon_cover, :is_livestock_phytase, :is_livestock_dairy_precision_feeding, :is_livestock_barnyard_runoff_controls, :is_livestock_water_control_structure, :is_livestock_treatment_wetland
@@ -93,7 +107,22 @@ class Field < ActiveRecord::Base
   validates_numericality_of :streambank_restoration_length, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_streambank_restoration?'
   validates_numericality_of :other_land_use_conversion_acres, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(4)'
 
-  validates_inclusion_of :is_acres_from_map, :in => [true, false], :allow_blank => true, :if => 'step?(4)'
+  #validates_inclusion_of :is_acres_from_map, :in => [true, false], :allow_blank => true, :if => 'step?(4)'
+
+  # step 7 and permanent pasture
+  validates_inclusion_of :is_streambank_fencing_in_place_future, :in => [true, false], :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
+  validates_presence_of :vegetation_type_fence_stream_id_future, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
+  validates_numericality_of :distance_fence_stream_future, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
+
+  # step 7 and crop or continuous hay
+  validates_numericality_of :forest_buffer_average_width_future, :forest_buffer_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forest_buffer_future?'
+  validates_numericality_of :grass_buffer_average_width_future, :grass_buffer_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_grass_buffer_future?'
+  validates_numericality_of :fertilizer_application_setback_average_width_future, :fertilizer_application_setback_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_fertilizer_application_setback_future?'
+
+  # step 7 for all
+  validates_numericality_of :wetland_area_future, :wetland_treated_area_future, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_wetland_future?'
+  validates_numericality_of :streambank_restoration_length_future, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_streambank_restoration_future?'
+  validates_numericality_of :other_land_use_conversion_acres_future, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(4)'
 
   # TODO: area of wetland < area of field
   # TODO: area of buffers < area of field (forest, grass and fence)
@@ -135,6 +164,19 @@ class Field < ActiveRecord::Base
 
   def fertilizer_application_setback_area
     self.fertilizer_application_setback_average_width * self.fertilizer_application_setback_length / 43560.0 unless (self.fertilizer_application_setback_average_width.nil? or self.fertilizer_application_setback_length.nil?)
+  end
+
+  # future BMP tab
+  def forest_buffer_area_future
+    self.forest_buffer_average_width_future * self.forest_buffer_length_future / 43560.0 unless (self.forest_buffer_average_width_future.nil? or self.forest_buffer_length_future.nil?)
+  end
+
+  def grass_buffer_area_future
+    self.grass_buffer_average_width_future * self.grass_buffer_length_future / 43560.0 unless (self.grass_buffer_average_width_future.nil? or self.grass_buffer_length_future.nil?)
+  end
+
+  def fertilizer_application_setback_area_future
+    self.fertilizer_application_setback_average_width_future * self.fertilizer_application_setback_length_future / 43560.0 unless (self.fertilizer_application_setback_average_width_future.nil? or self.fertilizer_application_setback_length_future.nil?)
   end
 
   def n_baseline

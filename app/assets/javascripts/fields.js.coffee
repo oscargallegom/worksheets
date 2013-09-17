@@ -93,6 +93,26 @@ updateFertilizerApplicationSetbackArea = ->
   else
     $("#fertilizer_application_setback_area").val('N/A')
 
+
+# now for the future BMP
+updateForestBufferAreaFuture = ->
+  if $.isNumeric($("#field_forest_buffer_average_width_future").val()) and $.isNumeric($("#field_forest_buffer_length_future").val())
+    $("#forest_buffer_area_future").val(($("#field_forest_buffer_average_width_future").val() * $("#field_forest_buffer_length_future").val() / 43560.0).toFixed(2))
+  else
+    $("#forest_buffer_area_future").val('N/A')
+
+updateGrassBufferAreaFuture = ->
+  if $.isNumeric($("#field_grass_buffer_average_width_future").val()) and $.isNumeric($("#field_grass_buffer_length_future").val())
+    $("#grass_buffer_area_future").val(($("#field_grass_buffer_average_width_future").val() * $("#field_grass_buffer_length_future").val() / 43560.0).toFixed(2))
+  else
+    $("#grass_buffer_area_future").val('N/A')
+
+updateFertilizerApplicationSetbackAreaFuture = ->
+  if $.isNumeric($("#field_fertilizer_application_setback_average_width_future").val()) and $.isNumeric($("#field_fertilizer_application_setback_length_future").val())
+    $("#fertilizer_application_setback_area_future").val(($("#field_fertilizer_application_setback_average_width_future").val() * $("#field_fertilizer_application_setback_length_future").val() / 43560.0).toFixed(2))
+  else
+    $("#fertilizer_application_setback_area_future").val('N/A')
+
 # when the button add crop is called find out the strip, then submit form
 addCrop = (caller) ->
   if (caller.attr('id') isnt undefined and caller.attr('id').indexOf('addCropButton') >= 0)
@@ -138,6 +158,18 @@ isFencingInPlace = ->
     $("#field_vegetation_type_fence_stream_id").prop('required', false)
     $("#field_distance_fence_stream").prop('required', false)
 
+isFencingInPlaceFuture = ->
+  if ($("#field_is_streambank_fencing_in_place_future_true").is(':checked'))
+    $("#div_is_fencing_in_place_future").show()
+  else
+    $("#div_is_fencing_in_place_future").hide()
+  if $("#div_is_fencing_in_place_future").is(":visible")
+    $("#field_vegetation_type_fence_stream_id_future").prop('required', true)
+    $("#field_distance_fence_stream_future").prop('required', true)
+  else
+    $("#field_vegetation_type_fence_stream_id_future").prop('required', false)
+    $("#field_distance_fence_stream_future").prop('required', false)
+
 # clicked forest buffer
 isForestBufferClicked = (true_click) ->
   $("#div_is_forest_buffer").toggle() if true_click
@@ -147,6 +179,16 @@ isForestBufferClicked = (true_click) ->
   else
     $("#field_forest_buffer_average_width").prop('required', false)
     $("#field_forest_buffer_length").prop('required', false)
+
+# clicked forest buffer
+isForestBufferFutureClicked = (true_click) ->
+  $("#div_is_forest_buffer_future").toggle() if true_click
+  if $("#div_is_forest_buffer_future").is(":visible")
+    $("#field_forest_buffer_average_width_future").prop('required', true)
+    $("#field_forest_buffer_length_future").prop('required', true)
+  else
+    $("#field_forest_buffer_average_width_future").prop('required', false)
+    $("#field_forest_buffer_length_future").prop('required', false)
 
 # clicked grass buffer
 isGrassBufferClicked = (true_click) ->
@@ -159,6 +201,16 @@ isGrassBufferClicked = (true_click) ->
     $("#field_grass_buffer_length").prop('required', false)
 
 # clicked grass buffer
+isGrassBufferFutureClicked = (true_click) ->
+  $("#div_is_grass_buffer_future").toggle() if true_click
+  if $("#div_is_grass_buffer_future").is(":visible")
+    $("#field_grass_buffer_average_width_future").prop('required', true)
+    $("#field_grass_buffer_length_future").prop('required', true)
+  else
+    $("#field_grass_buffer_average_width_future").prop('required', false)
+    $("#field_grass_buffer_length_future").prop('required', false)
+
+# clicked grass buffer
 isFertilizerApplicationSetbackClicked = (true_click) ->
   $("#div_is_fertilizer_application_setback").toggle() if true_click
   if $("#div_is_fertilizer_application_setback").is(":visible")
@@ -167,6 +219,17 @@ isFertilizerApplicationSetbackClicked = (true_click) ->
   else
     $("#field_fertilizer_application_setback_average_width").prop('required', false)
     $("#field_fertilizer_application_setback_length").prop('required', false)
+
+# clicked grass buffer
+isFertilizerApplicationSetbackFutureClicked = (true_click) ->
+  $("#div_is_fertilizer_application_setback_future").toggle() if true_click
+  if $("#div_is_fertilizer_application_setback_future").is(":visible")
+    $("#field_fertilizer_application_setback_average_width_future").prop('required', true)
+    $("#field_fertilizer_application_setback_length_future").prop('required', true)
+  else
+    $("#field_fertilizer_application_setback_average_width_future").prop('required', false)
+    $("#field_fertilizer_application_setback_length_future").prop('required', false)
+
 
 
 # clicked wetland
@@ -179,6 +242,16 @@ isWetlandClicked = (true_click) ->
     $("#field_wetland_area").prop('required', false)
     $("#field_wetland_treated_area").prop('required', false)
 
+# clicked wetland
+isWetlandFutureClicked = (true_click) ->
+  $("#div_is_wetland_future").toggle() if true_click
+  if $("#div_is_wetland_future").is(":visible")
+    $("#field_wetland_area_future").prop('required', true)
+    $("#field_wetland_treated_area_future").prop('required', true)
+  else
+    $("#field_wetland_area_future").prop('required', false)
+    $("#field_wetland_treated_area_future").prop('required', false)
+
 # clicked streambank
 isStreambankRestorationClicked = (true_click) ->
   $("#div_is_streambank_restoration").toggle() if true_click
@@ -186,6 +259,14 @@ isStreambankRestorationClicked = (true_click) ->
     $("#field_streambank_restoration_length").prop('required', true)
   else
     $("#field_streambank_restoration_length").prop('required', false)
+
+# clicked streambank
+isStreambankRestorationFutureClicked = (true_click) ->
+  $("#div_is_streambank_restoration_future").toggle() if true_click
+  if $("#div_is_streambank_restoration_future").is(":visible")
+    $("#field_streambank_restoration_length_future").prop('required', true)
+  else
+    $("#field_streambank_restoration_length_future").prop('required', false)
 
 
 changeLivestockInputMethodClicked = ->
@@ -326,6 +407,14 @@ $(document).ready ->
   isFertilizerApplicationSetbackClicked(false)
   isWetlandClicked(false)
   isStreambankRestorationClicked(false)
+
+  # Future
+  isForestBufferFutureClicked(false)
+  isGrassBufferFutureClicked(false)
+  isFertilizerApplicationSetbackFutureClicked(false)
+  isWetlandFutureClicked(false)
+  isStreambankRestorationFutureClicked(false)
+
   changeLivestockInputMethodClicked(false)
 
   $("select").change ->
@@ -355,20 +444,40 @@ $(document).ready ->
   $("#field_is_streambank_fencing_in_place_false").change ->
     isFencingInPlace()
 
+  $("#field_is_streambank_fencing_in_place_future_true").change ->
+    isFencingInPlaceFuture()
+  $("#field_is_streambank_fencing_in_place_future_false").change ->
+    isFencingInPlaceFuture()
+
   $("#field_is_forest_buffer").change ->
     isForestBufferClicked(true)
+
+  $("#field_is_forest_buffer_future").change ->
+    isForestBufferFutureClicked(true)
 
   $("#field_is_grass_buffer").change ->
     isGrassBufferClicked(true)
 
+  $("#field_is_grass_buffer_future").change ->
+    isGrassBufferFutureClicked(true)
+
   $("#field_is_fertilizer_application_setback").change ->
     isFertilizerApplicationSetbackClicked(true)
+
+  $("#field_is_fertilizer_application_setback_future").change ->
+    isFertilizerApplicationSetbackFutureClicked(true)
 
   $("#field_is_wetland").change ->
     isWetlandClicked(true)
 
+  $("#field_is_wetland_future").change ->
+    isWetlandFutureClicked(true)
+
   $("#field_is_streambank_restoration").change ->
     isStreambankRestorationClicked(true)
+
+  $("#field_is_streambank_restoration_future").change ->
+    isStreambankRestorationFutureClicked(true)
 
   $("#field_livestock_input_method_id").change ->
     changeLivestockInputMethodClicked()
@@ -377,15 +486,21 @@ $(document).ready ->
   $("input").keyup ->
     updateSiltPercents()
     updateForestBufferArea()
+    updateForestBufferAreaFuture()
     updateGrassBufferArea()
+    updateGrassBufferAreaFuture()
     updateFertilizerApplicationSetbackArea()
+    updateFertilizerApplicationSetbackAreaFuture()
 
   # if data is changed, update the silt percent
   $("input").change ->
     updateSiltPercents()
     updateForestBufferArea()
+    updateForestBufferAreaFuture()
     updateGrassBufferArea()
+    updateGrassBufferAreaFuture()
     updateFertilizerApplicationSetbackArea()
+    updateFertilizerApplicationSetbackAreaFuture()
 
   # show/hide details for soil 1
   $(".detailsLink1").click ->

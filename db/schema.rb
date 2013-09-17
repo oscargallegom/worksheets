@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909010429) do
+ActiveRecord::Schema.define(:version => 20130917020658) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -201,8 +201,8 @@ ActiveRecord::Schema.define(:version => 20130909010429) do
     t.string   "name"
     t.decimal  "area"
     t.string   "baseline_load"
-    t.datetime "created_at",                                                      :null => false
-    t.datetime "updated_at",                                                      :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
@@ -261,7 +261,6 @@ ActiveRecord::Schema.define(:version => 20130909010429) do
     t.boolean  "is_livestock_properly_sized_maintained"
     t.integer  "tmdl_id"
     t.integer  "soil_p_extractant_id"
-    t.boolean  "is_field_adjacent_water",                      :default => false
     t.boolean  "is_fertilizer_application_setback"
     t.decimal  "fertilizer_application_setback_average_width"
     t.decimal  "fertilizer_application_setback_length"
@@ -273,6 +272,33 @@ ActiveRecord::Schema.define(:version => 20130909010429) do
     t.decimal  "other_land_use_conversion_acres"
     t.integer  "other_land_use_conversion_vegetation_type_id"
     t.boolean  "is_other_land_use_conversion_planned"
+    t.boolean  "is_forest_buffer_future"
+    t.decimal  "forest_buffer_average_width_future"
+    t.decimal  "forest_buffer_length_future"
+    t.boolean  "is_forest_buffer_planned_future"
+    t.boolean  "is_grass_buffer_future"
+    t.boolean  "is_grass_buffer_planned_future"
+    t.boolean  "is_wetland_future"
+    t.decimal  "wetland_area_future"
+    t.decimal  "wetland_treated_area_future"
+    t.boolean  "is_wetland_planned_future"
+    t.boolean  "is_streambank_restoration_future"
+    t.decimal  "streambank_restoration_length_future"
+    t.boolean  "is_streambank_restoration_planned_future"
+    t.boolean  "is_streambank_fencing_in_place_future"
+    t.decimal  "distance_fence_stream_future"
+    t.integer  "vegetation_type_fence_stream_id_future"
+    t.text     "planned_management_details_future"
+    t.boolean  "is_fertilizer_application_setback_future"
+    t.decimal  "fertilizer_application_setback_average_width_future"
+    t.decimal  "fertilizer_application_setback_length_future"
+    t.decimal  "is_fertilizer_application_setback_planned_future"
+    t.text     "exclusion_description_future"
+    t.decimal  "other_land_use_conversion_acres_future"
+    t.integer  "other_land_use_conversion_vegetation_type_id_future"
+    t.boolean  "is_other_land_use_conversion_planned_future"
+    t.decimal  "grass_buffer_average_width_future"
+    t.decimal  "grass_buffer_length_future"
   end
 
   create_table "generator_types", :force => true do |t|
