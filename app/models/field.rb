@@ -118,9 +118,9 @@ class Field < ActiveRecord::Base
   #validates_inclusion_of :is_acres_from_map, :in => [true, false], :allow_blank => true, :if => 'step?(4)'
 
   # step 7 and permanent pasture
-  validates_inclusion_of :is_streambank_fencing_in_place_future, :in => [true, false], :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
-  validates_presence_of :vegetation_type_fence_stream_id_future, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
-  validates_numericality_of :distance_fence_stream_future, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
+  validates_inclusion_of :is_streambank_fencing_in_place_future, :in => [true, false], :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream?'
+  validates_presence_of :vegetation_type_fence_stream_id_future, :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
+  validates_numericality_of :distance_fence_stream_future, :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
 
   # step 7 and crop or continuous hay
   validates_numericality_of :forest_buffer_average_width_future, :forest_buffer_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forest_buffer_future?'

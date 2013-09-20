@@ -309,6 +309,16 @@ class FarmsController < ApplicationController
 
         # there should be at least one strip
         @field.strips.build if @field.strips.empty?
+        is_future_strip_found =false
+        @field.strips.each do |strip|
+          is_future_strip_found = true if strip.is_future
+        end
+
+        if !is_future_strip_found
+          @field.strips.build(:is_future => true)
+        end
+
+
 
         @field.save(:validate => false)
       end
