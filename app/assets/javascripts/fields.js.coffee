@@ -141,10 +141,10 @@ isPastureAdjacentToStream = ->
     #  $("#field_distance_fence_stream").prop('required', true)
   else
     $("#field_fence_length").prop('required', false)
-    #$("#field_is_streambank_fencing_in_place_true").prop('required', false)
-    #$("#field_is_streambank_fencing_in_place_false").prop('required', false)
-    #$("#field_vegetation_type_fence_stream_id").prop('required', false)
-    #$("#field_distance_fence_stream").prop('required', false)
+#$("#field_is_streambank_fencing_in_place_true").prop('required', false)
+#$("#field_is_streambank_fencing_in_place_false").prop('required', false)
+#$("#field_vegetation_type_fence_stream_id").prop('required', false)
+#$("#field_distance_fence_stream").prop('required', false)
 
 isFencingInPlace = ->
   if ($("#field_is_streambank_fencing_in_place_true").is(':checked'))
@@ -229,7 +229,6 @@ isFertilizerApplicationSetbackFutureClicked = (true_click) ->
   else
     $("#field_fertilizer_application_setback_average_width_future").prop('required', false)
     $("#field_fertilizer_application_setback_length_future").prop('required', false)
-
 
 
 # clicked wetland
@@ -364,9 +363,9 @@ updateBmpList = () ->
       while k < nextSelect.options.length
 
         # Horse pasture management (5) and Prescribed grazing (11) are mutually exclusive
-        if (currentValue=='5' && nextSelect.options[k].value=='11')
+        if (currentValue == '5' && nextSelect.options[k].value == '11')
           nextSelect.options[k].disabled = true
-        if (currentValue=='11' && nextSelect.options[k].value=='5')
+        if (currentValue == '11' && nextSelect.options[k].value == '5')
           nextSelect.options[k].disabled = true
 
         if (nextSelect.options[k].value == currentValue)

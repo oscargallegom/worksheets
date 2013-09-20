@@ -222,7 +222,7 @@ class Field < ActiveRecord::Base
       else
         modified_p_test_value = (((self.p_test_value + soil_p_extractant.b_value.to_f) / soil_p_extractant.m_value.to_f) + 54.145) / 4.6438
       end
-      end
+    end
 
     return modified_p_test_value
   end

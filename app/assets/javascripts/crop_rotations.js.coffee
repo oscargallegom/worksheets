@@ -95,7 +95,8 @@ updateTreatmentTypesCheckboxes = (caller) ->
 
 # incorporated checked, show dates and depth
 updateIncorporatedForCommercial = (caller) ->
-  componentNumber = getComponentNumber(caller.attr('id'), 'crop_rotation_commercial_fertilizer_applications_attributes_')
+  componentNumber = getComponentNumber(caller.attr('id'),
+    'crop_rotation_commercial_fertilizer_applications_attributes_')
   if caller.is(":checked")
     # show options
     $("#crop_rotation_commercial_fertilizer_applications_attributes_" + componentNumber + "_incorporation_date_year").closest('li').show()
@@ -292,7 +293,7 @@ $(document).on "nested:fieldRemoved", (event) ->
   field.find('input').prop('required', false)
   field.find('select').prop('required', false)
   # if removed all end of season, make sure the Add button is shown
-  if ($(".fields:visible").find(".end_of_season_index").length==0)
+  if ($(".fields:visible").find(".end_of_season_index").length == 0)
     $("#li_end_of_season_button").show()
 
 $(document).on "nested:fieldAdded", (event) ->

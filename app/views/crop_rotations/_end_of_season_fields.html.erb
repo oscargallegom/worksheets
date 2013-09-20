@@ -4,7 +4,7 @@
 <li>
   <%= f.label :end_of_season_type_id, 'End of season operation type:<em>*</em>'.html_safe, :class => 'wide' %>
 
-  <% if (@field.field_type_id == 1 or @field.field_type_id == 3) # show all options  %>
+  <% if (@field.field_type_id == 1 or @field.field_type_id == 3) # show all options   %>
       <%= f.collection_select :end_of_season_type_id, EndOfSeasonType.all, :id, :name, {:prompt => 'Select end of season operation type'}, {:required => true, :style => 'width:250px', :class => 'class_end_of_season_type_id'} %>
   <% else %>
       <%= f.collection_select :end_of_season_type_id, EndOfSeasonType.harvestOnly, :id, :name, {:prompt => 'Select end of season operation type'}, {:required => true, :style => 'width:250px', :class => 'class_end_of_season_type_id'} %>

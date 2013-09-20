@@ -47,23 +47,23 @@
               <%= f.collection_select :field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
             </li>
 
-                <li>
-                  <label class="wide"><b>Field is adjacent to stream/water body<em>*</em></b></label>
-                  <%= f.radio_button :is_pasture_adjacent_to_stream, true, :required => true %>
-                  <%= f.label :is_pasture_adjacent_to_stream_true, 'Yes' %>
-                  <%= f.radio_button :is_pasture_adjacent_to_stream, false, :required => true %>
-                  <%= f.label :is_pasture_adjacent_to_stream_false, 'No' %>
-                </li>
-                <div id='div_is_pasture_adjacent_to_stream'
-                     <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none'
-                     <% end %>>
-                  <li>
-                    <%= f.label :fence_length, 'Linear feet of streabank:<em>*</em>'.html_safe, :class => 'wide' %>
-                    <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
-                    ft
-                  </li>
+            <li>
+              <label class="wide"><b>Field is adjacent to stream/water body<em>*</em></b></label>
+              <%= f.radio_button :is_pasture_adjacent_to_stream, true, :required => true %>
+              <%= f.label :is_pasture_adjacent_to_stream_true, 'Yes' %>
+              <%= f.radio_button :is_pasture_adjacent_to_stream, false, :required => true %>
+              <%= f.label :is_pasture_adjacent_to_stream_false, 'No' %>
+            </li>
+            <div id='div_is_pasture_adjacent_to_stream'
+                 <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none'
+                 <% end %>>
+              <li>
+                <%= f.label :fence_length, 'Linear feet of streabank:<em>*</em>'.html_safe, :class => 'wide' %>
+                <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
+                ft
+              </li>
 
-                </div>
+            </div>
 
             <li>
               <div class='wide'>Notes:</div>

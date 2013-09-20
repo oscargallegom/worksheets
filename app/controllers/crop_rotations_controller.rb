@@ -97,8 +97,10 @@ class CropRotationsController < ApplicationController
   def destroy
     @crop_rotation.destroy
 
+    step = @strip.is_future ? 6 : 3
+
     respond_to do |format|
-      format.html { redirect_to edit_farm_field_path(@farm, @field, 'step' => 3) }
+      format.html { redirect_to edit_farm_field_path(@farm, @field, 'step' => step) }
     end
   end
 

@@ -319,7 +319,6 @@ class FarmsController < ApplicationController
         end
 
 
-
         @field.save(:validate => false)
       end
 

@@ -26,7 +26,7 @@
         <%= f.fields_for :strips do |strips_form| %>
             <%= render 'strip_fields_future', :f => strips_form if strips_form.object.is_future || strips_form.object.id.nil? %>
         <% end %>
-             </div>
+      </div>
     </div>
     <%= f.link_to_add "Add strip for strip cropping", :strips, :class => 'button', :id => 'addStripBtn', :data => {:target => "#div_strip"} %>
 
@@ -49,15 +49,15 @@
           <%= select_tag 'target_field_id', options_from_collection_for_select(@other_fields, 'id', 'name') %>
           <%= button_tag 'Submit' %>
       <% end %>
-
-      <br/>
-
-      <%= form_tag(populateFutureCropManagement_farm_field_path(@field.farm.id, @field.id), :name => 'populateFutureCropManagementForm', method: "post") do %>
-          <%= hidden_field_tag :step, 6 %>
-          <%= button_tag 'Add current crop rotations' %>
-      <% end %>
-
     </div>
 
 <% end %>
+
+<div class="sectionRest clearfix">
+  <%= form_tag(populateFutureCropManagement_farm_field_path(@field.farm.id, @field.id), :name => 'populateFutureCropManagementForm', method: "post") do %>
+      <%= hidden_field_tag :step, 6 %>
+      <%= button_tag 'Add current crop rotations' %>
+  <% end %>
+</div>
+
 
