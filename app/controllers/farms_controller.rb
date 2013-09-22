@@ -346,10 +346,14 @@ class FarmsController < ApplicationController
     # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
     client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
 
+    begin
     response = client.call(:run_query, message: {"Query" => sql})
     if response.success?
       return response.to_array(:run_query_response, :run_query_result, :diffgram, :new_data_set, :table).first
     end
+    rescue      # the SOAP call failed
+        return nil
+      end
   end
 
 
