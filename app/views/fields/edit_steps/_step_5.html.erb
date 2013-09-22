@@ -173,7 +173,11 @@
           </ol>
         </fieldset>
       </div>
+
       <div style="clear: both"></div>
+      <br/>
+      <%= link_to "Save and Continue",  edit_farm_field_path(@farm, @field, :step => 6), :class => 'button', :id => 'saveAndContinue' %>
+
     </div>
 
 <% end %>
