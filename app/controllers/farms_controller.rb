@@ -243,24 +243,24 @@ class FarmsController < ApplicationController
         # get the top 3 soils
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
         arrFieldmukey = params["field#{i}mukey"].split("|")
-        arrFieldcompname = params["field#{i}compname"].split("|")
+        arrFieldniccdcdpct = params["field#{i}niccdcdpct"].split("|")
         arrFieldmuname = params["field#{i}muname"].split("|")
-        arrFieldhydgrp = params["field#{i}hydgrp"].split("|")
+        arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
         arrFieldmusym = params["field#{i}musym"].split("|")
 
         @listSoils = Array.new
 
         arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
-          if !arrFieldcompname[index].eql?('Water') # ignore soil if water
+          #if !arrFieldcompname[index].eql?('Water') # ignore soil if water
             @listSoils << {
                 :percent => arrFieldpctsoiltype[index],
                 :mukey => arrFieldmukey[index],
-                :compname => arrFieldcompname[index],
+                :niccdcdpct => arrFieldniccdcdpct[index],
                 :muname => arrFieldmuname[index],
-                :hydgrp => arrFieldhydgrp[index],
+                :hydgrpdcd => arrFieldhydgrp[index],
                 :musym => arrFieldmusym[index]
             }
-          end
+          #end
         end
 
         # sort by percentage in descending order
@@ -279,13 +279,13 @@ class FarmsController < ApplicationController
         (0..@nbSoils-1).each do |i|
           @field.soils[i].percent = @listSoils[i][:percent]
           @field.soils[i].map_unit_key = @listSoils[i][:mukey]
-          @field.soils[i].component_name = @listSoils[i][:compname]
+          @field.soils[i].niccdcdpct = @listSoils[i][:niccdcdpct]
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
-          @field.soils[i].hydrologic_group = @listSoils[i][:hydgrp]
+          @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
 
           # getSoilData(1726303, 'Meadowville', 'B') #
-          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].component_name, @field.soils[i].hydrologic_group)
+          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].niccdcdpct, @field.soils[i].hydrologic_group)
 
           if data
             @field.soils[i].percent_clay = data[:percent_clay]
@@ -338,9 +338,10 @@ class FarmsController < ApplicationController
   end
 
 # Web service call
-  def getSoilData(map_unit_key, component_name, hydrologic_group)
+  def getSoilData(map_unit_key, niccdcdpct, hydrologic_group)
 
-    sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
+    #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
+    sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrpdcd as hydrologic_group, component.slope_r as slope, component.niccdcdpct as niccdcdpct, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrpdcd = '#{hydrologic_group}' AND component.niccdcdpct = '#{niccdcdpct}' ORDER BY chorizon.hzdepb_r"
 
     # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
     client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")

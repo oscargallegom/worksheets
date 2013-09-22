@@ -4,6 +4,7 @@ NutrientNet::Application.routes.draw do
     resources :fields do
       post :export, on: :member
       post :populateFutureCropManagement, on: :member
+      post :populateFutureBMPs, on: :member
       resources :strips do
         resources :crop_rotations do
           post :duplicate, on: :member

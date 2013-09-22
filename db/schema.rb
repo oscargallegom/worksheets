@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917232432) do
+ActiveRecord::Schema.define(:version => 20130922195740) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -439,10 +439,10 @@ ActiveRecord::Schema.define(:version => 20130917232432) do
     t.datetime "updated_at",       :null => false
     t.decimal  "percent"
     t.integer  "map_unit_key"
-    t.string   "component_name"
     t.string   "map_unit_name"
     t.string   "hydrologic_group"
     t.string   "map_unit_symbol"
+    t.decimal  "niccdcdpct"
   end
 
   create_table "states", :force => true do |t|

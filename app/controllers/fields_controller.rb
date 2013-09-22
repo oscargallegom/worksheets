@@ -320,4 +320,53 @@ class FieldsController < ApplicationController
       end
     end
   end
+
+  # POST /farms/1/fields/1/populateFutureBMP
+  def populateFutureBMPs
+
+
+    @field.is_forest_buffer_future = @field.is_forest_buffer
+    @field.forest_buffer_average_width_future = @field.forest_buffer_average_width
+    @field.forest_buffer_length_future =  @field.forest_buffer_length
+    @field.is_forest_buffer_planned_future = @field.is_forest_buffer_planned
+    @field.is_grass_buffer_future = @field.is_grass_buffer
+    @field.grass_buffer_average_width_future = @field.grass_buffer_average_width
+    @field.grass_buffer_length_future = @field.grass_buffer_length
+    @field.is_grass_buffer_planned = @field.is_grass_buffer_planned
+    @field.is_wetland = @field.is_wetland
+    @field.wetland_area_future = @field.wetland_area
+    @field.wetland_treated_area_future =@field.wetland_treated_area
+    @field.is_wetland_planned_future = @field.is_wetland_planned
+    @field.is_streambank_restoration_future = @field.is_streambank_restoration
+    @field.streambank_restoration_length_future =  @field.streambank_restoration_length
+    @field.is_streambank_restoration_planned_future =  @field.is_streambank_restoration_planned
+    @field.is_streambank_fencing_in_place_future= @field.is_streambank_fencing_in_place
+    @field.distance_fence_stream_future=@field.distance_fence_stream
+    @field.vegetation_type_fence_stream_id_future= @field.vegetation_type_fence_stream_id
+    @field.planned_management_details_future=@field.planned_management_details
+    @field.is_fertilizer_application_setback_future=@field.is_fertilizer_application_setback
+    @field.fertilizer_application_setback_average_width_future=@field.fertilizer_application_setback_average_width
+    @field.fertilizer_application_setback_length_future=@field.fertilizer_application_setback_length
+    @field.is_fertilizer_application_setback_planned_future=@field.is_fertilizer_application_setback_planned
+    @field.exclusion_description_future=@field.exclusion_description
+    @field.other_land_use_conversion_acres_future=@field.other_land_use_conversion_acres
+    @field.other_land_use_conversion_vegetation_type_id_future= @field.other_land_use_conversion_vegetation_type_id
+    @field.is_other_land_use_conversion_planned_future=@field.is_other_land_use_conversion_planned
+
+    # copy BMPs
+    @field.future_bmps.destroy_all
+
+    @field.bmps.each do|bmp|
+      @field.future_bmps.build(:bmp_type_id => bmp.bmp_type_id, :is_future => bmp.is_future)
+    end
+
+    respond_to do |format|
+      if @field.save
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 7), notice: 'Data imported successfully.' }
+      else
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 7), notice: 'Error importing data.' }
+      end
+    end
+
+  end
 end
