@@ -20,6 +20,11 @@
     <li><h2 class='sectionHeading'>Baseline BMPs</h2></li>
     <li>All additional BMPs not captured under the Baseline Crop Management tab should be listed here.</li>
 
+    <%= form_tag(populateFutureBMPs_farm_field_path(@field.farm.id, @field.id), :name => 'populateFutureCropManagementForm', method: "post") do %>
+        <%= hidden_field_tag :step, 6 %>
+        <%= button_tag 'Import current BMPs', :class => 'button' %>
+    <% end %>
+
     <!-- only show if permanent pasture -->
     <% if (@field.field_type_id == 2) then %>
         <% if @field.is_pasture_adjacent_to_stream? %>
@@ -302,8 +307,5 @@
     </div>
 <% end %>
 <div class="sectionRest clearfix">
-  <%= form_tag(populateFutureBMPs_farm_field_path(@field.farm.id, @field.id), :name => 'populateFutureCropManagementForm', method: "post") do %>
-      <%= hidden_field_tag :step, 6 %>
-      <%= button_tag 'Import current BMPs' %>
-  <% end %>
+
 </div>

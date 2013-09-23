@@ -6,14 +6,14 @@ module Ntt
 
   MAX_ATTEMPTS = 0
 
-  def callNtt(field)
+  def callNtt(field, is_future)
 
     attempts=0
     doc = nil
 
     begin
 
-      success, content = buildXml(field)
+      success, content = buildXml(field, is_future)
 
       if (success)
 
@@ -50,7 +50,7 @@ module Ntt
   end
 
 
-  def buildXml(field)
+  def buildXml(field, is_future)
 
     begin
 
@@ -69,10 +69,13 @@ module Ntt
       # sum length of all strips
       fieldsWidth= 0
       field.strips.each do |strip|
-        fieldsWidth = fieldsWidth + strip.length unless strip.length == nil
+        fieldsWidth = fieldsWidth + strip.length if (strip.is_future==is_future && !strip.length.nil?)
       end
 
       field.strips.each_with_index do |strip, strip_index|
+
+        if (strip.is_future == is_future)
+
         strip_id = (strip_index+1).to_s
 
         fieldArea = field.is_acres_from_map ? field.acres_from_map : field.acres_from_user
@@ -322,6 +325,7 @@ module Ntt
 
           end
         end
+          end
       end
       xml << "</Navigation>"
 

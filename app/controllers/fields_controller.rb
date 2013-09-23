@@ -68,7 +68,7 @@ class FieldsController < ApplicationController
 
     @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
 
-    if (@step =='5' && (@field.field_type.id == 1 || @field.field_type.id == 2 || @field.field_type.id == 3)) # perform calculations
+    if ((@step =='5' || @step == '8') && (@field.field_type.id == 1 || @field.field_type.id == 2 || @field.field_type.id == 3)) # perform calculations
       begin
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
