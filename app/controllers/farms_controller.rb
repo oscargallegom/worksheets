@@ -46,7 +46,12 @@ class FarmsController < ApplicationController
 
     @fields.each do |field|
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
+        begin
         @current_totals = computeBmpCalculations(field)
+        rescue Exception => e
+          flash[:error] = e.message
+          @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
+          end
         @current_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n]
         @current_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p]
         @current_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment]
