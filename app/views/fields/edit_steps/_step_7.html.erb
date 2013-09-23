@@ -304,6 +304,6 @@
 <div class="sectionRest clearfix">
   <%= form_tag(populateFutureBMPs_farm_field_path(@field.farm.id, @field.id), :name => 'populateFutureCropManagementForm', method: "post") do %>
       <%= hidden_field_tag :step, 6 %>
-      <%= button_tag 'Add current crop rotations' %>
+      <%= button_tag 'Import current BMPs' %>
   <% end %>
 </div>
