@@ -290,9 +290,10 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
 
           # getSoilData(1726303, 'Meadowville', 'B') #
-          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].niccdcdpct, @field.soils[i].hydrologic_group)
+          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].niccdcdpct)
 
           if data
+            @field.soils[i].component_name = data[:component_name]
             @field.soils[i].percent_clay = data[:percent_clay]
             @field.soils[i].percent_sand = data[:percent_sand]
             @field.soils[i].percent_silt = data[:percent_silt]
@@ -300,6 +301,7 @@ class FarmsController < ApplicationController
             @field.soils[i].organic_carbon = data[:organic_carbon]
             @field.soils[i].slope = data[:slope]
           else
+            @field.soils[i].component_name = ''
             @field.soils[i].percent_clay = 0
             @field.soils[i].percent_sand = 0
             @field.soils[i].percent_silt = 0
@@ -343,10 +345,11 @@ class FarmsController < ApplicationController
   end
 
 # Web service call
-  def getSoilData(map_unit_key, niccdcdpct, hydrologic_group)
+  def getSoilData(map_unit_key, niccdcdpct)
 
     #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
-    sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrpdcd as hydrologic_group, component.slope_r as slope, component.niccdcdpct as niccdcdpct, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrpdcd = '#{hydrologic_group}' AND component.niccdcdpct = '#{niccdcdpct}' ORDER BY chorizon.hzdepb_r"
+    #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrpdcd as hydrologic_group, component.slope_r as slope, component.niccdcdpct as niccdcdpct, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrpdcd = '#{hydrologic_group}' AND component.niccdcdpct = '#{niccdcdpct}' ORDER BY chorizon.hzdepb_r"
+    sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.comppct_r as component, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.comppct_r  = #{niccdcdpct} ORDER BY chorizon.hzdepb_r"
 
     # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
     client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
