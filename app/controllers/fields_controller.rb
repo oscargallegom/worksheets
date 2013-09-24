@@ -72,6 +72,7 @@ class FieldsController < ApplicationController
       begin
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
+        @ntt_results_future = @current_totals[:ntt_results_future]
       rescue Exception => e
         flash[:error] = e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
@@ -167,7 +168,7 @@ class FieldsController < ApplicationController
     if session[:debug]
       success, content = buildXml(@field) # TODO: remove/change
       @input_xml = content # TODO: remove/change
-      success, content = callNtt(@field) # TODO: remove/change
+      success, content = callNtt(@field, false) # TODO: remove/change
       if (success)
         @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
         @output_xml = content

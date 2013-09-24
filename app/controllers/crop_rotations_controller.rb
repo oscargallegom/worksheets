@@ -35,7 +35,7 @@ class CropRotationsController < ApplicationController
     if session[:debug]
       success, content = buildXml(@field) # TODO: remove/change
       @input_xml = content # TODO: remove/change
-      success, content = callNtt(@field) # TODO: remove/change
+      success, content = callNtt(@field, false) # TODO: remove/change
       if (success)
         @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
         @output_xml = content

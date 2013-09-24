@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130922195740) do
+ActiveRecord::Schema.define(:version => 20130924000137) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -443,6 +443,7 @@ ActiveRecord::Schema.define(:version => 20130922195740) do
     t.string   "hydrologic_group"
     t.string   "map_unit_symbol"
     t.decimal  "niccdcdpct"
+    t.string   "component_name"
   end
 
   create_table "states", :force => true do |t|

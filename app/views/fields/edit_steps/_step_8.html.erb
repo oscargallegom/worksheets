@@ -51,8 +51,8 @@
               lb/ac)
             </li>
             <li><span class='wide'>Future Load (EOS):</span>
-              <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: ',') %> lb
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n] / @field.acres, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@current_totals[:new_total_n_future], :precision => 2, delimiter: ',') %> lb
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n_future] / @field.acres, :precision => 2, delimiter: ',') %>
               lb/ac)
             </li>
 
@@ -90,12 +90,12 @@
               lb/ac)
             </li>
             <li><span class='wide'>Future Load (EOS):</span>
-              <%= number_with_precision(@current_totals[:new_total_p], :precision => 2, delimiter: ',') %> lb
+              <%= number_with_precision(@current_totals[:new_total_p_future], :precision => 2, delimiter: ',') %> lb
 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
+              <%= number_with_precision(@current_totals[:new_total_p_future] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              <%= number_with_precision(@current_totals[:new_total_p_future] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
+              <%= number_with_precision(@current_totals[:new_total_p_future] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
             </li>
 
@@ -117,8 +117,8 @@
               tons/ac)
             </li>
             <li><span class='wide'>Future Load (EOS):</span>
-              <%= number_with_precision(@current_totals[:new_total_sediment], :precision => 2, delimiter: ',') %> tons
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@current_totals[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment_future] / @field.acres, :precision => 2, delimiter: ',') %>
               tons/ac)
             </li>
 
@@ -148,7 +148,7 @@
                 </td>
                 <td>
                   <b>
-                    <%= number_with_precision((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results.key?('OrganicN') && @ntt_results.key?('NO3') && @ntt_results.key?('TileDrainN')) %>
+                    <%= number_with_precision((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN')) %>
                     lbs/ac
                   </b>
                 </td>
@@ -162,7 +162,7 @@
                   lbs/ac
                 </td>
                 <td>
-                  <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results.key?('OrganicN') %>
+                  <%= number_with_precision(@ntt_results_future['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results_future.key?('OrganicN') %>
                   lbs/ac
                 </td>
               </tr>
@@ -175,7 +175,7 @@
                   lbs/ac
                 </td>
                 <td>
-                  <%= number_with_precision(@ntt_results['NO3'], :precision => 2, delimiter: ',') %>
+                  <%= number_with_precision(@ntt_results_future['NO3'], :precision => 2, delimiter: ',') %>
                   lbs/ac
                 </td>
               </tr>
@@ -188,7 +188,7 @@
                   lbs/ac
                 </td>
                 <td>
-                  <%= number_with_precision(@ntt_results['TileDrainN'], :precision => 2, delimiter: ',') %>
+                  <%= number_with_precision(@ntt_results_future['TileDrainN'], :precision => 2, delimiter: ',') %>
                   lbs/ac
                 </td>
               </tr>
@@ -204,7 +204,7 @@
                 </td>
                 <td>
                   <b>
-                    <%= number_with_precision((@ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
+                    <%= number_with_precision((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
                     lbs/ac
                   </b>
                 </td>
@@ -218,7 +218,7 @@
                   lbs/ac
                 </td>
                 <td>
-                  <%= number_with_precision(@ntt_results['OrganicP'], :precision => 2, delimiter: ',') %>
+                  <%= number_with_precision(@ntt_results_future['OrganicP'], :precision => 2, delimiter: ',') %>
                   lbs/ac
                 </td>
               </tr>
@@ -231,7 +231,7 @@
                   lbs/ac
                 </td>
                 <td>
-                  <%= number_with_precision(@ntt_results['SolubleP'], :precision => 2, delimiter: ',') %>
+                  <%= number_with_precision(@ntt_results_future['SolubleP'], :precision => 2, delimiter: ',') %>
                   lbs/ac
                 </td>
               </tr>
@@ -244,7 +244,7 @@
                   lbs/ac
                 </td>
                 <td>
-                  <%= number_with_precision(@ntt_results['TileDrainP'], :precision => 2, delimiter: ',') %>
+                  <%= number_with_precision(@ntt_results_future['TileDrainP'], :precision => 2, delimiter: ',') %>
                   lbs/ac
                 </td>
               </tr>
@@ -260,7 +260,7 @@
                 </td>
                 <td>
                   <b>
-                    <%= number_with_precision(@ntt_results['Flow'], :precision => 2, delimiter: ',') %>
+                    <%= number_with_precision(@ntt_results_future['Flow'], :precision => 2, delimiter: ',') %>
                     in
                   </b>
                 </td>
@@ -277,7 +277,7 @@
                 </td>
                 <td>
                   <b>
-                    <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: ',') %>
+                    <%= number_with_precision(@ntt_results_future['Sediment'], :precision => 2, delimiter: ',') %>
                     tons/ac
                   </b>
                 </td>
@@ -294,7 +294,7 @@
                 </td>
                 <td>
                   <b>
-                    <%= number_with_precision(@ntt_results['Carbon'], :precision => 2, delimiter: ',') %>
+                    <%= number_with_precision(@ntt_results_future['Carbon'], :precision => 2, delimiter: ',') %>
                     lbs/ac
                   </b>
                 </td>

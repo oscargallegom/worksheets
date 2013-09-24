@@ -57,9 +57,11 @@ class FarmsController < ApplicationController
         @current_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment]
 
         watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
+        if (!watershed_segment.nil?)
         @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
         @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
         @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
+
 
         if field.tmdl.nil?
           @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
@@ -73,6 +75,7 @@ class FarmsController < ApplicationController
         else # use Maryland TMDL
           @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
           @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
+        end
         end
       end
       # animals

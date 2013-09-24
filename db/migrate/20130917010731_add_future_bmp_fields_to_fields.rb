@@ -6,14 +6,17 @@ class AddFutureBmpFieldsToFields < ActiveRecord::Migration
     add_column :fields, :forest_buffer_average_width_future, :decimal
     add_column :fields, :forest_buffer_length_future, :decimal
     add_column :fields, :is_forest_buffer_planned_future, :boolean
+
     add_column :fields, :is_grass_buffer_future, :boolean
     add_column :fields, :grass_buffer_average_width_future, :boolean
     add_column :fields, :grass_buffer_length_future, :boolean
     add_column :fields, :is_grass_buffer_planned_future, :boolean
+
     add_column :fields, :is_wetland_future, :boolean
     add_column :fields, :wetland_area_future, :decimal
     add_column :fields, :wetland_treated_area_future, :decimal
     add_column :fields, :is_wetland_planned_future, :boolean
+
     add_column :fields, :is_streambank_restoration_future, :boolean
     add_column :fields, :streambank_restoration_length_future, :decimal
     add_column :fields, :is_streambank_restoration_planned_future, :boolean
@@ -21,6 +24,7 @@ class AddFutureBmpFieldsToFields < ActiveRecord::Migration
     add_column :fields, :distance_fence_stream_future, :decimal
     add_column :fields, :vegetation_type_fence_stream_id_future, :integer
     add_column :fields, :planned_management_details_future, :text
+
     add_column :fields, :is_fertilizer_application_setback_future, :boolean
     add_column :fields, :fertilizer_application_setback_average_width_future, :decimal
     add_column :fields, :fertilizer_application_setback_length_future, :decimal

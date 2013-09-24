@@ -72,11 +72,12 @@ module Ntt
         fieldsWidth = fieldsWidth + strip.length if (strip.is_future==is_future && !strip.length.nil?)
       end
 
-      field.strips.each_with_index do |strip, strip_index|
+      strip_id = 0
+      field.strips.each do |strip|
 
         if (strip.is_future == is_future)
 
-        strip_id = (strip_index+1).to_s
+        strip_id = strip_id + 1
 
         fieldArea = field.is_acres_from_map ? field.acres_from_map : field.acres_from_user
 
@@ -103,8 +104,8 @@ module Ntt
           map_unit_key = soil.map_unit_key
           map_unit_symbol = soil.map_unit_symbol
           hydrologic_group = soil.hydrologic_group
-          #component_name = soil.component_name
-          niccdcdpct = soil.niccdcdpct
+          component_name = soil.component_name
+          #niccdcdpct = soil.niccdcdpct
           p_test = field.modified_p_test_value
           slope = soil.slope
           percent_sand = soil.percent_sand
@@ -114,7 +115,7 @@ module Ntt
           organic_carbon = soil.organic_carbon
 
 
-          xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{niccdcdpct}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+          xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
 
         end
 
