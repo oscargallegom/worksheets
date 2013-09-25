@@ -55,6 +55,11 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_n_future] / @field.acres, :precision => 2, delimiter: ',') %>
               lb/ac)
             </li>
+            <li><span class='wide'>Reduction:</span>
+              <%= number_with_precision(@current_totals[:new_total_n] - @current_totals[:new_total_n_future], :precision => 2, delimiter: ',') %> lb
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@current_totals[:new_total_n] - @current_totals[:new_total_n_future]) / @field.acres, :precision => 2, delimiter: ',') %>
+              lb/ac)
+            </li>
 
             <li><h2 class='sectionHeading'>Phosphorus</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
@@ -98,6 +103,13 @@
               <%= number_with_precision(@current_totals[:new_total_p_future] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
             </li>
+            <li><span class='wide'>Reduction:</span>
+              <%= number_with_precision(@current_totals[:new_total_p] - @current_totals[:new_total_p_future], :precision => 2, delimiter: ',') %> lb
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
+              <%= number_with_precision((@current_totals[:new_total_p] - @current_totals[:new_total_p_future]) / @field.acres, :precision => 2, delimiter: ',') %>
+              lb/ac)
+            </li>
 
             <li><h2 class='sectionHeading'>Sediment</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
@@ -121,6 +133,11 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment_future] / @field.acres, :precision => 2, delimiter: ',') %>
               tons/ac)
             </li>
+            <li><span class='wide'>Reduction:</span>
+              <%= number_with_precision(@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future]) / @field.acres, :precision => 2, delimiter: ',') %>
+              tons/ac)
+            </li>
 
             <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>
             <li>TBD: Mindy to provide some text.</li>
@@ -137,7 +154,7 @@
                 </td>
               </tr>
               <tr>
-                <td>
+                <td style="white-space: nowrap">
                   <b>Total N (before BMPs applied) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                 </td>
                 <td>
@@ -300,7 +317,7 @@
                 </td>
               </tr>
 
-              <% if !@ntt_results[:crops].nil? %>
+              <% if (!@ntt_results[:crops].nil? || !@ntt_results_current[:crops].nil?) %>
                   <tr>
                     <td>
                       <b>Crop Yield</b>
@@ -313,19 +330,27 @@
                     </td>
                   </tr>
 
+                <tr>
+                  <td></td>
+                  <td style="white-space: nowrap">
+                    <% if !@ntt_results[:crops].nil? %>
                   <% @ntt_results[:crops].each do |crop| %>
-                    <tr>
-                      <td>
-                        <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] %></b>
-                      </td>
-                      <td>
+                        <b><%= Crop.where(:code => crop['CropCode']).first[:name] %>:</b>
                         <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
-                      </td>
-                      <td>
-                        <b></b>
-                      </td>
-                    </tr>
+                        <br/>
                   <% end %>
+                    <% end %>
+                  </td>
+                  <td style="white-space: nowrap">
+                    <% if !@ntt_results_future[:crops].nil? %>
+                    <% @ntt_results_future[:crops].each do |crop| %>
+                        <b><%= Crop.where(:code => crop['CropCode']).first[:name] %>:</b>
+                        <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
+                        <br/>
+                    <% end %>
+                    <% end %>
+                  </td>
+                </tr>
               <% end %>
              </table>
 
