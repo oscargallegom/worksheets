@@ -311,6 +311,8 @@ class FieldsController < ApplicationController
         if !@future_strip_dup.save!(:validate => false)
           is_success = false
         end
+      else
+        strip.destroy
       end
     end
     respond_to do |format|
