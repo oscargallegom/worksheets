@@ -168,7 +168,7 @@ class FieldsController < ApplicationController
     if session[:debug]
       success, content = buildXml(@field, false) # TODO: remove/change
       @input_xml = content # TODO: remove/change
-      success, content = callNtt(@field, false) # TODO: remove/change
+      success, content = callNtt(@field, (@step=='6' || @step=='7')) # TODO: remove/change
       if (success)
         @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
         @output_xml = content
