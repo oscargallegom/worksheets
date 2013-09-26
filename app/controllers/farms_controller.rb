@@ -35,10 +35,15 @@ class FarmsController < ApplicationController
     # check if the farm meets baseline or not
     @baseline_n_load_fields = 0
     @current_n_load_fields = 0
+    @future_n_load_fields = 0
+
     @baseline_p_load_fields = 0
     @current_p_load_fields = 0
+    @future_p_load_fields = 0
+
     @baseline_sediment_load_fields = 0
     @current_sediment_load_fields = 0
+    @future_sediment_load_fields = 0
 
     @current_n_load_animals = 0
     @current_p_load_animals = 0
@@ -50,11 +55,16 @@ class FarmsController < ApplicationController
         @current_totals = computeBmpCalculations(field)
         rescue Exception => e
           flash[:error] = e.message
-          @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
-          end
+          @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
+        end
+
         @current_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n]
         @current_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p]
         @current_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment]
+
+        @future_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n_future]
+        @future_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p_future]
+        @future_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment_future]
 
         watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
         if (!watershed_segment.nil?)

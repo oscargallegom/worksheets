@@ -58,21 +58,21 @@
       <%= 'TBD' %>
     </li>
     <li>
-      <div class='wide'>Current N load fields:</div>
-      <%= number_with_precision(@current_n_load_fields, :precision => 2, delimiter: ',') %>
-    </li>
-    <li>
-      <div class='wide'>Current N load for Animal HQ:</div>
-      <%= number_with_precision(@current_n_load_animals, :precision => 2, delimiter: ',') %>
-    </li>
-    <li>
       <div class='wide'>Baseline N load fields:</div>
       <%= number_with_precision(@baseline_n_load_fields, :precision => 2, delimiter: ',') %>
       lb
     </li>
     <li>
-      <div class='wide'>Planned N load fields:</div>
-      <%= 'TBD' %>
+      <div class='wide'>Current N load fields:</div>
+      <%= number_with_precision(@current_n_load_fields, :precision => 2, delimiter: ',') %>
+    </li>
+    <li>
+      <div class='wide'>Future N load fields:</div>
+      <%= number_with_precision(@future_n_load_fields, :precision => 2, delimiter: ',') %>
+    </li>
+    <li>
+      <div class='wide'>Current N load for Animal HQ:</div>
+      <%= number_with_precision(@current_n_load_animals, :precision => 2, delimiter: ',') %>
     </li>
 
     <li><h2 class='sectionHeading'>P Load Information</h2></li>
@@ -81,22 +81,22 @@
       <%= 'TBD' %>
     </li>
     <li>
-      <div class='wide'>Current P load fields:</div>
-      <%= number_with_precision(@current_p_load_fields, :precision => 2, delimiter: ',') %>
-      lb
-    </li>
-    <li>
-      <div class='wide'>Current P load for Animal HQ:</div>
-      <%= number_with_precision(@current_p_load_animals, :precision => 2, delimiter: ',') %>
-    </li>
-    <li>
       <div class='wide'>Baseline P load fields:</div>
       <%= number_with_precision(@baseline_p_load_fields, :precision => 2, delimiter: ',') %>
       lb
     </li>
     <li>
-      <div class='wide'>Planned P load fields:</div>
-      <%= 'TBD' %>
+      <div class='wide'>Current P load fields:</div>
+      <%= number_with_precision(@current_p_load_fields, :precision => 2, delimiter: ',') %>
+      lb
+    </li>
+    <li>
+      <div class='wide'>Future P load fields:</div>
+      <%= number_with_precision(@future_p_load_fields, :precision => 2, delimiter: ',') %>
+    </li>
+    <li>
+      <div class='wide'>Current P load for Animal HQ:</div>
+      <%= number_with_precision(@current_p_load_animals, :precision => 2, delimiter: ',') %>
     </li>
 
     <li><h2 class='sectionHeading'>Sediment Load Information</h2></li>
@@ -105,22 +105,22 @@
       <%= 'TBD' %>
     </li>
     <li>
-      <div class='wide'>Current sediment load fields:</div>
-      <%= number_with_precision(@current_sediment_load_fields, :precision => 2, delimiter: ',') %>
-      tons
-    </li>
-    <li>
-      <div class='wide'>Current sediment load for Animal HQ:</div>
-      <%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
-    </li>
-    <li>
       <div class='wide'>Baseline sediment load fields:</div>
       <%= number_with_precision(@baseline_sediment_load_fields, :precision => 2, delimiter: ',') %>
       tons
     </li>
     <li>
-      <div class='wide'>Planned sediment load fields:</div>
-      <%= 'TBD' %>
+      <div class='wide'>Current sediment load fields:</div>
+      <%= number_with_precision(@current_sediment_load_fields, :precision => 2, delimiter: ',') %>
+      tons
+    </li>
+    <li>
+      <div class='wide'>Future sediment load fields:</div>
+      <%= number_with_precision(@future_sediment_load_fields, :precision => 2, delimiter: ',') %>
+    </li>
+    <li>
+      <div class='wide'>Current sediment load for Animal HQ:</div>
+      <%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
     </li>
 
 
@@ -157,12 +157,12 @@
     </li>
     <li>
       <div class='wide'>Buffered area:</div>
-      <%= @farm.buffered_area %>
+      <%= number_with_precision(@farm.buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
       <%= 'ac' unless @farm.buffered_area == 'N/A' %>
     </li>
     <li>
       <div class='wide'>Wetland area:</div>
-      <%= @farm.wetland_area %>
+      <%= number_with_precision(@farm.wetland_area, :precision => 2, :separator => '.', :delimiter => ',') %>
       <%= 'ac' unless @farm.wetland_area == 'N/A' %>
     </li>
     <li>
