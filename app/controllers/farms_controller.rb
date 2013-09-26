@@ -96,6 +96,8 @@ class FarmsController < ApplicationController
         @current_sediment_load_animals += @current_totals[:current_load_sediment]
       end
 
+      @meet_baseline = baseline_test(@farm)
+
     end
 
 
