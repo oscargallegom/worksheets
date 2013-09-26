@@ -2,31 +2,51 @@ module BmpCalculations
 
   def computeBmpCalculations(field)
 
+    # each strip should have at least one crop rotation
+    is_current_data_valid= true
+    is_future_data_valid =true
+    field.strips.each do |strip|
+      if (strip.crop_rotations.empty?)
+        if (strip.is_future?)
+          is_future_data_valid = false
+        else
+          is_current_data_valid =false
+        end
+      end
+    end
+
+
     # call NTT to get the latest values
     total_n_per_acre = 0
     total_p_per_acre = 0
     total_sediment_per_acre = 0
 
-    success, content = callNtt(field, false)
+    @ntt_results = Hash.new
 
-    if (success)
-      @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-      if (@ntt_results['ErrorCode'] != '0')
-        raise 'Error calling NTT.'
-      else
-        total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
-        total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
-        total_sediment_per_acre = @ntt_results['Sediment'].to_f
+    if (is_current_data_valid)
 
-        # add the crops information
-        crops = Array.new()
-        content.xpath('//Crops').each do |crop|
-          crops.push(Hash.from_xml(crop.to_s)['Crops'])
+      success, content = callNtt(field, false)
+
+      if (success)
+        @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+        if (@ntt_results['ErrorCode'] != '0')
+          raise 'Error calling NTT.'
+        else
+          total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
+          total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
+          total_sediment_per_acre = @ntt_results['Sediment'].to_f
+
+          # add the crops information
+          crops = Array.new()
+          content.xpath('//Crops').each do |crop|
+            crops.push(Hash.from_xml(crop.to_s)['Crops'])
+          end
+          @ntt_results[:crops] = crops
         end
-        @ntt_results[:crops] = crops
+      else
+        raise 'Error calling NTT: ' + content.to_s
       end
-    else
-      raise 'Error calling NTT: ' + content.to_s
+
     end
 
 
@@ -35,26 +55,31 @@ module BmpCalculations
     total_p_per_acre_future = 0
     total_sediment_per_acre_future = 0
 
-    success, content = callNtt(field, true)
 
-    if (success)
-      @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-      if (@ntt_results_future['ErrorCode'] != '0')
-        raise 'Error calling NTT (future).'
-      else
-        total_n_per_acre_future = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
-        total_p_per_acre_future = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
-        total_sediment_per_acre_future = @ntt_results['Sediment'].to_f
+    @ntt_results_future =  Hash.new
 
-        # add the crops information
-        crops = Array.new()
-        content.xpath('//Crops').each do |crop|
-          crops.push(Hash.from_xml(crop.to_s)['Crops'])
+    if is_future_data_valid
+      success, content = callNtt(field, true)
+
+      if (success)
+        @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+        if (@ntt_results_future['ErrorCode'] != '0')
+          raise 'Error calling NTT (future).'
+        else
+          total_n_per_acre_future = @ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f
+          total_p_per_acre_future = @ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f
+          total_sediment_per_acre_future = @ntt_results_future['Sediment'].to_f
+
+          # add the crops information
+          crops = Array.new()
+          content.xpath('//Crops').each do |crop|
+            crops.push(Hash.from_xml(crop.to_s)['Crops'])
+          end
+          @ntt_results_future[:crops] = crops
         end
-        @ntt_results_future[:crops] = crops
+      else
+        raise 'Error calling NTT (future): ' + content.to_s
       end
-    else
-      raise 'Error calling NTT (future): ' + content.to_s
     end
 
     # TODO: remove test values
@@ -281,10 +306,6 @@ module BmpCalculations
 
     end
 
-    # data check: Sum of upland acres treated cannot be greater than sum of unconverted acres.
-    # TODO: check this!
-    (fencing_functional_acres + grass_buffer_functional_acres + forest_buffer_functional_acres +fertilizer_buffer_functional_acres) * 4 + field.wetland_treated_area.to_f
-
     wetland_acres = 0
     wetland_forest_n_conversion= 0
     wetland_forest_p_conversion = 0
@@ -481,10 +502,9 @@ module BmpCalculations
     upland_wetland_treated_area_p = [field.wetland_treated_area.to_f, total_unconverted_acres - grass_fence_treated_upland_acres_p - forest_fence_treated_upland_acres_p - grass_buffer_treated_upland_acres_p].min
     upland_wetland_treated_area_sediment = [field.wetland_treated_area.to_f, total_unconverted_acres - grass_fence_treated_upland_acres_sediment - forest_fence_treated_upland_acres_sediment - grass_buffer_treated_upland_acres_sediment].min
 
-    # TODO: check the formula below, should it be !field.is_wetland  ???
-    upland_wetland_n_reduction = field.is_wetland ? 0 : [0, upland_wetland_treated_area_n * n_reduction_for_wetland * total_adjusted_n_per_acre].max
-    upland_wetland_p_reduction = field.is_wetland ? 0 : [0, upland_wetland_treated_area_p * p_reduction_for_wetland * total_adjusted_p_per_acre].max
-    upland_wetland_sediment_reduction = field.is_wetland ? 0 : [0, upland_wetland_treated_area_sediment * sediment_reduction_for_wetland * total_adjusted_sediment_per_acre].max
+    upland_wetland_n_reduction = !field.is_wetland ? 0 : [0, upland_wetland_treated_area_n * n_reduction_for_wetland * total_adjusted_n_per_acre].max
+    upland_wetland_p_reduction = !field.is_wetland ? 0 : [0, upland_wetland_treated_area_p * p_reduction_for_wetland * total_adjusted_p_per_acre].max
+    upland_wetland_sediment_reduction = !field.is_wetland ? 0 : [0, upland_wetland_treated_area_sediment * sediment_reduction_for_wetland * total_adjusted_sediment_per_acre].max
 
     # future
     # Calculate upland wetland treated area. use user entered acres unless sum of upland acre reductions is greater than unconverted acres
