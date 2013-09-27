@@ -534,7 +534,7 @@ module BmpCalculations
       field.bmps.each do |bmp|
         bmp_type_id = bmp.bmp_type_id
 
-        raise '=' + bmp_type_id + ' - ' + field_type_id + ' - ' + hgmr_code
+        raise '=' + bmp_type_id.to_s + ' - ' + field_type_id.to_s + ' - ' + hgmr_code.to_s
 
         bmp_efficiency = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
 
