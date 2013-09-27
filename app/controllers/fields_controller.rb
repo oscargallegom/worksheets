@@ -84,7 +84,7 @@ class FieldsController < ApplicationController
 
       # does the field meet baseline - only for Maryland
       if (@farm.site_state_id == 21)
-        flash.now[:meet_baseline] ||= []
+        flash.now[:meet_baseline] = Hash.new
 
         # if crop or hay
         if (@field.field_type_id == 1 || @field.field_type_id == 3)
@@ -136,7 +136,7 @@ class FieldsController < ApplicationController
 
     # does the field meet baseline - only for Virginia
     if (@farm.site_state_id == 47)
-      flash.now[:meet_baseline] ||= []
+      flash.now[:meet_baseline] = Hash.new
 
       # if field is pasture
       if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
