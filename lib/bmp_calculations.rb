@@ -544,6 +544,8 @@ module BmpCalculations
         new_total_p_per_acre = new_total_p_per_acre * (1 - p_reduction)
         new_total_sediment_per_acre = new_total_sediment_per_acre * (1 - sediment_reduction)
 
+        raise bmp_type_id + ' - ' + field_type_id + ' - ' + hgmr_code
+
       end
     end
 
