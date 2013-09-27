@@ -69,7 +69,7 @@
       <% if flash[:error] %>
           <p class="error"><%= flash[:error] %></p>
       <% end %>
-      <% if flash[:meet_baseline] %>
+      <% if flash[:meet_baseline] and flash[:meet_baseline].length>0 %>
           <p class="alert"><%= flash[:meet_baseline].join("<br>").html_safe %></p>
       <% end %>
 
