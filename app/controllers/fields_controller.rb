@@ -74,7 +74,7 @@ class FieldsController < ApplicationController
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
       rescue Exception => e
-        flash[:error] = e.message
+        flash[:error] = 'Error: ' + e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
       @watershed_segment = WatershedSegment.where(:id => @field.watershed_segment_id).first
@@ -246,7 +246,7 @@ class FieldsController < ApplicationController
         if !params[:addCropForStrip].blank?
           strip_index = params[:addCropForStrip].to_i
           format.html { redirect_to new_farm_field_strip_crop_rotation_url(@farm, @field, strip_index, :step => @step), notice: 'Field was successfully updated.' }
-        elsif (@step=='2' && @field.field_type.id == 5) # non-managed land and step 2: got back to farm summary
+        elsif (@step=='2' && @field.field_type_id == 5) # non-managed land and step 2: got back to farm summary
           format.html { redirect_to farm_url(@farm), notice: 'Field was successfully updated.' }
         else
           #format.html #{ redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }

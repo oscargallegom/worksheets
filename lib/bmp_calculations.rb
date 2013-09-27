@@ -543,9 +543,6 @@ module BmpCalculations
         new_total_n_per_acre = new_total_n_per_acre * (1 - n_reduction)
         new_total_p_per_acre = new_total_p_per_acre * (1 - p_reduction)
         new_total_sediment_per_acre = new_total_sediment_per_acre * (1 - sediment_reduction)
-
-
-
       end
     end
 
