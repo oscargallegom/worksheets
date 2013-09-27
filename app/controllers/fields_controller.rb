@@ -209,8 +209,18 @@ class FieldsController < ApplicationController
     # field = @farm.fields.find(params[:id])
     @step = params[:field][:step] || '1'
 
+
+
+
     respond_to do |format|
+
       if @field.update_attributes(params[:field])
+
+        # if Baseline BMPs, validate converted acres
+        if (@step=='4' && !is_converted_acres_valid(@field))
+          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 4), error: 'Total converted acre is greater than the field area. Please edit the buffer area.' }
+        end
+
         # if step 2 and the user click 'add a crop to rotation'
         if !params[:addCropForStrip].blank?
           strip_index = params[:addCropForStrip].to_i

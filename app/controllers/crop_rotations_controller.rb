@@ -19,7 +19,7 @@ class CropRotationsController < ApplicationController
     add_breadcrumb 'Strip ' + (@field.strips.find_index(@strip) + 1).to_s
     add_breadcrumb 'Crop ' + @crop_rotation.id.to_s
 
-    @step = params[:step] || '3'
+    @step = @strip.is_future ? '6' : '3'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -29,7 +29,7 @@ class CropRotationsController < ApplicationController
   # GET /farms/1/fields/1/strips/1/crop_rotations/1
   def show
 
-    @step = params[:step] || '3'
+    @step = @strip.is_future ? '6' : '3'
 
     ################  TEST
     if session[:debug]
@@ -64,7 +64,7 @@ class CropRotationsController < ApplicationController
 
   # POST /farms/1/fields/1/strips/1/crop_rotations/1
   def create
-    @step = params[:step] || '3'
+    @step = @strip.is_future ? '6' : '3'
     respond_to do |format|
       # TODO: handle second button
       if @crop_rotation.save
@@ -78,7 +78,7 @@ class CropRotationsController < ApplicationController
   # PUT /farms/1/fields/1/strips/1/crop_rotations/1
   def update
     # TODO: handle second button
-    @step = params[:step] || '3'
+    @step = @strip.is_future ? '6' : '3'
     respond_to do |format|
       if @crop_rotation.update_attributes(params[:crop_rotation])
         if (params[:nextPage] == 'Save & Continue')
@@ -106,15 +106,15 @@ class CropRotationsController < ApplicationController
 
   # /farms/1/fields/1/strips/1/crop_rotations/1
   def duplicate
+    @step = @strip.is_future ? '6' : '3'
     @crop_rotation_dup = @crop_rotation.amoeba_dup
     respond_to do |format|
       if @crop_rotation_dup.save(:validate => false)
-        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 3), notice: 'Crop was successfully duplicated.' }
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Crop was successfully duplicated.' }
       else
         format.html { redirect_to farms_url, notice: 'Could not duplicate crop rotation.' }
       end
     end
-
   end
 
 end

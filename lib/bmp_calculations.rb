@@ -56,7 +56,7 @@ module BmpCalculations
     total_sediment_per_acre_future = 0
 
 
-    @ntt_results_future =  Hash.new
+    @ntt_results_future = Hash.new
 
     if is_future_data_valid
       success, content = callNtt(field, true)
@@ -575,9 +575,9 @@ module BmpCalculations
 
     # if streambank restoration in place
     if (field.is_streambank_restoration)
-      total_n_for_unconverted_acre = total_n_for_unconverted_acre - (field.streambank_restoration_length * 0.2)
-      total_p_for_unconverted_acre = total_p_for_unconverted_acre - (field.streambank_restoration_length * 0.068)
-      total_sediment_for_unconverted_acre = total_sediment_for_unconverted_acre - (field.streambank_restoration_length * 0.027125)
+      total_n_for_unconverted_acre = [0, total_n_for_unconverted_acre - (field.streambank_restoration_length * 0.2)].max # cannot be negative
+      total_p_for_unconverted_acre = [0, total_p_for_unconverted_acre - (field.streambank_restoration_length * 0.068)].max # cannot be negative
+      total_sediment_for_unconverted_acre = [0, total_sediment_for_unconverted_acre - (field.streambank_restoration_length * 0.027125)].max # cannot be negative
     end
 
     # if future streambank restoration in place
@@ -854,61 +854,97 @@ module BmpCalculations
     farm.fields.each do |field|
 
 
-    if (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3) # perform calculations
+      if (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3) # perform calculations
 
 
-      # does the field meet baseline - only for Maryland
-      if (field.farm.site_state_id == 21)
+        # does the field meet baseline - only for Maryland
+        if (field.farm.site_state_id == 21)
 
-        # if crop or hay
-        if (field.field_type_id == 1 || field.field_type_id == 3)
-          # check if at least one manure fertilizer incorporated
-          is_manure_fertilizer_incorporated = false
-          field.strips.each do |strip|
-            strip.crop_rotations.each do |crop_rotation|
-              crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-                if (manure_fertilizer_application.is_incorporated)
-                  # this is actually valid
-                  #is_manure_fertilizer_incorporated = true
+          # if crop or hay
+          if (field.field_type_id == 1 || field.field_type_id == 3)
+            # check if at least one manure fertilizer incorporated
+            is_manure_fertilizer_incorporated = false
+            field.strips.each do |strip|
+              strip.crop_rotations.each do |crop_rotation|
+                crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+                  if (manure_fertilizer_application.is_incorporated)
+                    # this is actually valid
+                    #is_manure_fertilizer_incorporated = true
+                  end
                 end
               end
             end
+            if (is_manure_fertilizer_incorporated)
+              return false
+            end
           end
-          if (is_manure_fertilizer_incorporated)
+          # if field is pasture
+          if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
             return false
           end
-        end
-        # if field is pasture
-        if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-          return false
-        end
-        # if crop or pasture or hay
-        if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
-          is_commercial_or_manure_fertilizer = false
-          field.strips.each do |strip|
-            strip.crop_rotations.each do |crop_rotation|
-              if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
-                is_commercial_or_manure_fertilizer = true
+          # if crop or pasture or hay
+          if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
+            is_commercial_or_manure_fertilizer = false
+            field.strips.each do |strip|
+              strip.crop_rotations.each do |crop_rotation|
+                if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
+                  is_commercial_or_manure_fertilizer = true
+                end
               end
             end
-          end
-          if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
-            return false
-          end
-          # also soil conservation BMP needs to be checked
-          is_soil_conservation = false
-          field.bmps.each do |bmp|
-            if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-              is_soil_conservation = true
+            if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
+              return false
             end
-          end
-          if (!is_soil_conservation)
-            return false
+            # also soil conservation BMP needs to be checked
+            is_soil_conservation = false
+            field.bmps.each do |bmp|
+              if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
+                is_soil_conservation = true
+              end
+            end
+            if (!is_soil_conservation)
+              return false
+            end
           end
         end
       end
-      end
       return is_meet_baseline
+    end
+
+  end
+
+  def is_converted_acres_valid(field)
+    # for pasture, hay or crop
+    if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
+
+      # if permanent pasture and fencing in place
+      if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
+        fencing_acres = field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
+      end
+      # is grass buffer
+      if (field.is_grass_buffer?)
+        grass_buffer_acres = field.grass_buffer_area.to_f
+      end
+      # if forest buffer
+      if (field.is_forest_buffer?)
+        forest_buffer_acres = field.forest_buffer_area.to_f
+      end
+      # if fertilizer setback
+      if (field.is_fertilizer_application_setback?)
+        fertilizer_buffer_acres = field.fertilizer_application_setback_area.to_f
+      end
+      # is wetland
+      if (field.is_wetland)
+        wetland_acres = field.wetland_area.to_f
+      end
+      # other land conversion
+      other_land_use_conversion_acres = field.other_land_use_conversion_acres.to_f
+
+
+      total_converted_acres = fencing_acres.to_f + grass_buffer_acres.to_f + forest_buffer_acres.to_f + fertilizer_buffer_acres.to_f + wetland_acres.to_f + other_land_use_conversion_acres.to_f
+
+      field.acres.to_f - total_converted_acres >= 0
+
     end
 
   end
