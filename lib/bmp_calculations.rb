@@ -854,7 +854,7 @@ module BmpCalculations
     farm.fields.each do |field|
 
 
-      if (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3) # perform calculations
+      if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3) # perform calculations
 
 
         # does the field meet baseline - only for Maryland
