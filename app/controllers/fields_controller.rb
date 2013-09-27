@@ -107,8 +107,8 @@ class FieldsController < ApplicationController
         if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
           flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
         end
-        # if crop or pasture or hay
-        if (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)
+        # if crop or hay
+        if (@field.field_type_id == 1 || @field.field_type_id == 3)
           is_commercial_or_manure_fertilizer = false
           @field.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
@@ -134,6 +134,23 @@ class FieldsController < ApplicationController
       end
     end
 
+    # does the field meet baseline - only for Virginia
+    if (@farm.site_state_id == 47)
+      flash.now[:meet_baseline] ||= []
+
+      # if field is pasture
+      if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
+        flash.now[:meet_baseline] << 'According to Virginia Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
+      end
+      # if crop or hay
+      if (@field.field_type_id == 1 || @field.field_type_id == 3)
+        if (@field.is_pasture_adjacent_to_stream && (!@field.is_forest_buffer && !@field.is_grass_buffer && !@field.is_fertilizer_application_setback))
+          flash.now[:meet_baseline] << 'According to Virginia Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a "directed" application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams.'
+        end
+      end
+    end
+
+
     if (@step =='5' && (@field.field_type.id == 4)) # perform calculations for animal confinement
       begin
         @current_totals = computeLivestockBmpCalculations(@field)
@@ -156,8 +173,14 @@ class FieldsController < ApplicationController
           flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place'
         end
       end
+      # does the field meet baseline - only for Virginia
+      if (@farm.site_state_id == 47)
+        flash.now[:meet_baseline] ||= []
+        if (!@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system) || (!@field.field_poultry.empty? && (!@field.is_poultry_animal_waste_management_system))
+          flash.now[:meet_baseline] << 'Per Virginia Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule.'
+        end
+      end
     end
-
 
     @other_fields = []
     @farm.fields.each do |field|
@@ -208,8 +231,6 @@ class FieldsController < ApplicationController
     # @farm =Project.find(params[:farm_id])
     # field = @farm.fields.find(params[:id])
     @step = params[:field][:step] || '1'
-
-
 
 
     respond_to do |format|
@@ -340,7 +361,7 @@ class FieldsController < ApplicationController
 
     @field.is_forest_buffer_future = @field.is_forest_buffer
     @field.forest_buffer_average_width_future = @field.forest_buffer_average_width
-    @field.forest_buffer_length_future =  @field.forest_buffer_length
+    @field.forest_buffer_length_future = @field.forest_buffer_length
     @field.is_forest_buffer_planned_future = @field.is_forest_buffer_planned
     @field.is_grass_buffer_future = @field.is_grass_buffer
     @field.grass_buffer_average_width_future = @field.grass_buffer_average_width
@@ -351,8 +372,8 @@ class FieldsController < ApplicationController
     @field.wetland_treated_area_future =@field.wetland_treated_area
     @field.is_wetland_planned_future = @field.is_wetland_planned
     @field.is_streambank_restoration_future = @field.is_streambank_restoration
-    @field.streambank_restoration_length_future =  @field.streambank_restoration_length
-    @field.is_streambank_restoration_planned_future =  @field.is_streambank_restoration_planned
+    @field.streambank_restoration_length_future = @field.streambank_restoration_length
+    @field.is_streambank_restoration_planned_future = @field.is_streambank_restoration_planned
     @field.is_streambank_fencing_in_place_future= @field.is_streambank_fencing_in_place
     @field.distance_fence_stream_future=@field.distance_fence_stream
     @field.vegetation_type_fence_stream_id_future= @field.vegetation_type_fence_stream_id
@@ -369,7 +390,7 @@ class FieldsController < ApplicationController
     # copy BMPs
     @field.future_bmps.destroy_all
 
-    @field.bmps.each do|bmp|
+    @field.bmps.each do |bmp|
       @field.future_bmps.build(:bmp_type_id => bmp.bmp_type_id, :is_future => bmp.is_future)
     end
 

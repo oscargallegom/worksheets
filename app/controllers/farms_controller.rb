@@ -52,7 +52,7 @@ class FarmsController < ApplicationController
     @fields.each do |field|
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         begin
-        @current_totals = computeBmpCalculations(field)
+          @current_totals = computeBmpCalculations(field)
         rescue Exception => e
           flash[:error] = e.message
           @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
@@ -68,24 +68,24 @@ class FarmsController < ApplicationController
 
         watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
         if (!watershed_segment.nil?)
-        @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
-        @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
-        @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
+          @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
+          @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
+          @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
 
 
-        if field.tmdl.nil?
-          @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
-          @baseline_n_load_fields += watershed_segment[:n_pasture_baseline] * field.acres if field.field_type_id == 2
-          @baseline_n_load_fields += watershed_segment[:n_hay_baseline] * field.acres if field.field_type_id == 3
+          if field.tmdl.nil?
+            @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
+            @baseline_n_load_fields += watershed_segment[:n_pasture_baseline] * field.acres if field.field_type_id == 2
+            @baseline_n_load_fields += watershed_segment[:n_hay_baseline] * field.acres if field.field_type_id == 3
 
-          @baseline_p_load_fields += watershed_segment[:p_crop_baseline] * field.acres if field.field_type_id == 1
-          @baseline_p_load_fields += watershed_segment[:p_pasture_baseline] * field.acres if field.field_type_id == 2
-          @baseline_p_load_fields += watershed_segment[:p_hay_baseline] * field.acres if field.field_type_id == 3
+            @baseline_p_load_fields += watershed_segment[:p_crop_baseline] * field.acres if field.field_type_id == 1
+            @baseline_p_load_fields += watershed_segment[:p_pasture_baseline] * field.acres if field.field_type_id == 2
+            @baseline_p_load_fields += watershed_segment[:p_hay_baseline] * field.acres if field.field_type_id == 3
 
-        else # use Maryland TMDL
-          @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
-          @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
-        end
+          else # use Maryland TMDL
+            @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
+            @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
+          end
         end
       end
       # animals
@@ -272,14 +272,14 @@ class FarmsController < ApplicationController
 
         arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
           #if !arrFieldcompname[index].eql?('Water') # ignore soil if water
-            @listSoils << {
-                :percent => arrFieldpctsoiltype[index],
-                :mukey => arrFieldmukey[index],
-                :niccdcdpct => arrFieldniccdcdpct[index],
-                :muname => arrFieldmuname[index],
-                :hydgrpdcd => arrFieldhydgrp[index],
-                :musym => arrFieldmusym[index]
-            }
+          @listSoils << {
+              :percent => arrFieldpctsoiltype[index],
+              :mukey => arrFieldmukey[index],
+              :niccdcdpct => arrFieldniccdcdpct[index],
+              :muname => arrFieldmuname[index],
+              :hydgrpdcd => arrFieldhydgrp[index],
+              :musym => arrFieldmusym[index]
+          }
           #end
         end
 
@@ -305,7 +305,7 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
 
           # getSoilData(1726303, 'Meadowville', 'B') #
-          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol,  @field.soils[i].hydrologic_group)
+          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
 
           if data
             @field.soils[i].component_name = data[:component_name]
@@ -371,13 +371,13 @@ class FarmsController < ApplicationController
     client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
 
     begin
-    response = client.call(:run_query, message: {"Query" => sql})
-    if response.success?
-      return response.to_array(:run_query_response, :run_query_result, :diffgram, :new_data_set, :table).first
-    end
-    rescue      # the SOAP call failed
-        return nil
+      response = client.call(:run_query, message: {"Query" => sql})
+      if response.success?
+        return response.to_array(:run_query_response, :run_query_result, :diffgram, :new_data_set, :table).first
       end
+    rescue # the SOAP call failed
+      return nil
+    end
   end
 
 
