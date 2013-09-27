@@ -942,7 +942,7 @@ module BmpCalculations
 
       total_converted_acres = fencing_acres.to_f + grass_buffer_acres.to_f + forest_buffer_acres.to_f + fertilizer_buffer_acres.to_f + wetland_acres.to_f + other_land_use_conversion_acres.to_f
 
-      field.acres.to_f - total_converted_acres >= 0
+      field.acres.to_f - total_converted_acres.to_f >= 0
 
     end
 
