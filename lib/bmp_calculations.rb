@@ -398,8 +398,8 @@ module BmpCalculations
     field_type_id = field.field_type_id
     if (field.field_type_id == 1 && !field.crop_type_id.nil?) # if crop, check for high/low till
       field_type_id = field.crop_type_id + 10 # 11 = high till, 12 = low till
-    else
-      field_type_id = 11 # default to high till until the user makes a selection
+    # else
+      # field_type_id = 11 # default to high till until the user makes a selection
     end
 
     hgmr_code = field.watershed_segment.hgmr_code
@@ -533,8 +533,6 @@ module BmpCalculations
     if (!field.bmps.empty?)
       field.bmps.each do |bmp|
         bmp_type_id = bmp.bmp_type_id
-
-        raise '=' + bmp_type_id.to_s + ' - ' + field_type_id.to_s + ' - ' + hgmr_code.to_s
 
         bmp_efficiency = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
 
