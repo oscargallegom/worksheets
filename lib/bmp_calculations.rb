@@ -534,6 +534,8 @@ module BmpCalculations
       field.bmps.each do |bmp|
         bmp_type_id = bmp.bmp_type_id
 
+        raise bmp_type_id + ' - ' + field_type_id + ' - ' + hgmr_code
+
         bmp_efficiency = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
 
         n_reduction = bmp_efficiency[:n_reduction].to_f
@@ -544,7 +546,7 @@ module BmpCalculations
         new_total_p_per_acre = new_total_p_per_acre * (1 - p_reduction)
         new_total_sediment_per_acre = new_total_sediment_per_acre * (1 - sediment_reduction)
 
-        raise bmp_type_id + ' - ' + field_type_id + ' - ' + hgmr_code
+
 
       end
     end
