@@ -264,7 +264,7 @@
     </div>
     <li><%= f.link_to_add "Add BMP", :bmps, :class => 'button', :id => 'addBmpBtn', :data => {:target => "#div_bmp"} %></li>
 
-
+    <% if @field.is_pasture_adjacent_to_stream? %>
     <li><h2 class='sectionHeading'>Streambank restoration</h2></li>
     <li>
       <%= f.label :is_streambank_restoration, 'Streambank restoration in place:', :class => 'wide' %>
@@ -283,6 +283,7 @@
         <%= f.check_box :is_streambank_restoration_planned %>
       </li>
     </div>
+        <%end %>
 
     <li><h2 class='sectionHeading'>Planned changes to crop management</h2></li>
     <li>If any aspects of your crop management are not yet implemented and were entered in order to meet baseline,
