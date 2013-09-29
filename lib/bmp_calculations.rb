@@ -914,8 +914,6 @@ module BmpCalculations
 
   def is_converted_acres_valid(field)
     # for pasture, hay or crop
-    if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
-
       # if permanent pasture and fencing in place
       if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
         fencing_acres = field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
@@ -945,8 +943,6 @@ module BmpCalculations
       field.acres.to_f - total_converted_acres.to_f >= 0
 
     end
-
-  end
 
 end
 

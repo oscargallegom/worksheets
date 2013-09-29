@@ -238,7 +238,7 @@ class FieldsController < ApplicationController
       if @field.update_attributes(params[:field])
 
         # if Baseline BMPs, validate converted acres
-        if (@step=='4' && !is_converted_acres_valid(@field))
+        if (@step=='4' && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3) && !is_converted_acres_valid(@field))
           format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 4), error: 'Total converted acre is greater than the field area. Please edit the buffer area.' }
         end
 
