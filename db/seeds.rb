@@ -941,6 +941,8 @@ Crop.create!({:id => 111, :code => 9,  :name => 'Fallow', :crop_category_id => 2
 Crop.create!({:id => 112, :code => 128,  :name => 'ForrestEvergreen', :crop_category_id => 20}, :without_protection => true)
 Crop.create!({:id => 113, :code => 144,  :name => 'Nursery Evergreen Tree Stock', :crop_category_id => 20}, :without_protection => true)
 
+# added on 09/28/2013
+Crop.create!({:id => 114, :code => 149,  :name => 'Triticale', :crop_category_id => 2}, :without_protection => true)
 
 
 PlantingMethod.delete_all
