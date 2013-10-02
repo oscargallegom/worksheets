@@ -4,9 +4,9 @@
     <li><%= link_to 'Soil', edit_farm_field_path(@farm, @field, :step => 2) %></li>
     <li
     <% if (@step=='3') %> class="selected"
-    <% end %>><%= link_to 'Baseline Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
-    <li><%= link_to 'Baseline BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
-    <li><%= link_to 'Baseline Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
+    <% end %>><%= link_to 'Current Crop Management', edit_farm_field_path(@farm, @field, :step => 3) %></li>
+    <li><%= link_to 'Current BMPs', edit_farm_field_path(@farm, @field, :step => 4) %></li>
+    <li><%= link_to 'Current Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
     <li
     <% if (@step=='6') %> class="selected"
     <% end %> ><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130924000137) do
+ActiveRecord::Schema.define(:version => 20131001011751) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -299,6 +299,24 @@ ActiveRecord::Schema.define(:version => 20130924000137) do
     t.boolean  "is_other_land_use_conversion_planned_future"
     t.decimal  "grass_buffer_average_width_future"
     t.decimal  "grass_buffer_length_future"
+    t.boolean  "is_livestock_animal_waste_management_system_future"
+    t.boolean  "is_livestock_mortality_composting_future"
+    t.boolean  "is_livestock_plastic_permeable_lagoon_cover_future"
+    t.boolean  "is_livestock_phytase_future"
+    t.boolean  "is_livestock_dairy_precision_feeding_future"
+    t.boolean  "is_livestock_barnyard_runoff_controls_future"
+    t.boolean  "is_livestock_water_control_structure_future"
+    t.boolean  "is_livestock_treatment_wetland_future"
+    t.boolean  "is_poultry_animal_waste_management_system_future"
+    t.boolean  "is_poultry_mortality_composting_future"
+    t.boolean  "is_poultry_biofilters_future"
+    t.boolean  "is_poultry_vegetated_environmental_buffer_future"
+    t.boolean  "is_poultry_phytase_future"
+    t.boolean  "is_poultry_heavy_use_pads_future"
+    t.boolean  "is_poultry_barnyard_runoff_controls_future"
+    t.boolean  "is_poultry_water_control_structure_future"
+    t.boolean  "is_poultry_treatment_wetland_future"
+    t.boolean  "is_poultry_litter_treatment_future"
   end
 
   create_table "future_bmps", :force => true do |t|

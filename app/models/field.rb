@@ -57,8 +57,13 @@ class Field < ActiveRecord::Base
   attr_accessible :planned_management_details_future
 
   attr_accessible :is_livestock_implemented_nutrient_plan, :is_livestock_implemented_soil_water_plan, :is_livestock_properly_sized_maintained
-  attr_accessible :is_livestock_animal_waste_management_system, :is_livestock_mortality_composting, :is_livestock_plastic_permeable_lagoon_cover, :is_livestock_phytase, :is_livestock_dairy_precision_feeding, :is_livestock_barnyard_runoff_controls, :is_livestock_water_control_structure, :is_livestock_treatment_wetland
+   attr_accessible :is_livestock_animal_waste_management_system, :is_livestock_mortality_composting, :is_livestock_plastic_permeable_lagoon_cover, :is_livestock_phytase, :is_livestock_dairy_precision_feeding, :is_livestock_barnyard_runoff_controls, :is_livestock_water_control_structure, :is_livestock_treatment_wetland
   attr_accessible :is_poultry_animal_waste_management_system, :is_poultry_mortality_composting, :is_poultry_litter_treatment, :is_poultry_biofilters, :is_poultry_vegetated_environmental_buffer, :is_poultry_phytase, :is_poultry_heavy_use_pads, :is_poultry_barnyard_runoff_controls, :is_poultry_water_control_structure, :is_poultry_treatment_wetland
+
+  # future
+  attr_accessible :is_livestock_animal_waste_management_system_future, :is_livestock_mortality_composting_future, :is_livestock_plastic_permeable_lagoon_cover_future, :is_livestock_phytase_future, :is_livestock_dairy_precision_feeding_future, :is_livestock_barnyard_runoff_controls_future, :is_livestock_water_control_structure_future, :is_livestock_treatment_wetland_future
+  attr_accessible :is_poultry_animal_waste_management_system_future, :is_poultry_mortality_composting_future, :is_poultry_litter_treatment_future, :is_poultry_biofilters_future, :is_poultry_vegetated_environmental_buffer_future, :is_poultry_phytase_future, :is_poultry_heavy_use_pads_future, :is_poultry_barnyard_runoff_controls_future, :is_poultry_water_control_structure_future, :is_poultry_treatment_wetland_future
+
 
   attr_accessible :soils_attributes
   accepts_nested_attributes_for :soils, :allow_destroy => true
