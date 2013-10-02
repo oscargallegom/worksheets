@@ -954,11 +954,6 @@ PlantingMethod.create!({:id => 668,  :name => '30 inch Row Crop Planter'}, :with
 PlantingMethod.create!({:id => 767,  :name => '36 inch Row Crop Planter'}, :without_protection => true)
 PlantingMethod.create!({:id => 769,  :name => '15/30 inch Row Crop Planter (Splitter)'}, :without_protection => true)
 
-PTestMethod.delete_all
-PTestMethod.create!({:id => 1,  :name => 'Method 1'}, :without_protection => true)
-PTestMethod.create!({:id => 2,  :name => 'Method 2'}, :without_protection => true)
-PTestMethod.create!({:id => 3,  :name => 'Method 3'}, :without_protection => true)
-
 TillageOperationType.delete_all
 TillageOperationType.create!({:id => 157,  :name => 'Row Crop Cultivator'}, :without_protection => true)
 TillageOperationType.create!({:id => 165,  :name => 'Culti-Packer Pulverizer'}, :without_protection => true)
