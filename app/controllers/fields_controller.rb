@@ -156,12 +156,8 @@ class FieldsController < ApplicationController
         @current_totals = computeLivestockBmpCalculations(@field)
       rescue Exception => e
         flash[:error] = e.message
-        #@current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
+        @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
-      #@baseline_lookup = BaselineLookup.where(:state_id => @farm.site_state_id, :field_type_id => @field.field_type_id, :major_basin => @field.watershed_segment.major_basin).first
-      #if (@baseline_lookup.nil?)
-      #  flash[:error] = "Could not retrieve baseline data." if @baseline_lookup.nil?
-      #end
 
       # does the field meet baseline - only for Maryland
       if (@farm.site_state_id == 21)

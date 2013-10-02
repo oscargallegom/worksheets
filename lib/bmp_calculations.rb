@@ -148,14 +148,14 @@ module BmpCalculations
         stream_hyo_sediment_conversion_future = field.watershed_segment.total_sediment_hyo * fencing_acres_future
       end
 
-      if (field.distance_fence_stream >= 35 && field.distance_fence_stream <= 100)
+      if (!field.distance_fence_stream.nil? && field.distance_fence_stream >= 35 && field.distance_fence_stream <= 100)
         fencing_functional_acres = fencing_acres
-      elsif (field.distance_fence_stream > 100)
+      elsif (!field.distance_fence_stream.nil? && field.distance_fence_stream > 100)
         fencing_functional_acres = field.fence_length.to_f * 100.0 / 43560.0
       end
-      if (field.distance_fence_stream_future >= 35 && field.distance_fence_stream_future <= 100)
+      if (!field.distance_fence_stream_future.nil? && field.distance_fence_stream_future >= 35 && field.distance_fence_stream_future <= 100)
         fencing_functional_acres_future = fencing_acres_future
-      elsif (field.distance_fence_stream_future > 100)
+      elsif (!field.distance_fence_stream_future.nil? && field.distance_fence_stream_future > 100)
         fencing_functional_acres_future = field.fence_length.to_f * 100.0 / 43560.0
       end
     end
