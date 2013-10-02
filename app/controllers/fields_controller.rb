@@ -69,14 +69,14 @@ class FieldsController < ApplicationController
     @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
 
     if ((@step =='5' || @step == '8') && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)) # perform calculations
-      #begin
+      begin
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
-      #rescue Exception => e
+      rescue Exception => e
         flash[:error] = 'Error: ' + e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
-      #end
+      end
       @watershed_segment = WatershedSegment.where(:id => @field.watershed_segment_id).first
       if (@watershed_segment.nil?)
         flash[:error] = "Could not retrieve baseline data." if @watershed_segment.nil?
