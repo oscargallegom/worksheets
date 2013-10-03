@@ -10,6 +10,9 @@
           </ol>
         </fieldset>
       </div>
+
+
+
       <div style="clear: both"></div>
     </div>
 
@@ -17,28 +20,48 @@
 <% else %>
 
     <div class="sectionRest clearfix nn-form">
-
       <div>
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Current Load (EOS):</h2></li>
-            <li><span class='wide'>Nitrogen:</span>
-              <%= number_with_precision(@current_totals[:new_load_nitrogen], :precision => 2, delimiter: ',') %>
-              lbs per year
-            </li>
-            <li><span class='wide'>Phosphorus:</span>
-              <%= number_with_precision(@current_totals[:new_load_phosphorus], :precision => 2, delimiter: ',') %>
-              lbs per year
-            </li>
-            <li><span class='wide'>Sediment:</span>
-              <%= number_with_precision(@current_totals[:new_load_sediment], :precision => 2, delimiter: ',') %>
-              tons per year
-            </li>
+
+
+      <table cellpadding='10' cellspacing='10' width='500px'>
+        <tr>
+          <td></td>
+          <td><b>Current</b></td>
+          <td><b>Future</b></td>
+        </tr>
+        <tr>
+          <td><b>Nitrogen:</b></td>
+          <td> <%= number_with_precision(@current_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
+            lbs per year</td>
+          <td><%= number_with_precision(@future_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
+            lbs per year</td>
+        </tr>
+        <tr>
+          <td><b>Phosphorus:</b></td>
+          <td><%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
+            lbs per year</td>
+          <td><%= number_with_precision(@future_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
+            lbs per year</td>
+        </tr>
+        <tr>
+          <td><b>Sediment:</b></td>
+          <td> <%= number_with_precision(@current_totals[:current_load_sediment], :precision => 2, delimiter: ',') %>
+            tons per year</td>
+          <td> <%= number_with_precision(@future_totals[:current_load_sediment], :precision => 2, delimiter: ',') %>
+            tons per year</td>
+        </tr>
+      </table>
+
           </ol>
         </fieldset>
       </div>
+
       <div style="clear: both"></div>
     </div>
+
 
     <% if session[:debug] %>
         <br/><br/>

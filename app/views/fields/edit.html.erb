@@ -96,8 +96,6 @@
         <li
         <% if (@step=='5') %> class="selected"
         <% end %>
-        <% if @field.livestock_input_method_id.nil? %>   class="disabledTab"
-        <% end %>
         ><%= link_to 'Current Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
         <li
         <% if (@step=='6') %> class="selected"
@@ -105,8 +103,6 @@
         <li class="shadow"></li>
         <li
         <% if (@step=='7') %> class="selected"
-        <% end %>
-        <% if @field.livestock_input_method_id.nil? %>   class="disabledTab"
         <% end %>
         ><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 7) %></li>
       </ul>
@@ -138,8 +134,6 @@
 
     <%= render 'fields/edit_steps/step_1' if @step=='1' || @step.nil? %>
     <%= render 'fields/edit_steps_non_managed_land/step_2', :locals => {:field => @field} if @step=='2' %>
-
-
 <% end %>
 
 
