@@ -353,8 +353,6 @@ class FieldsController < ApplicationController
 
   # POST /farms/1/fields/1/populateFutureBMP
   def populateFutureBMPs
-
-
     @field.is_forest_buffer_future = @field.is_forest_buffer
     @field.forest_buffer_average_width_future = @field.forest_buffer_average_width
     @field.forest_buffer_length_future = @field.forest_buffer_length
