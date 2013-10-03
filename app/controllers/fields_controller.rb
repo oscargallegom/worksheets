@@ -387,7 +387,7 @@ class FieldsController < ApplicationController
     @field.future_bmps.destroy_all
 
     @field.bmps.each do |bmp|
-      @field.future_bmps.build(:bmp_type_id => bmp.bmp_type_id, :is_future => bmp.is_future)
+      @field.future_bmps.build(:bmp_type_id => bmp.bmp_type_id, :is_planned => bmp.is_planned)
     end
 
     respond_to do |format|
