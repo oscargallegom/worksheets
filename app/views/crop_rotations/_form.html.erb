@@ -179,6 +179,8 @@
                   <%= f.label :is_cover_crop_false, 'No' %>
 
                 </li>
+                <li id='li_cover_crop_warning_id'  <% if !@crop_rotation.end_of_seasons.blank? %>style='display: none'
+                    <% end %>>You do not have any end of season operations. You cover crop is going to be ignored.</li>
 
                 <li id='li_cover_crop_id'>
                   <%= f.label :cover_crop_id, 'Cover crop type:<em>*</em>'.html_safe, :class => 'wide' %>
