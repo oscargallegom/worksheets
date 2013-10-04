@@ -35,8 +35,14 @@
               tons per year
             </li>
           </ol>
+          <br/>
+          <%= link_to 'Continue', edit_farm_field_path(@field.farm.id, @field.id, :step => 6), :class => 'button', :method => :get %>
+
         </fieldset>
       </div>
+
+
+
       <div style="clear: both"></div>
     </div>
 

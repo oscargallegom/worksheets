@@ -321,7 +321,9 @@ changeLivestockInputMethodClicked = ->
 # when a BMP type is selected, delete all the following BMP sections
 changeBmpListener = (caller) ->
   componentNumber = getComponentNumber(caller.attr('id'), 'field_bmps_attributes_')
-
+  # if not found then we are in the future BMP tab
+  if !$.isNumeric(componentNumber)
+    componentNumber = getComponentNumber(caller.attr('id'), 'field_future_bmps_attributes_')
   # delete all BMP after the one just modified
   i = 0
   deleteSection = false
@@ -331,8 +333,10 @@ changeBmpListener = (caller) ->
       $('#div_bmp').find('.icon-delete')[i].removeAttribute('data-confirm')
       # simulate click
       $('#div_bmp').find('.icon-delete')[i].click()
-    if componentNumber is getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id,
-      'field_bmps_attributes_')
+    currentComponentNumber = getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id, 'field_bmps_attributes_')
+    if !$.isNumeric(currentComponentNumber)     # then future BMP
+      currentComponentNumber = getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id, 'field_future_bmps_attributes_')
+    if componentNumber is currentComponentNumber
       deleteSection = true
     i++
 

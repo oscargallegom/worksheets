@@ -387,6 +387,26 @@ class FieldsController < ApplicationController
     @field.other_land_use_conversion_vegetation_type_id_future= @field.other_land_use_conversion_vegetation_type_id
     @field.is_other_land_use_conversion_planned_future=@field.is_other_land_use_conversion_planned
 
+    # future for animals
+    @field.is_livestock_animal_waste_management_system_future = @field.is_livestock_animal_waste_management_system
+    @field.is_livestock_mortality_composting_future =@field.is_livestock_mortality_composting
+    @field.is_livestock_plastic_permeable_lagoon_cover_future = @field.is_livestock_plastic_permeable_lagoon_cover
+    @field.is_livestock_phytase_future = @field.is_livestock_phytase
+    @field.is_livestock_dairy_precision_feeding_future = @field.is_livestock_dairy_precision_feeding
+    @field.is_livestock_barnyard_runoff_controls_future = @field.is_livestock_barnyard_runoff_controls
+    @field.is_livestock_water_control_structure_future =  @field.is_livestock_water_control_structure
+    @field.is_livestock_treatment_wetland_future = @field.is_livestock_treatment_wetland
+    @field.is_poultry_animal_waste_management_system_future = @field.is_poultry_animal_waste_management_system
+    @field.is_poultry_mortality_composting_future = @field.is_poultry_mortality_composting
+    @field.is_poultry_biofilters_future = @field.is_poultry_biofilters
+    @field.is_poultry_vegetated_environmental_buffer_future = @field.is_poultry_vegetated_environmental_buffer
+    @field.is_poultry_phytase_future = @field.is_poultry_phytase
+    @field.is_poultry_heavy_use_pads_future = @field.is_poultry_heavy_use_pads
+    @field.is_poultry_barnyard_runoff_controls_future = @field.is_poultry_barnyard_runoff_controls
+    @field.is_poultry_water_control_structure_future =@field.is_poultry_water_control_structure
+    @field.is_poultry_treatment_wetland_future = @field.is_poultry_treatment_wetland
+    @field.is_poultry_litter_treatment_future = @field.is_poultry_litter_treatment
+
     # copy BMPs
     @field.future_bmps.destroy_all
 
@@ -394,11 +414,13 @@ class FieldsController < ApplicationController
       @field.future_bmps.build(:bmp_type_id => bmp.bmp_type_id, :is_planned => bmp.is_planned)
     end
 
+    @step = params[:step]
+
     respond_to do |format|
       if @field.save
-        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 7), notice: 'Data imported successfully.' }
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Data imported successfully.' }
       else
-        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 7), notice: 'Error importing data.' }
+        format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Error importing data.' }
       end
     end
 

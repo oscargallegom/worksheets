@@ -20,6 +20,8 @@
             <li><h2 class='sectionHeading'>BMPs</h2></li>
             <li>Check the boxes next to all of the BMPs that are currently in place in the animal confinement area.</li>
 
+            <%= link_to 'Import current BMPs ', populateFutureBMPs_farm_field_path(@field.farm.id, @field.id, :step => 6), :class => 'button', :method => :post %>
+
             <% if !@field.field_livestocks.empty? %>
                 <li><h2 class='sectionHeading'>Livestock BMPs</h2></li>
                 <li>Select all livestock BMPs that are in place.</li>
