@@ -260,15 +260,15 @@ class FarmsController < ApplicationController
           @field.watershed_segment_id = watershed_segment.id
         end
 
-        # get the top 3 soils
+        # get the top 3 soils (if any)
+        @listSoils = Array.new
+        if params.has_key?("field#{i}pctsoiltype")
         arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
         arrFieldmukey = params["field#{i}mukey"].split("|")
         arrFieldniccdcdpct = params["field#{i}niccdcdpct"].split("|")
         arrFieldmuname = params["field#{i}muname"].split("|")
         arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
         arrFieldmusym = params["field#{i}musym"].split("|")
-
-        @listSoils = Array.new
 
         arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
           #if !arrFieldcompname[index].eql?('Water') # ignore soil if water
@@ -280,7 +280,7 @@ class FarmsController < ApplicationController
               :hydgrpdcd => arrFieldhydgrp[index],
               :musym => arrFieldmusym[index]
           }
-          #end
+          end
         end
 
         # sort by percentage in descending order

@@ -12,6 +12,7 @@ class Field < ActiveRecord::Base
   belongs_to :p_test_method
   belongs_to :vegetation_type, :class_name => "VegetationType", :foreign_key => "vegetation_type_fence_stream_id"
   belongs_to :livestock_input_method
+  belongs_to :soil_texture
 
   has_many :strips, :dependent => :destroy, autosave: true
 
@@ -27,6 +28,7 @@ class Field < ActiveRecord::Base
   # , :area, :baseline_load, :coordinates        #  needed???
   attr_accessible :name, :field_type_id, :crop_type_id, :notes
   attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value
+  attr_accessible :soil_texture_id
 
   attr_accessible :is_forest_buffer, :forest_buffer_average_width, :forest_buffer_length, :is_forest_buffer_planned
   attr_accessible :is_forest_buffer_future, :forest_buffer_average_width_future, :forest_buffer_length_future, :is_forest_buffer_planned_future
@@ -101,6 +103,7 @@ class Field < ActiveRecord::Base
   validates_numericality_of :fertigation_n, :allow_blank => true, :greater_than_or_equal_to => 0, :if => 'step?(2) && (field_type_id==1 || field_type_id==2 || field_type_id==3) && (irrigation_id == 500 or irrigation_id == 530)'
   # also for non-managed land
   validates_numericality_of :acres_from_user, :greater_than_or_equal_to => 0, :if => '!is_acres_from_map? && step?(2)', :message => '^Acres is not a valid number.'
+  validates_presence_of :soil_texture_id, :if => 'step?(2) && self.soils.empty?'
 
   # step 2 and animal confinement
   validates_presence_of :livestock_input_method_id, :if => 'step?(2) && field_type_id==4'

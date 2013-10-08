@@ -73,6 +73,9 @@
               <%= f.text_field :p_test_value, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :step => 'any' %>
               &nbsp;<span id='p_test_value_unit'></span>
             </li>
+
+            <% if !@field.soils.empty? %>
+
             <div id='li_soil'>
 
               <%= f.fields_for :soils do |soils_form| %>
@@ -80,6 +83,14 @@
               <% end %>
 
             </div>
+
+            <% else %>
+            <li>
+              <%= f.label :soil_texture_id, 'Soil texture:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :soil_texture_id, SoilTexture.all, :id, :name, {:prompt => 'Select soil texture'}, :required => true %>
+            </li>
+
+            <% end %>
 
           </ol>
         </fieldset>

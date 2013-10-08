@@ -121,6 +121,25 @@ module Ntt
 
           end
 
+          # if no soil data, the user has manually picked one
+          if field.soils.empty?
+            # TODO: confirm with NTT
+            soil_area = soil.percent.to_f * area
+            map_unit_key = ''
+            map_unit_symbol = ''
+            hydrologic_group = ''
+            component_name = ''
+            p_test = field.modified_p_test_value
+            slope = 2.5
+            percent_sand = field.texture.percent_sand
+            percent_silt = field.texture.percent_silt
+            percent_clay = field.texture.percent_clay
+            bulk_density = field.texture.bulk_density
+            organic_carbon = ''
+
+            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+          end
+
           strip.crop_rotations.each_with_index do |crop_rotation, crop_rotation_index|
             crop_code = crop_rotation.crop.code
 

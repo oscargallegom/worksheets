@@ -1019,6 +1019,20 @@ VegetationType.delete_all
 VegetationType.create!({:id => 1,  :name => 'Forest'}, :without_protection => true)
 VegetationType.create!({:id => 2,  :name => 'Grass'}, :without_protection => true)
 
+SoilTexture.delete_all
+SoilTexture.create!({:id => 1, :name => 'Sandy clay loam', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 2, :name => 'Silty clay loam', :percent_sand => 8.9, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 3, :name => 'Loamy sand', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 4, :name => 'Sandy loam', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 5, :name => 'Sandy clay', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 6, :name => 'Silt loam', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 7, :name => 'clay loam', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 8, :name => 'Silty clay', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 9, :name => 'Sand', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 10, :name => 'Loam', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 11, :name => 'Silt', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+SoilTexture.create!({:id => 12, :name => 'Clay', :percent_sand => 53.2, :percent_silt => 20.6, :percent_clay => 26.2, :bulk_density => 1.49}, :without_protection => true)
+
 BmpType.delete_all
 #BmpType.create!({:id => 1,  :abbreviation => 'CaptureReuse', :name => 'Irrigation Water Capture Reuse'}, :without_protection => true)
 #BmpType.create!({:id => 2,  :abbreviation => 'Cropirrmgmt', :name => 'Cropland Irrigation Management'}, :without_protection => true)
