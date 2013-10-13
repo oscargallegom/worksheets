@@ -128,7 +128,7 @@ module Ntt
             hydrologic_group = ''
             component_name = ''
             p_test = field.modified_p_test_value
-            slope = field.soil_texture.slope
+            slope = field.slope
             percent_sand = field.soil_texture.percent_sand
             percent_silt = field.soil_texture.percent_silt
             percent_clay = field.soil_texture.percent_clay
