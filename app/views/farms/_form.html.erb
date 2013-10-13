@@ -119,7 +119,7 @@
           </tr>
           <tr id='tr_tract_number' style="display: none;">
             <td>
-              <%= f.label :tract_number, 'Field name:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.label :tract_number, 'FSA / tract number:<em>*</em>'.html_safe, :class => 'wide' %>
             </td>
             <td>
               <%= f.text_field :tract_number, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
@@ -161,7 +161,6 @@
             <td colspan='2' align='right' id='td_livestock'>
 
               <%= f.fields_for :livestock do |livestock_form| %>
-
 
                   <%= livestock_form.text_field :animal_units, :required => true, :class => 'textboxMedium', :type => 'number', :min => '0', :step => 'any' %>
 

@@ -268,7 +268,8 @@
   <% @fields.each do |field| %>
       <tr>
         <td>
-          <%= link_to field.name, edit_farm_field_path(@farm, field) %>
+          <%= link_to field.name, edit_farm_field_path(@farm, field) unless field.watershed_segment.nil? %>
+          <%= "Field '#{field.name}' is not in watershed."  if field.watershed_segment.nil? %>
           <br/>
           <%= field.field_type.name unless field.field_type.nil? %>
         </td>
