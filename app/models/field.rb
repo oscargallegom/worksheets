@@ -134,14 +134,14 @@ class Field < ActiveRecord::Base
   validates_numericality_of :distance_fence_stream_future, :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
 
   # step 7 and crop or continuous hay
-  validates_numericality_of :forest_buffer_average_width_future, :forest_buffer_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forest_buffer_future?'
-  validates_numericality_of :grass_buffer_average_width_future, :grass_buffer_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_grass_buffer_future?'
-  validates_numericality_of :fertilizer_application_setback_average_width_future, :fertilizer_application_setback_length_future, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_fertilizer_application_setback_future?'
+  validates_numericality_of :forest_buffer_average_width_future, :forest_buffer_length_future, :if => 'step?(7) && (field_type_id==1 || field_type_id==3) && is_forest_buffer_future?'
+  validates_numericality_of :grass_buffer_average_width_future, :grass_buffer_length_future, :if => 'step?(7) && (field_type_id==1 || field_type_id==3) && is_grass_buffer_future?'
+  validates_numericality_of :fertilizer_application_setback_average_width_future, :fertilizer_application_setback_length_future, :if => 'step?(7) && (field_type_id==1 || field_type_id==3) && is_fertilizer_application_setback_future?'
 
   # step 7 for all
-  validates_numericality_of :wetland_area_future, :wetland_treated_area_future, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_wetland_future?'
-  validates_numericality_of :streambank_restoration_length_future, :greater_than_or_equal_to => 0, :if => 'step?(4) && is_streambank_restoration_future?'
-  validates_numericality_of :other_land_use_conversion_acres_future, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(4)'
+  validates_numericality_of :wetland_area_future, :wetland_treated_area_future, :greater_than_or_equal_to => 0, :if => 'step?(7) && is_wetland_future?'
+  validates_numericality_of :streambank_restoration_length_future, :greater_than_or_equal_to => 0, :if => 'step?(7) && is_streambank_restoration_future?'
+  validates_numericality_of :other_land_use_conversion_acres_future, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(7)'
 
   # TODO: area of wetland < area of field
   # TODO: area of buffers < area of field (forest, grass and fence)
