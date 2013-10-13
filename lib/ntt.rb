@@ -128,12 +128,12 @@ module Ntt
             hydrologic_group = ''
             component_name = ''
             p_test = field.modified_p_test_value
-            slope = field.texture.slope
-            percent_sand = field.texture.percent_sand
-            percent_silt = field.texture.percent_silt
-            percent_clay = field.texture.percent_clay
-            bulk_density = field.texture.bulk_density
-            organic_carbon = field.texture.organic_carbon
+            slope = field.soil_texture.slope
+            percent_sand = field.soil_texture.percent_sand
+            percent_silt = field.soil_texture.percent_silt
+            percent_clay = field.soil_texture.percent_clay
+            bulk_density = field.soil_texture.bulk_density
+            organic_carbon = field.soil_texture.organic_carbon
 
             xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
           end
