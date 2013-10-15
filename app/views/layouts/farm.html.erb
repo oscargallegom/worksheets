@@ -17,8 +17,8 @@
               <% elsif (params[:controller]=='fields') %>selected
               <% end %>"><%= link_to 'Fields', farm_fields_path(@farm) %></li>
 
-            <li><a href="?show=disabled">Review</a></li>
-            <li><a href="?show=disabled">Submit</a></li>
+            <li class='disabledTab'><a href="?show=disabled">Review</a></li>
+            <li class='disabledTab'><a href="?show=disabled">Submit</a></li>
             <li class="shadow"></li>
           </ul>
         </div>

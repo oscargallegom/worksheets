@@ -49,6 +49,10 @@ class FarmsController < ApplicationController
     @current_p_load_animals = 0
     @current_sediment_load_animals = 0
 
+    @future_n_load_animals = 0
+    @future_p_load_animals = 0
+    @future_sediment_load_animals = 0
+
     @fields.each do |field|
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         begin
@@ -94,6 +98,11 @@ class FarmsController < ApplicationController
         @current_n_load_animals += @current_totals[:current_load_nitrogen]
         @current_p_load_animals += @current_totals[:current_load_phosphorus]
         @current_sediment_load_animals += @current_totals[:current_load_sediment]
+        #future
+        @future_totals = computeLivestockBmpCalculationsFuture(field)
+        @future_n_load_animals += @future_totals[:current_load_nitrogen]
+        @future_p_load_animals += @future_totals[:current_load_phosphorus]
+        @future_sediment_load_animals += @future_totals[:current_load_sediment]
       end
 
       @meet_baseline = baseline_test(@farm)
