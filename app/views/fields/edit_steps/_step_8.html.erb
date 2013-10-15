@@ -60,6 +60,13 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@current_totals[:new_total_n] - @current_totals[:new_total_n_future]) / @field.acres, :precision => 2, delimiter: ',') %>
               lb/ac)
             </li>
+            <li><span class='wide'>Delivery factor:</span>
+              <%= number_with_precision(@field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %>
+            </li>
+            <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
+              <%= number_with_precision([0, (@current_totals[:new_total_n] - @current_totals[:new_total_n_future])* @field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
+              lb
+            </li>
 
             <li><h2 class='sectionHeading'>Phosphorus</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
@@ -110,6 +117,13 @@
               <%= number_with_precision((@current_totals[:new_total_p] - @current_totals[:new_total_p_future]) / @field.acres, :precision => 2, delimiter: ',') %>
               lb/ac)
             </li>
+            <li><span class='wide'>Delivery factor:</span>
+              <%= number_with_precision(@field.watershed_segment.p_delivery_factor, :precision => 2, delimiter: ',') %>
+            </li>
+            <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
+              <%= number_with_precision([0, (@current_totals[:new_total_p] - @current_totals[:new_total_p_future])* @field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %>
+              lb
+            </li>
 
             <li><h2 class='sectionHeading'>Sediment</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
@@ -137,6 +151,13 @@
               <%= number_with_precision(@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future]) / @field.acres, :precision => 2, delimiter: ',') %>
               tons/ac)
+            </li>
+            <li><span class='wide'>Delivery factor:</span>
+              <%= number_with_precision(@field.watershed_segment.sediment_delivery_factor, :precision => 2, delimiter: ',') %>
+            </li>
+            <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
+              <%= number_with_precision([0, (@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future])* @field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
+              lb
             </li>
 
             <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>
