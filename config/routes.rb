@@ -14,6 +14,7 @@ NutrientNet::Application.routes.draw do
     post :duplicate, on: :member
     get :send_to_mapping_site, on: :member
     post :receive_from_mapping_site, on: :member
+    get :review, on: :member
   end
 
   resources :states do

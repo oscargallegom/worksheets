@@ -66,9 +66,9 @@ class FarmsController < ApplicationController
         @current_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p]
         @current_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment]
 
-        @future_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n_future]
-        @future_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p_future]
-        @future_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment_future]
+        @future_n_load_fields = @future_n_load_fields + @current_totals[:new_total_n_future]
+        @future_p_load_fields = @future_p_load_fields + @current_totals[:new_total_p_future]
+        @future_sediment_load_fields = @future_sediment_load_fields + @current_totals[:new_total_sediment_future]
 
         watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
         if (!watershed_segment.nil?)
@@ -105,14 +105,30 @@ class FarmsController < ApplicationController
         @future_sediment_load_animals += @future_totals[:current_load_sediment]
       end
 
-      @meet_baseline = baseline_test(@farm)
+      @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
 
     end
 
+    @tab = params[:tab]
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb   if @tab.nil?
     end
+  end
+
+  # GET/farms/id/review
+  def review
+    add_breadcrumb 'Farms', :farms_path
+    add_breadcrumb @farm.name
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Review #{@farm.name}",
+               #html: render_to_string(:layout => false , :template => "farms/review.pdf.erb"),
+               #:template => 'farms/review',
+               disposition: 'attachment'
+      end
+      end
   end
 
   # GET /farms/new

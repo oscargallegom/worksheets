@@ -155,6 +155,8 @@ GEM
     wasabi (3.1.0)
       httpi (~> 2.0)
       nokogiri (>= 1.4.0)
+    wicked_pdf (0.9.7)
+      rails
     will_paginate (3.0.4)
 
 PLATFORMS
@@ -181,4 +183,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   savon (~> 2.2.0)
   uglifier (>= 1.0.3)
+  wicked_pdf
   will_paginate

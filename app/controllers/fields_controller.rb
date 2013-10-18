@@ -89,17 +89,17 @@ class FieldsController < ApplicationController
         # if crop or hay
         if (@field.field_type_id == 1 || @field.field_type_id == 3)
           # check if at least one manure fertilizer incorporated
-          is_manure_fertilizer_incorporated = false
+          is_manure_fertilizer_not_incorporated = false
           @field.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
               crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-                if (manure_fertilizer_application.is_incorporated)
-                  is_manure_fertilizer_incorporated = true
+                if (!manure_fertilizer_application.is_incorporated)
+                  is_manure_fertilizer_not_incorporated = true
                 end
               end
             end
           end
-          if (is_manure_fertilizer_incorporated)
+          if (is_manure_fertilizer_not_incorporated)
             flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
           end
         end

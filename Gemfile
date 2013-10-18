@@ -52,6 +52,7 @@ gem 'nested_form'
 gem 'savon', '~> 2.2.0'
 gem 'naturalsorter', '2.0.5'   # natural sort
 gem 'amoeba', "~> 2.0.0"
+gem 'wicked_pdf'
 
 # rest API for NTT call
 gem "nokogiri"

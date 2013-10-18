@@ -1077,7 +1077,7 @@ module BmpCalculations
 
 
   # does the farm meet baseline
-  def baseline_test(farm)
+  def is_farm_meets_baseline(farm)
 
     is_meet_baseline =true
 
@@ -1085,7 +1085,6 @@ module BmpCalculations
 
 
       if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3) # perform calculations
-
 
         # does the field meet baseline - only for Maryland
         if (field.farm.site_state_id == 21)
@@ -1099,7 +1098,7 @@ module BmpCalculations
                 crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
                   if (manure_fertilizer_application.is_incorporated)
                     # this is actually valid
-                    #is_manure_fertilizer_incorporated = true
+                    is_manure_fertilizer_incorporated = true
                   end
                 end
               end
@@ -1108,6 +1107,7 @@ module BmpCalculations
               return false
             end
           end
+
           # if field is pasture
           if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
             return false
@@ -1137,10 +1137,41 @@ module BmpCalculations
             end
           end
         end
+
+        # does the field meet baseline - only for Virginia
+        if (field.farm.site_state_id == 47)
+          # if field is pasture
+          if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
+            return false
+          end
+          # if crop or hay
+          if ((field.field_type_id == 1 || field.field_type_id == 3) && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer))
+            return false
+          end
+        end
+
+        #animals
+        # does the field meet baseline - only for Maryland
+        if (field.farm.site_state_id == 21)
+          if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system || field.is_poultry_mortality_composting))
+            return false
+          end
+          if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
+            return  false
+          end
+        end
+        # does the field meet baseline - only for Virginia
+        if (field.farm.site_state_id == 47)
+          if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
+            return false
+          end
+        end
+
+
+
       end
       return is_meet_baseline
     end
-
   end
 
   def is_converted_acres_valid(field)
