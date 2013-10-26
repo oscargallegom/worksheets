@@ -237,6 +237,7 @@ showCoverCropSection = ->
   if ($(".fields:visible").find(".end_of_season_index").length == 0)
     $("#li_cover_crop_warning_id").show()
   $("#li_cover_crop_id").show()
+  $("#li_cover_crop_plant_date").show()
   $("#li_cover_crop_planting_method_id").show()
   $("#crop_rotation_cover_crop_id").prop('required', true)
   $("#crop_rotation_cover_crop_planting_method_id").prop('required', true)
@@ -244,6 +245,7 @@ showCoverCropSection = ->
 hideCoverCropSection = ->
   $("#li_cover_crop_warning_id").hide()
   $("#li_cover_crop_id").hide()
+  $("#li_cover_crop_plant_date").hide()
   $("#li_cover_crop_planting_method_id").hide()
   $("#crop_rotation_cover_crop_id").prop('required', false)
   $("#crop_rotation_cover_crop_planting_method_id").prop('required', false)

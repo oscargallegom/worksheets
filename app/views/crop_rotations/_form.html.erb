@@ -35,8 +35,6 @@
 
 
     <div class="sectionRest clearfix">
-
-
       <div>
         <fieldset>
           <ol>
@@ -185,6 +183,13 @@
                 <li id='li_cover_crop_id'>
                   <%= f.label :cover_crop_id, 'Cover crop type:<em>*</em>'.html_safe, :class => 'wide' %>
                   <%= f.collection_select :cover_crop_id, Crop.coverCrops, :id, :name, {:prompt => 'Select crop type'}, :required => true %>
+                </li>
+                <li id='li_cover_crop_plant_date'>
+                  <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
+
+                  <%= f.select :cover_crop_plant_date_year, options_for_select(listYears, :selected => @crop_rotation.cover_crop_plant_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+                  <%= f.select :cover_crop_plant_date_month, options_for_select(listMonths, :selected => @crop_rotation.cover_crop_plant_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+                  <%= f.select :cover_crop_plant_date_day, options_for_select(listDays, :selected => @crop_rotation.cover_crop_plant_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
                 </li>
                 <li id='li_cover_crop_planting_method_id'>
                   <%= f.label :cover_crop_planting_method_id, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>

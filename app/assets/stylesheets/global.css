@@ -1345,6 +1345,12 @@ div.wide {
     width: 160px;
     font-weight: bold;
 }
+div.extrawide {
+    display: block;
+    float: left;
+    width: 250px;
+    font-weight: bold;
+}
 
 .textboxMedium {
     width: 80px;

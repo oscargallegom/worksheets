@@ -8,7 +8,7 @@
             <% end %> ><%= link_to 'Summary', farm_path(@farm) %></li>
             <li
             <% if (params[:step]=='1') %> class="selected"
-            <% end %> ><%= link_to 'Edit Details', edit_farm_path(@farm, :step => 1) %></li>
+            <% end %> ><%= link_to 'Details', edit_farm_path(@farm, :step => 1) %></li>
             <li
             <% if (params[:step]=='2') %> class="selected"
             <% end %> ><a <%= link_to 'Edit Location', edit_farm_path(@farm, :step => 2) %></li>

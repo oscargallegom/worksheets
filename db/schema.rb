@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015010828) do
+ActiveRecord::Schema.define(:version => 20131022002748) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -104,6 +104,9 @@ ActiveRecord::Schema.define(:version => 20131015010828) do
     t.boolean  "is_cover_crop",                 :default => false, :null => false
     t.integer  "cover_crop_id"
     t.integer  "cover_crop_planting_method_id"
+    t.integer  "cover_crop_plant_date_year"
+    t.integer  "cover_crop_plant_date_month"
+    t.integer  "cover_crop_plant_date_day"
   end
 
   create_table "crop_types", :force => true do |t|

@@ -194,9 +194,15 @@ module Ntt
               seeding_rate = field.field_type_id != 2 ? crop_rotation.seeding_rate : 0
               cover_crop_code = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
               cover_crop_planting_method_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_planting_method_id : 0
+
+              cover_crop_plant_date_year = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ?  crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0') : '00'
+              cover_crop_plant_date_month = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_month.to_s.rjust(2, '0') : '00'
+              cover_crop_plant_date_day = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_day.to_s.rjust(2, '0') : '00'
+              cover_crop_plant_date = cover_crop_plant_date_year + cover_crop_plant_date_month + cover_crop_plant_date_day
+
               is_permanent_pasture = field.field_type_id == 2 ? 1 : 0
 
-              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_code}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>#{cover_crop_plant_date}</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_code}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
               ########################################################
               # Commercial fertilizer
@@ -258,24 +264,15 @@ module Ntt
                 operation_code = end_of_season.end_of_season_type_id
                 opVal1 = end_of_season.is_harvest_as_silage ? 1 : 0
 
-                #if (end_of_season.end_of_season_type_id==626 && end_of_season.is_harvest_as_silage) # harvest only
-                #  operation_code = 310
-                #elsif (end_of_season.end_of_season_type_id==626451 && end_of_season.is_harvest_as_silage) # harvest and terminate crop
-                #  operation_code = 626451
-                #else
-                #  operation_code = end_of_season.end_of_season_type_id
-                #end
-
-
                 year = end_of_season.year
                 month = end_of_season.month
                 day = end_of_season.day
 
                 # if cover crop (only for crop)
-                cover_crop = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
+                #cover_crop = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
                 planting_method = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.planting_method_id : 0
 
-                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{year}</Year><Month>#{month}</Month><Day>#{day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{opVal1}</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>#{cover_crop}</OpVal6><OpVal7>#{planting_method}</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{year}</Year><Month>#{month}</Month><Day>#{day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{opVal1}</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>#{planting_method}</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
               end
 
@@ -356,5 +353,4 @@ module Ntt
     end
 
   end
-
 end

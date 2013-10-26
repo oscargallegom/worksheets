@@ -29,6 +29,10 @@ class FarmsController < ApplicationController
     add_breadcrumb 'Farms', :farms_path
     add_breadcrumb @farm.name
 
+    @arrWatersheds = Array.new
+    @arrMajorBasins = Array.new
+    @arrTMDLs = Array.new
+
     # sort fields 'naturally'
     @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
 
@@ -54,6 +58,12 @@ class FarmsController < ApplicationController
     @future_sediment_load_animals = 0
 
     @fields.each do |field|
+
+      @arrWatersheds << field.watershed_name unless @arrWatersheds.include?(field.watershed_name)
+      @arrMajorBasins << field.watershed_segment.major_basin unless @arrMajorBasins.include?(field.watershed_segment.major_basin)
+      @arrTMDLs << field.tmdl.name if @farm.site_state_id == 21 && !@arrTMDLs.include?(field.tmdl.name)
+      @arrTMDLs << field.tmdl_va if @farm.site_state_id == 21 && !@arrTMDLs.include?(field.tmdl_va)
+
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         begin
           @current_totals = computeBmpCalculations(field)
@@ -198,7 +208,6 @@ class FarmsController < ApplicationController
 
     end
 
-
     respond_to do |format|
       format.html
       format.pdf do
@@ -229,7 +238,7 @@ class FarmsController < ApplicationController
     add_breadcrumb @farm.name
 
     @step = params[:step] || '1'
-    add_breadcrumb 'Edit details' if @step == '1'
+    add_breadcrumb 'Details' if @step == '1'
     add_breadcrumb 'Edit location' if @step == '2'
   end
 

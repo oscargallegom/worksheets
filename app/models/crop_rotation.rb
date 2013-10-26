@@ -14,7 +14,7 @@ class CropRotation < ActiveRecord::Base
   has_many :end_of_seasons
 
   attr_accessible :strip_id, :crop_category_id, :crop_id, :plant_date_year, :plant_date_month, :plant_date_day, :planting_method_id, :seeding_rate
-  attr_accessible :is_cover_crop, :cover_crop_id, :cover_crop_planting_method_id
+  attr_accessible :is_cover_crop, :cover_crop_id, :cover_crop_plant_date_year, :cover_crop_plant_date_month, :cover_crop_plant_date_day, :cover_crop_planting_method_id
 
   attr_accessible :grazing_livestocks_attributes
   accepts_nested_attributes_for :grazing_livestocks, :allow_destroy => true
@@ -39,17 +39,14 @@ class CropRotation < ActiveRecord::Base
   validates_numericality_of :seeding_rate, :greater_than_or_equal_to => 0, :allow_blank => true, :unless => :isPermanentPasture?
   validates_numericality_of :plant_date_day, :less_than_or_equal_to => 28, :if => 'plant_date_month==2', :message => '^Date incorrect for February', :unless => :isPermanentPasture?
 
-
   validates_presence_of :cover_crop_id, :cover_crop_planting_method_id, :if => 'is_cover_crop?'
+  validates_presence_of :cover_crop_plant_date_year, :cover_crop_plant_date_month, :cover_crop_plant_date_day, :if => 'is_cover_crop?'
+  validates_numericality_of :cover_crop_plant_date_day, :less_than_or_equal_to => 28, :if => 'cover_crop_plant_date_month==2', :message => '^Date incorrect for February', :if => 'is_cover_crop?'
 
   default_scope :order => 'created_at ASC'
 
   def isPermanentPasture?
     self.strip==nil ? false : (self.strip.field.field_type.id == 2) # could be nil when duplicating
-  end
-
-  def test
-    i=9
   end
 
   # allow duplication
