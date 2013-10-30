@@ -60,8 +60,8 @@ class FarmsController < ApplicationController
     @fields.each do |field|
 
       @arrWatersheds << field.watershed_name unless @arrWatersheds.include?(field.watershed_name)
-      @arrMajorBasins << field.watershed_segment.major_basin unless @arrMajorBasins.include?(field.watershed_segment.major_basin)
-      @arrTMDLs << field.tmdl.name if @farm.site_state_id == 21 && !field.tmdl.nil? && !@arrTMDLs.include?(field.tmdl.name)
+      @arrMajorBasins << field.watershed_segment.major_basin unless field.watershed_segment.nil? || @arrMajorBasins.include?(field.watershed_segment.major_basin)
+      @arrTMDLs << field.tmdl.name if @farm.site_state_id != 21 && !field.tmdl.nil? && !@arrTMDLs.include?(field.tmdl.name)
       @arrTMDLs << field.tmdl_va if @farm.site_state_id == 21 && !@arrTMDLs.include?(field.tmdl_va)
 
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
@@ -72,20 +72,19 @@ class FarmsController < ApplicationController
           @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
         end
 
-        @current_n_load_fields = @current_n_load_fields + @current_totals[:new_total_n]
-        @current_p_load_fields = @current_p_load_fields + @current_totals[:new_total_p]
-        @current_sediment_load_fields = @current_sediment_load_fields + @current_totals[:new_total_sediment]
+        @current_n_load_fields += @current_totals[:new_total_n]
+        @current_p_load_fields += @current_totals[:new_total_p]
+        @current_sediment_load_fields += @current_totals[:new_total_sediment]
 
-        @future_n_load_fields = @future_n_load_fields + @current_totals[:new_total_n_future]
-        @future_p_load_fields = @future_p_load_fields + @current_totals[:new_total_p_future]
-        @future_sediment_load_fields = @future_sediment_load_fields + @current_totals[:new_total_sediment_future]
+        @future_n_load_fields += @current_totals[:new_total_n_future]
+        @future_p_load_fields += @current_totals[:new_total_p_future]
+        @future_sediment_load_fields += @current_totals[:new_total_sediment_future]
 
         watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
         if (!watershed_segment.nil?)
           @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
           @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
           @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
-
 
           if field.tmdl.nil?
             @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
@@ -102,6 +101,7 @@ class FarmsController < ApplicationController
           end
         end
       end
+
       # animals
       if (!field.field_type.nil?) && (field.field_type.id == 4)
         @current_totals = computeLivestockBmpCalculations(field)

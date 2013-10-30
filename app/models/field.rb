@@ -1,4 +1,7 @@
 class Field < ActiveRecord::Base
+  #TODO: just a test for now
+  before_save :call_ntt
+
 
   attr_writer :step
   attr_accessor :soil_test_laboratory_id, :modified_p_test_value
@@ -288,5 +291,14 @@ class Field < ActiveRecord::Base
   amoeba do
     enable
   end
+
+  private
+  def call_ntt
+    i =0
+    i =2
+    puts self.changed?
+    i=4
+  end
+
 
 end

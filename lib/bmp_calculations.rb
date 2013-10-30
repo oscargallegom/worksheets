@@ -15,7 +15,6 @@ module BmpCalculations
       end
     end
 
-
     # call NTT to get the latest values
     total_n_per_acre = 0
     total_p_per_acre = 0
@@ -1155,7 +1154,7 @@ module BmpCalculations
         if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
           return false
         end
-      # does the field meet baseline - only for Virginia
+        # does the field meet baseline - only for Virginia
       elsif (field.farm.site_state_id == 47)
         if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
           return false
@@ -1189,7 +1188,6 @@ module BmpCalculations
     end
     # other land conversion
     other_land_use_conversion_acres = field.other_land_use_conversion_acres.to_f
-
 
     total_converted_acres = fencing_acres.to_f + grass_buffer_acres.to_f + forest_buffer_acres.to_f + fertilizer_buffer_acres.to_f + wetland_acres.to_f + other_land_use_conversion_acres.to_f
 

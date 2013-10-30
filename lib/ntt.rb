@@ -19,28 +19,14 @@ module Ntt
 
         xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
-        #params = {'input' => xml }
-        #url = URI.parse(URL_NTT)
-        #resp, data = Net::HTTP.post_form(url, params)
-        #puts resp.inspect
-        #puts data.inspect
-
         doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
 
-        if (!doc.nil?)
-          # Do something about the persistent error
-          # so that you don't try to access a nil
-          # doc later on.
-          #@hash = Hash.from_xml((doc.xpath('//Results')).to_s)['Results']
-          #pp @hash['ID']
-
-          return [true, doc]
-
-        end
+            if (!doc.nil?)
+            return [true, doc]
+                              end
       else
         return [false, content]
       end
-
 
     rescue Exception => ex
       attempts = attempts + 1
@@ -195,7 +181,7 @@ module Ntt
               cover_crop_code = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
               cover_crop_planting_method_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_planting_method_id : 0
 
-              cover_crop_plant_date_year = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ?  crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0') : '00'
+              cover_crop_plant_date_year = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0') : '00'
               cover_crop_plant_date_month = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_month.to_s.rjust(2, '0') : '00'
               cover_crop_plant_date_day = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_day.to_s.rjust(2, '0') : '00'
               cover_crop_plant_date = cover_crop_plant_date_year + cover_crop_plant_date_month + cover_crop_plant_date_day
