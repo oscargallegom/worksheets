@@ -208,10 +208,14 @@ module Ntt
                 incorporation_depth = commercial_fertilizer_application.is_incorporated ? (commercial_fertilizer_application.incorporation_depth * 25.4) : 0
 
                 # for nitrogen
-                xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>1</OpVal1><OpVal2>#{total_n_applied}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                if (total_n_applied > 0)
+                  xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>1</OpVal1><OpVal2>#{total_n_applied}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                end
 
                 # for phosphorus
+                if (total_p_applied > 0)
                 xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                end
 
                 # if the incorporation date is different from the application date, add extra management info
                 if commercial_fertilizer_application.is_incorporated && (commercial_fertilizer_application.application_date_year != commercial_fertilizer_application.incorporation_date_year || commercial_fertilizer_application.application_date_month != commercial_fertilizer_application.incorporation_date_month || commercial_fertilizer_application.application_date_day != commercial_fertilizer_application.incorporation_date_day)
