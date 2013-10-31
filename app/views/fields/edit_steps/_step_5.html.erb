@@ -26,7 +26,7 @@
                   <%= number_with_precision(@watershed_segment[:n_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@watershed_segment[:n_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@watershed_segment[:n_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% else # use Maryland TMDL    %>
+              <% else # use Maryland TMDL     %>
                   <%= number_with_precision(@field.tmdl[:total_n] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@field.tmdl[:total_n] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@field.tmdl[:total_n] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -38,7 +38,7 @@
                   <%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% else # use Maryland TMDL    %>
+              <% else # use Maryland TMDL     %>
                   <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -58,7 +58,7 @@
                   <%= number_with_precision(@watershed_segment[:p_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@watershed_segment[:p_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@watershed_segment[:p_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% else # use Maryland TMDL    %>
+              <% else # use Maryland TMDL     %>
                   <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -69,7 +69,7 @@
                   <%= number_with_precision(@watershed_segment[:p_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@watershed_segment[:p_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@watershed_segment[:p_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% else # use Maryland TMDL    %>
+              <% else # use Maryland TMDL     %>
                   <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -163,20 +163,20 @@
 
             <li><span class='extrawide'>Crop Yield</span><b></b></li>
             <% if !@ntt_results[:crops].nil? %>
-            <% @ntt_results[:crops].each do |crop| %>
-                <li>
-                  <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] %></span>
-                  <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
-                </li>
-            <% end %>
+                <% @ntt_results[:crops].each do |crop| %>
+                    <li>
+                      <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] %></span>
+                      <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
+                    </li>
                 <% end %>
+            <% end %>
           </ol>
         </fieldset>
       </div>
 
       <div style="clear: both"></div>
       <br/>
-      <%= link_to "Save and Continue",  edit_farm_field_path(@farm, @field, :step => 6), :class => 'button', :id => 'saveAndContinue' %>
+      <%= link_to "Save and Continue", edit_farm_field_path(@farm, @field, :step => 6), :class => 'button', :id => 'saveAndContinue' %>
 
     </div>
 

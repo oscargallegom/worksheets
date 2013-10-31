@@ -216,10 +216,10 @@ class FarmsController < ApplicationController
                #:template => 'farms/review',
                # :wkhtmltopdf => 'C:\Program Files\wkhtmltopdf\wkhtmltopdf.exe',
                :disposition => 'attachment',
-              :footer => {:center => 'NutrientNet',
-              :right => '[page] of [topage]'}
+               :footer => {:center => 'NutrientNet',
+                           :right => '[page] of [topage]'}
       end
-      end
+    end
   end
 
   # GET /farms/new
@@ -379,23 +379,23 @@ class FarmsController < ApplicationController
         # get the top 3 soils (if any)
         @listSoils = Array.new
         if params.has_key?("field#{i}pctsoiltype")
-        arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
-        arrFieldmukey = params["field#{i}mukey"].split("|")
-        arrFieldniccdcdpct = params["field#{i}niccdcdpct"].split("|")
-        arrFieldmuname = params["field#{i}muname"].split("|")
-        arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
-        arrFieldmusym = params["field#{i}musym"].split("|")
+          arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
+          arrFieldmukey = params["field#{i}mukey"].split("|")
+          arrFieldniccdcdpct = params["field#{i}niccdcdpct"].split("|")
+          arrFieldmuname = params["field#{i}muname"].split("|")
+          arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
+          arrFieldmusym = params["field#{i}musym"].split("|")
 
-        arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
-          #if !arrFieldcompname[index].eql?('Water') # ignore soil if water
-          @listSoils << {
-              :percent => arrFieldpctsoiltype[index],
-              :mukey => arrFieldmukey[index],
-              :niccdcdpct => arrFieldniccdcdpct[index],
-              :muname => arrFieldmuname[index],
-              :hydgrpdcd => arrFieldhydgrp[index],
-              :musym => arrFieldmusym[index]
-          }
+          arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
+            #if !arrFieldcompname[index].eql?('Water') # ignore soil if water
+            @listSoils << {
+                :percent => arrFieldpctsoiltype[index],
+                :mukey => arrFieldmukey[index],
+                :niccdcdpct => arrFieldniccdcdpct[index],
+                :muname => arrFieldmuname[index],
+                :hydgrpdcd => arrFieldhydgrp[index],
+                :musym => arrFieldmusym[index]
+            }
           end
         end
 

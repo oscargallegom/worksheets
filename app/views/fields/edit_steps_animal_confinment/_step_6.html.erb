@@ -52,7 +52,7 @@
                   <%= f.label :is_livestock_barnyard_runoff_controls_future, 'Barnyard runoff controls / loafing lot management:', :class => 'extrawide' %>
                   <%= f.check_box :is_livestock_barnyard_runoff_controls_future %>
                 </li>
-                <% if @farm.site_state_id == 21 # only for Maryland   %>
+                <% if @farm.site_state_id == 21 # only for Maryland    %>
                     <li>
                       <%= f.label :is_livestock_water_control_structure_future, 'Water control structure:', :class => 'extrawide' %>
                       <%= f.check_box :is_livestock_water_control_structure_future %>
@@ -85,7 +85,7 @@
                   <%= f.label :is_poultry_biofilters_future, 'Biofilters:', :class => 'extrawide' %>
                   <%= f.check_box :is_poultry_biofilters_future %>
                 </li>
-                <% if @farm.site_state_id == 21 # only for Maryland   %>
+                <% if @farm.site_state_id == 21 # only for Maryland    %>
                     <li>
                       <%= f.label :is_poultry_vegetated_environmental_buffer_future, 'Vegetated environmental buffer:', :class => 'extrawide' %>
                       <%= f.check_box :is_poultry_vegetated_environmental_buffer_future %>
@@ -105,7 +105,7 @@
                   <%= f.label :is_poultry_barnyard_runoff_controls_future, 'Barnyard runoff controls / clean water diversions:', :class => 'extrawide' %>
                   <%= f.check_box :is_poultry_barnyard_runoff_controls_future %>
                 </li>
-                <% if @farm.site_state_id == 21 # only for Maryland   %>
+                <% if @farm.site_state_id == 21 # only for Maryland    %>
                     <li>
                       <%= f.label :is_poultry_water_control_structure_future, 'Water control structure:', :class => 'extrawide' %>
                       <%= f.check_box :is_poultry_water_control_structure_future %>

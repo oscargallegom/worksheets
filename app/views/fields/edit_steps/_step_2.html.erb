@@ -76,22 +76,22 @@
 
             <% if !@field.soils.empty? %>
 
-            <div id='li_soil'>
+                <div id='li_soil'>
 
-              <%= f.fields_for :soils do |soils_form| %>
-                  <%= render 'soil_fields', :f => soils_form, :soil_index => @field.soils.index(soils_form.object) %>
-              <% end %>
+                  <%= f.fields_for :soils do |soils_form| %>
+                      <%= render 'soil_fields', :f => soils_form, :soil_index => @field.soils.index(soils_form.object) %>
+                  <% end %>
 
-            </div>
+                </div>
 
             <% else %>
-            <li>
-              <%= f.label :soil_texture_id, 'Soil texture:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :soil_texture_id, SoilTexture.all, :id, :name, {:prompt => 'Select soil texture'}, :required => true %>
-            </li>
+                <li>
+                  <%= f.label :soil_texture_id, 'Soil texture:<em>*</em>'.html_safe, :class => 'wide' %>
+                  <%= f.collection_select :soil_texture_id, SoilTexture.all, :id, :name, {:prompt => 'Select soil texture'}, :required => true %>
+                </li>
                 <li>
                   <%= f.label :slope, 'Soil slope:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.text_field :slope, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0,:max => 100, :step => 'any' %>                </li>
+                  <%= f.text_field :slope, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :max => 100, :step => 'any' %>                </li>
                 </li>
             <% end %>
           </ol>

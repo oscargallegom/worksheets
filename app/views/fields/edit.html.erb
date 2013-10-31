@@ -43,20 +43,23 @@
         <li
         <% if (@step=='5') %> class="selected"
         <% end %>
-        <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"
+        <% if @field.p_test_value.nil? %>   class="disabledTab"
         <% end %>
         ><%= link_to 'Current Nutrient Load', edit_farm_field_path(@farm, @field, :step => 5) %></li>
         <li
         <% if (@step=='6') %> class="selected"
-        <% end %> <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"
+        <% end %>
+        <% if @field.p_test_value.nil? %>   class="disabledTab"
         <% end %> ><%= link_to 'Future Crop Management', edit_farm_field_path(@farm, @field, :step => 6) %></li>
         <li
         <% if (@step=='7') %> class="selected"
-        <% end %> <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"
+        <% end %>
+        <% if @field.p_test_value.nil? %>   class="disabledTab"
         <% end %> ><%= link_to 'Future BMPs', edit_farm_field_path(@farm, @field, :step => 7) %></li>
         <li
         <% if (@step=='8') %> class="selected"
-        <% end %> <% if @field.p_test_value.nil? || @field.strips[0].crop_rotations.empty? %>   class="disabledTab"
+        <% end %>
+        <% if @field.p_test_value.nil? %>   class="disabledTab"
         <% end %> ><%= link_to 'Future Nutrient Load', edit_farm_field_path(@farm, @field, :step => 8) %></li>
         <li class="shadow"></li>
       </ul>

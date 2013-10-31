@@ -333,9 +333,11 @@ changeBmpListener = (caller) ->
       $('#div_bmp').find('.icon-delete')[i].removeAttribute('data-confirm')
       # simulate click
       $('#div_bmp').find('.icon-delete')[i].click()
-    currentComponentNumber = getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id, 'field_bmps_attributes_')
+    currentComponentNumber = getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id,
+      'field_bmps_attributes_')
     if !$.isNumeric(currentComponentNumber)     # then future BMP
-      currentComponentNumber = getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id, 'field_future_bmps_attributes_')
+      currentComponentNumber = getComponentNumber($('#div_bmp').find('.class_bmp_type_id').get(i).id,
+        'field_future_bmps_attributes_')
     if componentNumber is currentComponentNumber
       deleteSection = true
     i++

@@ -301,8 +301,6 @@ class FieldsController < ApplicationController
     end
 
     # delete all the existing strips for field B
-
-    @to_field.strips.destroy_all
     @to_field.strips.each do |strip|
       if ((@step == '6' && strip.is_future?) || (@step == '3' && !strip.is_future?))
         @to_field.strips.delete(strip)
@@ -394,7 +392,7 @@ class FieldsController < ApplicationController
     @field.is_livestock_phytase_future = @field.is_livestock_phytase
     @field.is_livestock_dairy_precision_feeding_future = @field.is_livestock_dairy_precision_feeding
     @field.is_livestock_barnyard_runoff_controls_future = @field.is_livestock_barnyard_runoff_controls
-    @field.is_livestock_water_control_structure_future =  @field.is_livestock_water_control_structure
+    @field.is_livestock_water_control_structure_future = @field.is_livestock_water_control_structure
     @field.is_livestock_treatment_wetland_future = @field.is_livestock_treatment_wetland
     @field.is_poultry_animal_waste_management_system_future = @field.is_poultry_animal_waste_management_system
     @field.is_poultry_mortality_composting_future = @field.is_poultry_mortality_composting

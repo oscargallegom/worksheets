@@ -39,7 +39,7 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Crop Category</h2></li>
-            <% if (@field.field_type_id == 1) # if crop   %>
+            <% if (@field.field_type_id == 1) # if crop    %>
                 <li>Enter the following information for the entire growing cycle of this crop, as applicable. Note that
                   some BMPs such as enhanced nutrient management, dairy feed management, and conservation tillage will
                   be credited automatically if the information entered on this page reflects any of these practices. If
@@ -49,13 +49,13 @@
                   long.
                 </li>
             <% end %>
-            <% if (@field.field_type_id == 2) # if permanent pasture   %>
+            <% if (@field.field_type_id == 2) # if permanent pasture    %>
                 <li>Enter the following information for this pasture, as applicable. Note that some BMPs such as
                   enhanced nutrient management will be credited automatically if the information entered on this page
                   reflects any of these practices.
                 </li>
             <% end %>
-            <% if (@field.field_type_id == 3) # if hay   %>
+            <% if (@field.field_type_id == 3) # if hay    %>
                 <li>Enter the following information for the entire growing cycle of this hay field, as applicable. Note
                   that some BMPs such as enhanced nutrient management and conservation tillage will be credited
                   automatically if the information entered on this page reflects any of these practices.
@@ -76,7 +76,7 @@
               </select>
             </li>
 
-            <% if (@field.field_type_id != 2) # hide if  field type is permanent pasture   %>
+            <% if (@field.field_type_id != 2) # hide if  field type is permanent pasture    %>
                 <li>
                   <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
 
@@ -95,7 +95,7 @@
                 </li>
             <% end %>
 
-            <% if (@field.field_type_id == 2) # only show if  field type is pasture   %>
+            <% if (@field.field_type_id == 2) # only show if  field type is pasture    %>
                 <li><h2 class='sectionHeading'>Grazing Livestock</h2></li>
                 <li>Enter grazing livestock for the given year.</li>
 
@@ -164,7 +164,7 @@
             <li id='li_end_of_season_button'><%= f.link_to_add "Add End Of Season", :end_of_seasons, :class => 'button', :id => 'addEndOFSeasonBtn', :data => {:target => "#div_end_of_season"} %></li>
 
 
-            <% if (@field.field_type_id == 1) # only show if  field type is crop   %>
+            <% if (@field.field_type_id == 1) # only show if  field type is crop    %>
                 <li><h2 class='sectionHeading'>Cover Crop</h2></li>
                 <li>Please indicate whether a conservation (i.e., non-commodity) cover crop will be planted following
                   this crop. For commodity cover crops, please add a crop to your rotation.
@@ -177,8 +177,10 @@
                   <%= f.label :is_cover_crop_false, 'No' %>
 
                 </li>
-                <li id='li_cover_crop_warning_id'  <% if !@crop_rotation.end_of_seasons.blank? %>style='display: none'
-                    <% end %>>You do not have any end of season operations. You cover crop is going to be ignored.</li>
+                <li id='li_cover_crop_warning_id'
+                    <% if !@crop_rotation.end_of_seasons.blank? %>style='display: none'
+                    <% end %>>You do not have any end of season operations. You cover crop is going to be ignored.
+                </li>
 
                 <li id='li_cover_crop_id'>
                   <%= f.label :cover_crop_id, 'Cover crop type:<em>*</em>'.html_safe, :class => 'wide' %>

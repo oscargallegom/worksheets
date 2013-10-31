@@ -240,6 +240,9 @@ showCoverCropSection = ->
   $("#li_cover_crop_plant_date").show()
   $("#li_cover_crop_planting_method_id").show()
   $("#crop_rotation_cover_crop_id").prop('required', true)
+  $("#crop_rotation_cover_crop_plant_date_year").prop('required', true)
+  $("#crop_rotation_cover_crop_plant_date_month").prop('required', true)
+  $("#crop_rotation_cover_crop_plant_date_day").prop('required', true)
   $("#crop_rotation_cover_crop_planting_method_id").prop('required', true)
 
 hideCoverCropSection = ->
@@ -248,6 +251,9 @@ hideCoverCropSection = ->
   $("#li_cover_crop_plant_date").hide()
   $("#li_cover_crop_planting_method_id").hide()
   $("#crop_rotation_cover_crop_id").prop('required', false)
+  $("#crop_rotation_cover_crop_plant_date_year").prop('required', false)
+  $("#crop_rotation_cover_crop_plant_date_month").prop('required', false)
+  $("#crop_rotation_cover_crop_plant_date_day").prop('required', false)
   $("#crop_rotation_cover_crop_planting_method_id").prop('required', false)
 
 

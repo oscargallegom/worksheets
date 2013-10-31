@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<%= wicked_pdf_image_tag('logo.png')  %>
+<%= wicked_pdf_image_tag('logo.png') %>
 
 <br/>
 
@@ -292,7 +292,7 @@ Under construction
       <tr>
         <td>
           <%= link_to field.name, edit_farm_field_path(@farm, field) unless field.watershed_segment.nil? %>
-          <%= "Field '#{field.name}' is not in watershed."  if field.watershed_segment.nil? %>
+          <%= "Field '#{field.name}' is not in watershed." if field.watershed_segment.nil? %>
           <br/>
           <%= field.field_type.name unless field.field_type.nil? %>
         </td>
@@ -312,8 +312,6 @@ Under construction
       </tr>
   <% end %>
 </table>
-
-
 
 
 </body>
