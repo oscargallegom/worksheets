@@ -775,8 +775,8 @@ EfficiencyBmp.create!({:id => 406,  :bmp_type_id => '3', :field_type_id => '11',
 
 
 CropType.delete_all
-CropType.create!({:id => 1, :name => 'High Till'}, :without_protection => true)
-CropType.create!({:id => 2, :name => 'Low Till / No till'}, :without_protection => true)
+CropType.create!({:id => 1, :name => 'High Till (<30% residue)'}, :without_protection => true)
+CropType.create!({:id => 2, :name => 'Low Till / No till (>30% residue)'}, :without_protection => true)
 
 Irrigation.delete_all
 Irrigation.create!({:id => 0, :name => 'None'}, :without_protection => true)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131022002748) do
+ActiveRecord::Schema.define(:version => 20131101012745) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20131022002748) do
     t.decimal  "incorporation_depth"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+    t.integer  "p_type_id"
   end
 
   create_table "counties", :force => true do |t|

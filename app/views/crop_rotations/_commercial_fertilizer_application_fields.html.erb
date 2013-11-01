@@ -18,6 +18,10 @@
   &nbsp; lbs/ac
 </li>
 <li>
+  <div class='wide'>&nbsp;</div>
+  <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:required => true, :style => 'width:120px'} %>
+</li>
+<li>
   <%= f.label :is_incorporated, 'Incorporated/Injected:', :class => 'wide' %>
   <%= f.check_box :is_incorporated, :size => 5 %>
 </li>

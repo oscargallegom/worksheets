@@ -178,17 +178,29 @@ module Ntt
               plant_date_day = field.field_type_id != 2 ? crop_rotation.plant_date_day : 0
 
               seeding_rate = field.field_type_id != 2 ? crop_rotation.seeding_rate : 0
-              cover_crop_code = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop.code : 0
-              cover_crop_planting_method_id = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_planting_method_id : 0
-
-              cover_crop_plant_date_year = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0') : '00'
-              cover_crop_plant_date_month = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_month.to_s.rjust(2, '0') : '00'
-              cover_crop_plant_date_day = (field.field_type_id == 1 && crop_rotation.is_cover_crop) ? crop_rotation.cover_crop_plant_date_day.to_s.rjust(2, '0') : '00'
-              cover_crop_plant_date = cover_crop_plant_date_year + cover_crop_plant_date_month + cover_crop_plant_date_day
 
               is_permanent_pasture = field.field_type_id == 2 ? 1 : 0
 
-              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4>#{cover_crop_plant_date}</OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>#{cover_crop_code}</OpVal6><OpVal7>#{cover_crop_planting_method_id}</OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6></OpVal6><OpVal7></OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+              ########################################################
+              # Cover crop
+              ########################################################
+
+              if (field.field_type_id == 1 && crop_rotation.is_cover_crop)
+              mid = mid + 1
+
+              cover_crop_code = crop_rotation.cover_crop.code
+              cover_crop_planting_method_id = crop_rotation.cover_crop_planting_method_id
+
+              cover_crop_plant_date_year = crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0')
+              cover_crop_plant_date_month = crop_rotation.cover_crop_plant_date_month.to_s.rjust(2, '0')
+              cover_crop_plant_date_day = crop_rotation.cover_crop_plant_date_day.to_s.rjust(2, '0')
+              cover_crop_plant_date = cover_crop_plant_date_year + cover_crop_plant_date_month + cover_crop_plant_date_day
+
+              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{cover_crop_plant_date_year}</Year><Month>#{cover_crop_plant_date_month}</Month><Day>#{cover_crop_plant_date_day}</Day><Crop>#{cover_crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>1</OpVal6><OpVal7></OpVal7><OpVal8></OpVal8><MID>#{mid}</MID></ManagementInfo>"
+
+              end
 
               ########################################################
               # Commercial fertilizer
@@ -204,6 +216,10 @@ module Ntt
 
                 total_n_applied = commercial_fertilizer_application.total_n_applied.to_f * 1.12
                 total_p_applied = commercial_fertilizer_application.total_p_applied.to_f * 1.12
+                # if P2O5
+                if (commercial_fertilizer_application.p_type_id == 2)
+                  total_p_applied = total_p_applied * 0.4364
+                end
 
                 incorporation_depth = commercial_fertilizer_application.is_incorporated ? (commercial_fertilizer_application.incorporation_depth * 25.4) : 0
 
@@ -279,7 +295,6 @@ module Ntt
                 application_date_day = manure_fertilizer_application.application_date_day
 
                 manure_application_code = '56'
-
 
                 # if liquid and gallons
                 conversion_rate = (operation_code == 265 && manure_fertilizer_application.liquid_unit_type_id == 1) ? (1000.0 * 8.34) : 2000
