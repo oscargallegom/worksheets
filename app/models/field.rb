@@ -1,7 +1,7 @@
 class Field < ActiveRecord::Base
   #TODO: just a test for now
+  include Ntt
   before_save :call_ntt
-
 
   attr_writer :step
   attr_accessor :soil_test_laboratory_id, :modified_p_test_value
@@ -49,10 +49,10 @@ class Field < ActiveRecord::Base
   attr_accessible :other_land_use_conversion_acres_future, :other_land_use_conversion_vegetation_type_id_future, :is_other_land_use_conversion_planned_future
 
 
-  attr_accessible :is_pasture_adjacent_to_stream, :fence_length
+  attr_accessible :is_pasture_adjacent_to_stream
 
-  attr_accessible :is_streambank_fencing_in_place, :vegetation_type_fence_stream_id, :distance_fence_stream, :exclusion_description
-  attr_accessible :is_streambank_fencing_in_place_future, :vegetation_type_fence_stream_id_future, :distance_fence_stream_future, :exclusion_description_future
+  attr_accessible :is_streambank_fencing_in_place, :fence_length, :vegetation_type_fence_stream_id, :distance_fence_stream, :exclusion_description
+  attr_accessible :is_streambank_fencing_in_place_future, :fence_length_future, :vegetation_type_fence_stream_id_future, :distance_fence_stream_future, :exclusion_description_future
 
   attr_accessible :is_streambank_restoration, :streambank_restoration_length, :is_streambank_restoration_planned
   attr_accessible :is_streambank_restoration_future, :streambank_restoration_length_future, :is_streambank_restoration_planned_future
@@ -94,7 +94,6 @@ class Field < ActiveRecord::Base
   # step 1
   validates_presence_of :name, :field_type_id, :if => 'step?(1)'
   validates_inclusion_of :is_pasture_adjacent_to_stream, :in => [true, false], :if => 'step?(1)'
-  validates_numericality_of :fence_length, :if => 'step?(1) && is_pasture_adjacent_to_stream?'
 
   # step 2 and crop or permanent pasture or continuous hay
   # TODO: check field type id
@@ -118,6 +117,7 @@ class Field < ActiveRecord::Base
   validates_inclusion_of :is_streambank_fencing_in_place, :in => [true, false], :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
   validates_presence_of :vegetation_type_fence_stream_id, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'
   validates_numericality_of :distance_fence_stream, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place?'
+  validates_numericality_of :fence_length, :if => 'step?(4) && field_type_id==2 && is_pasture_adjacent_to_stream?'
 
   # step 4 and crop or continuous hay
   validates_numericality_of :forest_buffer_average_width, :forest_buffer_length, :if => 'step?(4) && (field_type_id==1 || field_type_id==3) && is_forest_buffer?'
@@ -135,6 +135,7 @@ class Field < ActiveRecord::Base
   validates_inclusion_of :is_streambank_fencing_in_place_future, :in => [true, false], :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream?'
   validates_presence_of :vegetation_type_fence_stream_id_future, :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
   validates_numericality_of :distance_fence_stream_future, :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream? && is_streambank_fencing_in_place_future?'
+  validates_numericality_of :fence_length_future, :if => 'step?(7) && field_type_id==2 && is_pasture_adjacent_to_stream?'
 
   # step 7 and crop or continuous hay
   validates_numericality_of :forest_buffer_average_width_future, :forest_buffer_length_future, :if => 'step?(7) && (field_type_id==1 || field_type_id==3) && is_forest_buffer_future?'
@@ -292,12 +293,49 @@ class Field < ActiveRecord::Base
     enable
   end
 
+  def update_ntt_xml
+    # reset NTT XML
+    self.ntt_xml_current = Time.now
+    self.ntt_xml_future = Time.now
+    self.save
+  end
+
   private
   def call_ntt
-    i =0
-    i =2
-    puts self.changed?
-    i=4
+
+    if (self.changed?)
+
+    success, content = callNtt(self, false)
+
+    if (success)
+      @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+      if (@ntt_results['ErrorCode'] != '0')
+        self.ntt_xml_current =  nil
+        #raise 'Could not retrieve NTT data.'
+      else
+        self.ntt_xml_current = content
+      end
+    else
+      self.ntt_xml_current =  nil
+      raise 'Could not retrieve NTT data: ' + content.to_s
+    end
+
+    # now  for the future
+    success, content = callNtt(self, true)
+
+    if (success)
+      @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+      if (@ntt_results['ErrorCode'] != '0')
+        self.ntt_xml_future =  nil
+        #raise 'Could not retrieve NTT data for future scenario.'
+      else
+        self.ntt_xml_future = content
+      end
+    else
+      self.ntt_xml_future =  nil
+      raise 'Could not retrieve NTT data for future scenario: ' + content.to_s
+    end
+        end
   end
 
 

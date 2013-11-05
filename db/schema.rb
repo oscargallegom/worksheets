@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131101012745) do
+ActiveRecord::Schema.define(:version => 20131105023447) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -323,6 +323,9 @@ ActiveRecord::Schema.define(:version => 20131101012745) do
     t.boolean  "is_poultry_litter_treatment_future"
     t.integer  "soil_texture_id"
     t.decimal  "slope"
+    t.text     "ntt_xml_current"
+    t.text     "ntt_xml_future"
+    t.decimal  "fence_length_future"
   end
 
   create_table "future_bmps", :force => true do |t|
@@ -349,7 +352,6 @@ ActiveRecord::Schema.define(:version => 20131101012745) do
     t.boolean  "precision_feeding"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.integer  "days_grazed"
   end
 
   create_table "irrigations", :force => true do |t|

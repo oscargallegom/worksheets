@@ -1,5 +1,9 @@
 class CropRotation < ActiveRecord::Base
 
+  #  if any  change then ntt needs to be called
+  after_save :update_ntt_xml
+  after_destroy :update_ntt_xml
+
   attr_accessor :crop_category_id
 
   belongs_to :crop #, :inverse_of => :crop_rotations
@@ -52,6 +56,11 @@ class CropRotation < ActiveRecord::Base
   # allow duplication
   amoeba do
     enable
+  end
+
+  private
+  def update_ntt_xml
+    self.field.update_ntt_xml()
   end
 
 end

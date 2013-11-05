@@ -21161,18 +21161,122 @@
       <column name="updated_at" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93"/>
       <column name="farm_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="coordinates" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
-      <column name="acres" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
-      <column name="tmdl_watershed" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="acres_from_user" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
       <column name="field_type_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="notes" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
-      <column name="segment_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="acres_from_map" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
-      <column name="acres_use_map" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_acres_from_map" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
       <column name="tile_drainage_depth" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
       <column name="irrigation_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="fertigation_n" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
-      <column name="p_test_method_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="p_test_value" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="efficiency" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="watershed_segment_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="is_forest_buffer" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="forest_buffer_average_width" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="forest_buffer_length" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_forest_buffer_planned" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_grass_buffer" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="grass_buffer_average_width" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="grass_buffer_length" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_grass_buffer_planned" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_wetland" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="wetland_area" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="wetland_treated_area" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_wetland_planned" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_streambank_restoration" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="streambank_restoration_length" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_streambank_restoration_planned" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="crop_type_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="is_pasture_adjacent_to_stream" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_streambank_fencing_in_place" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="distance_fence_stream" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="fence_length" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="vegetation_type_fence_stream_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="livestock_input_method_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="is_livestock_animal_waste_management_system" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_mortality_composting" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_plastic_permeable_lagoon_cover" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_phytase" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_dairy_precision_feeding" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_barnyard_runoff_controls" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_water_control_structure" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_treatment_wetland" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_animal_waste_management_system" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_mortality_composting" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_biofilters" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_vegetated_environmental_buffer" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_phytase" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_heavy_use_pads" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_barnyard_runoff_controls" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_water_control_structure" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_treatment_wetland" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_litter_treatment" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_implemented_nutrient_plan" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_implemented_soil_water_plan" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_properly_sized_maintained" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="tmdl_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="soil_p_extractant_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="is_fertilizer_application_setback" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="fertilizer_application_setback_average_width" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="fertilizer_application_setback_length" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_fertilizer_application_setback_planned" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="planned_management_details" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
+      <column name="watershed_name" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="tmdl_va" sqlType="varchar" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="exclusion_description" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
+      <column name="other_land_use_conversion_acres" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="other_land_use_conversion_vegetation_type_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="is_other_land_use_conversion_planned" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_forest_buffer_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="forest_buffer_average_width_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="forest_buffer_length_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_forest_buffer_planned_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_grass_buffer_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_grass_buffer_planned_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_wetland_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="wetland_area_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="wetland_treated_area_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_wetland_planned_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_streambank_restoration_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="streambank_restoration_length_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_streambank_restoration_planned_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_streambank_fencing_in_place_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="distance_fence_stream_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="vegetation_type_fence_stream_id_future" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="planned_management_details_future" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
+      <column name="is_fertilizer_application_setback_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="fertilizer_application_setback_average_width_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="fertilizer_application_setback_length_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_fertilizer_application_setback_planned_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="exclusion_description_future" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
+      <column name="other_land_use_conversion_acres_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="other_land_use_conversion_vegetation_type_id_future" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="is_other_land_use_conversion_planned_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="grass_buffer_average_width_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="grass_buffer_length_future" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="is_livestock_animal_waste_management_system_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_mortality_composting_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_plastic_permeable_lagoon_cover_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_phytase_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_dairy_precision_feeding_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_barnyard_runoff_controls_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_water_control_structure_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_livestock_treatment_wetland_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_animal_waste_management_system_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_mortality_composting_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_biofilters_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_vegetated_environmental_buffer_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_phytase_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_heavy_use_pads_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_barnyard_runoff_controls_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_water_control_structure_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_treatment_wetland_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="is_poultry_litter_treatment_future" sqlType="bool" length="1" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="soil_texture_id" sqlType="int4" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="slope" sqlType="numeric" length="131089" precision="0" nullable="true" jdbcType="2"/>
+      <column name="ntt_xml_current" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
+      <column name="ntt_xml_future" sqlType="text" length="2147483647" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="fields_pkey" columns="id"/>
     </table>
     <table name="fields_id_seq" schema="public" catalog="nutrientnet_development" type="SEQUENCE">

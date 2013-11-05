@@ -128,7 +128,7 @@ class FieldsController < ApplicationController
             end
           end
           if (!is_soil_conservation)
-            flash.now[:meet_baseline] << 'Field cannot meet baseline unless both a current and valid Nutrient Management Plan and Soil and Water Conservation Plan have been checked on the BMP page.'
+            flash.now[:meet_baseline] << 'Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab.'
           end
         end
       end

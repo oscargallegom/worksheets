@@ -57,11 +57,7 @@
             <div id='div_is_pasture_adjacent_to_stream'
                  <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none'
                  <% end %>>
-              <li>
-                <%= f.label :fence_length, 'Linear feet of streabank:<em>*</em>'.html_safe, :class => 'wide' %>
-                <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
-                ft
-              </li>
+
 
             </div>
 

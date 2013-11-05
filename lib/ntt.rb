@@ -19,6 +19,9 @@ module Ntt
 
         xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
+
+        test= open(URL_NTT + '?input=' + xml)
+
         doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
 
             if (!doc.nil?)
@@ -46,7 +49,7 @@ module Ntt
         raise "Field '#{field.name}' is not in watershed."
       end
 
-      customer = current_user.id
+      customer = field.farm.owner_id #current_user.id
 
       mid = 0 # management info id
 
@@ -156,10 +159,9 @@ module Ntt
 
                 animal_id = grazing_livestock.animal_id
                 hours_grazed = grazing_livestock.hours_grazed
-                days_grazed = grazing_livestock.days_grazed
                 precision_feeding = grazing_livestock.precision_feeding ? 1 : 0
 
-                xml = xml + "<grazingInfo><FieldId>#{strip_id}</FieldId><MID>#{mid}</MID><OpVal1>0</OpVal1><OpVal2>#{animal_units}</OpVal2><OpVal3>#{animal_id}</OpVal3><OpVal4>0</OpVal4><OpVal5>#{hours_grazed}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{days_grazed}</OpVal7><OpVal8>#{precision_feeding}</OpVal8></grazingInfo>"
+                xml = xml + "<grazingInfo><FieldId>#{strip_id}</FieldId><MID>#{mid}</MID><OpVal1>0</OpVal1><OpVal2>#{animal_units}</OpVal2><OpVal3>#{animal_id}</OpVal3><OpVal4>0</OpVal4><OpVal5>#{hours_grazed}</OpVal5><OpVal6>0</OpVal6><OpVal7></OpVal7><OpVal8>#{precision_feeding}</OpVal8></grazingInfo>"
 
               end
 

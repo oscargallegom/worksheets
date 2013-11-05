@@ -1,4 +1,9 @@
 class Bmp < ActiveRecord::Base
+
+  #  if any  change then ntt needs to be called
+  after_save :update_ntt_xml
+  after_destroy :update_ntt_xml
+
   belongs_to :bmp_type
   belongs_to :field #, :inverse_of => :bmps
 
@@ -10,4 +15,10 @@ class Bmp < ActiveRecord::Base
   amoeba do
     enable
   end
+
+  private
+  def update_ntt_xml
+    self.field.update_ntt_xml()
+  end
+
 end

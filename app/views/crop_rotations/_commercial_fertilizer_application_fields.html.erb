@@ -8,18 +8,18 @@
   <%= f.select :application_date_day, options_for_select(listDays, :selected => f.object.application_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
-  <%= f.label :total_n_applied, 'Total N applied:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :total_n_applied, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+  <%= f.label :total_n_applied, 'Total N applied:'.html_safe, :class => 'wide' %>
+  <%= f.text_field :total_n_applied, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
   &nbsp; lbs/ac
 </li>
 <li>
-  <%= f.label :total_p_applied, 'Total P applied:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :total_p_applied, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+  <%= f.label :total_p_applied, 'Total P applied:'.html_safe, :class => 'wide' %>
+  <%= f.text_field :total_p_applied, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
   &nbsp; lbs/ac
 </li>
 <li>
   <div class='wide'>&nbsp;</div>
-  <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:required => true, :style => 'width:120px'} %>
+  <%= f.collection_select :p_type_id, PType.all, :id, :name, {:prompt => 'Select P type'}, {:style => 'width:120px'} %>
 </li>
 <li>
   <%= f.label :is_incorporated, 'Incorporated/Injected:', :class => 'wide' %>

@@ -1,4 +1,8 @@
 class Strip < ActiveRecord::Base
+  #  if any  change then ntt needs to be called
+  after_save :update_ntt_xml
+  after_destroy :update_ntt_xml
+
   has_many :crop_rotations, :dependent => :destroy, autosave: true #, :inverse_of => :strip
                                                                    #has_many :crops, :through => :crop_rotations
 
@@ -15,6 +19,11 @@ class Strip < ActiveRecord::Base
   # allow duplication
   amoeba do
     enable
+  end
+
+  private
+  def update_ntt_xml
+      self.field.update_ntt_xml()
   end
 
 end

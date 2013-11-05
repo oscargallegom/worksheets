@@ -31,6 +31,11 @@
               <%= f.radio_button :is_streambank_fencing_in_place, false, :required => true %>
               <%= f.label :is_streambank_fencing_in_place_false, 'No' %>
             </li>
+            <li>
+              <%= f.label :fence_length, 'Linear feet of streabank:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :fence_length, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :step => 'any', :required => true %>
+              ft
+            </li>
             <div id='div_is_fencing_in_place'
                  <% if !@field.is_streambank_fencing_in_place? %>style='display: none'
                  <% end %>>
@@ -238,7 +243,7 @@
     </div>
 
     <li><h2 class='sectionHeading'>Other land use conversion</h2></li>
-    <li>Please indicate any non-riperian land conversion in place or planned on this field.</li>
+    <li>Please indicate any non-riparian land conversion in place or planned on this field.</li>
     <li>
       <%= f.label :other_land_use_conversion_acres, 'Acres converted:', :class => 'wide' %>
       <%= f.text_field :other_land_use_conversion_acres, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any', :required => false %>

@@ -28,6 +28,7 @@
     <th>Manure Fertilizer</th>
     <th>Tillage Operations</th>
     <th>Harvest Operations</th>
+    <th>Cover crop</th>
     <th class="actions">Actions</th>
   </tr>
 
@@ -36,11 +37,12 @@
       <tr>
         <td><%= link_to 'Crop ' + (crop_rotation_index + 1).to_s, farm_field_strip_crop_rotation_path(crop_rotation.strip.field.farm.id, crop_rotation.strip.field.id, crop_rotation.strip.id, crop_rotation.id) %></td>
         <td><%= crop_rotation.crop.name unless crop_rotation.crop == nil %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= crop_rotation.grazing_livestocks.count %></td>
+        <td><%= crop_rotation.commercial_fertilizer_applications.count %></td>
+        <td><%= crop_rotation.manure_fertilizer_applications.count %></td>
+        <td><%= crop_rotation.tillage_operations.count %></td>
+        <td><%= crop_rotation.end_of_seasons.count %></td>
+        <td><%= crop_rotation.is_cover_crop ? 'Yes' :'No' %></td>
         <td>
           <%= link_to image_tag('/images/copy.png', :alt => 'Duplicate', :title => 'Duplicate crop'), duplicate_farm_field_strip_crop_rotation_path(crop_rotation.strip.field.farm.id, crop_rotation.strip.field.id, crop_rotation.strip.id, crop_rotation.id), :method => :post %>
           &nbsp;
