@@ -60,7 +60,7 @@ class CropRotation < ActiveRecord::Base
 
   private
   def update_ntt_xml
-    self.field.update_ntt_xml()
+    self.strip.field.update_ntt_xml()
   end
 
 end

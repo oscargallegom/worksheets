@@ -114,7 +114,7 @@ module BmpCalculations
     # if permanent pasture and fencing in place
     if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
       fencing_acres = field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
-      fencing_acres_future = field.distance_fence_stream_future.to_f * field.fence_length.to_f / 43560.0
+      fencing_acres_future = field.distance_fence_stream_future.to_f * field.fence_length_future.to_f / 43560.0
 
       if (field.vegetation_type_fence_stream_id == 1) # if forest
         stream_forest_n_conversion = field.watershed_segment.total_n_forest * fencing_acres
@@ -143,7 +143,7 @@ module BmpCalculations
       if (!field.distance_fence_stream_future.nil? && field.distance_fence_stream_future >= 35 && field.distance_fence_stream_future <= 100)
         fencing_functional_acres_future = fencing_acres_future
       elsif (!field.distance_fence_stream_future.nil? && field.distance_fence_stream_future > 100)
-        fencing_functional_acres_future = field.fence_length.to_f * 100.0 / 43560.0
+        fencing_functional_acres_future = field.fence_length_future.to_f * 100.0 / 43560.0
       end
     end
 

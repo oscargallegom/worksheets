@@ -262,8 +262,14 @@ class Field < ActiveRecord::Base
     # not field data entered yet
     percentCompleted = 10 if !self.field_type.nil?
 
-    if (!self.strips.empty? && !self.strips[0].crop_rotations.empty?)
-      percentCompleted = 30
+    self.strips.each do |strip|
+        if (!strip.is_future && !strip.crop_rotations.empty?)
+          percentCompleted = 50
+        end
+        if (strip.is_future && !strip.crop_rotations.empty?)
+          percentCompleted = 100
+          break
+        end
     end
 
     #is_one_crop_done = false
