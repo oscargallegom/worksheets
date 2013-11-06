@@ -110,7 +110,7 @@ module Ntt
           end
 
           # if no soil data, the user has manually picked one
-          if field.soils.empty?
+          if (field.soils.empty? && !field.soil_texture.nil?)
             soil_area = area
             map_unit_key = ''
             map_unit_symbol = ''
