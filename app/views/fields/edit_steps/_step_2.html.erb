@@ -84,16 +84,17 @@
 
                 </div>
 
-            <% else %>
+            <% end %>
+            <div id='div_soil_texture' <% if !@field.soils.empty? %> style='display:none' <% end %> >
                 <li>
                   <%= f.label :soil_texture_id, 'Soil texture:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.collection_select :soil_texture_id, SoilTexture.all, :id, :name, {:prompt => 'Select soil texture'}, :required => true %>
+                  <%= f.collection_select :soil_texture_id, SoilTexture.all, :id, :name, {:prompt => 'Select soil texture'}, :required => @field.soils.empty? %>
                 </li>
                 <li>
                   <%= f.label :slope, 'Soil slope:<em>*</em>'.html_safe, :class => 'wide' %>
-                  <%= f.text_field :slope, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :max => 100, :step => 'any' %>                </li>
+                  <%= f.text_field :slope, :class => 'textboxMedium', :type => 'number', :required => @field.soils.empty?, :min => 0, :max => 100, :step => 'any' %>                </li>
                 </li>
-            <% end %>
+             </div>
           </ol>
         </fieldset>
 

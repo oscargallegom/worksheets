@@ -308,6 +308,8 @@ class Field < ActiveRecord::Base
 
   private
   def call_ntt
+    #TODO: check this method
+    return
 
     if (self.changed?)
 

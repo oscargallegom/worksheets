@@ -42,6 +42,12 @@ updateIndexes = ->
       if $(this).prop("id").indexOf("_length") > 0
         $(this).prop('required', true)
 
+  # if all the soils have been removed, show the texture option
+  if $(".fields:visible").find("#div_soil").length == 0
+    $("#div_soil_texture").show()
+    $("#field_soil_texture_id").prop('required', true)
+    $("#field_slope").prop('required', true)
+
 # fertigation is only shown for option 500 and 530 (center pivot or drip):
 displayFertigation = ->
   if $("#field_irrigation_id option:selected").val() isnt '500' and $("#field_irrigation_id option:selected").val() isnt '530'
