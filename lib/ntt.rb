@@ -84,7 +84,7 @@ module Ntt
           fertigation_n = (field.irrigation_id==0 || field.irrigation_id==502) ? '' : field.fertigation_n
           width = field.strips.length==1 ? '' : strip.length.to_f * 0.3048
 
-          xml = xml + "<FieldInfo><FIID>#{strip_id}</FIID><Area>#{area}</Area><TileDrainD>#{tileDrainDepth}</TileDrainD><Irrigation>#{irrigation}</Irrigation><IrrEff>#{efficiency}</IrrEff><NFertInIrrg>#{fertigation_n}</NFertInIrrg><Width>#{width}</Width></FieldInfo>"
+          xml = xml + "<FieldInfo><FIID>#{strip_id}</FIID><Area>#{area.round(3)}</Area><TileDrainD>#{tileDrainDepth}</TileDrainD><Irrigation>#{irrigation}</Irrigation><IrrEff>#{efficiency}</IrrEff><NFertInIrrg>#{fertigation_n}</NFertInIrrg><Width>#{width}</Width></FieldInfo>"
 
           ########################################################
           # SoilInfo section
@@ -105,7 +105,7 @@ module Ntt
             bulk_density = soil.bulk_density
             organic_carbon = soil.organic_carbon
 
-            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area.round(3)}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test.round(3)}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
 
           end
 
@@ -124,7 +124,7 @@ module Ntt
             bulk_density = field.soil_texture.bulk_density
             organic_carbon = field.soil_texture.organic_carbon
 
-            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area.round(3)}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test.round(3)}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
           end
 
           strip.crop_rotations.each_with_index do |crop_rotation, crop_rotation_index|
