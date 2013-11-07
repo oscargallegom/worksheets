@@ -38,7 +38,6 @@ module Ntt
     end
   end
 
-
   def buildXml(field, is_future)
 
     begin
