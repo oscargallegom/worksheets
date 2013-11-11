@@ -19,8 +19,9 @@
             <li
             <% if (params[:action]=='review') %> class="selected"
             <% end %> ><a <%= link_to 'Review', review_farm_path(@farm) %></li>
-            <li class='disabledTab'><a href="?show=disabled">Submit</a></li>
-            <li class="shadow"></li>
+            <li
+            <% if (params[:action]=='submit') %> class="selected"
+            <% end %> ><a <%= link_to 'Submit', submit_farm_path(@farm) %></li>
           </ul>
         </div>
     <% end %>
