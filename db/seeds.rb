@@ -822,6 +822,7 @@ CropCategory.create!({:id => 20, :name => 'Evergreen Trees'}, :without_protectio
 CropCategory.create!({:id => 21, :name => 'Orchard'}, :without_protection => true)
 CropCategory.create!({:id => 22, :name => 'Nursery Stock'}, :without_protection => true)
 CropCategory.create!({:id => 23, :name => 'Fallow'}, :without_protection => true)
+CropCategory.create!({:id => 24, :name => 'Peanuts'}, :without_protection => true)
 CropCategory.create!({:id => 99, :name => 'Other'}, :without_protection => true)
 
 Crop.delete_all
@@ -924,7 +925,7 @@ Crop.create!({:id => 96, :code => 67,  :name => 'Cantaloupe', :crop_category_id 
 Crop.create!({:id => 97, :code => 68,  :name => 'Honeydew Melon', :crop_category_id => 15}, :without_protection => true)
 Crop.create!({:id => 98, :code => 69,  :name => 'Watermelon', :crop_category_id => 15}, :without_protection => true)
 Crop.create!({:id => 99, :code => 100,  :name => 'Casava', :crop_category_id => 15}, :without_protection => true)
-# TODO codes below
+
 Crop.create!({:id => 100, :code => 69,  :name => 'Pumpkins', :crop_category_id => 17}, :without_protection => true)
 Crop.create!({:id => 101, :code => 23,  :name => 'Canola, Rape Seeds', :crop_category_id => 2}, :without_protection => true)
 Crop.create!({:id => 102, :code => 23,  :name => 'Canola, Rape Seeds', :crop_category_id => 6}, :without_protection => true)
@@ -943,7 +944,7 @@ Crop.create!({:id => 113, :code => 144,  :name => 'Nursery Evergreen Tree Stock'
 
 # added on 09/28/2013
 Crop.create!({:id => 114, :code => 149,  :name => 'Triticale', :crop_category_id => 2}, :without_protection => true)
-
+Crop.create!({:id => 115, :code => 6,  :name => 'Peanuts', :crop_category_id => 24}, :without_protection => true)
 
 PlantingMethod.delete_all
 PlantingMethod.create!({:id => 146,  :name => 'Broadcast'}, :without_protection => true)
@@ -3670,6 +3671,7 @@ SoilTestLaboratory.create!({:id => 6, :name => 'Penn State', :state_id => 21}, :
 SoilTestLaboratory.create!({:id => 7, :name => 'Spectrum Analytic, Inc. (lbs/A)', :state_id => 21}, :without_protection => true)
 SoilTestLaboratory.create!({:id => 8, :name => 'Spectrum Analytic, Inc. (ppm)', :state_id => 21}, :without_protection => true)
 SoilTestLaboratory.create!({:id => 9, :name => 'U. Delaware', :state_id => 21}, :without_protection => true)
+SoilTestLaboratory.create!({:id => 37, :name => 'U. Maryland (FIV)', :state_id => 21}, :without_protection => true)
 SoilTestLaboratory.create!({:id => 10, :name => 'Waters', :state_id => 21}, :without_protection => true)
 SoilTestLaboratory.create!({:id => 11, :name => 'All Labs', :state_id => 39}, :without_protection => true)
 SoilTestLaboratory.create!({:id => 12, :name => 'Virginia Tech', :state_id => 47}, :without_protection => true)
@@ -3708,6 +3710,7 @@ SoilPExtractant.create!({:id => 6, :name => 'Mehlich-3 (25 mL:2.13 cm3)',  :soil
 SoilPExtractant.create!({:id => 7, :name => 'Mehlich-3 (10 mL:1.0 cm3)',  :soil_test_laboratory_id => 7, :unit => 'lbs/A', :m_value => 0.75, :b_value => 9, :h_value => 1.09, :g_value => 2, :formula_code => 2}, :without_protection => true)
 SoilPExtractant.create!({:id => 8, :name => 'Mehlich-3 (10 mL:1.0 cm3)',  :soil_test_laboratory_id => 8, :unit => 'ppm', :m_value => 1.06, :b_value => 9, :h_value => 1.09, :g_value => 2, :formula_code => 2}, :without_protection => true)
 SoilPExtractant.create!({:id => 9, :name => 'Mehlich-3 (25 mL:2.5 cm3 or 10mL: 1.0 cm3 depending upon the analyses requested)',  :soil_test_laboratory_id => 9, :unit => 'index', :m_value => 1.01, :b_value => 7, :h_value => 1.09, :g_value => 2, :formula_code => 2}, :without_protection => true)
+SoilPExtractant.create!({:id => 37, :name => 'FIV',  :soil_test_laboratory_id => 37, :unit => 'index', :m_value => 0, :b_value => 0, :h_value => 0, :g_value => 0, :formula_code => 1}, :without_protection => true)
 SoilPExtractant.create!({:id => 10, :name => 'Mehlich-1 (20mL:5 cm3)',  :soil_test_laboratory_id => 10, :unit => 'lbs/A', :m_value => 1.18, :b_value => 4, :h_value => 1.09, :g_value => 2, :formula_code => 2}, :without_protection => true)
 SoilPExtractant.create!({:id => 11, :name => 'Mehlich-3',  :soil_test_laboratory_id => 11, :unit => 'ppm', :m_value => nil, :b_value => nil, :h_value => nil, :g_value => nil, :formula_code => 1}, :without_protection => true)
 SoilPExtractant.create!({:id => 12, :name => 'Mehlich-1 (single buffer)',  :soil_test_laboratory_id => 12, :unit => 'ppm', :m_value => 0.458, :b_value => 3.26, :h_value => nil, :g_value => nil, :formula_code => 3}, :without_protection => true)
