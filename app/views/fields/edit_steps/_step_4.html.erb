@@ -19,6 +19,9 @@
     <ol>
     <li><h2 class='sectionHeading'>Current BMPs</h2></li>
     <li>All additional BMPs not captured under the Current Crop Management tab should be listed here.</li>
+    <li>
+    Click <%= link_to "here", "/pdfs/Crop_Pasture_BMP_Descriptions.pdf", :target => '_blank' %> to show BMP descriptions (PDF format).
+    </li>
 
     <!-- only show if permanent pasture -->
     <% if (@field.field_type_id == 2) then %>

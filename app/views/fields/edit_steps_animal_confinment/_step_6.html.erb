@@ -19,6 +19,7 @@
           <ol>
             <li><h2 class='sectionHeading'>BMPs</h2></li>
             <li>Check the boxes next to all of the BMPs that are currently in place in the animal confinement area.</li>
+            <li>Click <%= link_to "here", "/pdfs/Animal_BMP_Descriptions.pdf", :target => '_blank' %> to show BMP descriptions (PDF format).</li>
 
             <%= link_to 'Import current BMPs ', populateFutureBMPs_farm_field_path(@field.farm.id, @field.id, :step => 6), :class => 'button', :method => :post %>
 
