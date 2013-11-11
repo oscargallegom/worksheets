@@ -81,7 +81,7 @@ module Ntt
           irrigation = field.irrigation_id
           efficiency = (field.irrigation_id==0) ? '' : field.efficiency
           fertigation_n = (field.irrigation_id==0 || field.irrigation_id==502) ? '' : field.fertigation_n
-          width = field.strips.length==1 ? '' : strip.length.to_f * 0.3048
+          width = field.strips.length==1 ? 0 : strip.length.to_f * 0.3048
 
           xml = xml + "<FieldInfo><FIID>#{strip_id}</FIID><Area>#{area.round(3)}</Area><TileDrainD>#{tileDrainDepth}</TileDrainD><Irrigation>#{irrigation}</Irrigation><IrrEff>#{efficiency}</IrrEff><NFertInIrrg>#{fertigation_n}</NFertInIrrg><Width>#{width.round(3)}</Width></FieldInfo>"
 
