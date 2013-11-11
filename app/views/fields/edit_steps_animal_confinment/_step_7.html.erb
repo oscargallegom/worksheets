@@ -46,7 +46,7 @@
             <li><h2 class='sectionHeading'>Phosporus</h2></li>
             <li><span class='wide'>Current Load:</span>
               <%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
-              <%= number_with_reductionprecision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
             <li><span class='wide'>Future Load:</span>
