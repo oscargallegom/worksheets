@@ -393,7 +393,7 @@ class FarmsController < ApplicationController
           arrFieldmusym = params["field#{i}musym"].split("|")
 
           arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
-            #if !arrFieldcompname[index].eql?('Water') # ignore soil if water
+            if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
             @listSoils << {
                 :percent => arrFieldpctsoiltype[index],
                 :mukey => arrFieldmukey[index],
@@ -402,6 +402,7 @@ class FarmsController < ApplicationController
                 :hydgrpdcd => arrFieldhydgrp[index],
                 :musym => arrFieldmusym[index]
             }
+              end
           end
         end
 
