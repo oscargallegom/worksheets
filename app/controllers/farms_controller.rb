@@ -208,6 +208,12 @@ class FarmsController < ApplicationController
 
     end
 
+    # GET/farms/id/submit
+    def submit
+      add_breadcrumb 'Farms', :farms_path
+      add_breadcrumb @farm.name
+    end
+
     respond_to do |format|
       format.html
       format.pdf do
