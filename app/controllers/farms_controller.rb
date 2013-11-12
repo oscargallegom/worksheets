@@ -207,21 +207,21 @@ class FarmsController < ApplicationController
       @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
 
     end
+  end
 
-    # GET/farms/id/submit
-    def submit
-      add_breadcrumb 'Farms', :farms_path
-      add_breadcrumb @farm.name
-    end
+  # GET/farms/id/submit
+  def submit
+    add_breadcrumb 'Farms', :farms_path
+    add_breadcrumb @farm.name
 
     respond_to do |format|
       format.html
       format.pdf do
-        render :pdf => "Review #{@farm.name}",
+        render :pdf => "Pre filled MDA CCR form #{@farm.name}.pdf",
                #html: render_to_string(:layout => false , :template => "farms/review.pdf.erb"),
                #:template => 'farms/review',
                # :wkhtmltopdf => 'C:\Program Files\wkhtmltopdf\wkhtmltopdf.exe',
-               :disposition => 'attachment',
+               # :disposition => 'attachment',
                :footer => {:center => 'NutrientNet',
                            :right => '[page] of [topage]'}
       end
@@ -394,15 +394,15 @@ class FarmsController < ApplicationController
 
           arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
             if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
-            @listSoils << {
-                :percent => arrFieldpctsoiltype[index],
-                :mukey => arrFieldmukey[index],
-                :niccdcdpct => arrFieldniccdcdpct[index],
-                :muname => arrFieldmuname[index],
-                :hydgrpdcd => arrFieldhydgrp[index],
-                :musym => arrFieldmusym[index]
-            }
-              end
+              @listSoils << {
+                  :percent => arrFieldpctsoiltype[index],
+                  :mukey => arrFieldmukey[index],
+                  :niccdcdpct => arrFieldniccdcdpct[index],
+                  :muname => arrFieldmuname[index],
+                  :hydgrpdcd => arrFieldhydgrp[index],
+                  :musym => arrFieldmusym[index]
+              }
+            end
           end
         end
 

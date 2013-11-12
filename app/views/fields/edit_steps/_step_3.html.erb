@@ -1,4 +1,4 @@
-<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form"} do |f| %>
+<%= nested_form_for @field, :url => {:action => "update"}, :html => {:class => "nn-form", :novalidate => 'novalidate'} do |f| %>
 
     <% if @field.errors.any? %>
         <div id="error_explanation" class="alert">
@@ -30,7 +30,8 @@
 
       </div>
     </div>
-    <%= f.link_to_add "Add strip for strip cropping", :strips, :class => 'button', :id => 'addStripBtn', :data => {:target => "#div_strip"} %>
+
+    <a class="button" href="<%= new_farm_field_strip_path(@field.farm, @field, :step => 3) %>">Add strip for strip cropping</a>
 
     <%= f.submit 'Save and Continue', :class => 'button' %>
 
