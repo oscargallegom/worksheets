@@ -57,6 +57,10 @@ module BmpCalculations
 
     @ntt_results_future = Hash.new
 
+    #TODO: Disabled future calculations!!!
+    is_future_data_valid = false
+    #################################################################### TO BE REMOVED
+
     if is_future_data_valid
       success, content = callNtt(field, true)
 
