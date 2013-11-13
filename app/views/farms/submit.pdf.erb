@@ -193,7 +193,7 @@
 <TABLE cellpadding=0 cellspacing=0 class="t0">
   <TR>
     <TD class="tr0 td0"><P class="p3 ft1">1.</P></TD>
-    <TD colspan=3 class="tr0 td1"><P class="p4 ft1"><SPAN class="ft2">Applicant Information: </SPAN>____________________________________________________________</P></TD>
+    <TD colspan=3 class="tr0 td1"><P class="p4 ft1"><SPAN class="ft2">Applicant Information: </SPAN><%= @farm.owner.first_name + ' ' + @farm.owner.last_name %></P></TD>
   </TR>
   <TR>
     <TD class="tr1 td0"><P class="p5 ft3">&nbsp;</P></TD>
@@ -203,7 +203,7 @@
   </TR>
   <TR>
     <TD class="tr0 td0"><P class="p5 ft3">&nbsp;</P></TD>
-    <TD colspan=3 class="tr0 td1"><P class="p9 ft1">____________________________________________________________</P></TD>
+    <TD colspan=3 class="tr0 td1"><P class="p9 ft1"><%= @farm.owner.org_name %></P></TD>
   </TR>
   <TR>
     <TD class="tr1 td0"><P class="p5 ft3">&nbsp;</P></TD>
@@ -212,7 +212,7 @@
   </TR>
   <TR>
     <TD class="tr2 td0"><P class="p3 ft1">2.</P></TD>
-    <TD colspan=3 class="tr2 td1"><P class="p4 ft1"><SPAN class="ft2">Applicant Address: </SPAN><%= @farm.site_street_1%></P></TD>
+    <TD colspan=3 class="tr2 td1"><P class="p4 ft1"><SPAN class="ft2">Applicant Address: </SPAN><%= @farm.owner.org_street1 %><br/><%= @farm.owner.org_street1 %></P></TD>
   </TR>
   <TR>
     <TD class="tr1 td0"><P class="p5 ft3">&nbsp;</P></TD>
@@ -242,7 +242,7 @@
   </TR>
   <TR>
     <TD class="tr1 td0"><P class="p5 ft3">&nbsp;</P></TD>
-    <TD colspan=3 class="tr1 td1"><P class="p16 ft1"><SPAN class="ft2">control of the property: </SPAN>___________________________________________________________</P></TD>
+    <TD colspan=3 class="tr1 td1"><P class="p16 ft1"><SPAN class="ft2">control of the property: </SPAN><%= @farm.name %></P></TD>
   </TR>
   <TR>
     <TD class="tr0 td0"><P class="p5 ft3">&nbsp;</P></TD>
@@ -252,7 +252,7 @@
   </TR>
   <TR>
     <TD class="tr3 td0"><P class="p3 ft1">4.</P></TD>
-    <TD colspan=3 class="tr3 td1"><P class="p4 ft1"><SPAN class="ft2">Property Address: </SPAN>_____________________________________________________________</P></TD>
+    <TD colspan=3 class="tr3 td1"><P class="p4 ft1"><SPAN class="ft2">Property Address: </SPAN><%= @farm.site_street_1 %><br/><%= @farm.site_street_2 %></P></TD>
   </TR>
   <TR>
     <TD class="tr1 td0"><P class="p5 ft3">&nbsp;</P></TD>
@@ -262,7 +262,7 @@
   </TR>
   <TR>
     <TD class="tr0 td0"><P class="p5 ft3">&nbsp;</P></TD>
-    <TD colspan=3 class="tr0 td1"><P class="p19 ft1">_____________________________________________________________</P></TD>
+    <TD colspan=3 class="tr0 td1"><P class="p19 ft1"><%= @farm.site_city %> <%= @farm.state.abbreviation %> <%= @farm.site_zip %></P></TD>
   </TR>
   <TR>
     <TD class="tr4 td0"><P class="p5 ft3">&nbsp;</P></TD>
@@ -272,24 +272,20 @@
   </TR>
 </TABLE>
 <P class="p20 ft4"><SPAN class="ft1">5.</SPAN><SPAN class="ft5">Property Description (optional):</SPAN></P>
-<P class="p21 ft4">__________________________________________________________________________</P>
-<P class="p22 ft4">______________________________________________________________________________________</P>
+<P class="p21 ft4"><%= @farm.site_description %></P>
+
 <TABLE cellpadding=0 cellspacing=0 class="t1">
   <TR>
-    <TD class="tr1 td6"><P class="p23 ft1">6. <SPAN class="ft2">Property County: </SPAN>______________________</P></TD>
-    <TD class="tr1 td7"><P class="p24 ft1"><SPAN class="ft2">Watershed: </SPAN>________________________</P></TD>
+    <TD class="tr1 td6"><P class="p23 ft1">6. <SPAN class="ft2">Property County: </SPAN><%= @farm.county.name %></P></TD>
+    <TD class="tr1 td7"><P class="p24 ft1"><SPAN class="ft2">Watershed: </SPAN><%= @arrWatersheds.join(" / ").html_safe %></P></TD>
   </TR>
   <TR>
-    <TD class="tr3 td6"><P class="p25 ft4">Tract Number: ___________________________</P></TD>
+    <TD class="tr3 td6"><P class="p25 ft4">Tract Number: <%= @farm.tract_number %></P></TD>
     <TD class="tr3 td7"><P class="p26 ft2">Watershed Segment ID: __________________</P></TD>
   </TR>
   <TR>
     <TD class="tr3 td6"><P class="p27 ft4">MD Property View Acct. ID(s): ______________</P></TD>
-    <TD class="tr3 td7"><P class="p28 ft2">Latitude: ______________________________</P></TD>
-  </TR>
-  <TR>
-    <TD class="tr1 td6"><P class="p29 ft4">______________</P></TD>
-    <TD class="tr1 td7"><P class="p30 ft2">Longitude: _____________________________</P></TD>
+    <TD class="tr3 td7"><P class="p28 ft2">Coordinates: <%= @farm.coordinates %></P></TD>
   </TR>
   <TR>
     <TD class="tr0 td6"><P class="p29 ft4">______________</P></TD>

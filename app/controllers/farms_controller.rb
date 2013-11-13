@@ -214,6 +214,12 @@ class FarmsController < ApplicationController
     add_breadcrumb 'Farms', :farms_path
     add_breadcrumb @farm.name
 
+    @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
+    @arrWatersheds = Array.new
+    @fields.each do |field|
+      @arrWatersheds << field.watershed_name unless @arrWatersheds.include?(field.watershed_name)
+      end
+
     respond_to do |format|
       format.html
       format.pdf do
