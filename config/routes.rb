@@ -110,5 +110,6 @@ NutrientNet::Application.routes.draw do
 
   match "/401", to: "errors#not_authorized"
   match "/404", to: "errors#not_found"
+  match "/408", to: "errors#timeout"
   #match "/500", to: "errors#server_error"
 end
