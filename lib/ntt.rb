@@ -8,6 +8,10 @@ module Ntt
 
   def callNtt(field, is_future)
 
+    logger.info('############################################ enter callNtt')
+    puts '############################################ enter callNtt'
+    puts Time.new
+
     attempts=0
     doc = nil
 
@@ -19,12 +23,14 @@ module Ntt
 
         xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
-
-        test= open(URL_NTT + '?input=' + xml)
-
         doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
 
+        puts URL_NTT + '?input=' + xml
+
             if (!doc.nil?)
+
+              puts Time.new
+              puts '############################################ exit callNtt'
             return [true, doc]
                               end
       else

@@ -2,6 +2,9 @@ module BmpCalculations
 
   def computeBmpCalculations(field)
 
+    puts '############################################ enter computeBmpCalculations'
+    puts Time.now
+
     # each strip should have at least one crop rotation
     is_current_data_valid= true
     is_future_data_valid =true
@@ -58,7 +61,7 @@ module BmpCalculations
     @ntt_results_future = Hash.new
 
     #TODO: Disabled future calculations!!!
-    is_future_data_valid = false
+    #is_future_data_valid = false
     #################################################################### TO BE REMOVED
 
     if is_future_data_valid
@@ -585,6 +588,10 @@ module BmpCalculations
     new_total_n_future = total_n_for_converted_acre_future + total_n_for_unconverted_acre_future
     new_total_p_future = total_p_for_converted_acre_future + total_p_for_unconverted_acre_future
     new_total_sediment_future = total_sediment_for_converted_acre_future + total_sediment_for_unconverted_acre_future
+
+    puts Time.now
+    puts '############################################ exit computeBmpCalculations'
+
 
     {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => 'No error'}
 
