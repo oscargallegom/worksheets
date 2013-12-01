@@ -5,7 +5,7 @@ class Field < ActiveRecord::Base
 
   attr_writer :step
   attr_accessor :soil_test_laboratory_id, :modified_p_test_value
-  attr_accessible :ntt_call_status
+  attr_writer :ntt_call_status
 
   belongs_to :farm
   belongs_to :watershed_segment
@@ -366,6 +366,8 @@ class Field < ActiveRecord::Base
     #    end
     #  end
     #end
+
+    self.slope_changed?
 
     # TODO: should only check for fields impacting NTT
     if (self.acres_from_user_changed? ||
