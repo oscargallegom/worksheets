@@ -71,11 +71,11 @@ class FieldsController < ApplicationController
     if ((@step =='5' || @step == '8') && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)) # perform calculations
       begin
         @current_totals = computeBmpCalculations(@field)
-        raise  @current_totals.to_s
+        raise 'oops'
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
       rescue Exception => e
-        flash[:error] = 'Error: ' + e.message
+        flash[:error] = 'Error 2: ' + e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
       @watershed_segment = WatershedSegment.where(:id => @field.watershed_segment_id).first
