@@ -70,6 +70,11 @@ class FieldsController < ApplicationController
 
     if ((@step =='5' || @step == '8') && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)) # perform calculations
       begin
+
+        test = @field.ntt_xml_current + ' ######' + @field.ntt_xml_future
+
+        raise test
+
         @current_totals = computeBmpCalculations(@field)
         raise 'oops'
         @ntt_results = @current_totals[:ntt_results]

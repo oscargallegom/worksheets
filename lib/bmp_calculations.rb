@@ -14,34 +14,34 @@ module BmpCalculations
     @ntt_results = Hash.new
 
     #if (is_current_data_valid)
-        #success, content = callNtt(field, false)
-      if (!field.ntt_xml_current.nil?)
-        content = Nokogiri::XML(field.ntt_xml_current)
+    #success, content = callNtt(field, false)
+    if (!field.ntt_xml_current.nil?)
+      content = Nokogiri::XML(field.ntt_xml_current)
+    else
+      content = nil
+    end
+
+    if (!content.nil?)
+      @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+      if (@ntt_results['ErrorCode'] != '0')
+        raise 'No NTT data available.'
       else
-        content = nil
-      end
-
-      if (!content.nil?)
-        @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-        if (@ntt_results['ErrorCode'] != '0')
-          raise 'Could not retrieve NTT data.'
-        else
 
 
-          total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
-          total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
-          total_sediment_per_acre = @ntt_results['Sediment'].to_f
+        total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
+        total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
+        total_sediment_per_acre = @ntt_results['Sediment'].to_f
 
-          # add the crops information
-          crops = Array.new()
-          content.xpath('//Crops').each do |crop|
-            crops.push(Hash.from_xml(crop.to_s)['Crops'])
-          end
-          @ntt_results[:crops] = crops
+        # add the crops information
+        crops = Array.new()
+        content.xpath('//Crops').each do |crop|
+          crops.push(Hash.from_xml(crop.to_s)['Crops'])
         end
-      else
-        raise 'Could not retrieve NTT data.'
+        @ntt_results[:crops] = crops
       end
+    else
+      raise 'No NTT data available.'
+    end
 
     #end
 
@@ -56,32 +56,32 @@ module BmpCalculations
 
     #if is_future_data_valid
 
-      #success, content = callNtt(field, false)
-      if (!field.ntt_xml_future.nil?)
-        content = Nokogiri::XML(field.ntt_xml_future)
-      else
-        content = nil
-      end
+    #success, content = callNtt(field, false)
+    if (!field.ntt_xml_future.nil?)
+      content = Nokogiri::XML(field.ntt_xml_future)
+    else
+      content = nil
+    end
 
     if (!content.nil?)
-        @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-        if (@ntt_results_future['ErrorCode'] != '0')
-          raise 'Could not retrieve NTT data for future scenario'
-        else
-          total_n_per_acre_future = @ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f
-          total_p_per_acre_future = @ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f
-          total_sediment_per_acre_future = @ntt_results_future['Sediment'].to_f
-
-          # add the crops information
-          crops = Array.new()
-          content.xpath('//Crops').each do |crop|
-            crops.push(Hash.from_xml(crop.to_s)['Crops'])
-          end
-          @ntt_results_future[:crops] = crops
-        end
+      @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+      if (@ntt_results_future['ErrorCode'] != '0')
+        raise 'No NTT data for future scenario.'
       else
-        raise 'Could not retrieve NTT data for future scenario.'
+        total_n_per_acre_future = @ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f
+        total_p_per_acre_future = @ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f
+        total_sediment_per_acre_future = @ntt_results_future['Sediment'].to_f
+
+        # add the crops information
+        crops = Array.new()
+        content.xpath('//Crops').each do |crop|
+          crops.push(Hash.from_xml(crop.to_s)['Crops'])
+        end
+        @ntt_results_future[:crops] = crops
       end
+    else
+      raise 'No NTT data for future scenario.'
+    end
     #end
 
     # TODO: Mindy to find out about adjustment factor

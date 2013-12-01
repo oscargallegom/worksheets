@@ -444,6 +444,7 @@ class Field < ActiveRecord::Base
             self.ntt_xml_future = content.to_s
           end
         else
+          self.ntt_xml_future = nil
           ENV['debug'] += '<br/>Error retrieving future<br/>'
           self[:ntt_call_status] += 'Could not retrieve NTT data for future scenario: ' + content.to_s
           #raise 'Could not retrieve NTT data for future scenario: ' + content.to_s

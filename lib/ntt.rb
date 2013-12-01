@@ -26,9 +26,9 @@ module Ntt
 
         puts URL_NTT + '?input=' + xml
 
-            if (!doc.nil?)
-            return [true, doc]
-                              end
+        if (!doc.nil?)
+          return [true, doc]
+        end
       else
         return [false, content]
       end
@@ -191,17 +191,17 @@ module Ntt
               ########################################################
 
               if (field.field_type_id == 1 && crop_rotation.is_cover_crop)
-              mid = mid + 1
+                mid = mid + 1
 
-              cover_crop_code = crop_rotation.cover_crop.code
-              cover_crop_planting_method_id = crop_rotation.cover_crop_planting_method_id
+                cover_crop_code = crop_rotation.cover_crop.code
+                cover_crop_planting_method_id = crop_rotation.cover_crop_planting_method_id
 
-              cover_crop_plant_date_year = crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0')
-              cover_crop_plant_date_month = crop_rotation.cover_crop_plant_date_month.to_s.rjust(2, '0')
-              cover_crop_plant_date_day = crop_rotation.cover_crop_plant_date_day.to_s.rjust(2, '0')
-              cover_crop_plant_date = cover_crop_plant_date_year + cover_crop_plant_date_month + cover_crop_plant_date_day
+                cover_crop_plant_date_year = crop_rotation.cover_crop_plant_date_year.to_s.rjust(2, '0')
+                cover_crop_plant_date_month = crop_rotation.cover_crop_plant_date_month.to_s.rjust(2, '0')
+                cover_crop_plant_date_day = crop_rotation.cover_crop_plant_date_day.to_s.rjust(2, '0')
+                cover_crop_plant_date = cover_crop_plant_date_year + cover_crop_plant_date_month + cover_crop_plant_date_day
 
-              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{cover_crop_plant_date_year}</Year><Month>#{cover_crop_plant_date_month}</Month><Day>#{cover_crop_plant_date_day}</Day><Crop>#{cover_crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>1</OpVal6><OpVal7></OpVal7><OpVal8></OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{cover_crop_plant_date_year}</Year><Month>#{cover_crop_plant_date_month}</Month><Day>#{cover_crop_plant_date_day}</Day><Crop>#{cover_crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6>1</OpVal6><OpVal7></OpVal7><OpVal8></OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
               end
 
@@ -233,7 +233,7 @@ module Ntt
 
                 # for phosphorus
                 if (total_p_applied > 0)
-                xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied.round(3)}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                  xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied.round(3)}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
                 end
 
                 # if the incorporation date is different from the application date, add extra management info
