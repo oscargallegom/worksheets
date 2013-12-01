@@ -189,7 +189,6 @@ class FieldsController < ApplicationController
       @other_fields.push(field) if field.id != @field.id
     end
 
-
     if session[:debug]
       success, content = buildXml(@field, true) # TODO: remove/change
       @input_xml = content # TODO: remove/change
