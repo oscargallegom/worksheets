@@ -67,6 +67,7 @@ class FarmsController < ApplicationController
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         begin
           @current_totals = computeBmpCalculations(field)
+          flash[:error] <<  @current_totals.to_s
         rescue Exception => e
           flash[:error] << e.message
           @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
