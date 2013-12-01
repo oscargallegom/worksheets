@@ -41,7 +41,7 @@ module BmpCalculations
         @ntt_results[:crops] = crops
       end
     else
-      raise 'No NTT data available.'
+      raise 'Could not retrieve NTT data.'
     end
 
     #end
@@ -81,7 +81,7 @@ module BmpCalculations
         @ntt_results_future[:crops] = crops
       end
     else
-      raise 'No NTT data for future scenario.'
+      raise 'Could not retrieve NTT data for future scenario.'
     end
     #end
 
