@@ -74,8 +74,8 @@
       <% end %>
       <p class="error">
         Debug information (will be removed in production):&nbsp;
-      <%= 'no need to contact NTT' if ENV['debug'].empty?%>
-      <%= '<br/>' if !ENV['debug'].empty?%>
+      <%= 'no need to contact NTT' if ENV['debug'].blank?%>
+      <%= '<br/>' if !ENV['debug'].blank?%>
       <%= raw ENV['debug'] %>
       <% ENV['debug'] = '' %>
         </p>
