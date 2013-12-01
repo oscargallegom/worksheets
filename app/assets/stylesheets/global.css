@@ -658,7 +658,7 @@ ul#tabNav {
     position: relative;
     overflow: hidden;
     list-style: none;
-    margin-bottom: 10px;
+    margin-bottom: 1px;
 }
 
 ul#tabNav li {
