@@ -74,7 +74,7 @@ class FieldsController < ApplicationController
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
       rescue Exception => e
-        flash[:error] = 'Error: ' + e.message
+        flash[:error] = 'Errortest: ' + e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
       @watershed_segment = WatershedSegment.where(:id => @field.watershed_segment_id).first
