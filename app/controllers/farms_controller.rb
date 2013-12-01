@@ -65,12 +65,12 @@ class FarmsController < ApplicationController
       @arrTMDLs << field.tmdl_va if @farm.site_state_id == 21 && !@arrTMDLs.include?(field.tmdl_va)
 
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
-        #begin
+        begin
           @current_totals = computeBmpCalculations(field)
-        #rescue Exception => e
-        #  flash[:error] = e.message
-        #  @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
-        #end
+        rescue Exception => e
+          flash[:error] = e.message
+          @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
+        end
 
         @current_n_load_fields += @current_totals[:new_total_n]
         @current_p_load_fields += @current_totals[:new_total_p]
