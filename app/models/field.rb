@@ -368,11 +368,22 @@ class Field < ActiveRecord::Base
     end
 
     # TODO: should only check for fields impacting NTT
-    if (self.changed?)
+    if (self.acres_from_user_changed? ||
+        self.acres_from_map_changed? ||
+        self.is_acres_from_map_changed? ||
+        self.tile_drainage_depth_changed? ||
+        self.irrigation_id_changed? ||
+        self.fertigation_n_changed? ||
+        self.p_test_value_changed? ||
+        self.efficiency_changed? ||
+        self.crop_type_id_changed? ||
+        self.soil_p_extractant_id_changed? ||
+        self.soil_texture_id_changed? ||
+        self.slope_changed?)
       is_changed = true
       self.ntt_xml_current = nil
       self.ntt_xml_future = nil
-      ENV['debug'] += 'Field changed<br/>'
+      ENV['debug'] += 'Field changed (' + self.changed.to_s + ")<br/>"
     end
 
     if is_changed
