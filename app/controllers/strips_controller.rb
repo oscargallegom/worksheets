@@ -13,7 +13,7 @@ class StripsController < ApplicationController
   # GET /farms/1/fields/2/strips/new
   def new
     @step = params[:step] || '3'
-    @strip.length = 0
+    @strip.length = 1
       @strip.is_future = (@step == '6')
     respond_to do |format|
       if (@strip.save(:validate => false))

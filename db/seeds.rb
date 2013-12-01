@@ -868,7 +868,7 @@ Crop.create!({:id => 39, :code => 74,  :name => 'Sweet Corn', :crop_category_id 
 Crop.create!({:id => 40, :code => 75,  :name => 'Tobacco', :crop_category_id => 8}, :without_protection => true)
 Crop.create!({:id => 41, :code => 77,  :name => 'Fescue', :crop_category_id => 4}, :without_protection => true)
 Crop.create!({:id => 42, :code => 77,  :name => 'Fescue', :crop_category_id => 9}, :without_protection => true)
-Crop.create!({:id => 43, :code => 79,  :name => 'Pine Trees', :crop_category_id => 21}, :without_protection => true)
+Crop.create!({:id => 43, :code => 79,  :name => 'Pine Trees', :crop_category_id => 20}, :without_protection => true)
 Crop.create!({:id => 44, :code => 84,  :name => 'Switchgrass', :crop_category_id => 5}, :without_protection => true)
 Crop.create!({:id => 45, :code => 84,  :name => 'Switchgrass', :crop_category_id => 10}, :without_protection => true)
 Crop.create!({:id => 46, :code => 85,  :name => 'Drybeans', :crop_category_id => 11}, :without_protection => true)
@@ -897,12 +897,12 @@ Crop.create!({:id => 68, :code => 118,  :name => 'Indian Grass', :crop_category_
 Crop.create!({:id => 69, :code => 122,  :name => 'Orchard', :crop_category_id => 22}, :without_protection => true)
 Crop.create!({:id => 70, :code => 127,  :name => 'Deciduous Trees', :crop_category_id => 99}, :without_protection => true)
 Crop.create!({:id => 71, :code => 127,  :name => 'Deciduous Shrubs', :crop_category_id => 99}, :without_protection => true)
-Crop.create!({:id => 72, :code => 132,  :name => 'Hay', :crop_category_id => 5}, :without_protection => true)
+#Crop.create!({:id => 72, :code => 132,  :name => 'Hay', :crop_category_id => 5}, :without_protection => true)
 Crop.create!({:id => 73, :code => 146,  :name => 'Squash', :crop_category_id => 12}, :without_protection => true)
 Crop.create!({:id => 74, :code => 148,  :name => 'Tomatillos', :crop_category_id => 14}, :without_protection => true)
 Crop.create!({:id => 75, :code => 147,  :name => 'Zucchini', :crop_category_id => 12}, :without_protection => true)
-Crop.create!({:id => 76, :code => 144,  :name => 'Nursery Evergreen Tree Stock', :crop_category_id => 21}, :without_protection => true)
-Crop.create!({:id => 77, :code => 145,  :name => 'Nursery Evergreen Shrub Stock', :crop_category_id => 21}, :without_protection => true)
+#Crop.create!({:id => 76, :code => 144,  :name => 'Nursery Evergreen Tree Stock', :crop_category_id => 21}, :without_protection => true)
+Crop.create!({:id => 77, :code => 145,  :name => 'Nursery Evergreen Shrub Stock', :crop_category_id => 20}, :without_protection => true)
 Crop.create!({:id => 78, :code => 32,  :name => 'Clover: Alsike', :crop_category_id => 4}, :without_protection => true)
 Crop.create!({:id => 79, :code => 33,  :name => 'Clover: Red', :crop_category_id => 4}, :without_protection => true)
 Crop.create!({:id => 80, :code => 34,  :name => 'Clover: Sweet', :crop_category_id => 4}, :without_protection => true)
@@ -939,21 +939,33 @@ Crop.create!({:id => 109, :code => 41,  :name => 'Ryegrass', :crop_category_id =
 Crop.create!({:id => 110, :code => 150,  :name => 'Radishes', :crop_category_id => 6}, :without_protection => true)
 Crop.create!({:id => 111, :code => 9,  :name => 'Fallow', :crop_category_id => 23}, :without_protection => true)
 
-Crop.create!({:id => 112, :code => 128,  :name => 'ForrestEvergreen', :crop_category_id => 20}, :without_protection => true)
+Crop.create!({:id => 112, :code => 128,  :name => 'Forest Evergreen', :crop_category_id => 20}, :without_protection => true)
 Crop.create!({:id => 113, :code => 144,  :name => 'Nursery Evergreen Tree Stock', :crop_category_id => 20}, :without_protection => true)
 
 # added on 09/28/2013
 Crop.create!({:id => 114, :code => 149,  :name => 'Triticale', :crop_category_id => 2}, :without_protection => true)
 Crop.create!({:id => 115, :code => 6,  :name => 'Peanuts', :crop_category_id => 24}, :without_protection => true)
 
+# addded on 10/30/2013
+Crop.create!({:id => 116, :code => 77,  :name => 'Fescue', :crop_category_id => 5}, :without_protection => true)
+Crop.create!({:id => 117, :code => 122,  :name => 'Orchard', :crop_category_id => 21}, :without_protection => true)
+Crop.create!({:id => 118, :code => 136,  :name => 'Kentucky bluegrass', :crop_category_id => 5}, :without_protection => true)
+Crop.create!({:id => 119, :code => 96,  :name => 'Little bluestem', :crop_category_id => 5}, :without_protection => true)
+Crop.create!({:id => 120, :code => 88,  :name => 'Big bluestem', :crop_category_id => 5}, :without_protection => true)
+Crop.create!({:id => 121, :code => 49,  :name => 'Bermuda grass', :crop_category_id => 5}, :without_protection => true)
+Crop.create!({:id => 122, :code => 81,  :name => 'Apple trees', :crop_category_id => 21}, :without_protection => true)
+Crop.create!({:id => 123, :code => 141,  :name => 'Peach trees', :crop_category_id => 21}, :without_protection => true)
+Crop.create!({:id => 124, :code => 142,  :name => 'Pear trees', :crop_category_id => 21}, :without_protection => true)
+Crop.create!({:id => 125, :code => 143,  :name => 'Plum trees', :crop_category_id => 21}, :without_protection => true)
+
 PlantingMethod.delete_all
 PlantingMethod.create!({:id => 146,  :name => 'Broadcast'}, :without_protection => true)
 PlantingMethod.create!({:id => 144,  :name => 'Aerial'}, :without_protection => true)
 PlantingMethod.create!({:id => 121,  :name => 'No-till Drill'}, :without_protection => true)
 PlantingMethod.create!({:id => 132,  :name => 'Drill'}, :without_protection => true)
-PlantingMethod.create!({:id => 668,  :name => '30 inch Row Crop Planter'}, :without_protection => true)
-PlantingMethod.create!({:id => 767,  :name => '36 inch Row Crop Planter'}, :without_protection => true)
-PlantingMethod.create!({:id => 769,  :name => '15/30 inch Row Crop Planter (Splitter)'}, :without_protection => true)
+#PlantingMethod.create!({:id => 668,  :name => '30 inch Row Crop Planter'}, :without_protection => true)
+#PlantingMethod.create!({:id => 767,  :name => '36 inch Row Crop Planter'}, :without_protection => true)
+#PlantingMethod.create!({:id => 769,  :name => '15/30 inch Row Crop Planter (Splitter)'}, :without_protection => true)
 
 TillageOperationType.delete_all
 TillageOperationType.create!({:id => 157,  :name => 'Row Crop Cultivator'}, :without_protection => true)

@@ -1,10 +1,11 @@
 class Field < ActiveRecord::Base
   #TODO: just a test for now
   include Ntt
-  before_save :call_ntt
+  before_save :update_ntt_xml_fields
 
   attr_writer :step
   attr_accessor :soil_test_laboratory_id, :modified_p_test_value
+  attr_accessible :ntt_call_status
 
   belongs_to :farm
   belongs_to :watershed_segment
@@ -263,13 +264,13 @@ class Field < ActiveRecord::Base
     percentCompleted = 10 if !self.field_type.nil?
 
     self.strips.each do |strip|
-        if (!strip.is_future && !strip.crop_rotations.empty?)
-          percentCompleted = 50
-        end
-        if (strip.is_future && !strip.crop_rotations.empty?)
-          percentCompleted = 100
-          break
-        end
+      if (!strip.is_future && !strip.crop_rotations.empty?)
+        percentCompleted = 50
+      end
+      if (strip.is_future && !strip.crop_rotations.empty?)
+        percentCompleted = 100
+        break
+      end
     end
 
     #is_one_crop_done = false
@@ -299,52 +300,141 @@ class Field < ActiveRecord::Base
     enable
   end
 
-  def update_ntt_xml
-    # reset NTT XML
-    self.ntt_xml_current = Time.now
-    self.ntt_xml_future = Time.now
-    self.save
-  end
-
   private
-  def call_ntt
-    #TODO: check this method
-    return
+  def update_ntt_xml_fields
 
-    if (self.changed?)
+    ENV['debug'] ||= ''
+    self[:ntt_call_status] = ''
 
-    success, content = callNtt(self, false)
+    is_changed = (self.ntt_xml_current.nil? || self.ntt_xml_future.nil?)
 
-    if (success)
-      @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-      if (@ntt_results['ErrorCode'] != '0')
-        self.ntt_xml_current =  nil
-        #raise 'Could not retrieve NTT data.'
-      else
-        self.ntt_xml_current = content
-      end
-    else
-      self.ntt_xml_current =  nil
-      raise 'Could not retrieve NTT data: ' + content.to_s
-    end
-
-    # now  for the future
-    success, content = callNtt(self, true)
-
-    if (success)
-      @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-      if (@ntt_results['ErrorCode'] != '0')
-        self.ntt_xml_future =  nil
-        #raise 'Could not retrieve NTT data for future scenario.'
-      else
-        self.ntt_xml_future = content
-      end
-    else
-      self.ntt_xml_future =  nil
-      raise 'Could not retrieve NTT data for future scenario: ' + content.to_s
-    end
+    # check if the soil data has changed
+    if (!is_changed)
+      self.soils.each do |soil|
+        if (soil.changed? || soil.marked_for_destruction?)
+          is_changed = true
+          self.ntt_xml_current = nil
+          self.ntt_xml_future = nil
+          puts 'Soils changed'
+          ENV['debug'] += 'Soils changed<br/>'
+          break
         end
+      end
+    end
+
+    # check if strips changed
+    if (!is_changed)
+      is_strip_changed = false
+      self.strips.each do |strip|
+        if (strip.changed? || strip.marked_for_destruction?)
+          is_changed = true
+          if strip.is_future
+            self.ntt_xml_future = nil
+          else
+            self.ntt_xml_current = nil
+          end
+          puts 'Strip changed'
+          ENV['debug'] += 'Strip changed<br/>'
+          break
+        end
+      end
+    end
+
+
+    # check if BMPs have changed
+    if (!is_changed)
+      self.bmps.each do |bmp|
+        if (bmp.changed? || bmp.marked_for_destruction?)
+          is_changed = true
+          self.ntt_xml_current = nil
+          puts 'BMP changed'
+          ENV['debug'] += 'BMP changed changed<br/>'
+          break
+        end
+      end
+    end
+
+    # check if future BMPs have changed
+    if (!is_changed)
+      self.future_bmps.each do |future_bmp|
+        if (future_bmp.changed? || future_bmp.marked_for_destruction?)
+          is_changed = true
+          self.ntt_xml_future = nil
+          puts 'Future BMP changed'
+          ENV['debug'] += 'Future BMP changed<br/>'
+          break
+        end
+      end
+    end
+
+    # TODO: should only check for fields impacting NTT
+    if (self.changed?)
+      is_changed = true
+      self.ntt_xml_current = nil
+      self.ntt_xml_future = nil
+      ENV['debug'] += 'Field changed<br/>'
+    end
+
+    if is_changed
+
+      # each strip should have at least one crop rotation
+      is_current_data_valid= true
+      is_future_data_valid =true
+      self.strips.each do |strip|
+        if (strip.crop_rotations.empty? && !strip.marked_for_destruction?)
+          if (strip.is_future?)
+            is_future_data_valid = false
+          else
+            is_current_data_valid =false
+          end
+        end
+      end
+
+      # TODO: test when to call NTT
+      if (is_current_data_valid && self.ntt_xml_current.nil?)
+
+        success, content = callNtt(self, false)
+
+        if success
+          @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+          if (@ntt_results['ErrorCode'] != '0')
+            self.ntt_xml_current = nil
+            ENV['debug'] += 'Error retrieving current<br/>'
+            self[:ntt_call_status] += 'Could not retrieve NTT data.'
+            #raise 'Could not retrieve NTT data.'
+          else
+            self.ntt_xml_current = content.to_s
+          end
+        else
+          self.ntt_xml_current = nil
+          ENV['debug'] += 'Error retriebing current<br/>'
+          self[:ntt_call_status] += 'Could not retrieve NTT data:' + content.to_s
+          #raise 'Could not retrieve NTT data: ' + content.to_s
+        end
+
+      end
+
+      if (is_future_data_valid && self.ntt_xml_future.nil?)
+
+        # now  for the future
+        success, content = callNtt(self, true)
+
+        if (success)
+          @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+          if (@ntt_results['ErrorCode'] != '0')
+            self.ntt_xml_future = nil
+            #raise 'Could not retrieve NTT data for future scenario.'
+            self[:ntt_call_status] +=  'Could not retrieve NTT data for future scenario.'
+                ENV['debug'] += 'Error retrieving future<br/>'
+          else
+            self.ntt_xml_future = content.to_s
+          end
+        else
+          ENV['debug'] += '<br/>Error retrieving future<br/>'
+          self[:ntt_call_status] += 'Could not retrieve NTT data for future scenario: ' + content.to_s
+          #raise 'Could not retrieve NTT data for future scenario: ' + content.to_s
+        end
+      end
+    end
   end
-
-
 end

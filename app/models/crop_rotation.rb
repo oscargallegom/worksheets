@@ -1,8 +1,8 @@
 class CropRotation < ActiveRecord::Base
 
   #  if any  change then ntt needs to be called
-  after_save :update_ntt_xml
-  after_destroy :update_ntt_xml
+  before_save :reset_ntt_xml
+  before_destroy :reset_ntt_xml
 
   attr_accessor :crop_category_id
 
@@ -58,9 +58,72 @@ class CropRotation < ActiveRecord::Base
     enable
   end
 
-  private
-  def update_ntt_xml
-    self.strip.field.update_ntt_xml()
-  end
+  #private
+  def reset_ntt_xml
+    #  self.strip.field.reset_ntt_xml(self.strip.is_future)
+    is_changed = false
 
+    if (self.changed? || self.marked_for_destruction?)
+      is_changed = true
+      ENV['debug'] += 'Crop rotation changed<br/>'
+    end
+    if  !is_changed
+      self.tillage_operations.each do |tillage_operation|
+        if (tillage_operation.changed? || tillage_operation.marked_for_destruction?)
+          is_changed = true
+          puts 'tillage_operation changed'
+          ENV['debug'] += 'Tillage_operation changed<br/>'
+          break
+        end
+      end
+    end
+    if  !is_changed
+      self.manure_fertilizer_applications.each do |manure_fertilizer_application|
+        #puts 'manure_fertilizer_application.changed? = ' + manure_fertilizer_application.changed?.to_s
+        #puts 'manure_fertilizer_application.destroyed? = ' + manure_fertilizer_application.destroyed?.to_s
+        if (manure_fertilizer_application.changed? || manure_fertilizer_application.marked_for_destruction?)
+
+          is_changed = true
+          puts 'manure_fertilizer_application changed'
+          ENV['debug'] += 'Manure_fertilizer_application changed<br/>'
+
+          break
+        end
+      end
+    end
+    if  !is_changed
+      self.commercial_fertilizer_applications.each do |commercial_fertilizer_application|
+        if (commercial_fertilizer_application.changed? || commercial_fertilizer_application.marked_for_destruction?)
+          is_changed = true
+          puts 'commercial_fertilizer_application changed'
+          ENV['debug'] += 'Commercial_fertilizer_application changed<br/>'
+          break
+        end
+      end
+    end
+    if  !is_changed
+      self.end_of_seasons.each do |end_of_season|
+        #puts 'end_of_season.changed? = ' + end_of_season.changed?.to_s
+        #puts 'end_of_season.marked_for_destruction?? = ' + end_of_season.marked_for_destruction?.to_s
+        #puts 'end_of_season.new_record? = ' + end_of_season.new_record?.to_s
+        if (end_of_season.changed? || end_of_season.marked_for_destruction?)
+          is_changed = true
+          puts 'end_of_season changed'
+          ENV['debug'] += 'End_of_season change<br/>'
+          break
+        end
+      end
+    end
+    puts 'crop rotation changed = ' + is_changed.to_s
+
+    if is_changed
+      if (self.strip.is_future && !self.strip.field.ntt_xml_future.nil?)
+        self.strip.field.ntt_xml_future = nil
+        #self.strip.field.update_column(:ntt_xml_future, nil)
+      elsif (!self.strip.is_future && !self.strip.field.ntt_xml_current.nil?)
+        self.strip.field.ntt_xml_current = nil
+        #self.strip.field.update_column(:ntt_xml_current, nil)
+      end
+    end
+  end
 end

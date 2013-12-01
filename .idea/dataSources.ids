@@ -18691,10 +18691,7 @@
     <user-password>dfc4dfdfdfdedfd8dfc3dfcfdfc4dfdedfc4dfcfdfde</user-password>
     <libraries>
       <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-driver-license.txt</url>
-      </library>
-      <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+        <url>file://$PROJECT_DIR$/jdbc-driver/postgresql-9.2-1002.jdbc4.jar</url>
       </library>
     </libraries>
     <schema name="information_schema" catalog="nutrientnet_development"/>

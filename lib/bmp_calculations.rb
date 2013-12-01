@@ -2,20 +2,8 @@ module BmpCalculations
 
   def computeBmpCalculations(field)
 
-    puts '############################################ enter computeBmpCalculations'
-    puts Time.now
-
-    # each strip should have at least one crop rotation
-    is_current_data_valid= true
-    is_future_data_valid =true
-    field.strips.each do |strip|
-      if (strip.crop_rotations.empty?)
-        if (strip.is_future?)
-          is_future_data_valid = false
-        else
-          is_current_data_valid =false
-        end
-      end
+    if (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?)
+      field.save
     end
 
     # call NTT to get the latest values
@@ -25,15 +13,21 @@ module BmpCalculations
 
     @ntt_results = Hash.new
 
-    if (is_current_data_valid)
+    #if (is_current_data_valid)
+        #success, content = callNtt(field, false)
+      if (!field.ntt_xml_current.nil?)
+        content = Nokogiri::XML(field.ntt_xml_current)
+      else
+        content = nil
+      end
 
-      success, content = callNtt(field, false)
-
-      if (success)
+      if (!content.nil?)
         @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
         if (@ntt_results['ErrorCode'] != '0')
           raise 'Could not retrieve NTT data.'
         else
+
+
           total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
           total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
           total_sediment_per_acre = @ntt_results['Sediment'].to_f
@@ -46,10 +40,10 @@ module BmpCalculations
           @ntt_results[:crops] = crops
         end
       else
-        raise 'Could not retrieve NTT data: ' + content.to_s
+        raise 'Could not retrieve NTT data.'
       end
 
-    end
+    #end
 
 
     # call NTT to get the future values
@@ -60,14 +54,16 @@ module BmpCalculations
 
     @ntt_results_future = Hash.new
 
-    #TODO: Disabled future calculations!!!
-    #is_future_data_valid = false
-    #################################################################### TO BE REMOVED
+    #if is_future_data_valid
 
-    if is_future_data_valid
-      success, content = callNtt(field, true)
+      #success, content = callNtt(field, false)
+      if (!field.ntt_xml_future.nil?)
+        content = Nokogiri::XML(field.ntt_xml_future)
+      else
+        content = nil
+      end
 
-      if (success)
+    if (!content.nil?)
         @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
         if (@ntt_results_future['ErrorCode'] != '0')
           raise 'Could not retrieve NTT data for future scenario'
@@ -84,9 +80,9 @@ module BmpCalculations
           @ntt_results_future[:crops] = crops
         end
       else
-        raise 'Could not retrieve NTT data for future scenario: ' + content.to_s
+        raise 'Could not retrieve NTT data for future scenario.'
       end
-    end
+    #end
 
     # TODO: Mindy to find out about adjustment factor
     total_adjusted_n_per_acre = total_n_per_acre
@@ -588,10 +584,6 @@ module BmpCalculations
     new_total_n_future = total_n_for_converted_acre_future + total_n_for_unconverted_acre_future
     new_total_p_future = total_p_for_converted_acre_future + total_p_for_unconverted_acre_future
     new_total_sediment_future = total_sediment_for_converted_acre_future + total_sediment_for_unconverted_acre_future
-
-    puts Time.now
-    puts '############################################ exit computeBmpCalculations'
-
 
     {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => 'No error'}
 

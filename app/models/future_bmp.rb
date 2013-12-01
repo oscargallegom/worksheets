@@ -1,7 +1,7 @@
 class FutureBmp < ActiveRecord::Base
   #  if any  change then ntt needs to be called
-  after_save :update_ntt_xml
-  after_destroy :update_ntt_xml
+  after_save :reset_ntt_xml
+  after_destroy :reset_ntt_xml
 
   belongs_to :bmp_type
   belongs_to :field
@@ -11,8 +11,8 @@ class FutureBmp < ActiveRecord::Base
   validates_presence_of :bmp_type_id
 
   private
-  def update_ntt_xml
-    self.field.update_ntt_xml()
+  def reset_ntt_xml
+    self.field.reset_ntt_xml(false)
   end
 
 end

@@ -7,9 +7,8 @@ module Ntt
   MAX_ATTEMPTS = 0
 
   def callNtt(field, is_future)
-
-    logger.info('############################################ enter callNtt')
-    puts '############################################ enter callNtt'
+    ENV['debug'] += 'Update NTT: ' + (is_future ? 'future' : 'current') + ' (' + field.name + ') <br/>'
+    puts '############################################ enter callNtt - ' + is_future.to_s
     puts Time.new
 
     attempts=0
@@ -28,9 +27,6 @@ module Ntt
         puts URL_NTT + '?input=' + xml
 
             if (!doc.nil?)
-
-              puts Time.new
-              puts '############################################ exit callNtt'
             return [true, doc]
                               end
       else

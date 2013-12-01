@@ -1,9 +1,5 @@
 class FieldPoultry < ActiveRecord::Base
 
-  #  if any  change then ntt needs to be called
-  after_save :update_ntt_xml
-  after_destroy :update_ntt_xml
-
   belongs_to :field #, :inverse_of => :field_poultry
   belongs_to :animal
 
@@ -16,11 +12,6 @@ class FieldPoultry < ActiveRecord::Base
   # allow duplication
   amoeba do
     enable
-  end
-
-  private
-  def update_ntt_xml
-    self.field.update_ntt_xml()
   end
 
 end

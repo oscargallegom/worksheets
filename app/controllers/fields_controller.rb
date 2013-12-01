@@ -241,7 +241,7 @@ class FieldsController < ApplicationController
 
         # if Baseline BMPs, validate converted acres
         if (@step=='4' && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3) && !is_converted_acres_valid(@field))
-          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 4), error: 'Total converted acre is greater than the field area. Please edit the buffer area.' }
+          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => 4),  notice: 'Total converted acre is greater than the field area. Please edit the buffer area.' }
         end
 
         # if step 2 and the user click 'add a crop to rotation'
@@ -254,7 +254,7 @@ class FieldsController < ApplicationController
           #format.html #{ redirect_to edit_farm_field_url(@farm, @field, :step => @step.to_i+1), notice: 'Field was successfully updated.' }
           @step = (@step.to_i+1).to_s
 
-          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Field was successfully updated.' }
+          format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Field was successfully updated. ' +  @field.ntt_call_status.to_s}
         end
 
       else # error

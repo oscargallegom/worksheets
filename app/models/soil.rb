@@ -1,8 +1,8 @@
 class Soil < ActiveRecord::Base
 
   #  if any  change then ntt needs to be called
-  after_save :update_ntt_xml
-  after_destroy :update_ntt_xml
+  #after_save :reset_ntt_xml
+  #after_destroy :reset_ntt_xml
 
   # belongs_to :soil_type      # soil type old ???
   belongs_to :field #, :inverse_of => :soils
@@ -29,9 +29,12 @@ class Soil < ActiveRecord::Base
     enable
   end
 
-  private
-  def update_ntt_xml
-    self.field.update_ntt_xml()
-  end
+  #private
+  #def reset_ntt_xml
+  #  if (self.changed?)
+  #    self.field.reset_ntt_xml(false)
+  #    self.field.reset_ntt_xml(true)
+  #  end
+  #end
 
 end

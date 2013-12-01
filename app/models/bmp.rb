@@ -1,8 +1,8 @@
 class Bmp < ActiveRecord::Base
 
   #  if any  change then ntt needs to be called
-  after_save :update_ntt_xml
-  after_destroy :update_ntt_xml
+  #after_save :reset_ntt_xml
+  #after_destroy :reset_ntt_xml
 
   belongs_to :bmp_type
   belongs_to :field #, :inverse_of => :bmps
@@ -16,9 +16,9 @@ class Bmp < ActiveRecord::Base
     enable
   end
 
-  private
-  def update_ntt_xml
-    self.field.update_ntt_xml()
-  end
+  #private
+  #def reset_ntt_xml
+  #  self.field.reset_ntt_xml(false)
+  #end
 
 end

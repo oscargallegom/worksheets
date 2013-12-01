@@ -80,7 +80,7 @@ class CropRotationsController < ApplicationController
     # TODO: handle second button
     @step = @strip.is_future ? '6' : '3'
     respond_to do |format|
-      if @crop_rotation.update_attributes(params[:crop_rotation])
+      if (@crop_rotation.update_attributes(params[:crop_rotation]) && @crop_rotation.strip.field.save)
         if (params[:nextPage] == 'Save & Continue')
           format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step.to_i+1), notice: 'Crop was successfully updated.' }
         else
@@ -96,6 +96,7 @@ class CropRotationsController < ApplicationController
   # /farms/1/fields/1/strips/1/crop_rotations/1
   def destroy
     @crop_rotation.destroy
+    @crop_rotation.strip.field.save
 
     step = @strip.is_future ? 6 : 3
 
@@ -109,7 +110,7 @@ class CropRotationsController < ApplicationController
     @step = @strip.is_future ? '6' : '3'
     @crop_rotation_dup = @crop_rotation.amoeba_dup
     respond_to do |format|
-      if @crop_rotation_dup.save(:validate => false)
+      if (@crop_rotation_dup.save(:validate => false) && @crop_rotation_dup.strip.field.save)
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Crop was successfully duplicated.' }
       else
         format.html { redirect_to farms_url, notice: 'Could not duplicate crop rotation.' }

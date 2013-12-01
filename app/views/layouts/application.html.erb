@@ -69,6 +69,14 @@
       <% if flash[:error] %>
           <p class="error"><%= flash[:error] %></p>
       <% end %>
+      <% if flash[:debug] %>
+          <p class="error"><%= flash[:debug] %></p>
+      <% end %>
+      <p class="error">
+        Debug information (will be removed in production):<br/>
+      <%= raw ENV['debug'] %>
+      <% ENV['debug'] = '' %>
+        </p>
       <% if flash[:meet_baseline] and flash[:meet_baseline].length>0 %>
           <p class="alert"><%= flash[:meet_baseline].join("<br>").html_safe %></p>
       <% end %>

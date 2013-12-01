@@ -1,4 +1,8 @@
 class CommercialFertilizerApplication < ActiveRecord::Base
+
+  #after_save :reset_ntt_xml
+  #after_destroy :reset_ntt_xml
+
   belongs_to :crop_rotation
   belongs_to :p_type
 
@@ -15,4 +19,9 @@ class CommercialFertilizerApplication < ActiveRecord::Base
   validates_numericality_of :incorporation_depth, :greater_than_or_equal_to => 0, :if => :is_incorporated?
 
   validates_numericality_of :application_date_day, :less_than_or_equal_to => 28, :if => 'application_date_month==2', :message => '^Date incorrect for February'
+
+  #private
+  #def reset_ntt_xml
+  #  self.crop_rotation.strip.field.reset_ntt_xml(self.crop_rotation.strip.is_future)
+  #end
 end
