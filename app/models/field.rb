@@ -369,19 +369,20 @@ class Field < ActiveRecord::Base
 
     self.slope_changed?
 
-    # TODO: should only check for fields impacting NTT
+    # note that there is a bug if the value is 0.0 hence the extra check between old and new value
+    #  see 'https://github.com/rails/rails/pull/9042' for details
     if (self.acres_from_user_changed? ||
         self.acres_from_map_changed? ||
         self.is_acres_from_map_changed? ||
-        self.tile_drainage_depth_changed? ||
+        (self.tile_drainage_depth_changed? && self.tile_drainage_depth_change[0]!=self.tile_drainage_depth_change[1]) ||
         self.irrigation_id_changed? ||
-        self.fertigation_n_changed? ||
-        self.p_test_value_changed? ||
-        self.efficiency_changed? ||
+        (self.fertigation_n_changed? && self.fertigation_n_change[0]!=self.fertigation_n_change[1]) ||
+        (self.p_test_value_changed? && self.p_test_value_change[0]!=self.p_test_value_change[1]) ||
+        (self.efficiency_changed? && self.efficiency_change[0]!=self.efficiency_change[1]) ||
         self.crop_type_id_changed? ||
         self.soil_p_extractant_id_changed? ||
         self.soil_texture_id_changed? ||
-        self.slope_changed?)
+        (self.slope_changed? && self.slope_change[0]!=self.slope_change[1]))
       is_changed = true
       self.ntt_xml_current = nil
       self.ntt_xml_future = nil
