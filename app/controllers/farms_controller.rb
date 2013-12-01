@@ -68,7 +68,7 @@ class FarmsController < ApplicationController
         begin
           @current_totals = computeBmpCalculations(field)
         rescue Exception => e
-          flash[:error] = e.message
+          flash.now[:error] = e.message
           @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
         end
 

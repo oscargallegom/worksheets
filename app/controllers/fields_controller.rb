@@ -74,12 +74,12 @@ class FieldsController < ApplicationController
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
       rescue Exception => e
-        flash[:error] = 'Error: ' + e.message
+        flash.now[:error] = 'Error: ' + e.message
         @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
       @watershed_segment = WatershedSegment.where(:id => @field.watershed_segment_id).first
       if (@watershed_segment.nil?)
-        flash[:error] = "Could not retrieve baseline data." if @watershed_segment.nil?
+        flash.now[:error] = "Could not retrieve baseline data." if @watershed_segment.nil?
       end
 
       # does the field meet baseline - only for Maryland

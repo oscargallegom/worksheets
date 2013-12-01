@@ -40,10 +40,10 @@ class CropRotationsController < ApplicationController
         @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
         @output_xml = content
         if (@results['ErrorCode'] != '0')
-          flash[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
+          flash.now[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
         end
       else
-        flash[:error] = 'Could not contact NTT: ' << content.to_s
+        flash.now[:error] = 'Could not contact NTT: ' << content.to_s
       end
     end
 
