@@ -73,7 +73,9 @@
           <p class="error"><%= flash[:debug] %></p>
       <% end %>
       <p class="error">
-        Debug information (will be removed in production):<br/>
+        Debug information (will be removed in production):&nbsp;
+      <%= 'no need to contact NTT' if ENV['debug'].empty?%>
+      <%= '<br/>' if !ENV['debug'].empty?%>
       <%= raw ENV['debug'] %>
       <% ENV['debug'] = '' %>
         </p>

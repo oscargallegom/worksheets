@@ -342,30 +342,30 @@ class Field < ActiveRecord::Base
 
 
     # check if BMPs have changed
-    if (!is_changed)
-      self.bmps.each do |bmp|
-        if (bmp.changed? || bmp.marked_for_destruction?)
-          is_changed = true
-          self.ntt_xml_current = nil
-          puts 'BMP changed'
-          ENV['debug'] += 'BMP changed changed<br/>'
-          break
-        end
-      end
-    end
+    #if (!is_changed)
+    #  self.bmps.each do |bmp|
+    #    if (bmp.changed? || bmp.marked_for_destruction?)
+    #      is_changed = true
+    #      self.ntt_xml_current = nil
+    #      puts 'BMP changed'
+    #      ENV['debug'] += 'BMP changed changed<br/>'
+    #      break
+    #    end
+    #  end
+    #end
 
     # check if future BMPs have changed
-    if (!is_changed)
-      self.future_bmps.each do |future_bmp|
-        if (future_bmp.changed? || future_bmp.marked_for_destruction?)
-          is_changed = true
-          self.ntt_xml_future = nil
-          puts 'Future BMP changed'
-          ENV['debug'] += 'Future BMP changed<br/>'
-          break
-        end
-      end
-    end
+    #if (!is_changed)
+    #  self.future_bmps.each do |future_bmp|
+    #    if (future_bmp.changed? || future_bmp.marked_for_destruction?)
+    #      is_changed = true
+    #      self.ntt_xml_future = nil
+    #      puts 'Future BMP changed'
+    #      ENV['debug'] += 'Future BMP changed<br/>'
+    #      break
+    #    end
+    #  end
+    #end
 
     # TODO: should only check for fields impacting NTT
     if (self.acres_from_user_changed? ||

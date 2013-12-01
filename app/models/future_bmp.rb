@@ -1,7 +1,4 @@
 class FutureBmp < ActiveRecord::Base
-  #  if any  change then ntt needs to be called
-  after_save :reset_ntt_xml
-  after_destroy :reset_ntt_xml
 
   belongs_to :bmp_type
   belongs_to :field
