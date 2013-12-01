@@ -2,6 +2,7 @@ module BmpCalculations
 
   def computeBmpCalculations(field)
 
+    # try to retrieve data if not already present
     if (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?)
       field.save
     end
