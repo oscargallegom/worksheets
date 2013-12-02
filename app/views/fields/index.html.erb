@@ -4,7 +4,7 @@
     <th>Area (ac)</th>
     <th>Baseline</th>
     <th>Current</th>
-    <th>Planned</th>
+    <th>Future</th>
     <th>Status</th>
     <th class="actions">Actions</th>
   </tr>
@@ -26,8 +26,20 @@
           S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
           t/a
         </td>
-        <td></td>
-        <td></td>
+        <td>
+          N: <%= number_with_precision(field.bmp_calculations[:new_total_n], :precision => 2, delimiter: ',') %> lb
+          <br/>
+          P: <%= number_with_precision(field.bmp_calculations[:new_total_p], :precision => 2, delimiter: ',') %> lb
+          <br/>
+          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment], :precision => 2, delimiter: ',') %> tons
+        </td>
+        <td>
+          N: <%= number_with_precision(field.bmp_calculations[:new_total_n_future], :precision => 2, delimiter: ',') %> lb
+          <br/>
+          P: <%= number_with_precision(field.bmp_calculations[:new_total_p_future], :precision => 2, delimiter: ',') %> lb
+          <br/>
+          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
+        </td>
         <td>
           <!-- TODO: implement status bar -->
           <div><%= field.percentCompleted %>%&nbsp;complete</div>

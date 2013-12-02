@@ -3,7 +3,7 @@ module BmpCalculations
   def computeBmpCalculations(field)
 
     # try to retrieve data if not already present
-    if (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?)
+    if (!field.readonly? && (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?))
       field.save
     end
 
@@ -586,7 +586,7 @@ module BmpCalculations
     new_total_p_future = total_p_for_converted_acre_future + total_p_for_unconverted_acre_future
     new_total_sediment_future = total_sediment_for_converted_acre_future + total_sediment_for_unconverted_acre_future
 
-    {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => 'No error'}
+    {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => ''}
 
   end
 

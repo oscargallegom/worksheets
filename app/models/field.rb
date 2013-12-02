@@ -1,11 +1,15 @@
 class Field < ActiveRecord::Base
   #TODO: just a test for now
   include Ntt
+  include BmpCalculations
+
   before_save :update_ntt_xml_fields
 
   attr_writer :step
   attr_accessor :soil_test_laboratory_id, :modified_p_test_value
   attr_writer :ntt_call_status
+
+  attr_writer :bmp_calculations
 
   belongs_to :farm
   belongs_to :watershed_segment
@@ -167,6 +171,26 @@ class Field < ActiveRecord::Base
   # required fields are based on the current step
   def step?(step)
     @step.to_i==step
+  end
+
+  def bmp_calculations
+
+    if @bmp_calculations.nil?
+    begin
+      if (field_type_id <= 3)
+      @bmp_calculations = computeBmpCalculations(self)
+      elsif (field_type_id == 4)
+        @bmp_calculations = computeLivestockBmpCalculations(self)
+      else
+        @bmp_calculations = {:new_total_n => nil, :new_total_p => nil, :new_total_sediment => nil, :error_message => ''}
+        end
+    rescue Exception => e
+      @bmp_calculations = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => 'Error: ' + e.message}
+    end
+    else
+      @bmp_calculations
+    end
+
   end
 
 
@@ -366,8 +390,6 @@ class Field < ActiveRecord::Base
     #    end
     #  end
     #end
-
-    self.slope_changed?
 
     # note that there is a bug if the value is 0.0 hence the extra check between old and new value
     #  see 'https://github.com/rails/rails/pull/9042' for details
