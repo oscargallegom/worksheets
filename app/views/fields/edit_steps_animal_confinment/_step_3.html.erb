@@ -24,6 +24,7 @@
               system to be eligible to generate credits.
               <br/><br/>
             </li>
+            <% if @farm.site_state_id == 21 # only for Maryland    %>
             <li>
               <%= f.label :is_livestock_implemented_nutrient_plan, 'I have an implemented nutrient management plan:', :class => 'extrawide' %>
               <%= f.check_box :is_livestock_implemented_nutrient_plan %>
@@ -36,6 +37,10 @@
               <%= f.label :is_livestock_properly_sized_maintained, 'I have a properly sized and maintained manure storage and runoff system:', :class => 'extrawide' %>
               <%= f.check_box :is_livestock_properly_sized_maintained %>
             </li>
+            <% end %>
+            <% if @farm.site_state_id != 21 # not Maryland    %>
+            <li>Baseline requirements for your state are to be determined.</li>
+            <% end %>
 
           </ol>
         </fieldset>
