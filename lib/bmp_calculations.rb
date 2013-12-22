@@ -67,7 +67,8 @@ module BmpCalculations
     if (!content.nil?)
       @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
       if (@ntt_results_future['ErrorCode'] != '0')
-        raise 'No NTT data for future scenario.'
+        @ntt_results_future = nil
+        #raise 'No NTT data for future scenario.'
       else
         total_n_per_acre_future = @ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f
         total_p_per_acre_future = @ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f
@@ -81,7 +82,8 @@ module BmpCalculations
         @ntt_results_future[:crops] = crops
       end
     else
-      raise 'Could not retrieve NTT data for future scenario.'
+      @ntt_results_future = nil
+      #raise 'Could not retrieve NTT data for future scenario.'
     end
     #end
 

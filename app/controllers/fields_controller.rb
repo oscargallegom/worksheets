@@ -73,6 +73,13 @@ class FieldsController < ApplicationController
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
+
+        if @ntt_results.nil?
+          flash.now[:error] = 'Error: Could not retrieve NTT data.'
+        elsif @ntt_results_future.nil?
+          flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
+        end
+
       #rescue Exception => e
       #  flash.now[:error] = 'Error: ' + e.message
       #  @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
