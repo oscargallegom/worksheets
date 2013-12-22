@@ -75,9 +75,9 @@ class FieldsController < ApplicationController
         @ntt_results_future = @current_totals[:ntt_results_future]
 
         if @ntt_results.nil?
-          flash.now[:error] = 'Error: Could not retrieve NTT data.'
+          flash.now[:error] = 'Error2: Could not retrieve NTT data.'
         elsif @ntt_results_future.nil?
-          flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
+          flash.now[:error] = 'Error2: Could not retrieve NTT data for future scenario.'
         end
 
       #rescue Exception => e
