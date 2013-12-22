@@ -42,7 +42,7 @@ module Ntt
 
   def buildXml(field, is_future)
 
-    begin
+    #begin
 
       state = field.farm.state.abbreviation
       fips = field.watershed_segment.fips unless field.watershed_segment.nil?
@@ -356,9 +356,9 @@ module Ntt
 
       return [true, xml]
 
-    rescue Exception => ex
-      return [false, ex]
-    end
+    #rescue Exception =>
+    #  return [false, ex]
+    #end
 
   end
 end
