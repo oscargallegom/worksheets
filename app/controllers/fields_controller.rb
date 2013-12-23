@@ -323,7 +323,6 @@ class FieldsController < ApplicationController
           is_success = false
         end
       end
-
     end
 
     respond_to do |format|
@@ -352,8 +351,13 @@ class FieldsController < ApplicationController
         strip.destroy
       end
     end
+
+    # reset NTT field
+    @field.reload
+    @field.ntt_xml_future = nil
+
     respond_to do |format|
-      if is_success
+      if is_success && @field.save
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Copy successful.' }
       else
         format.html { redirect_to edit_farm_field_path(@farm, @field, :step => @step), notice: 'Error: could not import data.' }

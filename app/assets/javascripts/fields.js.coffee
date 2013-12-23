@@ -537,6 +537,10 @@ $(document).ready ->
   $("#field_soil_test_laboratory_id").change ->
     updateSoilPExtractants()
 
+  $("#typicalManureValuesLink").click ->
+    $("#typicalManureValuesTable").toggle()
+    return false
+
 
 $(document).on "nested:fieldRemoved", (event) ->
   updateIndexes()
