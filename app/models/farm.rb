@@ -132,19 +132,16 @@ class Farm < ActiveRecord::Base
       end
     end
 
-    is_one_crop_done = false
-    is_all_crop_done = true
+    nb_fields_completed = 0
     fields.each do |field|
       if (!field.strips.empty? && !field.strips[0].crop_rotations.empty?)
-        is_one_crop_done = true
-      else
-        is_all_crop_done = false
+        nb_fields_completed = nb_fields_completed + 1
       end
     end
 
+    percentFieldCompleted = [90, (nb_fields_completed / fields.size * 100).round].min
 
-    percentCompleted = 25 if is_one_crop_done
-    percentCompleted = 50 if is_all_crop_done
+    percentCompleted = [percentCompleted, percentFieldCompleted].max
 
     # TODO: finish %
     #  At least one field completed through “future load summary” 75 percent
