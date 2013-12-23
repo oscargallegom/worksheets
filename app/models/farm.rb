@@ -147,7 +147,7 @@ class Farm < ActiveRecord::Base
     #  At least one field completed through “future load summary” 75 percent
     # All fields completed through “future load summary” 100 percent
 
-    return percentCompleted
+    return percentFieldCompleted
 
   end
 
