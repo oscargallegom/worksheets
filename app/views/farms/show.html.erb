@@ -214,14 +214,17 @@
         lbs/yr
       </li>
       <li>
-        <div class='extrawide'>Total Reductions:</div>
+        <div class='extrawide'>Total Reductions (EOS):</div>
         <%= number_with_precision((@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals), :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
-        <%= ((@is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) && @farm.site_state_id != 47) ? number_with_precision([0, (@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals)].max, :precision => 2, delimiter: ',') : 0 %>
-        <%= (@is_farm_meets_baseline && @farm.site_state_id == 47) ? number_with_precision([0, (@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals)].max, :precision => 2, delimiter: ',') : 0 %>
+        <% if @farm.site_state_id != 47 %>
+        <%= ((@is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields))) ? number_with_precision([0, (@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
+        <% else %>
+        <%= @is_farm_meets_baseline ? number_with_precision([0, (@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
+        <% end %>
         lbs/yr
       </li>
       <li>
@@ -237,14 +240,17 @@
         lbs/yr
       </li>
       <li>
-        <div class='extrawide'>Total Reductions:</div>
+        <div class='extrawide'>Total Reductions (EOS):</div>
         <%= number_with_precision((@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals), :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
-        <%= ((@is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) && @farm.site_state_id != 47) ? number_with_precision([0, (@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals)].max, :precision => 2, delimiter: ',') : 0 %>
-        <%= (@is_farm_meets_baseline && @farm.site_state_id == 47) ? number_with_precision([0, (@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals)].max, :precision => 2, delimiter: ',') : 0 %>
+        <% if @farm.site_state_id != 47 %>
+        <%= ((@is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields))) ? number_with_precision([0, (@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
+        <% else %>
+        <%= @is_farm_meets_baseline ? number_with_precision([0, (@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
+        <% end %>
         lbs/yr
       </li>
       <li>
@@ -259,14 +265,17 @@
         lbs/yr
       </li>
       <li>
-        <div class='extrawide'>Total Reductions:</div>
+        <div class='extrawide'>Total Reductions (EOS):</div>
         <%= number_with_precision((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals), :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
-        <%= ((@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) && @farm.site_state_id != 47) ? number_with_precision([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max, :precision => 2, delimiter: ',') : 0 %>
-        <%= (@is_farm_meets_baseline && @farm.site_state_id == 47) ? number_with_precision([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max, :precision => 2, delimiter: ',') : 0 %>
+        <% if @farm.site_state_id != 47 %>
+        <%= ((@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields))) ? number_with_precision([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
+        <% else %>
+        <%= @is_farm_meets_baseline ? number_with_precision([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
+        <% end %>
         lbs/yr
       </li>
       <li>
