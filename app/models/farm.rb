@@ -158,6 +158,7 @@ class Farm < ActiveRecord::Base
         end
       end
     end
+
     return credits
   end
 
