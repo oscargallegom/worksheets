@@ -125,6 +125,7 @@ class Farm < ActiveRecord::Base
     credits[:total_p] = 0
     credits[:total_n] = 0
     credits[:total_sediment] = 0
+
     fields.each do |field|
 
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
