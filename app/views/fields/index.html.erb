@@ -12,7 +12,7 @@
   <% @fields.each do |field| %>
       <tr>
         <td>
-          <%= link_to field.name, edit_farm_field_path(@farm, field, :step => 1) unless field.watershed_segment.nil? %>
+          <%= link_to field.name, edit_farm_field_path(@farm, field, :step => 1) %>
           <%= "Field '#{field.name}' is not in watershed." if field.watershed_segment.nil? %>
           <br/>
           <%= field.field_type.nil? ? '' : field.field_type.name %>
