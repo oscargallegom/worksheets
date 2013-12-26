@@ -139,7 +139,10 @@ class Farm < ActiveRecord::Base
       end
     end
 
-    percentFieldCompleted = [90, (nb_fields_completed / fields.size * 100).round].min
+    percentFieldCompleted = 0
+    if fields.size > 0
+      percentFieldCompleted = [90, (nb_fields_completed / fields.size * 100).round].min
+    end
 
     percentCompleted = [percentCompleted, percentFieldCompleted].max
 
