@@ -17,6 +17,7 @@
       <div>
         <fieldset>
           <ol>
+            <% if @farm.site_state_id == 21 # only for Maryland    %>
             <li><h2 class='sectionHeading'>Requirements</h2></li>
             <li>Landowners must have an implemented nutrient management plan and a soil and water conservation plan
               before being eligible to generate credits.<br/><br/>
@@ -24,7 +25,6 @@
               system to be eligible to generate credits.
               <br/><br/>
             </li>
-            <% if @farm.site_state_id == 21 # only for Maryland    %>
             <li>
               <%= f.label :is_livestock_implemented_nutrient_plan, 'I have an implemented nutrient management plan:', :class => 'extrawide' %>
               <%= f.check_box :is_livestock_implemented_nutrient_plan %>

@@ -297,6 +297,11 @@ class Field < ActiveRecord::Base
       end
     end
 
+    # if animal confinment
+    if (!field.field_type.nil?) && (field.field_type_id == 4) && (!field.field_livestocks.nil? || !field.field_poultry.nil?) # perform calculations for animal confinement
+      percentCompleted = 100
+    end
+
     #is_one_crop_done = false
     #is_all_crop_done = true
     #fields.each do |field|
