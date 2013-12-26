@@ -61,7 +61,7 @@
               <%= number_with_precision(@field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %>
             </li>
             <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
-              <%= number_with_precision([0, (@current_totals[:current_load_phosphorus]-@future_totals[:current_load_phosphorus])* @field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision([0, (@current_totals[:current_load_phosphorus]-@future_totals[:current_load_phosphorus])* @field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %>
               tons
             </li>
 
@@ -82,7 +82,7 @@
               <%= number_with_precision(@field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %>
             </li>
             <li><span class='wide'>Reduction to the Chesapeake bay:</span>
-              <%= number_with_precision([0, (@current_totals[:current_load_sediment]-@future_totals[:current_load_sediment])* @field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
+              <%= number_with_precision([0, (@current_totals[:current_load_sediment]-@future_totals[:current_load_sediment])* @field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
               tons
             </li>
           </ol>

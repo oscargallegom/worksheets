@@ -176,17 +176,17 @@ class Field < ActiveRecord::Base
   def bmp_calculations
 
     if @bmp_calculations.nil?
-    begin
-      if (field_type_id <= 3)
-      @bmp_calculations = computeBmpCalculations(self)
-      elsif (field_type_id == 4)
-        @bmp_calculations = computeLivestockBmpCalculations(self)
-      else
-        @bmp_calculations = {:new_total_n => nil, :new_total_p => nil, :new_total_sediment => nil, :error_message => ''}
+      begin
+        if (field_type_id <= 3)
+          @bmp_calculations = computeBmpCalculations(self)
+        elsif (field_type_id == 4)
+          @bmp_calculations = computeLivestockBmpCalculations(self)
+        else
+          @bmp_calculations = {:new_total_n => nil, :new_total_p => nil, :new_total_sediment => nil, :error_message => ''}
         end
-    rescue Exception => e
-      @bmp_calculations = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => 'Error: ' + e.message}
-    end
+      rescue Exception => e
+        @bmp_calculations = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => 'Error: ' + e.message}
+      end
     else
       @bmp_calculations
     end
@@ -460,8 +460,8 @@ class Field < ActiveRecord::Base
           if (@ntt_results['ErrorCode'] != '0')
             self.ntt_xml_future = nil
             #raise 'Could not retrieve NTT data for future scenario.'
-            self[:ntt_call_status] +=  'Could not retrieve NTT data for future scenario.'
-                ENV['debug'] += 'Error retrieving future<br/>'
+            self[:ntt_call_status] += 'Could not retrieve NTT data for future scenario.'
+            ENV['debug'] += 'Error retrieving future<br/>'
           else
             self.ntt_xml_future = content.to_s
           end

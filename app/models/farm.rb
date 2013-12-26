@@ -120,6 +120,44 @@ class Farm < ActiveRecord::Base
     converted_area == 0 ? 'N/A' : converted_area
   end
 
+  def credits
+    credits = {}
+    credits[:total_p] = 0
+    credits[:total_n] = 0
+    credits[:total_sediment] = 0
+    fields.each do |field|
+
+      if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
+
+        begin
+          @current_totals = computeBmpCalculations(field)
+        rescue Exception => e
+          @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
+        end
+        credits[:total_n] += (@current_totals[:new_total_n] - @current_totals[:new_total_n_future])* field.watershed_segment.n_delivery_factor
+        credits[:total_p] += (@current_totals[:new_total_p] - @current_totals[:new_total_p_future])* field.watershed_segment.p_delivery_factor
+        credits[:total_sediment] += (@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor
+      end
+
+      if (!field.field_type.nil?) && (field.field_type_id == 4) # perform calculations for animal confinement
+        begin
+          @current_totals = computeLivestockBmpCalculations(@field)
+        rescue Exception => e
+          @current_totals = {:current_load_nitrogen => 0, :current_load_phosphorus => 0, :current_load_sediment => 0}
+        end
+        begin
+          @future_totals = computeLivestockBmpCalculationsFuture(@field)
+        rescue Exception => e
+          @future_totals = {:current_load_nitrogen => 0, :current_load_phosphorus => 0, :current_load_sediment => 0}
+        end
+        credits[:total_n] += (@current_totals[:current_load_nitrogen]-@future_totals[:current_load_nitrogen])* field.watershed_segment.n_delivery_factor
+        credits[:total_p] += (@current_totals[:current_load_phosphorus]-@future_totals[:current_load_phosphorus])* field.watershed_segment.p_delivery_factor
+        credits[:total_sediment] += (@current_totals[:current_load_sediment]-@future_totals[:current_load_sediment])* field.watershed_segment.sediment_delivery_factor
+      end
+    end
+    return credits
+  end
+
 
   def percentCompleted
 
@@ -142,7 +180,7 @@ class Farm < ActiveRecord::Base
     percentFieldCompleted = 0
     if fields.size > 0
       fields.each do |field|
-      percentFieldCompleted += field.percentCompleted
+        percentFieldCompleted += field.percentCompleted
       end
       percentFieldCompleted = percentFieldCompleted / fields.size
     end
