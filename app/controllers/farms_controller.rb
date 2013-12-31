@@ -26,7 +26,7 @@ class FarmsController < ApplicationController
   # GET /farms/1
   # GET /farms/1.json
   def show
-    add_breadcrumb 'Farms', :farms_path
+    add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
 
     @arrWatersheds = Array.new
@@ -128,7 +128,7 @@ class FarmsController < ApplicationController
 
   # GET/farms/id/review
   def review
-    add_breadcrumb 'Farms', :farms_path
+    add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
 
     # check if the farm meets baseline or not
@@ -211,7 +211,7 @@ class FarmsController < ApplicationController
 
   # GET/farms/id/submit
   def submit
-    add_breadcrumb 'Farms', :farms_path
+    add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
 
     @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
@@ -237,8 +237,8 @@ class FarmsController < ApplicationController
   # GET /farms/new
   # GET /farms/new.json
   def new
-    add_breadcrumb 'Farms', :farms_path
-    add_breadcrumb 'New farm'
+    add_breadcrumb 'Projects', :farms_path
+    add_breadcrumb 'New project'
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -246,7 +246,7 @@ class FarmsController < ApplicationController
 
   # GET /farms/1/edit
   def edit
-    add_breadcrumb 'Farms', :farms_path
+    add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
 
     @step = params[:step] || '1'

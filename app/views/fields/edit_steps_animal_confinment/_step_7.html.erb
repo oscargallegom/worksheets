@@ -23,15 +23,15 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Nitrogen</h2></li>
-            <li><span class='wide'>Current Load:</span>
+            <li><span class='wide'>Current Load (EOS):</span>
               <%= number_with_precision(@current_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
-            <li><span class='wide'>Future Load:</span>
+            <li><span class='wide'>Future Load (EOS):</span>
               <%= number_with_precision(@future_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
-            <li><span class='wide'>Reduction:</span>
+            <li><span class='wide'>Reductions (EOS):</span>
               <%= number_with_precision(@current_totals[:current_load_nitrogen]-@future_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
@@ -40,20 +40,20 @@
             </li>
             <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
               <%= number_with_precision([0, (@current_totals[:current_load_nitrogen]-@future_totals[:current_load_nitrogen])* @field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
-              tons
+              lbs/yr
             </li>
 
             <li><h2 class='sectionHeading'>Phosporus</h2></li>
-            <li><span class='wide'>Current Load:</span>
+            <li><span class='wide'>Current Load (EOS):</span>
               <%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
               <%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
-            <li><span class='wide'>Future Load:</span>
+            <li><span class='wide'>Future Load (EOS):</span>
               <%= number_with_precision(@future_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
-            <li><span class='wide'>Reduction:</span>
+            <li><span class='wide'>Reductions (EOS):</span>
               <%= number_with_precision(@current_totals[:current_load_phosphorus]-@future_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
@@ -62,7 +62,7 @@
             </li>
             <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
               <%= number_with_precision([0, (@current_totals[:current_load_phosphorus]-@future_totals[:current_load_phosphorus])* @field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %>
-              tons
+              lbs/yr
             </li>
 
             <li><h2 class='sectionHeading'>Sediment</h2></li>
@@ -83,7 +83,7 @@
             </li>
             <li><span class='wide'>Reduction to the Chesapeake bay:</span>
               <%= number_with_precision([0, (@current_totals[:current_load_sediment]-@future_totals[:current_load_sediment])* @field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
-              tons
+              tons/yr
             </li>
           </ol>
         </fieldset>

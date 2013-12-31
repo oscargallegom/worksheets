@@ -19,14 +19,13 @@
         </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
         <td>
-          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <% if (!field.field_type.nil? && field.field_type_id <= 3) %>
+          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
           <br/>
-          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
           <br/>
-          S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
+          S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> tons/a
+          <% end %>
         </td>
         <td>
           N: <%= number_with_precision(field.bmp_calculations[:new_total_n], :precision => 2, delimiter: ',') %>
