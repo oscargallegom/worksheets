@@ -292,7 +292,7 @@ Under construction
       <tr>
         <td>
           <%= link_to field.name, edit_farm_field_path(@farm, field) unless field.watershed_segment.nil? %>
-          <%= "Field '#{field.name}' is not in watershed." if field.watershed_segment.nil? %>
+          <%= "Field '#{field.name}' is not in watershed or field boundaries need to be redrawn so that they do not form a self-intersercting polygon." if field.watershed_segment.nil? %>
           <br/>
           <%= field.field_type.name unless field.field_type.nil? %>
         </td>
