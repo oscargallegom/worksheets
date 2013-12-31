@@ -298,7 +298,12 @@ class Field < ActiveRecord::Base
     end
 
     # if animal confinment
-    if (!self.field_type.nil?) && (self.field_type_id == 4) && (!self.field_livestocks.nil? || !self.field_poultry.nil?) # perform calculations for animal confinement
+    if (!self.field_type.nil?) && (self.field_type_id == 4) && (!self.field_livestocks.nil? || !self.field_poultry.nil?)
+      percentCompleted = 100
+    end
+
+    # if managed land
+    if (!self.field_type.nil?) && (self.field_type_id == 5)
       percentCompleted = 100
     end
 
