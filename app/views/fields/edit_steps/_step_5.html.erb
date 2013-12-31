@@ -165,8 +165,8 @@
             <% if !@ntt_results[:crops].nil? %>
                 <% @ntt_results[:crops].each do |crop| %>
                     <li>
-                      <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] %></span>
-                      <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
+                      <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] unless crop.nil? %></span>
+                      <%= crop['Yield'] unless crop.nil? %>&nbsp;<%= crop['Unit'] unless crop.nil? %>/ac
                     </li>
                 <% end %>
             <% end %>
