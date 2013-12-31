@@ -833,8 +833,6 @@ module BmpCalculations
         :poultry_eof_confined_po4p => poultry_eof_confined_po4p,
 
         :error_message => 'No error'}
-
-
   end
 
   # TODO: merge the 2 functions
