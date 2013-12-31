@@ -383,6 +383,7 @@ class FieldsController < ApplicationController
     @field.streambank_restoration_length_future = @field.streambank_restoration_length
     @field.is_streambank_restoration_planned_future = @field.is_streambank_restoration_planned
     @field.is_streambank_fencing_in_place_future= @field.is_streambank_fencing_in_place
+    @field.fence_length_future = @field.fence_length
     @field.distance_fence_stream_future=@field.distance_fence_stream
     @field.vegetation_type_fence_stream_id_future= @field.vegetation_type_fence_stream_id
     @field.planned_management_details_future=@field.planned_management_details
