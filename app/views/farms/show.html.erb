@@ -343,10 +343,10 @@
           N: <%= number_with_precision([0, (field.bmp_calculations[:new_total_n] - field.bmp_calculations[:new_total_n_future])* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision([0, (field.bmp_calculations[:new_total_p] - field.bmp_calculations[:new_total_p_future])* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
+          P: <%= number_with_precision([0, (field.bmp_calculations[:new_total_p] - field.bmp_calculations[:new_total_p_future])* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision([0, (field.bmp_calculations[:new_total_sediment] - field.bmp_calculations[:new_total_sediment_future])* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
+          S: <%= number_with_precision([0, (field.bmp_calculations[:new_total_sediment] - field.bmp_calculations[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'tons/a' : 'tons' %></td>
         </td>
         <td><%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete field'), farm_field_path(@farm, field), method: :delete, data: {confirm: 'Are you sure?'} %></td>
