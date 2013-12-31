@@ -19,26 +19,34 @@
         </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
         <td>
-          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
+          <%= field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
+          <%= field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
           S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
-          t/a
+          <%= field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
         </td>
         <td>
-          N: <%= number_with_precision(field.bmp_calculations[:new_total_n], :precision => 2, delimiter: ',') %> lbs/a
+          N: <%= number_with_precision(field.bmp_calculations[:new_total_n], :precision => 2, delimiter: ',') %>
+          <%= field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision(field.bmp_calculations[:new_total_p], :precision => 2, delimiter: ',') %> lbs/a
+          P: <%= number_with_precision(field.bmp_calculations[:new_total_p], :precision => 2, delimiter: ',') %>
+          <%= field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment], :precision => 2, delimiter: ',') %> tons/a
+          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment], :precision => 2, delimiter: ',') %>
+          <%= field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
         </td>
         <td>
-          N: <%= number_with_precision(field.bmp_calculations[:new_total_n_future], :precision => 2, delimiter: ',') %> lbs/a
+          N: <%= number_with_precision(field.bmp_calculations[:new_total_n_future], :precision => 2, delimiter: ',') %>
+          <%= field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision(field.bmp_calculations[:new_total_p_future], :precision => 2, delimiter: ',') %> lbs/a
+          P: <%= number_with_precision(field.bmp_calculations[:new_total_p_future], :precision => 2, delimiter: ',') %>
+          <%= field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons/a
+          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment_future], :precision => 2, delimiter: ',') %>
+          <%= field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
         </td>
         <td>
           <!-- TODO: implement status bar -->
