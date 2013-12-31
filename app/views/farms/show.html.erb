@@ -312,18 +312,33 @@
         </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
         <td>
-          N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
-          <br/>
-          P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
-          <br/>
-          S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %>
-          t/a
+          <% if (!field.field_type.nil? && field.field_type_id <= 3) %>
+              N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+              <br/>
+              P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+              <br/>
+              S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> tons/a
+          <% end %>
         </td>
         <td>
-          N:  <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: ',') %> lb
-
+          N: <%= number_with_precision(field.bmp_calculations[:new_total_n], :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision(field.bmp_calculations[:new_total_p], :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment], :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
         </td>
-        <td></td>
+        <td>
+          N: <%= number_with_precision(field.bmp_calculations[:new_total_n_future], :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision(field.bmp_calculations[:new_total_p_future], :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision(field.bmp_calculations[:new_total_sediment_future], :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'tons/a' : 'tons' %></td>
         <td></td>
         <td><%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete field'), farm_field_path(@farm, field), method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
