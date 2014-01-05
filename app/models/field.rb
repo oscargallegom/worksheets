@@ -184,7 +184,7 @@ class Field < ActiveRecord::Base
           @bmp_calculations_animal_confinment_future = computeLivestockBmpCalculationsFuture(self)
           @bmp_calculations = {:new_total_n => @bmp_calculations_animal_confinment[:current_load_nitrogen], :new_total_p => @bmp_calculations_animal_confinment[:current_load_phosphorus], :new_total_sediment => @bmp_calculations_animal_confinment[:current_load_sediment], :new_total_n_future => @bmp_calculations_animal_confinment_future[:current_load_nitrogen], :new_total_p_future => @bmp_calculations_animal_confinment_future[:current_load_phosphorus], :new_total_sediment_future => @bmp_calculations_animal_confinment_future[:current_load_sediment], :error_message => ''}
         else
-          @bmp_calculations = {:new_total_n => nil, :new_total_p => nil, :new_total_sediment => nil, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => ''}
+          @bmp_calculations = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => ''}
         end
       rescue Exception => e
         @bmp_calculations = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => 'Error: ' + e.message}
