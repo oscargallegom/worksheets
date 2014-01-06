@@ -574,9 +574,9 @@ module BmpCalculations
 
     # if future streambank restoration in place
     if (field.is_pasture_adjacent_to_stream && field.is_streambank_restoration_future)
-      total_n_for_unconverted_acre_future = total_n_for_unconverted_acre_future - (field.streambank_restoration_length_future * 0.2)
-      total_p_for_unconverted_acre_future = total_p_for_unconverted_acre_future - (field.streambank_restoration_length_future * 0.068)
-      total_sediment_for_unconverted_acre_future = total_sediment_for_unconverted_acre_future - (field.streambank_restoration_length_future * 0.027125)
+      total_n_for_unconverted_acre_future = [0, total_n_for_unconverted_acre_future - (field.streambank_restoration_length_future * 0.2)].max # cannot be negative
+      total_p_for_unconverted_acre_future = [0, total_p_for_unconverted_acre_future - (field.streambank_restoration_length_future * 0.068)].max # cannot be negative
+      total_sediment_for_unconverted_acre_future = [0, total_sediment_for_unconverted_acre_future - (field.streambank_restoration_length_future * 0.027125)].max # cannot be negative
     end
 
 
