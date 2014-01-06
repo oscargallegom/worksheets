@@ -11,11 +11,11 @@ class CropRotation < ActiveRecord::Base
 
   belongs_to :cover_crop, class_name: 'Crop'
 
-  has_many :grazing_livestocks
-  has_many :tillage_operations
-  has_many :manure_fertilizer_applications
-  has_many :commercial_fertilizer_applications
-  has_many :end_of_seasons
+  has_many :grazing_livestocks, :dependent => :destroy, autosave: true
+  has_many :tillage_operations, :dependent => :destroy, autosave: true
+  has_many :manure_fertilizer_applications, :dependent => :destroy, autosave: true
+  has_many :commercial_fertilizer_applications, :dependent => :destroy, autosave: true
+  has_many :end_of_seasons, :dependent => :destroy, autosave: true
 
   attr_accessible :strip_id, :crop_category_id, :crop_id, :plant_date_year, :plant_date_month, :plant_date_day, :planting_method_id, :seeding_rate
   attr_accessible :is_cover_crop, :cover_crop_id, :cover_crop_plant_date_year, :cover_crop_plant_date_month, :cover_crop_plant_date_day, :cover_crop_planting_method_id
