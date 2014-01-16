@@ -147,12 +147,12 @@ class FieldsController < ApplicationController
 
       # if field is pasture
       if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
-        flash.now[:meet_baseline] << 'According to Virginia Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
+        flash.now[:meet_baseline] << 'According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
       end
       # if crop or hay
       if (@field.field_type_id == 1 || @field.field_type_id == 3)
-        if (@field.is_pasture_adjacent_to_stream && (!@field.is_forest_buffer && !@field.is_grass_buffer && !@field.is_fertilizer_application_setback))
-          flash.now[:meet_baseline] << 'According to Virginia Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a "directed" application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams.'
+        if (@field.is_pasture_adjacent_to_stream && (!@field.is_forest_buffer && !@field.is_grass_buffer))
+          flash.now[:meet_baseline] << 'According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place.'
         end
       end
     end
