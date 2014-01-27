@@ -106,7 +106,8 @@ NutrientNet::Application.routes.draw do
   end
   #root :to => 'users/sessions#new'
 
-  match "/help", to: "static_pages#help", as: "help"
+  # replaced by a PDF
+  #match "/help", to: "static_pages#help", as: "help"
 
   match "/401", to: "errors#not_authorized"
   match "/404", to: "errors#not_found"

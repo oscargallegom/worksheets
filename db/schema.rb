@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105023447) do
+ActiveRecord::Schema.define(:version => 20140127031044) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -608,12 +608,18 @@ ActiveRecord::Schema.define(:version => 20131105023447) do
     t.decimal  "sediment_crop_baseline"
     t.decimal  "sediment_pasture_baseline"
     t.decimal  "sediment_hay_baseline"
-    t.decimal  "n_adjust"
-    t.decimal  "p_adjust"
-    t.decimal  "sediment_adjust"
+    t.decimal  "n_crop_adjust"
+    t.decimal  "p_crop_adjust"
+    t.decimal  "sediment_crop_adjust"
     t.decimal  "cafo_eos_sediment"
     t.decimal  "cafo_n_rf"
     t.decimal  "cafo_p_rf"
+    t.decimal  "n_hay_adjust"
+    t.decimal  "p_hay_adjust"
+    t.decimal  "sediment_hay_adjust"
+    t.decimal  "n_pasture_adjust"
+    t.decimal  "p_pasture_adjust"
+    t.decimal  "sediment_pasture_adjust"
   end
 
 end

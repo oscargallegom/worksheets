@@ -87,13 +87,37 @@ module BmpCalculations
     end
     #end
 
-    # TODO: Mindy to find out about adjustment factor
-    total_adjusted_n_per_acre = total_n_per_acre
-    total_adjusted_p_per_acre = total_p_per_acre
-    total_adjusted_sediment_per_acre = total_sediment_per_acre
-    total_adjusted_n_per_acre_future = total_n_per_acre_future
-    total_adjusted_p_per_acre_future = total_p_per_acre_future
-    total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future
+    # add adjustment factor
+    if field.field_type_id == 1  # crop
+      total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_crop_adjust
+      total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_crop_adjust
+      total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_crop_adjust
+
+      total_adjusted_n_per_acre_future = total_n_per_acre_future  * field.watershed_segment.n_crop_adjust
+      total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_crop_adjust
+      total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_crop_adjust
+    end
+
+    if field.field_type_id == 2  # pasture
+      total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_pasture_adjust
+      total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_pasture_adjust
+      total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_pasture_adjust
+
+      total_adjusted_n_per_acre_future = total_n_per_acre_future * field.watershed_segment.n_pasture_adjust
+      total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_pasture_adjust
+      total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_pasture_adjust
+    end
+
+    if field.field_type_id == 3  # hay
+      total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_hay_adjust
+      total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_hay_adjust
+      total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_hay_adjust
+
+      total_adjusted_n_per_acre_future = total_n_per_acre_future * field.watershed_segment.n_hay_adjust
+      total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_hay_adjust
+      total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_hay_adjust
+    end
+
 
     fencing_acres = 0
     fencing_acres_future = 0
