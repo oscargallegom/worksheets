@@ -35,9 +35,14 @@ ActiveRecord::Schema.define(:version => 20140127031044) do
   end
 
   create_table "animals_farms", :force => true do |t|
+    t.decimal "animals_units"
     t.integer "farm_id"
     t.integer "animal_id"
-    t.decimal "animals_units"
+  end
+
+  create_table "animals_projects", :id => false, :force => true do |t|
+    t.integer "farm_id"
+    t.integer "animal_id"
   end
 
   create_table "bmp_efficiency_lookups", :force => true do |t|
@@ -150,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20140127031044) do
     t.string   "name",              :null => false
     t.string   "tract_number"
     t.string   "farm_notes"
-    t.string   "site_name",         :null => false
+    t.string   "site_name"
     t.string   "site_street_1"
     t.string   "site_street_2"
     t.string   "site_city"
@@ -158,8 +163,8 @@ ActiveRecord::Schema.define(:version => 20140127031044) do
     t.integer  "owner_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.integer  "site_state_id",     :null => false
-    t.integer  "site_county_id",    :null => false
+    t.integer  "site_state_id"
+    t.integer  "site_county_id"
     t.text     "site_description"
     t.text     "coordinates"
     t.decimal  "acres"
@@ -180,7 +185,7 @@ ActiveRecord::Schema.define(:version => 20140127031044) do
 
   create_table "field_poultry", :force => true do |t|
     t.integer  "field_id"
-    t.integer  "poultry_id"
+    t.integer  "animal_id"
     t.decimal  "quantity"
     t.integer  "flocks_per_year"
     t.decimal  "days_in_growing_cycle"
@@ -207,7 +212,6 @@ ActiveRecord::Schema.define(:version => 20140127031044) do
     t.string   "baseline_load"
     t.datetime "created_at",                                          :null => false
     t.datetime "updated_at",                                          :null => false
-    t.integer  "farm_id"
     t.text     "coordinates"
     t.decimal  "acres_from_user"
     t.integer  "field_type_id"
@@ -514,7 +518,7 @@ ActiveRecord::Schema.define(:version => 20140127031044) do
     t.string  "name"
     t.decimal "total_n"
     t.decimal "total_p"
-    t.integer "code",    :limit => 8
+    t.integer "code"
   end
 
   create_table "user_types", :force => true do |t|

@@ -25,8 +25,12 @@ gem 'jquery-rails'
 
 # ruby
 # platforms :ruby_19 do
-gem 'pg'
-gem 'activerecord-postgresql-adapter'
+group :production do
+  gem 'mysql2'
+  gem 'therubyracer'
+  gem 'execjs'
+end
+
 # end
 
 # for jruby
@@ -61,6 +65,7 @@ gem "rest-client", "~> 1.6.7"
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'sqlite3'
   #  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
 end
 

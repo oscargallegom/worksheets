@@ -1,0 +1,3026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/app/controllers/fields_controller.rb" line="201" mnemonic="9" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5289494a-0cf5-42c4-81b1-5e58a7695a92" name="Default" comment="" />
+    <ignored path="NutrientNet.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="public/assets/rails.png" />
+    <ignored path="public/assets/application-abf34eace21c64d8dbf795e321e616fb.js" />
+    <ignored path="public/assets/application-722a4abe1174a2b19e7b4ff8df24c791.css" />
+    <ignored path="public/assets/rails-a3386665c05a2d82f711a4aaa72d247c.png" />
+    <ignored path="public/assets/manifest.yml" />
+    <ignored path="public/assets/jquery.min-1c0cf7b6a3425fbd9a3bfccab0a99a4e.map" />
+    <ignored path="public/assets/application-722a4abe1174a2b19e7b4ff8df24c791.css.gz" />
+    <ignored path="public/assets/application-abf34eace21c64d8dbf795e321e616fb.js.gz" />
+    <file path="/Dummy.txt" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390919980680" ignored="false" />
+    <file path="/_manure_fertilizer_application_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378432859960" ignored="false" />
+    <file path="/manure_fertilizer_application.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384699258345" ignored="false" />
+    <file path="/_form.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388972692462" ignored="false" />
+    <file path="/end_of_season_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373424018353" ignored="false" />
+    <file path="/_end_of_season_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374193935028" ignored="false" />
+    <file path="/crop_rotations.js.coffee" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1382406894275" ignored="false" />
+    <file path="/20130612002312_add_fips_to_counties.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1370996619839" ignored="false" />
+    <file path="/send_to_mapping_site.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373501516474" ignored="false" />
+    <file path="/_commercial_fertilizer_application_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379295332001" ignored="false" />
+    <file path="/Gemfile" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390696082079" ignored="false" />
+    <file path="/Gemfile.lock" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371009999367" ignored="false" />
+    <file path="/fields.js.coffee" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1387700641153" ignored="false" />
+    <file path="/application.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390876226726" ignored="false" />
+    <file path="/farms_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388502982001" ignored="false" />
+    <file path="/farm.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388072603759" ignored="false" />
+    <file path="/20130613012313_add_fields_to_crop_rotations.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371086872955" ignored="false" />
+    <file path="/crop.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1376359402588" ignored="false" />
+    <file path="/crop_rotation.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384831917766" ignored="false" />
+    <file path="/.gitignore" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371089766216" ignored="false" />
+    <file path="/index.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390874175253" ignored="false" />
+    <file path="/_step_2.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388972711184" ignored="false" />
+    <file path="/20130614001825_rename_fields_in_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371169118928" ignored="false" />
+    <file path="/field.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388499732575" ignored="false" />
+    <file path="/Rails NutrientNet: development" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1385869650554" ignored="false" />
+    <file path="/fragment.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1385908231665" ignored="false" />
+    <file path="/20130614005203_add_buffer_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371171337331" ignored="false" />
+    <file path="/20130614010132_create_bmp.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371171802309" ignored="false" />
+    <file path="/seeds.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1387572287541" ignored="false" />
+    <file path="/bmp_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371690755863" ignored="false" />
+    <file path="/bmp.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384697609858" ignored="false" />
+    <file path="/_step_4.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388971607242" ignored="false" />
+    <file path="/20130619000441_add_short_name_to_bmp_types.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371600311304" ignored="false" />
+    <file path="/20130614014847_add_planned_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371600794598" ignored="false" />
+    <file path="/20130619002328_add_streambank_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371602170019" ignored="false" />
+    <file path="/crop_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371602271904" ignored="false" />
+    <file path="/20130619004750_add_new_fields_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371603114669" ignored="false" />
+    <file path="/vegetation_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371603206241" ignored="false" />
+    <file path="/20130619005316_create_vegetation_types.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371603557762" ignored="false" />
+    <file path="/20130619013452_rename_restauration_in_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371605711715" ignored="false" />
+    <file path="/_bmp_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374974215761" ignored="false" />
+    <file path="/20130620002311_create_field_type_bmp_types.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371687848333" ignored="false" />
+    <file path="/field_type_bmp_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371690793722" ignored="false" />
+    <file path="/field_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371690864766" ignored="false" />
+    <file path="/edit.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384743389212" ignored="false" />
+    <file path="/_step_10.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371691853140" ignored="false" />
+    <file path="/_strip_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388972625652" ignored="false" />
+    <file path="/_step_3.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388074195349" ignored="false" />
+    <file path="/_grazing_livestock_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378432666585" ignored="false" />
+    <file path="/_tillage_operation_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373253137345" ignored="false" />
+    <file path="/farm.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384137550066" ignored="false" />
+    <file path="/20130622003455_add_hydrologic_group_to_soils.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371861344249" ignored="false" />
+    <file path="/20130622010356_add_livestock_input_methods_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371863070193" ignored="false" />
+    <file path="/20130622010855_create_field_livestocks.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371863585991" ignored="false" />
+    <file path="/livestock_input_method.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371864722594" ignored="false" />
+    <file path="/field_livestock.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375582121494" ignored="false" />
+    <file path="/_field_livestock_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375841309564" ignored="false" />
+    <file path="/20130622023158_create_field_poultries.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371868482746" ignored="false" />
+    <file path="/inflections.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371869102449" ignored="false" />
+    <file path="/_field_poultry_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1376353688084" ignored="false" />
+    <file path="/field_poultry.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375840831240" ignored="false" />
+    <file path="/20130622190402_add_animal_bmp_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371928596993" ignored="false" />
+    <file path="/20130623130622_add_poultry_litter_treatment_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371992821748" ignored="false" />
+    <file path="/global.css" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1382405233095" ignored="false" />
+    <file path="/20130623141409_add_requirements_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371997093527" ignored="false" />
+    <file path="/test.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1371999831805" ignored="false" />
+    <file path="/fields_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1389840398889" ignored="false" />
+    <file path="/20130623154617_create_efficiency_bmps.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372376892556" ignored="false" />
+    <file path="/TestOlivier.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372038149175" ignored="false" />
+    <file path="/testolivier.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372347751657" ignored="false" />
+    <file path="/animals_farm.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372123243732" ignored="false" />
+    <file path="/farms.js.coffee" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372380344188" ignored="false" />
+    <file path="/a.dummy" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390920031450" ignored="false" />
+    <file path="/html5.js.coffee" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378946600876" ignored="false" />
+    <file path="/livestock.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374363183818" ignored="false" />
+    <file path="/schema.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378678278478" ignored="false" />
+    <file path="/global_parameters.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379882012402" ignored="false" />
+    <file path="/_step_1.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378775730750" ignored="false" />
+    <file path="/_soil_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1383705847036" ignored="false" />
+    <file path="/strip.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384698849374" ignored="false" />
+    <file path="/crop_rotations_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1385913129205" ignored="false" />
+    <file path="/20130629220619_add_default_value_to_is_cover_crop_in_crop_rotations.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372543683364" ignored="false" />
+    <file path="/commercial_fertilizer_application.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384699245598" ignored="false" />
+    <file path="/grazing_livestock.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373340480050" ignored="false" />
+    <file path="/soil.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384697323470" ignored="false" />
+    <file path="/20130630141110_add_average_weight_to_field_livestock.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372601515036" ignored="false" />
+    <file path="/20130630185223_rename_forest_in_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1372618499375" ignored="false" />
+    <file path="/mycalculations.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374625971143" ignored="false" />
+    <file path="/new.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379213705186" ignored="false" />
+    <file path="/ntt.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1387695838741" ignored="false" />
+    <file path="/counties_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373131668936" ignored="false" />
+    <file path="/errors_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375475289787" ignored="false" />
+    <file path="/states_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373132266616" ignored="false" />
+    <file path="/show.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390874375558" ignored="false" />
+    <file path="/poultry.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373235846116" ignored="false" />
+    <file path="/20130707222935_rename_animal_id_poultry_id_in_field_poultry.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374106626933" ignored="false" />
+    <file path="/20130709015005_add_map_unit_symbol_to_soil.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373336285927" ignored="false" />
+    <file path="/application.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390767587784" ignored="false" />
+    <file path="/sessions_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378522781552" ignored="false" />
+    <file path="/receive_from_mapping_site.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373501948963" ignored="false" />
+    <file path="/user.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390693755862" ignored="false" />
+    <file path="/help.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373667365627" ignored="false" />
+    <file path="/20130713012024_create_tmdls.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373678460857" ignored="false" />
+    <file path="/20130713013523_add_code_to_tmdl.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373679419399" ignored="false" />
+    <file path="/20130713022631_modify_tmdl_watershed_in_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373682515378" ignored="false" />
+    <file path="/tmdl.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373682713619" ignored="false" />
+    <file path="/20130714020354_create_soil_tets_laboratory.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373767508880" ignored="false" />
+    <file path="/soil_p_extractant.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374104317481" ignored="false" />
+    <file path="/soil_test_laboratory.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373937862749" ignored="false" />
+    <file path="/soil_test_laboratory_soil_p_extractant.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373768370939" ignored="false" />
+    <file path="/20130714020651_create_soil_test_laboratories.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373937420233" ignored="false" />
+    <file path="/20130714021356_create_soil_test_laboratory_soil_p_extractants.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373770065316" ignored="false" />
+    <file path="/20130714020831_create_soil_p_extractants.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373937528292" ignored="false" />
+    <file path="/state.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373937723440" ignored="false" />
+    <file path="/20130716021600_add_soil_p_method_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1373941054424" ignored="false" />
+    <file path="/routes.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390877381932" ignored="false" />
+    <file path="/20130718001648_rename_soil_p_extractant_in_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374106733868" ignored="false" />
+    <file path="/20130718005228_add_gh_values_to_fiels.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374108821818" ignored="false" />
+    <file path="/Ruby Console" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379026730087" ignored="false" />
+    <file path="/20130718005829_add_hg_values_to_soil_p_extractant.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374109205169" ignored="false" />
+    <file path="/crop_category.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374109607663" ignored="false" />
+    <file path="/end_of_season.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384699287527" ignored="false" />
+    <file path="/20130719003623_add_is_harvest_as_silage_to_end_of_season.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374194215038" ignored="false" />
+    <file path="/20130719005430_add_is_field_adjacent_to_water_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374195312158" ignored="false" />
+    <file path="/20130719021720_add_fertilizer_setback_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374200419133" ignored="false" />
+    <file path="/20130719022650_add_planned_management_detail_to_field.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374200830026" ignored="false" />
+    <file path="/20130721173023_add_p_fraction_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374428093111" ignored="false" />
+    <file path="/20130721173745_add_p_fraction_to_manure_type.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374428286147" ignored="false" />
+    <file path="/20130721191113_add_fieldsto_watershed.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374433967984" ignored="false" />
+    <file path="/20130721193951_rename_forrest_in_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374435774797" ignored="false" />
+    <file path="/20130722011243_create_bmp_efficiency_lookups.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374455632076" ignored="false" />
+    <file path="/20130722021830_rename_bmp_type_in_bmp_efficiency_lookup.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374459544528" ignored="false" />
+    <file path="/_step_5.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388970371768" ignored="false" />
+    <file path="/user_mailer.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379215056893" ignored="false" />
+    <file path="/project_issues_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379213818566" ignored="false" />
+    <file path="/project_issue.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374796059989" ignored="false" />
+    <file path="/project_issue_email.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379215351033" ignored="false" />
+    <file path="/project_issue_email.text.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1374797155669" ignored="false" />
+    <file path="/soil_p_extractants_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379268385068" ignored="false" />
+    <file path="/bmp_calculations.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390794098777" ignored="false" />
+    <file path="/20130730131715_add_code_to_crop.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375190339589" ignored="false" />
+    <file path="/20130801004112_create_baseline_lookuos.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375317962297" ignored="false" />
+    <file path="/baseline_lookup.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375318272621" ignored="false" />
+    <file path="/server_error.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375464618627" ignored="false" />
+    <file path="/application_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390696541216" ignored="false" />
+    <file path="/not_found.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375450220348" ignored="false" />
+    <file path="/local_request_override.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375453513070" ignored="false" />
+    <file path="/production.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375459598211" ignored="false" />
+    <file path="/not_authorized.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375475333084" ignored="false" />
+    <file path="/20130803161112_add_fields_to_watershed_segment.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375546593817" ignored="false" />
+    <file path="/20130804235545_rename_table_animal_lookup.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375660615635" ignored="false" />
+    <file path="/20130805010330_drop_baseline_lookup_table.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375664627295" ignored="false" />
+    <file path="/20130807002324_add_huc12_name_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375835051794" ignored="false" />
+    <file path="/20130807014938_drop_poultry_table.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375840663412" ignored="false" />
+    <file path="/animal.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375841032593" ignored="false" />
+    <file path="/20130807020453_rename_category_in_animals.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1375841119031" ignored="false" />
+    <file path="/20130810005805_add_fields_to_watershed_segment_table.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1376096369252" ignored="false" />
+    <file path="/20130810023002_add_debug_field_to_users.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1376101916086" ignored="false" />
+    <file path="/devise.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379037686347" ignored="false" />
+    <file path="/20130816005403_add_tmdl_va_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1376614520732" ignored="false" />
+    <file path="/20130903000157_default_value_adjacent_water.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378166651587" ignored="false" />
+    <file path="/20130905012118_add_exclusion_description_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378344119786" ignored="false" />
+    <file path="/20130906002259_remove_acres_from_bmp.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378429206244" ignored="false" />
+    <file path="/20130906005912_add_other_land_conversion_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378429325863" ignored="false" />
+    <file path="/*.regexp" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1383706369787" ignored="false" />
+    <file path="/20130908184517_delete_ptest_method.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378667073008" ignored="false" />
+    <file path="/future_strip.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378685247194" ignored="false" />
+    <file path="/future_crop_rotation.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378678064073" ignored="false" />
+    <file path="/_step_6.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1380852901867" ignored="false" />
+    <file path="/20130908222030_delete_future_crop_rotation.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378678842981" ignored="false" />
+    <file path="/20130909005729_delete_future_strips.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378688374032" ignored="false" />
+    <file path="/20130909010105_drop_future_strips_table.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378688485398" ignored="false" />
+    <file path="/20130909010429_add_is_future.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1378688725145" ignored="false" />
+    <file path="/_future_strip_fields.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379207694136" ignored="false" />
+    <file path="/20130911013132_add_is_future_to_strip.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379381561382" ignored="false" />
+    <file path="/registrations_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379027382388" ignored="false" />
+    <file path="/devise_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379024232503" ignored="false" />
+    <file path="/devise_helper.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379027917477" ignored="false" />
+    <file path="/development.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390771352769" ignored="false" />
+    <file path="/heroku_env.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1385908717887" ignored="false" />
+    <file path="/ability.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390871784649" ignored="false" />
+    <file path="/unlock_instructions.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379379315399" ignored="false" />
+    <file path="/20130917010731_add_future_bmp_fields_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379381316251" ignored="false" />
+    <file path="/_step_7.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388971613274" ignored="false" />
+    <file path="/20130917020658_change_data_type_grass_buffer_future.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379383895141" ignored="false" />
+    <file path="/20130922195740_rename_component_nameniccdcdpct.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379879932298" ignored="false" />
+    <file path="/_step_8.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388506623496" ignored="false" />
+    <file path="/20130924000137_add_component_name_to_soil.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1379980916312" ignored="false" />
+    <file path="/20131001011751_add_future_animal_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1380590841466" ignored="false" />
+    <file path="/20131008005954_create_soil_textures.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1381194205703" ignored="false" />
+    <file path="/soil_texture.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1381194303970" ignored="false" />
+    <file path="/20131013011216_add_fields_to_soil_texture.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1381626788452" ignored="false" />
+    <file path="/20131013020829_field_slope.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1381630151936" ignored="false" />
+    <file path="/20131015010828_rename_delivery_factor.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1381799348399" ignored="false" />
+    <file path="/review.pdf.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388497783017" ignored="false" />
+    <file path="/review.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1382062030386" ignored="false" />
+    <file path="/wicked_pdf.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1382140592233" ignored="false" />
+    <file path="/20131022002748_add_cover_crop_plant_date_to_cover_crop.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1382401767745" ignored="false" />
+    <file path="/20131101012745_add_p_type_id_to_commercial_fertilizer_applications.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1383269410798" ignored="false" />
+    <file path="/20131104004353_add_xml_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1383525932565" ignored="false" />
+    <file path="/20131105022222_remove_days_grazed_from_grazing_livestock.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1383618186324" ignored="false" />
+    <file path="/20131105023447_add_fence_length_future_to_fields.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1383618948718" ignored="false" />
+    <file path="/submit.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384222460399" ignored="false" />
+    <file path="/submit.pdf.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384309525848" ignored="false" />
+    <file path="/strips_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384737004123" ignored="false" />
+    <file path="/timeout.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384306906755" ignored="false" />
+    <file path="/tillage_operation.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1384699274362" ignored="false" />
+    <file path="/planting_method.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1387574803163" ignored="false" />
+    <file path="/_strip_fields_future.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1388972632344" ignored="false" />
+    <file path="/20140125225903_add_owner_id_to_properties.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390691960176" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/db/migrate/20140125225903_add_owner_id_to_properties.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390692165814" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/config/routes.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390878579366" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/db/migrate/20140125231134_create_applications.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390692193843" ignored="false" />
+    <file path="/20140125231134_create_applications.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390692193843" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/db/schema.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390870658378" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/Gemfile" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390696086375" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/config/environments/development.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390771539193" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/views/layouts/application.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390767592887" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/models/user.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390707715586" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/models/ability.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390871784317" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/controllers/application_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390706199210" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/controllers/applications_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390881158118" ignored="false" />
+    <file path="/applications_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390880888295" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/config/initializers/devise.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390706355711" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/db/migrate/20140126033146_add_fields_to_user_table.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390707308981" ignored="false" />
+    <file path="/20140126033146_add_fields_to_user_table.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390707308981" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/controllers/properties_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390708237061" ignored="false" />
+    <file path="/properties_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390708237061" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/public/index.htm.html" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390765822234" ignored="false" />
+    <file path="/index.htm.html" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390766850320" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/public/index.html" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390766860915" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/views/properties/show.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390767579570" ignored="false" />
+    <file path="/_header.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390795015803" ignored="false" />
+    <file path="/20140127031044_add_new_fields_to_watershed_segment.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390792394199" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/db/migrate/20140128005526_create_properties_applicants_join.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390870604927" ignored="false" />
+    <file path="/20140128005526_create_properties_applicants_join.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390870593157" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/controllers/applicants_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390872532859" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/models/applicant.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390875548313" ignored="false" />
+    <file path="/applicant.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390875512611" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/models/property.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390871872747" ignored="false" />
+    <file path="/property.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390871169191" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/views/applicants/index.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390874177905" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/log/development.log" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390881656064" ignored="false" />
+    <file path="/Rails RentJedi: development" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390876043274" ignored="false" />
+    <file path="db-console:/6751c4/bd1ed181-a8b7-4191-a5ab-d034991ff007/" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390876065592" ignored="false" />
+    <file path="/applicants_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390872532859" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/views/applicants/show.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390874376632" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/models/application.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390876367791" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/views/applications/index.html.erb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390876551750" ignored="false" />
+    <file path="$USER_HOME$/RubymineProjects/RentJedi/app/controllers/tenantsapplications_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390877920403" ignored="false" />
+    <file path="/tenantsapplications_controller.rb" changelist="5289494a-0cf5-42c4-81b1-5e58a7695a92" time="1390877919806" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="C:\Users\Olivier\RubymineProjects\NutrientNet" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <flatten value="false" />
+    <groupTables value="false" />
+    <sortChildren value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="NutrientNet" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="manure_type_category.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/manure_type_category.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project_issue.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/project_issue.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="108" column="21" selection-start="3089" selection-end="3089" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strip.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/strip.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strips_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/strips_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="29" selection-start="49" selection-end="76" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="development.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="36" selection-start="1859" selection-end="1870" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="heroku_env.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/heroku_env.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="5" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="devise.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/initializers/devise.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="30" selection-start="401" selection-end="401" vertical-scroll-proportion="-1.742236">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crop_category.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/crop_category.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crop_rotation.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/crop_rotation.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="GeneratorOptions">
+    <option name="VCS_SHOW_CONFIRMATION" value="true" />
+    <option name="MODEL_SKIP_TIMESTAMPS" value="true" />
+    <option name="ENVIRONMENT" value="development" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/app/views/fields/edit_steps/_step_5.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/bmp.rb" />
+        <option value="$PROJECT_DIR$/app/views/fields/edit_steps/_step_4.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/fields/edit_steps/_step_7.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/fields/_strip_fields.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/fields/_strip_fields_future.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/crop_rotations/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/fields/edit_steps_animal_confinment/_step_2.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/fields_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/ability.rb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20140127031044_add_new_fields_to_watershed_segment.rb" />
+        <option value="$PROJECT_DIR$/lib/bmp_calculations.rb" />
+        <option value="$PROJECT_DIR$/app/views/shared/_header.html.erb" />
+        <option value="$PROJECT_DIR$/db/seeds.rb" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource ProjectPane="true" />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pdfs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wsdl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="initializers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static_pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crop_rotations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mailers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutrientNet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="RailsProjectView" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyIdeSdkConfigurable" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
+    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="Database.TableEditor.Splitter" value="0.9" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="Ruby.ViewRefParam.DefaultExtension" value="html.erb" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\RubymineProjects\NutrientNet\app\views\errors" />
+      <recent name="D:\Projects\RubymineProjects\NutrientNet\app\views\farms" />
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\app\assets\images" />
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\app\views\farms" />
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\app\views\fields\edit_steps_animal_confinment" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\config\initializers" />
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\config" />
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\lib" />
+      <recent name="C:\Users\Olivier\RubymineProjects\NutrientNet\app\views\fields\edit_steps_non_managed_land" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Rake.db:seed">
+    <configuration default="false" name="routes" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="NutrientNet" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="routes" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="assets:precompile" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="NutrientNet" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="production" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="assets:precompile" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="assets:clean" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="NutrientNet" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="development" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="assets:clean" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="IRB console" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
+      <module name="NutrientNet" />
+      <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <IRB_RUN_CONFIG NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <IRB_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <IRB_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <IRB_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <IRB_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="C:/RailsInstaller/Ruby1.9.3/bin/irb" />
+      <IRB_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="--prompt simple" />
+      <IRB_RUN_CONFIG NAME="IS_RAILS_CONSOLE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="db:seed" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
+      <module name="NutrientNet" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:seed" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="RailsRunConfigurationType" factoryName="Rails">
+      <predefined_log_file id="RUBY_RAILS_SERVER" enabled="true" />
+      <module name="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="DUMMY_APP" VALUE="test/dummy" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="RSpecRunConfigurationType" factoryName="RSpec">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest">
+      <predefined_log_file id="RUBY_TESTUNIT" enabled="true" />
+      <module name="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="IrbRunConfigurationType" factoryName="IRB console">
+      <module name="" />
+      <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <IRB_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <IRB_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <IRB_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <IRB_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <IRB_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
+      <IRB_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <IRB_RUN_CONFIG NAME="IS_RAILS_CONSOLE" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote" singleton="true">
+      <JSRemoteDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSRemoteDebuggerConfigurationSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NutrientNet Dev" type="RailsRunConfigurationType" factoryName="Rails">
+      <predefined_log_file id="RUBY_RAILS_SERVER" enabled="true" />
+      <module name="NutrientNet" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="DUMMY_APP" VALUE="test/dummy" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NutrientNet Prod" type="RailsRunConfigurationType" factoryName="Rails">
+      <predefined_log_file id="RUBY_RAILS_SERVER" enabled="true" />
+      <module name="NutrientNet" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="DUMMY_APP" VALUE="test/dummy" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="production" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="db:migrate" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="NutrientNet" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="development" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="db:migrate" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <list size="8">
+      <item index="0" class="java.lang.String" itemvalue="Rake.routes" />
+      <item index="1" class="java.lang.String" itemvalue="Rake.assets:precompile" />
+      <item index="2" class="java.lang.String" itemvalue="Rake.assets:clean" />
+      <item index="3" class="java.lang.String" itemvalue="IRB console.IRB console" />
+      <item index="4" class="java.lang.String" itemvalue="Rake.db:seed" />
+      <item index="5" class="java.lang.String" itemvalue="Rails.NutrientNet Dev" />
+      <item index="6" class="java.lang.String" itemvalue="Rails.NutrientNet Prod" />
+      <item index="7" class="java.lang.String" itemvalue="Rake.db:migrate" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Rake.db:seed" />
+        <item index="1" class="java.lang.String" itemvalue="Rake.routes" />
+        <item index="2" class="java.lang.String" itemvalue="Rake.assets:precompile" />
+        <item index="3" class="java.lang.String" itemvalue="Rake.assets:clean" />
+        <item index="4" class="java.lang.String" itemvalue="IRB console.IRB console" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5289494a-0cf5-42c4-81b1-5e58a7695a92" name="Default" comment="" />
+      <created>1370833202090</created>
+      <updated>1370833202090</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Baseline Crop Management">
+      <created>1371004754896</created>
+      <updated>1371004754896</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Baseline Crop Management">
+      <created>1371005446216</created>
+      <updated>1371005446216</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Baseline Crop Management">
+      <created>1371006226599</created>
+      <updated>1371006226599</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Baseline Crop Management">
+      <created>1371006419822</created>
+      <updated>1371006419822</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Baseline Crop Management">
+      <created>1371006904856</created>
+      <updated>1371006904856</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Baseline Crop Management">
+      <created>1371007272257</created>
+      <updated>1371007272258</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Baseline Crop Management">
+      <created>1371007956350</created>
+      <updated>1371007956350</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Baseline Crop Management">
+      <created>1371008085664</created>
+      <updated>1371008085664</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Baseline Crop Management">
+      <created>1371008095586</created>
+      <updated>1371008095586</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Baseline Crop Management">
+      <created>1371008368045</created>
+      <updated>1371008368046</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Baseline Crop Management">
+      <created>1371009425467</created>
+      <updated>1371009425467</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Baseline Crop Management">
+      <created>1371009745001</created>
+      <updated>1371009745001</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Heroku issue">
+      <created>1371042069274</created>
+      <updated>1371042069274</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Heroku issue">
+      <created>1371042620904</created>
+      <updated>1371042620904</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Heroku issue">
+      <created>1371042777192</created>
+      <updated>1371042777192</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Heroku issue">
+      <created>1371042926165</created>
+      <updated>1371042926165</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Heroku issue">
+      <created>1371043038964</created>
+      <updated>1371043038964</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Heroku issue">
+      <created>1371043074814</created>
+      <updated>1371043074814</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Heroku issue">
+      <created>1371043313895</created>
+      <updated>1371043313895</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Heroku issue">
+      <created>1371043524736</created>
+      <updated>1371043524736</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Heroku issue">
+      <created>1371043751266</created>
+      <updated>1371043751266</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Heroku issue">
+      <created>1371044219688</created>
+      <updated>1371044219688</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Heroku issue">
+      <created>1371045246069</created>
+      <updated>1371045246069</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Heroku issue">
+      <created>1371045675057</created>
+      <updated>1371045675057</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Heroku issue">
+      <created>1371045954849</created>
+      <updated>1371045954849</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Heroku issue">
+      <created>1371049009454</created>
+      <updated>1371049009454</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Heroku issue">
+      <created>1371050010272</created>
+      <updated>1371050010272</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Heroku issue">
+      <created>1371050384882</created>
+      <updated>1371050384882</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Heroku issue">
+      <created>1371050511231</created>
+      <updated>1371050511231</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Heroku issue">
+      <created>1371052115051</created>
+      <updated>1371052115051</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Heroku issue">
+      <created>1371056895615</created>
+      <updated>1371056895615</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Heroku issue">
+      <created>1371057411343</created>
+      <updated>1371057411343</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Heroku issue">
+      <created>1371063447969</created>
+      <updated>1371063447969</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Baseline crop management">
+      <created>1371084004193</created>
+      <updated>1371084004193</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Baseline crop management">
+      <created>1371088738341</created>
+      <updated>1371088738341</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Baseline crop management">
+      <created>1371089814370</created>
+      <updated>1371089814370</updated>
+    </task>
+    <task id="LOCAL-00037" summary="BMP tab">
+      <created>1371175159760</created>
+      <updated>1371175159760</updated>
+    </task>
+    <task id="LOCAL-00038" summary="BMP tab">
+      <created>1371611004322</created>
+      <updated>1371611004322</updated>
+    </task>
+    <task id="LOCAL-00039" summary="BMP tab">
+      <created>1371611725465</created>
+      <updated>1371611725465</updated>
+    </task>
+    <task id="LOCAL-00040" summary="BMP tab">
+      <created>1371817080543</created>
+      <updated>1371817080543</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Animal confinment">
+      <created>1371993548311</created>
+      <updated>1371993548311</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Animal confinment">
+      <created>1371994142686</created>
+      <updated>1371994142686</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Requirements">
+      <created>1371997457432</created>
+      <updated>1371997457432</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Requirements">
+      <created>1371997477994</created>
+      <updated>1371997477994</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Requirements">
+      <created>1372344827839</created>
+      <updated>1372344827839</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Tract number issue (required)">
+      <created>1372345349461</created>
+      <updated>1372345349461</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Tract number issue (required)">
+      <created>1372346395832</created>
+      <updated>1372346395832</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Testolivier upper case issue">
+      <created>1372346782837</created>
+      <updated>1372346782837</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Renamed Testolivier Calculations">
+      <created>1372347302464</created>
+      <updated>1372347302464</updated>
+    </task>
+    <task id="LOCAL-00050" summary="calculations.rb renamed">
+      <created>1372347776999</created>
+      <updated>1372347776999</updated>
+    </task>
+    <task id="LOCAL-00051" summary="calculations.rb renamed">
+      <created>1372348365775</created>
+      <updated>1372348365775</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Bug fixes.">
+      <created>1372425582214</created>
+      <updated>1372425582214</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Bug fixes.">
+      <created>1372434981473</created>
+      <updated>1372434981473</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Validation in place.">
+      <created>1372644278538</created>
+      <updated>1372644278538</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Bug with animal  units (missing :)">
+      <created>1372646055721</created>
+      <updated>1372646055721</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Bug fixes.">
+      <created>1373253522393</created>
+      <updated>1373253522393</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Bug is_acres_from_map">
+      <created>1373254588375</created>
+      <updated>1373254588375</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Bug is_acres_from_map">
+      <created>1373255029274</created>
+      <updated>1373255029274</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Bug is_acres_from_map">
+      <created>1373255692998</created>
+      <updated>1373255692998</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Removed vendor folder.">
+      <created>1373328598821</created>
+      <updated>1373328598821</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Bug fixes.">
+      <created>1373371356385</created>
+      <updated>1373371356386</updated>
+    </task>
+    <task id="LOCAL-00062" summary="NTT XML">
+      <created>1373426207901</created>
+      <updated>1373426207901</updated>
+    </task>
+    <task id="LOCAL-00063" summary="NTT XML">
+      <created>1373464324569</created>
+      <updated>1373464324569</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Pretty XML display to debug">
+      <created>1373467611964</created>
+      <updated>1373467611964</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Pretty XML display to debug">
+      <created>1373468808471</created>
+      <updated>1373468808471</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Pretty XML display to debug">
+      <created>1373470214067</created>
+      <updated>1373470214067</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Pretty XML display to debug: with google-code-prettify">
+      <created>1373477285687</created>
+      <updated>1373477285687</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Construction of the XML string.">
+      <created>1373513965007</created>
+      <updated>1373513965007</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Debug info.">
+      <created>1373552283631</created>
+      <updated>1373552283631</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Added XML response from NTT">
+      <created>1373585979934</created>
+      <updated>1373585979934</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Added XML response from NTT">
+      <created>1373588470458</created>
+      <updated>1373588470458</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Added XML response from NTT">
+      <created>1373590200967</created>
+      <updated>1373590200967</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Removed XML for field.">
+      <created>1373593604838</created>
+      <updated>1373593604838</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Removed XML for field.">
+      <created>1373594256252</created>
+      <updated>1373594256252</updated>
+    </task>
+    <task id="LOCAL-00075" summary="NTT XML issues">
+      <created>1373594992307</created>
+      <updated>1373594992307</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Trying to catch error with XML.">
+      <created>1373596076786</created>
+      <updated>1373596076787</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Trying to catch error with XML.">
+      <created>1373596245363</created>
+      <updated>1373596245363</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Trying to catch error with XML.">
+      <created>1373597122568</created>
+      <updated>1373597122568</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Trying to catch error with XML.">
+      <created>1373600131234</created>
+      <updated>1373600131234</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Fixed NTT xml issue.">
+      <created>1373669206263</created>
+      <updated>1373669206263</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Fixed issue with crop type for permanent pasture.">
+      <created>1373673034863</created>
+      <updated>1373673034863</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Change to TMLD.">
+      <created>1373766007607</created>
+      <updated>1373766007607</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Soil P test.">
+      <created>1374154318334</created>
+      <updated>1374154318334</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Calculations">
+      <created>1374458564322</created>
+      <updated>1374458564322</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Calculations">
+      <created>1374460045409</created>
+      <updated>1374460045409</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Calculations">
+      <created>1374636026076</created>
+      <updated>1374636026076</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Calculations">
+      <created>1374970144303</created>
+      <updated>1374970144303</updated>
+    </task>
+    <task id="LOCAL-00088" summary="BMP: limit next options">
+      <created>1374983548056</created>
+      <updated>1374983548056</updated>
+    </task>
+    <task id="LOCAL-00089" summary="Forest mispelled.">
+      <created>1374983946229</created>
+      <updated>1374983946229</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Bug fix.">
+      <created>1375049675583</created>
+      <updated>1375049675583</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Calculations bug fixes.">
+      <created>1375055317048</created>
+      <updated>1375055317048</updated>
+    </task>
+    <task id="LOCAL-00092" summary="BMP disable options.">
+      <created>1375057633511</created>
+      <updated>1375057633511</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Disabled NTT default value.">
+      <created>1375059452866</created>
+      <updated>1375059452866</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Fixed BMP (disabled options).">
+      <created>1375059695427</created>
+      <updated>1375059695427</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Fixed calculations.">
+      <created>1375063281818</created>
+      <updated>1375063281818</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Bug fix calculations.">
+      <created>1375231705478</created>
+      <updated>1375231705478</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Baseline  nutrient load.">
+      <created>1375238565509</created>
+      <updated>1375238565509</updated>
+    </task>
+    <task id="LOCAL-00098" summary="NTT call with real XML.">
+      <created>1375316846125</created>
+      <updated>1375316846125</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Added baseline lookup.">
+      <created>1375319638299</created>
+      <updated>1375319638300</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Calculations bug fix.">
+      <created>1375321474737</created>
+      <updated>1375321474737</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Show errrors in Heroku">
+      <created>1375362127401</created>
+      <updated>1375362127401</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Nil values for baseline lookup.">
+      <created>1375363388545</created>
+      <updated>1375363388545</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Error message handling">
+      <created>1375363957517</created>
+      <updated>1375363957517</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Error message handling">
+      <created>1375364156300</created>
+      <updated>1375364156300</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Error message handling">
+      <created>1375401038318</created>
+      <updated>1375401038318</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Error message handling">
+      <created>1375401423299</created>
+      <updated>1375401423299</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Updated percentage completion  logic.">
+      <created>1375405819394</created>
+      <updated>1375405819394</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Error handling.">
+      <created>1375479631070</created>
+      <updated>1375479631070</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Updated  Watershed table.">
+      <created>1375573821795</created>
+      <updated>1375573821795</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Field livestock logic.">
+      <created>1375583021372</created>
+      <updated>1375583021372</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Poultry calculations.">
+      <created>1375667377638</created>
+      <updated>1375667377638</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Refactored Animals table.">
+      <created>1375841751733</created>
+      <updated>1375841751733</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Calculations and URL map.">
+      <created>1376074302219</created>
+      <updated>1376074302219</updated>
+    </task>
+    <task id="LOCAL-00114" summary="Animal calculations.">
+      <created>1376099067157</created>
+      <updated>1376099067158</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Animal calculations.">
+      <created>1376099178467</created>
+      <updated>1376099178467</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Added Oscar.">
+      <created>1376099482968</created>
+      <updated>1376099482968</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Added Oscar.">
+      <created>1376099671311</created>
+      <updated>1376099671311</updated>
+    </task>
+    <task id="LOCAL-00118" summary="Animal calculations.">
+      <created>1376184075494</created>
+      <updated>1376184075495</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Animal calculations.">
+      <created>1376185190039</created>
+      <updated>1376185190039</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Animal calculations.">
+      <created>1376185293918</created>
+      <updated>1376185293918</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Animal calculations.">
+      <created>1376186323123</created>
+      <updated>1376186323123</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Animal calculations.">
+      <created>1376186496781</created>
+      <updated>1376186496781</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Animal calculations.">
+      <created>1376187696593</created>
+      <updated>1376187696593</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Animal calculations.">
+      <created>1376188808891</created>
+      <updated>1376188808891</updated>
+    </task>
+    <task id="LOCAL-00125" summary="Bug fixes.">
+      <created>1376355551918</created>
+      <updated>1376355551918</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Bug fixes.">
+      <created>1376356694920</created>
+      <updated>1376356694920</updated>
+    </task>
+    <task id="LOCAL-00127" summary="Bug fixes.">
+      <created>1376357838150</created>
+      <updated>1376357838151</updated>
+    </task>
+    <task id="LOCAL-00128" summary="Bug fixes.">
+      <created>1376358068046</created>
+      <updated>1376358068046</updated>
+    </task>
+    <task id="LOCAL-00129" summary="Bug fixes.">
+      <created>1376359556882</created>
+      <updated>1376359556882</updated>
+    </task>
+    <task id="LOCAL-00130" summary="Bug fixes.">
+      <created>1376359716732</created>
+      <updated>1376359716732</updated>
+    </task>
+    <task id="LOCAL-00131" summary="Bug fixes.">
+      <created>1376360285938</created>
+      <updated>1376360285938</updated>
+    </task>
+    <task id="LOCAL-00132" summary="Bug fixes.">
+      <created>1376360590933</created>
+      <updated>1376360590933</updated>
+    </task>
+    <task id="LOCAL-00133" summary="Bug fixes.">
+      <created>1376362783216</created>
+      <updated>1376362783216</updated>
+    </task>
+    <task id="LOCAL-00134" summary="Bug fixes.">
+      <created>1376449122923</created>
+      <updated>1376449122923</updated>
+    </task>
+    <task id="LOCAL-00135" summary="NTT calculations bug fixes.">
+      <created>1376529129807</created>
+      <updated>1376529129807</updated>
+    </task>
+    <task id="LOCAL-00136" summary="NTT calculations bug fixes.">
+      <created>1376533088421</created>
+      <updated>1376533088421</updated>
+    </task>
+    <task id="LOCAL-00137" summary="NTT calculations bug fixes.">
+      <created>1376534265686</created>
+      <updated>1376534265686</updated>
+    </task>
+    <task id="LOCAL-00138" summary="Poultry calculations.">
+      <created>1377545291849</created>
+      <updated>1377545291849</updated>
+    </task>
+    <task id="LOCAL-00139" summary="Meet baseline logic.">
+      <created>1377551210915</created>
+      <updated>1377551210915</updated>
+    </task>
+    <task id="LOCAL-00140" summary="Bug fix for new field.">
+      <created>1377761025542</created>
+      <updated>1377761025542</updated>
+    </task>
+    <task id="LOCAL-00141" summary="Updated flash text.">
+      <created>1377761661319</created>
+      <updated>1377761661319</updated>
+    </task>
+    <task id="LOCAL-00142" summary="Updated text.">
+      <created>1377761784396</created>
+      <updated>1377761784396</updated>
+    </task>
+    <task id="LOCAL-00143" summary="Bug fixes.">
+      <created>1378170763708</created>
+      <updated>1378170763708</updated>
+    </task>
+    <task id="LOCAL-00144" summary="Bug fixes.">
+      <created>1378254223178</created>
+      <updated>1378254223179</updated>
+    </task>
+    <task id="LOCAL-00145" summary="Bug fixes.">
+      <created>1378259946742</created>
+      <updated>1378259946742</updated>
+    </task>
+    <task id="LOCAL-00146" summary="Bug fixes.">
+      <created>1378346151279</created>
+      <updated>1378346151279</updated>
+    </task>
+    <task id="LOCAL-00147" summary="Bug fixes.">
+      <created>1378346260537</created>
+      <updated>1378346260537</updated>
+    </task>
+    <task id="LOCAL-00148" summary="Bug fixes.">
+      <created>1378432923363</created>
+      <updated>1378432923363</updated>
+    </task>
+    <task id="LOCAL-00149" summary="Added devise secret key.">
+      <created>1378473596118</created>
+      <updated>1378473596118</updated>
+    </task>
+    <task id="LOCAL-00150" summary="Added devise secret key.">
+      <created>1378517738814</created>
+      <updated>1378517738814</updated>
+    </task>
+    <task id="LOCAL-00151" summary="Bug fix.">
+      <created>1378520074073</created>
+      <updated>1378520074073</updated>
+    </task>
+    <task id="LOCAL-00152" summary="Bug fix.">
+      <created>1378523837348</created>
+      <updated>1378523837348</updated>
+    </task>
+    <task id="LOCAL-00153" summary="Fixed login issue.">
+      <created>1378572584937</created>
+      <updated>1378572584937</updated>
+    </task>
+    <task id="LOCAL-00154" summary="Fixed login issue.">
+      <created>1378572872161</created>
+      <updated>1378572872161</updated>
+    </task>
+    <task id="LOCAL-00155" summary="Updated p test value">
+      <created>1378668825887</created>
+      <updated>1378668825888</updated>
+    </task>
+    <task id="LOCAL-00156" summary="Updated p test value">
+      <created>1378669071321</created>
+      <updated>1378669071321</updated>
+    </task>
+    <task id="LOCAL-00157" summary="Updated p test value">
+      <created>1378672670802</created>
+      <updated>1378672670802</updated>
+    </task>
+    <task id="LOCAL-00158" summary="Bug with null p test value">
+      <created>1378772320562</created>
+      <updated>1378772320562</updated>
+    </task>
+    <task id="LOCAL-00159" summary="Field not in watershed.">
+      <created>1378774035582</created>
+      <updated>1378774035583</updated>
+    </task>
+    <task id="LOCAL-00160" summary="Bug poultry manure">
+      <created>1378774598540</created>
+      <updated>1378774598540</updated>
+    </task>
+    <task id="LOCAL-00161" summary="Bug poultry manure">
+      <created>1378774763050</created>
+      <updated>1378774763050</updated>
+    </task>
+    <task id="LOCAL-00162" summary="Streambank fencing change.">
+      <created>1378777157890</created>
+      <updated>1378777157890</updated>
+    </task>
+    <task id="LOCAL-00163" summary="P test">
+      <created>1378861824403</created>
+      <updated>1378861824403</updated>
+    </task>
+    <task id="LOCAL-00164" summary="Better errors">
+      <created>1378862729572</created>
+      <updated>1378862729573</updated>
+    </task>
+    <task id="LOCAL-00165" summary="Add is_furure field">
+      <created>1378863200155</created>
+      <updated>1378863200155</updated>
+    </task>
+    <task id="LOCAL-00166" summary="Bug fixes.">
+      <created>1378865265610</created>
+      <updated>1378865265610</updated>
+    </task>
+    <task id="LOCAL-00167" summary="Streambank fencing change.">
+      <created>1378865408255</created>
+      <updated>1378865408255</updated>
+    </task>
+    <task id="LOCAL-00168" summary="Poultry bug fix.">
+      <created>1378865465925</created>
+      <updated>1378865465925</updated>
+    </task>
+    <task id="LOCAL-00169" summary="Streambank fencing change.">
+      <created>1378865478700</created>
+      <updated>1378865478700</updated>
+    </task>
+    <task id="LOCAL-00170" summary="FIIP for soil XML.">
+      <created>1378865593622</created>
+      <updated>1378865593622</updated>
+    </task>
+    <task id="LOCAL-00171" summary="Secret key">
+      <created>1378865829292</created>
+      <updated>1378865829292</updated>
+    </task>
+    <task id="LOCAL-00172" summary="Removed future strip">
+      <created>1378866176436</created>
+      <updated>1378866176436</updated>
+    </task>
+    <task id="LOCAL-00173" summary="Removed header.">
+      <created>1378866339108</created>
+      <updated>1378866339108</updated>
+    </task>
+    <task id="LOCAL-00174" summary="HTML 5">
+      <created>1378949701568</created>
+      <updated>1378949701568</updated>
+    </task>
+    <task id="LOCAL-00175" summary="User registration issue.">
+      <created>1378952612772</created>
+      <updated>1378952612772</updated>
+    </task>
+    <task id="LOCAL-00176" summary="User registration issue.">
+      <created>1378953068195</created>
+      <updated>1378953068195</updated>
+    </task>
+    <task id="LOCAL-00177" summary="User registration issue.">
+      <created>1379022532514</created>
+      <updated>1379022532514</updated>
+    </task>
+    <task id="LOCAL-00178" summary="User registration issue.">
+      <created>1379022719289</created>
+      <updated>1379022719289</updated>
+    </task>
+    <task id="LOCAL-00179" summary="User registration issue.">
+      <created>1379022937973</created>
+      <updated>1379022937973</updated>
+    </task>
+    <task id="LOCAL-00180" summary="User registration issue.">
+      <created>1379023234615</created>
+      <updated>1379023234615</updated>
+    </task>
+    <task id="LOCAL-00181" summary="User registration issue.">
+      <created>1379023493451</created>
+      <updated>1379023493451</updated>
+    </task>
+    <task id="LOCAL-00182" summary="User registration issue.">
+      <created>1379024690602</created>
+      <updated>1379024690602</updated>
+    </task>
+    <task id="LOCAL-00183" summary="User registration issue.">
+      <created>1379024992838</created>
+      <updated>1379024992838</updated>
+    </task>
+    <task id="LOCAL-00184" summary="User registration issue.">
+      <created>1379025193136</created>
+      <updated>1379025193136</updated>
+    </task>
+    <task id="LOCAL-00185" summary="User registration issue.">
+      <created>1379025457074</created>
+      <updated>1379025457074</updated>
+    </task>
+    <task id="LOCAL-00186" summary="User registration issue.">
+      <created>1379025600861</created>
+      <updated>1379025600861</updated>
+    </task>
+    <task id="LOCAL-00187" summary="User registration issue.">
+      <created>1379025787670</created>
+      <updated>1379025787670</updated>
+    </task>
+    <task id="LOCAL-00188" summary="User registration issue.">
+      <created>1379025977201</created>
+      <updated>1379025977201</updated>
+    </task>
+    <task id="LOCAL-00189" summary="User registration issue.">
+      <created>1379026506565</created>
+      <updated>1379026506565</updated>
+    </task>
+    <task id="LOCAL-00190" summary="User registration issue.">
+      <created>1379028054937</created>
+      <updated>1379028054938</updated>
+    </task>
+    <task id="LOCAL-00191" summary="Future crop management.">
+      <created>1379029691292</created>
+      <updated>1379029691292</updated>
+    </task>
+    <task id="LOCAL-00192" summary="User creation">
+      <created>1379031568097</created>
+      <updated>1379031568097</updated>
+    </task>
+    <task id="LOCAL-00193" summary="User creation">
+      <created>1379033685717</created>
+      <updated>1379033685717</updated>
+    </task>
+    <task id="LOCAL-00194" summary="Updated parameters">
+      <created>1379037833755</created>
+      <updated>1379037833755</updated>
+    </task>
+    <task id="LOCAL-00195" summary="Future crop management">
+      <created>1379264621362</created>
+      <updated>1379264621362</updated>
+    </task>
+    <task id="LOCAL-00196" summary="Bug fixes">
+      <created>1379265855107</created>
+      <updated>1379265855107</updated>
+    </task>
+    <task id="LOCAL-00197" summary="Bug fixes">
+      <created>1379266638034</created>
+      <updated>1379266638034</updated>
+    </task>
+    <task id="LOCAL-00198" summary="Bug fixes">
+      <created>1379269116770</created>
+      <updated>1379269116770</updated>
+    </task>
+    <task id="LOCAL-00199" summary="Bug fixes">
+      <created>1379273498844</created>
+      <updated>1379273498844</updated>
+    </task>
+    <task id="LOCAL-00200" summary="Bug fixes">
+      <created>1379274714489</created>
+      <updated>1379274714489</updated>
+    </task>
+    <task id="LOCAL-00201" summary="Bug fixes">
+      <created>1379275273018</created>
+      <updated>1379275273018</updated>
+    </task>
+    <task id="LOCAL-00202" summary="Bug fixes">
+      <created>1379282839090</created>
+      <updated>1379282839090</updated>
+    </task>
+    <task id="LOCAL-00203" summary="Bug fixes">
+      <created>1379298180952</created>
+      <updated>1379298180952</updated>
+    </task>
+    <task id="LOCAL-00204" summary="Future BMP">
+      <created>1379384337703</created>
+      <updated>1379384337704</updated>
+    </task>
+    <task id="LOCAL-00205" summary="Future BMP">
+      <created>1379462115840</created>
+      <updated>1379462115840</updated>
+    </task>
+    <task id="LOCAL-00206" summary="Bug with manure.">
+      <created>1379639802108</created>
+      <updated>1379639802108</updated>
+    </task>
+    <task id="LOCAL-00207" summary="Bug with future BMP.">
+      <created>1379641832234</created>
+      <updated>1379641832234</updated>
+    </task>
+    <task id="LOCAL-00208" summary="Bug fix and reformat.">
+      <created>1379642561926</created>
+      <updated>1379642561926</updated>
+    </task>
+    <task id="LOCAL-00209" summary="New soil data.">
+      <created>1379883211943</created>
+      <updated>1379883211943</updated>
+    </task>
+    <task id="LOCAL-00210" summary="Handes no crop returned by NTT.">
+      <created>1379883600923</created>
+      <updated>1379883600923</updated>
+    </task>
+    <task id="LOCAL-00211" summary="Added save and continue">
+      <created>1379884933991</created>
+      <updated>1379884933991</updated>
+    </task>
+    <task id="LOCAL-00212" summary="Catch execption in getSoil">
+      <created>1379888072361</created>
+      <updated>1379888072361</updated>
+    </task>
+    <task id="LOCAL-00213" summary="Updated calculation checks.">
+      <created>1379896985325</created>
+      <updated>1379896985325</updated>
+    </task>
+    <task id="LOCAL-00214" summary="New data check">
+      <created>1379897353274</created>
+      <updated>1379897353274</updated>
+    </task>
+    <task id="LOCAL-00215" summary="Label update.">
+      <created>1379897533117</created>
+      <updated>1379897533117</updated>
+    </task>
+    <task id="LOCAL-00216" summary="Bug fix.">
+      <created>1379897903060</created>
+      <updated>1379897903061</updated>
+    </task>
+    <task id="LOCAL-00217" summary="Future calculations.">
+      <created>1379934113901</created>
+      <updated>1379934113901</updated>
+    </task>
+    <task id="LOCAL-00218" summary="Rescue NTT call to display error message.">
+      <created>1379938774110</created>
+      <updated>1379938774110</updated>
+    </task>
+    <task id="LOCAL-00219" summary="Modified getSoilData.">
+      <created>1379981690190</created>
+      <updated>1379981690190</updated>
+    </task>
+    <task id="LOCAL-00220" summary="Update callNtt()">
+      <created>1379984771294</created>
+      <updated>1379984771294</updated>
+    </task>
+    <task id="LOCAL-00221" summary="Future BMPs.">
+      <created>1379989467881</created>
+      <updated>1379989467881</updated>
+    </task>
+    <task id="LOCAL-00222" summary="Updated getSoilData() SQL">
+      <created>1380052166059</created>
+      <updated>1380052166059</updated>
+    </task>
+    <task id="LOCAL-00223" summary="Bug fix with strips.">
+      <created>1380068536080</created>
+      <updated>1380068536081</updated>
+    </task>
+    <task id="LOCAL-00224" summary="Fixed import.">
+      <created>1380069324554</created>
+      <updated>1380069324554</updated>
+    </task>
+    <task id="LOCAL-00225" summary="Debug mode information.">
+      <created>1380069847028</created>
+      <updated>1380069847028</updated>
+    </task>
+    <task id="LOCAL-00226" summary="Reduction information.">
+      <created>1380071403558</created>
+      <updated>1380071403559</updated>
+    </task>
+    <task id="LOCAL-00227" summary="Only call NTT when at least one rotation is present.">
+      <created>1380158040236</created>
+      <updated>1380158040236</updated>
+    </task>
+    <task id="LOCAL-00228" summary="Updated farm page.">
+      <created>1380159340055</created>
+      <updated>1380159340055</updated>
+    </task>
+    <task id="LOCAL-00229" summary="Updated farm page.">
+      <created>1380162058295</created>
+      <updated>1380162058295</updated>
+    </task>
+    <task id="LOCAL-00230" summary="Bug fixes.">
+      <created>1380244424516</created>
+      <updated>1380244424517</updated>
+    </task>
+    <task id="LOCAL-00231" summary="Virginia regulations.">
+      <created>1380245534349</created>
+      <updated>1380245534349</updated>
+    </task>
+    <task id="LOCAL-00232" summary="Bug fix.">
+      <created>1380247781448</created>
+      <updated>1380247781448</updated>
+    </task>
+    <task id="LOCAL-00233" summary="Check bug...">
+      <created>1380248700954</created>
+      <updated>1380248700954</updated>
+    </task>
+    <task id="LOCAL-00234" summary="Check bug...">
+      <created>1380249120599</created>
+      <updated>1380249120599</updated>
+    </task>
+    <task id="LOCAL-00235" summary="Check bug...">
+      <created>1380249254787</created>
+      <updated>1380249254787</updated>
+    </task>
+    <task id="LOCAL-00236" summary="Check bug...">
+      <created>1380249377338</created>
+      <updated>1380249377338</updated>
+    </task>
+    <task id="LOCAL-00237" summary="Check bug...">
+      <created>1380249551340</created>
+      <updated>1380249551341</updated>
+    </task>
+    <task id="LOCAL-00238" summary="Check bug...">
+      <created>1380249788042</created>
+      <updated>1380249788042</updated>
+    </task>
+    <task id="LOCAL-00239" summary="Fixed bug.">
+      <created>1380250436140</created>
+      <updated>1380250436140</updated>
+    </task>
+    <task id="LOCAL-00240" summary="Fixed bug.">
+      <created>1380250777098</created>
+      <updated>1380250777098</updated>
+    </task>
+    <task id="LOCAL-00241" summary="Fixed bug.">
+      <created>1380250997220</created>
+      <updated>1380250997220</updated>
+    </task>
+    <task id="LOCAL-00242" summary="Fixed bug.">
+      <created>1380251228486</created>
+      <updated>1380251228486</updated>
+    </task>
+    <task id="LOCAL-00243" summary="Fixed bug.">
+      <created>1380251482606</created>
+      <updated>1380251482606</updated>
+    </task>
+    <task id="LOCAL-00244" summary="Fixed bug.">
+      <created>1380289873078</created>
+      <updated>1380289873078</updated>
+    </task>
+    <task id="LOCAL-00245" summary="Bug import future BMPs.">
+      <created>1380417148582</created>
+      <updated>1380417148582</updated>
+    </task>
+    <task id="LOCAL-00246" summary="Bug BMP for animal confinement.">
+      <created>1380417418247</created>
+      <updated>1380417418247</updated>
+    </task>
+    <task id="LOCAL-00247" summary="Text change.">
+      <created>1380418017161</created>
+      <updated>1380418017161</updated>
+    </task>
+    <task id="LOCAL-00248" summary="Streambank restoration only shown if appropriate.">
+      <created>1380418199619</created>
+      <updated>1380418199619</updated>
+    </task>
+    <task id="LOCAL-00249" summary="Future animals.">
+      <created>1380676301351</created>
+      <updated>1380676301351</updated>
+    </task>
+    <task id="LOCAL-00250" summary="Future animals.">
+      <created>1380676422211</created>
+      <updated>1380676422211</updated>
+    </task>
+    <task id="LOCAL-00251" summary="Bug fix pasture.">
+      <created>1380676769416</created>
+      <updated>1380676769416</updated>
+    </task>
+    <task id="LOCAL-00252" summary="Removed PTest.">
+      <created>1380678516327</created>
+      <updated>1380678516327</updated>
+    </task>
+    <task id="LOCAL-00253" summary="Bug fix.">
+      <created>1380679087467</created>
+      <updated>1380679087467</updated>
+    </task>
+    <task id="LOCAL-00254" summary="Bug fix import BMP">
+      <created>1380760402439</created>
+      <updated>1380760402439</updated>
+    </task>
+    <task id="LOCAL-00255" summary="Bug fix import BMP">
+      <created>1380760449379</created>
+      <updated>1380760449379</updated>
+    </task>
+    <task id="LOCAL-00256" summary="Future BMPs animals.">
+      <created>1380763568255</created>
+      <updated>1380763568255</updated>
+    </task>
+    <task id="LOCAL-00257" summary="Bug fixes and changes.">
+      <created>1380765771418</created>
+      <updated>1380765771419</updated>
+    </task>
+    <task id="LOCAL-00258" summary="Bug fixes and improvements.">
+      <created>1380853003786</created>
+      <updated>1380853003786</updated>
+    </task>
+    <task id="LOCAL-00259" summary="Added soil texture">
+      <created>1381197591805</created>
+      <updated>1381197591806</updated>
+    </task>
+    <task id="LOCAL-00260" summary="Added soil texture">
+      <created>1381627345314</created>
+      <updated>1381627345314</updated>
+    </task>
+    <task id="LOCAL-00261" summary="Added slope">
+      <created>1381630444431</created>
+      <updated>1381630444431</updated>
+    </task>
+    <task id="LOCAL-00262" summary="Bug future validation.">
+      <created>1381630620339</created>
+      <updated>1381630620339</updated>
+    </task>
+    <task id="LOCAL-00263" summary="Typo.">
+      <created>1381630923390</created>
+      <updated>1381630923390</updated>
+    </task>
+    <task id="LOCAL-00264" summary="Typo.">
+      <created>1381631035622</created>
+      <updated>1381631035622</updated>
+    </task>
+    <task id="LOCAL-00265" summary="Added reduction to farm.">
+      <created>1381798904984</created>
+      <updated>1381798904984</updated>
+    </task>
+    <task id="LOCAL-00266" summary="Reduction to the Chesapeake bay.">
+      <created>1381799868785</created>
+      <updated>1381799868785</updated>
+    </task>
+    <task id="LOCAL-00267" summary="Reduction to the Chesapeake bay.">
+      <created>1381801015324</created>
+      <updated>1381801015324</updated>
+    </task>
+    <task id="LOCAL-00268" summary="PDF option">
+      <created>1382063508774</created>
+      <updated>1382063508775</updated>
+    </task>
+    <task id="LOCAL-00269" summary="PDF option">
+      <created>1382064156305</created>
+      <updated>1382064156305</updated>
+    </task>
+    <task id="LOCAL-00270" summary="PDF option">
+      <created>1382064401777</created>
+      <updated>1382064401777</updated>
+    </task>
+    <task id="LOCAL-00271" summary="PDF option">
+      <created>1382064783115</created>
+      <updated>1382064783116</updated>
+    </task>
+    <task id="LOCAL-00272" summary="Wicked-PDF">
+      <created>1382140028794</created>
+      <updated>1382140028794</updated>
+    </task>
+    <task id="LOCAL-00273" summary="Wicked-PDF">
+      <created>1382147172347</created>
+      <updated>1382147172347</updated>
+    </task>
+    <task id="LOCAL-00274" summary="Current - future">
+      <created>1382753370115</created>
+      <updated>1382753370115</updated>
+    </task>
+    <task id="LOCAL-00275" summary="Current - future">
+      <created>1382753473823</created>
+      <updated>1382753473823</updated>
+    </task>
+    <task id="LOCAL-00276" summary="Bug">
+      <created>1382924225918</created>
+      <updated>1382924225918</updated>
+    </task>
+    <task id="LOCAL-00277" summary="Bug and cleanup.">
+      <created>1383095048525</created>
+      <updated>1383095048526</updated>
+    </task>
+    <task id="LOCAL-00278" summary="Bug with NTT XML.">
+      <created>1383180919187</created>
+      <updated>1383180919187</updated>
+    </task>
+    <task id="LOCAL-00279" summary="Updated format">
+      <created>1383182909693</created>
+      <updated>1383182909693</updated>
+    </task>
+    <task id="LOCAL-00280" summary="Added P2O5 for commercial fertilizer">
+      <created>1383270197061</created>
+      <updated>1383270197061</updated>
+    </task>
+    <task id="LOCAL-00281" summary="Added P2O5 for commercial fertilizer">
+      <created>1383270388373</created>
+      <updated>1383270388373</updated>
+    </task>
+    <task id="LOCAL-00282" summary="Enhancements.">
+      <created>1383619329822</created>
+      <updated>1383619329822</updated>
+    </task>
+    <task id="LOCAL-00283" summary="Percent complete.">
+      <created>1383621140755</created>
+      <updated>1383621140755</updated>
+    </task>
+    <task id="LOCAL-00284" summary="Bug soil texture nil.">
+      <created>1383704314811</created>
+      <updated>1383704314812</updated>
+    </task>
+    <task id="LOCAL-00285" summary="Soil remove options.">
+      <created>1383760748808</created>
+      <updated>1383760748808</updated>
+    </task>
+    <task id="LOCAL-00286" summary="Round numbers for XML.">
+      <created>1383793901432</created>
+      <updated>1383793901432</updated>
+    </task>
+    <task id="LOCAL-00287" summary="Round numbers for XML.">
+      <created>1383794118141</created>
+      <updated>1383794118141</updated>
+    </task>
+    <task id="LOCAL-00288" summary="Bug typo.">
+      <created>1384134353566</created>
+      <updated>1384134353566</updated>
+    </task>
+    <task id="LOCAL-00289" summary="Bugs.">
+      <created>1384134757288</created>
+      <updated>1384134757288</updated>
+    </task>
+    <task id="LOCAL-00290" summary="Added peanuts.">
+      <created>1384135835704</created>
+      <updated>1384135835704</updated>
+    </task>
+    <task id="LOCAL-00291" summary="New PDF form.">
+      <created>1384138117552</created>
+      <updated>1384138117552</updated>
+    </task>
+    <task id="LOCAL-00292" summary="New PDF form.">
+      <created>1384138142173</created>
+      <updated>1384138142173</updated>
+    </task>
+    <task id="LOCAL-00293" summary="New PDF forms.">
+      <created>1384139957994</created>
+      <updated>1384139957994</updated>
+    </task>
+    <task id="LOCAL-00294" summary="Width cannot be ''.">
+      <created>1384141112497</created>
+      <updated>1384141112497</updated>
+    </task>
+    <task id="LOCAL-00295" summary="Ignore Water soils.">
+      <created>1384141733784</created>
+      <updated>1384141733784</updated>
+    </task>
+    <task id="LOCAL-00296" summary="Bug fixes and dynamic PDF.">
+      <created>1384227617107</created>
+      <updated>1384227617107</updated>
+    </task>
+    <task id="LOCAL-00297" summary="Timeout error.">
+      <created>1384307061297</created>
+      <updated>1384307061297</updated>
+    </task>
+    <task id="LOCAL-00298" summary="Disabled future calculations (performance issue).">
+      <created>1384307667086</created>
+      <updated>1384307667086</updated>
+    </task>
+    <task id="LOCAL-00299" summary="Submit PDF form.">
+      <created>1384309635257</created>
+      <updated>1384309635257</updated>
+    </task>
+    <task id="LOCAL-00300" summary="Log NTT calls for performance.">
+      <created>1384396680748</created>
+      <updated>1384396680748</updated>
+    </task>
+    <task id="LOCAL-00301" summary="Fixed typo in step 8.">
+      <created>1384397561123</created>
+      <updated>1384397561124</updated>
+    </task>
+    <task id="LOCAL-00302" summary="Performance improvements and new crops.">
+      <created>1385865232623</created>
+      <updated>1385865232623</updated>
+    </task>
+    <task id="LOCAL-00303" summary="Debug information.">
+      <created>1385866245403</created>
+      <updated>1385866245404</updated>
+    </task>
+    <task id="LOCAL-00304" summary="Removed BMP from the list of changes impacting NTT calls.">
+      <created>1385866719016</created>
+      <updated>1385866719016</updated>
+    </task>
+    <task id="LOCAL-00305" summary="Replaced empty? with blank?">
+      <created>1385867115659</created>
+      <updated>1385867115659</updated>
+    </task>
+    <task id="LOCAL-00306" summary="Test to show future XML">
+      <created>1385868787462</created>
+      <updated>1385868787462</updated>
+    </task>
+    <task id="LOCAL-00307" summary="Bug fix if new value is 0.0">
+      <created>1385908748162</created>
+      <updated>1385908748162</updated>
+    </task>
+    <task id="LOCAL-00308" summary="Test to get more information about error.">
+      <created>1385909427913</created>
+      <updated>1385909427913</updated>
+    </task>
+    <task id="LOCAL-00309" summary="Test to get more information about error.">
+      <created>1385909870016</created>
+      <updated>1385909870016</updated>
+    </task>
+    <task id="LOCAL-00310" summary="Test to get more information about error.">
+      <created>1385910509052</created>
+      <updated>1385910509052</updated>
+    </task>
+    <task id="LOCAL-00311" summary="Test to get more information about error.">
+      <created>1385910628178</created>
+      <updated>1385910628178</updated>
+    </task>
+    <task id="LOCAL-00312" summary="Test to get more information about error.">
+      <created>1385911084029</created>
+      <updated>1385911084029</updated>
+    </task>
+    <task id="LOCAL-00313" summary="Test to get more information about error.">
+      <created>1385911198875</created>
+      <updated>1385911198875</updated>
+    </task>
+    <task id="LOCAL-00314" summary="Test to get more information about error.">
+      <created>1385911342301</created>
+      <updated>1385911342301</updated>
+    </task>
+    <task id="LOCAL-00315" summary="Test to get more information about error.">
+      <created>1385911807632</created>
+      <updated>1385911807632</updated>
+    </task>
+    <task id="LOCAL-00316" summary="Test to get more information about error.">
+      <created>1385912026079</created>
+      <updated>1385912026079</updated>
+    </task>
+    <task id="LOCAL-00317" summary="Update error message.">
+      <created>1385912916328</created>
+      <updated>1385912916328</updated>
+    </task>
+    <task id="LOCAL-00318" summary="Update error message.">
+      <created>1385913301175</created>
+      <updated>1385913301175</updated>
+    </task>
+    <task id="LOCAL-00319" summary="Update error message.">
+      <created>1385913316147</created>
+      <updated>1385913316147</updated>
+    </task>
+    <task id="LOCAL-00320" summary="Update error message.">
+      <created>1385913636289</created>
+      <updated>1385913636289</updated>
+    </task>
+    <task id="LOCAL-00321" summary="Update calculations logic.">
+      <created>1385956382903</created>
+      <updated>1385956382903</updated>
+    </task>
+    <task id="LOCAL-00322" summary="Bug fixes.">
+      <created>1387573970576</created>
+      <updated>1387573970576</updated>
+    </task>
+    <task id="LOCAL-00323" summary="Bug fixes.">
+      <created>1387574890079</created>
+      <updated>1387574890079</updated>
+    </task>
+    <task id="LOCAL-00324" summary="Bug fixes.">
+      <created>1387575504452</created>
+      <updated>1387575504452</updated>
+    </task>
+    <task id="LOCAL-00325" summary="Removed rescue code to debug.">
+      <created>1387695908419</created>
+      <updated>1387695908419</updated>
+    </task>
+    <task id="LOCAL-00326" summary="Remove rescue after NTT calls.">
+      <created>1387698098968</created>
+      <updated>1387698098968</updated>
+    </task>
+    <task id="LOCAL-00327" summary="Remove rescue after NTT calls.">
+      <created>1387698377287</created>
+      <updated>1387698377287</updated>
+    </task>
+    <task id="LOCAL-00328" summary="Remove rescue after NTT calls.">
+      <created>1387698459724</created>
+      <updated>1387698459725</updated>
+    </task>
+    <task id="LOCAL-00329" summary="Call NTT after importing strips.">
+      <created>1387782333111</created>
+      <updated>1387782333111</updated>
+    </task>
+    <task id="LOCAL-00330" summary="Summary page: eligible reductions.">
+      <created>1387783157800</created>
+      <updated>1387783157800</updated>
+    </task>
+    <task id="LOCAL-00331" summary="Updated percent complete.">
+      <created>1387784462857</created>
+      <updated>1387784462857</updated>
+    </task>
+    <task id="LOCAL-00332" summary="Test percent completed.">
+      <created>1387792481494</created>
+      <updated>1387792481494</updated>
+    </task>
+    <task id="LOCAL-00333" summary="Divide by zero issue.">
+      <created>1388067082981</created>
+      <updated>1388067083003</updated>
+    </task>
+    <task id="LOCAL-00334" summary="Percent completed.">
+      <created>1388067596623</created>
+      <updated>1388067596623</updated>
+    </task>
+    <task id="LOCAL-00335" summary="Watershed">
+      <created>1388067994538</created>
+      <updated>1388067994538</updated>
+    </task>
+    <task id="LOCAL-00336" summary="Credit calculations.">
+      <created>1388071899226</created>
+      <updated>1388071899226</updated>
+    </task>
+    <task id="LOCAL-00337" summary="Debug">
+      <created>1388072350308</created>
+      <updated>1388072350308</updated>
+    </task>
+    <task id="LOCAL-00338" summary="Debug">
+      <created>1388072820685</created>
+      <updated>1388072820685</updated>
+    </task>
+    <task id="LOCAL-00339" summary="Debug">
+      <created>1388073973370</created>
+      <updated>1388073973370</updated>
+    </task>
+    <task id="LOCAL-00340" summary="Debug">
+      <created>1388073998540</created>
+      <updated>1388073998540</updated>
+    </task>
+    <task id="LOCAL-00341" summary="Debug">
+      <created>1388074564602</created>
+      <updated>1388074564602</updated>
+    </task>
+    <task id="LOCAL-00342" summary="Debug">
+      <created>1388074708046</created>
+      <updated>1388074708046</updated>
+    </task>
+    <task id="LOCAL-00343" summary="Managed land percent complete.">
+      <created>1388497301114</created>
+      <updated>1388497301114</updated>
+    </task>
+    <task id="LOCAL-00344" summary="Updated error message for fields not in watershed.">
+      <created>1388497832269</created>
+      <updated>1388497832269</updated>
+    </task>
+    <task id="LOCAL-00345" summary="Animal confinment N, P, sediment.">
+      <created>1388501726354</created>
+      <updated>1388501726354</updated>
+    </task>
+    <task id="LOCAL-00346" summary="Animal confinment N, P, sediment.">
+      <created>1388502158498</created>
+      <updated>1388502158498</updated>
+    </task>
+    <task id="LOCAL-00347" summary="Animal confinment N, P, sediment.">
+      <created>1388502393544</created>
+      <updated>1388502393544</updated>
+    </task>
+    <task id="LOCAL-00348" summary="Text changes.">
+      <created>1388503028008</created>
+      <updated>1388503028008</updated>
+    </task>
+    <task id="LOCAL-00349" summary="Text changes.">
+      <created>1388503717465</created>
+      <updated>1388503717465</updated>
+    </task>
+    <task id="LOCAL-00350" summary="N, P, sediment on main farm page">
+      <created>1388504976516</created>
+      <updated>1388504976516</updated>
+    </task>
+    <task id="LOCAL-00351" summary="Typical manure values.">
+      <created>1388505418656</created>
+      <updated>1388505418656</updated>
+    </task>
+    <task id="LOCAL-00352" summary="Bug import BMP.">
+      <created>1388505973175</created>
+      <updated>1388505973175</updated>
+    </task>
+    <task id="LOCAL-00353" summary="Reduction to bay">
+      <created>1388506129615</created>
+      <updated>1388506129615</updated>
+    </task>
+    <task id="LOCAL-00354" summary="Crop lookup bug">
+      <created>1388506649465</created>
+      <updated>1388506649465</updated>
+    </task>
+    <task id="LOCAL-00355" summary="Crop lookup bug">
+      <created>1388507024794</created>
+      <updated>1388507024794</updated>
+    </task>
+    <task id="LOCAL-00356" summary="Crop lookup bug">
+      <created>1388507218733</created>
+      <updated>1388507218733</updated>
+    </task>
+    <task id="LOCAL-00357" summary="Crop lookup bug">
+      <created>1388507433021</created>
+      <updated>1388507433022</updated>
+    </task>
+    <task id="LOCAL-00358" summary="Crop lookup bug">
+      <created>1388507816640</created>
+      <updated>1388507816640</updated>
+    </task>
+    <task id="LOCAL-00359" summary="Crop lookup bug">
+      <created>1388508217082</created>
+      <updated>1388508217082</updated>
+    </task>
+    <task id="LOCAL-00360" summary="Crop lookup bug">
+      <created>1388508518016</created>
+      <updated>1388508518016</updated>
+    </task>
+    <task id="LOCAL-00361" summary="Reduction to bay">
+      <created>1388508977255</created>
+      <updated>1388508977256</updated>
+    </task>
+    <task id="LOCAL-00362" summary="Non-managed land bug.">
+      <created>1388959514925</created>
+      <updated>1388959514925</updated>
+    </task>
+    <task id="LOCAL-00363" summary="Various bugs.">
+      <created>1388971877099</created>
+      <updated>1388971877099</updated>
+    </task>
+    <task id="LOCAL-00364" summary="Total n cannot be negative.">
+      <created>1388972468267</created>
+      <updated>1388972468267</updated>
+    </task>
+    <task id="LOCAL-00365" summary="Total n cannot be negative.">
+      <created>1388972854497</created>
+      <updated>1388972854497</updated>
+    </task>
+    <task id="LOCAL-00366" summary="Fixed typos.">
+      <created>1388972940090</created>
+      <updated>1388972940091</updated>
+    </task>
+    <task id="LOCAL-00367" summary="Removed debug information.">
+      <created>1389793203692</created>
+      <updated>1389793203692</updated>
+    </task>
+    <task id="LOCAL-00368" summary="Removed debug information.">
+      <created>1389793241713</created>
+      <updated>1389793241713</updated>
+    </task>
+    <task id="LOCAL-00369" summary="Removed debug information.">
+      <created>1389840560579</created>
+      <updated>1389840560579</updated>
+    </task>
+    <task id="LOCAL-00370" summary="Added help file.&#10;Added adjust factors.">
+      <created>1390794362471</created>
+      <updated>1390794362471</updated>
+    </task>
+    <task id="LOCAL-00371" summary="Added farm calculator">
+      <created>1390795071588</created>
+      <updated>1390795071588</updated>
+    </task>
+    <task id="LOCAL-00372" summary="Updated watershed segment values.">
+      <created>1390829442164</created>
+      <updated>1390829442165</updated>
+    </task>
+    <task id="LOCAL-00373" summary="Updated watershed segment values.">
+      <created>1390848707277</created>
+      <updated>1390848707277</updated>
+    </task>
+    <task id="LOCAL-00374" summary="Updated Excel file.">
+      <created>1390919989482</created>
+      <updated>1390919989483</updated>
+    </task>
+    <option name="localTasksCounter" value="375" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20493563" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31866953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2795699" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11474164" sideWeight="0.7184466" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.111363634" sideWeight="0.8327974" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.09765208" sideWeight="0.72043014" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36587983" sideWeight="0.5983957" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2795699" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28070176" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32038835" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32150537" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Excel file." />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Updated percent complete." />
+    <MESSAGE value="Test percent completed." />
+    <MESSAGE value="Divide by zero issue." />
+    <MESSAGE value="Percent completed." />
+    <MESSAGE value="Watershed" />
+    <MESSAGE value="Credit calculations." />
+    <MESSAGE value="Debug" />
+    <MESSAGE value="Managed land percent complete." />
+    <MESSAGE value="Updated error message for fields not in watershed." />
+    <MESSAGE value="Animal confinment N, P, sediment." />
+    <MESSAGE value="Text changes." />
+    <MESSAGE value="N, P, sediment on main farm page" />
+    <MESSAGE value="Typical manure values." />
+    <MESSAGE value="Bug import BMP." />
+    <MESSAGE value="Crop lookup bug" />
+    <MESSAGE value="Reduction to bay" />
+    <MESSAGE value="Non-managed land bug." />
+    <MESSAGE value="Various bugs." />
+    <MESSAGE value="Total n cannot be negative." />
+    <MESSAGE value="Fixed typos." />
+    <MESSAGE value="Removed debug information." />
+    <MESSAGE value="Added help file.&#10;Added adjust factors." />
+    <MESSAGE value="Added farm calculator" />
+    <MESSAGE value="Updated watershed segment values." />
+    <MESSAGE value="Updated Excel file." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/db/migrate/20130622190402_add_animal_bmp_to_fields.rb</url>
+          <line>2</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/controllers/farms_controller.rb</url>
+          <line>335</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/controllers/errors_controller.rb</url>
+          <line>7</line>
+          <option name="timeStamp" value="377" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/controllers/application_controller.rb</url>
+          <line>10</line>
+          <option name="timeStamp" value="455" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/devise-2.2.4/app/controllers/devise/registrations_controller.rb</url>
+          <line>6</line>
+          <option name="timeStamp" value="513" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/lib/bmp_calculations.rb</url>
+          <line>1195</line>
+          <option name="timeStamp" value="591" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/models/strip.rb</url>
+          <line>25</line>
+          <option name="timeStamp" value="694" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/models/commercial_fertilizer_application.rb</url>
+          <line>24</line>
+          <option name="timeStamp" value="699" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/models/soil.rb</url>
+          <line>33</line>
+          <option name="timeStamp" value="713" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="864" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lib/bmp_calculations.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="31" selection-start="2830" selection-end="2855" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/seeds.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1401" column="68" selection-start="650444" selection-end="650463" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/field_type_bmp_type.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="92" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/end_of_season.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/farm.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/grazing_livestock.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/manure_type_category.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/project_issue.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/crop_category.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/crop_rotation.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="21" selection-start="3089" selection-end="3089" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/strip.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/strips_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="29" selection-start="49" selection-end="76" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="36" selection-start="1859" selection-end="1870" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/heroku_env.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="5" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/devise.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="30" selection-start="401" selection-end="401" vertical-scroll-proportion="-1.742236">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

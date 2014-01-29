@@ -1,5 +1,10 @@
 class AddEmailToUserTable < ActiveRecord::Migration
-  def change
-    add_column :users, :email, :string, :null => false
+  def self.up
+    add_column :users, :email, :string
+    change_column :users, :email, :string, :null => false
+  end
+
+  def self.down
+  	remove_column :users, :email, :string
   end
 end
