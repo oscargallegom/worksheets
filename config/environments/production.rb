@@ -77,4 +77,10 @@ NutrientNet::Application.configure do
       :user_name => ENV['email_login'],
       :password => ENV['email_password']
   }
+
+
+
+RECAPTCHA_PUBLIC_KEY= '6Le0yO0SAAAAAMW-Ve1MsTCUMYsLqqeEpc_koyj5'
+RECAPTCHA_PRIVATE_KEY= '6Le0yO0SAAAAAO96MtO5s8KnuGGdzwD6jGSr9Ao8'
+  
 end
