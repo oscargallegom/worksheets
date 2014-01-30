@@ -34,7 +34,7 @@ class Field < ActiveRecord::Base
 
   attr_accessible :step
   # , :area, :baseline_load, :coordinates        #  needed???
-  attr_accessible :name, :field_type_id, :crop_type_id, :notes
+  attr_accessible :name, :field_type_id, :crop_type_id, :notes, :farm_id
   attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value
   attr_accessible :soil_texture_id, :slope
 
