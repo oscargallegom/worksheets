@@ -383,7 +383,7 @@ class FarmsController < ApplicationController
         #@field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 
         # get the watershed segment
-        watershed_segment = WatershedSegment.where(["key == :tag", {:tag => params["field#{i}segment"]}]).first
+        watershed_segment = WatershedSegment.where(:id => params["field#{i}segment"]}]).first
         if !watershed_segment.nil?
           @field.watershed_segment_id = watershed_segment.id
         end
