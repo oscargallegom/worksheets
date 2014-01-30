@@ -84,7 +84,7 @@ class FieldsController < ApplicationController
       #  flash.now[:error] = 'Error: ' + e.message
       #  @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       #end
-      @watershed_segment = WatershedSegment.find(:id => @field.watershed_segment_id)
+      @watershed_segment = WatershedSegment.find(:first)
       if (@watershed_segment.nil?)
         flash.now[:error] = "Could not retrieve baseline data." if @watershed_segment.nil?
       end
