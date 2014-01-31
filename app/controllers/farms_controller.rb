@@ -445,7 +445,6 @@ class FarmsController < ApplicationController
             @field.soils[i].bulk_density = data[:bulc_density]
             @field.soils[i].organic_carbon = data[:organic_carbon]
             @field.soils[i].slope = data[:slope]
-            @field.soils[i].percent = data[:percent]
           else
             @field.soils[i].component_name = ''
             @field.soils[i].percent_clay = 0
