@@ -471,7 +471,7 @@ class FarmsController < ApplicationController
         end
 
 
-        @field.save(:validate => false)
+        @field.save(:validate => true)
       end
 
       @farm.coordinates = params[:parcelcoords]
