@@ -371,7 +371,7 @@ class FarmsController < ApplicationController
         @field.acres_from_map = params["field#{i}acres"]
         @field.is_acres_from_map = true
 
-        #@field.segment_id = params["field#{i}segment"]
+        @field.segment_id = params["field#{i}segment"]
 
         # @field.tmdl = Tmdl.where(:code => params["field#{i}huc12"].to_i).first
         @field.tmdl = Tmdl.where(:code => params["field#{i}tmdl_md"]).first
@@ -383,7 +383,7 @@ class FarmsController < ApplicationController
         #@field.tmdl_watershed = (params["field#{i}tmdl"] != 'none')
 
         # get the watershed segment
-        watershed_segment = WatershedSegment.where(["key = :tag", {:tag => params["field#{i}segment"]}]).first
+        watershed_segment = WatershedSegment.where(:key => @field.segment_id).first
 
         if !watershed_segment.nil?
           @field.watershed_segment_id = watershed_segment.id

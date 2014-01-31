@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140130141450) do
+ActiveRecord::Schema.define(:version => 20140131171222) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -331,6 +331,7 @@ ActiveRecord::Schema.define(:version => 20140130141450) do
     t.text     "ntt_xml_future"
     t.decimal  "fence_length_future"
     t.integer  "farm_id"
+    t.string   "segment_id"
   end
 
   create_table "future_bmps", :force => true do |t|
