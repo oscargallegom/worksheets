@@ -433,6 +433,7 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
           @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
+          @field.save
 
           # getSoilData(1726303, 'Meadowville', 'B') #
           data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
@@ -471,7 +472,7 @@ class FarmsController < ApplicationController
         end
 
 
-        @field.save(:validate => true)
+        @field.save(:validate => false)
       end
 
       @farm.coordinates = params[:parcelcoords]
