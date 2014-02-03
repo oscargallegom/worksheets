@@ -1,4 +1,4 @@
-class ConvertPercentToFloatInSoils < ActiveRecord::Migration
+class ChangeDataTypes < ActiveRecord::Migration
     def self.up
     change_table :animals do |t|
       t.change :typical_live_weight, :float
