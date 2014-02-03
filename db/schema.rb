@@ -11,31 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140203163451) do
+ActiveRecord::Schema.define(:version => 20140203173713) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
     t.integer "category_id"
-    t.decimal "typical_live_weight"
-    t.decimal "animals_per_au"
-    t.decimal "daily_manure_production_lbs_per_au"
-    t.decimal "mortality_rate"
-    t.decimal "fraction_p2o5"
-    t.decimal "fraction_nh3"
-    t.decimal "fraction_org_n"
-    t.decimal "fraction_no3"
-    t.decimal "fraction_org_p"
-    t.decimal "fraction_po4p"
-    t.decimal "volatilization_fraction"
-    t.decimal "default_nh3_lbs"
-    t.decimal "default_org_n_lbs"
-    t.decimal "default_org_p_lbs"
-    t.decimal "default_po4_lbs"
-    t.decimal "storage_loss_fraction"
+    t.float   "typical_live_weight"
+    t.float   "animals_per_au"
+    t.float   "daily_manure_production_lbs_per_au"
+    t.float   "mortality_rate"
+    t.float   "fraction_p2o5"
+    t.float   "fraction_nh3"
+    t.float   "fraction_org_n"
+    t.float   "fraction_no3"
+    t.float   "fraction_org_p"
+    t.float   "fraction_po4p"
+    t.float   "volatilization_fraction"
+    t.float   "default_nh3_lbs"
+    t.float   "default_org_n_lbs"
+    t.float   "default_org_p_lbs"
+    t.float   "default_po4_lbs"
+    t.float   "storage_loss_fraction"
   end
 
   create_table "animals_farms", :force => true do |t|
-    t.decimal "animals_units"
+    t.float   "animals_units"
     t.integer "farm_id"
     t.integer "animal_id"
   end
@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer "bmp_type_id"
     t.integer "field_type_id"
     t.string  "hgmr_code"
-    t.decimal "n_reduction"
-    t.decimal "p_reduction"
-    t.decimal "sediment_reduction"
+    t.float   "n_reduction"
+    t.float   "p_reduction"
+    t.float   "sediment_reduction"
   end
 
   create_table "bmp_types", :force => true do |t|
@@ -70,13 +70,13 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer  "application_date_year"
     t.integer  "application_date_month"
     t.integer  "application_date_day"
-    t.decimal  "total_n_applied"
-    t.decimal  "total_p_applied"
+    t.float    "total_n_applied"
+    t.float    "total_p_applied"
     t.boolean  "is_incorporated"
     t.integer  "incorporation_date_year"
     t.integer  "incorporation_date_month"
     t.integer  "incorporation_date_day"
-    t.decimal  "incorporation_depth"
+    t.float    "incorporation_depth"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
     t.integer  "p_type_id"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   create_table "crop_rotations", :force => true do |t|
     t.integer  "crop_id"
     t.integer  "planting_method_id"
-    t.decimal  "seeding_rate"
+    t.float    "seeding_rate"
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
     t.integer  "strip_id"
@@ -131,9 +131,9 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer "bmp_type_id"
     t.integer "field_type_id"
     t.string  "hgmr_code"
-    t.decimal "nitrogen_efficiency"
-    t.decimal "phosphorus_efficiency"
-    t.decimal "sediment_efficiency"
+    t.float   "nitrogen_efficiency"
+    t.float   "phosphorus_efficiency"
+    t.float   "sediment_efficiency"
   end
 
   create_table "end_of_season_types", :force => true do |t|
@@ -167,30 +167,30 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer  "site_county_id"
     t.text     "site_description"
     t.text     "coordinates"
-    t.decimal  "acres"
+    t.float    "acres"
     t.integer  "generator_type_id"
   end
 
   create_table "field_livestocks", :force => true do |t|
     t.integer "field_id"
     t.integer "animal_id"
-    t.decimal "quantity"
+    t.float   "quantity"
     t.integer "days_per_year_confined"
-    t.decimal "hours_per_day_confined"
-    t.decimal "n_excreted"
-    t.decimal "p205_excreted"
-    t.decimal "total_manure"
-    t.decimal "average_weight"
+    t.float   "hours_per_day_confined"
+    t.float   "n_excreted"
+    t.float   "p205_excreted"
+    t.float   "total_manure"
+    t.float   "average_weight"
   end
 
   create_table "field_poultry", :force => true do |t|
     t.integer  "field_id"
     t.integer  "animal_id"
-    t.decimal  "quantity"
+    t.float    "quantity"
     t.integer  "flocks_per_year"
-    t.decimal  "days_in_growing_cycle"
-    t.decimal  "n_excreted"
-    t.decimal  "p205_excreted"
+    t.float    "days_in_growing_cycle"
+    t.float    "n_excreted"
+    t.float    "p205_excreted"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
   end
@@ -208,42 +208,42 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
 
   create_table "fields", :force => true do |t|
     t.string   "name"
-    t.decimal  "area"
+    t.float    "area"
     t.string   "baseline_load"
     t.datetime "created_at",                                          :null => false
     t.datetime "updated_at",                                          :null => false
     t.text     "coordinates"
-    t.decimal  "acres_from_user"
+    t.float    "acres_from_user"
     t.integer  "field_type_id"
     t.text     "notes"
-    t.decimal  "acres_from_map"
+    t.float    "acres_from_map"
     t.boolean  "is_acres_from_map"
-    t.decimal  "tile_drainage_depth"
+    t.float    "tile_drainage_depth"
     t.integer  "irrigation_id"
-    t.decimal  "fertigation_n"
-    t.decimal  "p_test_value"
-    t.decimal  "efficiency"
+    t.float    "fertigation_n"
+    t.float    "p_test_value"
+    t.float    "efficiency"
     t.integer  "watershed_segment_id"
     t.boolean  "is_forest_buffer"
-    t.decimal  "forest_buffer_average_width"
-    t.decimal  "forest_buffer_length"
+    t.float    "forest_buffer_average_width"
+    t.float    "forest_buffer_length"
     t.boolean  "is_forest_buffer_planned"
     t.boolean  "is_grass_buffer"
-    t.decimal  "grass_buffer_average_width"
-    t.decimal  "grass_buffer_length"
+    t.float    "grass_buffer_average_width"
+    t.float    "grass_buffer_length"
     t.boolean  "is_grass_buffer_planned"
     t.boolean  "is_wetland"
-    t.decimal  "wetland_area"
-    t.decimal  "wetland_treated_area"
+    t.float    "wetland_area"
+    t.float    "wetland_treated_area"
     t.boolean  "is_wetland_planned"
     t.boolean  "is_streambank_restoration"
-    t.decimal  "streambank_restoration_length"
+    t.float    "streambank_restoration_length"
     t.boolean  "is_streambank_restoration_planned"
     t.integer  "crop_type_id"
     t.boolean  "is_pasture_adjacent_to_stream"
     t.boolean  "is_streambank_fencing_in_place"
-    t.decimal  "distance_fence_stream"
-    t.decimal  "fence_length"
+    t.float    "distance_fence_stream"
+    t.float    "fence_length"
     t.integer  "vegetation_type_fence_stream_id"
     t.integer  "livestock_input_method_id"
     t.boolean  "is_livestock_animal_waste_management_system"
@@ -270,43 +270,43 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer  "tmdl_id"
     t.integer  "soil_p_extractant_id"
     t.boolean  "is_fertilizer_application_setback"
-    t.decimal  "fertilizer_application_setback_average_width"
-    t.decimal  "fertilizer_application_setback_length"
+    t.float    "fertilizer_application_setback_average_width"
+    t.float    "fertilizer_application_setback_length"
     t.boolean  "is_fertilizer_application_setback_planned"
     t.text     "planned_management_details"
     t.string   "watershed_name"
     t.string   "tmdl_va"
     t.text     "exclusion_description"
-    t.decimal  "other_land_use_conversion_acres"
+    t.float    "other_land_use_conversion_acres"
     t.integer  "other_land_use_conversion_vegetation_type_id"
     t.boolean  "is_other_land_use_conversion_planned"
     t.boolean  "is_forest_buffer_future"
-    t.decimal  "forest_buffer_average_width_future"
-    t.decimal  "forest_buffer_length_future"
+    t.float    "forest_buffer_average_width_future"
+    t.float    "forest_buffer_length_future"
     t.boolean  "is_forest_buffer_planned_future"
     t.boolean  "is_grass_buffer_future"
     t.boolean  "is_grass_buffer_planned_future"
     t.boolean  "is_wetland_future"
-    t.decimal  "wetland_area_future"
-    t.decimal  "wetland_treated_area_future"
+    t.float    "wetland_area_future"
+    t.float    "wetland_treated_area_future"
     t.boolean  "is_wetland_planned_future"
     t.boolean  "is_streambank_restoration_future"
-    t.decimal  "streambank_restoration_length_future"
+    t.float    "streambank_restoration_length_future"
     t.boolean  "is_streambank_restoration_planned_future"
     t.boolean  "is_streambank_fencing_in_place_future"
-    t.decimal  "distance_fence_stream_future"
+    t.float    "distance_fence_stream_future"
     t.integer  "vegetation_type_fence_stream_id_future"
     t.text     "planned_management_details_future"
     t.boolean  "is_fertilizer_application_setback_future"
-    t.decimal  "fertilizer_application_setback_average_width_future"
-    t.decimal  "fertilizer_application_setback_length_future"
-    t.decimal  "is_fertilizer_application_setback_planned_future"
+    t.float    "fertilizer_application_setback_average_width_future"
+    t.float    "fertilizer_application_setback_length_future"
+    t.float    "is_fertilizer_application_setback_planned_future"
     t.text     "exclusion_description_future"
-    t.decimal  "other_land_use_conversion_acres_future"
+    t.float    "other_land_use_conversion_acres_future"
     t.integer  "other_land_use_conversion_vegetation_type_id_future"
     t.boolean  "is_other_land_use_conversion_planned_future"
-    t.decimal  "grass_buffer_average_width_future"
-    t.decimal  "grass_buffer_length_future"
+    t.float    "grass_buffer_average_width_future"
+    t.float    "grass_buffer_length_future"
     t.boolean  "is_livestock_animal_waste_management_system_future"
     t.boolean  "is_livestock_mortality_composting_future"
     t.boolean  "is_livestock_plastic_permeable_lagoon_cover_future"
@@ -326,10 +326,10 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.boolean  "is_poultry_treatment_wetland_future"
     t.boolean  "is_poultry_litter_treatment_future"
     t.integer  "soil_texture_id"
-    t.decimal  "slope"
+    t.float    "slope"
     t.text     "ntt_xml_current"
     t.text     "ntt_xml_future"
-    t.decimal  "fence_length_future"
+    t.float    "fence_length_future"
     t.integer  "farm_id"
     t.string   "segment_id"
   end
@@ -353,8 +353,8 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer  "end_date_month"
     t.integer  "end_date_day"
     t.integer  "animal_id"
-    t.decimal  "animal_units"
-    t.decimal  "hours_grazed"
+    t.float    "animal_units"
+    t.float    "hours_grazed"
     t.boolean  "precision_feeding"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
@@ -371,7 +371,7 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   end
 
   create_table "livestock", :force => true do |t|
-    t.decimal "animal_units"
+    t.float   "animal_units"
     t.integer "animal_id"
     t.integer "farm_id"
   end
@@ -392,11 +392,11 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer  "manure_type_id"
     t.integer  "manure_consistency_id"
     t.integer  "liquid_unit_type_id"
-    t.decimal  "total_n_concentration"
-    t.decimal  "p_concentration"
+    t.float    "total_n_concentration"
+    t.float    "p_concentration"
     t.integer  "p_type_id"
-    t.decimal  "application_rate"
-    t.decimal  "moisture_content"
+    t.float    "application_rate"
+    t.float    "moisture_content"
     t.boolean  "is_precision_feeding"
     t.boolean  "is_phytase_treatment"
     t.boolean  "is_poultry_litter_treatment"
@@ -404,7 +404,7 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.integer  "incorporation_date_year"
     t.integer  "incorporation_date_month"
     t.integer  "incorporation_date_day"
-    t.decimal  "incorporation_depth"
+    t.float    "incorporation_depth"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
@@ -416,7 +416,7 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   create_table "manure_types", :force => true do |t|
     t.string  "name"
     t.integer "manure_type_category_id"
-    t.decimal "p_fraction"
+    t.float   "p_fraction"
   end
 
   create_table "p_types", :force => true do |t|
@@ -441,12 +441,12 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   create_table "soil_p_extractants", :force => true do |t|
     t.string  "name"
     t.string  "unit"
-    t.decimal "m_value"
-    t.decimal "b_value"
+    t.float   "m_value"
+    t.float   "b_value"
     t.integer "formula_code"
     t.integer "soil_test_laboratory_id"
-    t.decimal "h_value"
-    t.decimal "g_value"
+    t.float   "h_value"
+    t.float   "g_value"
   end
 
   create_table "soil_test_laboratories", :force => true do |t|
@@ -455,12 +455,12 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   end
 
   create_table "soil_textures", :force => true do |t|
-    t.string  "name"
-    t.decimal "percent_sand"
-    t.decimal "percent_silt"
-    t.decimal "percent_clay"
-    t.decimal "bulk_density"
-    t.decimal "organic_carbon"
+    t.string "name"
+    t.float  "percent_sand"
+    t.float  "percent_silt"
+    t.float  "percent_clay"
+    t.float  "bulk_density"
+    t.float  "organic_carbon"
   end
 
   create_table "soil_types", :force => true do |t|
@@ -470,20 +470,20 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   create_table "soils", :force => true do |t|
     t.integer  "soil_type_id"
     t.integer  "field_id"
-    t.decimal  "percent_clay"
-    t.decimal  "percent_sand"
-    t.decimal  "percent_silt"
+    t.float    "percent_clay"
+    t.float    "percent_sand"
+    t.float    "percent_silt"
     t.float    "bulk_density"
-    t.decimal  "organic_carbon"
-    t.decimal  "slope"
+    t.float    "organic_carbon"
+    t.float    "slope"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.decimal  "percent"
+    t.float    "percent"
     t.integer  "map_unit_key"
     t.string   "map_unit_name"
     t.string   "hydrologic_group"
     t.string   "map_unit_symbol"
-    t.decimal  "niccdcdpct"
+    t.float    "niccdcdpct"
     t.string   "component_name"
   end
 
@@ -495,7 +495,7 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
   end
 
   create_table "strips", :force => true do |t|
-    t.decimal  "length"
+    t.float    "length"
     t.integer  "field_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
@@ -518,8 +518,8 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
 
   create_table "tmdls", :force => true do |t|
     t.string  "name"
-    t.decimal "total_n"
-    t.decimal "total_p"
+    t.float   "total_n"
+    t.float   "total_p"
     t.integer "code"
   end
 
@@ -593,39 +593,39 @@ ActiveRecord::Schema.define(:version => 20140203163451) do
     t.string   "trib_strat_basin"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-    t.decimal  "total_n_forest"
-    t.decimal  "total_n_hyo"
-    t.decimal  "total_n_trp"
-    t.decimal  "total_p_forest"
-    t.decimal  "total_p_hyo"
-    t.decimal  "total_p_trp"
-    t.decimal  "total_sediment_forest"
-    t.decimal  "total_sediment_hyo"
-    t.decimal  "total_sediment_trp"
-    t.decimal  "n_delivery_factor"
-    t.decimal  "p_delivery_factor"
-    t.decimal  "sediment_delivery_factor"
-    t.decimal  "n_crop_baseline"
-    t.decimal  "n_pasture_baseline"
-    t.decimal  "n_hay_baseline"
-    t.decimal  "p_crop_baseline"
-    t.decimal  "p_pasture_baseline"
-    t.decimal  "p_hay_baseline"
-    t.decimal  "sediment_crop_baseline"
-    t.decimal  "sediment_pasture_baseline"
-    t.decimal  "sediment_hay_baseline"
-    t.decimal  "n_crop_adjust"
-    t.decimal  "p_crop_adjust"
-    t.decimal  "sediment_crop_adjust"
-    t.decimal  "cafo_eos_sediment"
-    t.decimal  "cafo_n_rf"
-    t.decimal  "cafo_p_rf"
-    t.decimal  "n_hay_adjust"
-    t.decimal  "p_hay_adjust"
-    t.decimal  "sediment_hay_adjust"
-    t.decimal  "n_pasture_adjust"
-    t.decimal  "p_pasture_adjust"
-    t.decimal  "sediment_pasture_adjust"
+    t.float    "total_n_forest"
+    t.float    "total_n_hyo"
+    t.float    "total_n_trp"
+    t.float    "total_p_forest"
+    t.float    "total_p_hyo"
+    t.float    "total_p_trp"
+    t.float    "total_sediment_forest"
+    t.float    "total_sediment_hyo"
+    t.float    "total_sediment_trp"
+    t.float    "n_delivery_factor"
+    t.float    "p_delivery_factor"
+    t.float    "sediment_delivery_factor"
+    t.float    "n_crop_baseline"
+    t.float    "n_pasture_baseline"
+    t.float    "n_hay_baseline"
+    t.float    "p_crop_baseline"
+    t.float    "p_pasture_baseline"
+    t.float    "p_hay_baseline"
+    t.float    "sediment_crop_baseline"
+    t.float    "sediment_pasture_baseline"
+    t.float    "sediment_hay_baseline"
+    t.float    "n_crop_adjust"
+    t.float    "p_crop_adjust"
+    t.float    "sediment_crop_adjust"
+    t.float    "cafo_eos_sediment"
+    t.float    "cafo_n_rf"
+    t.float    "cafo_p_rf"
+    t.float    "n_hay_adjust"
+    t.float    "p_hay_adjust"
+    t.float    "sediment_hay_adjust"
+    t.float    "n_pasture_adjust"
+    t.float    "p_pasture_adjust"
+    t.float    "sediment_pasture_adjust"
   end
 
 end
