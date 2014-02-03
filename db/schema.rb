@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131171222) do
+ActiveRecord::Schema.define(:version => 20140203163451) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -473,7 +473,7 @@ ActiveRecord::Schema.define(:version => 20140131171222) do
     t.decimal  "percent_clay"
     t.decimal  "percent_sand"
     t.decimal  "percent_silt"
-    t.decimal  "bulk_density"
+    t.float    "bulk_density"
     t.decimal  "organic_carbon"
     t.decimal  "slope"
     t.datetime "created_at",       :null => false

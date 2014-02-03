@@ -29,8 +29,8 @@ test:
   host: localhost
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: worksheets
   pool: 5
   username: test
   password: password
