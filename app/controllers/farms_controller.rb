@@ -427,12 +427,13 @@ class FarmsController < ApplicationController
 
 
         (0..@nbSoils-1).each do |i|
-          @field.soils[i].percent = @listSoils[i][:percent]
-          @field.soils[i].map_unit_key = @listSoils[i][:mukey]
-          @field.soils[i].niccdcdpct = @listSoils[i][:niccdcdpct]
-          @field.soils[i].map_unit_name = @listSoils[i][:muname]
-          @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
-          @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
+            @field.soils[i].percent = @listSoils[i][:percent]
+            @field.soils[i].map_unit_key = @listSoils[i][:mukey]
+            @field.soils[i].niccdcdpct = @listSoils[i][:niccdcdpct]
+            @field.soils[i].map_unit_name = @listSoils[i][:muname]
+            @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
+            @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
+            @field.soils[i].save!
 
           # getSoilData(1726303, 'Meadowville', 'B') #
           data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
@@ -445,6 +446,7 @@ class FarmsController < ApplicationController
             @field.soils[i].bulk_density = data[:bulk_density]
             @field.soils[i].organic_carbon = data[:organic_carbon]
             @field.soils[i].slope = data[:slope]
+            @field.soils[i].save!
           else
             @field.soils[i].component_name = ''
             @field.soils[i].percent_clay = 0
