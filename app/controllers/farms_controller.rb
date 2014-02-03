@@ -226,8 +226,8 @@ class FarmsController < ApplicationController
         render :pdf => "Pre filled MDA CCR form #{@farm.name}.pdf",
                #html: render_to_string(:layout => false , :template => "farms/review.pdf.erb"),
                #:template => 'farms/review',
-               # :wkhtmltopdf => 'C:\Program Files\wkhtmltopdf\wkhtmltopdf.exe',
-               # :disposition => 'attachment',
+               :wkhtmltopdf => 'wkhtmltopdf-i386',
+               :disposition => 'attachment',
                :footer => {:center => 'NutrientNet',
                            :right => '[page] of [topage]'}
       end
