@@ -74,8 +74,8 @@ NutrientNet::Application.configure do
       :port => 587,
       :domain => 'mail.google.com', # mail.customdomain.com if you use google apps
       :authentication => "plain",
-      :user_name => ENV['email_login'],
-      :password => ENV['email_password']
+      :user_name => 'nutrientnet.project@gmail.com',
+      :password => 'nutrientnetprojectallintel'
   }
 
 
