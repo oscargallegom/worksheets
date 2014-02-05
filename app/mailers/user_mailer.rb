@@ -1,6 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: ENV['email_login']
-
+  default from: 'nutrientnet.project@gmail.com'
   def welcome_email(user)
     @user = user
     @url = root_url.gsub(/\/$/, '')
@@ -12,7 +11,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @project_issue = project_issue
     @host = root_url.gsub(/\/$/, '').gsub("http://", "")
-    mail(:to => ENV['email_login'], :subject => "Issue with project")
+    mail(:to => 'nutrientnet.project@gmail.com', :subject => "Issue with project")
   end
 
 end
