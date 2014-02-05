@@ -104,3 +104,19 @@
       <%= f.submit 'Save and Continue', :class => 'button' %>
     </div>
 <% end %>
+
+
+<script>
+$(function(){
+   $("#efficiency").hide();
+   $("#irrigation_id").change(function(){
+        if ($("#irrigation_id").val()=="531"){
+            $("#efficiency").show();
+        } else {
+            $("#efficiency").hide();
+        }
+    })
+        
+   
+})
+</script>
