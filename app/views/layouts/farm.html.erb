@@ -12,7 +12,10 @@
             <li
             <% if (params[:step]=='2') %> class="selected"
             <% end %> ><a <%= link_to 'Edit Location', edit_farm_path(@farm, :step => 2) %></li>
-
+            <li class="
+              <% if (!@farm.fields?) %>disabledTab
+              <% elsif (params[:controller]=='fields') %>selected
+              <% end %>"><%= link_to 'Fields', farm_fields_path(@farm) %></li>
             <li
             <% if (params[:action]=='review') %> class="selected"
             <% end %> ><a <%= link_to 'Review', review_farm_path(@farm) %></li>
