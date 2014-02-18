@@ -60,8 +60,9 @@
 
       <%= render_breadcrumbs %>
       <br/>
+      <p class="alert"><%= flash[:notice] %></p>
       <% if flash[:notice] %>
-          <p class="alert"><%= flash[:notice] %></p> <!-- # class: notice     -->
+          <p class="alert">This database is still in testing. Any actions performed may be overwritten at any time.</p> <!-- # class: notice     -->
       <% end %>
       <% if flash[:alert] %>
           <p class="alert"><%= flash[:alert] %></p>
