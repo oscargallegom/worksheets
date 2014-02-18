@@ -56,13 +56,13 @@
 
     <div id="pageContent" class="clearfix">
 
-      <h1 class="pageTitle"><%= link_to 'Agricultural Project Worksheets', farms_path %> </h1>
+      <h1 class="pageTitle"><%= link_to 'Agricultural Project Worksheets', farms_path %> </h1><br>
+      <h1><font color="red">Please note: this database is still in testing. All data subject to overwrite.</font></h1>
 
       <%= render_breadcrumbs %>
       <br/>
-      <p class="alert"><%= flash[:notice] %></p>
       <% if flash[:notice] %>
-          <p class="alert">This database is still in testing. Any actions performed may be overwritten at any time.</p> <!-- # class: notice     -->
+          <p class="alert"><%= flash[:notice] %></p> <!-- # class: notice     -->
       <% end %>
       <% if flash[:alert] %>
           <p class="alert"><%= flash[:alert] %></p>
