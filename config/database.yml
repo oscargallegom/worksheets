@@ -24,8 +24,8 @@ test:
   reconnect: false
   database: worksheets_test
   pool: 5
-  username: root
-  password:
+  username: kcook
+  password: tiaer05
   host: localhost
 
 production:
