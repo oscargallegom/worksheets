@@ -58,7 +58,6 @@
               <%= f.text_field :fertigation_n, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
               &nbsp;ppm
             </li>
-            <br>
             <li>
               <%= f.label :soil_test_laboratory_id, 'Soil Test Laboratory:<em>*</em>'.html_safe, :class => 'wide' %>
               <%= f.collection_select :soil_test_laboratory_id, @soil_test_laboratories, :id, :name, {:prompt => 'Select Test Laboratory'}, {:required => true} %>
