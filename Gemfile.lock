@@ -84,12 +84,11 @@ GEM
     mysql2 (0.3.15)
     naturalsorter (2.0.5)
     nested_form (0.3.2)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
     nokogiri (1.6.1-x86-mingw32)
       mini_portile (~> 0.5.0)
     nori (2.1.0)
     orm_adapter (0.5.0)
+    pg (0.17.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -180,6 +179,7 @@ DEPENDENCIES
   naturalsorter (= 2.0.5)
   nested_form
   nokogiri
+  pg
   rails (= 3.2.12)
   recaptcha
   rest-client (~> 1.6.7)
