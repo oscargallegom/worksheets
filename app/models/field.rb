@@ -169,9 +169,6 @@ class Field < ActiveRecord::Base
     end
   end
 
-
-  end
-
   # the user can override the acres retrieved from the map
   def acres
     is_acres_from_map ? acres_from_map : acres_from_user
