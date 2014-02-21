@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140203173713) do
+ActiveRecord::Schema.define(:version => 20140221234053) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20140203173713) do
     t.float    "p205_excreted"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "poultry_id"
   end
 
   create_table "field_type_bmp_types", :force => true do |t|
