@@ -520,7 +520,7 @@ ActiveRecord::Schema.define(:version => 20140203173713) do
     t.string  "name"
     t.float   "total_n"
     t.float   "total_p"
-    t.integer "code",    :limit => 8
+    t.integer "code"
   end
 
   create_table "user_types", :force => true do |t|
