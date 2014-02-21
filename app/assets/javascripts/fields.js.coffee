@@ -57,7 +57,7 @@ displayFertigation = ->
 
 # fertigation is only shown for any option selected
 displayEfficiency = ->
-  if ($("#field_irrigation_id option:selected").val() is '' or $("#field_irrigation_id option:selected").val() is '0')
+  if ($("#field_irrigation_id option:selected").val() is '' or $("#field_irrigation_id option:selected").val() is '0' or $("#field_irrigation_id option:selected").val() is '999')
     $("#efficiency").hide()
     $("#field_efficiency").prop('required', false)
   else
