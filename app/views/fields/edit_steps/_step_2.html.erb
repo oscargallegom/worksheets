@@ -46,7 +46,7 @@
             </li>
             <li>
               <%= f.label :irrigation_id, 'Irrigation:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :irrigation_id, Irrigation.all, :id, :name, {:prompt => 'Select irrigation'}, :required => true %>
+              <%= f.collection_select :irrigation_id, Irrigation.all, :id, :name, {:prompt => 'None'}, :required => false %>
             </li>
             <li id='efficiency'>
               <%= f.label :efficiency, 'Efficiency<em>*</em>'.html_safe, :class => 'wide' %>
