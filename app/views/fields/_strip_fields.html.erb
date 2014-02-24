@@ -9,7 +9,7 @@
         </li>
 
         <li><%= f.label :length, 'Width:<em>*</em>'.html_safe, :class => 'wide' %>
-          <%= f.text_field :length, :class => 'textboxMedium', :required => false, :type => 'number', :min => 0, :step => 'any' %>
+          <%= f.text_field :length, :class => 'textboxMedium', :required => true, :type => 'number', :min => 1, :value => 1.0, :step => 'any' %>
           ft
         </li>
       </div>
