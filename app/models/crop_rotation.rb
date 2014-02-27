@@ -102,6 +102,16 @@ class CropRotation < ActiveRecord::Base
       end
     end
     if  !is_changed
+      self.grazing_livestocks.each do |grazing_livestock|
+        if (grazing_livestock.changed? || grazing_livestock.marked_for_destruction?)
+          is_changed = true
+          puts 'grazing_livestock changed'
+          ENV['debug'] += 'Grazing_livestock changed<br/>'
+          break
+        end
+      end
+    end
+    if  !is_changed
       self.end_of_seasons.each do |end_of_season|
         #puts 'end_of_season.changed? = ' + end_of_season.changed?.to_s
         #puts 'end_of_season.marked_for_destruction?? = ' + end_of_season.marked_for_destruction?.to_s
