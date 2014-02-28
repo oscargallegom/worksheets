@@ -361,6 +361,8 @@
                 <% @current_strips.each do |strip| %>
                   <% strip.each do |rotation| %>
                     <b><%= strip.rotation.crop.name %>:</b>
+                    <% end %>
+                  <% end %>
                    
                     <br/>
                 <% end %>
