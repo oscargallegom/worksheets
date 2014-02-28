@@ -358,8 +358,8 @@
           <td></td>
           <td style="white-space: nowrap">
             <% if !@ntt_results[:crops].nil? %>
-                <% @current_strips_rotations.each do |rotation| %>
-                    <b><%= rotation.crop.name %>:</b>
+                <% @current_strips.each do |strip| %>
+                    <b><%= strip.crop_rotation.crop.name %>:</b>
                    
                     <br/>
                 <% end %>
