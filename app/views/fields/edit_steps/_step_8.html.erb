@@ -358,9 +358,9 @@
           <td></td>
           <td style="white-space: nowrap">
             <% if !@ntt_results[:crops].nil? %>
-                <% @ntt_results[:crops].each do |crop| %>
-                    <b><%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %>:</b>
-                    <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
+                <% @current_strips_rotations.each do |rotation| %>
+                    <b><%= rotation.crop.name %>:</b>
+                   
                     <br/>
                 <% end %>
             <% end %>
