@@ -61,9 +61,7 @@ class FieldsController < ApplicationController
   def edit
     @field = Field.find(params[:id])
     @current_strips = @field.strips.where(:is_future => false)
-    @current_strips_rotations = @current_strips.crop_rotations
     @future_strips = @field.strips.where(:is_future => true)
-    @future_strips_rotations = @future_strips.crop_rotations
 
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
