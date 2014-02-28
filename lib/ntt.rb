@@ -20,10 +20,6 @@ module Ntt
 
       if (success)
 
-        field.strips.each |strip| do
-          strip.is_strip_new = false
-          strip.save!
-        end
 
         xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
