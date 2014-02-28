@@ -58,7 +58,7 @@ class CropRotation < ActiveRecord::Base
     enable
   end
 
-  #private
+  private
   def reset_ntt_xml
     #  self.strip.field.reset_ntt_xml(self.strip.is_future)
     is_changed = false
