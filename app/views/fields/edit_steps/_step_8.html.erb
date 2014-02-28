@@ -368,7 +368,7 @@
           <td style="white-space: nowrap">
             <% if !@ntt_results_future[:crops].nil? %>
                 <% @ntt_results_future[:crops].each do |crop| %>
-                    <b><%= Crop.where(:code => crop['CropCode']).code %>:</b>
+                    <b><%= Crop.where(:code => crop['CropCode']) %>:</b>
                     <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
                     <br/>
                 <% end %>
