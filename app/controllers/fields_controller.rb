@@ -59,6 +59,7 @@ class FieldsController < ApplicationController
 
   # GET /farms/1/fields/1/edit
   def edit
+    @field = Field.find(params[:id])
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name
