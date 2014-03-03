@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140221234053) do
+ActiveRecord::Schema.define(:version => 20140303235040) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -498,9 +498,10 @@ ActiveRecord::Schema.define(:version => 20140221234053) do
   create_table "strips", :force => true do |t|
     t.float    "length"
     t.integer  "field_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "is_future",  :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_future",    :default => false
+    t.boolean  "is_strip_new"
   end
 
   create_table "tillage_operation_types", :force => true do |t|
@@ -573,10 +574,10 @@ ActiveRecord::Schema.define(:version => 20140221234053) do
     t.boolean  "is_debug_mode",          :default => false
   end
 
-  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token"
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
+  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token"
   add_index "users", ["username"], :name => "index_users_on_email", :unique => true
 
   create_table "vegetation_types", :force => true do |t|
