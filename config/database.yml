@@ -34,7 +34,7 @@ test:
 
 production:
   adapter: mysql2
-  database: worksheets_test
+  database: worksheets
   pool: 5
   username: kcook
   password: tiaer05
