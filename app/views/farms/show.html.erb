@@ -280,7 +280,7 @@
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 2, delimiter: ',') : 0.00 %>
+
       </li>
     </ol>
   </fieldset>
