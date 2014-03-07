@@ -56,7 +56,11 @@
 <div class="sectionRest clearfix">
   <%= form_tag(populateFutureCropManagement_farm_field_path(@field.farm.id, @field.id), :name => 'populateFutureCropManagementForm', method: "post") do %>
       <%= hidden_field_tag :step, 6 %>
+      <% if @field.field_type_id == 2 %>
+      <%= button_tag 'Import current pasture' %>
+      <% else %>
       <%= button_tag 'Import current crop rotations' %>
+      <% end %>
   <% end %>
 </div>
 

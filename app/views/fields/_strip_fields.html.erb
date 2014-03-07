@@ -56,7 +56,13 @@
 
 <br/>
 
-<a class="button" id='addCropButton' strip_id='<%= f.object.id %>' href="#">Add a crop to rotation</a>
+<a class="button" id='addCropButton' strip_id='<%= f.object.id %>' href="#">
+  <% if f.object.field.field_type_id == 2 %>
+  Add pasture
+  <% else %>
+  Add a crop to rotation
+  <% end %>
+</a>
 
 
 <br/><br/>
