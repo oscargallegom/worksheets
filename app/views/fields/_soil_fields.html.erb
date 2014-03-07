@@ -1,6 +1,6 @@
 <li><h2 class='sectionHeading' id='div_soil'>Soil <%= soil_index+1 %>: <%= f.link_to_remove ' ', :style => 'position:relative;left:-320px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete soil' %></h2>
 </li>
-<li><b><%= f.object.map_unit_key %>, <%= f.object.component_name %>, <%= f.object.map_unit_name %>
+<li><b> <%= f.object.map_unit_key %>, <%= f.object.component_name %>, <%= f.object.map_unit_name %>
   <a href="#" class='detailsLink<%= soil_index+1 %>'>(show details)</a> </b></li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
   <%= f.label :clay, 'Clay, Sand, Silt:<em>*</em>'.html_safe, :class => 'wide' %>

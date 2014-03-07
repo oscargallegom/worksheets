@@ -541,6 +541,9 @@ $(document).ready ->
     $("#typicalManureValuesTable").toggle()
     return false
 
+  $("#typicalAnimalValuesLink").click ->
+    $("#typicalAnimalValuesTable").toggle()
+    return false
 
 $(document).on "nested:fieldRemoved", (event) ->
   updateIndexes()

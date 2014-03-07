@@ -98,6 +98,31 @@
             <% if (@field.field_type_id == 2) # only show if  field type is pasture    %>
                 <li><h2 class='sectionHeading'>Grazing Livestock</h2></li>
                 <li>Enter grazing livestock for the given year.</li>
+                            <li>Click <a href="#" id="typicalAnimalValuesLink">here</a> to see typical animal conversion values.
+
+              <div id="typicalAnimalValuesTable" style="display: none">
+                <br/>
+                <table class='listingTable'>
+                  <tr><th>Animal Name </th><th>Typical Weight (lbs)</th><th>Animal Units<br>1 animal unit = 1,000 pounds</th></tr>
+                  <tr><td>Beef: Cows</td> <td>1000</td> <td>1</td></tr>
+                  <tr><td>Dairy: Milk cows</td> <td>1351.35</td>  <td>1.35135</td></tr>
+                  <tr><td>Dairy: Dry cows</td>  <td>1351.35</td>  <td>1.35135</td></tr>
+                  <tr><td>Swine: Slaughters</td>  <td>110.01</td> <td>0.11001</td></tr>
+                  <tr><td>Swine: Breeders</td>  <td>374.53</td> <td>0.37453</td></tr>
+                  <tr><td>Biosolid: Aerobically digested, lime stabilized</td>  <td>0 </td><td>0</td></tr>
+                  <tr><td>Biosolid: Anaerobically digested, chemically stabilized </td><td>0</td> <td>0</td></tr>
+                  <tr><td>Biosolid: Sewage sludge compost</td>  <td>0 </td><td>0</td></tr>
+                  <tr><td>Otder: Horses</td>  <td>1400</td> <td>1.4</td></tr>
+                  <tr><td>Otder: Sheep</td> <td>80</td> <td>0.08</td></tr>
+                  <tr><td>Otder: Goats</td> <td>80</td> <td>0.08</td></tr>
+                  <tr><td>Otder: Veal</td>  <td>450</td>  <td>0.45</td></tr>
+                  <tr><td>Otder: Bison</td> <td>1000</td> <td>1</td></tr>
+                  <tr><td>Otder: Llamas</td>  <td>320</td>  <td>0.32</td></tr>
+                  <tr><td>Otder: Alpacas  </td><td>107</td> <td>0.107</td></tr>
+                  <tr><td>Otder: Emu</td> <td>133</td>  <td>0.133</td></tr>
+                </table>
+              </div>
+            </li>
 
                 <div id='div_grazing_livestock'>
 

@@ -759,6 +759,10 @@ ul#tabNav li a em {
     font-style: normal;
 }
 
+/*.listingTable {
+    width: 600px;
+}*/
+
 .listingTable th {
     background: #999;
     color: #fff;
@@ -950,7 +954,7 @@ form li {
     border: none;
     color: #666;
     float: left;
-    width: 435px;
+    width: 600px;
 }
 
 .nn-form ol {
