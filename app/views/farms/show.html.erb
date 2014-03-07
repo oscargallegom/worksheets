@@ -229,7 +229,7 @@
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_n], :precision => 2, delimiter: ',') : 0.00 %>
+        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_n], :precision => 0, delimiter: ',') : 0.00 %>
       </li>
 
       <li></li>
@@ -255,7 +255,7 @@
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_p], :precision => 2, delimiter: ',') : 0.00 %>
+        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_p], :precision => 0, delimiter: ',') : 0.00 %>
       </li>
       <li></li>
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
@@ -280,7 +280,7 @@
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 2, delimiter: ',') : 0.00 %>
+        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 0, delimiter: ',') : 0 %>
       </li>
     </ol>
   </fieldset>
