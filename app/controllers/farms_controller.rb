@@ -470,16 +470,23 @@ class FarmsController < ApplicationController
           @field.strips.build(:is_future => true)
         end
 
-
-        @field.save(:validate => false)
+        if watershed_segment.nil?
+          render 'errors/map_down', :layout => false
+        else
+          @field.save(:validate => false)
+        end
       end
 
-      @farm.coordinates = params[:parcelcoords]
-      @farm.acres = params[:parcelacres]
-      @farm.save
-      #######################
+      if !watershed_segment.nil?
 
-      render :receive_from_mapping_site, :layout => false
+        @farm.coordinates = params[:parcelcoords]
+        @farm.acres = params[:parcelacres]
+        @farm.save
+        #######################
+
+      
+        render :receive_from_mapping_site, :layout => false
+      end
 
 
     elsif
