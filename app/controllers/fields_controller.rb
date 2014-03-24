@@ -215,6 +215,27 @@ class FieldsController < ApplicationController
       end
     end
 
+    # if @field.strips > 1
+    #   logger.debug "Testing fields controller. Number of strips: #{@field.strips.count}"
+    # end
+    def is_strips_greater_than_one(field)
+      number_of_strips = @field.strips.count
+      if number_of_strips > 1
+        return true
+      else
+        false
+      end
+    end
+    logger.debug "Is strips greater than one: #{is_strips_greater_than_one(@field)}"
+    if is_strips_greater_than_one(@field)
+      @field.strips.each do |strip|
+        if strip.length == nil
+          strip.length = 1
+          strip.save!
+        end
+      end
+    end
+
   end
 
   # POST /farms/1/fields
