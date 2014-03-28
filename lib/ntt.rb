@@ -107,7 +107,7 @@ module Ntt
             bulk_density = soil.bulk_density
             organic_carbon = soil.organic_carbon
 
-            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area.round(3)}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test.round(3)}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area.round(3)}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test.round(3)}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt.round(4)}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
 
           end
 
@@ -126,7 +126,7 @@ module Ntt
             bulk_density = field.soil_texture.bulk_density
             organic_carbon = field.soil_texture.organic_carbon
 
-            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area.round(3)}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test.round(3)}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
+            xml = xml + "<SoilInfo><FIID>#{strip_id}</FIID><area>#{soil_area.round(3)}</area><MapUnit>#{map_unit_key}</MapUnit><MapSymbol>#{map_unit_symbol}</MapSymbol><Group>#{hydrologic_group}</Group><Component>#{component_name}</Component><PTest>#{p_test.round(3)}</PTest><SoilSlope>#{slope}</SoilSlope><Sand>#{percent_sand}</Sand><Silt>#{percent_silt.round(4)}</Silt><Clay>#{percent_clay}</Clay><BD>#{bulk_density}</BD><OM>#{organic_carbon}</OM></SoilInfo>"
           end
 
           strip.crop_rotations.each_with_index do |crop_rotation, crop_rotation_index|
@@ -336,7 +336,7 @@ module Ntt
                   end
                 end
 
-                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{manure_application_code}</OpVal1><OpVal2>#{application_rate}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>#{n_fraction}</OpVal4><OpVal5>#{manure_type_id}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{p_fraction}</OpVal7><OpVal8>#{manure_treatment}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{manure_application_code}</OpVal1><OpVal2>#{application_rate}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>#{n_fraction.round(4)}</OpVal4><OpVal5>#{manure_type_id}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{p_fraction.round(4)}</OpVal7><OpVal8>#{manure_treatment}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
                 # if the incorporation date is different from the application date, add extra management info
                 if manure_fertilizer_application.is_incorporated && (manure_fertilizer_application.application_date_year != manure_fertilizer_application.incorporation_date_year || manure_fertilizer_application.application_date_month != manure_fertilizer_application.incorporation_date_month || manure_fertilizer_application.application_date_day != manure_fertilizer_application.incorporation_date_day)
@@ -354,6 +354,9 @@ module Ntt
         end
       end
       xml << "</Navigation>"
+      @xml_test = xml
+
+      logger.debug "testing ntt debug: here's the XML: #{@xml_test}" 
 
       return [true, xml]
 
