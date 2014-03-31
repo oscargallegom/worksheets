@@ -45,7 +45,7 @@ class CropRotation < ActiveRecord::Base
 
   validates_presence_of :cover_crop_id, :cover_crop_planting_method_id, :if => 'is_cover_crop?'
   validates_presence_of :cover_crop_plant_date_year, :cover_crop_plant_date_month, :cover_crop_plant_date_day, :if => 'is_cover_crop?'
-  validates_numericality_of :cover_crop_plant_date_day, :less_than_or_equal_to => 28, :if => 'cover_crop_plant_date_month==2', :message => '^Date incorrect for February', :if => 'is_cover_crop?'
+  #validates_numericality_of :cover_crop_plant_date_day, :less_than_or_equal_to => 28, :if => 'cover_crop_plant_date_month==2', :message => '^Date incorrect for February', :if => 'is_cover_crop?'
 
   default_scope :order => 'created_at ASC'
 

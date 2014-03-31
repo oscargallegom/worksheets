@@ -20,17 +20,25 @@ module Ntt
 
       if (success)
 
-
         xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
-        doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
+        #doc is the xml that is returned from NTT
 
-        puts URL_NTT + '?input=' + xml
+        #doc = Nokogiri::XML(open(URL_NTT + '?input=' + xml))
+
+        #puts URL_NTT + '?input=' + xml
+        
+         uri = URI(URL_NTT)
+         res = Net::HTTP.post_form(uri, 'input' => xml)
+         puts res.body
+         doc = Nokogiri::XML(res.body)
+         logger.debug "!!!!!!!!!!!!!!! #{res.body}"
 
         if (!doc.nil?)
           return [true, doc]
         end
       else
+        #content is the xml that is sent to NTT
         return [false, content]
       end
 
@@ -55,7 +63,7 @@ module Ntt
 
       mid = 0 # management info id
 
-      xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Navigation><StartInfo><SIID>start</SIID><State>#{state}</State><County>#{fips}</County><Customer>#{customer}</Customer></StartInfo>"
+      xml = "<?xml version=\"1.0\" standalone=\"yes\"?><Navigation><StartInfo><SIID>start</SIID><State>#{state}</State><County>#{fips}</County><Customer>#{customer}</Customer></StartInfo>"
 
       # sum length of all strips
       fieldsWidth= 0
@@ -354,9 +362,6 @@ module Ntt
         end
       end
       xml << "</Navigation>"
-      @xml_test = xml
-
-      logger.debug "testing ntt debug: here's the XML: #{@xml_test}" 
 
       return [true, xml]
 

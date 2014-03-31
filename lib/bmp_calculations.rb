@@ -17,8 +17,10 @@ module BmpCalculations
     #if (is_current_data_valid)
     #success, content = callNtt(field, false)
     if (!field.ntt_xml_current.nil?)
+      logger.debug "am i here?"
       content = Nokogiri::XML(field.ntt_xml_current)
     else
+      logger.debug "or am i here?"
       content = nil
     end
 
@@ -41,6 +43,7 @@ module BmpCalculations
         @ntt_results[:crops] = crops
       end
     else
+      logger.debug "!!!!!!!!!!!!!!!! Content: #{content}"
       raise 'Could not retrieve NTT data.'
     end
 
