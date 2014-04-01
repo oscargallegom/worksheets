@@ -48,18 +48,15 @@
             </li>
 
             <li>
-              <label class="wide"><b>Field is adjacent to stream/water body<em>*</em></b></label>
+              <label class="wide">Field is adjacent to stream/water body<em>*</em></label>
               <%= f.radio_button :is_pasture_adjacent_to_stream, true, :required => true %>
               <%= f.label :is_pasture_adjacent_to_stream_true, 'Yes' %>
               <%= f.radio_button :is_pasture_adjacent_to_stream, false, :required => true %>
-              <%= f.label :is_pasture_adjacent_to_stream_false, 'No' %>
+              <%= f.label :is_pasture_adjacent_to_stream_false, 'No' %><br><br>
+              <p>The term adjacent refers to land that is upland, next to or physically part of your land parcel. </p>
             </li>
-            <div id='div_is_pasture_adjacent_to_stream'
-                 <% if !@field.is_pasture_adjacent_to_stream? %>style='display: none'
-                 <% end %>>
 
 
-            </div>
 
             <li>
               <div class='wide'>Notes:</div>
