@@ -213,6 +213,10 @@
         <%= number_with_precision(@future_n_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
+            <li>
+        <div class='extrawide'>Delivery Ratio:</div>
+        <%= @n_factors %>
+      </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
         <%= number_with_precision((@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals), :precision => 2, delimiter: ',') %>
@@ -232,12 +236,15 @@
         <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_n], :precision => 0, delimiter: ',') : 0.00 %>
       </li>
 
-      <li></li>
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
       <li>
         <div class='extrawide'>Future P load for animal HQ:</div>
         <%= number_with_precision(@future_p_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
+      </li>
+                  <li>
+        <div class='extrawide'>Delivery Ratio:</div>
+        <%= @p_factors %>
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
@@ -257,12 +264,15 @@
         <div class='extrawide'>Credits:</div>
         <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_p], :precision => 0, delimiter: ',') : 0.00 %>
       </li>
-      <li></li>
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
       <li>
         <div class='extrawide'>Future sediment load for animal HQ (EOS):</div>
         <%= number_with_precision(@future_sediment_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
+      </li>
+                        <li>
+        <div class='extrawide'>Delivery Ratio:</div>
+        <%= @s_factors %>
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>

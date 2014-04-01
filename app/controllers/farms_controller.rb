@@ -36,6 +36,11 @@ class FarmsController < ApplicationController
     # sort fields 'naturally'
     @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
 
+    @watersheds = (@fields.collect {|x| x.watershed_segment}).uniq
+    @p_factors = ((@watersheds.collect {|z| z.p_delivery_factor}).uniq).map {|i| i.to_s }.join(",")
+    @n_factors = ((@watersheds.collect {|z| z.n_delivery_factor}).uniq).map {|i| i.to_s }.join(",")
+    @s_factors = ((@watersheds.collect {|z| z.sediment_delivery_factor}).uniq).map {|i| i.to_s }.join(",")
+
     # check if the farm meets baseline or not
     @baseline_n_load_fields = 0
     @current_n_load_fields = 0
