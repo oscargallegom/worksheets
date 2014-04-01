@@ -1104,6 +1104,7 @@ module BmpCalculations
 
   # does the farm meet baseline
   def is_farm_meets_baseline(farm)
+    logger.debug "@@@@@@@@@@@@@@@@@@@ SAY HI"
 
     is_meet_baseline =true
 
@@ -1156,6 +1157,9 @@ module BmpCalculations
             end
           end
           if (!is_soil_conservation)
+            return false
+          end
+          if field.hel_soils == false
             return false
           end
         end

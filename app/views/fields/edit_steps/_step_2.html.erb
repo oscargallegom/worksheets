@@ -74,7 +74,12 @@
               <%= f.text_field :p_test_value, :class => 'textboxMedium', :type => 'number', :required => true, :min => 0, :step => 'any' %>
               &nbsp;<span id='p_test_value_unit'></span>
             </li>
-
+            <% if @field.farm.state.id == 21 %>
+                        <li>
+              <div class='wide'>Does this field contain Highly Erodible (HEL) soils?</div>
+              <%= f.check_box :hel_soils %>
+            </li>
+<br><% end %>
             <% if !@field.soils.empty? %>
 
                 <div id='li_soil'>

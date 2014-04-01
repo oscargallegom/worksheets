@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303235040) do
+ActiveRecord::Schema.define(:version => 20140401192856) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(:version => 20140303235040) do
     t.float    "fence_length_future"
     t.integer  "farm_id"
     t.string   "segment_id"
+    t.boolean  "hel_soils"
   end
 
   create_table "future_bmps", :force => true do |t|

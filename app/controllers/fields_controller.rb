@@ -112,7 +112,9 @@ class FieldsController < ApplicationController
             end
           end
           if (is_manure_fertilizer_not_incorporated)
-            flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
+            unless @field.hel_soils == true
+              flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
+            end
           end
         end
         # if field is pasture
