@@ -32,7 +32,6 @@ module Ntt
          res = Net::HTTP.post_form(uri, 'input' => xml)
          puts res.body
          doc = Nokogiri::XML(res.body)
-         logger.debug "!!!!!!!!!!!!!!! #{res.body}"
 
         if (!doc.nil?)
           return [true, doc]

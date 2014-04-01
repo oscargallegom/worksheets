@@ -96,6 +96,7 @@ class FieldsController < ApplicationController
       # does the field meet baseline - only for Maryland
       if (@farm.site_state_id == 21)
         flash.now[:meet_baseline] ||= []
+        logger.debug "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& IS ANYBODY OUT THERE"
 
         # if crop or hay
         if (@field.field_type_id == 1 || @field.field_type_id == 3)
@@ -117,6 +118,17 @@ class FieldsController < ApplicationController
         # if field is pasture
         if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
           flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
+        end
+        if (@field.field_type_id == 2)
+          is_soil_conservation = false
+          @field.bmps.each do |bmp|
+            if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
+              is_soil_conservation = true
+            end
+          end
+          if (!is_soil_conservation)
+            flash.now[:meet_baseline] << 'Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab.'
+          end
         end
         # if crop or hay
         if (@field.field_type_id == 1 || @field.field_type_id == 3)

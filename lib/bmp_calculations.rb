@@ -16,12 +16,9 @@ module BmpCalculations
 
     #if (is_current_data_valid)
     #success, content = callNtt(field, false)
-    logger.debug "What is field.ntt_xml_current? #{field.ntt_xml_current}"
     if (!field.ntt_xml_current.nil?)
-      logger.debug "am i here?"
       content = Nokogiri::XML(field.ntt_xml_current)
     else
-      logger.debug "or am i here?"
       content = nil
     end
 
@@ -44,7 +41,6 @@ module BmpCalculations
         @ntt_results[:crops] = crops
       end
     else
-      logger.debug "!!!!!!!!!!!!!!!! Content: #{content}"
       raise 'Could not retrieve NTT data.'
     end
 
@@ -1156,10 +1152,12 @@ module BmpCalculations
           is_soil_conservation = false
           field.bmps.each do |bmp|
             if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
+              logger.debug "************hi can you see me"
               is_soil_conservation = true
             end
           end
           if (!is_soil_conservation)
+            logger.debug "!!!!!!!!!!!!!!!!!!!!HERE I AM"
             return false
           end
         end
