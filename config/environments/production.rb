@@ -67,16 +67,25 @@ NutrientNet::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   # added by Olivier for devise
   # TODO: find a long term solution (SMTP server/gmail)
-  config.action_mailer.default_url_options = {:host => ENV['host']}
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-      :address => 'smtp.gmail.com', #'localhost',
-      :port => 587,
-      :domain => 'mail.google.com', # mail.customdomain.com if you use google apps
-      :authentication => "plain",
-      :user_name => 'nutrientnet.project@gmail.com',
-      :password => 'nutrientnetprojectallintel'
-  }
+  config.action_mailer.delivery_method = :sendmail
+# Defaults to:
+# config.action_mailer.sendmail_settings = {
+#   location: '/usr/sbin/sendmail',
+#   arguments: '-i -t'
+# }
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { :host => 'http://cbntt.org' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'mail.google.com',
+    user_name:            'cbnttmanager',
+    password:             '123tsu!@#',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 
 
 

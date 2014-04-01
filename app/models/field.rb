@@ -446,7 +446,9 @@ class Field < ActiveRecord::Base
         if success
           logger.debug "!!!!!!!!!!!!!!!! CONTENT: #{content}"
           @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+          logger.debug "wuuuuut? @ntt_results: #{@ntt_results}"
           if (@ntt_results['ErrorCode'] != '0')
+            logger.debug "*** am i hiding in here?"
             self.ntt_xml_current = nil
             ENV['debug'] += 'Error retrieving current<br/>'
             self[:ntt_call_status] += 'Could not retrieve NTT data.'

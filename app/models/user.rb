@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   #before_save :set_default
   before_create :default_role
-  #after_create :send_welcome_email
+  after_create :send_welcome_email
 
   def deleted
     !deleted_at.nil?

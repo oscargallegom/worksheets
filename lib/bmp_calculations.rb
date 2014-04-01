@@ -16,6 +16,7 @@ module BmpCalculations
 
     #if (is_current_data_valid)
     #success, content = callNtt(field, false)
+    logger.debug "What is field.ntt_xml_current? #{field.ntt_xml_current}"
     if (!field.ntt_xml_current.nil?)
       logger.debug "am i here?"
       content = Nokogiri::XML(field.ntt_xml_current)
