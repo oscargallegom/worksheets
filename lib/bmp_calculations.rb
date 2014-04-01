@@ -1159,8 +1159,10 @@ module BmpCalculations
           if (!is_soil_conservation)
             return false
           end
-          if field.hel_soils == false
-            return false
+          if is_commercial_or_manure_fertilizer == true
+            if field.hel_soils == false
+              return false
+            end
           end
         end
 
