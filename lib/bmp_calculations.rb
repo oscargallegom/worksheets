@@ -1113,24 +1113,26 @@ module BmpCalculations
       # does the field meet baseline - only for Maryland
       if (field.farm.site_state_id == 21)
 
-        # if crop or hay
-        #if (field.field_type_id == 1 || field.field_type_id == 3)
-        #  # check if at least one manure fertilizer incorporated
-        #  is_manure_fertilizer_incorporated = false
-        #  field.strips.each do |strip|
-        #    strip.crop_rotations.each do |crop_rotation|
-        #      crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-        #        if (manure_fertilizer_application.is_incorporated)
-        #          # this is actually valid
-        #          is_manure_fertilizer_incorporated = true
-        #        end
-        #      end
-        #    end
-        #  end
-        #  if (is_manure_fertilizer_incorporated)
-        #    return false
-        #  end
-        #end
+        #if crop or hay
+        if (field.field_type_id == 1 || field.field_type_id == 3)
+         # check if at least one manure fertilizer incorporated
+         is_manure_fertilizer_incorporated = false
+         field.strips.each do |strip|
+           strip.crop_rotations.each do |crop_rotation|
+             crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+               if (manure_fertilizer_application.is_incorporated)
+                 # this is actually valid
+                 is_manure_fertilizer_incorporated = true
+               end
+             end
+           end
+         end
+         if is_manure_fertilizer_incorporated == false
+           if field.hel_soils == false
+              return false
+            end
+         end
+        end
 
         # if field is pasture
         if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
@@ -1158,11 +1160,6 @@ module BmpCalculations
           end
           if (!is_soil_conservation)
             return false
-          end
-          if is_manure_fertilizer_incorporated == false
-            if field.hel_soils == false
-              return false
-            end
           end
         end
 
