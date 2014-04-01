@@ -1152,12 +1152,10 @@ module BmpCalculations
           is_soil_conservation = false
           field.bmps.each do |bmp|
             if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-              logger.debug "************hi can you see me"
               is_soil_conservation = true
             end
           end
           if (!is_soil_conservation)
-            logger.debug "!!!!!!!!!!!!!!!!!!!!HERE I AM"
             return false
           end
         end

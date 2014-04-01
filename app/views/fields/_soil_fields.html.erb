@@ -2,6 +2,10 @@
 </li>
 <li><b> <%= f.object.map_unit_key %>, <%= f.object.component_name %>, <%= f.object.map_unit_name %>
   <a href="#" class='detailsLink<%= soil_index+1 %>'>(show details)</a> </b></li>
+  <li class='liSoil<%= soil_index+1 %>' style="display: none;">
+<%= f.label :percentage, 'Percent converage:'.html_safe, :class => 'wide' %>
+  <%= ((f.object.percent)*100).round(2) %>%
+</li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
   <%= f.label :clay, 'Clay, Sand, Silt:<em>*</em>'.html_safe, :class => 'wide' %>
   <%= f.text_field :percent_clay, :type => 'number', :class => 'textboxSmall', :required => true, :min => 0, :max => 100, :step => 'any' %>
