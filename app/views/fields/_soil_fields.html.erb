@@ -3,7 +3,7 @@
 <li><b> <%= f.object.map_unit_key %>, <%= f.object.component_name %>, <%= f.object.map_unit_name %>
   <a href="#" class='detailsLink<%= soil_index+1 %>'>(show details)</a> </b></li>
   <li class='liSoil<%= soil_index+1 %>' style="display: none;">
-<%= f.label :percentage, 'Percent converage:'.html_safe, :class => 'wide' %>
+<%= f.label :percentage, 'Percent coverage:'.html_safe, :class => 'wide' %>
   <%= ((f.object.percent)*100).round(2) %>%
 </li>
 <li class='liSoil<%= soil_index+1 %>' style="display: none;">
