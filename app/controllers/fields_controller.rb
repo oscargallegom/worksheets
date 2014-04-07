@@ -2,7 +2,7 @@ class FieldsController < ApplicationController
 
   include BmpCalculations
   include Ntt
-  include Baseline
+  #include Baseline
 
   load_and_authorize_resource :farm
   load_and_authorize_resource :field, :through => :farm
@@ -100,7 +100,7 @@ class FieldsController < ApplicationController
 
           @current_sediment = (@ntt_results['Sediment'].to_f).round(2)
 
-          @current_carbon = (@ntt_results['Sediment'].to_f).round(2)
+          @current_carbon = (@ntt_results['Carbon'].to_f).round(2)
         end
 
         if @ntt_results.nil?
