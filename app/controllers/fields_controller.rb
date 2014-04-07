@@ -101,6 +101,7 @@ class FieldsController < ApplicationController
           @current_sediment = (@ntt_results['Sediment'].to_f).round(2)
 
           @current_carbon = (@ntt_results['Carbon'].to_f).round(2)
+
         end
 
         if (!@ntt_results_future.nil?)
