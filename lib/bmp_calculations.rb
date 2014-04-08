@@ -197,11 +197,11 @@ module BmpCalculations
     end
     # if permanent pasture and no fencing in place future
     if (field.field_type_id == 2 && !field.is_streambank_fencing_in_place_future?)
-      if field.ntt_xml_future.nil?
-        degraded_pasture_acres_future = 0
-      else
+      #if field.ntt_xml_future.nil?
+       # degraded_pasture_acres_future = 0
+      #else
         degraded_pasture_acres_future = field.fence_length.to_f * 35.0 / 43560.0
-      end
+      #end
 
       trp_n_conversion_future = field.watershed_segment.total_n_trp * degraded_pasture_acres_future
       trp_p_conversion_future = field.watershed_segment.total_p_trp * degraded_pasture_acres_future
