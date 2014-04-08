@@ -183,13 +183,13 @@
       </td>
       <td>
         <b>
-          <%= number_with_precision((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results.key?('OrganicN') && @ntt_results.key?('NO3') && @ntt_results.key?('TileDrainN')) %>
+          <%= @current_total_n %>
           lbs/ac
         </b>
       </td>
       <td>
         <b>
-          <%= number_with_precision((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN')) %>
+          <%= @future_total_n %>
           lbs/ac
         </b>
       </td>
@@ -199,11 +199,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)
       </td>
       <td>
-        <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results.key?('OrganicN') %>
+        <%= @current_sediment_organic_n %>
         lbs/ac
       </td>
       <td>
-        <%= number_with_precision(@ntt_results_future['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results_future.key?('OrganicN') %>
+        <%= @future_sediment_organic_n %>
         lbs/ac
       </td>
     </tr>
@@ -212,11 +212,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)
       </td>
       <td>
-        <%= number_with_precision(@ntt_results['NO3'], :precision => 2, delimiter: ',') %>
+        <%= @current_soluble_n %>
         lbs/ac
       </td>
       <td>
-        <%= number_with_precision(@ntt_results_future['NO3'], :precision => 2, delimiter: ',') %>
+        <%= @future_soluble_n %>
         lbs/ac
       </td>
     </tr>
@@ -225,11 +225,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N
       </td>
       <td>
-        <%= number_with_precision(@ntt_results['TileDrainN'], :precision => 2, delimiter: ',') %>
+        <%= @tile_drained_n %>
         lbs/ac
       </td>
       <td>
-        <%= number_with_precision(@ntt_results_future['TileDrainN'], :precision => 2, delimiter: ',') %>
+        <%= @future_tile_drained_n %>
         lbs/ac
       </td>
     </tr>
@@ -239,13 +239,13 @@
       </td>
       <td>
         <b>
-          <%= number_with_precision((@ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
+          <%= @current_total_p %>
           lbs/ac
         </b>
       </td>
       <td>
         <b>
-          <%= number_with_precision((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
+          <%= @future_total_p %>
           lbs/ac
         </b>
       </td>
@@ -255,11 +255,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic P)
       </td>
       <td>
-        <%= number_with_precision(@ntt_results['OrganicP'], :precision => 2, delimiter: ',') %>
+        <%= @current_sediment_organic_p %>
         lbs/ac
       </td>
       <td>
-        <%= number_with_precision(@ntt_results_future['OrganicP'], :precision => 2, delimiter: ',') %>
+        <%= @future_sediment_organic_p %>
         lbs/ac
       </td>
     </tr>
@@ -268,11 +268,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble P
       </td>
       <td>
-        <%= number_with_precision(@ntt_results['SolubleP'], :precision => 2, delimiter: ',') %>
+        <%= @current_soluble_p %>
         lbs/ac
       </td>
       <td>
-        <%= number_with_precision(@ntt_results_future['SolubleP'], :precision => 2, delimiter: ',') %>
+        <%= @future_soluble_p %>
         lbs/ac
       </td>
     </tr>
@@ -281,11 +281,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained P
       </td>
       <td>
-        <%= number_with_precision(@ntt_results['TileDrainP'], :precision => 2, delimiter: ',') %>
+        <%= @tile_drained_p %>
         lbs/ac
       </td>
       <td>
-        <%= number_with_precision(@ntt_results_future['TileDrainP'], :precision => 2, delimiter: ',') %>
+        <%= @future_tile_drained_p %>
         lbs/ac
       </td>
     </tr>
@@ -295,13 +295,13 @@
       </td>
       <td>
         <b>
-          <%= number_with_precision(@ntt_results['Flow'], :precision => 2, delimiter: ',') %>
+          <%= @current_flow %>
           in
         </b>
       </td>
       <td>
         <b>
-          <%= number_with_precision(@ntt_results_future['Flow'], :precision => 2, delimiter: ',') %>
+          <%= @future_flow %>
           in
         </b>
       </td>
@@ -312,13 +312,13 @@
       </td>
       <td>
         <b>
-          <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: ',') %>
+          <%= @current_sediment %>
           tons/ac
         </b>
       </td>
       <td>
         <b>
-          <%= number_with_precision(@ntt_results_future['Sediment'], :precision => 2, delimiter: ',') %>
+          <%= @future_sediment %>
           tons/ac
         </b>
       </td>
@@ -329,19 +329,17 @@
       </td>
       <td>
         <b>
-          <%= number_with_precision(@ntt_results['Carbon'], :precision => 2, delimiter: ',') %>
+          <%= @current_carbon %>
           lbs/ac
         </b>
       </td>
       <td>
         <b>
-          <%= number_with_precision(@ntt_results_future['Carbon'], :precision => 2, delimiter: ',') %>
+          <%= @future_carbon %>
           lbs/ac
         </b>
       </td>
     </tr>
-
-    <% if (!@ntt_results[:crops].nil? || !@ntt_results_future[:crops].nil?) %>
         <tr>
           <td>
             <b>Crop Yield</b>
@@ -353,10 +351,10 @@
             <b></b>
           </td>
         </tr>
-
         <tr>
           <td></td>
           <td style="white-space: nowrap">
+            <% if !@ntt_results.nil? %>
             <% if !@ntt_results[:crops].nil? %>
                 <% @ntt_results[:crops].each do |crop| %>
                     <b><%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %>:</b>
@@ -364,8 +362,10 @@
                     <br/>
                 <% end %>
             <% end %>
+            <% end %>
           </td>
           <td style="white-space: nowrap">
+            <% if !@ntt_results_future.nil? %>
             <% if !@ntt_results_future[:crops].nil? %>
                 <% @ntt_results_future[:crops].each do |crop| %>
                     <b><%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %>:</b>
@@ -373,9 +373,9 @@
                     <br/>
                 <% end %>
             <% end %>
+            <% end %>
           </td>
         </tr>
-    <% end %>
     </table>
 
     </ol>

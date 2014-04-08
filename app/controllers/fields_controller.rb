@@ -101,12 +101,37 @@ class FieldsController < ApplicationController
           @current_sediment = (@ntt_results['Sediment'].to_f).round(2)
 
           @current_carbon = (@ntt_results['Carbon'].to_f).round(2)
+
+        end
+
+        if (!@ntt_results_future.nil?)
+          @future_total_n = ((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f) if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN'))).round(2)
+
+          @future_sediment_organic_n = (@ntt_results_future['OrganicN'].to_f if @ntt_results_future.key?('OrganicN')).round(2)
+
+          @future_soluble_n = (@ntt_results_future['NO3'].to_f).round(2)
+
+          @future_tile_drained_n = (@ntt_results_future['TileDrainN'].to_f).round(2)
+
+          @future_total_p = ((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f)).round(2)
+
+          @future_sediment_organic_p = (@ntt_results_future['OrganicP'].to_f).round(2)
+
+          @future_soluble_p = (@ntt_results_future['SolubleP'].to_f).round(2)
+
+          @future_tile_drained_p = (@ntt_results_future['TileDrainP'].to_f).round(2)
+
+          @future_flow = (@ntt_results_future['Flow'].to_f).round(2)
+
+          @future_sediment = (@ntt_results_future['Sediment'].to_f).round(2)
+
+          @future_carbon = (@ntt_results_future['Carbon'].to_f).round(2)
         end
 
         if @ntt_results.nil?
           flash.now[:error] = 'Error: Could not retrieve NTT data.'
         elsif @ntt_results_future.nil? && @step == '8'
-          flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
+          #flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
         end
 
       #rescue Exception => e
@@ -128,9 +153,9 @@ class FieldsController < ApplicationController
 
           # checkBaseline(@field)
           # if checkBaseline(@field) == false
-          #   unless @field.hel_soils == true
-          #     flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
-          #   end
+          # unless @field.hel_soils == true
+          # flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
+          # end
           # end
           is_manure_fertilizer_not_incorporated = false
           @field.strips.each do |strip|
