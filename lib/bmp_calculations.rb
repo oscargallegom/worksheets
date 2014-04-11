@@ -71,6 +71,7 @@ module BmpCalculations
         #raise 'No NTT data for future scenario.'
       else
         total_n_per_acre_future = @ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f
+
         total_p_per_acre_future = @ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f
         total_sediment_per_acre_future = @ntt_results_future['Sediment'].to_f
 
@@ -90,10 +91,14 @@ module BmpCalculations
     # add adjustment factor
     if field.field_type_id == 1  # crop
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_crop_adjust
+
+
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_crop_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_crop_adjust
 
       total_adjusted_n_per_acre_future = total_n_per_acre_future  * field.watershed_segment.n_crop_adjust
+
+
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_crop_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_crop_adjust
     end
@@ -533,9 +538,9 @@ module BmpCalculations
     upland_wetland_treated_area_p_future = [field.wetland_treated_area_future.to_f, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future - forest_fence_treated_upland_acres_p_future - grass_buffer_treated_upland_acres_p_future].min
     upland_wetland_treated_area_sediment_future = [field.wetland_treated_area_future.to_f, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future - forest_fence_treated_upland_acres_sediment_future - grass_buffer_treated_upland_acres_sediment_future].min
 
-    upland_wetland_n_reduction_future = field.is_wetland_future ? 0 : [0, upland_wetland_treated_area_n_future * n_reduction_for_wetland * total_adjusted_n_per_acre_future].max
-    upland_wetland_p_reduction_future = field.is_wetland_future ? 0 : [0, upland_wetland_treated_area_p_future * p_reduction_for_wetland * total_adjusted_p_per_acre_future].max
-    upland_wetland_sediment_reduction_future = field.is_wetland_future ? 0 : [0, upland_wetland_treated_area_sediment_future * sediment_reduction_for_wetland * total_adjusted_sediment_per_acre_future].max
+    upland_wetland_n_reduction_future = !field.is_wetland_future ? 0 : [0, upland_wetland_treated_area_n_future * n_reduction_for_wetland * total_adjusted_n_per_acre_future].max
+    upland_wetland_p_reduction_future = !field.is_wetland_future ? 0 : [0, upland_wetland_treated_area_p_future * p_reduction_for_wetland * total_adjusted_p_per_acre_future].max
+    upland_wetland_sediment_reduction_future = !field.is_wetland_future ? 0 : [0, upland_wetland_treated_area_sediment_future * sediment_reduction_for_wetland * total_adjusted_sediment_per_acre_future].max
 
 
     # Calculate load for unconverted acres after upland acre reductions
@@ -544,6 +549,8 @@ module BmpCalculations
     new_total_sediment_per_acre = total_unconverted_acres==0 ? 0 : ((total_unconverted_acres * total_adjusted_sediment_per_acre) - upland_streambank_grass_sediment_reduction - upland_streambank_forest_sediment_reduction - upland_grass_buffer_sediment_reduction - upland_forest_buffer_sediment_reduction - upland_wetland_sediment_reduction) / (total_unconverted_acres)
     # Future
     new_total_n_per_acre_future = total_unconverted_acres_future==0 ? 0 : ((total_unconverted_acres_future * total_adjusted_n_per_acre_future) - upland_streambank_grass_n_reduction_future - upland_streambank_forest_n_reduction_future - upland_grass_buffer_n_reduction_future - upland_forest_buffer_n_reduction_future - upland_wetland_n_reduction_future) / (total_unconverted_acres_future)
+
+
     new_total_p_per_acre_future = total_unconverted_acres_future==0 ? 0 : ((total_unconverted_acres_future * total_adjusted_p_per_acre_future) - upland_streambank_grass_p_reduction_future - upland_streambank_forest_p_reduction_future - upland_grass_buffer_p_reduction_future - upland_forest_buffer_p_reduction_future - upland_wetland_p_reduction_future) / (total_unconverted_acres_future)
     new_total_sediment_per_acre_future = total_unconverted_acres_future==0 ? 0 : ((total_unconverted_acres_future * total_adjusted_sediment_per_acre_future) - upland_streambank_grass_sediment_reduction_future - upland_streambank_forest_sediment_reduction_future - upland_grass_buffer_sediment_reduction_future - upland_forest_buffer_sediment_reduction_future - upland_wetland_sediment_reduction_future) / (total_unconverted_acres_future)
 
@@ -586,10 +593,16 @@ module BmpCalculations
     end
 
     total_n_for_unconverted_acre = new_total_n_per_acre * total_unconverted_acres
+    if field.name == '2'
+      logger.debug "$$$$$$$$$$$$$$$$$ new_total_n_per_acre for field 2: #{new_total_n_per_acre}"
+    end
     total_p_for_unconverted_acre = new_total_p_per_acre * total_unconverted_acres
     total_sediment_for_unconverted_acre = new_total_sediment_per_acre * total_unconverted_acres
     # future
     total_n_for_unconverted_acre_future = new_total_n_per_acre_future * total_unconverted_acres_future
+    if field.name == '2'
+      logger.debug "$$$$$$$$$$$$$$$$$ new_total_n_per_acre_future for field 2: #{new_total_n_per_acre_future}"
+    end
     total_p_for_unconverted_acre_future = new_total_p_per_acre_future * total_unconverted_acres_future
     total_sediment_for_unconverted_acre_future = new_total_sediment_per_acre_future * total_unconverted_acres_future
 

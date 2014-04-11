@@ -78,10 +78,16 @@ class FarmsController < ApplicationController
         end
 
         @current_n_load_fields += @current_totals[:new_total_n]
+        if field.name == '2'
+          logger.debug ">>>>>>>>>>>we are in field #{field.name}>>>>>>>>>>>>>>>>> @current_totals[:new_total_n]: #{@current_totals[:new_total_n]}"
+        end
         @current_p_load_fields += @current_totals[:new_total_p]
         @current_sediment_load_fields += @current_totals[:new_total_sediment]
 
         @future_n_load_fields += @current_totals[:new_total_n_future]
+        if field.name == '2'
+          logger.debug ">>>>>>>>>>>>>>>>>>>>>>>>>>>> @current_totals[:new_total_n_future]: #{@current_totals[:new_total_n_future]}"
+        end
         @future_p_load_fields += @current_totals[:new_total_p_future]
         @future_sediment_load_fields += @current_totals[:new_total_sediment_future]
 
@@ -430,9 +436,11 @@ class FarmsController < ApplicationController
           @field.soils.build
         end
 
+        @soil_total = 0
 
         (0..@nbSoils-1).each do |i|
           @field.soils[i].percent = @listSoils[i][:percent]
+          @soil_total += @listSoils[i][:percent].to_f
           @field.soils[i].map_unit_key = @listSoils[i][:mukey]
           @field.soils[i].niccdcdpct = @listSoils[i][:niccdcdpct]
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
@@ -462,7 +470,17 @@ class FarmsController < ApplicationController
 
           # TODO: how to display errors?
 
+        end 
+
+        logger.debug "@@@@@@@@@@@@@@@@@@@ SOIL TOTAL: #{@soil_total}"
+        @field.soils.each do |soil|
+          logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$ soil percent #{soil.percent}"
+          soil.percent = (soil.percent)/(@soil_total)
+          logger.debug "****************************** NEW soil percent #{soil.percent}"
+          soil.save
         end
+
+
 
         # there should be at least one strip
         @field.strips.build if @field.strips.empty?

@@ -82,9 +82,9 @@ module Ntt
           fieldArea = field.is_acres_from_map ? field.acres_from_map : field.acres_from_user
 
           if (number_of_strips == 1) # if no strip the area is the field area
-            area = fieldArea
+            area = fieldArea*(0.404686)
           else # otherwise it is a fraction of the field area
-            area = strip.length.to_f * fieldArea / fieldsWidth * 0.405
+            area = strip.length.to_f * fieldArea / fieldsWidth * 0.404686
           end
 
           tileDrainDepth = field.tile_drainage_depth==nil ? '' : field.tile_drainage_depth * 304.8
