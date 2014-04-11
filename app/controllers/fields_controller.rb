@@ -472,7 +472,7 @@ class FieldsController < ApplicationController
     @field.grass_buffer_average_width_future = @field.grass_buffer_average_width
     @field.grass_buffer_length_future = @field.grass_buffer_length
     @field.is_grass_buffer_planned = @field.is_grass_buffer_planned
-    @field.is_wetland = @field.is_wetland
+    @field.is_wetland_future = @field.is_wetland
     @field.wetland_area_future = @field.wetland_area
     @field.wetland_treated_area_future =@field.wetland_treated_area
     @field.is_wetland_planned_future = @field.is_wetland_planned
