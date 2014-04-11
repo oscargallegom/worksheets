@@ -192,7 +192,11 @@ module Ntt
 
               is_permanent_pasture = field.field_type_id == 2 ? 1 : 0
 
-              xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6></OpVal6><OpVal7></OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              if field.field_type_id == 3
+                xml = xml + "<ManagementInfo><Operation>132</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6></OpVal6><OpVal7></OpVal7><OpVal8>1</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              else
+                xml = xml + "<ManagementInfo><Operation>#{planting_operation}</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6></OpVal6><OpVal7></OpVal7><OpVal8>#{is_permanent_pasture}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+              end
 
               ########################################################
               # Cover crop

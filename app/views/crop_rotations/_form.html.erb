@@ -76,7 +76,7 @@
               </select>
             </li>
 
-            <% if (@field.field_type_id != 2) # hide if  field type is permanent pasture    %>
+            <% if (@field.field_type_id != 2 && @field.field_type_id != 3) # hide if  field type is permanent pasture    %>
                 <li>
                   <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
 
