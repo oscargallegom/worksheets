@@ -28,6 +28,9 @@ module BmpCalculations
         raise 'No NTT data available.'
       else
 
+        @testing_id = @ntt_results['ID']
+        logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ @testing_id #{@testing_id}"
+
 
         total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
         total_p_per_acre = @ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f
