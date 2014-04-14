@@ -14,17 +14,11 @@ module Ntt
     attempts=0
     doc = nil
 
-
-    logger.debug "~~~~~~~~~~~~~~~~~~~~~~~~~~~ say hello"
-
     begin
 
       success, content = buildXml(field, is_future)
-      logger.debug "$$$$$$$$$$$$$$$$ success: #{success}"
 
       if (success)
-
-        logger.debug "*********************************** say hi"
 
         xml = URI.escape(content.gsub('<', '[').gsub('>', ']'))
 
@@ -41,9 +35,7 @@ module Ntt
 
         if (!doc.nil?)
           return [true, doc]
-          return xml
         end
-        return xml
       else
         #content is the xml that is sent to NTT
         return [false, content]
@@ -57,12 +49,6 @@ module Ntt
   end
 
   def buildXml(field, is_future)
-
-            logger.debug "&&&&&&&&&&&&&&&&& SAY HELLO BUILD XML METHOD"
-
-            logger.debug "@@@@@ WHAT TIME IS IT? #{Time.now}"
-
-      current_time = Time.now
 
     #begin
 
