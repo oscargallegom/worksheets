@@ -240,12 +240,12 @@ module Ntt
 
                 # for nitrogen
                 if (total_n_applied > 0)
-                  xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>1</OpVal1><OpVal2>#{total_n_applied.round(3)}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                  xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>1</OpVal1><OpVal2>#{total_n_applied.round(3)}</OpVal2><OpVal3>#{incorporation_depth.round(2)}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
                 end
 
                 # for phosphorus
                 if (total_p_applied > 0)
-                  xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied.round(3)}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                  xml = xml + "<ManagementInfo><Operation>#{commercial_fertilizer_operation}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>2</OpVal1><OpVal2>#{total_p_applied.round(3)}</OpVal2><OpVal3>#{incorporation_depth.round(2)}</OpVal3><OpVal4>0</OpVal4><OpVal5>0</OpVal5><OpVal6>0</OpVal6><OpVal7>0</OpVal7><OpVal8>0</OpVal8><MID>#{mid}</MID></ManagementInfo>"
                 end
 
                 # if the incorporation date is different from the application date, add extra management info
@@ -347,7 +347,7 @@ module Ntt
                   end
                 end
 
-                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{manure_application_code}</OpVal1><OpVal2>#{application_rate}</OpVal2><OpVal3>#{incorporation_depth}</OpVal3><OpVal4>#{n_fraction.round(4)}</OpVal4><OpVal5>#{manure_type_id}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{p_fraction.round(4)}</OpVal7><OpVal8>#{manure_treatment}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
+                xml = xml + "<ManagementInfo><Operation>#{operation_code}</Operation><Year>#{application_date_year}</Year><Month>#{application_date_month}</Month><Day>#{application_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>#{manure_application_code}</OpVal1><OpVal2>#{application_rate}</OpVal2><OpVal3>#{incorporation_depth.round(2)}</OpVal3><OpVal4>#{n_fraction.round(4)}</OpVal4><OpVal5>#{manure_type_id}</OpVal5><OpVal6>0</OpVal6><OpVal7>#{p_fraction.round(4)}</OpVal7><OpVal8>#{manure_treatment}</OpVal8><MID>#{mid}</MID></ManagementInfo>"
 
                 # if the incorporation date is different from the application date, add extra management info
                 if manure_fertilizer_application.is_incorporated && (manure_fertilizer_application.application_date_year != manure_fertilizer_application.incorporation_date_year || manure_fertilizer_application.application_date_month != manure_fertilizer_application.incorporation_date_month || manure_fertilizer_application.application_date_day != manure_fertilizer_application.incorporation_date_day)
