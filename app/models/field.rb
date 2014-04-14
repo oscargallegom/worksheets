@@ -166,9 +166,11 @@ class Field < ActiveRecord::Base
     if step?(4)
        @strips = self.strips
        @strips.each do |strip|
+        unless strip.is_future == true
             if strip.crop_rotations.empty?
               errors.add(:strip, "must have at least one crop rotation. Please return to the crop management tab and either delete the empty strip or add rotations.")
             end
+          end
         end
       end
     end
