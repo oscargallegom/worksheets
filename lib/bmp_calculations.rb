@@ -69,6 +69,7 @@ module BmpCalculations
 
     if (!content.nil?)
       @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
+      logger.debug "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ntt results future: #{@ntt_results_future}"
       if (@ntt_results_future['ErrorCode'] != '0')
         @ntt_results_future = nil
         #raise 'No NTT data for future scenario.'

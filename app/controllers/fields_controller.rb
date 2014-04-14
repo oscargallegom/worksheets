@@ -3,6 +3,7 @@ class FieldsController < ApplicationController
   include BmpCalculations
   include Ntt
   #include Baseline
+  include ModelRun
 
   load_and_authorize_resource :farm
   load_and_authorize_resource :field, :through => :farm
@@ -77,62 +78,49 @@ class FieldsController < ApplicationController
       #begin
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
-        @ntt_results_future = @current_totals[:ntt_results_future]
+        # @ntt_results_future = @current_totals[:ntt_results_future]
 
-        if (@ntt_results.any?)
-          @current_total_n = ((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f) if (@ntt_results.key?('OrganicN') && @ntt_results.key?('NO3') && @ntt_results.key?('TileDrainN'))).round(2)
+        # if (@ntt_results.any?)
 
-          @current_sediment_organic_n = (@ntt_results['OrganicN'].to_f if @ntt_results.key?('OrganicN')).round(2)
+        #   @tile_drained_p = (@ntt_results['TileDrainP'].to_f).round(2)
 
-          @current_soluble_n = (@ntt_results['NO3'].to_f).round(2)
+        #   @current_flow = (@ntt_results['Flow'].to_f).round(2)
 
-          @tile_drained_n = (@ntt_results['TileDrainN'].to_f).round(2)
+        #   @current_sediment = (@ntt_results['Sediment'].to_f).round(2)
 
-          @current_total_p = ((@ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f)).round(2)
+        #   @current_carbon = (@ntt_results['Carbon'].to_f).round(2)
 
-          @current_sediment_organic_p = (@ntt_results['OrganicP'].to_f).round(2)
+        # end
 
-          @current_soluble_p = (@ntt_results['SolubleP'].to_f).round(2)
+        # if (!@ntt_results_future.nil?)
+        #   @future_total_n = ((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f) if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN'))).round(2)
 
-          @tile_drained_p = (@ntt_results['TileDrainP'].to_f).round(2)
+        #   @future_sediment_organic_n = (@ntt_results_future['OrganicN'].to_f if @ntt_results_future.key?('OrganicN')).round(2)
 
-          @current_flow = (@ntt_results['Flow'].to_f).round(2)
+        #   @future_soluble_n = (@ntt_results_future['NO3'].to_f).round(2)
 
-          @current_sediment = (@ntt_results['Sediment'].to_f).round(2)
+        #   @future_tile_drained_n = (@ntt_results_future['TileDrainN'].to_f).round(2)
 
-          @current_carbon = (@ntt_results['Carbon'].to_f).round(2)
+        #   @future_total_p = ((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f)).round(2)
 
-        end
+        #   @future_sediment_organic_p = (@ntt_results_future['OrganicP'].to_f).round(2)
 
-        if (!@ntt_results_future.nil?)
-          @future_total_n = ((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f) if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN'))).round(2)
+        #   @future_soluble_p = (@ntt_results_future['SolubleP'].to_f).round(2)
 
-          @future_sediment_organic_n = (@ntt_results_future['OrganicN'].to_f if @ntt_results_future.key?('OrganicN')).round(2)
+        #   @future_tile_drained_p = (@ntt_results_future['TileDrainP'].to_f).round(2)
 
-          @future_soluble_n = (@ntt_results_future['NO3'].to_f).round(2)
+        #   @future_flow = (@ntt_results_future['Flow'].to_f).round(2)
 
-          @future_tile_drained_n = (@ntt_results_future['TileDrainN'].to_f).round(2)
+        #   @future_sediment = (@ntt_results_future['Sediment'].to_f).round(2)
 
-          @future_total_p = ((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f)).round(2)
+        #   @future_carbon = (@ntt_results_future['Carbon'].to_f).round(2)
+        # end
 
-          @future_sediment_organic_p = (@ntt_results_future['OrganicP'].to_f).round(2)
-
-          @future_soluble_p = (@ntt_results_future['SolubleP'].to_f).round(2)
-
-          @future_tile_drained_p = (@ntt_results_future['TileDrainP'].to_f).round(2)
-
-          @future_flow = (@ntt_results_future['Flow'].to_f).round(2)
-
-          @future_sediment = (@ntt_results_future['Sediment'].to_f).round(2)
-
-          @future_carbon = (@ntt_results_future['Carbon'].to_f).round(2)
-        end
-
-        if @ntt_results.nil?
-          flash.now[:error] = 'Error: Could not retrieve NTT data.'
-        elsif @ntt_results_future.nil? && @step == '8'
-          #flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
-        end
+        # if @ntt_results.nil?
+        #   flash.now[:error] = 'Error: Could not retrieve NTT data.'
+        # elsif @ntt_results_future.nil? && @step == '8'
+        #   #flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
+        # end
 
       #rescue Exception => e
       #  flash.now[:error] = 'Error: ' + e.message
@@ -146,7 +134,6 @@ class FieldsController < ApplicationController
       # does the field meet baseline - only for Maryland
       if (@farm.site_state_id == 21)
         flash.now[:meet_baseline] ||= []
-        logger.debug "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& IS ANYBODY OUT THERE"
 
         # if crop or hay
         if (@field.field_type_id == 1 || @field.field_type_id == 3)
@@ -175,6 +162,10 @@ class FieldsController < ApplicationController
 
 
         end
+
+
+
+
         # if field is pasture
         if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
           flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
@@ -273,19 +264,26 @@ class FieldsController < ApplicationController
     end
 
     if session[:debug]
-      success, content = buildXml(@field, true) # TODO: remove/change
-      @input_xml = content # TODO: remove/change
-      success, content = callNtt(@field, (@step=='6' || @step=='7')) # TODO: remove/change
-      if (success)
-        @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
-        @output_xml = content
-        if (@results['ErrorCode'] != '0')
-          flash[:notice] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
-        end
-      else
-        flash[:notice] = 'Could not contact NTT: ' << content.to_s
-      end
+      # success, content = buildXml(@field, true) # TODO: remove/change
+      # @input_xml = content # TODO: remove/change
+      # success, content = callNtt(@field, (@step=='6' || @step=='7')) # TODO: remove/change
+      # if (success)
+      #   @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
+      #   @output_xml = content
+      #   if (@results['ErrorCode'] != '0')
+      #     flash[:notice] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
+      #   end
+      # else
+      #   flash[:notice] = 'Could not contact NTT: ' << content.to_s
+      # end
     end
+
+
+
+
+
+
+
 
     # if @field.strips > 1
     #   logger.debug "Testing fields controller. Number of strips: #{@field.strips.count}"
@@ -531,4 +529,21 @@ class FieldsController < ApplicationController
     end
 
   end
+
+  def run_model
+
+    model_run(@field)
+    calculate_bmps(@field)
+
+    redirect_to(:back)
+
+  end
+
+  def run_model_future
+    model_run_future(@field)
+    calculate_bmps(@field)
+
+    redirect_to(:back)
+end
+
 end

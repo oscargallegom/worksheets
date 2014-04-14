@@ -20,6 +20,10 @@
     <div>
     <fieldset>
     <ol>
+      <br>
+<%= link_to "Update Future Nutrient Load Results", run_model_future_farm_field_path, class: "callntt", method: :post %>
+<br><br>
+
     <li><h2 class='sectionHeading'>Nitrogen</h2></li>
     <li><span class='wide'>Baseline Load (EOS):</span>
       <% if @field.tmdl.nil? %>
@@ -203,13 +207,13 @@
       </td>
       <td>
         <b>
-          <%= @current_total_n %>
+          <%= @field.current_total_n %>
           lbs/ac
         </b>
       </td>
       <td>
         <b>
-          <%= @future_total_n %>
+          <%= @field.future_total_n %>
           lbs/ac
         </b>
       </td>
@@ -219,11 +223,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)
       </td>
       <td>
-        <%= @current_sediment_organic_n %>
+        <%= @field.current_sediment_organic_n %>
         lbs/ac
       </td>
       <td>
-        <%= @future_sediment_organic_n %>
+        <%= @field.future_sediment_organic_n %>
         lbs/ac
       </td>
     </tr>
@@ -232,11 +236,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)
       </td>
       <td>
-        <%= @current_soluble_n %>
+        <%= @field.current_soluble_n %>
         lbs/ac
       </td>
       <td>
-        <%= @future_soluble_n %>
+        <%= @field.future_soluble_n %>
         lbs/ac
       </td>
     </tr>
@@ -245,11 +249,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N
       </td>
       <td>
-        <%= @tile_drained_n %>
+        <%= @field.tile_drained_n %>
         lbs/ac
       </td>
       <td>
-        <%= @future_tile_drained_n %>
+        <%= @field.future_tile_drained_n %>
         lbs/ac
       </td>
     </tr>
@@ -259,13 +263,13 @@
       </td>
       <td>
         <b>
-          <%= @current_total_p %>
+          <%= @field.current_total_p %>
           lbs/ac
         </b>
       </td>
       <td>
         <b>
-          <%= @future_total_p %>
+          <%= @field.future_total_p %>
           lbs/ac
         </b>
       </td>
@@ -275,11 +279,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic P)
       </td>
       <td>
-        <%= @current_sediment_organic_p %>
+        <%= @field.current_sediment_organic_p %>
         lbs/ac
       </td>
       <td>
-        <%= @future_sediment_organic_p %>
+        <%= @field.future_sediment_organic_p %>
         lbs/ac
       </td>
     </tr>
@@ -288,11 +292,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble P
       </td>
       <td>
-        <%= @current_soluble_p %>
+        <%= @field.current_soluble_p %>
         lbs/ac
       </td>
       <td>
-        <%= @future_soluble_p %>
+        <%= @field.future_soluble_p %>
         lbs/ac
       </td>
     </tr>
@@ -301,11 +305,11 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained P
       </td>
       <td>
-        <%= @tile_drained_p %>
+        <%= @field.tile_drained_p %>
         lbs/ac
       </td>
       <td>
-        <%= @future_tile_drained_p %>
+        <%= @field.future_tile_drained_p %>
         lbs/ac
       </td>
     </tr>
@@ -315,13 +319,13 @@
       </td>
       <td>
         <b>
-          <%= @current_flow %>
+          <%= @field.current_flow %>
           in
         </b>
       </td>
       <td>
         <b>
-          <%= @future_flow %>
+          <%= @field.future_flow %>
           in
         </b>
       </td>
@@ -332,13 +336,13 @@
       </td>
       <td>
         <b>
-          <%= @current_sediment %>
+          <%= @field.current_sediment %>
           tons/ac
         </b>
       </td>
       <td>
         <b>
-          <%= @future_sediment %>
+          <%= @field.future_sediment %>
           tons/ac
         </b>
       </td>
@@ -349,13 +353,13 @@
       </td>
       <td>
         <b>
-          <%= @current_carbon %>
+          <%= @field.current_carbon %>
           lbs/ac
         </b>
       </td>
       <td>
         <b>
-          <%= @future_carbon %>
+          <%= @field.future_carbon %>
           lbs/ac
         </b>
       </td>

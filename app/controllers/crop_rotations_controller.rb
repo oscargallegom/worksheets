@@ -32,20 +32,20 @@ class CropRotationsController < ApplicationController
     @step = @strip.is_future ? '6' : '3'
 
     ################  TEST
-    if session[:debug]
-      success, content = buildXml(@field, false) # TODO: remove/change
-      @input_xml = content # TODO: remove/change
-      success, content = callNtt(@field, false) # TODO: remove/change
-      if (success)
-        @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
-        @output_xml = content
-        if (@results['ErrorCode'] != '0')
-          flash.now[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
-        end
-      else
-        flash.now[:error] = 'Could not contact NTT: ' << content.to_s
-      end
-    end
+    # if session[:debug]
+    #   success, content = buildXml(@field, false) # TODO: remove/change
+    #   @input_xml = content # TODO: remove/change
+    #   success, content = callNtt(@field, false) # TODO: remove/change
+    #   if (success)
+    #     @results = Hash.from_xml((content.xpath('//Results')).to_s)['Results']
+    #     @output_xml = content
+    #     if (@results['ErrorCode'] != '0')
+    #       flash.now[:error] = 'Could not retrieve NTT info: ' << @results['ErrorDes'] # TODO: check for error!
+    #     end
+    #   else
+    #     flash.now[:error] = 'Could not contact NTT: ' << content.to_s
+    #   end
+    # end
 
 
     ################  END TEST
@@ -119,3 +119,4 @@ class CropRotationsController < ApplicationController
   end
 
 end
+

@@ -162,6 +162,26 @@ class Farm < ActiveRecord::Base
     return credits
   end
 
+  # def does_farm_meet_n_baseline
+  #   if self.site_state_id == 47
+  #     if is_farm_meets_baseline(self) == true
+  #       return 'Yes'
+  #     else
+  #       return 'No'
+  #     end
+  #   else
+  #     if is_farm_meets_baseline(self) == true
+  #       if @baseline_n_load_fields
+  #         return 'Yes'
+  #       else 
+  #         return 'HI'
+  #       end
+  #     else
+  #       return 'No'
+  #     end
+  #   end
+  # end
+
 
   def percentCompleted
 
