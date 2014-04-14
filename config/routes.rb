@@ -2,6 +2,8 @@ NutrientNet::Application.routes.draw do
 
   resources :farms do
     resources :fields do
+      post :run_model, on: :member
+      post :run_model_future, on: :member
       post :export, on: :member
       post :populateFutureCropManagement, on: :member
       post :populateFutureBMPs, on: :member
@@ -114,3 +116,4 @@ NutrientNet::Application.routes.draw do
   match "/408", to: "errors#timeout"
   #match "/500", to: "errors#server_error"
 end
+

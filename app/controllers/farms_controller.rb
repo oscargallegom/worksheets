@@ -78,16 +78,14 @@ class FarmsController < ApplicationController
         end
 
         @current_n_load_fields += @current_totals[:new_total_n]
-        if field.name == '2'
           logger.debug ">>>>>>>>>>>we are in field #{field.name}>>>>>>>>>>>>>>>>> @current_totals[:new_total_n]: #{@current_totals[:new_total_n]}"
-        end
         @current_p_load_fields += @current_totals[:new_total_p]
         @current_sediment_load_fields += @current_totals[:new_total_sediment]
 
         @future_n_load_fields += @current_totals[:new_total_n_future]
-        if field.name == '2'
+
           logger.debug ">>>>>>>>>>>>>>>>>>>>>>>>>>>> @current_totals[:new_total_n_future]: #{@current_totals[:new_total_n_future]}"
-        end
+
         @future_p_load_fields += @current_totals[:new_total_p_future]
         @future_sediment_load_fields += @current_totals[:new_total_sediment_future]
 

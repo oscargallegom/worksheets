@@ -20,6 +20,11 @@
       <div>
         <fieldset>
           <ol>
+<br>
+<%= link_to "Update Current Nutrient Load Results", run_model_farm_field_path, class: "callntt", method: :post %>
+<br><br>
+
+
             <li><h2 class='sectionHeading'>Nitrogen</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
               <% if @field.tmdl.nil? %>
@@ -33,17 +38,15 @@
               <% end %>
 
               lb
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <% if @field.tmdl.nil? %>
-                  <%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<% if @field.tmdl.nil? %>
+                  (<%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% else # use Maryland TMDL     %>
+              <% else # use Maryland TMDL %>
                   <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% end %>
-              lb/ac)
+              <% end %>lb/ac)
             </li>
             <li><span class='wide'>Current Load (EOS):</span>
               <%= number_with_precision(@current_totals[:new_total_n], :precision => 2, delimiter: ',') %> lb
@@ -64,23 +67,22 @@
                   <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               <% end %>
               lb
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <% if @field.tmdl.nil? %>
-                  <%= number_with_precision(@watershed_segment[:p_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+                  (<%= number_with_precision(@watershed_segment[:p_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@watershed_segment[:p_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@watershed_segment[:p_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               <% else # use Maryland TMDL     %>
                   <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
                   <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
                   <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-              <% end %>
-              lb/ac)
+              <% end %>lb/ac)
             </li>
             <li><span class='wide'>Current Load (EOS):</span>
               <%= number_with_precision(@current_totals[:new_total_p], :precision => 2, delimiter: ',') %> lb
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              (<%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
               <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
               <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
@@ -92,8 +94,8 @@
               <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline] * @field.acres / 2000.0, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
               <%= number_with_precision(@watershed_segment[:sediment_hay_baseline] * @field.acres / 2000.0, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               tons
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
-              <%= number_with_precision(@watershed_segment[:sediment_crop_baseline] / 2000.0, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              (<%= number_with_precision(@watershed_segment[:sediment_crop_baseline] / 2000.0, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
               <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline] / 2000.0, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
               <%= number_with_precision(@watershed_segment[:sediment_hay_baseline] / 2000.0, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               tons/ac)
@@ -110,39 +112,39 @@
             <li><span class='extrawide'>&nbsp;</span><b>Current</b></li>
 
             <li><span class='extrawide'>Total N (before BMPs applied)</span><b>
-              <%= @current_total_n %>
+              <%= @field.current_total_n %>
               lbs/ac
             </b></li>
 
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
-              <%= @current_sediment_organic_n %>
+              <%= @field.current_sediment_organic_n %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>
-              <%= @current_soluble_n %>
+              <%= @field.current_soluble_n %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>
-              <%= @tile_drained_n %>
+              <%= @field.tile_drained_n %>
               lbs/ac
             </li>
 
 
             <li><span class='extrawide'>Total P (before BMPs applied)</span><b>
-              <%= @current_total_p %>
+              <%= @field.current_total_p %>
               lbs/ac
             </b></li>
 
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic P)</span>
-              <%= @current_sediment_organic_p %>
+              <%= @field.current_sediment_organic_p %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble P (NO3)</span>
-              <%= @current_soluble_p %>
+              <%= @field.current_soluble_p %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained P</span>
-              <%= @tile_drained_p %>
+              <%= @field.tile_drained_p %>
               lbs/ac
             </li>
 
