@@ -32,7 +32,11 @@ production:
   adapter: mysql2
   database: worksheets
   pool: 5
-  host: 10.20.1.56
-  username: ntt
+  # host: 10.20.1.56
+  # username: ntt
+  # password: TIAER05
+  ##### for test #####
+  host: localhost
+  username: test
   password: TIAER05
 
