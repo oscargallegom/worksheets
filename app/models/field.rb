@@ -299,6 +299,14 @@ class Field < ActiveRecord::Base
   #  end
   #end
 
+  def crops
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        crops = @ntt_results[:crops]
+        return crops
+  end
+
+
   def percentCompleted
 
     percentCompleted = 0

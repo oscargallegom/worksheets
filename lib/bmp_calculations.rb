@@ -432,6 +432,8 @@ module BmpCalculations
                                                               # field_type_id = 11 # default to high till until the user makes a selection
     end
 
+    logger.debug "$$$$$$$$$$$$$$$$$$ field.field_type_id: #{field.field_type_id}"
+
     hgmr_code = field.watershed_segment.hgmr_code
 
     # 100 = forest buffer

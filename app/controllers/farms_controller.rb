@@ -138,7 +138,7 @@ class FarmsController < ApplicationController
   # GET/farms/id/review
   def review
 
-    @completed = false
+    @completed = true
 
     add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
@@ -154,6 +154,7 @@ class FarmsController < ApplicationController
       @arrMajorBasins << field.watershed_segment.major_basin unless field.watershed_segment.nil? || @arrMajorBasins.include?(field.watershed_segment.major_basin)
       @arrTMDLs << field.tmdl.name if @farm.site_state_id != 21 && !field.tmdl.nil? && !@arrTMDLs.include?(field.tmdl.name)
       @arrTMDLs << field.tmdl_va if @farm.site_state_id == 21 && !@arrTMDLs.include?(field.tmdl_va)
+
     end
 
     # check if the farm meets baseline or not

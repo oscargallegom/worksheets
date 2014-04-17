@@ -364,11 +364,14 @@
     <td><h2>Baseline Crop Management</h2></td>
     <td></td>
   </tr>
-  <tr>
-        <td class="review-table">Map Unit:</td>
-        <td></td>
-  </tr>
-
+  <% unless field.ntt_xml_current == nil %>
+  <% field.crops.each do |crop| %>
+                      <tr><td>
+                        <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %></span>
+                        <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac</td>
+                      </tr>
+          <% end %>
+  <% end %>
   
   <% end %>
 
