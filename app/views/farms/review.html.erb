@@ -364,15 +364,19 @@
     <td><h2>Baseline Crop Management</h2></td>
     <td></td>
   </tr>
-  <% unless field.ntt_xml_current == nil %>
-  <% field.crops.each do |crop| %>
-                      <tr><td>
-                        <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %></span>
-                        <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac</td>
-                      </tr>
-          <% end %>
-  <% end %>
-  
+  <% field.strips.each do |strip| %>
+   <% i=1 %>
+   <tr><td class="review-table">Strip <%= i %> </td>
+ <td class="review-table"> </td></tr>
+   <% strip.crop_rotations.each do |crop| %>
+   <% j=1 %>
+<tr><td class="review-table">Crop #<%= j %>: <%= crop.crop.name %> </td>
+ <td class="review-table"> </td></tr>
+<% j +=1 %>
+<% i +=1 %>
+<% end %>
+<% end %>
+
   <% end %>
 
 
