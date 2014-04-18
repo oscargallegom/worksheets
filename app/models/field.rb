@@ -306,6 +306,34 @@ class Field < ActiveRecord::Base
         return crops
   end
 
+  def current_n_load
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        n_load = @current_totals[:new_total_n]
+        return n_load
+  end
+
+    def current_p_load
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        p_load = @current_totals[:new_total_p]
+        return p_load
+  end
+
+    def future_n_load
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        n_load = @current_totals[:new_total_n_future]
+        return n_load
+  end
+
+      def future_p_load
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        p_load = @current_totals[:new_total_p_future]
+        return p_load
+  end
+
 
   def percentCompleted
 

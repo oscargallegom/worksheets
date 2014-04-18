@@ -263,15 +263,15 @@
 <% @fields.each do |field| %>
 <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
   <tr>
-    <th>Field: <%= field.name %></th>
+    <th><b><font size="5">Field: <%= field.name %></font></th>
     <th> </th>
   </tr>
   <tr>
-    <td><h2>General</h2></td>
+    <td><h2 class='sectionHeading'>General</h2></td>
     <td></td>
   </tr>
       <tr>
-        <td class="review-table">Field Type:</td>
+        <div class="review-table"><td>Field Type:</td></div>
         <td><%= field.field_type.name unless field.field_type.nil? %></td>
       </tr>
       <tr>
@@ -290,25 +290,6 @@
       <td class="review-table">Total Area:</td>
       <td><%= number_with_precision(field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %></td>
      </tr>
-     <tr>
-        <td class="review-table">Managed area:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="review-table">Buffered area:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="review-table">Wetland area:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="review-table">Converted area:</td>
-        <td></td>
-      </tr>
-  <tr>
-    <td><h2>Soils</h2></td>
-    <td></td>
   </tr>
   <% i=0 %>
   <% field.soils.each do |soil| %>
@@ -361,21 +342,581 @@
   <% end %>
 
   <tr>
-    <td><h2>Baseline Crop Management</h2></td>
+    <td width="300px"><h2 class='sectionHeading'>Baseline Crop Management</h2></td>
     <td></td>
   </tr>
+  <% i=1 %>
   <% field.strips.each do |strip| %>
-   <% i=1 %>
-   <tr><td class="review-table">Strip <%= i %> </td>
+   <% if strip.is_future == false %>
+   <tr><td class="review-table"><b>Strip <%= i %> </b></td>
  <td class="review-table"> </td></tr>
+      <% unless strip.length == 1 %>
+      <% unless strip.length == nil %> <tr>
+        <td class="review-table">Length:</td>
+        <td><%= strip.length %> ft</td>
+  </tr> <% end %><% end %>
+ <% j=1 %>
    <% strip.crop_rotations.each do |crop| %>
-   <% j=1 %>
-<tr><td class="review-table">Crop #<%= j %>: <%= crop.crop.name %> </td>
+<tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
  <td class="review-table"> </td></tr>
+ <% if strip.field.field_type_id == 1 %><tr><td class="review-table">Plant Date: </td>
+ <td>Year <%= crop.plant_date_year %>, month <%= crop.plant_date_month %>, day <%= crop.plant_date_day %> </td></tr>
+ <tr><td class="review-table">Planting method: </td>
+ <td><%= PlantingMethod.find(crop.planting_method_id).name %> </td></tr>
+<tr><td class="review-table">Seeding rate: </td>
+ <td><% if crop.seeding_rate == nil %>default<% else %><%= crop.seeding_rate %> <% end %></td></tr>
+ <% end %>
+
+
+<% k=1 %>
+<% crop.commercial_fertilizer_applications.each do |fert| %>
+<tr><td class="review-table">Commercial Fertilizer #<%= k %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
+ <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N applied: </td>
+ <td><%= fert.total_n_applied %> lbs/ac</td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total P applied: </td>
+ <td><%= fert.total_p_applied %> lbs/ac</td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <% k +=1 %>
+<% end %>
+
+<% l=1 %>
+<% crop.manure_fertilizer_applications.each do |fert| %>
+<tr><td class="review-table">Manure Fertilizer #<%= l %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
+ <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure type: </td>
+ <td><%= ManureType.find(fert.manure_type_id).name %></td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure consistency: </td>
+ <td><%= ManureConsistency.find(fert.manure_consistency_id).name %></td></tr>
+   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N concentration: </td>
+ <td><%= fert.total_n_concentration %> lb/1000 gallons</td></tr>
+    <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P concentration: </td>
+ <td><%= fert.p_concentration %> lb/1000 gallons</td></tr>
+     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P type: </td>
+ <td><%= PType.find(fert.p_type_id).name %></td></tr>
+     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Application rate: </td>
+ <td><%= fert.application_rate %> 1000 gallons/ac</td></tr>
+      <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Moisture content: </td>
+ <td><%= fert.moisture_content %> %</td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <% l +=1 %>
+<% end %>
+
+<% m=1 %>
+<% crop.tillage_operations.each do |till| %>
+<tr><td class="review-table">Tillage Operation #<%= m %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation date: </td>
+ <td>Year <%= till.start_date_year %>,  month <%= till.start_date_month %>, day <%= till.start_date_day %></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation type: </td>
+ <td><%= TillageOperationType.find(till.tillage_operation_type_id).name %></td></tr>
+ <% m +=1 %>
+<% end %>
+
+<% n=1 %>
+<% crop.end_of_seasons.each do |harvest| %>
+<tr><td class="review-table">End of Season </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">End of season operation type: </td>
+ <td><%= EndOfSeasonType.find(harvest.end_of_season_type_id).name %></td></tr>
+ <tr><td class="review-table">End of season operation date: </td>
+ <td>Year <%= harvest.year %>,  month <%= harvest.month %>, day <%= harvest.day %></td></tr>
+ <tr><td class="review-table">Harvest as silage: </td>
+ <td><% if harvest.is_harvest_as_silage %>Yes<% else %>No<% end %></td></tr>
+ <% n +=1 %>
+<% end %>
+
+<% if crop.is_cover_crop %>
+ <tr><td class="review-table">Cover crop: </td>
+ <td><%= Crop.find(crop.cover_crop_id).name %></td></tr>
+  <tr><td class="review-table">Cover crop plant date: </td>
+ <td>Year <%= crop.cover_crop_plant_date_year %>,  month <%= crop.cover_crop_plant_date_month %>, day <%= crop.cover_crop_plant_date_day %></tr>
+   <tr><td class="review-table">Cover crop planting method: </td>
+ <td><%= PlantingMethod.find(crop.cover_crop_planting_method_id).name %></td></tr>
+ <% else %>
+  <tr><td class="review-table">Cover crop: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+
 <% j +=1 %>
 <% i +=1 %>
 <% end %>
 <% end %>
+<% end %>
+
+
+
+ <tr>
+    <td width="300px"><h2 class='sectionHeading'>Future Crop Management</h2></td>
+    <td></td>
+  </tr>
+  <% i=1 %>
+  <% field.strips.each do |strip| %>
+   <% if strip.is_future == true %>
+   <tr><td class="review-table"><b>Strip <%= i %> </b></td>
+ <td class="review-table"> </td></tr>
+      <% unless strip.length == 1 %>
+      <% unless strip.length == nil %> <tr>
+        <td class="review-table">Length:</td>
+        <td><%= strip.length %> ft</td>
+  </tr> <% end %><% end %>
+ <% j=1 %>
+   <% strip.crop_rotations.each do |crop| %>
+<tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
+ <td class="review-table"> </td></tr>
+ <% if strip.field.field_type_id == 1 %><tr><td class="review-table">Plant Date: </td>
+ <td>Year <%= crop.plant_date_year %>, month <%= crop.plant_date_month %>, day <%= crop.plant_date_day %> </td></tr>
+ <tr><td class="review-table">Planting method: </td>
+ <td><%= PlantingMethod.find(crop.planting_method_id).name %> </td></tr>
+<tr><td class="review-table">Seeding rate: </td>
+ <td><% if crop.seeding_rate == nil %>default<% else %><%= crop.seeding_rate %> <% end %></td></tr>
+ <% end %>
+
+
+<% k=1 %>
+<% crop.commercial_fertilizer_applications.each do |fert| %>
+<tr><td class="review-table">Commercial Fertilizer #<%= k %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
+ <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N applied: </td>
+ <td><%= fert.total_n_applied %> lbs/ac</td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total P applied: </td>
+ <td><%= fert.total_p_applied %> lbs/ac</td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <% k +=1 %>
+<% end %>
+
+<% l=1 %>
+<% crop.manure_fertilizer_applications.each do |fert| %>
+<tr><td class="review-table">Manure Fertilizer #<%= l %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
+ <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure type: </td>
+ <td><%= ManureType.find(fert.manure_type_id).name %></td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure consistency: </td>
+ <td><%= ManureConsistency.find(fert.manure_consistency_id).name %></td></tr>
+   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N concentration: </td>
+ <td><%= fert.total_n_concentration %> lb/1000 gallons</td></tr>
+    <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P concentration: </td>
+ <td><%= fert.p_concentration %> lb/1000 gallons</td></tr>
+     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P type: </td>
+ <td><%= PType.find(fert.p_type_id).name %></td></tr>
+     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Application rate: </td>
+ <td><%= fert.application_rate %> 1000 gallons/ac</td></tr>
+      <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Moisture content: </td>
+ <td><%= fert.moisture_content %> %</td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <% l +=1 %>
+<% end %>
+
+<% m=1 %>
+<% crop.tillage_operations.each do |till| %>
+<tr><td class="review-table">Tillage Operation #<%= m %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation date: </td>
+ <td>Year <%= till.start_date_year %>,  month <%= till.start_date_month %>, day <%= till.start_date_day %></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation type: </td>
+ <td><%= TillageOperationType.find(till.tillage_operation_type_id).name %></td></tr>
+ <% m +=1 %>
+<% end %>
+
+<% n=1 %>
+<% crop.end_of_seasons.each do |harvest| %>
+<tr><td class="review-table">End of Season </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">End of season operation type: </td>
+ <td><%= EndOfSeasonType.find(harvest.end_of_season_type_id).name %></td></tr>
+ <tr><td class="review-table">End of season operation date: </td>
+ <td>Year <%= harvest.year %>,  month <%= harvest.month %>, day <%= harvest.day %></td></tr>
+ <tr><td class="review-table">Harvest as silage: </td>
+ <td><% if harvest.is_harvest_as_silage %>Yes<% else %>No<% end %></td></tr>
+ <% n +=1 %>
+<% end %>
+
+<% if crop.is_cover_crop %>
+ <tr><td class="review-table">Cover crop: </td>
+ <td><%= Crop.find(crop.cover_crop_id).name %></td></tr>
+  <tr><td class="review-table">Cover crop plant date: </td>
+ <td>Year <%= crop.cover_crop_plant_date_year %>,  month <%= crop.cover_crop_plant_date_month %>, day <%= crop.cover_crop_plant_date_day %></tr>
+   <tr><td class="review-table">Cover crop planting method: </td>
+ <td><%= PlantingMethod.find(crop.cover_crop_planting_method_id).name %></td></tr>
+ <% else %>
+  <tr><td class="review-table">Cover crop: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+
+<% j +=1 %>
+<% i +=1 %>
+<% end %>
+<% end %>
+<% end %>
+
+
+
+
+  <tr>
+    <td width="300px"><h2 class='sectionHeading'>Baseline BMPs</h2></td>
+    <td></td>
+  </tr>
+  <% if field.is_forest_buffer %>
+ <tr><td class="review-table">Forest Buffer: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of buffer: </td>
+ <td><%= field.forest_buffer_average_width %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of buffer: </td>
+ <td><%= field.forest_buffer_length %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_forest_buffer_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Forest Buffer: </td>
+ <td>No</td></tr>
+ <% end %>
+
+   <% if field.is_grass_buffer %>
+ <tr><td class="review-table">Grass Buffer: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of buffer: </td>
+ <td><%= field.grass_buffer_average_width %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of buffer: </td>
+ <td><%= field.grass_buffer_length %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_grass_buffer_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Grass Buffer: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+    <% if field.is_fertilizer_application_setback %>
+ <tr><td class="review-table">Fertilizer application setback in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of setback: </td>
+ <td><%= field.fertilizer_application_setback_average_width %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of setback: </td>
+ <td><%= field.fertilizer_application_setback_length %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_fertilizer_application_setback_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Fertilizer application setback in place: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+    <% if field.is_wetland %>
+ <tr><td class="review-table">Wetland in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Wetland area: </td>
+ <td><%= field.wetland_area %> ac</td></tr>
+   <tr><td class="review-table">Upland area treated by wetland: </td>
+ <td><%= field.wetland_treated_area %> ac</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_wetland_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Wetland in place: </td>
+ <td>No</td></tr>
+ <% end %>
+
+     <% if field.field_type_id ==2 %>
+     <% if field.is_streambank_fencing_in_place %>
+ <tr><td class="review-table">Is fencing/exclusion in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Linear feet of streambank: </td>
+ <td><%= field.fence_length %> ft</td></tr>
+   <tr><td class="review-table">Vegetation type: </td>
+ <td><%= VegetationType.find(field.vegetation_type_fence_stream_id).name %></td></tr>
+    <tr><td class="review-table">Distance between fence/exclusion and stream: </td>
+ <td><%= field.distance_fence_stream %> ft</td></tr>
+ <% else %>
+ <tr><td class="review-table">Is fencing/exclusion in place: </td>
+ <td>No</td></tr>
+   <tr><td class="review-table">Linear feet of streambank: </td>
+ <td><%= field.fence_length %> ft</td></tr>
+ <% end %>
+<% end %>
+
+
+    <% if field.other_land_use_conversion_acres %>
+     <tr><td class="review-table">Other land use conversion </td>
+ <td></td></tr>
+ <tr><td class="review-table">Acres converted: </td>
+ <td><%= field.other_land_use_conversion_acres %> ac</td></tr>
+    <tr><td class="review-table">Converted to: </td>
+ <td><%= VegetationType.find(field.other_land_use_conversion_vegetation_type_id).name %></td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_other_land_use_conversion_planned %>Yes<% else %>No<% end %></td></tr>
+ <% end %>
+
+
+
+ <% field.bmps.each do |bmp| %>
+      <tr><td class="review-table">Other BMPs</td>
+ <td></td></tr>
+<tr><td class="review-table">BMP type: </td>
+ <td><%= BmpType.find(bmp.bmp_type_id).name %></td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if bmp.is_planned %>Yes<% else %>No<% end %></td></tr>
+<% end %>
+
+ <tr>
+    <td width="300px"><h2 class='sectionHeading'>Future BMPs</h2></td>
+    <td></td>
+  </tr>
+  <% if field.is_forest_buffer_future %>
+ <tr><td class="review-table">Forest Buffer: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of buffer: </td>
+ <td><%= field.forest_buffer_average_width_future %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of buffer: </td>
+ <td><%= field.forest_buffer_length_future %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_forest_buffer_planned_future %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Forest Buffer: </td>
+ <td>No</td></tr>
+ <% end %>
+
+   <% if field.is_grass_buffer_future %>
+ <tr><td class="review-table">Grass Buffer: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of buffer: </td>
+ <td><%= field.grass_buffer_average_width_future %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of buffer: </td>
+ <td><%= field.grass_buffer_length_future %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_grass_buffer_planned_future %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Grass Buffer: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+    <% if field.is_fertilizer_application_setback_future %>
+ <tr><td class="review-table">Fertilizer application setback in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of setback: </td>
+ <td><%= field.fertilizer_application_setback_average_width_future %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of setback: </td>
+ <td><%= field.fertilizer_application_setback_length_future %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_fertilizer_application_setback_planned_future %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Fertilizer application setback in place: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+    <% if field.is_wetland_future %>
+ <tr><td class="review-table">Wetland in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Wetland area: </td>
+ <td><%= field.wetland_area_future %> ac</td></tr>
+   <tr><td class="review-table">Upland area treated by wetland: </td>
+ <td><%= field.wetland_treated_area_future %> ac</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_wetland_planned_future %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Wetland in place: </td>
+ <td>No</td></tr>
+ <% end %>
+
+     <% if field.field_type_id ==2 %>
+     <% if field.is_streambank_fencing_in_place_future %>
+ <tr><td class="review-table">Is fencing/exclusion in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Linear feet of streambank: </td>
+ <td><%= field.fence_length_future %> ft</td></tr>
+   <tr><td class="review-table">Vegetation type: </td>
+ <td><%= VegetationType.find(field.vegetation_type_fence_stream_id_future).name %></td></tr>
+    <tr><td class="review-table">Distance between fence/exclusion and stream: </td>
+ <td><%= field.distance_fence_stream_future %> ft</td></tr>
+ <% else %>
+ <tr><td class="review-table">Is fencing/exclusion in place: </td>
+ <td>No</td></tr>
+   <tr><td class="review-table">Linear feet of streambank: </td>
+ <td><%= field.fence_length_future %> ft</td></tr>
+ <% end %>
+<% end %>
+
+
+    <% if field.other_land_use_conversion_acres_future %>
+     <tr><td class="review-table">Other land use conversion </td>
+ <td></td></tr>
+ <tr><td class="review-table">Acres converted: </td>
+ <td><%= field.other_land_use_conversion_acres_future %> ac</td></tr>
+    <tr><td class="review-table">Converted to: </td>
+ <td><%= VegetationType.find(field.other_land_use_conversion_vegetation_type_id_future).name %></td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_other_land_use_conversion_planned_future %>Yes<% else %>No<% end %></td></tr>
+ <% end %>
+
+
+
+ <% field.future_bmps.each do |bmp| %>
+      <tr><td class="review-table">Other BMPs</td>
+ <td></td></tr>
+<tr><td class="review-table">BMP type: </td>
+ <td><%= BmpType.find(bmp.bmp_type_id).name %></td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if bmp.is_planned %>Yes<% else %>No<% end %></td></tr>
+<% end %>
+
+
+ <tr>
+    <td width="300px"><h2 class='sectionHeading'>Credits and Reductions</h2></td>
+    <td></td>
+  </tr>
+     <tr>
+    <td width="300px"><h2>Nitrogen</h2></td>
+    <td></td>
+  </tr>
+  <tr><td class="review-table">Baseline load (EOS): </td>
+ <td>
+
+
+<% if field.tmdl.nil? %>
+          <%= number_with_precision(field.watershed_segment.n_crop_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.watershed_segment.n_pasture_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.n_hay_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= number_with_precision(field.tmdl[:total_n] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.tmdl[:total_n] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.tmdl[:total_n] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+
+      lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
+      <% if field.tmdl.nil? %>
+          <%= number_with_precision(field.watershed_segment.n_crop_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.watershed_segment.n_pasture_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.n_hay_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= number_with_precision(field.tmdl[:total_n], :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.tmdl[:total_n], :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.tmdl[:total_n], :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+      lb/ac)
+
+
+
+
+
+ </td>
+
+
+   <tr><td class="review-table">Current load (EOS): </td>
+ <td>
+
+<% if field.ntt_xml_current %>
+<%= number_with_precision(field.current_n_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_n_load / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)
+<% end %>
+
+ </td></tr>
+
+<% if field.ntt_xml_future %>
+   <tr><td class="review-table">Future load (EOS): </td>
+ <td>
+<%= number_with_precision(field.future_n_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.future_n_load / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)
+
+
+ </td>
+</tr>
+
+    <tr><td class="review-table">Reductions (EOS): </td>
+ <td><%= number_with_precision(field.current_n_load - field.future_n_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_n_load - field.future_n_load) / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)</td>
+</tr>
+<% end %>
+
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+<% if field.ntt_xml_future %>
+    <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
+ <td> <%= number_with_precision([0, (field.current_n_load - field.future_n_load)* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %> lb</td>
+</tr>
+<% end %>
+
+
+   <tr>
+    <td width="300px"><h2>Phosphorus</h2></td>
+    <td></td>
+  </tr>
+  <tr><td class="review-table">Baseline load (EOS): </td>
+ <td>
+<% if field.tmdl.nil? %>
+          <%= number_with_precision(field.watershed_segment.p_crop_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.watershed_segment.p_pasture_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.p_hay_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= number_with_precision(field.tmdl[:total_p] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.tmdl[:total_p] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.tmdl[:total_p] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+      lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(
+      <% if field.tmdl.nil? %>
+          <%= number_with_precision(field.watershed_segment.p_crop_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.watershed_segment.p_pasture_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.p_hay_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= number_with_precision(field.tmdl[:total_p], :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.tmdl[:total_p], :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.tmdl[:total_p], :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+      lb/ac)
+
+
+ </td></tr>
+
+
+    <tr><td class="review-table">Current load (EOS): </td>
+ <td>
+
+<% if field.ntt_xml_current %>
+<%= number_with_precision(field.current_p_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_p_load / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)
+<% end %>
+
+ </td></tr>
+
+<% if field.ntt_xml_future %>
+   <tr><td class="review-table">Future load (EOS): </td>
+ <td>
+<%= number_with_precision(field.future_p_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.future_p_load / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)
+
+
+ </td>
+</tr>
+
+    <tr><td class="review-table">Reductions (EOS): </td>
+ <td><%= number_with_precision(field.current_p_load - field.future_p_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_p_load - field.future_p_load) / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)</td>
+</tr>
+<% end %>
+
 
   <% end %>
 

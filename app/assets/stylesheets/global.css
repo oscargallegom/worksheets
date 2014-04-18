@@ -588,7 +588,16 @@ h2.sectionHeading {
     color: #126AA3;
     font-size: 1.6em;
     font-weight: normal;
-    margin: 20px 0 0;
+    margin: 5px 0 0;
+}
+
+h2.reviewHeading {
+    font-family: 'OptimaRegular';
+    text-transform: uppercase;
+    color: #126AA3;
+    font-size: 1.3em;
+    font-weight: normal;
+    margin: 5px 0 0;
 }
 
 h2.sectionHeading em {
@@ -1451,6 +1460,6 @@ div.review-extrawide {
 }
 
 .review-table {
-    width: 200px;
+
 }
 
