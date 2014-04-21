@@ -320,6 +320,13 @@ class Field < ActiveRecord::Base
         return p_load
   end
 
+  def current_s_load
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        s_load = @current_totals[:new_total_sediment]
+        return s_load
+  end
+
     def future_n_load
         @current_totals = computeBmpCalculations(self)
         @ntt_results = @current_totals[:ntt_results]
@@ -332,6 +339,13 @@ class Field < ActiveRecord::Base
         @ntt_results = @current_totals[:ntt_results]
         p_load = @current_totals[:new_total_p_future]
         return p_load
+  end
+
+  def future_s_load
+        @current_totals = computeBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        s_load = @current_totals[:new_total_sediment_future]
+        return s_load
   end
 
 
