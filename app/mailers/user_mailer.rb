@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
     #admin_user = User.where(:id => 1).first # TODO: put admin email in environment variable
     @user = user
     @project_issue = project_issue
-    @host = root_path.gsub(/\/$/, '').gsub("http://", "")
+    @host = root_url.gsub(/\/$/, '').gsub("http://", "")
     mail(:to => 'cbnttmanager@gmail.com', :subject => "Issue with project")
   end
 
