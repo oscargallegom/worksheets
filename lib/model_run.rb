@@ -5,6 +5,8 @@ module ModelRun
 
       success, content = callNtt(field, false)
 
+      logger.debug "%%%%%%%%%%%%%%%%%%%%%% content: #{content}"
+
         if success
           @ntt_results = Hash.from_xml(content.xpath('//Results').to_s)['Results']
           if (@ntt_results['ErrorCode'] != '0')
