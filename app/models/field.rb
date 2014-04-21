@@ -348,6 +348,48 @@ class Field < ActiveRecord::Base
         return s_load
   end
 
+    def animal_current_n_load
+        @current_totals = computeLivestockBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        n_load = @current_totals[:current_load_nitrogen]
+        return n_load
+  end
+
+      def animal_future_n_load
+        @future_totals = computeLivestockBmpCalculationsFuture(self)
+        @ntt_results = @future_totals[:ntt_results]
+        n_load = @future_totals[:current_load_nitrogen]
+        return n_load
+  end
+
+      def animal_current_p_load
+        @current_totals = computeLivestockBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        p_load = @current_totals[:current_load_phosphorus]
+        return p_load
+  end
+
+      def animal_future_p_load
+        @future_totals = computeLivestockBmpCalculationsFuture(self)
+        @ntt_results = @future_totals[:ntt_results]
+        p_load = @future_totals[:current_load_phosphorus]
+        return p_load
+  end
+
+        def animal_current_s_load
+        @current_totals = computeLivestockBmpCalculations(self)
+        @ntt_results = @current_totals[:ntt_results]
+        s_load = @current_totals[:current_load_sediment]
+        return s_load
+  end
+
+      def animal_future_s_load
+        @future_totals = computeLivestockBmpCalculationsFuture(self)
+        @ntt_results = @future_totals[:ntt_results]
+        s_load = @future_totals[:current_load_sediment]
+        return s_load
+  end
+
 
   def percentCompleted
 
