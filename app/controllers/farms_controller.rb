@@ -16,7 +16,7 @@ class FarmsController < ApplicationController
   def index
     add_breadcrumb 'Projects'
 
-    @farms = @farms.search(params[:search]).page(params[:page]).order(sort_column + ' ' + sort_direction)
+    @farms = @farms.searchByStatus(params[:tab]).search(params[:search]).page(params[:page]).order(sort_column + ' ' + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
