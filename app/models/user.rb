@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
 
   # validates_inclusion_of :deleted, :in => [true, false]
 
-  validates_presence_of :username, :email, :user_type_id, :first_name, :last_name, :phone
+  validates_presence_of :username, :email, :user_type_id, :first_name, :last_name, :phone, :on => create
   validates_uniqueness_of :username
-  validates_presence_of :roles, :on => :update, :message => '^Select at least one role.'
+  #validates_presence_of :roles, :on => :update, :message => '^Select at least one role.'
 
   #before_save :set_default
   before_create :default_role
