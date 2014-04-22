@@ -541,6 +541,7 @@ class FieldsController < ApplicationController
 
   def run_model_future
     model_run_future(@field)
+    model_run(@field)
     calculate_bmps(@field)
 
     redirect_to(:back)
