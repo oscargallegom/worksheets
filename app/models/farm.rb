@@ -47,7 +47,7 @@ class Farm < ActiveRecord::Base
   # search by code or name
   def self.search(search)
     if search
-      where(' id || \'\' LIKE ? OR name LIKE ? ', "%#{search}%", "%#{search}%")
+      where('id LIKE ? OR name LIKE ? OR farm_notes LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
       # find(:all, :conditions => ['id' LIKE ? OR title LIKE ? OR description LIKE ?', search_condition, search_condition, search_condition])
     else
       scoped
