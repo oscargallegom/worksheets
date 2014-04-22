@@ -54,6 +54,12 @@ class Farm < ActiveRecord::Base
     end
   end
 
+  def self.searchByStatus(status)
+    scoped = self.scoped
+    scoped
+
+  end
+
   def acres_from_fields
     field_acres = 0
     fields.each do |field|
