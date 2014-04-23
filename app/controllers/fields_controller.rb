@@ -76,8 +76,22 @@ class FieldsController < ApplicationController
 
     if ((@step =='5' || @step == '8') && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)) # perform calculations
       #begin
+### this is a hack to check whether land use conversion results in increased sediment than otherwise, and if so, disregard the land use conversion.
+      if @field.other_land_use_conversion_acres_future
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
+        @ntt_results_future = @current_totals[:ntt_results_future]
+        calculate_bmps_without_conversion(@field)
+        calculate_bmps(@field)
+        logger.debug "!!!!!!!!! future_sediment_with_conversion: #{@future_sediment_with_conversion}"
+        logger.debug "!!!!!!!!! future_sediment_without_conversion: #{@future_sediment_without_conversion}"
+        if @future_sediment_with_conversion > @future_sediment_without_conversion
+          @current_totals[:new_total_sediment_future] = @future_sediment_without_conversion
+        end
+      else
+        @current_totals = computeBmpCalculations(@field)
+        @ntt_results = @current_totals[:ntt_results]
+      end
         # @ntt_results_future = @current_totals[:ntt_results_future]
 
         # if (@ntt_results.any?)
@@ -542,7 +556,7 @@ class FieldsController < ApplicationController
   def run_model_future
     model_run_future(@field)
     model_run(@field)
-    calculate_bmps(@field)
+
 
     redirect_to(:back)
 end

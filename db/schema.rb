@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140423150114) do
+ActiveRecord::Schema.define(:version => 20140423184938) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -349,6 +349,30 @@ ActiveRecord::Schema.define(:version => 20140423150114) do
     t.float    "n_bay_reductions"
     t.float    "p_bay_reductions"
     t.float    "s_bay_reductions"
+    t.float    "current_solube_p"
+    t.string   "future_tile_drained_p_float"
+    t.float    "current_total_n"
+    t.float    "current_sediment_organic_n"
+    t.float    "current_soluble_n"
+    t.float    "tile_drained_n"
+    t.float    "current_total_p"
+    t.float    "current_sediment_organic_p"
+    t.float    "current_soluble_p"
+    t.float    "tile_drained_p"
+    t.float    "future_total_n"
+    t.float    "future_sediment_organic_n"
+    t.float    "future_soluble_n"
+    t.float    "future_tile_drained_n"
+    t.float    "future_total_p"
+    t.float    "future_sediment_organic_p"
+    t.float    "future_tile_drained_p"
+    t.float    "current_flow"
+    t.float    "future_flow"
+    t.float    "current_sediment"
+    t.float    "future_sediment"
+    t.float    "current_carbon"
+    t.float    "future_carbon"
+    t.float    "future_soluble_p"
   end
 
   create_table "future_bmps", :force => true do |t|

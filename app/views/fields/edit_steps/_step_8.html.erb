@@ -30,7 +30,7 @@
           <%= number_with_precision(@watershed_segment[:n_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@watershed_segment[:n_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@watershed_segment[:n_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-      <% else # use Maryland TMDL     %>
+      <% else # use Maryland TMDL %>
           <%= number_with_precision(@field.tmdl[:total_n] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@field.tmdl[:total_n] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@field.tmdl[:total_n] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -42,7 +42,7 @@
           <%= number_with_precision(@watershed_segment[:n_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@watershed_segment[:n_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@watershed_segment[:n_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-      <% else # use Maryland TMDL     %>
+      <% else # use Maryland TMDL %>
           <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@field.tmdl[:total_n], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -68,7 +68,7 @@
     <li><span class='wide'>Delivery factor:</span>
       <%= number_with_precision(@field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %>
     </li>
-    <li><span class='wide'>Reductions to  the Chesapeake bay:</span>
+    <li><span class='wide'>Reductions to the Chesapeake bay:</span>
       <%= number_with_precision([0, (@current_totals[:new_total_n] - @current_totals[:new_total_n_future])* @field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
       lb
     </li>
@@ -79,7 +79,7 @@
           <%= number_with_precision(@watershed_segment[:p_crop_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@watershed_segment[:p_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@watershed_segment[:p_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-      <% else # use Maryland TMDL     %>
+      <% else # use Maryland TMDL %>
           <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@field.tmdl[:total_p] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -90,7 +90,7 @@
           <%= number_with_precision(@watershed_segment[:p_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@watershed_segment[:p_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@watershed_segment[:p_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
-      <% else # use Maryland TMDL     %>
+      <% else # use Maryland TMDL %>
           <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
           <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
           <%= number_with_precision(@field.tmdl[:total_p], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
@@ -126,7 +126,7 @@
     <li><span class='wide'>Delivery factor:</span>
       <%= number_with_precision(@field.watershed_segment.p_delivery_factor, :precision => 2, delimiter: ',') %>
     </li>
-    <li><span class='wide'>Reductions to  the Chesapeake bay:</span>
+    <li><span class='wide'>Reductions to the Chesapeake bay:</span>
       <%= number_with_precision([0, (@current_totals[:new_total_p] - @current_totals[:new_total_p_future])* @field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %>
       lb
     </li>
@@ -162,7 +162,7 @@
     <li><span class='wide'>Delivery factor:</span>
       <%= number_with_precision(@field.watershed_segment.sediment_delivery_factor, :precision => 2, delimiter: ',') %>
     </li>
-    <li><span class='wide'>Reduction to  the Chesapeake bay:</span>
+    <li><span class='wide'>Reduction to the Chesapeake bay:</span>
       <%= number_with_precision([0, (@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future])* @field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
       lb
     </li>
