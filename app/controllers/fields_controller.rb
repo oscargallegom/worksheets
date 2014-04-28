@@ -555,6 +555,7 @@ class FieldsController < ApplicationController
 
   def run_model_future
     model_run_future(@field)
+    calculate_bmps(@field)
     model_run(@field)
 
 
