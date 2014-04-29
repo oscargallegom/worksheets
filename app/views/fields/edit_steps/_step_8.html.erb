@@ -191,8 +191,8 @@
         </b>
       </td>
       <td>
-        <b>
-          <%= number_with_precision((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN')) %>
+        <b><% unless @ntt_results_future.nil? %>
+          <%= number_with_precision((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN')) %><% end %>
           lbs/ac
         </b>
       </td>
@@ -205,8 +205,8 @@
         <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results.key?('OrganicN') %>
         lbs/ac
       </td>
-      <td>
-        <%= number_with_precision(@ntt_results_future['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results_future.key?('OrganicN') %>
+      <td><% unless @ntt_results_future.nil? %>
+        <%= number_with_precision(@ntt_results_future['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results_future.key?('OrganicN') %><% end %>
         lbs/ac
       </td>
     </tr>
@@ -218,8 +218,8 @@
         <%= number_with_precision(@ntt_results['NO3'], :precision => 2, delimiter: ',') %>
         lbs/ac
       </td>
-      <td>
-        <%= number_with_precision(@ntt_results_future['NO3'], :precision => 2, delimiter: ',') %>
+      <td><% unless @ntt_results_future.nil? %>
+        <%= number_with_precision(@ntt_results_future['NO3'], :precision => 2, delimiter: ',') %><% end %>
         lbs/ac
       </td>
     </tr>
@@ -231,8 +231,8 @@
         <%= number_with_precision(@ntt_results['TileDrainN'], :precision => 2, delimiter: ',') %>
         lbs/ac
       </td>
-      <td>
-        <%= number_with_precision(@ntt_results_future['TileDrainN'], :precision => 2, delimiter: ',') %>
+      <td><% unless @ntt_results_future.nil? %>
+        <%= number_with_precision(@ntt_results_future['TileDrainN'], :precision => 2, delimiter: ',') %><% end %>
         lbs/ac
       </td>
     </tr>
@@ -247,8 +247,8 @@
         </b>
       </td>
       <td>
-        <b>
-          <%= number_with_precision((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
+        <b><% unless @ntt_results_future.nil? %>
+          <%= number_with_precision((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f), :precision => 2, delimiter: ',') %><% end %>
           lbs/ac
         </b>
       </td>
@@ -261,8 +261,8 @@
         <%= number_with_precision(@ntt_results['OrganicP'], :precision => 2, delimiter: ',') %>
         lbs/ac
       </td>
-      <td>
-        <%= number_with_precision(@ntt_results_future['OrganicP'], :precision => 2, delimiter: ',') %>
+      <td><% unless @ntt_results_future.nil? %>
+        <%= number_with_precision(@ntt_results_future['OrganicP'], :precision => 2, delimiter: ',') %><% end %>
         lbs/ac
       </td>
     </tr>
@@ -274,8 +274,8 @@
         <%= number_with_precision(@ntt_results['SolubleP'], :precision => 2, delimiter: ',') %>
         lbs/ac
       </td>
-      <td>
-        <%= number_with_precision(@ntt_results_future['SolubleP'], :precision => 2, delimiter: ',') %>
+      <td><% unless @ntt_results_future.nil? %>
+        <%= number_with_precision(@ntt_results_future['SolubleP'], :precision => 2, delimiter: ',') %><% end %>
         lbs/ac
       </td>
     </tr>
@@ -287,8 +287,8 @@
         <%= number_with_precision(@ntt_results['TileDrainP'], :precision => 2, delimiter: ',') %>
         lbs/ac
       </td>
-      <td>
-        <%= number_with_precision(@ntt_results_future['TileDrainP'], :precision => 2, delimiter: ',') %>
+      <td><% unless @ntt_results_future.nil? %>
+        <%= number_with_precision(@ntt_results_future['TileDrainP'], :precision => 2, delimiter: ',') %><% end %>
         lbs/ac
       </td>
     </tr>
@@ -303,8 +303,8 @@
         </b>
       </td>
       <td>
-        <b>
-          <%= number_with_precision(@ntt_results_future['Flow'], :precision => 2, delimiter: ',') %>
+        <b><% unless @ntt_results_future.nil? %>
+          <%= number_with_precision(@ntt_results_future['Flow'], :precision => 2, delimiter: ',') %><% end %>
           in
         </b>
       </td>
@@ -320,8 +320,8 @@
         </b>
       </td>
       <td>
-        <b>
-          <%= number_with_precision(@ntt_results_future['Sediment'], :precision => 2, delimiter: ',') %>
+        <b><% unless @ntt_results_future.nil? %>
+          <%= number_with_precision(@ntt_results_future['Sediment'], :precision => 2, delimiter: ',') %><% end %>
           tons/ac
         </b>
       </td>
@@ -337,14 +337,13 @@
         </b>
       </td>
       <td>
-        <b>
-          <%= number_with_precision(@ntt_results_future['Carbon'], :precision => 2, delimiter: ',') %>
+        <b><% unless @ntt_results_future.nil? %>
+          <%= number_with_precision(@ntt_results_future['Carbon'], :precision => 2, delimiter: ',') %><% end %>
           lbs/ac
         </b>
       </td>
     </tr>
 
-    <% if (!@ntt_results[:crops].nil? || !@ntt_results_future[:crops].nil?) %>
         <tr>
           <td>
             <b>Crop Yield</b>
@@ -369,6 +368,7 @@
             <% end %>
           </td>
           <td style="white-space: nowrap">
+            <% unless @ntt_results_future.nil? %>
             <% if !@ntt_results_future[:crops].nil? %>
                 <% @ntt_results_future[:crops].each do |crop| %>
                     <b><%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %>:</b>
@@ -376,9 +376,9 @@
                     <br/>
                 <% end %>
             <% end %>
+            <% end %>
           </td>
         </tr>
-    <% end %>
     </table>
 
     </ol>
