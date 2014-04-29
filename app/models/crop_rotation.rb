@@ -128,10 +128,10 @@ class CropRotation < ActiveRecord::Base
 
     if is_changed
       if (self.strip.is_future && !self.strip.field.ntt_xml_future.nil?)
-        self.strip.field.ntt_xml_future = nil
+        #self.strip.field.ntt_xml_future = nil
         #self.strip.field.update_column(:ntt_xml_future, nil)
       elsif (!self.strip.is_future && !self.strip.field.ntt_xml_current.nil?)
-        self.strip.field.ntt_xml_current = nil
+        #self.strip.field.ntt_xml_current = nil
         #self.strip.field.update_column(:ntt_xml_current, nil)
       end
     end

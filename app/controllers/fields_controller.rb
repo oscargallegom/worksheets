@@ -462,8 +462,8 @@ class FieldsController < ApplicationController
     end
 
     # reset NTT field
-    @field.reload
-    @field.ntt_xml_future = nil
+    # @field.reload
+    # @field.ntt_xml_future = nil
 
     respond_to do |format|
       if is_success && @field.save
