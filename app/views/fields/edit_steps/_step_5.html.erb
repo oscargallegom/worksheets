@@ -20,10 +20,9 @@
       <div>
         <fieldset>
           <ol>
-          <br>
+                      <br>
 <%= link_to "Update Current Nutrient Load Results", run_model_farm_field_path, class: "callntt", method: :post %>
 <br><br>
-
             <li><h2 class='sectionHeading'>Nitrogen</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
               <% if @field.tmdl.nil? %>
@@ -114,68 +113,65 @@
             <li><span class='extrawide'>&nbsp;</span><b>Current</b></li>
 
             <li><span class='extrawide'>Total N (before BMPs applied)</span><b>
-              <%= @current_total_n %>
+              <%= number_with_precision((@ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f), :precision => 2, delimiter: ',') if (@ntt_results.key?('OrganicN') && @ntt_results.key?('NO3') && @ntt_results.key?('TileDrainN')) %>
               lbs/ac
             </b></li>
 
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic N)</span>
-              <%= @current_sediment_organic_n %>
+              <%= number_with_precision(@ntt_results['OrganicN'], :precision => 2, delimiter: ',') if @ntt_results.key?('OrganicN') %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble N (NO3)</span>
-              <%= @current_soluble_n %>
+              <%= number_with_precision(@ntt_results['NO3'], :precision => 2, delimiter: ',') %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained N</span>
-              <%= @tile_drained_n %>
+              <%= number_with_precision(@ntt_results['TileDrainN'], :precision => 2, delimiter: ',') %>
               lbs/ac
             </li>
 
 
             <li><span class='extrawide'>Total P (before BMPs applied)</span><b>
-              <%= @current_total_p %>
+              <%= number_with_precision((@ntt_results['OrganicP'].to_f + @ntt_results['SolubleP'].to_f + @ntt_results['TileDrainP'].to_f), :precision => 2, delimiter: ',') %>
               lbs/ac
             </b></li>
 
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sediment (Organic P)</span>
-              <%= @current_sediment_organic_p %>
+              <%= number_with_precision(@ntt_results['OrganicP'], :precision => 2, delimiter: ',') %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soluble P (NO3)</span>
-              <%= @current_soluble_p %>
+              <%= number_with_precision(@ntt_results['SolubleP'], :precision => 2, delimiter: ',') %>
               lbs/ac
             </li>
             <li><span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tile Drained P</span>
-              <%= @tile_drained_p %>
+              <%= number_with_precision(@ntt_results['TileDrainP'], :precision => 2, delimiter: ',') %>
               lbs/ac
             </li>
 
             <li><span class='extrawide'>Flow</span><b>
-              <%= @current_flow %>
+              <%= number_with_precision(@ntt_results['Flow'], :precision => 2, delimiter: ',') %>
               in
             </b></li>
 
             <li><span class='extrawide'>Sediment</span><b>
-              <%= @current_sediment %>
+              <%= number_with_precision(@ntt_results['Sediment'], :precision => 2, delimiter: ',') %>
               tons/ac
             </b></li>
 
             <li><span class='extrawide'>Carbon</span><b>
-              <%= @current_carbon %>
+              <%= number_with_precision(@ntt_results['Carbon'], :precision => 2, delimiter: ',') %>
               lbs/ac
             </b></li>
 
             <li><span class='extrawide'>Crop Yield</span><b></b></li>
-            <% if (!@ntt_results.nil?) %>
-              <% if !@ntt_results[:crops].nil? %>
-                  <% @ntt_results[:crops].each do |crop| %>
-                      <li>
-                        <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %></span>
-                        <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
-                      </li>
-                  <% end %>
-              <% end %>
-            <% else %> 0
+            <% if !@ntt_results[:crops].nil? %>
+                <% @ntt_results[:crops].each do |crop| %>
+                    <li>
+                      <span class='extrawide_not_bold'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Crop.where(:code => crop['CropCode']).first[:name] unless Crop.where(:code => crop['CropCode']).first.nil? %></span>
+                      <%= crop['Yield'] %>&nbsp;<%= crop['Unit'] %>/ac
+                    </li>
+                <% end %>
             <% end %>
           </ol>
         </fieldset>
