@@ -75,6 +75,15 @@ class FieldsController < ApplicationController
     @soil_test_laboratories = SoilTestLaboratory.where(:state_id => @farm.site_state_id) if @step == '2'
 
     if ((@step =='5' || @step == '8') && (@field.field_type_id == 1 || @field.field_type_id == 2 || @field.field_type_id == 3)) # perform calculations
+      if @step == '5'
+        model_run(@field)
+        calculate_bmps(@field)
+      end
+      if @step == '8'
+        model_run_future(@field)
+        model_run(@field)
+        calculate_bmps(@field)
+      end
       #begin
 ### this is a hack to check whether land use conversion results in increased sediment than otherwise, and if so, disregard the land use conversion.
       if @field.other_land_use_conversion_acres_future
