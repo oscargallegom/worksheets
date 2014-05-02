@@ -307,6 +307,21 @@
     </div>
     <div style="clear: both"></div>
 
-    <%= f.submit 'Save and Continue', :class => 'button' %>
+    <%= f.submit 'Save and Continue', :class => 'button', id: "nttcall" %>
+<div id="loading-indicator">
+  <br>
+ <%= image_tag("loading.gif", :id => "loading") %> Calculating results...
+<br>
+</div><br>
+<script>
+$(function() {
+  $('#loading-indicator').hide();
+  $(function() {
+         $('#nttcall').click( function() {
+      $('#loading-indicator').show();
+    })
+  });
+});
+</script>
     </div>
 <% end %>
