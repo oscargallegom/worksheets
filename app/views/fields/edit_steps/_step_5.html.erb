@@ -21,8 +21,22 @@
         <fieldset>
           <ol>
                       <br>
-<%= link_to "Update Current Nutrient Load Results", run_model_farm_field_path, class: "callntt", method: :post %>
-<br><br>
+<%= link_to "Calculate Current Nutrient Load Results", run_model_farm_field_path, class: "callntt", method: :post, id: "nttcall" %>
+<div id="loading-indicator">
+  <br>
+ <%= image_tag("loading.gif", :id => "loading") %> Calculating results...
+<br>
+</div><br><br>
+<script>
+$(function() {
+  $('#loading-indicator').hide();
+  $(function() {
+         $('#nttcall').click( function() {
+      $('#loading-indicator').show();
+    })
+  });
+});
+</script>
             <li><h2 class='sectionHeading'>Nitrogen</h2></li>
             <li><span class='wide'>Baseline Load (EOS):</span>
               <% if @field.tmdl.nil? %>
