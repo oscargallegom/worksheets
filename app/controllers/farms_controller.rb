@@ -138,7 +138,7 @@ class FarmsController < ApplicationController
   # GET/farms/id/review
   def review
 
-    @completed = true
+    @completed = false
 
     add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
