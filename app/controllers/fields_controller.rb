@@ -508,7 +508,9 @@ class FieldsController < ApplicationController
     @field.is_fertilizer_application_setback_future=@field.is_fertilizer_application_setback
     @field.fertilizer_application_setback_average_width_future=@field.fertilizer_application_setback_average_width
     @field.fertilizer_application_setback_length_future=@field.fertilizer_application_setback_length
-    @field.is_fertilizer_application_setback_planned_future=@field.is_fertilizer_application_setback_planned
+    if @field.is_fertilizer_application_setback_planned == true
+    @field.is_fertilizer_application_setback_planned_future =1
+    end
     @field.exclusion_description_future=@field.exclusion_description
     @field.other_land_use_conversion_acres_future=@field.other_land_use_conversion_acres
     @field.other_land_use_conversion_vegetation_type_id_future= @field.other_land_use_conversion_vegetation_type_id
