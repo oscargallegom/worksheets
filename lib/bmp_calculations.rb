@@ -1795,10 +1795,17 @@ def computeBmpCalculationsWithoutConversion(field)
              end
            end
          end
+
          if is_manure_fertilizer_incorporated == false
-           if field.hel_soils == false
-              return false
+          field.strips.each do |strip|
+            strip.crop_rotations.each do |crop_rotation|
+             if crop_rotation.manure_fertilizer_applications.any?
+               if field.hel_soils == false
+                  return false
+                end
             end
+          end
+        end
          end
         end
 
