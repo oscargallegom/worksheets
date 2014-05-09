@@ -302,6 +302,7 @@
         <td class="review-table">P Test value:</td>
         <td><%= field.p_test_value %> ppm</td>
   </tr> 
+  <% unless field.field_type_id == 4 %>
   </tr>
   <% i=0 %>
   <% field.soils.each do |soil| %>
@@ -339,6 +340,7 @@
         <td><%= soil.slope %></td>
   </tr> 
 
+  <% end %>
   <% end %>
 
   <% if field.field_type_id != 4 %>
