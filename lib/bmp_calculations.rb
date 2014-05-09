@@ -29,7 +29,6 @@ module BmpCalculations
       else
 
         @testing_id = @ntt_results['ID']
-        logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ @testing_id #{@testing_id}"
 
 
         total_n_per_acre = @ntt_results['OrganicN'].to_f + @ntt_results['NO3'].to_f + @ntt_results['TileDrainN'].to_f
@@ -69,7 +68,6 @@ module BmpCalculations
 
     if (!content.nil?)
       @ntt_results_future = Hash.from_xml(content.xpath('//Results').to_s)['Results']
-      logger.debug "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ntt results future: #{@ntt_results_future}"
       if (@ntt_results_future['ErrorCode'] != '0')
         @ntt_results_future = nil
         #raise 'No NTT data for future scenario.'
@@ -431,8 +429,6 @@ module BmpCalculations
                                                               # else
                                                               # field_type_id = 11 # default to high till until the user makes a selection
     end
-
-    logger.debug "$$$$$$$$$$$$$$$$$$ field.field_type_id: #{field.field_type_id}"
 
     hgmr_code = field.watershed_segment.hgmr_code
 

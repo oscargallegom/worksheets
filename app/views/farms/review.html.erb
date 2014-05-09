@@ -290,6 +290,18 @@
       <td class="review-table">Total Area:</td>
       <td><%= number_with_precision(field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %></td>
      </tr>
+          <tr>
+      <td class="review-table">Irrigation:</td>
+      <td><% if !field.irrigation_id.nil?%><%= Irrigation.find(field.irrigation_id).name %><% else %>None<% end %></td>
+     </tr>
+           <tr>
+        <td class="review-table">Tile Drainage Depth:</td>
+        <td><%= field.tile_drainage_depth %></td>
+  </tr> 
+    <tr>
+        <td class="review-table">P Test value:</td>
+        <td><%= field.p_test_value %> ppm</td>
+  </tr> 
   </tr>
   <% i=0 %>
   <% field.soils.each do |soil| %>
@@ -322,21 +334,9 @@
         <td class="review-table">Organic Carbon:</td>
         <td><%= soil.organic_carbon %>%</td>
   </tr> 
-  <tr>
-        <td class="review-table">P Test value:</td>
-        <td><%= soil.field.p_test_value %> ppm</td>
-  </tr> 
     <tr>
         <td class="review-table">Slope:</td>
         <td><%= soil.slope %></td>
-  </tr> 
-      <tr>
-        <td class="review-table">Tile Drainage Depth:</td>
-        <td><%= soil.field.tile_drainage_depth %></td>
-  </tr> 
-  <tr>
-        <td class="review-table">Irrigation:</td>
-        <td><% if !soil.field.irrigation_id.nil?%><%= Irrigation.find(soil.field.irrigation_id).name %><% end %></td>
   </tr> 
 
   <% end %>
@@ -780,7 +780,7 @@
 
 
  <tr>
-    <td width="300px"><h2 class='sectionHeading'>Credits and Reductions</h2></td>
+    <td width="300px"><h2 class='sectionHeading'>Reductions</h2></td>
     <td></td>
   </tr>
      <tr>
@@ -974,9 +974,9 @@
 </td></tr>
 
     <tr><td class="review-table">Reductions (EOS): </td>
- <td><%= number_with_precision(field.current_s_load - field.future_s_load, :precision => 2, delimiter: ',') %> lb
+ <td><%= number_with_precision(field.current_s_load - field.future_s_load, :precision => 2, delimiter: ',') %> tons
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_s_load - field.future_s_load) / field.acres, :precision => 2, delimiter: ',') %>
-      lb/ac)</td>
+      tons/ac)</td>
 </tr>
 
 <% end %>
@@ -986,7 +986,7 @@
 
 <% if field.ntt_xml_future %>
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td> <%= number_with_precision([0, (field.current_s_load - field.future_s_load)* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> lb</td>
+ <td> <%= number_with_precision([0, (field.current_s_load - field.future_s_load)* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> tons</td>
 </tr>
 <% end %>
 
@@ -1160,14 +1160,13 @@
 
 
  <tr>
-    <td width="300px"><h2 class='sectionHeading'>Credits and Reductions</h2></td>
+    <td width="300px"><h2 class='sectionHeading'>Reductions</h2></td>
     <td></td>
   </tr>
      <tr>
     <td width="300px"><h2>Nitrogen</h2></td>
     <td></td>
   </tr>
-
 
    <tr><td class="review-table">Current load (EOS): </td>
  <td>

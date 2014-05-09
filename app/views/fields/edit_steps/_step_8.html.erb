@@ -177,7 +177,7 @@ $(function() {
     </li>
     <li><span class='wide'>Reduction to the Chesapeake bay:</span>
       <%= number_with_precision([0, (@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future])* @field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
-      lb
+      tons
     </li>
 
     <li><h2 class='sectionHeading'>NTT Results Summary</h2></li>

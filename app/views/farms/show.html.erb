@@ -292,7 +292,7 @@
       <li>
         <div class='extrawide'>Future sediment load for animal HQ (EOS):</div>
         <%= number_with_precision(@future_sediment_load_animals, :precision => 2, delimiter: ',') %>
-        lbs/yr
+        t/yr
       </li>
                         <li>
         <div class='extrawide'>Delivery Ratio:</div>
@@ -305,7 +305,7 @@
         <% else %>
         <%= number_with_precision((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals), :precision => 2, delimiter: ',') %>
         <% end %>
-        lbs/yr
+        t/yr
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
@@ -317,7 +317,7 @@
         <% else %>
         <%= @is_farm_meets_baseline ? number_with_precision([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
         <% end %><% end %>
-        lbs/yr
+        t/yr
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
