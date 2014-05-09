@@ -362,7 +362,7 @@
 <tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
  <td class="review-table"> </td></tr>
  <% if strip.field.field_type_id == 1 %><tr><td class="review-table">Plant Date: </td>
- <td>Year <%= crop.plant_date_year %>, month <%= crop.plant_date_month %>, day <%= crop.plant_date_day %> </td></tr>
+ <td>Year <%= crop.plant_date_year %>, <%= crop.is_month %> <%= crop.plant_date_day %> </td></tr>
  <tr><td class="review-table">Planting method: </td>
  <td><%= PlantingMethod.find(crop.planting_method_id).name %> </td></tr>
 <tr><td class="review-table">Seeding rate: </td>
@@ -375,13 +375,13 @@
 <tr><td class="review-table">Commercial Fertilizer #<%= k %> </td>
  <td class="review-table"></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
- <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <td>Year <%= fert.application_date_year %>, <%= fert.is_month %> <%= fert.application_date_day %></td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N applied: </td>
  <td><%= fert.total_n_applied %> lbs/ac</td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total P applied: </td>
  <td><%= fert.total_p_applied %> lbs/ac</td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
- <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %> <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
  <% k +=1 %>
 <% end %>
 
@@ -390,7 +390,7 @@
 <tr><td class="review-table">Manure Fertilizer #<%= l %> </td>
  <td class="review-table"></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
- <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <td>Year <%= fert.application_date_year %> <%= fert.is_month %> <%= fert.application_date_day %></td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure type: </td>
  <td><%= ManureType.find(fert.manure_type_id).name %></td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure consistency: </td>
@@ -406,7 +406,7 @@
       <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Moisture content: </td>
  <td><%= fert.moisture_content %> %</td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
- <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
  <% l +=1 %>
 <% end %>
 
@@ -415,7 +415,7 @@
 <tr><td class="review-table">Tillage Operation #<%= m %> </td>
  <td class="review-table"></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation date: </td>
- <td>Year <%= till.start_date_year %>,  month <%= till.start_date_month %>, day <%= till.start_date_day %></td></tr>
+ <td>Year <%= till.start_date_year %>, <%= till.is_month %> <%= till.start_date_day %></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation type: </td>
  <td><%= TillageOperationType.find(till.tillage_operation_type_id).name %></td></tr>
  <% m +=1 %>
@@ -428,7 +428,7 @@
 <tr><td class="review-table">End of season operation type: </td>
  <td><%= EndOfSeasonType.find(harvest.end_of_season_type_id).name %></td></tr>
  <tr><td class="review-table">End of season operation date: </td>
- <td>Year <%= harvest.year %>,  month <%= harvest.month %>, day <%= harvest.day %></td></tr>
+ <td>Year <%= harvest.year %> <%= harvest.is_month %> <%= harvest.day %></td></tr>
  <tr><td class="review-table">Harvest as silage: </td>
  <td><% if harvest.is_harvest_as_silage %>Yes<% else %>No<% end %></td></tr>
  <% n +=1 %>
@@ -438,7 +438,7 @@
  <tr><td class="review-table">Cover crop: </td>
  <td><%= Crop.find(crop.cover_crop_id).name %></td></tr>
   <tr><td class="review-table">Cover crop plant date: </td>
- <td>Year <%= crop.cover_crop_plant_date_year %>,  month <%= crop.cover_crop_plant_date_month %>, day <%= crop.cover_crop_plant_date_day %></tr>
+ <td>Year <%= crop.cover_crop_plant_date_year %>, <%= crop.cover_crop_is_month %> <%= crop.cover_crop_plant_date_day %></tr>
    <tr><td class="review-table">Cover crop planting method: </td>
  <td><%= PlantingMethod.find(crop.cover_crop_planting_method_id).name %></td></tr>
  <% else %>
@@ -475,7 +475,7 @@
 <tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
  <td class="review-table"> </td></tr>
  <% if strip.field.field_type_id == 1 %><tr><td class="review-table">Plant Date: </td>
- <td>Year <%= crop.plant_date_year %>, month <%= crop.plant_date_month %>, day <%= crop.plant_date_day %> </td></tr>
+ <td>Year <%= crop.plant_date_year %>, <%= crop.is_month %> <%= crop.plant_date_day %> </td></tr>
  <tr><td class="review-table">Planting method: </td>
  <td><%= PlantingMethod.find(crop.planting_method_id).name %> </td></tr>
 <tr><td class="review-table">Seeding rate: </td>
@@ -488,13 +488,13 @@
 <tr><td class="review-table">Commercial Fertilizer #<%= k %> </td>
  <td class="review-table"></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
- <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <td>Year <%= fert.application_date_year %> <%= fert.is_month %> <%= fert.application_date_day %></td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N applied: </td>
  <td><%= fert.total_n_applied %> lbs/ac</td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total P applied: </td>
  <td><%= fert.total_p_applied %> lbs/ac</td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
- <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
  <% k +=1 %>
 <% end %>
 
@@ -503,7 +503,7 @@
 <tr><td class="review-table">Manure Fertilizer #<%= l %> </td>
  <td class="review-table"></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
- <td>Year <%= fert.application_date_year %>,  month <%= fert.application_date_month %>, day <%= fert.application_date_day %></td></tr>
+ <td>Year <%= fert.application_date_year %> <%= fert.is_month %> <%= fert.application_date_day %></td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure type: </td>
  <td><%= ManureType.find(fert.manure_type_id).name %></td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure consistency: </td>
@@ -519,7 +519,7 @@
       <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Moisture content: </td>
  <td><%= fert.moisture_content %> %</td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
- <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, month <%= fert.incorporation_date_month %>, day <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
  <% l +=1 %>
 <% end %>
 
@@ -528,7 +528,7 @@
 <tr><td class="review-table">Tillage Operation #<%= m %> </td>
  <td class="review-table"></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation date: </td>
- <td>Year <%= till.start_date_year %>,  month <%= till.start_date_month %>, day <%= till.start_date_day %></td></tr>
+ <td>Year <%= till.start_date_year %>, <%= till.is_month %> <%= till.start_date_day %></td></tr>
 <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation type: </td>
  <td><%= TillageOperationType.find(till.tillage_operation_type_id).name %></td></tr>
  <% m +=1 %>
@@ -541,7 +541,7 @@
 <tr><td class="review-table">End of season operation type: </td>
  <td><%= EndOfSeasonType.find(harvest.end_of_season_type_id).name %></td></tr>
  <tr><td class="review-table">End of season operation date: </td>
- <td>Year <%= harvest.year %>,  month <%= harvest.month %>, day <%= harvest.day %></td></tr>
+ <td>Year <%= harvest.year %>, <%= harvest.is_month %> <%= harvest.day %></td></tr>
  <tr><td class="review-table">Harvest as silage: </td>
  <td><% if harvest.is_harvest_as_silage %>Yes<% else %>No<% end %></td></tr>
  <% n +=1 %>
@@ -551,7 +551,7 @@
  <tr><td class="review-table">Cover crop: </td>
  <td><%= Crop.find(crop.cover_crop_id).name %></td></tr>
   <tr><td class="review-table">Cover crop plant date: </td>
- <td>Year <%= crop.cover_crop_plant_date_year %>,  month <%= crop.cover_crop_plant_date_month %>, day <%= crop.cover_crop_plant_date_day %></tr>
+ <td>Year <%= crop.cover_crop_plant_date_year %>, <%= crop.cover_crop_is_month %> <%= crop.cover_crop_plant_date_day %></tr>
    <tr><td class="review-table">Cover crop planting method: </td>
  <td><%= PlantingMethod.find(crop.cover_crop_planting_method_id).name %></td></tr>
  <% else %>

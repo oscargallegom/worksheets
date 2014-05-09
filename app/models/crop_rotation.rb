@@ -58,6 +58,62 @@ class CropRotation < ActiveRecord::Base
     enable
   end
 
+  def is_month
+    if self.plant_date_month == 1
+      "January"
+    elsif self.plant_date_month == 2
+      "Februrary"
+    elsif self.plant_date_month == 3
+      "March"
+    elsif self.plant_date_month == 4
+      "April"
+    elsif self.plant_date_month == 5
+      "May"
+    elsif self.plant_date_month == 6
+      "June"
+    elsif self.plant_date_month == 7
+      "July"
+    elsif self.plant_date_month == 8
+      "August"
+    elsif self.plant_date_month == 9
+      "September"
+    elsif self.plant_date_month == 10
+      "October"
+    elsif self.plant_date_month == 11
+      "November"
+    else
+      "December"
+    end
+  end
+
+    def cover_crop_is_month
+    if self.cover_crop_plant_date_month == 1
+      "January"
+    elsif self.cover_crop_plant_date_month == 2
+      "Februrary"
+    elsif self.cover_crop_plant_date_month == 3
+      "March"
+    elsif self.cover_crop_plant_date_month == 4
+      "April"
+    elsif self.cover_crop_plant_date_month == 5
+      "May"
+    elsif self.cover_crop_plant_date_month == 6
+      "June"
+    elsif self.cover_crop_plant_date_month == 7
+      "July"
+    elsif self.cover_crop_plant_date_month == 8
+      "August"
+    elsif self.cover_crop_plant_date_month == 9
+      "September"
+    elsif self.cover_crop_plant_date_month == 10
+      "October"
+    elsif self.cover_crop_plant_date_month == 11
+      "November"
+    else
+      "December"
+    end
+  end
+
   private
   def reset_ntt_xml
     #  self.strip.field.reset_ntt_xml(self.strip.is_future)

@@ -32,4 +32,61 @@ class ManureFertilizerApplication < ActiveRecord::Base
   #  self.crop_rotation.strip.field.reset_ntt_xml(self.crop_rotation.strip.is_future)
   #end
 
+
+      def is_month
+    if self.application_date_month == 1
+      "January"
+    elsif self.application_date_month == 2
+      "Februrary"
+    elsif self.application_date_month == 3
+      "March"
+    elsif self.application_date_month == 4
+      "April"
+    elsif self.application_date_month == 5
+      "May"
+    elsif self.application_date_month == 6
+      "June"
+    elsif self.application_date_month == 7
+      "July"
+    elsif self.application_date_month == 8
+      "August"
+    elsif self.application_date_month == 9
+      "September"
+    elsif self.application_date_month == 10
+      "October"
+    elsif self.application_date_month == 11
+      "November"
+    else
+      "December"
+    end
+  end
+
+        def incorporation_is_month
+    if self.incorporation_date_month == 1
+      "January"
+    elsif self.incorporation_date_month == 2
+      "Februrary"
+    elsif self.incorporation_date_month == 3
+      "March"
+    elsif self.incorporation_date_month == 4
+      "April"
+    elsif self.incorporation_date_month == 5
+      "May"
+    elsif self.incorporation_date_month == 6
+      "June"
+    elsif self.incorporation_date_month == 7
+      "July"
+    elsif self.incorporation_date_month == 8
+      "August"
+    elsif self.incorporation_date_month == 9
+      "September"
+    elsif self.incorporationn_date_month == 10
+      "October"
+    elsif self.incorporation_date_month == 11
+      "November"
+    else
+      "December"
+    end
+  end
+
 end
