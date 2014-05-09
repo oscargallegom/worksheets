@@ -349,16 +349,17 @@
     <td width="300px"><h2 class='sectionHeading'>Baseline Crop Management</h2></td>
     <td></td>
   </tr>
-  <% i=1 %>
-  <% field.strips.each do |strip| %>
-   <% if strip.is_future == false %>
+  <% i=0 %>
+  <% field.strips.where(:is_future => false).each do |strip| %>
+  <% i +=1 %>
+   <% unless strip.field.strips.where(:is_future => false).count == 1 %>
    <tr><td class="review-table"><b>Strip <%= i %> </b></td>
  <td class="review-table"> </td></tr>
       <% unless strip.length == 1 %>
       <% unless strip.length == nil %> <tr>
         <td class="review-table">Length:</td>
         <td><%= strip.length %> ft</td>
-  </tr> <% end %><% end %>
+  </tr><% end %> <% end %><% end %>
  <% j=1 %>
    <% strip.crop_rotations.each do |crop| %>
 <tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
@@ -451,8 +452,6 @@
 
 
 <% j +=1 %>
-<% i +=1 %>
-<% end %>
 <% end %>
 <% end %>
 
@@ -465,13 +464,17 @@
   <% i=1 %>
   <% field.strips.each do |strip| %>
    <% if strip.is_future == true %>
+   <% unless strip.field.strips.where(:is_future => true).count == 1 %>
    <tr><td class="review-table"><b>Strip <%= i %> </b></td>
  <td class="review-table"> </td></tr>
       <% unless strip.length == 1 %>
       <% unless strip.length == nil %> <tr>
         <td class="review-table">Length:</td>
         <td><%= strip.length %> ft</td>
-  </tr> <% end %><% end %>
+  </tr> 
+  <% end %>
+  <% end %>
+  <% end %>
  <% j=1 %>
    <% strip.crop_rotations.each do |crop| %>
 <tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
