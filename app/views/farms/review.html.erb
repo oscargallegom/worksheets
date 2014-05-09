@@ -346,7 +346,7 @@
   <% if field.field_type_id != 4 %>
 
   <tr>
-    <td width="300px"><h2 class='sectionHeading'>Baseline Crop Management</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Baseline Crop Management</h2></td>
     <td></td>
   </tr>
   <% i=0 %>
@@ -455,12 +455,16 @@
 <% end %>
 <% end %>
 
-
+</table>
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
 
  <tr>
-    <td width="300px"><h2 class='sectionHeading'>Future Crop Management</h2></td>
+    <td width="500px"><h2 class='sectionHeading'>Future Crop Management</h2></td>
     <td></td>
   </tr>
+</table>
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+
   <% i=1 %>
   <% field.strips.each do |strip| %>
    <% if strip.is_future == true %>
@@ -574,7 +578,7 @@
 
 
   <tr>
-    <td width="300px"><h2 class='sectionHeading'>Baseline BMPs</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Baseline BMPs</h2></td>
     <td></td>
   </tr>
   <% if field.is_forest_buffer %>
@@ -677,7 +681,7 @@
 <% end %>
 
  <tr>
-    <td width="300px"><h2 class='sectionHeading'>Future BMPs</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Future BMPs</h2></td>
     <td></td>
   </tr>
   <% if field.is_forest_buffer_future %>
@@ -785,11 +789,11 @@
 
 
  <tr>
-    <td width="300px"><h2 class='sectionHeading'>Reductions</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Reductions</h2></td>
     <td></td>
   </tr>
      <tr>
-    <td width="300px"><h2>Nitrogen</h2></td>
+    <td width="200px"><h2>Nitrogen</h2></td>
     <td></td>
   </tr>
   <tr><td class="review-table">Baseline load (EOS): </td>
@@ -866,7 +870,7 @@
 
 
    <tr>
-    <td width="300px"><h2>Phosphorus</h2></td>
+    <td width="200px"><h2>Phosphorus</h2></td>
     <td></td>
   </tr>
   <tr><td class="review-table">Baseline load (EOS): </td>
@@ -937,7 +941,7 @@
 <% end %>
 
    <tr>
-    <td width="300px"><h2>Sediment</h2></td>
+    <td width="200px"><h2>Sediment</h2></td>
     <td></td>
   </tr>
 
@@ -1001,7 +1005,7 @@
 <% else %>
 
   <tr>
-    <td width="300px"><h2 class='sectionHeading'>Animal Confinement</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Animal Confinement</h2></td>
     <td></td>
   </tr>
   <tr><td class="review-table">Loafing lot area: </td>
@@ -1055,7 +1059,7 @@
 
 
   <tr>
-    <td width="300px"><h2 class='sectionHeading'>Best Management Practices</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Best Management Practices</h2></td>
     <td></td>
   </tr>
 
@@ -1165,11 +1169,11 @@
 
 
  <tr>
-    <td width="300px"><h2 class='sectionHeading'>Reductions</h2></td>
+    <td width="200px"><h2 class='sectionHeading'>Reductions</h2></td>
     <td></td>
   </tr>
      <tr>
-    <td width="300px"><h2>Nitrogen</h2></td>
+    <td width="200px"><h2>Nitrogen</h2></td>
     <td></td>
   </tr>
 
@@ -1209,7 +1213,7 @@
 
 
    <tr>
-    <td width="300px"><h2>Phosphorus</h2></td>
+    <td width="200px"><h2>Phosphorus</h2></td>
     <td></td>
   </tr>
 
@@ -1248,7 +1252,7 @@
 </tr>
 
    <tr>
-    <td width="300px"><h2>Sediment</h2></td>
+    <td width="200px"><h2>Sediment</h2></td>
     <td></td>
   </tr>
 
