@@ -290,6 +290,7 @@
       <td class="review-table">Total Area:</td>
       <td><%= number_with_precision(field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %></td>
      </tr>
+     <% unless field.field_type_id == 4 %>
           <tr>
       <td class="review-table">Irrigation:</td>
       <td><% if !field.irrigation_id.nil?%><%= Irrigation.find(field.irrigation_id).name %><% else %>None<% end %></td>
@@ -302,7 +303,6 @@
         <td class="review-table">P Test value:</td>
         <td><%= field.p_test_value %> ppm</td>
   </tr> 
-  <% unless field.field_type_id == 4 %>
   </tr>
   <% i=0 %>
   <% field.soils.each do |soil| %>
