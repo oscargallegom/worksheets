@@ -1,6 +1,6 @@
 <% if @completed == true %>
 
-<div class="nn-review sectionRest clearfix">
+<div class="nn-summary sectionRest clearfix">
 <div>
   <fieldset>
 <ol>
@@ -1087,10 +1087,11 @@
   </tr>
   <tr><td class="review-table">Loafing lot area: </td>
  <td><%= field.acres_from_map.round(2) %> ac</td></tr>
-
+<% if field.field_livestocks.any? %>
   <tr><td class="review-table"><h2>Livestock</h2> </td>
     <td></td>
   </tr>
+  <% end %>
 
 <% z = 1 %>
     <% field.field_livestocks.each do |livestock| %>
@@ -1111,11 +1112,11 @@
 <% z += 1 %>
 
 <% end %>
-
+<% if field.field_poultry.any? %>
   <tr><td class="review-table"><h2>Poultry</h2> </td>
     <td></td>
   </tr>
-
+<% end %>
 <% x = 1 %>
     <% field.field_poultry.each do |poultry| %>
   <tr> <td class="review-table">Poultry #<%= x %>:</td>
