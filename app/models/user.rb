@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   # just am example to filter
   # scope :user_filter, lambda {|user_id|
-  #  where(:id => user_id) unless user_id.nil?
+  # where(:id => user_id) unless user_id.nil?
   #}
 
   # Setup accessible (or protected) attributes for your model
@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
 
   # validates_inclusion_of :deleted, :in => [true, false]
 
-  validates_presence_of :username, :email, :user_type_id, :first_name, :last_name, :phone, :on => create
+  validates_presence_of :username, :email, :user_type_id, :first_name, :last_name, :phone
   validates_uniqueness_of :username
-  #validates_presence_of :roles, :on => :update, :message => '^Select at least one role.'
+  validates_presence_of :roles, :on => :update, :message => '^Select at least one role.'
 
   #before_save :set_default
   before_create :default_role
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   # def set_default
-  #   set_default = false unless  :set_default
+  # set_default = false unless :set_default
   # end
 
   def default_role
@@ -70,15 +70,15 @@ class User < ActiveRecord::Base
     end
   end
 
-#   def self.send_reset_password_instructions(attributes={})
-#     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
-#     if !recoverable.approved?
-#       recoverable.errors[:base] << I18n.t("devise.failure.not_approved")
-#     elsif recoverable.persisted?
-#       recoverable.send_reset_password_instructions
-#     end
-#     recoverable
-#   end
+# def self.send_reset_password_instructions(attributes={})
+# recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+# if !recoverable.approved?
+# recoverable.errors[:base] << I18n.t("devise.failure.not_approved")
+# elsif recoverable.persisted?
+# recoverable.send_reset_password_instructions
+# end
+# recoverable
+# end
 
 # allow updates without entering current password
   def update_with_password(params={})
@@ -126,12 +126,12 @@ class User < ActiveRecord::Base
   end
 
   #def self.all_enabled(par = nil)
-  #  if par.nil?
-  #    scoped
-  #  elsif par == 'true'
-  #    where(:deleted_at => nil)
-  #  else    par == 'false'
-  #         where("deleted_at IS NOT NULL")
-  #  end
+  # if par.nil?
+  # scoped
+  # elsif par == 'true'
+  # where(:deleted_at => nil)
+  # else par == 'false'
+  # where("deleted_at IS NOT NULL")
+  # end
   #end
 end
