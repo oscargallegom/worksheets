@@ -1120,7 +1120,7 @@
 <% x = 1 %>
     <% field.field_poultry.each do |poultry| %>
   <tr> <td class="review-table">Poultry #<%= x %>:</td>
- <td><%= Animal.find(poultry.animal_id).name %></td></tr>
+ <td><%= Animal.find(poultry.poultry_id).name %></td></tr>
    <tr> <td class="review-table">Birds/flock:</td>
  <td><%= poultry.quantity %></td></tr>
     <tr> <td class="review-table">Flocks/yr:</td>
