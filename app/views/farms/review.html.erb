@@ -63,7 +63,6 @@
       </li>
     </ol>
   </fieldset>
-
   <fieldset>
     <ol>
       <li><h2 class='sectionHeading'>Totals</h2></li>
@@ -120,6 +119,11 @@
 
 </div>
 <div style="clear: both"></div>
+<iframe width='1000' height='600' src='<%= url_for :controller => 'farms', :action => 'send_to_mapping_site', :id => @farm.id %>'>
+</iframe>
+
+
+
 
 <div>
   <fieldset>
