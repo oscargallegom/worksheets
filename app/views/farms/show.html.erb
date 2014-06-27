@@ -127,6 +127,10 @@
         <div class='extrawide'>Farm meets N baseline:</div>
         <%= (@is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
         <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+
+
+      <% if (!@is_farm_meets_baseline) || (@current_n_load_fields > @baseline_n_load_fields) %> &nbsp&nbsp<a href="#" id="trigger">(Why?)</a><% end %>
+
       </li>
       <li>
         <div class='extrawide'>Baseline N load fields (EOS):</div>
@@ -154,6 +158,11 @@
         <div class='extrawide'>Farm meets P baseline:</div>
         <%= (@is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
         <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+             
+
+             <% if (!@is_farm_meets_baseline) || (@current_p_load_fields > @baseline_p_load_fields) %> 
+        &nbsp&nbsp<a href="#" id="ptrigger">(Why?)</a><% end %>
+
       </li>
       <li>
         <div class='extrawide'>Baseline P load fields (EOS):</div>
@@ -181,6 +190,9 @@
         <div class='extrawide'>Farm meets sediment baseline:</div>
         <%= (@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
         <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+
+             <% if (!@is_farm_meets_baseline) || (@current_sediment_load_fields > @baseline_sediment_load_fields) %> 
+        &nbsp&nbsp<a href="#" id="strigger">(Why?)</a><% end %>
       </li>
       <li>
         <div class='extrawide'>Baseline sediment load fields (EOS):</div>
@@ -400,4 +412,107 @@
   <% end %>
 </table>
 
+    <div id="pop-up">
+      <h3>Farm Does Not Meet N Baseline</h3>
+      <p>
+        <% if @farm.site_state_id != 47 %>
+          <% if( @baseline_n_load_fields < @current_n_load_fields) %>
+            Current N load is greater than Baseline N load.<br><br>
+          <% end %>
+        <% end %>
+        <% @farm.show_meets_baseline.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
 
+    <div id="p-pop-up">
+      <h3>Farm Does Not Meet P Baseline</h3>
+      <p>
+        <% if @farm.site_state_id != 47 %>
+          <% if( @baseline_p_load_fields < @current_p_load_fields) %>
+            Current P load is greater than Baseline P load.<br><br>
+          <% end %>
+        <% end %>
+        <% @farm.show_meets_baseline.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="s-pop-up">
+      <h3>Farm Does Not Meet S Baseline</h3>
+      <p>
+        <% if @farm.site_state_id != 47 %>
+          <% if( @baseline_sediment_load_fields < @current_sediment_load_fields) %>
+            Current S load is greater than Baseline S load.<br><br>
+          <% end %>
+        <% end %>
+        <% @farm.show_meets_baseline.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+    <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#trigger').hover(function(e) {
+    $('div#pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#pop-up').hide();
+  });
+
+  $('a#trigger').mousemove(function(e) {
+    $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
+
+        <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#ptrigger').hover(function(e) {
+    $('div#p-pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#p-pop-up').hide();
+  });
+
+  $('a#ptrigger').mousemove(function(e) {
+    $("div#p-pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
+
+
+        <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#strigger').hover(function(e) {
+    $('div#s-pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#s-pop-up').hide();
+  });
+
+  $('a#strigger').mousemove(function(e) {
+    $("div#s-pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>

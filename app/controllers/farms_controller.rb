@@ -124,7 +124,10 @@ class FarmsController < ApplicationController
 
       @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
 
+
+
     end
+
 
     @tab = params[:tab]
 

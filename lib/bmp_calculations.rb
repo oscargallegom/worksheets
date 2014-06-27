@@ -1866,6 +1866,10 @@ def computeBmpCalculationsWithoutConversion(field)
     return is_meet_baseline
   end
 
+
+
+
+
   def is_converted_acres_valid(field)
     # for pasture, hay or crop
     # if permanent pasture and fencing in place

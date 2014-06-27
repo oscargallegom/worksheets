@@ -96,3 +96,4 @@ $(document).ready ->
   # show tract number if state is Maryland
   # $("#tr_tract_number").show() if $("#farm_site_state_id option:selected").text()=='Maryland'
   hideAnimalSection() if $("#has_animals_no").is(":checked")
+

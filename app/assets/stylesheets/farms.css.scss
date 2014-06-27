@@ -14,3 +14,37 @@
   display: block;
 }
 
+
+
+/* HOVER STYLES */
+div#pop-up {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background: #F5F5F5;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+div#p-pop-up {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background: #F5F5F5;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}
+
+div#s-pop-up {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background: #F5F5F5;
+  color: #000000;
+  border: 1px solid #1a1a1a;
+  font-size: 90%;
+}

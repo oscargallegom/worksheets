@@ -98,26 +98,26 @@ module ModelRun
           @future_carbon = (@ntt_results_future['Carbon'].to_f).round(2)
         end
 
-        field.current_total_n = @current_total_n
-        field.current_sediment_organic_n = @current_sediment_organic_n
-        field.current_soluble_n = @current_soluble_n
-        field.tile_drained_n = @tile_drained_n
-        field.current_total_p = @current_total_p
-        field.current_sediment_organic_p = @current_sediment_organic_p
-        field.current_soluble_p = @current_soluble_p
-        field.current_flow = @current_flow
-        field.current_sediment = @current_sediment
-        field.current_carbon = @current_carbon
-        field.future_total_n = @future_total_n
-        field.future_sediment_organic_n = @future_sediment_organic_n
-        field.future_soluble_n = @future_soluble_n
-        field.future_tile_drained_n = @future_tile_drained_n
-        field.future_total_p = @future_total_p
-        field.future_sediment_organic_p = @future_sediment_organic_p
-        field.future_soluble_p = @future_soluble_p
-        field.future_flow = @future_flow
-        field.future_sediment = @future_sediment
-        field.future_carbon = @future_carbon
+        # field.current_total_n = @current_total_n
+        # field.current_sediment_organic_n = @current_sediment_organic_n
+        # field.current_soluble_n = @current_soluble_n
+        # field.tile_drained_n = @tile_drained_n
+        # field.current_total_p = @current_total_p
+        # field.current_sediment_organic_p = @current_sediment_organic_p
+        # field.current_soluble_p = @current_soluble_p
+        # #field.current_flow = @current_flow
+        # field.current_sediment = @current_sediment
+        # field.current_carbon = @current_carbon
+        # field.future_total_n = @future_total_n
+        # field.future_sediment_organic_n = @future_sediment_organic_n
+        # field.future_soluble_n = @future_soluble_n
+        # field.future_tile_drained_n = @future_tile_drained_n
+        # field.future_total_p = @future_total_p
+        # field.future_sediment_organic_p = @future_sediment_organic_p
+        # field.future_soluble_p = @future_soluble_p
+        # field.future_flow = @future_flow
+        # field.future_sediment = @future_sediment
+        # field.future_carbon = @future_carbon
         field.save
 
         @future_sediment_with_conversion = @current_totals[:new_total_sediment_future]
