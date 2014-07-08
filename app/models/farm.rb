@@ -296,10 +296,7 @@ class Farm < ActiveRecord::Base
                       if strip.is_future == false 
                        if crop_rotation.manure_fertilizer_applications.any?
                                             logger.debug "################ HI "
-                         if field.hel_soils == nil
-                            show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
-                          end
-                          if field.hel_soils == false
+                         if [nil, false].include? field.hel_soils
                             show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
                           end
                       end
