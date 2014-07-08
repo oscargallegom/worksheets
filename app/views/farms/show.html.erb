@@ -170,7 +170,7 @@
         <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
 
 
-     <!-- <% if (!@is_farm_meets_baseline) || (@current_n_load_fields > @baseline_n_load_fields) %> &nbsp&nbsp<a href="#" id="trigger">(Why?)</a><% end %>-->
+      <% if (!@is_farm_meets_baseline) || (@current_n_load_fields > @baseline_n_load_fields) %> &nbsp&nbsp<a href="#" id="trigger">(Why?)</a><% end %>
 
       </li>
       <li>
@@ -201,8 +201,8 @@
         <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
              
 
-            <!-- <% if (!@is_farm_meets_baseline) || (@current_p_load_fields > @baseline_p_load_fields) %> 
-        &nbsp&nbsp<a href="#" id="ptrigger">(Why?)</a><% end %>-->
+             <% if (!@is_farm_meets_baseline) || (@current_p_load_fields > @baseline_p_load_fields) %> 
+        &nbsp&nbsp<a href="#" id="ptrigger">(Why?)</a><% end %>
 
       </li>
       <li>
@@ -232,8 +232,8 @@
         <%= (@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
         <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
 
-        <!--     <% if (!@is_farm_meets_baseline) || (@current_sediment_load_fields > @baseline_sediment_load_fields) %> 
-        &nbsp&nbsp<a href="#" id="strigger">(Why?)</a><% end %>-->
+             <% if (!@is_farm_meets_baseline) || (@current_sediment_load_fields > @baseline_sediment_load_fields) %> 
+        &nbsp&nbsp<a href="#" id="strigger">(Why?)</a><% end %>
       </li>
       <li>
         <div class='extrawide'>Baseline sediment load fields (EOS):</div>

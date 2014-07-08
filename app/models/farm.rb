@@ -291,20 +291,24 @@ class Farm < ActiveRecord::Base
                    end
 
                    if is_manure_fertilizer_incorporated == false
-                    field.strips.each do |strip|
-                      strip.crop_rotations.each do |crop_rotation|
-                      if strip.is_future == false 
-                       if crop_rotation.manure_fertilizer_applications.any?
-                                            logger.debug "################ HI "
-                         if [nil, false].include? field.hel_soils
-                            show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+                    z = 0
+                      field.strips.each do |strip|
+                        strip.crop_rotations.each do |crop_rotation|
+                          if strip.is_future == false 
+                            while z == 0
+                            if crop_rotation.manure_fertilizer_applications.any?
+                              if [nil, false].include? field.hel_soils
+                                show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+                                z = 1
+                              end
+                            end
+                            z = 2
                           end
+                          end
+                        end
                       end
-                    end
-                    end
                   end
-                   end
-                  end
+                end
 
                   # if field is pasture
                   if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
