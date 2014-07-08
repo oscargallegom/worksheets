@@ -119,11 +119,6 @@
 
 </div>
 <div style="clear: both"></div>
-<iframe width='1000' height='600' src='<%= url_for :controller => 'farms', :action => 'send_to_mapping_site', :id => @farm.id %>'>
-</iframe>
-
-
-
 
 <div>
   <fieldset>
@@ -340,6 +335,10 @@
 </div>
 <div style="clear: both"></div>
 </div>
+<iframe width='1000' height='600' src='<%= url_for :controller => 'farms', :action => 'send_to_mapping_site', :id => @farm.id %>'>
+</iframe>
+
+
 
 <% @fields.each do |field| %>
 <table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">

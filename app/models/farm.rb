@@ -95,6 +95,24 @@ class Farm < ActiveRecord::Base
     buffered_area == 0 ? 'N/A' : buffered_area
   end
 
+  def grass_buffered_area
+    buffered_area = 0
+    fields.each do |field|
+      #buffered_area = buffered_area + field.forest_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer)
+      buffered_area = buffered_area + field.grass_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer)
+    end
+    buffered_area == 0 ? 'N/A' : buffered_area
+  end
+
+  def forest_buffered_area
+    buffered_area = 0
+    fields.each do |field|
+      buffered_area = buffered_area + field.forest_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer)
+      #buffered_area = buffered_area + field.grass_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer)
+    end
+    buffered_area == 0 ? 'N/A' : buffered_area
+  end
+
   def wetland_area
     wetland_area = 0
     fields.each do |field|
@@ -119,6 +137,90 @@ class Farm < ActiveRecord::Base
     converted_area = converted_area + wetland_area unless wetland_area == 'N/A'
     converted_area = converted_area + streambank_fencing_area unless streambank_fencing_area == 'N/A'
     converted_area == 0 ? 'N/A' : converted_area
+  end
+
+  def soil_water_management_plan
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 8
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
+  end
+
+  def water_control_structures
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 7
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
+  end
+
+  def sorbing_materials
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 4
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
+  end
+
+  def decision_ag
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 3
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
+  end
+
+  def horse_pasture
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 6
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
+  end
+
+  def prescribed_grazing
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 11
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
+  end
+
+  def off_stream
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 3
+          area += bmp.field.acres
+        end
+      end
+    end
+    return area
   end
 
   def credits

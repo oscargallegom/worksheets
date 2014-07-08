@@ -92,8 +92,13 @@
         <%= @farm.percentCompleted %> %
       </li>
       <li>
-        <div class='extrawide'>Buffered area:</div>
-        <%= number_with_precision(@farm.buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <div class='extrawide'>Grass buffer area:</div>
+        <%= number_with_precision(@farm.grass_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.buffered_area == 'N/A' %>
+      </li>
+            <li>
+        <div class='extrawide'>Forest buffer area:</div>
+        <%= number_with_precision(@farm.forest_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
         <%= 'ac' unless @farm.buffered_area == 'N/A' %>
       </li>
       <li>
@@ -112,6 +117,42 @@
         <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
         <%= 'N/A' if @farm.converted_area == 'N/A' %>
         <%= 'ac' unless @farm.converted_area == 'N/A' %>
+      </li>
+            <li>
+        <div class='extrawide'>Acres of soil and water management plans:</div>
+        <%= number_with_precision(@farm.soil_water_management_plan, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.soil_water_management_plan == 'N/A' %>
+        <%= 'N/A' if @farm.soil_water_management_plan == 'N/A' %>
+        <%= 'ac' unless @farm.soil_water_management_plan == 'N/A' %>
+      </li>
+                  <li>
+        <div class='extrawide'>Acres treated by water control structures:</div>
+        <%= number_with_precision(@farm.water_control_structures, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.water_control_structures == 'N/A' %>
+        <%= 'N/A' if @farm.water_control_structures == 'N/A' %>
+        <%= 'ac' unless @farm.water_control_structures == 'N/A' %>
+      </li>
+                        <li>
+        <div class='extrawide'>Acres of sorbing materials in ag ditches:</div>
+        <%= number_with_precision(@farm.sorbing_materials, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.sorbing_materials == 'N/A' %>
+        <%= 'N/A' if @farm.sorbing_materials == 'N/A' %>
+        <%= 'ac' unless @farm.sorbing_materials == 'N/A' %>
+      </li>
+                        <li>
+        <div class='extrawide'>Acres of decision/precision agriculture:</div>
+        <%= number_with_precision(@farm.decision_ag, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.decision_ag == 'N/A' %>
+        <%= 'N/A' if @farm.decision_ag == 'N/A' %>
+        <%= 'ac' unless @farm.decision_ag == 'N/A' %>
+      </li>
+                              <li>
+        <div class='extrawide'>Acres of prescribed grazing:</div>
+        <%= number_with_precision(@farm.prescribed_grazing, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.prescribed_grazing == 'N/A' %>
+        <%= 'N/A' if @farm.prescribed_grazing == 'N/A' %>
+        <%= 'ac' unless @farm.prescribed_grazing == 'N/A' %>
+      </li>
+                                    <li>
+        <div class='extrawide'>Acres of off stream watering without Fencing:</div>
+        <%= number_with_precision(@farm.off_stream, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.off_stream == 'N/A' %>
+        <%= 'N/A' if @farm.off_stream == 'N/A' %>
+        <%= 'ac' unless @farm.off_stream == 'N/A' %>
       </li>
     </ol>
   </fieldset>
