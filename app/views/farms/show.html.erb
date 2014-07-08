@@ -393,6 +393,7 @@
   <tr>
     <th>Field</th>
     <th>Area (ac)</th>
+    <th>Slope</th>
     <th>Baseline</th>
     <th>Current</th>
     <th>Future</th>
@@ -410,6 +411,13 @@
           <%= field.field_type.name unless field.field_type.nil? %>
         </td>
         <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
+        <td>
+          <% i = 1 %>
+          <% field.soils.each do |soil| %>
+          Soil <%= i %>: <%= soil.slope %><br>
+          <% i+=1 %>
+          <% end %>
+        </td>
         <td>
           <% if (!field.field_type.nil? && field.field_type_id <= 3) %>
               N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
