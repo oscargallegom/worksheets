@@ -117,7 +117,7 @@
         <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
         <%= 'N/A' if @farm.converted_area == 'N/A' %>
         <%= 'ac' unless @farm.converted_area == 'N/A' %>
-      </li>
+      </li><!--
             <li>
         <div class='extrawide'>Acres of soil and water management plans:</div>
         <%= number_with_precision(@farm.soil_water_management_plan, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.soil_water_management_plan == 'N/A' %>
@@ -153,7 +153,7 @@
         <%= number_with_precision(@farm.off_stream, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.off_stream == 'N/A' %>
         <%= 'N/A' if @farm.off_stream == 'N/A' %>
         <%= 'ac' unless @farm.off_stream == 'N/A' %>
-      </li>
+      </li>-->
     </ol>
   </fieldset>
 
