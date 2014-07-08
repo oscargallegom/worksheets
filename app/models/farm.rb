@@ -278,6 +278,7 @@ class Farm < ActiveRecord::Base
                    # check if at least one manure fertilizer incorporated
                    is_manure_fertilizer_incorporated = false
                    field.strips.each do |strip|
+                    if strip.is_future == false
                      strip.crop_rotations.each do |crop_rotation|
                        crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
                          if (manure_fertilizer_application.is_incorporated)
@@ -286,6 +287,7 @@ class Farm < ActiveRecord::Base
                          end
                        end
                      end
+                   end
                    end
 
                    if is_manure_fertilizer_incorporated == false
