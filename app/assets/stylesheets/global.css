@@ -1440,13 +1440,13 @@ div.wide {
 div.extrawide {
     display: block;
     float: left;
-    width: 270px;
+    width: 260px;
     font-weight: bold;
 }
 div.narrow {
     display: block;
     float: left;
-    width: 65px;}
+    width: 70px;}
 
 div.review-extrawide {
     display: block;

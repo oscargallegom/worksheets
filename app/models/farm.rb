@@ -102,13 +102,28 @@ class Farm < ActiveRecord::Base
       buffered_area = buffered_area + field.grass_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer)
     end
     buffered_area == 0 ? 'N/A' : buffered_area
+  end  
+
+  def grass_buffered_area_future
+    buffered_area = 0
+    fields.each do |field|
+        buffered_area = buffered_area + field.grass_buffer_area_future if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer_future)
+    end
+    buffered_area == 0 ? 'N/A' : buffered_area
   end
 
   def forest_buffered_area
     buffered_area = 0
     fields.each do |field|
       buffered_area = buffered_area + field.forest_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer)
-      #buffered_area = buffered_area + field.grass_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer)
+    end
+    buffered_area == 0 ? 'N/A' : buffered_area
+  end
+
+  def forest_buffered_area_future
+    buffered_area = 0
+    fields.each do |field|
+      buffered_area = buffered_area + field.forest_buffer_area_future if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer_future)
     end
     buffered_area == 0 ? 'N/A' : buffered_area
   end
@@ -121,11 +136,30 @@ class Farm < ActiveRecord::Base
     wetland_area == 0 ? 'N/A' : wetland_area
   end
 
+
+  def wetland_area_future
+    wetland_area = 0
+    fields.each do |field|
+      wetland_area = wetland_area + field.wetland_area_future if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland_future)
+    end
+    wetland_area == 0 ? 'N/A' : wetland_area
+  end
+
   def streambank_fencing_area
     streambank_fencing_area = 0
     fields.each do |field|
       if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
         streambank_fencing_area = streambank_fencing_area + field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
+      end
+    end
+    streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
+  end
+
+  def streambank_fencing_area_future
+    streambank_fencing_area = 0
+    fields.each do |field|
+      if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place_future?)
+        streambank_fencing_area = streambank_fencing_area + field.distance_fence_stream_future.to_f * field.fence_length_future.to_f / 43560.0
       end
     end
     streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area

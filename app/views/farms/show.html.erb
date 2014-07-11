@@ -52,10 +52,10 @@
 
   <fieldset>
     <ol>
-      <li><h2 class='sectionHeading'>Watershed</h2></li>
+      <li><h2 class='sectionHeading'>Watershed Information</h2></li>
             <li>
         <div class='extrawide'>Watershed:</div>
-        <%= @arrWatersheds.join(" / ").html_safe %>
+      <%= @arrWatersheds.join(" / ").html_safe %>
       </li>
                   <li>
         <div class='extrawide'>CBWM Segment:</div>
@@ -69,6 +69,7 @@
         <div class='extrawide'>TMDL:</div>
         <%= @arrTMDLs.join(" / ").html_safe %>
       </li>
+      <li></li>
       <li><h2 class='sectionHeading'>Totals</h2></li>
       <li>
         <div class='extrawide'>Farm area (from map):</div>
@@ -194,7 +195,7 @@
         t/yr
       </li>
       <li>
-        <div class='extrawide'>Current sed load for Animal HQ (EOS):</div>
+        <div class='extrawide'>Current load for Animal HQ (EOS):</div>
         <%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
         t/yr</li>
           <li>
@@ -204,31 +205,34 @@
               <li>
         <div class='extrawide'>Grass buffer area:</div>
         <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.buffered_area == 'N/A' %></div>
+        <%= 'ac' unless @farm.grass_buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.grass_buffered_area_future == 'N/A' %></div>
       </li>
             <li>
         <div class='extrawide'>Forest buffer area:</div>
-        <%= number_with_precision(@farm.forest_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.buffered_area == 'N/A' %>
+         <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.forest_buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.forest_buffered_area_future == 'N/A' %></div>
       </li>
       <li>
         <div class='extrawide'>Wetland area:</div>
-        <%= number_with_precision(@farm.wetland_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.wetland_area == 'N/A' %>
+         <div class='narrow'><%= number_with_precision(@farm.wetland_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.wetland_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.wetland_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.wetland_area_future == 'N/A' %></div>
       </li>
       <li>
         <div class='extrawide'>Streambank fencing area:</div>
-        <%= number_with_precision(@farm.streambank_fencing_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.streambank_fencing_area == 'N/A' %>
-        <%= 'N/A' if @farm.streambank_fencing_area == 'N/A' %>
-        <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %>
+         <div class='narrow'><%= number_with_precision(@farm.streambank_fencing_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.streambank_fencing_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.streambank_fencing_area_future == 'N/A' %></div>
       </li>
-<!--
+
             <li>
         <div class='extrawide'>Acres of soil and water management plans:</div>
-        <%= number_with_precision(@farm.soil_water_management_plan, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.soil_water_management_plan == 'N/A' %>
-        <%= 'N/A' if @farm.soil_water_management_plan == 'N/A' %>
-        <%= 'ac' unless @farm.soil_water_management_plan == 'N/A' %>
+        <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.grass_buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.grass_buffered_area_future == 'N/A' %></div>
+      </li>
       </li>
                   <li>
         <div class='extrawide'>Acres treated by water control structures:</div>
@@ -259,7 +263,7 @@
         <%= number_with_precision(@farm.off_stream, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.off_stream == 'N/A' %>
         <%= 'N/A' if @farm.off_stream == 'N/A' %>
         <%= 'ac' unless @farm.off_stream == 'N/A' %>
-      </li>-->
+      </li>
     </ol>
   </fieldset>
 
@@ -386,11 +390,24 @@
         <% else %>
         <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 0, delimiter: ',') : 0 %><% end %>
       </li>
-         <li>
-        <h2 class='sectionHeading'>Land Use Conversion</h2>
+         <li><!--
+        <h2 class='sectionHeading'>Land Use Conversion</h2>-->
+      </li>
+                    <li> <div class='extrawide'>&nbsp</div><div class='narrow'><b>Current</b></div><div class='narrow'><b>Future</b></div></li>
+      <li>
+        <div class='extrawide'>Fertilizer application setback:</div>
+        <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
+        <%= 'N/A' if @farm.converted_area == 'N/A' %>
+        <%= 'ac' unless @farm.converted_area == 'N/A' %>
       </li>
       <li>
-        <div class='extrawide'>Converted area:</div>
+        <div class='extrawide'>Other land use conversion:</div>
+        <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
+        <%= 'N/A' if @farm.converted_area == 'N/A' %>
+        <%= 'ac' unless @farm.converted_area == 'N/A' %>
+      </li>
+      <li>
+        <div class='extrawide'>Total Converted area:</div>
         <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
         <%= 'N/A' if @farm.converted_area == 'N/A' %>
         <%= 'ac' unless @farm.converted_area == 'N/A' %>
