@@ -1001,7 +1001,7 @@ form li {
     border: none;
     color: #666;
     float: left;
-    width: 400px;
+    width: 450px;
 }
 
 .nn-review fieldset {
@@ -1446,7 +1446,7 @@ div.extrawide {
 div.narrow {
     display: block;
     float: left;
-    width: 70px;}
+    width: 80px;}
 
 div.review-extrawide {
     display: block;
