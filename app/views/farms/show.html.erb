@@ -59,7 +59,7 @@
       </li>
                   <li>
         <div class='extrawide'>CBWM Segment:</div>
-       
+       <%= @cb_segment %>
       </li>
       <li>
         <div class='extrawide'>Major basin:</div>
@@ -226,43 +226,33 @@
         <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.streambank_fencing_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
         <%= 'ac' unless @farm.streambank_fencing_area_future == 'N/A' %></div>
       </li>
+            <li>
+        <div class='extrawide'>Fertilizer application setback:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+      <li>
+        <div class='extrawide'>Other land use conversion:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+      <li>
+        <div class='extrawide'>Total Converted area:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
 
             <li>
-        <div class='extrawide'>Acres of soil and water management plans:</div>
-        <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.grass_buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.grass_buffered_area_future == 'N/A' %></div>
-      </li>
-      </li>
+        <div class='extrawide'>Soil and water management plans:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>      </li>
                   <li>
-        <div class='extrawide'>Acres treated by water control structures:</div>
-        <%= number_with_precision(@farm.water_control_structures, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.water_control_structures == 'N/A' %>
-        <%= 'N/A' if @farm.water_control_structures == 'N/A' %>
-        <%= 'ac' unless @farm.water_control_structures == 'N/A' %>
+        <div class='extrawide'>Water control structures:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
       </li>
                         <li>
-        <div class='extrawide'>Acres of sorbing materials in ag ditches:</div>
-        <%= number_with_precision(@farm.sorbing_materials, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.sorbing_materials == 'N/A' %>
-        <%= 'N/A' if @farm.sorbing_materials == 'N/A' %>
-        <%= 'ac' unless @farm.sorbing_materials == 'N/A' %>
+        <div class='extrawide'>Sorbing materials in ag ditches:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
       </li>
                         <li>
-        <div class='extrawide'>Acres of decision/precision agriculture:</div>
-        <%= number_with_precision(@farm.decision_ag, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.decision_ag == 'N/A' %>
-        <%= 'N/A' if @farm.decision_ag == 'N/A' %>
-        <%= 'ac' unless @farm.decision_ag == 'N/A' %>
-      </li>
-                              <li>
-        <div class='extrawide'>Acres of prescribed grazing:</div>
-        <%= number_with_precision(@farm.prescribed_grazing, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.prescribed_grazing == 'N/A' %>
-        <%= 'N/A' if @farm.prescribed_grazing == 'N/A' %>
-        <%= 'ac' unless @farm.prescribed_grazing == 'N/A' %>
-      </li>
-                                    <li>
-        <div class='extrawide'>Acres of off stream watering without Fencing:</div>
-        <%= number_with_precision(@farm.off_stream, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.off_stream == 'N/A' %>
-        <%= 'N/A' if @farm.off_stream == 'N/A' %>
-        <%= 'ac' unless @farm.off_stream == 'N/A' %>
+        <div class='extrawide'>Decision/precision agriculture:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
       </li>
     </ol>
   </fieldset>
@@ -394,23 +384,45 @@
         <h2 class='sectionHeading'>Land Use Conversion</h2>-->
       </li>
                     <li> <div class='extrawide'>&nbsp</div><div class='narrow'><b>Current</b></div><div class='narrow'><b>Future</b></div></li>
-      <li>
-        <div class='extrawide'>Fertilizer application setback:</div>
-        <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
-        <%= 'N/A' if @farm.converted_area == 'N/A' %>
-        <%= 'ac' unless @farm.converted_area == 'N/A' %>
+                              <li>
+        <div class='extrawide'>Prescribed grazing:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
       </li>
-      <li>
-        <div class='extrawide'>Other land use conversion:</div>
-        <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
-        <%= 'N/A' if @farm.converted_area == 'N/A' %>
-        <%= 'ac' unless @farm.converted_area == 'N/A' %>
+                                    <li>
+        <div class='extrawide'>Off stream watering without Fencing:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
       </li>
-      <li>
-        <div class='extrawide'>Total Converted area:</div>
-        <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
-        <%= 'N/A' if @farm.converted_area == 'N/A' %>
-        <%= 'ac' unless @farm.converted_area == 'N/A' %>
+            <li>
+        <div class='extrawide'>Horse pasture management:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Biofilters:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Barnyard Runoff Controls:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Mortality Composting:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Animal Waste Management System:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Poultry Litter Treatment/Alum:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Heavy Use Pads:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+      </li>
+            <li>
+        <div class='extrawide'>Treatment Wetland:</div>
+ <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
       </li>
     </ol>
   </fieldset>

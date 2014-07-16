@@ -41,6 +41,8 @@ class FarmsController < ApplicationController
     @n_factors = ((@watersheds.collect {|z| z.n_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
     @s_factors = ((@watersheds.collect {|z| z.sediment_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
 
+    @cb_segment = ((@watersheds.collect {|z| z.key}).uniq).map {|i| i.to_s }.join(", ")
+
     # check if the farm meets baseline or not
     @baseline_n_load_fields = 0
     @current_n_load_fields = 0
