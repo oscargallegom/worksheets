@@ -212,6 +212,123 @@ class Field < ActiveRecord::Base
 
   end
 
+  def field_converted_area
+    conversion = 0
+    if is_forest_buffer?
+      conversion = conversion + forest_buffer_area
+    end
+    if is_grass_buffer?
+      conversion = conversion + grass_buffer_area
+    end 
+    if is_wetland?
+      conversion = conversion + wetland_area
+    end
+    if is_streambank_fencing_in_place?
+      conversion = conversion + ((distance_fence_stream.to_f * fence_length.to_f) / 43560.0)
+    end
+    if is_fertilizer_application_setback?
+      conversion = conversion + ((fertilizer_application_setback_average_width.to_f * fertilizer_application_setback_length.to_f) / 43560.0)
+    end
+    if other_land_use_conversion_acres
+      unless other_land_use_conversion_acres == 0
+      conversion = conversion + other_land_use_conversion_acres
+    end
+    end
+    return conversion
+  end
+
+  def field_converted_area_future
+    conversion = 0
+    if is_forest_buffer_future?
+      conversion = conversion + forest_buffer_area_future
+    end
+    if is_grass_buffer_future?
+      conversion = conversion + grass_buffer_area_future
+    end
+    if is_wetland_future?
+      conversion = conversion + wetland_area_future
+    end
+    if is_streambank_fencing_in_place_future?
+      conversion = conversion + ((distance_fence_stream_future.to_f * fence_length_future.to_f) / 43560.0)
+    end
+    if is_fertilizer_application_setback_future?
+      conversion = conversion + ((fertilizer_application_setback_average_width_future.to_f * fertilizer_application_setback_length_future.to_f) / 43560.0)
+    end
+    if other_land_use_conversion_acres_future
+      unless other_land_use_conversion_acres_future == 0
+      conversion = conversion + other_land_use_conversion_acres_future
+    end
+    end
+    return conversion
+  end
+
+def has_conversion
+  conversion = false
+  if is_forest_buffer?
+    conversion = true
+  elsif is_grass_buffer?
+    conversion = true
+  elsif is_wetland?
+    conversion = true
+  elsif is_streambank_fencing_in_place?
+    conversion = true
+  elsif is_fertilizer_application_setback?
+    conversion = true
+  elsif other_land_use_conversion_acres
+    unless other_land_use_conversion_acres == 0
+    conversion = true
+  end
+  end
+  return conversion
+  logger.debug "%%%%%%%%%%%%%%%%%%%%% conversion: #{conversion}"
+end
+def has_conversion_future
+  conversion = false
+  if is_forest_buffer_future?
+    conversion = true
+  elsif is_grass_buffer_future?
+    conversion = true
+  elsif is_wetland_future?
+    conversion = true
+  elsif is_streambank_fencing_in_place_future?
+    conversion = true
+  elsif is_fertilizer_application_setback_future?
+    conversion = true
+  elsif other_land_use_conversion_acres_future
+    unless other_land_use_conversion_acres_future == 0
+    conversion = true
+  end
+  end
+  return conversion
+end
+
+def has_cover_crop
+  cover_crop = false
+      self.strips.each do |strip|
+        if !strip.is_future?
+        strip.crop_rotations.each do |crop|
+            if crop.is_cover_crop
+              cover_crop = true
+            end
+          end
+        end
+      end
+      return cover_crop
+  end
+
+  def has_cover_crop_future
+  cover_crop = false
+      self.strips.each do |strip|
+        if strip.is_future?
+        strip.crop_rotations.each do |crop|
+            if crop.is_cover_crop
+              cover_crop = true
+            end
+          end
+        end
+      end
+      return cover_crop
+  end
 
   def soil_test_laboratory_id
     if @soil_test_laboratory_id == nil

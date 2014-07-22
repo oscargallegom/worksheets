@@ -201,58 +201,84 @@
           <li>
         <h2 class='sectionHeading'>BMP Information</h2></li>
 
-              <li> <div class='extrawide'>&nbsp</div><div class='narrow'><b>Current</b></div><div class='narrow'><b>Future</b></div></li>
+              <li> <div class='extrawide'>&nbsp</div><div class='narrow'><b>Current</b></div>
+<div class='extranarrow'><b># of fields</b></div>
+                <div class='narrow'><b>Future</b></div>
+              <div class='extranarrow'><b># of fields</b></div></li>
+                                                          <li>
+        <div class='extrawide'>Conservation Tillage:</div>
+ <div class='narrow'><%= number_with_precision(@farm.conservation_tillage, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.conservation_tillage == 'N/A' %></div>
+ <div class='extranarrow'><%= @farm.conservation_tillage_fields %></div> <div class='narrow'><%= number_with_precision(@farm.conservation_tillage_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.conservation_tillage_future == 'N/A' %></div><div class='extranarrow'><%= @farm.conservation_tillage_fields %></div>
+      </li>
+                                                <li>
+        <div class='extrawide'>Cover Crop:</div>
+ <div class='narrow'><%= number_with_precision(@farm.cover_crop, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.cover_crop == 'N/A' %></div>
+ <div class='extranarrow'><%= @farm.cover_crop_fields %></div> <div class='narrow'><%= number_with_precision(@farm.cover_crop_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.cover_crop_future == 'N/A' %></div><div class='extranarrow'><%= @farm.cover_crop_future_fields %></div>
+      </li>
               <li>
         <div class='extrawide'>Grass buffer area:</div>
         <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.grass_buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.grass_buffered_area_future == 'N/A' %></div>
+        <%= 'ac' unless @farm.grass_buffered_area == 'N/A' %></div>  <div class='extranarrow'><%= @farm.grass_buffered_area_fields %></div> <div class='narrow'><%= number_with_precision(@farm.grass_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.grass_buffered_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.grass_buffered_area_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Forest buffer area:</div>
          <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.forest_buffered_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.forest_buffered_area_future == 'N/A' %></div>
+        <%= 'ac' unless @farm.forest_buffered_area == 'N/A' %></div>  <div class='extranarrow'><%= @farm.forest_buffered_area_fields %></div> <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.forest_buffered_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.grass_buffered_area_future_fields %></div> 
       </li>
       <li>
         <div class='extrawide'>Wetland area:</div>
          <div class='narrow'><%= number_with_precision(@farm.wetland_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.wetland_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.wetland_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.wetland_area_future == 'N/A' %></div>
+        <%= 'ac' unless @farm.wetland_area == 'N/A' %></div>  <div class='extranarrow'><%= @farm.wetland_area_fields %></div> <div class='narrow'><%= number_with_precision(@farm.wetland_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.wetland_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.wetland_area_future_fields %></div> 
       </li>
       <li>
         <div class='extrawide'>Streambank fencing area:</div>
          <div class='narrow'><%= number_with_precision(@farm.streambank_fencing_area, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %></div> <div class='narrow'><%= number_with_precision(@farm.streambank_fencing_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.streambank_fencing_area_future == 'N/A' %></div>
+        <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %></div>  <div class='extranarrow'><%= @farm.streambank_fencing_area_fields %></div> <div class='narrow'><%= number_with_precision(@farm.streambank_fencing_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.streambank_fencing_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.streambank_fencing_area_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Fertilizer application setback:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+         <div class='narrow'><%= number_with_precision(@farm.setback_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.setback_area == 'N/A' %></div> <div class='extranarrow'><%= @farm.setback_area_fields %></div>  <div class='narrow'>
+        <%= number_with_precision(@farm.setback_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.setback_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.setback_area_future_fields %></div> 
       </li>
       <li>
         <div class='extrawide'>Other land use conversion:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+ <div class='narrow'><%= number_with_precision(@farm.other_conversion, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.other_conversion == 'N/A' %></div>  <div class='extranarrow'><% logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ other_conversion_fields: #{@farm.other_conversion_fields}"%><%= @farm.other_conversion_fields %></div> <div class='narrow'><%= number_with_precision(@farm.other_conversion_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.other_conversion_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.other_conversion_future_fields %></div> 
       </li>
       <li>
         <div class='extrawide'>Total Converted area:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+ <div class='narrow'><%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.converted_area == 'N/A' %></div>  <div class='extranarrow'><%= @farm.converted_area_fields %></div> <div class='narrow'><%= number_with_precision(@farm.converted_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.converted_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.converted_area_fields_future %></div> 
       </li>
 
             <li>
         <div class='extrawide'>Soil and water management plans:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>      </li>
+ <div class='narrow'><%= number_with_precision(@farm.soil_water_management_plan, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.soil_water_management_plan == 'N/A' %></div>  <div class='extranarrow'><%= @farm.soil_water_management_plan_fields %></div> <div class='narrow'><%= number_with_precision(@farm.soil_water_management_plan_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.soil_water_management_plan_future == 'N/A' %></div>   <div class='extranarrow'><%= @farm.soil_water_management_plan_future_fields %></div>     </li>
                   <li>
         <div class='extrawide'>Water control structures:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+ <div class='narrow'><%= number_with_precision(@farm.water_control_structures, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.water_control_structures == 'N/A' %></div> <div class='extranarrow'><%= @farm.water_control_structures_fields %></div>  <div class='narrow'><%= number_with_precision(@farm.water_control_structures_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.water_control_structures_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.water_control_structures_future_fields %></div> 
       </li>
                         <li>
         <div class='extrawide'>Sorbing materials in ag ditches:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
-      </li>
-                        <li>
-        <div class='extrawide'>Decision/precision agriculture:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+ <div class='narrow'><%= number_with_precision(@farm.sorbing_materials, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.sorbing_materials == 'N/A' %></div>  <div class='extranarrow'><%= @farm.sorbing_materials_fields %></div> <div class='narrow'><%= number_with_precision(@farm.sorbing_materials_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.sorbing_materials_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.sorbing_materials_fields_future %></div> 
       </li>
     </ol>
   </fieldset>
@@ -383,46 +409,77 @@
          <li><!--
         <h2 class='sectionHeading'>Land Use Conversion</h2>-->
       </li>
-                    <li> <div class='extrawide'>&nbsp</div><div class='narrow'><b>Current</b></div><div class='narrow'><b>Future</b></div></li>
+                <li> <div class='extrawide'>&nbsp</div><div class='narrow'><b>Current</b></div>
+<div class='extranarrow'><b># of fields</b></div>
+                <div class='narrow'><b>Future</b></div>
+              <div class='extranarrow'><b># of fields</b></div></li>
+                                            <li>
+        <div class='extrawide'>Decision/precision agriculture:</div>
+ <div class='narrow'><%= number_with_precision(@farm.decision_ag, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.decision_ag == 'N/A' %></div>  <div class='extranarrow'><%= @farm.decision_ag_fields %></div> <div class='narrow'><%= number_with_precision(@farm.decision_ag_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.decision_ag_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.decision_ag_future_fields %></div> 
+      </li>
                               <li>
         <div class='extrawide'>Prescribed grazing:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.prescribed_grazing, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.prescribed_grazing == 'N/A' %></div>  <div class='extranarrow'><%= @farm.prescribed_grazing_fields %></div> <div class='narrow'><%= number_with_precision(@farm.prescribed_grazing_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.prescribed_grazing_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.prescribed_grazing_future_fields %></div> 
       </li>
                                     <li>
         <div class='extrawide'>Off stream watering without Fencing:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.off_stream, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.off_stream == 'N/A' %></div>  <div class='extranarrow'><%= @farm.off_stream_fields %></div> <div class='narrow'><%= number_with_precision(@farm.off_stream_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.off_stream_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.off_stream_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Horse pasture management:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.horse_pasture, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.horse_pasture == 'N/A' %></div>  <div class='extranarrow'><%= @farm.horse_pasture_fields %></div> <div class='narrow'><%= number_with_precision(@farm.horse_pasture_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.horse_pasture_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.horse_pasture_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Biofilters:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.biofilters, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.biofilters == 'N/A' %></div>  <div class='extranarrow'><%= @farm.biofilters_fields %></div> <div class='narrow'><%= number_with_precision(@farm.biofilters_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.biofilters_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.biofilters_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Barnyard Runoff Controls:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.barnyard_runoff, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.barnyard_runoff == 'N/A' %></div>  <div class='extranarrow'><%= @farm.barnyard_runoff_fields %></div> <div class='narrow'><%= number_with_precision(@farm.barnyard_runoff_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.barnyard_runoff_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.barnyard_runoff_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Mortality Composting:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.mortality_composting, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.mortality_composting == 'N/A' %></div>  <div class='extranarrow'><%= @farm.mortality_composting_fields %></div> <div class='narrow'><%= number_with_precision(@farm.mortality_composting_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.mortality_composting_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.mortality_composting_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Animal Waste Management System:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.animal_waste, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.animal_waste == 'N/A' %></div>  <div class='extranarrow'><%= @farm.animal_waste_fields %></div> <div class='narrow'><%= number_with_precision(@farm.animal_waste_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.animal_waste_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.animal_waste_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Poultry Litter Treatment/Alum:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.poultry_litter, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.poultry_litter == 'N/A' %></div>  <div class='extranarrow'><%= @farm.poultry_litter_fields %></div> <div class='narrow'><%= number_with_precision(@farm.poultry_litter_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.poultry_litter_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.poultry_litter_future_fields %></div> 
       </li>
             <li>
         <div class='extrawide'>Heavy Use Pads:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.heavy_use, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.heavy_use == 'N/A' %></div>  <div class='extranarrow'><%= @farm.heavy_use_fields %></div> <div class='narrow'><%= number_with_precision(@farm.heavy_use_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.heavy_use_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.heavy_use_future_fields %></div> 
+      </li>
       </li>
             <li>
         <div class='extrawide'>Treatment Wetland:</div>
- <div class='narrow'>N/A</div> <div class='narrow'>N/A</div>
+<div class='narrow'><%= number_with_precision(@farm.treatment_wetland, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.treatment_wetland == 'N/A' %></div>  <div class='extranarrow'><%= @farm.treatment_wetland_fields %></div> <div class='narrow'><%= number_with_precision(@farm.treatment_wetland_future, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.treatment_wetland_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.treatment_wetland_future_fields %></div> 
+      </li>
       </li>
     </ol>
   </fieldset>

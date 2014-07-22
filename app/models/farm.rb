@@ -104,6 +104,14 @@ class Farm < ActiveRecord::Base
     buffered_area == 0 ? 'N/A' : buffered_area
   end  
 
+  def grass_buffered_area_fields
+    number = 0
+    fields.each do |field|
+      number = number + 1 if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer)
+    end
+    number == 0 ? 'N/A' : number
+  end  
+
   def grass_buffered_area_future
     buffered_area = 0
     fields.each do |field|
@@ -112,12 +120,28 @@ class Farm < ActiveRecord::Base
     buffered_area == 0 ? 'N/A' : buffered_area
   end
 
+  def grass_buffered_area_future_fields
+    number = 0
+    fields.each do |field|
+      number = number + 1 if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_grass_buffer_future)
+    end
+   number == 0 ? 'N/A' : number
+  end  
+
   def forest_buffered_area
     buffered_area = 0
     fields.each do |field|
       buffered_area = buffered_area + field.forest_buffer_area if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer)
     end
     buffered_area == 0 ? 'N/A' : buffered_area
+  end
+
+  def forest_buffered_area_fields
+    number = 0
+    fields.each do |field|
+      number = number + 1 if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer)
+    end
+    number == 0 ? 'N/A' : number
   end
 
   def forest_buffered_area_future
@@ -128,10 +152,26 @@ class Farm < ActiveRecord::Base
     buffered_area == 0 ? 'N/A' : buffered_area
   end
 
+def forest_buffered_area_future_fields
+    number = 0
+    fields.each do |field|
+      number = number + 1 if (!field.field_type_id.nil? && (field.field_type_id == 1 || field.field_type_id == 3) && field.is_forest_buffer_future)
+    end
+    number == 0 ? 'N/A' : number
+  end
+
   def wetland_area
     wetland_area = 0
     fields.each do |field|
       wetland_area = wetland_area + field.wetland_area if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland)
+    end
+    wetland_area == 0 ? 'N/A' : wetland_area
+  end
+
+  def wetland_area_fields
+    wetland_area = 0
+    fields.each do |field|
+      wetland_area = wetland_area + 1 if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland)
     end
     wetland_area == 0 ? 'N/A' : wetland_area
   end
@@ -145,11 +185,29 @@ class Farm < ActiveRecord::Base
     wetland_area == 0 ? 'N/A' : wetland_area
   end
 
+def wetland_area_future_fields
+    wetland_area = 0
+    fields.each do |field|
+      wetland_area = wetland_area + 1 if (!field.field_type_id.nil? && field.field_type_id <= 3 && field.is_wetland_future)
+    end
+    wetland_area == 0 ? 'N/A' : wetland_area
+  end
+
   def streambank_fencing_area
     streambank_fencing_area = 0
     fields.each do |field|
       if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
         streambank_fencing_area = streambank_fencing_area + field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
+      end
+    end
+    streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
+  end
+
+  def streambank_fencing_area_fields
+    streambank_fencing_area = 0
+    fields.each do |field|
+      if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
+        streambank_fencing_area = streambank_fencing_area + 1
       end
     end
     streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
@@ -165,12 +223,140 @@ class Farm < ActiveRecord::Base
     streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
   end
 
+  def streambank_fencing_area_future_fields
+    streambank_fencing_area = 0
+    fields.each do |field|
+      if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place_future?)
+        streambank_fencing_area = streambank_fencing_area + 1
+      end
+    end
+    streambank_fencing_area == 0 ? 'N/A' : streambank_fencing_area
+  end
+
+  def setback_area
+    setback_area = 0
+    fields.each do |field|
+      if (field.is_fertilizer_application_setback)
+        setback_area = setback_area + field.fertilizer_application_setback_average_width.to_f * field.fertilizer_application_setback_length.to_f / 43560.0
+      end    
+    end
+    setback_area == 0 ? 'N/A' : setback_area
+  end
+
+    def setback_area_fields
+    setback_area = 0
+    fields.each do |field|
+      if (field.is_fertilizer_application_setback)
+        setback_area = setback_area + 1
+      end    
+    end
+    setback_area == 0 ? 'N/A' : setback_area
+  end
+
+    def setback_area_future
+    setback_area = 0
+    fields.each do |field|
+      if (field.is_fertilizer_application_setback_future)
+        setback_area = setback_area + field.fertilizer_application_setback_average_width_future.to_f * field.fertilizer_application_setback_length_future.to_f / 43560.0
+      end    
+    end
+    setback_area == 0 ? 'N/A' : setback_area
+  end
+
+    def setback_area_future_fields
+    setback_area = 0
+    fields.each do |field|
+      if (field.is_fertilizer_application_setback_future)
+        setback_area = setback_area + 1
+      end    
+    end
+    setback_area == 0 ? 'N/A' : setback_area
+  end
+
+  def other_conversion
+    conversion_area = 0
+    fields.each do |field|
+      if (field.other_land_use_conversion_acres)
+        conversion_area = conversion_area + field.other_land_use_conversion_acres
+      end    
+    end
+    conversion_area == 0 ? 'N/A' : conversion_area
+  end
+
+  def other_conversion_fields
+    area = 0
+    fields.each do |field|
+      if field.other_land_use_conversion_acres
+        unless field.other_land_use_conversion_acres == 0
+        area = area + 1
+      end
+      end    
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+  def other_conversion_future
+    area = 0
+    fields.each do |field|
+      if (field.other_land_use_conversion_acres_future)
+        area = area + field.other_land_use_conversion_acres_future
+      end    
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+  def other_conversion_future_fields
+    area = 0
+    fields.each do |field|
+      if (field.other_land_use_conversion_acres_future)
+                unless field.other_land_use_conversion_acres_future == 0
+        area = area + 1
+      end
+      end    
+    end
+    area == 0 ? 'N/A' : area
+  end
+
   def converted_area
     converted_area = 0
-    converted_area = converted_area + buffered_area unless buffered_area == 'N/A'
+    converted_area = converted_area + grass_buffered_area unless grass_buffered_area == 'N/A'
+    converted_area = converted_area + forest_buffered_area unless forest_buffered_area == 'N/A'
     converted_area = converted_area + wetland_area unless wetland_area == 'N/A'
     converted_area = converted_area + streambank_fencing_area unless streambank_fencing_area == 'N/A'
+    converted_area = converted_area + setback_area unless setback_area == 'N/A'
+    converted_area = converted_area + other_conversion unless other_conversion == 'N/A'
     converted_area == 0 ? 'N/A' : converted_area
+  end
+
+  def converted_area_fields
+    number = 0
+    fields.each do |field|
+      if (field.has_conversion)
+        number = number + 1
+      end    
+    end
+    number == 0 ? 'N/A' : number
+  end
+
+    def converted_area_future
+    converted_area = 0
+    converted_area = converted_area + grass_buffered_area_future unless grass_buffered_area_future == 'N/A'
+    converted_area = converted_area + forest_buffered_area_future unless forest_buffered_area_future == 'N/A'
+    converted_area = converted_area + wetland_area_future unless wetland_area_future == 'N/A'
+    converted_area = converted_area + streambank_fencing_area_future unless streambank_fencing_area_future == 'N/A'
+    converted_area = converted_area + setback_area_future unless setback_area_future == 'N/A'
+    converted_area = converted_area + other_conversion_future unless other_conversion_future == 'N/A'
+    converted_area == 0 ? 'N/A' : converted_area
+  end
+
+    def converted_area_fields_future
+    number = 0
+    fields.each do |field|
+      if (field.has_conversion_future)
+        number = number + 1
+      end    
+    end
+    number == 0 ? 'N/A' : number
   end
 
   def soil_water_management_plan
@@ -178,11 +364,45 @@ class Farm < ActiveRecord::Base
     fields.each do |field|
       field.bmps.each do |bmp|
         if bmp.bmp_type_id == 8
-          area += bmp.field.acres
+          area += (bmp.field.acres - bmp.field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+    def soil_water_management_plan_fields
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 8
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def soil_water_management_plan_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |future_bmp|
+        if future_bmp.bmp_type_id == 8
+          area += (future_bmp.field.acres - future_bmp.field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+    def soil_water_management_plan_future_fields
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |future_bmp|
+        if future_bmp.bmp_type_id == 8
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def water_control_structures
@@ -190,11 +410,47 @@ class Farm < ActiveRecord::Base
     fields.each do |field|
       field.bmps.each do |bmp|
         if bmp.bmp_type_id == 7
-          area += bmp.field.acres
+          area += (bmp.field.acres - bmp.field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+
+  def water_control_structures_fields
+        area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 7
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+  def water_control_structures_future
+        area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 7
+          area += (bmp.field.acres - bmp.field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+  def water_control_structures_future_fields
+        area = 0
+    fields.each do |field|
+      field.future_bmps.each do |future_bmp|
+        if future_bmp.bmp_type_id == 7
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def sorbing_materials
@@ -202,11 +458,45 @@ class Farm < ActiveRecord::Base
     fields.each do |field|
       field.bmps.each do |bmp|
         if bmp.bmp_type_id == 4
-          area += bmp.field.acres
+          area += (bmp.field.acres - field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+  def sorbing_materials_fields
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 4
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def sorbing_materials_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 4
+          area += (bmp.field.acres - field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+      def sorbing_materials_fields_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 4
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def decision_ag
@@ -214,23 +504,95 @@ class Farm < ActiveRecord::Base
     fields.each do |field|
       field.bmps.each do |bmp|
         if bmp.bmp_type_id == 3
-          area += bmp.field.acres
+          area += (bmp.field.acres - field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+
+    def decision_ag_fields
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 3
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def decision_ag_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 3
+          area += (bmp.field.acres - field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def decision_ag_future_fields
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 3
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def horse_pasture
     area = 0
     fields.each do |field|
       field.bmps.each do |bmp|
-        if bmp.bmp_type_id == 6
-          area += bmp.field.acres
+        if bmp.bmp_type_id == 5
+          area += (bmp.field.acres - field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+
+    def horse_pasture_fields
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 5
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def horse_pasture_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 5
+          area += (bmp.field.acres - field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def horse_pasture_future_fields
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 5
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def prescribed_grazing
@@ -238,23 +600,484 @@ class Farm < ActiveRecord::Base
     fields.each do |field|
       field.bmps.each do |bmp|
         if bmp.bmp_type_id == 11
-          area += bmp.field.acres
+          area += (bmp.field.acres - field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+
+    def prescribed_grazing_fields
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 11
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def prescribed_grazing_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 11
+          area += (bmp.field.acres - field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def prescribed_grazing_future_fields
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 11
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def off_stream
     area = 0
     fields.each do |field|
       field.bmps.each do |bmp|
-        if bmp.bmp_type_id == 3
-          area += bmp.field.acres
+        if bmp.bmp_type_id == 6
+          area += (bmp.field.acres - field.field_converted_area)
         end
       end
     end
-    return area
+    area == 0 ? 'N/A' : area
+  end
+
+    def off_stream_fields
+    area = 0
+    fields.each do |field|
+      field.bmps.each do |bmp|
+        if bmp.bmp_type_id == 6
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def off_stream_future
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 6
+          area += (bmp.field.acres - field.field_converted_area_future)
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def off_stream_future_fields
+    area = 0
+    fields.each do |field|
+      field.future_bmps.each do |bmp|
+        if bmp.bmp_type_id == 6
+          area += 1
+        end
+      end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+ def biofilters
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_biofilters
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def biofilters_fields
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_biofilters
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def biofilters_future
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_biofilters_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def biofilters_future_fields
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_biofilters_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+
+
+    def conservation_tillage
+    area = 0
+    fields.each do |field|
+        if field.crop_type_id == 2
+          area += (field.acres - field.field_converted_area)
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+  def conservation_tillage_fields
+    number = 0
+    fields.each do |field|
+        if field.crop_type_id == 2
+          number += 1
+        end
+    end
+    if number == 0
+      return 'N/A'
+    else
+      return number
+    end
+  end
+      def conservation_tillage_future
+    area = 0
+    fields.each do |field|
+        if field.crop_type_id == 2
+          area += (field.acres - field.field_converted_area_future)
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+   def barnyard_runoff
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_barnyard_runoff_controls
+          area += field.acres
+        elsif field.is_poultry_barnyard_runoff_controls
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def barnyard_runoff_fields
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_barnyard_runoff_controls
+          area += 1
+        elsif field.is_poultry_barnyard_runoff_controls
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def barnyard_runoff_future
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_barnyard_runoff_controls_future
+          area += field.acres
+        elsif field.is_poultry_barnyard_runoff_controls_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def barnyard_runoff_future_fields
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_barnyard_runoff_controls_future
+          area += 1
+        elsif field.is_poultry_barnyard_runoff_controls_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+   def mortality_composting
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_mortality_composting
+          area += field.acres
+        elsif field.is_poultry_mortality_composting
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def mortality_composting_fields
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_mortality_composting
+          area += 1
+        elsif field.is_poultry_mortality_composting
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def mortality_composting_future
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_mortality_composting_future
+          area += field.acres
+        elsif field.is_poultry_mortality_composting_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def mortality_composting_future_fields
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_mortality_composting_future
+          area += 1
+        elsif field.is_poultry_mortality_composting_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+   def animal_waste
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_animal_waste_management_system
+          area += field.acres
+        elsif field.is_poultry_animal_waste_management_system
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def animal_waste_fields
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_animal_waste_management_system
+          area += 1
+        elsif field.is_poultry_animal_waste_management_system
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def animal_waste_future
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_animal_waste_management_system_future
+          area += field.acres
+        elsif field.is_poultry_animal_waste_management_system_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def animal_waste_future_fields
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_animal_waste_management_system_future
+          area += 1
+        elsif field.is_poultry_animal_waste_management_system_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+
+ def poultry_litter
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_litter_treatment
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def poultry_litter_fields
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_litter_treatment
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def poultry_litter_future
+    area = 0
+    fields.each do |field|
+                if field.is_poultry_litter_treatment_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def poultry_litter_future_fields
+    area = 0
+    fields.each do |field|
+                if field.is_poultry_litter_treatment_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+   def heavy_use
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_heavy_use_pads
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def heavy_use_fields
+    area = 0
+    fields.each do |field|
+        if field.is_poultry_heavy_use_pads
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def heavy_use_future
+    area = 0
+    fields.each do |field|
+                if field.is_poultry_heavy_use_pads_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def heavy_use_future_fields
+    area = 0
+    fields.each do |field|
+                if field.is_poultry_heavy_use_pads_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+   def treatment_wetland
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_treatment_wetland
+          area += field.acres
+        elsif field.is_poultry_treatment_wetland
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def treatment_wetland_fields
+    area = 0
+    fields.each do |field|
+        if field.is_livestock_treatment_wetland
+          area += 1
+        elsif field.is_poultry_treatment_wetland
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def treatment_wetland_future
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_treatment_wetland_future
+          area += field.acres
+        elsif field.is_poultry_treatment_wetland_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def treatment_wetland_future_fields
+    area = 0
+    fields.each do |field|
+                if field.is_livestock_treatment_wetland_future
+          area += 1
+        elsif field.is_poultry_treatment_wetland_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+
+
+  def cover_crop
+    area = 0
+    fields.each do |field|
+        if field.has_cover_crop
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def cover_crop_fields
+    area = 0
+    fields.each do |field|
+        if field.has_cover_crop
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+    def cover_crop_future
+    area = 0
+    fields.each do |field|
+        if field.has_cover_crop_future
+          area += field.acres
+        end
+    end
+    area == 0 ? 'N/A' : area
+  end
+
+      def cover_crop_future_fields
+    area = 0
+    fields.each do |field|
+        if field.has_cover_crop_future
+          area += 1
+        end
+    end
+    area == 0 ? 'N/A' : area
   end
 
   def credits
