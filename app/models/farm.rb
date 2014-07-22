@@ -1044,7 +1044,7 @@ def wetland_area_future_fields
     area = 0
     fields.each do |field|
         if field.has_cover_crop
-          area += field.acres
+          area += (field.acres - field.field_converted_area)
         end
     end
     area == 0 ? 'N/A' : area
@@ -1064,7 +1064,7 @@ def wetland_area_future_fields
     area = 0
     fields.each do |field|
         if field.has_cover_crop_future
-          area += field.acres
+          area += (field.acres - field.field_converted_area_future)
         end
     end
     area == 0 ? 'N/A' : area
