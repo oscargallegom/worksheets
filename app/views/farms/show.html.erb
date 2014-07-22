@@ -229,7 +229,7 @@
         <div class='extrawide'>Forest buffer area:</div>
          <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
         <%= 'ac' unless @farm.forest_buffered_area == 'N/A' %></div>  <div class='extranarrow'><%= @farm.forest_buffered_area_fields %></div> <div class='narrow'><%= number_with_precision(@farm.forest_buffered_area_future, :precision => 2, :separator => '.', :delimiter => ',') %>
-        <%= 'ac' unless @farm.forest_buffered_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.grass_buffered_area_future_fields %></div> 
+        <%= 'ac' unless @farm.forest_buffered_area_future == 'N/A' %></div> <div class='extranarrow'><%= @farm.forest_buffered_area_future_fields %></div> 
       </li>
       <li>
         <div class='extrawide'>Wetland area:</div>
