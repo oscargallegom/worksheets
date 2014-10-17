@@ -27,7 +27,7 @@ gem 'jquery-rails'
 # ruby
 # platforms :ruby_19 do
 group :production do
-  gem 'mysql2'
+  #gem 'mysql2'
   gem 'therubyracer'
   gem 'execjs'
 end

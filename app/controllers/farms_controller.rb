@@ -384,6 +384,7 @@ class FarmsController < ApplicationController
 
   # Note that this method is not protected by Cancan
   def receive_from_mapping_site
+    logger.debug "$$$$$$$$$$$$$$$$$ START METHOD"
     # request.referer    TODO: check referrer for cross-site forgery
     if (session[:session_id] == params[:source_id]) then
 
@@ -521,11 +522,11 @@ class FarmsController < ApplicationController
           @field.strips.build(:is_future => true)
         end
 
-        if watershed_segment.nil?
-          render 'errors/map_down', :layout => false
-        else
+        #if watershed_segment.nil?
+        #  render 'errors/map_down', :layout => false
+        #else
           @field.save(:validate => false)
-        end
+        #end
       end
 
       if !watershed_segment.nil?
@@ -550,6 +551,7 @@ class FarmsController < ApplicationController
 # Web service call
   def getSoilData(map_unit_key, map_unit_symbol, hydrologic_group)
 
+
     #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
     #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrpdcd as hydrologic_group, component.slope_r as slope, component.niccdcdpct as niccdcdpct, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrpdcd = '#{hydrologic_group}' AND component.niccdcdpct = '#{niccdcdpct}' ORDER BY chorizon.hzdepb_r"
     #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.comppct_r as component, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.comppct_r  = #{niccdcdpct} ORDER BY chorizon.hzdepb_r"
@@ -557,6 +559,7 @@ class FarmsController < ApplicationController
 
     # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
     client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
+    logger.debug "*********************** client: #{client}"
 
     begin
       response = client.call(:run_query, message: {"Query" => sql})
