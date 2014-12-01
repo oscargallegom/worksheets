@@ -24,7 +24,7 @@
           <br/>
           P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
           <br/>
-          S: <%= number_with_precision(field.sediment_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> tons/a
+          S: <%= number_with_precision(field.sediment_baseline*2000, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
           <% end %>
         </td>
         <td>
@@ -34,8 +34,8 @@
           P: <%= number_with_precision((field.bmp_calculations[:new_total_p])/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment])/(field.acres), :precision => 2, delimiter: ',') %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
+          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
         </td>
         <td>
           N: <%= number_with_precision((field.bmp_calculations[:new_total_n_future])/(field.acres), :precision => 2, delimiter: ',') %>
@@ -44,8 +44,8 @@
           P: <%= number_with_precision((field.bmp_calculations[:new_total_p_future])/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment_future])/(field.acres), :precision => 2, delimiter: ',') %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'tons/a' : 'tons' %>
+          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment_future]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
         </td>
         <td>
           <!-- TODO: implement status bar -->
