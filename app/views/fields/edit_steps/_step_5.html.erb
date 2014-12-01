@@ -102,9 +102,7 @@ $(function() {
               <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
               <%= number_with_precision(@watershed_segment[:sediment_hay_baseline] * @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lbs
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:sediment_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:sediment_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@watershed_segment[:sediment_crop_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 1 %><%= number_with_precision(@watershed_segment[:sediment_pasture_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 2 %><%= number_with_precision(@watershed_segment[:sediment_hay_baseline], :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lbs/ac)
 
               <br>
