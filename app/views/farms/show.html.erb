@@ -373,7 +373,7 @@
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
       <li>
         <div class='extrawide'>Future sediment load for animal HQ (EOS):</div>
-        <%= number_with_precision(@future_sediment_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@future_sediment_load_animals*2000, :precision => 2, delimiter: ',') %>
         lbs/yr (<% if @future_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@future_sediment_load_animals, :precision => 2, delimiter: ',') %> 
         t/yr<% end %>)
       </li>
