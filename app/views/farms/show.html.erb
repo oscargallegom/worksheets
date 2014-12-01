@@ -386,7 +386,7 @@
         <% if @future_sediment_load_fields == 0 %>
         0.00 lbs/yr (0.00 t/yr)
         <% else %>
-        <%= number_with_precision((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)*2000, :precision => 2, delimiter: ',') %> lbs/yr ( <%= number_with_precision((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals), :precision => 2, delimiter: ',') %> t/yr)
+         <%= number_with_precision(((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals))*2000, :precision => 2, delimiter: ',') %> lbs/yr (<%= number_with_precision((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals), :precision => 2, delimiter: ',') %> t/yr)
         <% end %>
       </li>
       <li>
