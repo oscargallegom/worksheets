@@ -166,6 +166,17 @@ $(function() {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment] / @field.acres, :precision => 2, delimiter: ',') %>
               tons/ac)
     </li>
+
+     <li><span class='wide'>Future Load (EOS):</span>
+<%= number_with_precision(@current_totals[:new_total_sediment_future]*2000, :precision => 2, delimiter: ',') %> lbs
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@current_totals[:new_total_sediment_future] / @field.acres)*2000, :precision => 2, delimiter: ',') %>
+lbs/ac)
+                    <br>
+<span class='wide'>&nbsp</span>
+<%= number_with_precision(@current_totals[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment_future] / @field.acres, :precision => 2, delimiter: ',') %>
+tons/ac)
+</li>
     <li><span class='wide'>Reductions (EOS):</span>
       <%= number_with_precision((@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future]) * 2000.0, :precision => 2, delimiter: ',') %>
       lbs
@@ -181,18 +192,6 @@ $(function() {
 
 
     </li>
-
-     <li><span class='wide'>Future Load (EOS):</span>
-<%= number_with_precision(@current_totals[:new_total_sediment_future]*2000, :precision => 2, delimiter: ',') %> lbs
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@current_totals[:new_total_sediment_future] / @field.acres)*2000, :precision => 2, delimiter: ',') %>
-lbs/ac)
-                    <br>
-<span class='wide'>&nbsp</span>
-<%= number_with_precision(@current_totals[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_sediment_future] / @field.acres, :precision => 2, delimiter: ',') %>
-tons/ac)
-</li>
-
     <li><span class='wide'>Delivery factor:</span>
       <%= number_with_precision(@field.watershed_segment.sediment_delivery_factor, :precision => 2, delimiter: ',') %>
     </li>
