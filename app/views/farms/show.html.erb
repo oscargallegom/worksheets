@@ -200,7 +200,7 @@
       <li>
         <div class='extrawide'>Current load for Animal HQ (EOS):</div>
         <%= number_with_precision(@current_sediment_load_animals*2000, :precision => 2, delimiter: ',') %>
-        lbs/yr (<% if @current_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@current_sediment_load_animal, :precision => 2, delimiter: ',') %>
+        lbs/yr (<% if @current_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
         t/yr<% end %>)</li>
           <li>
         <h2 class='sectionHeading'>BMP Information</h2></li>
