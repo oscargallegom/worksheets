@@ -92,9 +92,7 @@ $(function() {
             <li><span class='wide'>Current Load (EOS):</span>
               <%= number_with_precision(@current_totals[:new_total_p], :precision => 2, delimiter: ',') %> lb
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %><%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %><%= number_with_precision(@current_totals[:new_total_p] / @field.acres, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               lb/ac)
             </li>
 
@@ -117,9 +115,7 @@ $(function() {
               <%= number_with_precision((@watershed_segment[:sediment_hay_baseline] * @field.acres)/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
 
               tons
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@watershed_segment[:sediment_crop_baseline])/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %>
-              <%= number_with_precision(@watershed_segment[:sediment_pasture_baseline]/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %>
-              <%= number_with_precision(@watershed_segment[:sediment_hay_baseline]/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((@watershed_segment[:sediment_crop_baseline])/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 1 %><%= number_with_precision(@watershed_segment[:sediment_pasture_baseline]/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 2 %><%= number_with_precision(@watershed_segment[:sediment_hay_baseline]/2000, :precision => 2, delimiter: ',') if @field.field_type_id == 3 %>
               tons/ac)
 
 
