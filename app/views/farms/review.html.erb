@@ -599,13 +599,13 @@
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure consistency: </td>
  <td><%= ManureConsistency.find(fert.manure_consistency_id).name %></td></tr>
    <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N concentration: </td>
- <td><%= fert.total_n_concentration %> lb/1000 gallons</td></tr>
+ <td><%= fert.total_n_concentration %> <% if fert.manure_consistency_id == 266 %>lb/ton<% else %>lb/1000 gallons<% end %></td></tr>
     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P concentration: </td>
- <td><%= fert.p_concentration %> lb/1000 gallons</td></tr>
+ <td><%= fert.p_concentration %> <% if fert.manure_consistency_id == 266 %>lb/ton<% else %>lb/1000 gallons<% end %></td></tr>
      <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P type: </td>
  <td><%= PType.find(fert.p_type_id).name %></td></tr>
      <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Application rate: </td>
- <td><%= fert.application_rate %> 1000 gallons/ac</td></tr>
+ <td><%= fert.application_rate %> <% if fert.manure_consistency_id == 266 %>tons/ac<% else %>1000 gallons/ac<% end %></td></tr>
       <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Moisture content: </td>
  <td><%= fert.moisture_content %> %</td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
