@@ -1,7 +1,6 @@
 module Calculations
 
 	def self.grass_buffer_calcs(field)
-		Rails.logger.debug "@(#%*#(@$%*@#(%*#$(%*@$#%(@#*%(@#%*@#(%*@#(%*@(#%*@(#%*@(#%*@(#%*@#(%*@#*%@#%"
 
 		grass_buffer_acres = field.grass_buffer_area.to_f
 
