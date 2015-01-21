@@ -391,6 +391,10 @@
     <td><h2>Soil <%= i %></h2></td>
     <td></td>
   </tr>
+    <tr>
+        <td class="review-table">Percent Coverage:</td>
+        <td><%= ((soil.percent)*100).round(2) %>%</td>
+  </tr>
   <tr>
         <td class="review-table">Map Unit:</td>
         <td><%= soil.map_unit_name %></td>
