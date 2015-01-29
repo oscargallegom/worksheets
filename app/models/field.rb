@@ -365,17 +365,25 @@ def has_cover_crop
 
   def n_baseline
     n_baseline = nil
-    n_baseline = self.watershed_segment[:n_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
-    n_baseline = self.watershed_segment[:n_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
-    n_baseline = self.watershed_segment[:n_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+    if self.tmdl.nil?
+      n_baseline = self.watershed_segment[:n_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
+      n_baseline = self.watershed_segment[:n_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
+      n_baseline = self.watershed_segment[:n_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+    else
+      n_baseline = self.tmdl[:total_n]
+    end
     return n_baseline
   end
 
   def p_baseline
     p_baseline = nil
-    p_baseline = self.watershed_segment[:p_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
-    p_baseline = self.watershed_segment[:p_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
-    p_baseline = self.watershed_segment[:p_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+    if self.tmdl.nil?
+      p_baseline = self.watershed_segment[:p_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
+      p_baseline = self.watershed_segment[:p_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
+      p_baseline = self.watershed_segment[:p_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+    else
+      p_baseline = self.tmdl[:total_p]
+    end
     return p_baseline
   end
 
