@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140423184938) do
+ActiveRecord::Schema.define(:version => 20140412172555) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -333,24 +333,6 @@ ActiveRecord::Schema.define(:version => 20140423184938) do
     t.float    "fence_length_future"
     t.integer  "farm_id"
     t.string   "segment_id"
-    t.boolean  "hel_soils"
-    t.float    "baseline_n_load"
-    t.float    "baseline_p_load"
-    t.float    "baseline_s_load"
-    t.float    "current_n_load"
-    t.float    "current_p_load"
-    t.float    "current_s_load"
-    t.float    "future_n_load"
-    t.float    "future_p_load"
-    t.float    "future_s_load"
-    t.float    "n_reductions"
-    t.float    "p_reductions"
-    t.float    "s_reductions"
-    t.float    "n_bay_reductions"
-    t.float    "p_bay_reductions"
-    t.float    "s_bay_reductions"
-    t.float    "current_solube_p"
-    t.string   "future_tile_drained_p_float"
     t.float    "current_total_n"
     t.float    "current_sediment_organic_n"
     t.float    "current_soluble_n"
@@ -358,21 +340,7 @@ ActiveRecord::Schema.define(:version => 20140423184938) do
     t.float    "current_total_p"
     t.float    "current_sediment_organic_p"
     t.float    "current_soluble_p"
-    t.float    "tile_drained_p"
-    t.float    "future_total_n"
-    t.float    "future_sediment_organic_n"
-    t.float    "future_soluble_n"
-    t.float    "future_tile_drained_n"
-    t.float    "future_total_p"
-    t.float    "future_sediment_organic_p"
-    t.float    "future_tile_drained_p"
-    t.float    "current_flow"
-    t.float    "future_flow"
-    t.float    "current_sediment"
-    t.float    "future_sediment"
-    t.float    "current_carbon"
-    t.float    "future_carbon"
-    t.float    "future_soluble_p"
+    t.boolean  "hel_soils"
   end
 
   create_table "future_bmps", :force => true do |t|
@@ -538,10 +506,9 @@ ActiveRecord::Schema.define(:version => 20140423184938) do
   create_table "strips", :force => true do |t|
     t.float    "length"
     t.integer  "field_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "is_future",    :default => false
-    t.boolean  "is_strip_new"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_future",  :default => false
   end
 
   create_table "tillage_operation_types", :force => true do |t|
@@ -562,7 +529,7 @@ ActiveRecord::Schema.define(:version => 20140423184938) do
     t.string  "name"
     t.float   "total_n"
     t.float   "total_p"
-    t.integer "code"
+    t.integer "code",    :limit => 255
   end
 
   create_table "user_types", :force => true do |t|
