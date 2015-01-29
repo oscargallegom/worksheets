@@ -107,6 +107,7 @@ module Ntt
             component_name = soil.component_name
             #niccdcdpct = soil.niccdcdpct
             p_test = field.modified_p_test_value
+            logger.debug "@@@@@@@@@@@@@!!!!!!!!!!! p_test: #{p_test}"
             slope = soil.slope
             percent_sand = soil.percent_sand
             percent_silt = soil.percent_silt
@@ -126,6 +127,7 @@ module Ntt
             hydrologic_group = ''
             component_name = ''
             p_test = field.modified_p_test_value
+            logger.debug "@@@@@@@@@@@@@!!!!!!!!!!! p_test: #{p_test}"
             slope = field.slope
             percent_sand = field.soil_texture.percent_sand
             percent_silt = field.soil_texture.percent_silt
