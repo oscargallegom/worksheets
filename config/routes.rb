@@ -17,6 +17,7 @@ NutrientNet::Application.routes.draw do
     get :send_to_mapping_site, on: :member
     post :receive_from_mapping_site, on: :member
     get :review, on: :member
+    get :current, on: :member
     get :submit, on: :member
   end
 

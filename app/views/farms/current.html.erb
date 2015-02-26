@@ -1,0 +1,905 @@
+<% if @completed == true %>
+
+<div class="nn-summary sectionRest clearfix">
+<div>
+  <fieldset>
+<ol>
+      <li><h2 class='sectionHeading'>Details</h2></li>
+      <li>
+        <div class='extrawide'>Farm/Project name:</div>
+        <%= @farm.name %>
+      </li>
+      <li>
+        <div class='extrawide'>(FSA) Tract number:</div>
+        <%= @farm.tract_number %>
+      </li>
+      <li>
+        <div class='extrawide'>Project notes:</div>
+        <%= @farm.farm_notes %>
+      </li>
+      <li>
+        <div class='extrawide'>Generator type:</div>
+        <%= @farm.generator_type.name unless @farm.generator_type == nil %>
+      </li>
+      <li>
+        <div class='extrawide'>Applicant name:</div>
+        <%= @farm.site_name %>
+      </li>
+      <li>
+        <div class='extrawide'>Street 1:</div>
+        <%= @farm.site_street_1 %>
+      </li>
+      <li>
+        <div class='extrawide'>Street 2:</div>
+        <%= @farm.site_street_2 %>
+      </li>
+      <li>
+        <div class='extrawide'>Location description:</div>
+        <%= @farm.site_description %>
+      </li>
+      <li>
+        <div class='extrawide'>ZIP code:</div>
+        <%= @farm.site_zip %>
+      </li>
+      <li>
+        <div class='extrawide'>State:</div>
+        <%= @farm.state.name %>
+      </li>
+      <li>
+        <div class='extrawide'>County:</div>
+        <%= @farm.county.name %>
+      </li>
+      <li>
+        <div class='extrawide'>Watershed:</div>
+        <%= @arrWatersheds.join(" / ").html_safe %>
+      </li>
+      <li>
+        <div class='extrawide'>Major basin:</div>
+        <%= @arrMajorBasins.join(" / ").html_safe %>
+      </li>
+      <li>
+        <div class='extrawide'>TMDL:</div>
+        <%= @arrTMDLs.join(" / ").html_safe %>
+      </li>
+    </ol>
+  </fieldset>
+  <fieldset>
+    <ol>
+      <li><h2 class='sectionHeading'>Totals</h2></li>
+      <li>
+        <div class='extrawide'>Farm area (from map):</div>
+        <%= number_with_precision(@farm.acres, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.acres.nil? %>
+      </li>
+      <li>
+        <div class='extrawide'>Farm area (sum of fields):</div>
+        <%= number_with_precision(@farm.acres_from_fields, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.acres_from_fields == 0 %>
+      </li>
+      <li>
+        <div class='extrawide'>Animal headquarters:</div>
+        <%= @farm.animal_headquarters %>
+      </li>
+      <li>
+        <div class='extrawide'>Nonmanaged land:</div>
+        <%= @farm.nonmanaged_land %>
+      </li>
+      <li>
+        <div class='extrawide'>Number of fields (crop/pasture/hay):</div>
+        <%= @farm.number_of_fields %>
+      </li>
+      <li>
+        <div class='extrawide'>Percent complete:</div>
+        <%= @farm.percentCompleted %> %
+      </li>
+      <li>
+        <div class='extrawide'>Buffered area:</div>
+        <%= number_with_precision(@farm.buffered_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.buffered_area == 'N/A' %>
+      </li>
+      <li>
+        <div class='extrawide'>Wetland area:</div>
+        <%= number_with_precision(@farm.wetland_area, :precision => 2, :separator => '.', :delimiter => ',') %>
+        <%= 'ac' unless @farm.wetland_area == 'N/A' %>
+      </li>
+      <li>
+        <div class='extrawide'>Streambank fencing area:</div>
+        <%= number_with_precision(@farm.streambank_fencing_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.streambank_fencing_area == 'N/A' %>
+        <%= 'N/A' if @farm.streambank_fencing_area == 'N/A' %>
+        <%= 'ac' unless @farm.streambank_fencing_area == 'N/A' %>
+      </li>
+      <li>
+        <div class='extrawide'>Converted area:</div>
+        <%= number_with_precision(@farm.converted_area, :precision => 2, :separator => '.', :delimiter => ',') unless @farm.converted_area == 'N/A' %>
+        <%= 'N/A' if @farm.converted_area == 'N/A' %>
+        <%= 'ac' unless @farm.converted_area == 'N/A' %>
+      </li>
+    </ol>
+  </fieldset>
+
+</div>
+<div style="clear: both"></div>
+
+<div>
+  <fieldset>
+    <ol>
+      <li><h2 class='sectionHeading'>N Load Information</h2></li>
+      <li>
+        <div class='extrawide'>Farm meets N baseline:</div>
+        <%= (@is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
+        <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+      </li>
+      <li>
+        <div class='extrawide'>Baseline N load fields (EOS):</div>
+        <%= number_with_precision(@baseline_n_load_fields, :precision => 2, delimiter: ',') %>
+        lbs/yr
+      </li>
+      <li>
+        <div class='extrawide'>Current N load fields (EOS):</div>
+        <%= number_with_precision(@current_n_load_fields, :precision => 2, delimiter: ',') %>
+        lbs/yr
+      </li>
+      <li>
+        <div class='extrawide'>Current N load for Animal HQ (EOS):</div>
+        <%= number_with_precision(@current_n_load_animals, :precision => 2, delimiter: ',') %>
+        lbs/yr
+      </li>
+
+      <li><h2 class='sectionHeading'>P Load Information (EOS)</h2></li>
+      <li>
+        <div class='extrawide'>Farm meets P baseline:</div>
+        <%= (@is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
+        <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+      </li>
+      <li>
+        <div class='extrawide'>Baseline P load fields (EOS):</div>
+        <%= number_with_precision(@baseline_p_load_fields, :precision => 2, delimiter: ',') %>
+        lbs/yr
+      </li>
+      <li>
+        <div class='extrawide'>Current P load fields (EOS):</div>
+        <%= number_with_precision(@current_p_load_fields, :precision => 2, delimiter: ',') %>
+        lbs/yr
+      </li>
+      <li>
+        <div class='extrawide'>Current P load for Animal HQ (EOS):</div>
+        <%= number_with_precision(@current_p_load_animals, :precision => 2, delimiter: ',') %>
+        lbs/yr
+      </li>
+
+      <li><h2 class='sectionHeading'>Sediment Load Information</h2></li>
+      <li>
+        <div class='extrawide'>Farm meets sediment baseline:</div>
+        <%= (@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
+        <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+      </li>
+      <li>
+        <div class='extrawide'>Baseline sediment load fields (EOS):</div>
+        <%= number_with_precision(@baseline_sediment_load_fields, :precision => 2, delimiter: ',') %>
+        t/yr
+      </li>
+      <li>
+        <div class='extrawide'>Current sediment load fields (EOS):</div>
+        <%= number_with_precision(@current_sediment_load_fields, :precision => 2, delimiter: ',') %>
+        t/yr
+      </li>
+      <li>
+        <div class='extrawide'>Current sediment load for Animal HQ (EOS):</div>
+        <%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
+        t/yr
+      </li>
+    </ol>
+  </fieldset>
+
+  <fieldset>
+    <ol>
+      <li><h2 class='sectionHeading'>&nbsp;</h2></li>
+      <li>
+  
+      </li>
+            <li>
+ 
+      </li>
+      <li>
+
+      </li>
+      <li>
+
+      </li>
+      <li>
+ 
+      </li>
+
+      <li><h2 class='sectionHeading'>&nbsp;</h2></li>
+      <li>
+
+      </li>
+                  <li>
+
+      </li>
+      <li>
+
+
+      </li>
+      <li>
+
+
+      </li>
+      <li>
+
+      </li>
+      <li><h2 class='sectionHeading'>&nbsp;</h2></li>
+      <li>
+
+      </li>
+
+      </li>
+      <li>
+
+      </li>
+      <li>
+
+      </li>
+      <li>
+
+      </li>
+    </ol>
+  </fieldset>
+
+</div>
+<div style="clear: both"></div>
+</div>
+<iframe width='1000' height='600' src='<%= url_for :controller => 'farms', :action => 'send_to_mapping_site', :id => @farm.id %>'>
+</iframe>
+
+
+
+<% @fields.each do |field| %>
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+  <tr>
+    <th><b><font size="5">Field: <%= field.name %></font></th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td><h2 class='sectionHeading'>General</h2></td>
+    <td></td>
+  </tr>
+      <tr>
+        <div class="review-table"><td>Field Type:</td></div>
+        <td><%= field.field_type.name unless field.field_type.nil? %></td>
+      </tr>
+      <tr>
+        <td class="review-table">Chesapeake Bay Segment:</td>
+        <td><%= field.watershed_segment.key unless field.watershed_segment.nil? %> (in <%= field.watershed_segment.major_basin unless field.watershed_segment.nil? %> trading basin) </td>
+      </tr>
+     <tr>
+      <td>TMDL watershed:</td>
+        <td><% if @farm.site_state_id == 21 %>
+                  <%= field.tmdl != nil ? field.tmdl.name : 'N/A' %>
+              <% else %>
+                  <%= field.tmdl_va %>
+              <% end %></td>
+     </tr>
+     <tr>
+      <td class="review-table">Total Area:</td>
+      <td><% if field.is_acres_from_map %><%= number_with_precision(field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %><% else %><%= number_with_precision(field.acres_from_user, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %><% end %></td>
+     </tr>
+     <% unless field.field_type_id == 4 %>
+          <tr>
+      <td class="review-table">Irrigation:</td>
+      <td><% if !field.irrigation_id.nil?%><%= Irrigation.find(field.irrigation_id).name %><% else %>None<% end %></td>
+     </tr>
+           <tr>
+        <td class="review-table">Tile Drainage Depth:</td>
+        <td><%= field.tile_drainage_depth %></td>
+  </tr> 
+    <tr>
+        <td class="review-table">P Test value:</td>
+        <td><%= field.p_test_value %> ppm</td>
+  </tr> 
+  </tr>
+  <% i=0 %>
+  <% field.soils.each do |soil| %>
+  <% i+=1 %>
+  <tr>
+    <td><h2>Soil <%= i %></h2></td>
+    <td></td>
+  </tr>
+    <tr>
+        <td class="review-table">Percent Coverage:</td>
+        <td><%= ((soil.percent)*100).round(2) %>%</td>
+  </tr>
+  <tr>
+        <td class="review-table">Map Unit:</td>
+        <td><%= soil.map_unit_name %></td>
+  </tr>
+    <tr>
+        <td class="review-table">Soil Component:</td>
+        <td><%= soil.component_name %></td>
+  </tr>
+  <tr>
+        <td class="review-table">Map Symbol:</td>
+        <td><%= soil.map_unit_symbol %></td>
+  </tr>
+  <tr>
+        <td class="review-table">Hydrologic Group:</td>
+        <td><%= soil.hydrologic_group %></td>
+  </tr>  
+    <tr>
+        <td class="review-table">Bulk Density:</td>
+        <td><%= soil.bulk_density %></td>
+  </tr>  
+      <tr>
+        <td class="review-table">Organic Carbon:</td>
+        <td><%= soil.organic_carbon %>%</td>
+  </tr> 
+    <tr>
+        <td class="review-table">Slope:</td>
+        <td><%= soil.slope %></td>
+  </tr> 
+
+  <% end %>
+  <% end %>
+
+  <% if field.field_type_id != 4 %>
+
+  <tr>
+    <td width="200px"><h2 class='sectionHeading'>Baseline Crop Management</h2></td>
+    <td></td>
+  </tr>
+  <% i=0 %>
+  <% field.strips.where(:is_future => false).each do |strip| %>
+  <% i +=1 %>
+   <% unless strip.field.strips.where(:is_future => false).count == 1 %>
+   <tr><td class="review-table"><b>Strip <%= i %> </b></td>
+ <td class="review-table"> </td></tr>
+      <% unless strip.length == 1 %>
+      <% unless strip.length == nil %> <tr>
+        <td class="review-table">Length:</td>
+        <td><%= strip.length %> ft</td>
+  </tr><% end %> <% end %><% end %>
+ <% j=1 %>
+   <% strip.crop_rotations.each do |crop| %>
+<tr><td class="review-table"><u>Crop #<%= j %>: <%= crop.crop.name %> </u></td>
+ <td class="review-table"> </td></tr>
+ <% if strip.field.field_type_id == 1 %><tr><td class="review-table">Plant Date: </td>
+ <td>Year <%= crop.plant_date_year %>, <%= crop.is_month %> <%= crop.plant_date_day %> </td></tr>
+ <tr><td class="review-table">Planting method: </td>
+ <td><%= PlantingMethod.find(crop.planting_method_id).name %> </td></tr>
+<tr><td class="review-table">Seeding rate: </td>
+ <td><% if crop.seeding_rate == nil %>default<% else %><%= crop.seeding_rate %> <% end %></td></tr>
+ <% end %>
+
+
+<% k=1 %>
+<% crop.commercial_fertilizer_applications.each do |fert| %>
+<tr><td class="review-table">Commercial Fertilizer #<%= k %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
+ <td>Year <%= fert.application_date_year %>, <%= fert.is_month %> <%= fert.application_date_day %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N applied: </td>
+ <td><%= fert.total_n_applied %> lbs/ac</td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total P applied: </td>
+ <td><%= fert.total_p_applied %> lbs/ac</td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %> <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <% k +=1 %>
+<% end %>
+
+<% l=1 %>
+<% crop.manure_fertilizer_applications.each do |fert| %>
+<tr><td class="review-table">Manure Fertilizer #<%= l %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date applied: </td>
+ <td>Year <%= fert.application_date_year %> <%= fert.is_month %> <%= fert.application_date_day %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure type: </td>
+ <td><%= ManureType.find(fert.manure_type_id).name %></td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Manure consistency: </td>
+ <td><%= ManureConsistency.find(fert.manure_consistency_id).name %></td></tr>
+   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total N concentration: </td>
+ <td><%= fert.total_n_concentration %> <% if fert.manure_consistency_id == 266 %>lb/ton<% else %>lb/1000 gallons<% end %></td></tr>
+    <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P concentration: </td>
+ <td><%= fert.p_concentration %> <% if fert.manure_consistency_id == 266 %>lb/ton<% else %>lb/1000 gallons<% end %></td></tr>
+     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P type: </td>
+ <td><%= PType.find(fert.p_type_id).name %></td></tr>
+     <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Application rate: </td>
+ <td><%= fert.application_rate %> <% if fert.manure_consistency_id == 266 %>tons/ac<% else %>1000 gallons/ac<% end %></td></tr>
+      <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Moisture content: </td>
+ <td><%= fert.moisture_content %> %</td></tr>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
+ <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %>, <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
+ <% l +=1 %>
+<% end %>
+
+<% m=1 %>
+<% crop.tillage_operations.each do |till| %>
+<tr><td class="review-table">Tillage Operation #<%= m %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation date: </td>
+ <td>Year <%= till.start_date_year %>, <%= till.is_month %> <%= till.start_date_day %></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Operation type: </td>
+ <td><%= TillageOperationType.find(till.tillage_operation_type_id).name %></td></tr>
+ <% m +=1 %>
+<% end %>
+
+<% n=1 %>
+<% crop.end_of_seasons.each do |harvest| %>
+<tr><td class="review-table">End of Season </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">End of season operation type: </td>
+ <td><%= EndOfSeasonType.find(harvest.end_of_season_type_id).name %></td></tr>
+ <tr><td class="review-table">End of season operation date: </td>
+ <td>Year <%= harvest.year %> <%= harvest.is_month %> <%= harvest.day %></td></tr>
+ <tr><td class="review-table">Harvest as silage: </td>
+ <td><% if harvest.is_harvest_as_silage %>Yes<% else %>No<% end %></td></tr>
+ <% n +=1 %>
+<% end %>
+
+<% if crop.is_cover_crop %>
+ <tr><td class="review-table">Cover crop: </td>
+ <td><%= Crop.find(crop.cover_crop_id).name %></td></tr>
+  <tr><td class="review-table">Cover crop plant date: </td>
+ <td>Year <%= crop.cover_crop_plant_date_year %>, <%= crop.cover_crop_is_month %> <%= crop.cover_crop_plant_date_day %></tr>
+   <tr><td class="review-table">Cover crop planting method: </td>
+ <td><%= PlantingMethod.find(crop.cover_crop_planting_method_id).name %></td></tr>
+ <% else %>
+  <tr><td class="review-table">Cover crop: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+
+<% j +=1 %>
+<% end %>
+<% end %>
+
+</table>
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+ <tr>
+    <td width="200px"><h2 class='sectionHeading'>Baseline BMPs</h2></td>
+    <td></td>
+  </tr>
+  <% if field.is_forest_buffer %>
+ <tr><td class="review-table">Forest Buffer: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of buffer: </td>
+ <td><%= field.forest_buffer_average_width %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of buffer: </td>
+ <td><%= field.forest_buffer_length %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_forest_buffer_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Forest Buffer: </td>
+ <td>No</td></tr>
+ <% end %>
+
+   <% if field.is_grass_buffer %>
+ <tr><td class="review-table">Grass Buffer: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of buffer: </td>
+ <td><%= field.grass_buffer_average_width %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of buffer: </td>
+ <td><%= field.grass_buffer_length %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_grass_buffer_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Grass Buffer: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+    <% if field.is_fertilizer_application_setback %>
+ <tr><td class="review-table">Fertilizer application setback in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Average width of setback: </td>
+ <td><%= field.fertilizer_application_setback_average_width %> ft</td></tr>
+   <tr><td class="review-table">Linear Feet of setback: </td>
+ <td><%= field.fertilizer_application_setback_length %> ft</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_fertilizer_application_setback_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Fertilizer application setback in place: </td>
+ <td>No</td></tr>
+ <% end %>
+
+
+    <% if field.is_wetland %>
+ <tr><td class="review-table">Wetland in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Wetland area: </td>
+ <td><%= field.wetland_area %> ac</td></tr>
+   <tr><td class="review-table">Upland area treated by wetland: </td>
+ <td><%= field.wetland_treated_area %> ac</td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_wetland_planned %>Yes<% else %>No<% end %></td></tr>
+ <% else %>
+ <tr><td class="review-table">Wetland in place: </td>
+ <td>No</td></tr>
+ <% end %>
+
+     <% if field.field_type_id ==2 %>
+     <% if field.is_streambank_fencing_in_place %>
+ <tr><td class="review-table">Is fencing/exclusion in place: </td>
+ <td>Yes</td></tr>
+  <tr><td class="review-table">Linear feet of streambank: </td>
+ <td><%= field.fence_length %> ft</td></tr>
+   <tr><td class="review-table">Vegetation type: </td>
+ <td><%= VegetationType.find(field.vegetation_type_fence_stream_id).name %></td></tr>
+    <tr><td class="review-table">Distance between fence/exclusion and stream: </td>
+ <td><%= field.distance_fence_stream %> ft</td></tr>
+ <% else %>
+ <tr><td class="review-table">Is fencing/exclusion in place: </td>
+ <td>No</td></tr>
+   <tr><td class="review-table">Linear feet of streambank: </td>
+ <td><%= field.fence_length %> ft</td></tr>
+ <% end %>
+<% end %>
+
+
+    <% if field.other_land_use_conversion_acres %>
+     <tr><td class="review-table">Other land use conversion </td>
+ <td></td></tr>
+ <tr><td class="review-table">Acres converted: </td>
+ <td><%= field.other_land_use_conversion_acres %> ac</td></tr>
+    <tr><td class="review-table">Converted to: </td>
+ <td><%= VegetationType.find(field.other_land_use_conversion_vegetation_type_id).name %></td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if field.is_other_land_use_conversion_planned %>Yes<% else %>No<% end %></td></tr>
+ <% end %>
+
+
+
+ <% field.bmps.each do |bmp| %>
+      <tr><td class="review-table">Other BMPs</td>
+ <td></td></tr>
+<tr><td class="review-table">BMP type: </td>
+ <td><%= BmpType.find(bmp.bmp_type_id).name %></td></tr>
+    <tr><td class="review-table">Planned: </td>
+ <td><% if bmp.is_planned %>Yes<% else %>No<% end %></td></tr>
+<% end %>
+
+ 
+
+
+ <tr>
+    <td width="200px"><h2 class='sectionHeading'>Results</h2></td>
+    <td></td>
+  </tr>
+     <tr>
+    <td width="200px"><h2>Nitrogen</h2></td>
+    <td></td>
+  </tr>
+  <tr><td class="review-table">Baseline load (EOS): </td>
+ <td>
+
+
+<% if field.tmdl.nil? %>
+          <%= number_with_precision(field.watershed_segment.n_crop_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.watershed_segment.n_pasture_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.n_hay_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= number_with_precision(field.tmdl[:total_n] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.tmdl[:total_n] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.tmdl[:total_n] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+
+      lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <% if field.tmdl.nil? %>
+          <%= "(" + number_with_precision(field.watershed_segment.n_crop_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= "(" + number_with_precision(field.watershed_segment.n_pasture_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.n_hay_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= "(" + number_with_precision(field.tmdl[:total_n], :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= "(" + number_with_precision(field.tmdl[:total_n], :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= "(" + number_with_precision(field.tmdl[:total_n], :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+      lb/ac)
+
+
+
+
+
+ </td>
+
+
+   <tr><td class="review-table">Current load (EOS): </td>
+ <td>
+
+<% if field.ntt_xml_current %>
+<%= number_with_precision(field.current_n_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_n_load / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)
+<% end %>
+
+ </td></tr>
+
+
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+
+
+
+   <tr>
+    <td width="200px"><h2>Phosphorus</h2></td>
+    <td></td>
+  </tr>
+  <tr><td class="review-table">Baseline load (EOS): </td>
+ <td>
+<% if field.tmdl.nil? %>
+          <%= number_with_precision(field.watershed_segment.p_crop_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.watershed_segment.p_pasture_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.watershed_segment.p_hay_baseline * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= number_with_precision(field.tmdl[:total_p] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= number_with_precision(field.tmdl[:total_p] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= number_with_precision(field.tmdl[:total_p] * field.acres, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+      lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <% if field.tmdl.nil? %>
+          <%= "(" + number_with_precision(field.watershed_segment.p_crop_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= "(" + number_with_precision(field.watershed_segment.p_pasture_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= "(" + number_with_precision(field.watershed_segment.p_hay_baseline, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% else # use Maryland TMDL     %>
+          <%= "(" + number_with_precision(field.tmdl[:total_p], :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+          <%= "(" + number_with_precision(field.tmdl[:total_p], :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+          <%= "(" + number_with_precision(field.tmdl[:total_p], :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      <% end %>
+      lb/ac)
+
+
+ </td></tr>
+
+
+    <tr><td class="review-table">Current load (EOS): </td>
+ <td>
+
+<% if field.ntt_xml_current %>
+<%= number_with_precision(field.current_p_load, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_p_load / field.acres, :precision => 2, delimiter: ',') %>
+      lb/ac)
+<% end %>
+
+ </td></tr>
+
+ 
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.p_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+
+
+   <tr>
+    <td width="200px"><h2>Sediment</h2></td>
+    <td></td>
+  </tr>
+
+  <tr><td class="review-table">Baseline load (EOS): </td>
+    <td>
+      <%= number_with_precision(field.watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+      <%= number_with_precision(field.watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+      <%= number_with_precision(field.watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      tons
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= "(" + number_with_precision(field.watershed_segment[:sediment_crop_baseline] / 2000.0, :precision => 2, delimiter: ',') if field.field_type_id == 1 %>
+      <%= "(" + number_with_precision(field.watershed_segment[:sediment_pasture_baseline] / 2000.0, :precision => 2, delimiter: ',') if field.field_type_id == 2 %>
+      <%= "(" + number_with_precision(field.watershed_segment[:sediment_hay_baseline] / 2000.0, :precision => 2, delimiter: ',') if field.field_type_id == 3 %>
+      tons/ac)
+    </td></tr>
+
+
+    <tr><td class="review-table">Current load (EOS): </td>
+
+ <td>
+<% if field.ntt_xml_current %>
+ 
+<%= number_with_precision(field.current_s_load, :precision => 2, delimiter: ',') %> tons
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_s_load / field.acres, :precision => 2, delimiter: ',') %>
+      tons/ac)
+<% end %>
+</td></tr>
+
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.sediment_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+
+
+<% else %>
+
+  <tr>
+    <td width="200px"><h2 class='sectionHeading'>Animal Confinement</h2></td>
+    <td></td>
+  </tr>
+  <tr><td class="review-table">Loafing lot area: </td>
+ <td><%= field.acres_from_map.round(2) %> ac</td></tr>
+<% if field.field_livestocks.any? %>
+  <tr><td class="review-table"><h2>Livestock</h2> </td>
+    <td></td>
+  </tr>
+  <% end %>
+
+<% z = 1 %>
+    <% field.field_livestocks.each do |livestock| %>
+  <tr> <td class="review-table">Livestock #<%= z %>:</td>
+ <td><%= Animal.find(livestock.animal_id).name %></td></tr>
+   <tr> <td class="review-table">Quantity:</td>
+ <td><%= livestock.quantity %></td></tr>
+    <tr> <td class="review-table">Days per year confined:</td>
+ <td><%= livestock.days_per_year_confined %></td></tr>
+     <tr> <td class="review-table">Hours per day confined:</td>
+ <td><%= livestock.hours_per_day_confined %></td></tr>
+      <tr> <td class="review-table">Average weight:</td>
+ <td><%= livestock.average_weight %> lb</td></tr>
+       <tr> <td class="review-table">N excreted:</td>
+ <td><%= livestock.n_excreted %> lb/T</td></tr>
+        <tr> <td class="review-table">P2O5 excreted:</td>
+ <td><%= livestock.p205_excreted %> lb/T</td></tr>
+<% z += 1 %>
+
+<% end %>
+<% if field.field_poultry.any? %>
+  <tr><td class="review-table"><h2>Poultry</h2> </td>
+    <td></td>
+  </tr>
+<% end %>
+<% x = 1 %>
+    <% field.field_poultry.each do |poultry| %>
+  <tr> <td class="review-table">Poultry #<%= x %>:</td>
+ <td><%= Animal.find(poultry.poultry_id).name %></td></tr>
+   <tr> <td class="review-table">Birds/flock:</td>
+ <td><%= poultry.quantity %></td></tr>
+    <tr> <td class="review-table">Flocks/yr:</td>
+ <td><%= poultry.flocks_per_year %></td></tr>
+     <tr> <td class="review-table">Days in growing cycle:</td>
+ <td><%= poultry.days_in_growing_cycle %></td></tr>
+       <tr> <td class="review-table">N excreted:</td>
+ <td><%= poultry.n_excreted %> lb/T</td></tr>
+        <tr> <td class="review-table">P2O5 excreted:</td>
+ <td><%= poultry.p205_excreted %> lb/T</td></tr>
+<% x += 1 %>
+
+<% end %>
+
+
+  <tr>
+    <td width="200px"><h2 class='sectionHeading'>Best Management Practices</h2></td>
+    <td></td>
+  </tr>
+
+  <tr><td class="review-table"><h2>Current BMPs</h2> </td>
+    <td></td>
+  </tr>
+  <% if field.field_livestocks.any? %>
+    <tr><td class="review-table"><h2>Livestock BMPs</h2> </td>
+    <td></td>
+  </tr>
+        <tr> <td class="review-table">Animal waste management system:</td>
+ <td><% if field.is_livestock_animal_waste_management_system %> Yes <% else %> No <% end %></td></tr>
+         <tr> <td class="review-table">Mortality composting:</td>
+ <td><% if field.is_livestock_mortality_composting %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Plastic permeable lagoon cover:</td>
+ <td><% if field.is_livestock_plastic_permeable_lagoon_cover %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Phytase:</td>
+ <td><% if field.is_livestock_phytase %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Dairy precision feeding:</td>
+ <td><% if field.is_livestock_dairy_precision_feeding %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Barnyard runoff controls/loafing lot management:</td>
+ <td><% if field.is_livestock_barnyard_runoff_controls %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Water control structure:</td>
+ <td><% if field.is_livestock_water_control_structure %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Treatment wetland:</td>
+ <td><% if field.is_livestock_treatment_wetland %> Yes <% else %> No <% end %></td></tr>
+
+<% end %>
+  <% if field.field_poultry.any? %>
+    <tr><td class="review-table"><h2>Poultry BMPs</h2> </td>
+    <td></td>
+  </tr>
+        <tr> <td class="review-table">Animal waste management system:</td>
+ <td><% if field.is_poultry_animal_waste_management_system %> Yes <% else %> No <% end %></td></tr>
+         <tr> <td class="review-table">Mortality composting:</td>
+ <td><% if field.is_poultry_mortality_composting %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Poultry litter treatment:</td>
+ <td><% if field.is_poultry_litter_treatment %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Biofilters:</td>
+ <td><% if field.is_poultry_biofilters %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Vegetated environmental buffer:</td>
+ <td><% if field.is_poultry_vegetated_environmental_buffer %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Phytase:</td>
+ <td><% if field.is_poultry_phytase %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Heavy use pads:</td>
+ <td><% if field.is_poultry_heavy_use_pads %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Barnyard runoff controls / clean water diversions:</td>
+ <td><% if field.is_poultry_barnyard_runoff_controls %> Yes <% else %> No <% end %></td></tr>
+  <tr> <td class="review-table">Water control structure:</td>
+ <td><% if field.is_poultry_water_control_structure %> Yes <% else %> No <% end %></td></tr>
+          <tr> <td class="review-table">Treatment wetland:</td>
+ <td><% if field.is_poultry_treatment_wetland %> Yes <% else %> No <% end %></td></tr>
+
+<% end %>
+
+  
+
+ <tr>
+    <td width="200px"><h2 class='sectionHeading'>Results</h2></td>
+    <td></td>
+  </tr>
+     <tr>
+    <td width="200px"><h2>Nitrogen</h2></td>
+    <td></td>
+  </tr>
+
+   <tr><td class="review-table">Current load (EOS): </td>
+ <td>
+
+
+<%= number_with_precision(field.animal_current_n_load, :precision => 2, delimiter: ',') %> lbs/year
+
+
+ </td></tr>
+
+
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.n_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+
+
+
+
+   <tr>
+    <td width="200px"><h2>Phosphorus</h2></td>
+    <td></td>
+  </tr>
+
+
+    <tr><td class="review-table">Current load (EOS): </td>
+ <td>
+
+<%= number_with_precision(field.animal_current_p_load, :precision => 2, delimiter: ',') %> lbs/year
+
+
+ </td></tr>
+
+
+
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.p_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+
+
+   <tr>
+    <td width="200px"><h2>Sediment</h2></td>
+    <td></td>
+  </tr>
+
+    <tr><td class="review-table">Current load (EOS): </td>
+
+ <td>
+<%= number_with_precision(field.animal_current_s_load, :precision => 2, delimiter: ',') %> lbs/year
+
+</td></tr>
+
+
+
+    <tr><td class="review-table">Delivery Factor: </td>
+ <td><%= number_with_precision(field.watershed_segment.sediment_delivery_factor, :precision => 2, delimiter: ',') %></td>
+</tr>
+
+
+
+
+<% end %>
+
+
+
+  <% end %>
+
+</table>
+
+<% else %>
+
+Under construction
+<% end %>
+
+<!--<a class="button" href="<%= review_farm_path(@farm, {:format => :pdf}) %>">Download PDF copy</a> -->
