@@ -54,6 +54,8 @@ module BaselineCheck
 
 	def check_if_fert
 		@incorp = true
+		@checked_bmp = false
+		@checked_setback = false
 		self.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
             	crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
@@ -62,23 +64,35 @@ module BaselineCheck
             		end
             	end
             	if !crop_rotation.commercial_fertilizer_applications.empty?
-            		is_fert_setback
+            		if !@checked_bmp
+            			@checked_bmp, @checked_setback = is_fert_setback(@checked_bmp, @checked_setback)
+            		end
             	end
             end
         end
 	end
 
-	def is_fert_setback
+	def is_fert_setback(checked_bmp, checked_setback)
 		if self.is_pasture_adjacent_to_stream?
 			if self.is_fertilizer_application_setback
-				soil_conservation_bmp
+				if !checked_bmp
+					soil_conservation_bmp
+					checked_bmp = true
+				end
 			else
-				@messages[:meets_baseline] = false
-				@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
+				if !checked_setback
+					@messages[:meets_baseline] = false
+					@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
+					checked_setback = true
+				end
 			end
 		else
-			soil_conservation_bmp
+			if !checked_bmp
+				soil_conservation_bmp
+				checked_bmp = true
+			end
 		end
+		return [checked_bmp, checked_setback]
 	end
 
 	def check_this_for_nil(*args)
