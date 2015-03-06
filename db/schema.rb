@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140412172555) do
+ActiveRecord::Schema.define(:version => 20150304171049) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(:version => 20140412172555) do
     t.float    "current_sediment_organic_p"
     t.float    "current_soluble_p"
     t.boolean  "hel_soils"
+    t.text     "totals"
   end
 
   create_table "future_bmps", :force => true do |t|

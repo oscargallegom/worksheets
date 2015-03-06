@@ -1,3 +1,5 @@
+require 'debugger'
+
 class Farm < ActiveRecord::Base
   include BmpCalculations
 

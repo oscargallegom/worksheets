@@ -11,6 +11,8 @@ class Field < ActiveRecord::Base
 
   attr_writer :bmp_calculations
 
+  serialize :totals
+
   belongs_to :farm
   belongs_to :watershed_segment
   belongs_to :irrigation
@@ -565,6 +567,15 @@ def has_cover_crop
 
   end
 
+  
+  def maryland?
+    self.farm.site_state_id == 21
+  end
+
+  def virginia?
+    self.farm.site_state_id == 47
+  end
+
   # allow duplication
   amoeba do
     enable
@@ -720,5 +731,8 @@ def has_cover_crop
       end
     end
   end
+
+
+
 end
 

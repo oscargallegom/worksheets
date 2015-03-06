@@ -1,3 +1,5 @@
+require 'debugger'
+
 module BmpCalculations
 
   def computeBmpCalculations(field)
@@ -642,7 +644,8 @@ module BmpCalculations
     logger.debug "**********************************************************************"
     {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => ''}
 
-
+    field.totals = {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => ''}
+    # field.save!
 
   end
 
@@ -1788,38 +1791,40 @@ def computeBmpCalculationsWithoutConversion(field)
       # does the field meet baseline - only for Maryland
       if (field.farm.site_state_id == 21)
 
+
         #if crop or hay
         if (field.field_type_id == 1 || field.field_type_id == 3)
          # check if at least one manure fertilizer incorporated
          is_manure_fertilizer_incorporated = false
-         field.strips.each do |strip|
-           strip.crop_rotations.each do |crop_rotation|
-             crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-               if (manure_fertilizer_application.is_incorporated)
-                 # this is actually valid
-                 is_manure_fertilizer_incorporated = true
-               end
-             end
-           end
-         end
-
-         if is_manure_fertilizer_incorporated == false
           field.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
-             if crop_rotation.manure_fertilizer_applications.any?
-               if field.hel_soils == false
-                  return false
+              crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+                if (manure_fertilizer_application.is_incorporated)
+                 # this is actually valid
+                 is_manure_fertilizer_incorporated = true
                 end
+              end
             end
           end
-        end
-         end
+
+          if is_manure_fertilizer_incorporated == false
+            field.strips.each do |strip|
+              strip.crop_rotations.each do |crop_rotation|
+                if crop_rotation.manure_fertilizer_applications.any?
+                  if field.hel_soils == false
+                    return false
+                  end
+                end
+              end
+            end
+          end
         end
 
         # if field is pasture
         if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
           return false
         end
+
         # if crop or pasture or hay
         if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
           is_commercial_or_manure_fertilizer = false
