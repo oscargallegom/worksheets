@@ -53,12 +53,13 @@ module BaselineCheck
 	end
 
 	def check_if_fert
-		manure = false
-		commercial = false
+		@incorp = true
 		self.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
             	crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-            		check_if_manure_incorp(manure_fertilizer_application)
+            		if @incorp
+            			@incorp = check_if_manure_incorp(manure_fertilizer_application, @incorp)
+            		end
             	end
             	if !crop_rotation.commercial_fertilizer_applications.empty?
             		is_fert_setback
@@ -88,18 +89,22 @@ module BaselineCheck
 		self.send :check_this_for_nil, :hel_soils
 	end
 
-	def check_if_manure_incorp(manure)
+	def check_if_manure_incorp(manure, incorp)
 		if manure.is_incorporated
 			is_fert_setback
 		else
 			if self.hel_soils?
 				is_fert_setback
 			else
-				@messages[:meets_baseline] = false
-				@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
-				break
+				if incorp
+					@messages[:meets_baseline] = false
+					@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+					incorp = false
+					puts "testing incorp: #{incorp}"
+				end
 			end
 		end
+		return incorp
 	end
 
 	def adj_to_stream(state)
