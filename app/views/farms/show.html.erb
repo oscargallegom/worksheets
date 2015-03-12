@@ -540,7 +540,18 @@
           S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
         </td>
+        <% if field.other_land_use_conversion_acres_future %>
         <td>
+          N: <%= number_with_precision((field.bmp_calculations[:new_total_n])/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision((field.bmp_calculations[:new_total_p])/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
+          <% else %>
+          <td>
           N: <%= number_with_precision((field.bmp_calculations[:new_total_n_future])/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
@@ -549,6 +560,7 @@
           <br/>
           S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment_future]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
+          <% end %>
         <td>
           N: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.bmp_calculations[:new_total_n])/(field.acres) - (field.bmp_calculations[:new_total_n_future])/(field.acres))* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
