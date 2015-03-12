@@ -37,7 +37,8 @@
           </ol>
           <br/>
           <%= link_to 'Continue', edit_farm_field_path(@field.farm.id, @field.id, :step => 6), :class => 'button', :method => :get %>
-
+<br><br>
+            <%= link_to "Review Current Results", current_farm_path(@farm), :class => 'button', :id => 'review' %>
         </fieldset>
       </div>
 

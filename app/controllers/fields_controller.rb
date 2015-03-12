@@ -92,10 +92,14 @@ class FieldsController < ApplicationController
         @ntt_results_future = @current_totals[:ntt_results_future]
         calculate_bmps_without_conversion(@field)
         calculate_bmps(@field)
-        logger.info ">>>>>>>>>>>>>>>>!!!!!!!!! future_sediment_with_conversion: #{@future_sediment_with_conversion}"
-        logger.info ">>>>>>>>>>>>>>>>!!!!!!!!! future_sediment_without_conversion: #{@future_sediment_without_conversion}"
-        if @future_sediment_with_conversion > @future_sediment_without_conversion
-          @current_totals[:new_total_sediment_future] = @future_sediment_without_conversion
+        if @with_conversion[:sediment] > @without_conversion[:sediment]
+          @current_totals[:new_total_sediment_future] = @without_conversion[:sediment]
+        end
+        if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
+              @current_totals[:new_total_n_future] = @without_conversion[:nitrogen]
+        end
+        if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
+              @current_totals[:new_total_p_future] = @without_conversion[:phosphorus]
         end
       else
         @current_totals = computeBmpCalculations(@field)

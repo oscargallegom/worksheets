@@ -2,6 +2,7 @@ require 'debugger'
 
 class Farm < ActiveRecord::Base
   include BmpCalculations
+  include ModelRun
 
   belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
   #belongs_to :site_state, :class_name => 'State', :foreign_key => 'site_state_id'
@@ -1093,7 +1094,22 @@ def wetland_area_future_fields
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         @current_totals = {}
         begin
-          @current_totals = computeBmpCalculations(field)
+          if field.other_land_use_conversion_acres_future
+            @current_totals = computeBmpCalculations(field)
+            calculate_bmps_without_conversion(field)
+            calculate_bmps(field)
+            if @with_conversion[:sediment] > @without_conversion[:sediment]
+              @current_totals[:new_total_sediment_future] = @without_conversion[:sediment]
+            end
+            if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
+              @current_totals[:new_total_n_future] = @without_conversion[:nitrogen]
+            end
+            if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
+              @current_totals[:new_total_p_future] = @without_conversion[:phosphorus]
+            end
+          else
+            @current_totals = computeBmpCalculations(field)
+          end
         rescue Exception => e
           @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
         ensure
@@ -1101,6 +1117,7 @@ def wetland_area_future_fields
           credits[:total_p] += (@current_totals[:new_total_p] - @current_totals[:new_total_p_future])* field.watershed_segment.p_delivery_factor
           credits[:total_sediment] += (@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor
         end
+        
      end
 
       if (!field.field_type.nil?) && (field.field_type_id == 4) # perform calculations for animal confinement

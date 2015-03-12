@@ -1,3 +1,5 @@
+require 'debugger'
+
 module ModelRun
 
     def model_run(field)
@@ -55,8 +57,8 @@ module ModelRun
 
 
     def calculate_bmps(field)
-
-        @current_totals = computeBmpCalculations(@field)
+        @with_conversion = Hash.new
+        @current_totals = computeBmpCalculations(field)
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
 
@@ -120,16 +122,18 @@ module ModelRun
         # field.future_carbon = @future_carbon
         field.save
 
-        @future_sediment_with_conversion = @current_totals[:new_total_sediment_future]
-        return @future_sediment_with_conversion
-        logger.debug " @@@@@@@@ future_sediment_with_conversion: #{future_sediment_with_conversion}"
+        @with_conversion[:sediment] = @current_totals[:new_total_sediment_future]
+        @with_conversion[:nitrogen] = @current_totals[:new_total_n_future]
+        @with_conversion[:phosphorus] = @current_totals[:new_total_p_future]
+        return @with_conversion
     end
 
 
 
         def calculate_bmps_without_conversion(field)
-
-        @current_totals = computeBmpCalculationsWithoutConversion(@field)
+          
+        @without_conversion = Hash.new
+        @current_totals = computeBmpCalculationsWithoutConversion(field)
         @ntt_results = @current_totals[:ntt_results]
         @ntt_results_future = @current_totals[:ntt_results_future]
 
@@ -194,9 +198,10 @@ module ModelRun
         field.save
 
 
-                @future_sediment_without_conversion = @current_totals[:new_total_sediment_future]
-                return @future_sediment_without_conversion
-        logger.debug " @@@@@@@@ future_sediment_without_conversion: #{future_sediment_without_conversion}"
+                @without_conversion[:sediment] = @current_totals[:new_total_sediment_future]
+                @without_conversion[:nitrogen] = @current_totals[:new_total_n_future]
+                @without_conversion[:phosphorus] = @current_totals[:new_total_p_future]
+                return @without_conversion
     end
 
 

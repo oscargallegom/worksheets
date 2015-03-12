@@ -5,9 +5,9 @@ module BmpCalculations
   def computeBmpCalculations(field)
 
     # try to retrieve data if not already present
-    if (!field.readonly? && (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?))
-      field.save
-    end
+    # if (!field.readonly? && (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?))
+    #   field.save
+    # end
 
     # call NTT to get the latest values
     total_n_per_acre = 0
@@ -653,9 +653,9 @@ module BmpCalculations
 def computeBmpCalculationsWithoutConversion(field)
 
     # try to retrieve data if not already present
-    if (!field.readonly? && (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?))
-      field.save
-    end
+    # if (!field.readonly? && (field.ntt_xml_current.nil? || field.ntt_xml_future.nil?))
+    #   field.save
+    # end
 
     # call NTT to get the latest values
     total_n_per_acre = 0

@@ -1,7 +1,10 @@
+require 'debugger'
+
 class FarmsController < ApplicationController
 
   include BmpCalculations
   include Ntt
+  include ModelRun
 
   load_and_authorize_resource
   helper_method :sort_column, :sort_direction
@@ -73,7 +76,22 @@ class FarmsController < ApplicationController
 
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
         begin
-          @current_totals = computeBmpCalculations(field)
+          if field.other_land_use_conversion_acres_future
+            @current_totals = computeBmpCalculations(field)
+            calculate_bmps_without_conversion(field)
+            calculate_bmps(field)
+            if @with_conversion[:sediment] > @without_conversion[:sediment]
+              @current_totals[:new_total_sediment_future] = @without_conversion[:sediment]
+            end
+            if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
+              @current_totals[:new_total_n_future] = @without_conversion[:nitrogen]
+            end
+            if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
+              @current_totals[:new_total_p_future] = @without_conversion[:phosphorus]
+            end
+          else
+            @current_totals = computeBmpCalculations(field)
+          end
         rescue Exception => e
           flash.now[:error] = e.message
           @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
@@ -87,6 +105,7 @@ class FarmsController < ApplicationController
 
 
         @future_p_load_fields += @current_totals[:new_total_p_future]
+
         @future_sediment_load_fields += @current_totals[:new_total_sediment_future]
 
         watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first

@@ -60,7 +60,7 @@ module BaselineCheck
             strip.crop_rotations.each do |crop_rotation|
             	crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
             		if @incorp
-            			@incorp = check_if_manure_incorp(manure_fertilizer_application, @incorp)
+            			@incorp, @checked_setback = check_if_manure_incorp(manure_fertilizer_application, @incorp, @checked_setback)
             		end
             	end
             	if !crop_rotation.commercial_fertilizer_applications.empty?
@@ -103,12 +103,18 @@ module BaselineCheck
 		self.send :check_this_for_nil, :hel_soils
 	end
 
-	def check_if_manure_incorp(manure, incorp)
+	def check_if_manure_incorp(manure, incorp, setback)
 		if manure.is_incorporated
-			is_fert_setback
+			if !setback
+				is_fert_setback
+				setback = true
+			end
 		else
 			if self.hel_soils?
-				is_fert_setback
+				if !setback
+					is_fert_setback
+					setback = true
+				end
 			else
 				if incorp
 					@messages[:meets_baseline] = false
@@ -118,7 +124,7 @@ module BaselineCheck
 				end
 			end
 		end
-		return incorp
+		return incorp, setback
 	end
 
 	def adj_to_stream(state)
