@@ -26,7 +26,7 @@ module BaselineCheck
 				virginia_or_maryland(:crop_or_hay)
 			end
 		else
-			@messages[:meets_baseline] = true
+			#@messages[:meets_baseline] = true
 		end
 	end
 
@@ -153,7 +153,7 @@ module BaselineCheck
 			end
 		else
 			if state == :virginia
-				@messages[:meets_baseline] = true
+				#@messages[:meets_baseline] = true
 			else
 				check_if_fert
 			end
@@ -163,7 +163,7 @@ module BaselineCheck
 	def is_streambank_fencing(state)
 		if self.is_streambank_fencing_in_place
 			if state == :virginia
-				@messages[:meets_baseline] = true
+				#@messages[:meets_baseline] = true
 			else
 				soil_conservation_bmp
 			end
@@ -179,7 +179,7 @@ module BaselineCheck
 
 	def grass_or_forest_buffer
 		if self.is_forest_buffer? || self.is_grass_buffer?
-			@messages[:meets_baseline] = true
+			#@messages[:meets_baseline] = true
 		else
 			@messages[:meets_baseline] = false
 			@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place."
@@ -198,7 +198,7 @@ module BaselineCheck
             end
         end
         if has_bmp
-        	@messages[:meets_baseline] = true
+        	#@messages[:meets_baseline] = true
         else
         	@messages[:meets_baseline] = false
 			@messages[:errors] << "Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab."
