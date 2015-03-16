@@ -44,14 +44,14 @@ module BaselineCheck
 	end
 
 	def pasture(state)
-		adj_to_stream(state)
+		adj_to_stream(state, :pasture)
 	end
 
 	def crop_or_hay(state)
 		if state == :maryland
 			check_if_fert
 		elsif state == :virginia
-			adj_to_stream(state)
+			adj_to_stream(state, :crop)
 		end
 	end
 
@@ -140,10 +140,14 @@ module BaselineCheck
 		return incorp, setback
 	end
 
-	def adj_to_stream(state)
+	def adj_to_stream(state, field_type)
 		if self.is_pasture_adjacent_to_stream?
 			if state == :virginia
-				grass_or_forest_buffer
+				if field_type == :pasture
+					is_streambank_fencing(:virginia)
+				else
+					grass_or_forest_buffer
+				end
 			else
 				is_streambank_fencing(state)
 			end
