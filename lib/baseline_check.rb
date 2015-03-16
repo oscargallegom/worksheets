@@ -1,3 +1,5 @@
+include CalculateLoads
+
 module BaselineCheck
 
 
@@ -5,14 +7,37 @@ module BaselineCheck
 	def does_farm_meet_baseline(farm)
 		meets = []
 		farm_messages = Hash.new
+		farm_messages[:errors] = []
 		farm.fields.each do |field|
 			meets << field.does_field_meet_baseline[:meets_baseline]
 			field_name = field.name.to_sym
 			farm_messages[field_name] = field.does_field_meet_baseline[:errors]
 		end
+		loads = check_loads(farm)
+		if loads[:n_below_baseline] < 0
+			farm_messages[:errors] << "Current N Load is greater than Baseline N Load."
+			meets << false
+		end
+		if loads[:p_below_baseline] < 0
+			farm_messages[:errors] << "Current P Load is greater than Baseline P Load."
+			meets << false
+		end
+		if loads[:sediment_below_baseline] < 0
+			farm_messages[:errors] << "Current sediment Load is greater than Baseline sediment Load."
+			meets << false
+		end
 		farm_messages[:meets_baseline] = !meets.include?(false)
 		return farm_messages
+	end
 
+
+	def check_loads(farm)
+		loads = Hash.new
+		totals = get_current_totals(farm)
+		loads[:n_below_baseline] = totals[:baseline_n_load_fields] - totals[:current_n_load_fields]
+		loads[:p_below_baseline] = totals[:baseline_p_load_fields] - totals[:current_p_load_fields]
+		loads[:sediment_below_baseline] = totals[:baseline_sediment_load_fields] - totals[:current_sediment_load_fields]
+		return loads
 	end
 
 
@@ -210,8 +235,6 @@ module BaselineCheck
 			@messages[:errors] << "Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab."
 		end
 	end
-
-
 
 end
 
