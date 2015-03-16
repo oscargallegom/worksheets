@@ -161,10 +161,11 @@ module BaselineCheck
 				end
 			else
 				if incorp
-					@messages[:meets_baseline] = false
-					@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+					if !self.is_field_pasture?
+						@messages[:meets_baseline] = false
+						@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+					end
 					incorp = false
-					puts "testing incorp: #{incorp}"
 				end
 			end
 		end

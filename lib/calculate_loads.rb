@@ -1,5 +1,6 @@
 require 'debugger'
 include BmpCalculations
+include ModelRun
 
 module CalculateLoads
 
@@ -141,6 +142,6 @@ module CalculateLoads
 		return totals
 	end
 
-	
+
 
 end
