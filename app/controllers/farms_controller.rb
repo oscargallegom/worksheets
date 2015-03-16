@@ -207,7 +207,7 @@ class FarmsController < ApplicationController
 
     @farm.fields.each do |field|
       if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
-        if f.totals.nil?
+        if field.totals.nil?
           model_run(field)
           calculate_bmps(field)
         end
