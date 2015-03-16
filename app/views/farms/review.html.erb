@@ -1056,7 +1056,6 @@
 
     <tr><td class="review-table">Future load (EOS): </td>
        <td>
-<% if field.ntt_xml_future %>
 
 
  
@@ -1072,16 +1071,14 @@
       tons/ac)</td>
 </tr>
 
-<% end %>
+
     <tr><td class="review-table">Delivery Factor: </td>
  <td><%= number_with_precision(field.watershed_segment.sediment_delivery_factor, :precision => 2, delimiter: ',') %></td>
 </tr>
 
-<% if field.ntt_xml_future %>
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
  <td> <%= number_with_precision([0, (field.totals[:new_total_sediment] - field.totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> tons</td>
 </tr>
-<% end %>
 
 
 
