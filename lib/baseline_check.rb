@@ -13,6 +13,7 @@ module BaselineCheck
 
 	def does_field_meet_baseline
 		@messages = Hash.new
+		@messages[:meets_baseline] = true
 		@messages[:errors] = []
 		get_field_type
 		return @messages
