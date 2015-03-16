@@ -1,5 +1,16 @@
 module BaselineCheck
 
+
+	#not functional....fix this nasty method
+	def does_farm_meet_baseline(farm)
+		meets = []
+		farm.fields.each do |field|
+			meets << field.does_field_meet_baseline[:meets_baseline]
+		end
+		return !meets.include?(false)
+	end
+
+
 	def does_field_meet_baseline
 		@messages = Hash.new
 		@messages[:errors] = []
@@ -104,15 +115,17 @@ module BaselineCheck
 	end
 
 	def check_if_manure_incorp(manure, incorp, setback)
+		checked_bmp = false
+		setback = false
 		if manure.is_incorporated
 			if !setback
-				is_fert_setback
+				is_fert_setback(checked_bmp, setback)
 				setback = true
 			end
 		else
 			if self.hel_soils?
 				if !setback
-					is_fert_setback
+					is_fert_setback(checked_bmp, setback)
 					setback = true
 				end
 			else
