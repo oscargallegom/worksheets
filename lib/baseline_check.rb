@@ -4,10 +4,15 @@ module BaselineCheck
 	#not functional....fix this nasty method
 	def does_farm_meet_baseline(farm)
 		meets = []
+		farm_messages = Hash.new
 		farm.fields.each do |field|
 			meets << field.does_field_meet_baseline[:meets_baseline]
+			field_name = field.name.to_sym
+			farm_messages[field_name] = field.does_field_meet_baseline[:errors]
 		end
-		return !meets.include?(false)
+		farm_messages[:meets_baseline] = !meets.include?(false)
+		return farm_messages
+
 	end
 
 
