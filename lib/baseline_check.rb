@@ -79,11 +79,7 @@ module BaselineCheck
 	end
 
 	def crop_or_hay(state)
-		if state == :maryland
-			check_if_fert
-		elsif state == :virginia
-			adj_to_stream(state, :crop)
-		end
+		adj_to_stream(state, :crop)
 	end
 
 	def is_crop_or_hay_or_pasture?
@@ -94,10 +90,8 @@ module BaselineCheck
 		self.field_type_id == 2
 	end
 
-	def check_if_fert
+	def check_if_fert(checked_bmp, checked_setback)
 		@incorp = true
-		@checked_bmp = false
-		@checked_setback = false
 		self.strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
             	crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
@@ -146,8 +140,8 @@ module BaselineCheck
 	end
 
 	def check_if_manure_incorp(manure, incorp, setback)
-		checked_bmp = false
-		setback = false
+		# checked_bmp = false
+		# setback = false
 		if manure.is_incorporated
 			if !setback
 				is_fert_setback(checked_bmp, setback)
@@ -187,7 +181,9 @@ module BaselineCheck
 			if state == :virginia
 				#@messages[:meets_baseline] = true
 			else
-				check_if_fert
+				checked_bmp = false
+				checked_setback = false
+				check_if_fert(checked_bmp, checked_setback)
 			end
 		end
 	end
@@ -200,11 +196,15 @@ module BaselineCheck
 				soil_conservation_bmp
 			end
 		else
-			@messages[:meets_baseline] = false
 			if state == :virginia
 				@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+				@messages[:meets_baseline] = false
 			else
-				@messages[:errors] << "Pasture is adjacent to stream and does not have streambank fencing"
+				@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+				@messages[:meets_baseline] = false
+				checked_bmp = false
+				setback = false
+				check_if_fert(checked_bmp, setback)
 			end
 		end
 	end
