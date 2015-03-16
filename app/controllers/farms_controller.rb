@@ -182,6 +182,11 @@ class FarmsController < ApplicationController
       @arrTMDLs << field.tmdl.name if @farm.site_state_id != 47 && !field.tmdl.nil? && !@arrTMDLs.include?(field.tmdl.name)
       @arrTMDLs << field.tmdl_va if @farm.site_state_id == 47 && !@arrTMDLs.include?(field.tmdl_va)
 
+        if field.totals.nil?
+          model_run(field)
+          calculate_bmps(field)
+        end
+
     end
 
     # check if the farm meets baseline or not
@@ -262,10 +267,6 @@ class FarmsController < ApplicationController
             @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
             @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
           end
-        end
-        if field.totals.nil?
-          model_run(field)
-          calculate_bmps(field)
         end
       end
       # animals
