@@ -8,10 +8,13 @@ module BaselineCheck
 		meets = []
 		farm_messages = Hash.new
 		farm_messages[:errors] = []
+		farm_messages[:field_errors] = Hash[farm.fields.map{|f| [f.name, f.does_field_meet_baseline[:errors]]}]
 		farm.fields.each do |field|
-			meets << field.does_field_meet_baseline[:meets_baseline]
-			field_name = field.name.to_sym
-			farm_messages[field_name] = field.does_field_meet_baseline[:errors]
+			if farm_messages[:field_errors][field.name].empty?
+				meets << true
+			else
+				meets << false
+			end
 		end
 		loads = check_loads(farm)
 		if loads[:n_below_baseline] < 0
@@ -77,7 +80,7 @@ module BaselineCheck
 	def does_field_meet_baseline
 		@messages = Hash.new
 		@messages[:meets_baseline] = true
-		@messages[:errors] = []
+		@messages[:errors] = Array.new
 		get_field_type
 		return @messages
 	end	
@@ -153,6 +156,10 @@ module BaselineCheck
 					@messages[:meets_baseline] = false
 					@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
 					checked_setback = true
+					if !checked_bmp
+						soil_conservation_bmp
+						checked_bmp = true
+					end
 				end
 			end
 		else
