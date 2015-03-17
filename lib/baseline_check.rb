@@ -140,8 +140,8 @@ module BaselineCheck
 	end
 
 	def check_if_manure_incorp(manure, incorp, setback)
-		# checked_bmp = false
-		# setback = false
+		checked_bmp = false
+		setback = false
 		if manure.is_incorporated
 			if !setback
 				is_fert_setback(checked_bmp, setback)
@@ -160,6 +160,11 @@ module BaselineCheck
 						@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
 					end
 					incorp = false
+				end
+				puts "***************************************"
+				if !checked_bmp
+					soil_conservation_bmp
+					checked_bmp = true
 				end
 			end
 		end
