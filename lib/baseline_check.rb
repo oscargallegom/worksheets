@@ -237,8 +237,6 @@ module BaselineCheck
 				@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
 				@messages[:meets_baseline] = false
 			else
-				@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
-				@messages[:meets_baseline] = false
 				checked_bmp = false
 				setback = false
 				check_if_fert(checked_bmp, setback)
