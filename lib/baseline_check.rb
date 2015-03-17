@@ -16,18 +16,51 @@ module BaselineCheck
 		loads = check_loads(farm)
 		if loads[:n_below_baseline] < 0
 			farm_messages[:errors] << "Current N Load is greater than Baseline N Load."
-			meets << false
+			farm_messages[:meets_n_baseline] = false
+		else
+			farm_messages[:meets_n_baseline] = true
 		end
 		if loads[:p_below_baseline] < 0
 			farm_messages[:errors] << "Current P Load is greater than Baseline P Load."
-			meets << false
+			farm_messages[:meets_p_baseline] = false
+		else
+			farm_messages[:meets_p_baseline] = true
 		end
 		if loads[:sediment_below_baseline] < 0
 			farm_messages[:errors] << "Current sediment Load is greater than Baseline sediment Load."
-			meets << false
+			farm_messages[:meets_sediment_baseline] = false
+		else
+			farm_messages[:meets_sediment_baseline] = true
 		end
 		farm_messages[:meets_baseline] = !meets.include?(false)
 		return farm_messages
+	end
+
+	def does_farm_meet_n_baseline(farm)
+		baseline = does_farm_meet_baseline(farm)
+		if baseline[:meets_baseline] && baseline[:meets_n_baseline]
+			return true
+		else
+			return false
+		end
+	end
+
+	def does_farm_meet_p_baseline(farm)
+		baseline = does_farm_meet_baseline(farm)
+		if baseline[:meets_baseline] && baseline[:meets_p_baseline]
+			return true
+		else
+			return false
+		end
+	end
+
+	def does_farm_meet_sediment_baseline(farm)
+		baseline = does_farm_meet_baseline(farm)
+		if baseline[:meets_baseline] && baseline[:meets_sediment_baseline]
+			return true
+		else
+			return false
+		end
 	end
 
 
@@ -161,7 +194,6 @@ module BaselineCheck
 					end
 					incorp = false
 				end
-				puts "***************************************"
 				if !checked_bmp
 					soil_conservation_bmp
 					checked_bmp = true
