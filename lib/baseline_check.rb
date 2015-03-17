@@ -81,6 +81,9 @@ module BaselineCheck
 		@messages = Hash.new
 		@messages[:meets_baseline] = true
 		@messages[:errors] = Array.new
+		@checked_bmp = false
+		@checked_setback = false
+		@checked_hel = false
 		get_field_type
 		return @messages
 	end	
@@ -126,49 +129,52 @@ module BaselineCheck
 		self.field_type_id == 2
 	end
 
-	def check_if_fert(checked_bmp, checked_setback)
-		@incorp = true
-		self.strips.each do |strip|
+	def check_if_fert
+		current_strips = self.strips.where(:is_future => false)
+		current_strips.each do |strip|
             strip.crop_rotations.each do |crop_rotation|
             	crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-            		if @incorp
-            			@incorp, @checked_setback = check_if_manure_incorp(manure_fertilizer_application, @incorp, @checked_setback)
-            		end
+            		check_if_manure_incorp(manure_fertilizer_application)
             	end
             	if !crop_rotation.commercial_fertilizer_applications.empty?
             		if !@checked_bmp
-            			@checked_bmp, @checked_setback = is_fert_setback(@checked_bmp, @checked_setback)
+            			is_fert_setback
             		end
-            	end
+            	else
+            		if !@checked_bmp
+            			soil_conservation_bmp
+						@checked_bmp = true
+					end
+				end
             end
         end
 	end
 
-	def is_fert_setback(checked_bmp, checked_setback)
+	def is_fert_setback
+		puts "&&&&&&&& am i getting here?"
 		if self.is_pasture_adjacent_to_stream?
 			if self.is_fertilizer_application_setback
-				if !checked_bmp
+				if !@checked_bmp
 					soil_conservation_bmp
-					checked_bmp = true
+					@checked_bmp = true
 				end
 			else
-				if !checked_setback
+				if !@checked_setback
 					@messages[:meets_baseline] = false
 					@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
-					checked_setback = true
-					if !checked_bmp
+					@checked_setback = true
+					if !@checked_bmp
 						soil_conservation_bmp
-						checked_bmp = true
+						@checked_bmp = true
 					end
 				end
 			end
 		else
-			if !checked_bmp
+			if !@checked_bmp
 				soil_conservation_bmp
-				checked_bmp = true
+				@checked_bmp = true
 			end
 		end
-		return [checked_bmp, checked_setback]
 	end
 
 	def check_this_for_nil(*args)
@@ -179,35 +185,36 @@ module BaselineCheck
 		self.send :check_this_for_nil, :hel_soils
 	end
 
-	def check_if_manure_incorp(manure, incorp, setback)
-		checked_bmp = false
-		setback = false
+	def check_if_manure_incorp(manure)
 		if manure.is_incorporated
-			if !setback
-				is_fert_setback(checked_bmp, setback)
-				setback = true
+			if !@checked_setback
+				is_fert_setback
+				@checked_setback = true
 			end
 		else
 			if self.hel_soils?
-				if !setback
-					is_fert_setback(checked_bmp, setback)
-					setback = true
+				if !@checked_setback
+					is_fert_setback
+					@checked_setback = true
 				end
 			else
-				if incorp
+				if !@checked_hel
 					if !self.is_field_pasture?
 						@messages[:meets_baseline] = false
 						@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
 					end
-					incorp = false
+					@checked_hel = true
 				end
-				if !checked_bmp
+				if !@checked_bmp
 					soil_conservation_bmp
-					checked_bmp = true
+					@checked_bmp = true
 				end
 			end
+			if !@checked_setback
+					is_fert_setback
+					@checked_setback = true
+			end
 		end
-		return incorp, setback
 	end
 
 	def adj_to_stream(state, field_type)
@@ -219,15 +226,22 @@ module BaselineCheck
 					grass_or_forest_buffer
 				end
 			else
-				is_streambank_fencing(state)
+				if field_type == :pasture
+					if !self.is_streambank_fencing_in_place
+						@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+						@messages[:meets_baseline] = false
+					end
+				else 
+					is_streambank_fencing(state)
+				end
 			end
 		else
 			if state == :virginia
 				#@messages[:meets_baseline] = true
 			else
-				checked_bmp = false
-				checked_setback = false
-				check_if_fert(checked_bmp, checked_setback)
+				@checked_bmp = false
+				@checked_setback = false
+				check_if_fert
 			end
 		end
 	end
@@ -244,9 +258,7 @@ module BaselineCheck
 				@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
 				@messages[:meets_baseline] = false
 			else
-				checked_bmp = false
-				setback = false
-				check_if_fert(checked_bmp, setback)
+				check_if_fert
 			end
 		end
 	end
