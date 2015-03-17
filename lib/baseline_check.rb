@@ -89,14 +89,16 @@ module BaselineCheck
 	end	
 
 	def get_field_type
-		if is_crop_or_hay_or_pasture?
-			if is_field_pasture?
-				virginia_or_maryland(:pasture)
+		if self.field_type_id
+			if is_crop_or_hay_or_pasture?
+				if is_field_pasture?
+					virginia_or_maryland(:pasture)
+				else
+					virginia_or_maryland(:crop_or_hay)
+				end
 			else
-				virginia_or_maryland(:crop_or_hay)
+				#@messages[:meets_baseline] = true
 			end
-		else
-			#@messages[:meets_baseline] = true
 		end
 	end
 

@@ -12,7 +12,8 @@ module CalculateLoads
 	    @arrTMDLs = Array.new
 
 	    # sort fields 'naturally'
-	    @fields = Naturalsorter::Sorter.sort_by_method(farm.fields, :name, true)
+	    @farm_fields = farm.fields.where(:field_type_id => nil)
+	    @fields = Naturalsorter::Sorter.sort_by_method(@farm_fields, :name, true)
 
 	    @watersheds = (@fields.collect {|x| x.watershed_segment}).uniq
 	    @p_factors = ((@watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
