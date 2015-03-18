@@ -396,7 +396,7 @@
         <% elsif @farm.future_s_load == 0 %>
         0
         <% else %>
-        <%= ((@farm.site_state_id != 47 && @farm.sediment_baseline && (@farm.baseline_s_load > @farm.current_s_load)) || (@farm.site_state_id == 47 && @farm.sediment_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 0, delimiter: ',') : 0 %><% end %>
+        <%= ((@farm.site_state_id != 47 && @farm.sediment_baseline == 'Yes' && (@farm.baseline_s_load > @farm.current_s_load)) || (@farm.site_state_id == 47 && @farm.sediment_baseline == 'Yes')) ? number_with_precision(@farm.credits[:total_sediment], :precision => 0, delimiter: ',') : 0 %><% end %>
       </li>
          <li><!--
         <h2 class='sectionHeading'>Land Use Conversion</h2>-->
