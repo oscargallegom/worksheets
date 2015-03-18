@@ -127,20 +127,23 @@
       <li>
         <div class='extrawide'>Farm meets N baseline:</div>
         <%= @farm.n_baseline %>
+
+      <% if @farm.n_baseline == 'No' %> &nbsp&nbsp<a href="#" id="trigger">(Why?)</a><% end %>
+
       </li>
       <li>
         <div class='extrawide'>Baseline N load fields (EOS):</div>
-        <%= number_with_precision(@baseline_n_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.baseline_n_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Current N load fields (EOS):</div>
-        <%= number_with_precision(@current_n_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_n_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
-      <li>
+            <li>
         <div class='extrawide'>Current N load for Animal HQ (EOS):</div>
-        <%= number_with_precision(@current_n_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_n_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
 
@@ -148,10 +151,15 @@
       <li>
         <div class='extrawide'>Farm meets P baseline:</div>
         <%= @farm.p_baseline %>
+             
+
+             <% if @farm.p_baseline == 'No' %>
+        &nbsp&nbsp<a href="#" id="ptrigger">(Why?)</a><% end %>
+
       </li>
       <li>
         <div class='extrawide'>Baseline P load fields (EOS):</div>
-        <%= number_with_precision(@baseline_p_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.baseline_p_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
@@ -161,87 +169,37 @@
       </li>
       <li>
         <div class='extrawide'>Current P load for Animal HQ (EOS):</div>
-        <%= number_with_precision(@current_p_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_p_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
-
       <li><h2 class='sectionHeading'>Sediment Load Information</h2></li>
       <li>
         <div class='extrawide'>Farm meets sediment baseline:</div>
         <%= @farm.sediment_baseline %>
+
+             <% if @farm.sediment_baseline == 'No' %>
+        &nbsp&nbsp<a href="#" id="strigger">(Why?)</a><% end %>
       </li>
       <li>
         <div class='extrawide'>Baseline sediment load fields (EOS):</div>
-        <%= number_with_precision(@baseline_sediment_load_fields, :precision => 2, delimiter: ',') %>
-        t/yr
+        <%= number_with_precision(@farm.baseline_s_load*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<%= number_with_precision(@farm.baseline_s_load, :precision => 2, delimiter: ',') %>
+        t/yr)
       </li>
       <li>
         <div class='extrawide'>Current sediment load fields (EOS):</div>
-        <%= number_with_precision(@current_sediment_load_fields, :precision => 2, delimiter: ',') %>
-        t/yr
+        <%= number_with_precision(@farm.current_s_load*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<%= number_with_precision(@farm.current_s_load, :precision => 2, delimiter: ',') %>
+        t/yr)
       </li>
       <li>
-        <div class='extrawide'>Current sediment load for Animal HQ (EOS):</div>
-        <%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
-        t/yr
-      </li>
+        <div class='extrawide'>Current load for Animal HQ (EOS):</div>
+        <%= number_with_precision(@farm.current_s_load_animals*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<% if @current_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@farm.current_s_load_animals, :precision => 2, delimiter: ',') %>
+        t/yr<% end %>)</li>
     </ol>
   </fieldset>
 
-  <fieldset>
-    <ol>
-      <li><h2 class='sectionHeading'>&nbsp;</h2></li>
-      <li>
-  
-      </li>
-            <li>
- 
-      </li>
-      <li>
-
-      </li>
-      <li>
-
-      </li>
-      <li>
- 
-      </li>
-
-      <li><h2 class='sectionHeading'>&nbsp;</h2></li>
-      <li>
-
-      </li>
-                  <li>
-
-      </li>
-      <li>
-
-
-      </li>
-      <li>
-
-
-      </li>
-      <li>
-
-      </li>
-      <li><h2 class='sectionHeading'>&nbsp;</h2></li>
-      <li>
-
-      </li>
-
-      </li>
-      <li>
-
-      </li>
-      <li>
-
-      </li>
-      <li>
-
-      </li>
-    </ol>
-  </fieldset>
 
 </div>
 <div style="clear: both"></div>
@@ -900,3 +858,91 @@ Under construction
 <% end %>
 
 <!--<a class="button" href="<%= review_farm_path(@farm, {:format => :pdf}) %>">Download PDF copy</a> -->
+
+    <div id="pop-up">
+      <h3>Farm Does Not Meet N Baseline</h3>
+        <% @farm.disp_field_errors_n.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+    </div>
+
+    <div id="p-pop-up">
+      <h3>Farm Does Not Meet P Baseline</h3>
+      <p>
+        <% @farm.disp_field_errors_p.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="s-pop-up">
+      <h3>Farm Does Not Meet S Baseline</h3>
+      <p>
+        <% @farm.disp_field_errors_s.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+    <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#trigger').hover(function(e) {
+    $('div#pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#pop-up').hide();
+  });
+
+  $('a#trigger').mousemove(function(e) {
+    $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
+
+        <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#ptrigger').hover(function(e) {
+    $('div#p-pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#p-pop-up').hide();
+  });
+
+  $('a#ptrigger').mousemove(function(e) {
+    $("div#p-pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
+
+
+        <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#strigger').hover(function(e) {
+    $('div#s-pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#s-pop-up').hide();
+  });
+
+  $('a#strigger').mousemove(function(e) {
+    $("div#s-pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>

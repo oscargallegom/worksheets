@@ -123,17 +123,17 @@
       </li>
       <li>
         <div class='extrawide'>Current N load fields (EOS):</div>
-        <%= number_with_precision(@current_n_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_n_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Future N load fields (EOS):</div>
-        <%= number_with_precision(@future_n_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.future_n_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Current N load for Animal HQ (EOS):</div>
-        <%= number_with_precision(@current_n_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_n_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
 
@@ -154,17 +154,17 @@
       </li>
       <li>
         <div class='extrawide'>Current P load fields (EOS):</div>
-        <%= number_with_precision(@current_p_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_p_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Future P load fields (EOS):</div>
-        <%= number_with_precision(@future_p_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.future_p_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Current P load for Animal HQ (EOS):</div>
-        <%= number_with_precision(@current_p_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_p_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
 
@@ -173,7 +173,7 @@
         <div class='extrawide'>Farm meets sediment baseline:</div>
         <%= @farm.sediment_baseline %>
 
-             <% if (!@is_farm_meets_baseline) || (@current_sediment_load_fields > @baseline_sediment_load_fields) %> 
+             <% if @farm.sediment_baseline == 'No' %>
         &nbsp&nbsp<a href="#" id="strigger">(Why?)</a><% end %>
       </li>
       <li>
@@ -184,20 +184,20 @@
       </li>
       <li>
         <div class='extrawide'>Current sediment load fields (EOS):</div>
-        <%= number_with_precision(@current_sediment_load_fields*2000, :precision => 2, delimiter: ',') %>
-        lbs/yr (<%= number_with_precision(@current_sediment_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_s_load*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<%= number_with_precision(@farm.current_s_load, :precision => 2, delimiter: ',') %>
         t/yr)
       </li>
       <li>
         <div class='extrawide'>Future sediment load fields (EOS):</div>
-        <%= number_with_precision(@future_sediment_load_fields*2000, :precision => 2, delimiter: ',') %>
-        lbs/yr (<%= number_with_precision(@future_sediment_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.future_s_load*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<%= number_with_precision(@farm.future_s_load, :precision => 2, delimiter: ',') %>
         t/yr)
       </li>
       <li>
         <div class='extrawide'>Current load for Animal HQ (EOS):</div>
-        <%= number_with_precision(@current_sediment_load_animals*2000, :precision => 2, delimiter: ',') %>
-        lbs/yr (<% if @current_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@current_sediment_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.current_s_load_animals*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<% if @current_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@farm.current_s_load_animals, :precision => 2, delimiter: ',') %>
         t/yr<% end %>)</li>
           <li>
         <h2 class='sectionHeading'>BMP Information</h2></li>
@@ -289,7 +289,7 @@
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
       <li>
         <div class='extrawide'>Future N load for animal HQ (EOS):</div>
-        <%= number_with_precision(@future_n_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.future_n_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
             <li>
@@ -298,39 +298,35 @@
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
-        <% if @future_n_load_fields == 0 %>
+        <% if @farm.future_n_load == 0 %>
         0.00
         <% else %>
-        <%= number_with_precision((@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals), :precision => 2, delimiter: ',') %>
+        <%= number_with_precision((@farm.current_n_load + @farm.current_n_load_animals)-(@farm.future_n_load + @farm.future_n_load_animals), :precision => 2, delimiter: ',') %>
         <% end %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
-        <% if @future_n_load_fields == 0 %>
+        <% if @farm.future_n_load == 0 %>
         0.00
         <% else %>
-        <% if @farm.site_state_id != 47 %>
-        <%= ((@is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields))) ? number_with_precision([0, (@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
-        <% else %>
-        <%= @is_farm_meets_baseline ? number_with_precision([0, (@current_n_load_fields + @current_n_load_animals)-(@future_n_load_fields + @future_n_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
-        <% end %><% end %>
+        <%= @farm.eligible_n_reductions.round(2) %><% end %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <% if @future_n_load_fields > @current_n_load_fields %>
+        <% if @farm.future_n_load > @farm.current_n_load %>
         0
-        <% elsif @future_n_load_fields == 0 %>
+        <% elsif @farm.future_n_load == 0 %>
         0
         <% else %>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_n], :precision => 0, delimiter: ',') : 0.00 %><% end %>
+        <%= ((@farm.site_state_id != 47 && @farm.n_baseline == 'Yes' && (@farm.baseline_n_load > @farm.current_n_load)) || (@farm.site_state_id == 47 && @farm.n_baseline == 'Yes')) ? number_with_precision(@farm.credits[:total_n], :precision => 0, delimiter: ',') : 0.00 %><% end %>
       </li>
 
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
       <li>
         <div class='extrawide'>Future P load for animal HQ:</div>
-        <%= number_with_precision(@future_p_load_animals, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.future_p_load_animals, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
                   <li>
@@ -339,39 +335,35 @@
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
-        <% if @future_p_load_fields == 0 %>
+        <% if @farm.future_p_load == 0 %>
         0.00
         <% else %>
-        <%= number_with_precision((@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals), :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(((@farm.current_p_load + @farm.current_p_load_animals)-(@farm.future_p_load + @farm.future_p_load_animals)), :precision => 2, delimiter: ',') %>
         <% end %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
-        <% if @future_p_load_fields == 0 %>
+        <% if @farm.future_p_load == 0 %>
         0.00
         <% else %>
-        <% if @farm.site_state_id != 47 %>
-        <%= ((@is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields))) ? number_with_precision([0, (@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
-        <% else %>
-        <%= @is_farm_meets_baseline ? number_with_precision([0, (@current_p_load_fields + @current_p_load_animals)-(@future_p_load_fields + @future_p_load_animals)].max, :precision => 2, delimiter: ',') : 0.00 %>
-        <% end %><% end %>
+        <%= @farm.eligible_p_reductions.round(2) %><% end %>
         lbs/yr
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <% if @future_p_load_fields > @current_p_load_fields %>
+        <% if @farm.future_p_load > @farm.current_p_load %>
         0
-        <% elsif @future_p_load_fields == 0 %>
+        <% elsif @farm.future_p_load == 0 %>
         0
         <% else %>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_p], :precision => 0, delimiter: ',') : 0.00 %><% end %>
+        <%= ((@farm.site_state_id != 47 && @farm.p_baseline == 'Yes' && (@farm.baseline_p_load > @farm.current_p_load)) || (@farm.site_state_id == 47 && @farm.p_baseline == 'Yes')) ? number_with_precision(@farm.credits[:total_p], :precision => 0, delimiter: ',') : 0.00 %><% end %>
       </li>
       <li><h2 class='sectionHeading'>&nbsp;</h2></li>
       <li>
         <div class='extrawide'>Future sediment load for animal HQ (EOS):</div>
-        <%= number_with_precision(@future_sediment_load_animals*2000, :precision => 2, delimiter: ',') %>
-        lbs/yr (<% if @future_sediment_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@future_sediment_load_animals, :precision => 2, delimiter: ',') %> 
+        <%= number_with_precision(@farm.future_s_load_animals*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<% if @farm.future_s_load_animals == 0 %>0.00 t/yr<% else %><%= number_with_precision(@farm.future_s_load_animals, :precision => 2, delimiter: ',') %> 
         t/yr<% end %>)
       </li>
                         <li>
@@ -380,31 +372,31 @@
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
-        <% if @future_sediment_load_fields == 0 %>
+        <% if @farm.future_s_load == 0 %>
         0.00 lbs/yr (0.00 t/yr)
         <% else %>
-         <%= number_with_precision(((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals))*2000, :precision => 2, delimiter: ',') %> lbs/yr (<%= number_with_precision((@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals), :precision => 2, delimiter: ',') %> t/yr)
+         <%= number_with_precision((((@farm.current_s_load + @farm.current_s_load_animals)-(@farm.future_s_load + @farm.future_s_load_animals))*2000), :precision => 2, delimiter: ',') %> lbs/yr (<%= number_with_precision((@farm.current_s_load + @farm.current_s_load_animals)-(@farm.future_s_load + @farm.future_s_load_animals), :precision => 2, delimiter: ',') %> t/yr)
         <% end %>
       </li>
       <li>
         <div class='extrawide'>Eligible reductions:</div>
-        <% if @future_sediment_load_fields == 0 %>
+        <% if @farm.future_s_load == 0 %>
         0.00 lbs/yr (0.00 t/yr)
         <% else %>
         <% if @farm.site_state_id != 47 %>
-        <%= ((@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields))) ? number_with_precision(([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max)*2000.00, :precision => 2, delimiter: ',') : 0.00 %> lbs/yr (<%= ((@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields))) ? number_with_precision(([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max), :precision => 2, delimiter: ',') : 0.00 %> t/yr)
+        <%= (@farm.eligible_s_reductions * 2000).round(2) %> lbs/yr (<%= @farm.eligible_s_reductions.round(2) %> t/yr)
         <% else %>
-        <%= @is_farm_meets_baseline ? number_with_precision(([0, (@current_sediment_load_fields + @current_sediment_load_animals)-(@future_sediment_load_fields + @future_sediment_load_animals)].max*2000.00), :precision => 2, delimiter: ',') : 0.00 %> lbs/yr
+        <%= (@farm.eligible_s_reductions * 2000).round(2) %> lbs/yr (<%= @farm.eligible_s_reductions.round(2) %> t/yr)
         <% end %><% end %>
       </li>
       <li>
         <div class='extrawide'>Credits:</div>
-        <% if @future_sediment_load_fields > @current_sediment_load_fields %>
+        <% if @farm.future_s_load > @farm.current_s_load %>
         0
-        <% elsif @future_sediment_load_fields == 0 %>
+        <% elsif @farm.future_s_load == 0 %>
         0
         <% else %>
-        <%= ((@farm.site_state_id != 47 && @is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) || (@farm.site_state_id == 47 && @is_farm_meets_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 0, delimiter: ',') : 0 %><% end %>
+        <%= ((@farm.site_state_id != 47 && @farm.sediment_baseline && (@farm.baseline_s_load > @farm.current_s_load)) || (@farm.site_state_id == 47 && @farm.s_baseline)) ? number_with_precision(@farm.credits[:total_sediment], :precision => 0, delimiter: ',') : 0 %><% end %>
       </li>
          <li><!--
         <h2 class='sectionHeading'>Land Use Conversion</h2>-->
@@ -528,44 +520,44 @@
           <% end %>
         </td>
         <td>
-          N: <%= number_with_precision((field.bmp_calculations[:new_total_n])/(field.acres), :precision => 2, delimiter: ',') %>
+          N: <%= number_with_precision((field.current_n_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision((field.bmp_calculations[:new_total_p])/(field.acres), :precision => 2, delimiter: ',') %>
+          P: <%= number_with_precision((field.current_p_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          S: <%= number_with_precision((field.current_s_load_fields*2000)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
         </td>
         <% if field.other_land_use_conversion_acres_future %>
         <td>
-          N: <%= number_with_precision((field.bmp_calculations[:new_total_n])/(field.acres), :precision => 2, delimiter: ',') %>
+          N: <%= number_with_precision((field.current_n_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision((field.bmp_calculations[:new_total_p])/(field.acres), :precision => 2, delimiter: ',') %>
+          P: <%= number_with_precision((field.current_p_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          S: <%= number_with_precision((field.current_s_load_fields*2000)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
           <% else %>
           <td>
-          N: <%= number_with_precision((field.bmp_calculations[:new_total_n_future])/(field.acres), :precision => 2, delimiter: ',') %>
+          N: <%= number_with_precision((field.future_n_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <%= number_with_precision((field.bmp_calculations[:new_total_p_future])/(field.acres), :precision => 2, delimiter: ',') %>
+          P: <%= number_with_precision((field.future_p_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <%= number_with_precision((field.bmp_calculations[:new_total_sediment_future]*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          S: <%= number_with_precision((field.future_s_load_fields*2000)/(field.acres), :precision => 2, delimiter: ',') %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
           <% end %>
         <td>
-          N: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.bmp_calculations[:new_total_n])/(field.acres) - (field.bmp_calculations[:new_total_n_future])/(field.acres))* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
+          N: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.totals[:new_total_n])/(field.acres) - (field.totals[:new_total_n_future])/(field.acres))* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          P: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.bmp_calculations[:new_total_p])/(field.acres) - (field.bmp_calculations[:new_total_p_future])/(field.acres))* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
+          P: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.totals[:new_total_p])/(field.acres) - (field.totals[:new_total_p_future])/(field.acres))* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
           <br/>
-          S: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision(([0, ((field.bmp_calculations[:new_total_sediment])/(field.acres) - (field.bmp_calculations[:new_total_sediment_future])/(field.acres))* field.watershed_segment.sediment_delivery_factor].max)*2000, :precision => 2, delimiter: ',') %><% end %>
+          S: <% if field.ntt_xml_future.nil? %> 0.00 <% else %><%= number_with_precision(([0, ((field.totals[:new_total_sediment])/(field.acres) - (field.totals[:new_total_sediment_future])/(field.acres))* field.watershed_segment.sediment_delivery_factor].max)*2000, :precision => 2, delimiter: ',') %><% end %>
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
         </td>
         <td><%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete field'), farm_field_path(@farm, field), method: :delete, data: {confirm: 'Are you sure?'} %></td>

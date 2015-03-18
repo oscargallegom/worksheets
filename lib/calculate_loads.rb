@@ -107,14 +107,14 @@ module CalculateLoads
 	      # animals
 	      if (!field.field_type.nil?) && (field.field_type.id == 4)
 	        @current_totals = computeLivestockBmpCalculations(field)
-	        @current_n_load_animals += @current_totals[:current_load_nitrogen]
-	        @current_p_load_animals += @current_totals[:current_load_phosphorus]
-	        @current_sediment_load_animals += @current_totals[:current_load_sediment]
+	        @current_n_load_animals += field.totals[:new_total_n]
+	        @current_p_load_animals += field.totals[:new_total_p]
+	        @current_sediment_load_animals += field.totals[:new_total_sediment]
 	        #future
 	        @future_totals = computeLivestockBmpCalculationsFuture(field)
-	        @future_n_load_animals += @future_totals[:current_load_nitrogen]
-	        @future_p_load_animals += @future_totals[:current_load_phosphorus]
-	        @future_sediment_load_animals += @future_totals[:current_load_sediment]
+	        @future_n_load_animals += field.totals[:new_total_n_future]
+	        @future_p_load_animals += field.totals[:new_total_p_future]
+	        @future_sediment_load_animals += field.totals[:new_total_sediment_future]
 	      end
 
 		end

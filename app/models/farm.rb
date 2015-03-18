@@ -1145,6 +1145,105 @@ def wetland_area_future_fields
     return field_baselines.inject {|a,b| a+b}
   end
 
+  def current_n_load
+    field_currents = self.fields.map {|f| f.current_n_load_fields }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def current_p_load
+    field_currents = self.fields.map {|f| f.current_p_load_fields }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def current_s_load
+    field_currents = self.fields.map {|f| f.current_s_load_fields }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def current_n_load_animals
+    field_currents = self.fields.map {|f| f.current_n_load_animals }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def current_p_load_animals
+    field_currents = self.fields.map {|f| f.current_p_load_animals }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def current_s_load_animals
+    field_currents = self.fields.map {|f| f.current_s_load_animals }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def future_n_load
+    field_futures = self.fields.map {|f| f.future_n_load_fields }
+    return field_futures.inject {|a,b| a+b}
+  end
+
+  def future_p_load
+    field_currents = self.fields.map {|f| f.future_p_load_fields }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def future_s_load
+    field_currents = self.fields.map {|f| f.future_s_load_fields }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def future_n_load_animals
+    field_currents = self.fields.map {|f| f.future_n_load_animals }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def future_p_load_animals
+    field_currents = self.fields.map {|f| f.future_p_load_animals }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def future_s_load_animals
+    field_currents = self.fields.map {|f| f.future_s_load_animals }
+    return field_currents.inject {|a,b| a+b}
+  end
+
+  def eligible_n_reductions
+    if does_farm_meet_n_baseline(self)
+      reduction = (self.current_n_load + self.current_n_load_animals) - (self.future_n_load + self.future_n_load_animals)
+    else
+      reduction = 0
+    end
+    if reduction < 0
+      return 0
+    else
+      return reduction
+    end
+  end
+
+  def eligible_p_reductions
+    if does_farm_meet_p_baseline(self)
+      reduction = (self.current_p_load + self.current_p_load_animals) - (self.future_p_load + self.future_p_load_animals)
+    else
+      reduction = 0
+    end
+    if reduction < 0
+      return 0
+    else
+      return reduction
+    end
+  end
+
+  def eligible_s_reductions
+    if does_farm_meet_sediment_baseline(self)
+      reduction = (self.current_s_load + self.current_s_load_animals) - (self.future_s_load + self.future_s_load_animals)
+    else
+      reduction = 0
+    end
+    if reduction < 0
+      return 0
+    else
+      return reduction
+    end
+  end
+
   def credits
     credits = {}
     credits[:total_p] = 0
@@ -1153,164 +1252,17 @@ def wetland_area_future_fields
 
     fields.each do |field|
 
-      if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
-        @current_totals = {}
-        begin
-          if field.other_land_use_conversion_acres_future
-            @current_totals = computeBmpCalculations(field)
-            calculate_bmps_without_conversion(field)
-            calculate_bmps(field)
-            if @with_conversion[:sediment] > @without_conversion[:sediment]
-              @current_totals[:new_total_sediment_future] = @without_conversion[:sediment]
-            end
-            if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
-              @current_totals[:new_total_n_future] = @without_conversion[:nitrogen]
-            end
-            if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
-              @current_totals[:new_total_p_future] = @without_conversion[:phosphorus]
-            end
-          else
-            @current_totals = computeBmpCalculations(field)
-          end
-        rescue Exception => e
-          @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0}
-        ensure
-          credits[:total_n] += (@current_totals[:new_total_n] - @current_totals[:new_total_n_future])* field.watershed_segment.n_delivery_factor
-          credits[:total_p] += (@current_totals[:new_total_p] - @current_totals[:new_total_p_future])* field.watershed_segment.p_delivery_factor
-          credits[:total_sediment] += (@current_totals[:new_total_sediment] - @current_totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor
-        end
-        
+      if (!field.field_type.nil?)
+          credits[:total_n] += (field.totals[:new_total_n] - field.totals[:new_total_n_future])* field.watershed_segment.n_delivery_factor
+          credits[:total_p] += (field.totals[:new_total_p] - field.totals[:new_total_p_future])* field.watershed_segment.p_delivery_factor
+          credits[:total_sediment] += (field.totals[:new_total_sediment] - field.totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor
+ 
      end
 
-      if (!field.field_type.nil?) && (field.field_type_id == 4) # perform calculations for animal confinement
-        @current_totals = {}
-        @future_totals = {}
-        begin
-          @current_totals = computeLivestockBmpCalculations(field)
-          @future_totals = computeLivestockBmpCalculationsFuture(field)
-        rescue Exception => e
-          @current_totals = {:current_load_nitrogen => 0, :current_load_phosphorus => 0, :current_load_sediment => 0}
-          @future_totals = {:current_load_nitrogen => 0, :current_load_phosphorus => 0, :current_load_sediment => 0}
-        ensure
-        credits[:total_n] += (@current_totals[:current_load_nitrogen]-@future_totals[:current_load_nitrogen])* field.watershed_segment.n_delivery_factor
-        credits[:total_p] += (@current_totals[:current_load_phosphorus]-@future_totals[:current_load_phosphorus])* field.watershed_segment.p_delivery_factor
-        credits[:total_sediment] += (@current_totals[:current_load_sediment]-@future_totals[:current_load_sediment])* field.watershed_segment.sediment_delivery_factor
-        end
-      end
     end
 
     return credits
   end
-
-
-  # def show_meets_baseline
-
-  #   show_errors ||= []
-
-  #   self.fields.each do |field|
-
-  #         if (field.farm.site_state_id == 21)
-
-  #                 #if crop or hay
-  #                 if (field.field_type_id == 1 || field.field_type_id == 3)
-  #                  # check if at least one manure fertilizer incorporated
-  #                  is_manure_fertilizer_incorporated = false
-  #                  field.strips.each do |strip|
-  #                   if strip.is_future == false
-  #                    strip.crop_rotations.each do |crop_rotation|
-  #                      crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-  #                        if (manure_fertilizer_application.is_incorporated)
-  #                          # this is actually valid
-  #                          is_manure_fertilizer_incorporated = true
-  #                        end
-  #                      end
-  #                    end
-  #                  end
-  #                  end
-
-  #                  if is_manure_fertilizer_incorporated == false
-  #                   z = 0
-  #                     field.strips.each do |strip|
-  #                       strip.crop_rotations.each do |crop_rotation|
-  #                         if strip.is_future == false 
-  #                           while z == 0
-  #                           if crop_rotation.manure_fertilizer_applications.any?
-  #                             if [nil, false].include? field.hel_soils
-  #                               show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
-  #                               z = 1
-  #                             end
-  #                           end
-  #                           z = 2
-  #                         end
-  #                         end
-  #                       end
-  #                     end
-  #                 end
-  #               end
-
-  #                 # if field is pasture
-  #                 if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-  #                   show_errors << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
-  #                 end
-  #                 # if crop or pasture or hay
-  #                 if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
-  #                   is_commercial_or_manure_fertilizer = false
-  #                   field.strips.each do |strip|
-  #                     strip.crop_rotations.each do |crop_rotation|
-  #                       if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
-  #                         is_commercial_or_manure_fertilizer = true
-  #                       end
-  #                     end
-  #                   end
-  #                   if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
-  #                     show_errors << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
-  #                   end
-  #                   # also soil conservation BMP needs to be checked
-  #                   is_soil_conservation = false
-  #                   field.bmps.each do |bmp|
-  #                     if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-  #                       is_soil_conservation = true
-  #                     end
-  #                   end
-  #                   if (!is_soil_conservation)
-  #                     show_errors << "Field #{field.name}: Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab."
-  #                   end
-  #                 end
-
-  #                 # does the field meet baseline - only for Virginia
-  #               elsif (field.farm.site_state_id == 47)
-  #                 # if field is pasture
-  #                 if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-  #                   show_errors << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
-  #                 end
-  #                 # if crop or hay
-  #                 if ((field.field_type_id == 1 || field.field_type_id == 3) && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer))
-  #                   show_errors << "According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place."
-  #                 end
-
-  #               end
-
-  #               #animals
-  #               # does the field meet baseline - only for Maryland
-  #               if (field.farm.site_state_id == 21)
-  #                 if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system || field.is_poultry_mortality_composting))
-  #                   return "Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule."
-  #                 end
-  #                 if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
-  #                   return "Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place."
-  #                 end
-  #                 # does the field meet baseline - only for Virginia
-  #               elsif (field.farm.site_state_id == 47)
-  #                 if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
-  #                   return "Per Virginia Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland's Nutrient Management Regulations and CAFO rule."
-  #                 end
-  #               end
-  #             end
-
-
-  #   return show_errors
-
-  # end
 
   def n_baseline
       if does_farm_meet_n_baseline(self)

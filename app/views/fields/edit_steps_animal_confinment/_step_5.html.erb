@@ -23,15 +23,15 @@
           <ol>
             <li><h2 class='sectionHeading'>Current Load (EOS):</h2></li>
             <li><span class='wide'>Nitrogen:</span>
-              <%= number_with_precision(@current_totals[:current_load_nitrogen], :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@field.totals[:new_total_n], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
             <li><span class='wide'>Phosphorus:</span>
-              <%= number_with_precision(@current_totals[:current_load_phosphorus], :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@field.totals[:new_total_p], :precision => 2, delimiter: ',') %>
               lbs/yr
             </li>
             <li><span class='wide'>Sediment:</span>
-              <%= number_with_precision(@current_totals[:current_load_sediment], :precision => 2, delimiter: ',') %>
+              <%= number_with_precision(@field.totals[:new_total_sediment], :precision => 2, delimiter: ',') %>
               tons/yr
             </li>
           </ol>

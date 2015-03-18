@@ -265,6 +265,150 @@ class Field < ActiveRecord::Base
     end
   end
 
+  def current_n_load_fields
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_n]
+      end
+    else
+      return 0
+    end
+  end
+
+  def current_n_load_animals
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_n]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
+  def current_p_load_fields
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_p]
+      end
+    else
+      return 0
+    end
+  end
+
+  def current_p_load_animals
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_p]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
+  def current_s_load_fields
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_sediment]
+      end
+    else
+      return 0
+    end
+  end
+
+  def current_s_load_animals
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_sediment]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
+    def future_n_load_fields
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_n_future]
+      end
+    else
+      return 0
+    end
+  end
+
+  def future_n_load_animals
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_n_future]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
+  def future_p_load_fields
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_p_future]
+      end
+    else
+      return 0
+    end
+  end
+
+  def future_p_load_animals
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_p_future]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
+  def future_s_load_fields
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_sediment_future]
+      end
+    else
+      return 0
+    end
+  end
+
+  def future_s_load_animals
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_sediment_future]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
 
   # the user can override the acres retrieved from the map
   def acres
@@ -289,7 +433,7 @@ class Field < ActiveRecord::Base
         elsif (field_type_id == 4) # animal confinment
           @bmp_calculations_animal_confinment = computeLivestockBmpCalculations(self)
           @bmp_calculations_animal_confinment_future = computeLivestockBmpCalculationsFuture(self)
-          @bmp_calculations = {:new_total_n => @bmp_calculations_animal_confinment[:current_load_nitrogen], :new_total_p => @bmp_calculations_animal_confinment[:current_load_phosphorus], :new_total_sediment => @bmp_calculations_animal_confinment[:current_load_sediment], :new_total_n_future => @bmp_calculations_animal_confinment_future[:current_load_nitrogen], :new_total_p_future => @bmp_calculations_animal_confinment_future[:current_load_phosphorus], :new_total_sediment_future => @bmp_calculations_animal_confinment_future[:current_load_sediment], :error_message => ''}
+          @bmp_calculations = {:new_total_n => @bmp_calculations_animal_confinment[:new_total_n], :new_total_p => @bmp_calculations_animal_confinment[:new_total_p], :new_total_sediment => @bmp_calculations_animal_confinment[:new_total_sediment], :new_total_n_future => @bmp_calculations_animal_confinment_future[:new_total_n_future], :new_total_p_future => @bmp_calculations_animal_confinment_future[:new_total_p_future], :new_total_sediment_future => @bmp_calculations_animal_confinment_future[:new_total_sediment_future], :error_message => ''}
         else
           @bmp_calculations = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0, :new_total_n_future => 0, :new_total_p_future => 0, :new_total_sediment_future => 0, :error_message => ''}
         end

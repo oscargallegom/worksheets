@@ -245,7 +245,7 @@ module BaselineCheck
 				@checked_setback = true
 			end
 		else
-			if self.hel_soils?
+			if self.hel_soils
 				if !@checked_setback
 					is_fert_setback
 					@checked_setback = true
