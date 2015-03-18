@@ -180,6 +180,14 @@ class Field < ActiveRecord::Base
     end
     end
 
+    def stream
+      if self.is_pasture_adjacent_to_stream?
+        return "Yes"
+      else
+        return "No"
+      end
+    end
+
   def does_field_meet_baseline
     @messages = Hash.new
     @messages[:meets_baseline] = true
