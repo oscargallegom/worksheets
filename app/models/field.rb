@@ -2,6 +2,8 @@ class Field < ActiveRecord::Base
   #TODO: just a test for now
   include Ntt
   include BmpCalculations
+  include BaselineCheck
+
 
   before_save :update_ntt_xml_fields
 
@@ -177,6 +179,19 @@ class Field < ActiveRecord::Base
       end
     end
     end
+
+  def does_field_meet_baseline
+    @messages = Hash.new
+    @messages[:meets_baseline] = true
+    @messages[:errors] = Array.new
+    @checked_bmp = false
+    @checked_setback = false
+    @checked_hel = false
+    if self.field_type_id
+      get_field_type
+    end
+    return @messages
+  end 
 
   # the user can override the acres retrieved from the map
   def acres

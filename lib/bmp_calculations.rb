@@ -1785,105 +1785,105 @@ def computeBmpCalculationsWithoutConversion(field)
 
 
   # does the farm meet baseline
-  def is_farm_meets_baseline(farm)
+  # def is_farm_meets_baseline(farm)
 
-    is_meet_baseline =true
+  #   is_meet_baseline =true
 
-    farm.fields.each do |field|
+  #   farm.fields.each do |field|
 
-      # does the field meet baseline - only for Maryland
-      if (field.farm.site_state_id == 21)
+  #     # does the field meet baseline - only for Maryland
+  #     if (field.farm.site_state_id == 21)
 
 
-        #if crop or hay
-        if (field.field_type_id == 1 || field.field_type_id == 3)
-         # check if at least one manure fertilizer incorporated
-         is_manure_fertilizer_incorporated = false
-          field.strips.each do |strip|
-            strip.crop_rotations.each do |crop_rotation|
-              crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-                if (manure_fertilizer_application.is_incorporated)
-                 # this is actually valid
-                 is_manure_fertilizer_incorporated = true
-                end
-              end
-            end
-          end
+  #       #if crop or hay
+  #       if (field.field_type_id == 1 || field.field_type_id == 3)
+  #        # check if at least one manure fertilizer incorporated
+  #        is_manure_fertilizer_incorporated = false
+  #         field.strips.each do |strip|
+  #           strip.crop_rotations.each do |crop_rotation|
+  #             crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+  #               if (manure_fertilizer_application.is_incorporated)
+  #                # this is actually valid
+  #                is_manure_fertilizer_incorporated = true
+  #               end
+  #             end
+  #           end
+  #         end
 
-          if is_manure_fertilizer_incorporated == false
-            field.strips.each do |strip|
-              strip.crop_rotations.each do |crop_rotation|
-                if crop_rotation.manure_fertilizer_applications.any?
-                  if field.hel_soils == false
-                    return false
-                  end
-                end
-              end
-            end
-          end
-        end
+  #         if is_manure_fertilizer_incorporated == false
+  #           field.strips.each do |strip|
+  #             strip.crop_rotations.each do |crop_rotation|
+  #               if crop_rotation.manure_fertilizer_applications.any?
+  #                 if field.hel_soils == false
+  #                   return false
+  #                 end
+  #               end
+  #             end
+  #           end
+  #         end
+  #       end
 
-        # if field is pasture
-        if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-          return false
-        end
+  #       # if field is pasture
+  #       if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
+  #         return false
+  #       end
 
-        # if crop or pasture or hay
-        if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
-          is_commercial_or_manure_fertilizer = false
-          field.strips.each do |strip|
-            strip.crop_rotations.each do |crop_rotation|
-              if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
-                is_commercial_or_manure_fertilizer = true
-              end
-            end
-          end
-          if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
-            return false
-          end
-          # also soil conservation BMP needs to be checked
-          is_soil_conservation = false
-          field.bmps.each do |bmp|
-            if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-              is_soil_conservation = true
-            end
-          end
-          if (!is_soil_conservation)
-            return false
-          end
-        end
+  #       # if crop or pasture or hay
+  #       if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
+  #         is_commercial_or_manure_fertilizer = false
+  #         field.strips.each do |strip|
+  #           strip.crop_rotations.each do |crop_rotation|
+  #             if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
+  #               is_commercial_or_manure_fertilizer = true
+  #             end
+  #           end
+  #         end
+  #         if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
+  #           return false
+  #         end
+  #         # also soil conservation BMP needs to be checked
+  #         is_soil_conservation = false
+  #         field.bmps.each do |bmp|
+  #           if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
+  #             is_soil_conservation = true
+  #           end
+  #         end
+  #         if (!is_soil_conservation)
+  #           return false
+  #         end
+  #       end
 
-        # does the field meet baseline - only for Virginia
-      elsif (field.farm.site_state_id == 47)
-        # if field is pasture
-        if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-          return false
-        end
-        # if crop or hay
-        if ((field.field_type_id == 1 || field.field_type_id == 3) && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer))
-          return false
-        end
+  #       # does the field meet baseline - only for Virginia
+  #     elsif (field.farm.site_state_id == 47)
+  #       # if field is pasture
+  #       if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
+  #         return false
+  #       end
+  #       # if crop or hay
+  #       if ((field.field_type_id == 1 || field.field_type_id == 3) && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer))
+  #         return false
+  #       end
 
-      end
+  #     end
 
-      #animals
-      # does the field meet baseline - only for Maryland
-      if (field.farm.site_state_id == 21)
-        if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system || field.is_poultry_mortality_composting))
-          return false
-        end
-        if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
-          return false
-        end
-        # does the field meet baseline - only for Virginia
-      elsif (field.farm.site_state_id == 47)
-        if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
-          return false
-        end
-      end
-    end
-    return is_meet_baseline
-  end
+  #     #animals
+  #     # does the field meet baseline - only for Maryland
+  #     if (field.farm.site_state_id == 21)
+  #       if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system || field.is_poultry_mortality_composting))
+  #         return false
+  #       end
+  #       if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
+  #         return false
+  #       end
+  #       # does the field meet baseline - only for Virginia
+  #     elsif (field.farm.site_state_id == 47)
+  #       if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
+  #         return false
+  #       end
+  #     end
+  #   end
+  #   return is_meet_baseline
+  # end
 
 
 

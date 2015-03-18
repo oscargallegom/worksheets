@@ -3,6 +3,7 @@ require 'debugger'
 class Farm < ActiveRecord::Base
   include BmpCalculations
   include ModelRun
+  include BaselineCheck
 
   belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
   #belongs_to :site_state, :class_name => 'State', :foreign_key => 'site_state_id'
@@ -40,6 +41,52 @@ class Farm < ActiveRecord::Base
   # is the selected state Maryland
   def is_maryland?
     self.site_state_id == 21
+  end
+
+
+  def disp_field_errors_n
+    err = []
+    farm_messages = does_farm_meet_baseline(self)
+    if !farm_messages[:meets_n_baseline]
+      err << farm_messages[:n_errors]
+    end
+    self.fields.each do |field|
+      field.does_field_meet_baseline[:errors].each do |error|
+        err << "Field #{field.name}: #{error}"
+      end
+    end
+
+    return err.flatten
+  end
+
+  def disp_field_errors_p
+    err = []
+    farm_messages = does_farm_meet_baseline(self)
+    if !farm_messages[:meets_p_baseline]
+      err << farm_messages[:p_errors]
+    end
+    self.fields.each do |field|
+      field.does_field_meet_baseline[:errors].each do |error|
+        err << "Field #{field.name}: #{error}"
+      end
+    end
+
+    return err.flatten
+  end
+
+    def disp_field_errors_s
+    err = []
+    farm_messages = does_farm_meet_baseline(self)
+    if !farm_messages[:meets_sediment_baseline]
+      err << farm_messages[:s_errors]
+    end
+    self.fields.each do |field|
+      field.does_field_meet_baseline[:errors].each do |error|
+        err << "Field #{field.name}: #{error}"
+      end
+    end
+
+    return err.flatten
   end
 
   # PCL code
@@ -1141,115 +1188,138 @@ def wetland_area_future_fields
   end
 
 
-  def show_meets_baseline
+  # def show_meets_baseline
 
-    show_errors ||= []
+  #   show_errors ||= []
 
-    self.fields.each do |field|
+  #   self.fields.each do |field|
 
-          if (field.farm.site_state_id == 21)
+  #         if (field.farm.site_state_id == 21)
 
-                  #if crop or hay
-                  if (field.field_type_id == 1 || field.field_type_id == 3)
-                   # check if at least one manure fertilizer incorporated
-                   is_manure_fertilizer_incorporated = false
-                   field.strips.each do |strip|
-                    if strip.is_future == false
-                     strip.crop_rotations.each do |crop_rotation|
-                       crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-                         if (manure_fertilizer_application.is_incorporated)
-                           # this is actually valid
-                           is_manure_fertilizer_incorporated = true
-                         end
-                       end
-                     end
-                   end
-                   end
+  #                 #if crop or hay
+  #                 if (field.field_type_id == 1 || field.field_type_id == 3)
+  #                  # check if at least one manure fertilizer incorporated
+  #                  is_manure_fertilizer_incorporated = false
+  #                  field.strips.each do |strip|
+  #                   if strip.is_future == false
+  #                    strip.crop_rotations.each do |crop_rotation|
+  #                      crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
+  #                        if (manure_fertilizer_application.is_incorporated)
+  #                          # this is actually valid
+  #                          is_manure_fertilizer_incorporated = true
+  #                        end
+  #                      end
+  #                    end
+  #                  end
+  #                  end
 
-                   if is_manure_fertilizer_incorporated == false
-                    z = 0
-                      field.strips.each do |strip|
-                        strip.crop_rotations.each do |crop_rotation|
-                          if strip.is_future == false 
-                            while z == 0
-                            if crop_rotation.manure_fertilizer_applications.any?
-                              if [nil, false].include? field.hel_soils
-                                show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
-                                z = 1
-                              end
-                            end
-                            z = 2
-                          end
-                          end
-                        end
-                      end
-                  end
-                end
+  #                  if is_manure_fertilizer_incorporated == false
+  #                   z = 0
+  #                     field.strips.each do |strip|
+  #                       strip.crop_rotations.each do |crop_rotation|
+  #                         if strip.is_future == false 
+  #                           while z == 0
+  #                           if crop_rotation.manure_fertilizer_applications.any?
+  #                             if [nil, false].include? field.hel_soils
+  #                               show_errors << "Field #{field.name}: According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+  #                               z = 1
+  #                             end
+  #                           end
+  #                           z = 2
+  #                         end
+  #                         end
+  #                       end
+  #                     end
+  #                 end
+  #               end
 
-                  # if field is pasture
-                  if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-                    show_errors << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
-                  end
-                  # if crop or pasture or hay
-                  if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
-                    is_commercial_or_manure_fertilizer = false
-                    field.strips.each do |strip|
-                      strip.crop_rotations.each do |crop_rotation|
-                        if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
-                          is_commercial_or_manure_fertilizer = true
-                        end
-                      end
-                    end
-                    if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
-                      show_errors << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
-                    end
-                    # also soil conservation BMP needs to be checked
-                    is_soil_conservation = false
-                    field.bmps.each do |bmp|
-                      if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-                        is_soil_conservation = true
-                      end
-                    end
-                    if (!is_soil_conservation)
-                      show_errors << "Field #{field.name}: Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab."
-                    end
-                  end
+  #                 # if field is pasture
+  #                 if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
+  #                   show_errors << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+  #                 end
+  #                 # if crop or pasture or hay
+  #                 if (field.field_type_id == 1 || field.field_type_id == 2 || field.field_type_id == 3)
+  #                   is_commercial_or_manure_fertilizer = false
+  #                   field.strips.each do |strip|
+  #                     strip.crop_rotations.each do |crop_rotation|
+  #                       if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
+  #                         is_commercial_or_manure_fertilizer = true
+  #                       end
+  #                     end
+  #                   end
+  #                   if (is_commercial_or_manure_fertilizer && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer && !field.is_fertilizer_application_setback))
+  #                     show_errors << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
+  #                   end
+  #                   # also soil conservation BMP needs to be checked
+  #                   is_soil_conservation = false
+  #                   field.bmps.each do |bmp|
+  #                     if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
+  #                       is_soil_conservation = true
+  #                     end
+  #                   end
+  #                   if (!is_soil_conservation)
+  #                     show_errors << "Field #{field.name}: Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab."
+  #                   end
+  #                 end
 
-                  # does the field meet baseline - only for Virginia
-                elsif (field.farm.site_state_id == 47)
-                  # if field is pasture
-                  if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
-                    show_errors << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
-                  end
-                  # if crop or hay
-                  if ((field.field_type_id == 1 || field.field_type_id == 3) && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer))
-                    show_errors << "According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place."
-                  end
+  #                 # does the field meet baseline - only for Virginia
+  #               elsif (field.farm.site_state_id == 47)
+  #                 # if field is pasture
+  #                 if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && !field.is_streambank_fencing_in_place)
+  #                   show_errors << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+  #                 end
+  #                 # if crop or hay
+  #                 if ((field.field_type_id == 1 || field.field_type_id == 3) && field.is_pasture_adjacent_to_stream && (!field.is_forest_buffer && !field.is_grass_buffer))
+  #                   show_errors << "According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place."
+  #                 end
 
-                end
+  #               end
 
-                #animals
-                # does the field meet baseline - only for Maryland
-                if (field.farm.site_state_id == 21)
-                  if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system || field.is_poultry_mortality_composting))
-                    return "Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule."
-                  end
-                  if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
-                    return "Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place."
-                  end
-                  # does the field meet baseline - only for Virginia
-                elsif (field.farm.site_state_id == 47)
-                  if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
-                    return "Per Virginia Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland's Nutrient Management Regulations and CAFO rule."
-                  end
-                end
-              end
+  #               #animals
+  #               # does the field meet baseline - only for Maryland
+  #               if (field.farm.site_state_id == 21)
+  #                 if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system || field.is_poultry_mortality_composting))
+  #                   return "Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule."
+  #                 end
+  #                 if (field.field_poultry.empty? && field.is_poultry_heavy_use_pads)
+  #                   return "Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place."
+  #                 end
+  #                 # does the field meet baseline - only for Virginia
+  #               elsif (field.farm.site_state_id == 47)
+  #                 if (field.field_livestocks.empty? && field.is_livestock_animal_waste_management_system) || (field.field_poultry.empty? && (field.is_poultry_animal_waste_management_system))
+  #                   return "Per Virginia Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland's Nutrient Management Regulations and CAFO rule."
+  #                 end
+  #               end
+  #             end
 
 
-    return show_errors
+  #   return show_errors
 
-  end
+  # end
 
+  def n_baseline
+      if does_farm_meet_n_baseline(self)
+        return "Yes"
+      else
+        return "No"
+      end
+    end
+
+    def p_baseline
+      if does_farm_meet_p_baseline(self)
+        return "Yes"
+      else
+        return "No"
+      end
+    end
+
+    def sediment_baseline
+      if does_farm_meet_sediment_baseline(self)
+        return "Yes"
+      else
+        return "No"
+      end
+    end
 
 
 

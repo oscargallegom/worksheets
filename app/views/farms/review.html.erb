@@ -126,8 +126,7 @@
       <li><h2 class='sectionHeading'>N Load Information</h2></li>
       <li>
         <div class='extrawide'>Farm meets N baseline:</div>
-        <%= (@is_farm_meets_baseline && (@baseline_n_load_fields > @current_n_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
-        <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+        <%= @farm.n_baseline %>
       </li>
       <li>
         <div class='extrawide'>Baseline N load fields (EOS):</div>
@@ -153,8 +152,7 @@
       <li><h2 class='sectionHeading'>P Load Information (EOS)</h2></li>
       <li>
         <div class='extrawide'>Farm meets P baseline:</div>
-        <%= (@is_farm_meets_baseline && (@baseline_p_load_fields > @current_p_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
-        <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+        <%= @farm.p_baseline %>
       </li>
       <li>
         <div class='extrawide'>Baseline P load fields (EOS):</div>
@@ -180,8 +178,7 @@
       <li><h2 class='sectionHeading'>Sediment Load Information</h2></li>
       <li>
         <div class='extrawide'>Farm meets sediment baseline:</div>
-        <%= (@is_farm_meets_baseline && (@baseline_sediment_load_fields > @current_sediment_load_fields)) ? 'Yes' : 'No' if @farm.site_state_id != 47 %>
-        <%= (@is_farm_meets_baseline) ? 'Yes' : 'No' if @farm.site_state_id == 47 %>
+        <%= @farm.sediment_baseline %>
       </li>
       <li>
         <div class='extrawide'>Baseline sediment load fields (EOS):</div>

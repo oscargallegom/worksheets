@@ -5,6 +5,8 @@ class FarmsController < ApplicationController
   include BmpCalculations
   include Ntt
   include ModelRun
+  include BaselineCheck
+
 
   load_and_authorize_resource
   helper_method :sort_column, :sort_direction
@@ -143,11 +145,10 @@ class FarmsController < ApplicationController
         @future_sediment_load_animals += @future_totals[:current_load_sediment]
       end
 
-      @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
-
 
 
     end
+
 
 
     @tab = params[:tab]
@@ -165,7 +166,7 @@ class FarmsController < ApplicationController
     add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
 
-@fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
+    @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
 
     @watersheds = (@fields.collect {|x| x.watershed_segment}).uniq
     @p_factors = ((@watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
@@ -181,11 +182,6 @@ class FarmsController < ApplicationController
       @arrMajorBasins << field.watershed_segment.major_basin unless field.watershed_segment.nil? || @arrMajorBasins.include?(field.watershed_segment.major_basin)
       @arrTMDLs << field.tmdl.name if @farm.site_state_id != 47 && !field.tmdl.nil? && !@arrTMDLs.include?(field.tmdl.name)
       @arrTMDLs << field.tmdl_va if @farm.site_state_id == 47 && !@arrTMDLs.include?(field.tmdl_va)
-
-        if field.totals.nil?
-          model_run(field)
-          calculate_bmps(field)
-        end
 
     end
 
@@ -282,7 +278,7 @@ class FarmsController < ApplicationController
         @future_sediment_load_animals += @future_totals[:current_load_sediment]
       end
 
-      @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
+      # @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
 
     end
   end
@@ -406,7 +402,7 @@ class FarmsController < ApplicationController
         @future_sediment_load_animals += @future_totals[:current_load_sediment]
       end
 
-      @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
+      # @is_farm_meets_baseline = is_farm_meets_baseline(@farm)
 
     end
   end

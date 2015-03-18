@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 
 include CalculateLoads
 
@@ -9,7 +9,6 @@ module BaselineCheck
 	def does_farm_meet_baseline(farm)
 		meets = []
 		farm_messages = Hash.new
-		farm_messages[:errors] = []
 		farm_messages[:field_errors] = Hash[farm.fields.map{|f| [f.name, f.does_field_meet_baseline[:errors]]}]
 		farm.fields.each do |field|
 			if farm_messages[:field_errors][field.name].empty?
@@ -20,19 +19,19 @@ module BaselineCheck
 		end
 		loads = check_loads(farm)
 		if loads[:n_below_baseline] < 0
-			farm_messages[:errors] << "Current N Load is greater than Baseline N Load."
+			farm_messages[:n_errors] = 'Current N Load is greater than Baseline N Load.'
 			farm_messages[:meets_n_baseline] = false
 		else
 			farm_messages[:meets_n_baseline] = true
 		end
 		if loads[:p_below_baseline] < 0
-			farm_messages[:errors] << "Current P Load is greater than Baseline P Load."
+			farm_messages[:p_errors] = 'Current P Load is greater than Baseline P Load.'
 			farm_messages[:meets_p_baseline] = false
 		else
 			farm_messages[:meets_p_baseline] = true
 		end
 		if loads[:sediment_below_baseline] < 0
-			farm_messages[:errors] << "Current sediment Load is greater than Baseline sediment Load."
+			farm_messages[:s_errors] = 'Current sediment Load is greater than Baseline sediment Load.'
 			farm_messages[:meets_sediment_baseline] = false
 		else
 			farm_messages[:meets_sediment_baseline] = true
@@ -68,6 +67,19 @@ module BaselineCheck
 		end
 	end
 
+	# def disp_field_errors(farm)
+	# 	err = []
+	# 	farm_messages = does_farm_meet_baseline(farm)
+	# 	err << farm_messages[:errors]
+	# 	farm.fields.each do |field|
+	# 		field.does_field_meet_baseline[:errors].each do |error|
+	# 			err << "Field #{field.name}: #{error}"
+	# 		end
+	# 	end
+
+	# 	return err.flatten
+	# end
+
 
 	def check_loads(farm)
 		loads = Hash.new
@@ -78,19 +90,19 @@ module BaselineCheck
 		return loads
 	end
 
-
-	def does_field_meet_baseline
-		@messages = Hash.new
-		@messages[:meets_baseline] = true
-		@messages[:errors] = Array.new
-		@checked_bmp = false
-		@checked_setback = false
-		@checked_hel = false
-		if self.field_type_id
-			get_field_type
-		end
-		return @messages
-	end	
+	# this got moved to the Field model as a Field class method......because reasons......
+	# def does_field_meet_baseline
+	# 	@messages = Hash.new
+	# 	@messages[:meets_baseline] = true
+	# 	@messages[:errors] = Array.new
+	# 	@checked_bmp = false
+	# 	@checked_setback = false
+	# 	@checked_hel = false
+	# 	if self.field_type_id
+	# 		get_field_type
+	# 	end
+	# 	return @messages
+	# end	
 
 	def get_field_type
 		if self.field_type_id
@@ -100,6 +112,8 @@ module BaselineCheck
 				else
 					virginia_or_maryland(:crop_or_hay)
 				end
+			elsif is_animal?
+				virginia_or_maryland(:animal)
 			else
 				#@messages[:meets_baseline] = true
 			end
@@ -127,8 +141,42 @@ module BaselineCheck
 		adj_to_stream(state, :crop)
 	end
 
+	def animal(state)
+		check_livestocks(state)
+		if state == :maryland
+			check_poultry
+		end
+	end
+
+	def check_livestocks(state)
+		if state == :maryland
+
+			if (!self.field_livestocks.empty? && !self.is_livestock_animal_waste_management_system) || (!self.field_poultry.empty? && (!self.is_poultry_animal_waste_management_system || !self.is_poultry_mortality_composting))
+				@messages[:meets_baseline] = false
+				@messages[:errors] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule.'
+			end
+		else
+			if (!self.field_livestocks.empty? && !self.is_livestock_animal_waste_management_system) || (!self.field_poultry.empty? && (!self.is_poultry_animal_waste_management_system))
+				@messages[:meets_baseline] = false
+				@messages[:errors] << 'Per Virginia Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule.'
+			end
+		end
+
+	end
+
+	def check_poultry
+		if (!self.field_poultry.empty? && !self.is_poultry_heavy_use_pads)
+				@messages[:meets_baseline] = false
+				@messages[:errors] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place'
+		end
+	end
+
 	def is_crop_or_hay_or_pasture?
 		self.field_type_id < 4
+	end
+
+	def is_animal?
+		self.field_type_id == 4
 	end
 
 	def is_field_pasture?
@@ -166,7 +214,7 @@ module BaselineCheck
 			else
 				if !@checked_setback
 					@messages[:meets_baseline] = false
-					@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a 'directed' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams."
+					@messages[:errors] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a \'directed\' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams.'
 					@checked_setback = true
 					if !@checked_bmp
 						soil_conservation_bmp
@@ -206,7 +254,7 @@ module BaselineCheck
 				if !@checked_hel
 					if !self.is_field_pasture?
 						@messages[:meets_baseline] = false
-						@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs)."
+						@messages[:errors] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
 					end
 					@checked_hel = true
 				end
@@ -233,7 +281,7 @@ module BaselineCheck
 			else
 				if field_type == :pasture
 					if !self.is_streambank_fencing_in_place
-						@messages[:errors] << "According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+						@messages[:errors] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
 						@messages[:meets_baseline] = false
 					end
 				else 
@@ -260,7 +308,7 @@ module BaselineCheck
 			end
 		else
 			if state == :virginia
-				@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank."
+				@messages[:errors] << 'According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
 				@messages[:meets_baseline] = false
 			else
 				check_if_fert
@@ -273,7 +321,7 @@ module BaselineCheck
 			#@messages[:meets_baseline] = true
 		else
 			@messages[:meets_baseline] = false
-			@messages[:errors] << "According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place."
+			@messages[:errors] << 'According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place.'
 		end
 	end
 
@@ -292,7 +340,7 @@ module BaselineCheck
         	#@messages[:meets_baseline] = true
         else
         	@messages[:meets_baseline] = false
-			@messages[:errors] << "Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab."
+			@messages[:errors] << 'Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab.'
 		end
 	end
 

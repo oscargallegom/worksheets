@@ -105,150 +105,14 @@ class FieldsController < ApplicationController
         @current_totals = computeBmpCalculations(@field)
         @ntt_results = @current_totals[:ntt_results]
       end
-        # @ntt_results_future = @current_totals[:ntt_results_future]
 
-        # if (@ntt_results.any?)
-
-        #   @tile_drained_p = (@ntt_results['TileDrainP'].to_f).round(2)
-
-        #   @current_flow = (@ntt_results['Flow'].to_f).round(2)
-
-        #   @current_sediment = (@ntt_results['Sediment'].to_f).round(2)
-
-        #   @current_carbon = (@ntt_results['Carbon'].to_f).round(2)
-
-        # end
-
-        # if (!@ntt_results_future.nil?)
-        #   @future_total_n = ((@ntt_results_future['OrganicN'].to_f + @ntt_results_future['NO3'].to_f + @ntt_results_future['TileDrainN'].to_f) if (@ntt_results_future.key?('OrganicN') && @ntt_results_future.key?('NO3') && @ntt_results_future.key?('TileDrainN'))).round(2)
-
-        #   @future_sediment_organic_n = (@ntt_results_future['OrganicN'].to_f if @ntt_results_future.key?('OrganicN')).round(2)
-
-        #   @future_soluble_n = (@ntt_results_future['NO3'].to_f).round(2)
-
-        #   @future_tile_drained_n = (@ntt_results_future['TileDrainN'].to_f).round(2)
-
-        #   @future_total_p = ((@ntt_results_future['OrganicP'].to_f + @ntt_results_future['SolubleP'].to_f + @ntt_results_future['TileDrainP'].to_f)).round(2)
-
-        #   @future_sediment_organic_p = (@ntt_results_future['OrganicP'].to_f).round(2)
-
-        #   @future_soluble_p = (@ntt_results_future['SolubleP'].to_f).round(2)
-
-        #   @future_tile_drained_p = (@ntt_results_future['TileDrainP'].to_f).round(2)
-
-        #   @future_flow = (@ntt_results_future['Flow'].to_f).round(2)
-
-        #   @future_sediment = (@ntt_results_future['Sediment'].to_f).round(2)
-
-        #   @future_carbon = (@ntt_results_future['Carbon'].to_f).round(2)
-        # end
-
-        # if @ntt_results.nil?
-        #   flash.now[:error] = 'Error: Could not retrieve NTT data.'
-        # elsif @ntt_results_future.nil? && @step == '8'
-        #   #flash.now[:error] = 'Error: Could not retrieve NTT data for future scenario.'
-        # end
-
-      #rescue Exception => e
-      #  flash.now[:error] = 'Error: ' + e.message
-      #  @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
-      #end
       @watershed_segment = WatershedSegment.where(:id => @field.watershed_segment_id).first
       if (@watershed_segment.nil?)
         flash.now[:error] = "Could not retrieve baseline data." if @watershed_segment.nil?
       end
 
-      # does the field meet baseline - only for Maryland
-      if (@farm.site_state_id == 21)
-        flash.now[:meet_baseline] ||= []
+      flash.now[:meet_baseline] = @field.does_field_meet_baseline[:errors]
 
-        # if crop or hay
-        if (@field.field_type_id == 1 || @field.field_type_id == 3)
-
-          # checkBaseline(@field)
-          # if checkBaseline(@field) == false
-          # unless @field.hel_soils == true
-          # flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
-          # end
-          # end
-          is_manure_fertilizer_not_incorporated = false
-          @field.strips.each do |strip|
-            strip.crop_rotations.each do |crop_rotation|
-              crop_rotation.manure_fertilizer_applications.each do |manure_fertilizer_application|
-                if (!manure_fertilizer_application.is_incorporated)
-                  is_manure_fertilizer_not_incorporated = true
-                end
-              end
-            end
-          end
-          if (is_manure_fertilizer_not_incorporated)
-            unless @field.hel_soils == true
-              flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
-            end
-          end
-
-
-        end
-
-
-
-
-        # if field is pasture
-        if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
-          flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
-        end
-        if (@field.field_type_id == 2)
-          is_soil_conservation = false
-          @field.bmps.each do |bmp|
-            if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-              is_soil_conservation = true
-            end
-          end
-          if (!is_soil_conservation)
-            flash.now[:meet_baseline] << 'Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab.'
-          end
-        end
-        # if crop or hay
-        if (@field.field_type_id == 1 || @field.field_type_id == 3)
-          is_commercial_or_manure_fertilizer = false
-          @field.strips.each do |strip|
-            strip.crop_rotations.each do |crop_rotation|
-              if (!crop_rotation.manure_fertilizer_applications.empty? || !crop_rotation.commercial_fertilizer_applications.empty?)
-                is_commercial_or_manure_fertilizer = true
-              end
-            end
-          end
-          if (is_commercial_or_manure_fertilizer && @field.is_pasture_adjacent_to_stream && (!@field.is_forest_buffer && !@field.is_grass_buffer && !@field.is_fertilizer_application_setback))
-            flash.now[:meet_baseline] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a "directed" application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams.'
-          end
-          # also soil conservation BMP needs to be checked
-          is_soil_conservation = false
-          @field.bmps.each do |bmp|
-            if (bmp.bmp_type_id == 8) # Soil Conservation and Water Quality Plans
-              is_soil_conservation = true
-            end
-          end
-          if (!is_soil_conservation)
-            flash.now[:meet_baseline] << 'Field cannot meet baseline unless both a current and valid Soil and Water Conservation Plan is in place and has been checked on the current BMP tab.'
-          end
-        end
-      end
-    end
-
-    # does the field meet baseline - only for Virginia
-    if (@farm.site_state_id == 47)
-      flash.now[:meet_baseline] ||= []
-
-      # if field is pasture
-      if (@field.field_type_id == 2 && @field.is_pasture_adjacent_to_stream && !@field.is_streambank_fencing_in_place)
-        flash.now[:meet_baseline] << 'According to Virginia statute, baseline cannot be met unless there is either fencing or an alternative animal exclusion along a streambank.'
-      end
-      # if crop or hay
-      if (@field.field_type_id == 1 || @field.field_type_id == 3)
-        if (@field.is_pasture_adjacent_to_stream && (!@field.is_forest_buffer && !@field.is_grass_buffer))
-          flash.now[:meet_baseline] << 'According to Virginia statute, baseline cannot be met unless there is a streamside buffer in place.'
-        end
-      end
     end
 
 
@@ -266,23 +130,8 @@ class FieldsController < ApplicationController
         @future_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
       end
 
-      # does the field meet baseline - only for Maryland
-      if (@farm.site_state_id == 21)
-        flash.now[:meet_baseline] ||= []
-        if (!@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system) || (!@field.field_poultry.empty? && (!@field.is_poultry_animal_waste_management_system || !@field.is_poultry_mortality_composting))
-          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule.'
-        end
-        if (!@field.field_poultry.empty? && !@field.is_poultry_heavy_use_pads)
-          flash.now[:meet_baseline] << 'Per Maryland Nutrient Management regulations, your farm cannot meet baseline unless heavy use pads are in place'
-        end
-      end
-      # does the field meet baseline - only for Virginia
-      if (@farm.site_state_id == 47)
-        flash.now[:meet_baseline] ||= []
-        if (!@field.field_livestocks.empty? && !@field.is_livestock_animal_waste_management_system) || (!@field.field_poultry.empty? && (!@field.is_poultry_animal_waste_management_system))
-          flash.now[:meet_baseline] << 'Per Virginia Nutrient Management regulations, your farm cannot meet baseline unless the farm cannot meet baseline unless the animal headquarters has both a properly sized and maintained animal waste management system and mortality composting in addition to meeting any and all applicable requirements under Maryland' 's Nutrient Management Regulations and CAFO rule.'
-        end
-      end
+      flash.now[:meet_baseline] = @field.does_field_meet_baseline[:errors]
+
     end
 
     @other_fields = []
