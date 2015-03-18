@@ -431,7 +431,9 @@ module BmpCalculations
     if (field.field_type_id == 1 && !field.crop_type_id.nil?) # if crop, check for high/low till
       field_type_id = field.crop_type_id + 10 # 11 = high till, 12 = low till
     else
-      field_type_id = 11 # default to high till until the user makes a selection
+      if field_type_id == 1
+        field_type_id = 11 # default to high till until the user makes a selection
+      end
     end
 
     hgmr_code = field.watershed_segment.hgmr_code
