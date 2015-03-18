@@ -1130,6 +1130,21 @@ def wetland_area_future_fields
     area == 0 ? 'N/A' : area
   end
 
+  def baseline_n_load
+    field_baselines = self.fields.map {|f| f.baseline_n_load }
+    return field_baselines.inject {|a,b| a+b}
+  end
+
+  def baseline_p_load
+    field_baselines = self.fields.map {|f| f.baseline_p_load }
+    return field_baselines.inject {|a,b| a+b}
+  end
+
+  def baseline_s_load
+    field_baselines = self.fields.map {|f| f.baseline_s_load }
+    return field_baselines.inject {|a,b| a+b}
+  end
+
   def credits
     credits = {}
     credits[:total_p] = 0

@@ -201,6 +201,71 @@ class Field < ActiveRecord::Base
     return @messages
   end 
 
+  def baseline_n_load
+    watershed_segment = WatershedSegment.where(:id => self.watershed_segment_id).first
+    if (!watershed_segment.nil?)
+      if self.tmdl.nil?
+        if self.field_type_id == 1
+          load = watershed_segment[:n_crop_baseline] * self.acres
+        elsif self.field_type_id == 2
+          load = watershed_segment[:n_pasture_baseline] * self.acres
+        elsif self.field_type_id == 3
+          load = watershed_segment[:n_hay_baseline] * self.acres
+        end
+
+      else
+        load = self.tmdl[:total_n] * self.acres
+      end
+    end
+    if load.nil?
+      return 0
+    else
+      return load
+    end
+  end
+
+  def baseline_p_load
+    watershed_segment = WatershedSegment.where(:id => self.watershed_segment_id).first
+    if (!watershed_segment.nil?)
+      if self.tmdl.nil?
+        if self.field_type_id == 1
+          load = watershed_segment[:p_crop_baseline] * self.acres
+        elsif self.field_type_id == 2
+          load = watershed_segment[:p_pasture_baseline] * self.acres
+        elsif self.field_type_id == 3
+          load = watershed_segment[:p_hay_baseline] * self.acres
+        end
+
+      else
+        load = self.tmdl[:total_p] * self.acres
+      end
+    end
+    if load.nil?
+      return 0
+    else
+      return load
+    end
+  end
+
+  def baseline_s_load
+    watershed_segment = WatershedSegment.where(:id => self.watershed_segment_id).first
+    if (!watershed_segment.nil?)
+      if self.field_type_id == 1
+          load = watershed_segment[:sediment_crop_baseline] * self.acres / 2000.0
+      elsif self.field_type_id == 2
+          load = watershed_segment[:sediment_pasture_baseline] * self.acres / 2000.0
+      elsif self.field_type_id == 3
+          load = watershed_segment[:sediment_hay_baseline] * self.acres / 2000.0
+      end
+    end
+    if load.nil?
+      return 0
+    else
+      return load
+    end
+  end
+
+
   # the user can override the acres retrieved from the map
   def acres
     is_acres_from_map ? acres_from_map : acres_from_user

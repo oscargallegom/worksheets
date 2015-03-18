@@ -113,12 +113,12 @@
         <%= @farm.n_baseline %>
 
 
-      <% if (!@is_farm_meets_baseline) || (@current_n_load_fields > @baseline_n_load_fields) %> &nbsp&nbsp<a href="#" id="trigger">(Why?)</a><% end %>
+      <% if @farm.n_baseline == 'No' %> &nbsp&nbsp<a href="#" id="trigger">(Why?)</a><% end %>
 
       </li>
       <li>
         <div class='extrawide'>Baseline N load fields (EOS):</div>
-        <%= number_with_precision(@baseline_n_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.baseline_n_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
@@ -143,13 +143,13 @@
         <%= @farm.p_baseline %>
              
 
-             <% if (!@is_farm_meets_baseline) || (@current_p_load_fields > @baseline_p_load_fields) %> 
+             <% if @farm.p_baseline == 'No' %>
         &nbsp&nbsp<a href="#" id="ptrigger">(Why?)</a><% end %>
 
       </li>
       <li>
         <div class='extrawide'>Baseline P load fields (EOS):</div>
-        <%= number_with_precision(@baseline_p_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.baseline_p_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
@@ -178,8 +178,8 @@
       </li>
       <li>
         <div class='extrawide'>Baseline sediment load fields (EOS):</div>
-        <%= number_with_precision(@baseline_sediment_load_fields*2000, :precision => 2, delimiter: ',') %>
-        lbs/yr (<%= number_with_precision(@baseline_sediment_load_fields, :precision => 2, delimiter: ',') %>
+        <%= number_with_precision(@farm.baseline_s_load*2000, :precision => 2, delimiter: ',') %>
+        lbs/yr (<%= number_with_precision(@farm.baseline_s_load, :precision => 2, delimiter: ',') %>
         t/yr)
       </li>
       <li>

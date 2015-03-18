@@ -49,7 +49,7 @@ class FarmsController < ApplicationController
     @cb_segment = ((@watersheds.collect {|z| z.key}).uniq).map {|i| i.to_s }.join(", ")
 
     # check if the farm meets baseline or not
-    @baseline_n_load_fields = 0
+    #@baseline_n_load_fields = 0
     @current_n_load_fields = 0
     @future_n_load_fields = 0
 
@@ -110,26 +110,26 @@ class FarmsController < ApplicationController
 
         @future_sediment_load_fields += @current_totals[:new_total_sediment_future]
 
-        watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
-        if (!watershed_segment.nil?)
-          @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
-          @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
-          @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
+        # watershed_segment = WatershedSegment.where(:id => field.watershed_segment_id).first
+        # if (!watershed_segment.nil?)
+        #   # @baseline_sediment_load_fields += watershed_segment[:sediment_crop_baseline] * field.acres / 2000.0 if field.field_type_id == 1
+        #   # @baseline_sediment_load_fields += watershed_segment[:sediment_pasture_baseline] * field.acres / 2000.0 if field.field_type_id == 2
+        #   # @baseline_sediment_load_fields += watershed_segment[:sediment_hay_baseline] * field.acres / 2000.0 if field.field_type_id == 3
 
-          if field.tmdl.nil?
-            @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
-            @baseline_n_load_fields += watershed_segment[:n_pasture_baseline] * field.acres if field.field_type_id == 2
-            @baseline_n_load_fields += watershed_segment[:n_hay_baseline] * field.acres if field.field_type_id == 3
+        #   if field.tmdl.nil?
+        #     #@baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
+        #     #@baseline_n_load_fields += watershed_segment[:n_pasture_baseline] * field.acres if field.field_type_id == 2
+        #     #@baseline_n_load_fields += watershed_segment[:n_hay_baseline] * field.acres if field.field_type_id == 3
 
-            @baseline_p_load_fields += watershed_segment[:p_crop_baseline] * field.acres if field.field_type_id == 1
-            @baseline_p_load_fields += watershed_segment[:p_pasture_baseline] * field.acres if field.field_type_id == 2
-            @baseline_p_load_fields += watershed_segment[:p_hay_baseline] * field.acres if field.field_type_id == 3
+        #     #@baseline_p_load_fields += watershed_segment[:p_crop_baseline] * field.acres if field.field_type_id == 1
+        #     #@baseline_p_load_fields += watershed_segment[:p_pasture_baseline] * field.acres if field.field_type_id == 2
+        #     #@baseline_p_load_fields += watershed_segment[:p_hay_baseline] * field.acres if field.field_type_id == 3
 
-          else # use Maryland TMDL
-            @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
-            @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
-          end
-        end
+        #   else # use Maryland TMDL
+        #     #@baseline_n_load_fields += field.tmdl[:total_n] * field.acres
+        #     #@baseline_p_load_fields += field.tmdl[:total_p] * field.acres
+        #   end
+        # end
       end
 
       # animals
@@ -310,7 +310,7 @@ class FarmsController < ApplicationController
     end
 
     # check if the farm meets baseline or not
-    @baseline_n_load_fields = 0
+    #@baseline_n_load_fields = 0
     @current_n_load_fields = 0
     @future_n_load_fields = 0
 
@@ -375,7 +375,7 @@ class FarmsController < ApplicationController
 
 
           if field.tmdl.nil?
-            @baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
+            #@baseline_n_load_fields += watershed_segment[:n_crop_baseline] * field.acres if field.field_type_id == 1
             @baseline_n_load_fields += watershed_segment[:n_pasture_baseline] * field.acres if field.field_type_id == 2
             @baseline_n_load_fields += watershed_segment[:n_hay_baseline] * field.acres if field.field_type_id == 3
 
@@ -384,7 +384,7 @@ class FarmsController < ApplicationController
             @baseline_p_load_fields += watershed_segment[:p_hay_baseline] * field.acres if field.field_type_id == 3
 
           else # use Maryland TMDL
-            @baseline_n_load_fields += field.tmdl[:total_n] * field.acres
+            #@baseline_n_load_fields += field.tmdl[:total_n] * field.acres
             @baseline_p_load_fields += field.tmdl[:total_p] * field.acres
           end
         end
