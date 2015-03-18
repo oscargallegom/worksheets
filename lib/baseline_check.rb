@@ -1,3 +1,5 @@
+require 'debugger'
+
 include CalculateLoads
 
 module BaselineCheck
@@ -84,7 +86,9 @@ module BaselineCheck
 		@checked_bmp = false
 		@checked_setback = false
 		@checked_hel = false
-		get_field_type
+		if self.field_type_id
+			get_field_type
+		end
 		return @messages
 	end	
 
@@ -153,7 +157,6 @@ module BaselineCheck
 	end
 
 	def is_fert_setback
-		puts "&&&&&&&& am i getting here?"
 		if self.is_pasture_adjacent_to_stream?
 			if self.is_fertilizer_application_setback
 				if !@checked_bmp

@@ -436,6 +436,7 @@ module BmpCalculations
 
     hgmr_code = field.watershed_segment.hgmr_code
 
+    if field_type_id > 10
     # 100 = forest buffer
     bmp_efficiency_for_forest = BmpEfficiencyLookup.where(:bmp_type_id => 100, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
 
@@ -559,7 +560,7 @@ module BmpCalculations
 
     new_total_p_per_acre_future = total_unconverted_acres_future==0 ? 0 : ((total_unconverted_acres_future * total_adjusted_p_per_acre_future) - upland_streambank_grass_p_reduction_future - upland_streambank_forest_p_reduction_future - upland_grass_buffer_p_reduction_future - upland_forest_buffer_p_reduction_future - upland_wetland_p_reduction_future) / (total_unconverted_acres_future)
     new_total_sediment_per_acre_future = total_unconverted_acres_future==0 ? 0 : ((total_unconverted_acres_future * total_adjusted_sediment_per_acre_future) - upland_streambank_grass_sediment_reduction_future - upland_streambank_forest_sediment_reduction_future - upland_grass_buffer_sediment_reduction_future - upland_forest_buffer_sediment_reduction_future - upland_wetland_sediment_reduction_future) / (total_unconverted_acres_future)
-
+  end
 
     # TODO: data check
 

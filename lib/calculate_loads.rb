@@ -12,8 +12,7 @@ module CalculateLoads
 	    @arrTMDLs = Array.new
 
 	    # sort fields 'naturally'
-	    @farm_fields = farm.fields.where(:field_type_id => nil)
-	    @fields = Naturalsorter::Sorter.sort_by_method(@farm_fields, :name, true)
+	    @fields = (farm.fields - farm.fields.where(:crop_type_id => nil))
 
 	    @watersheds = (@fields.collect {|x| x.watershed_segment}).uniq
 	    @p_factors = ((@watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
@@ -52,7 +51,6 @@ module CalculateLoads
 	      if (!field.field_type.nil?) && (field.field_type.id == 1 || field.field_type.id == 2 || field.field_type.id == 3)
 	        #begin
 	          if field.other_land_use_conversion_acres_future
-
 	            @current_totals = computeBmpCalculations(field)
 	            calculate_bmps_without_conversion(field)
 	            calculate_bmps(field)
