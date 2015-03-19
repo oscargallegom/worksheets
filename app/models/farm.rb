@@ -34,6 +34,21 @@ class Farm < ActiveRecord::Base
     prepend :name => "Copy of "
   end
 
+  def p_factors
+    watersheds = (self.fields.collect {|x| x.watershed_segment}).uniq
+    return ((watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+  end
+
+  def n_factors
+    watersheds = (self.fields.collect {|x| x.watershed_segment}).uniq
+    return ((watersheds.collect {|z| z.n_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+  end
+
+  def s_factors
+    watersheds = (self.fields.collect {|x| x.watershed_segment}).uniq
+    return ((watersheds.collect {|z| z.sediment_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+  end
+
   def has_animals?
     self.new_record? ? false : !self.livestock.empty?
   end

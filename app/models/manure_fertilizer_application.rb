@@ -80,7 +80,7 @@ class ManureFertilizerApplication < ActiveRecord::Base
       "August"
     elsif self.incorporation_date_month == 9
       "September"
-    elsif self.incorporationn_date_month == 10
+    elsif self.incorporation_date_month == 10
       "October"
     elsif self.incorporation_date_month == 11
       "November"

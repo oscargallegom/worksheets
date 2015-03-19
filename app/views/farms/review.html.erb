@@ -227,7 +227,7 @@
       </li>
             <li>
         <div class='extrawide'>Delivery Ratio:</div>
-        <%= @n_factors %>
+        <%= @farm.n_factors %>
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
@@ -264,7 +264,7 @@
       </li>
                   <li>
         <div class='extrawide'>Delivery Ratio:</div>
-        <%= @p_factors %>
+        <%= @farm.p_factors %>
       </li>
        <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
@@ -301,7 +301,7 @@
       </li>
                         <li>
         <div class='extrawide'>Delivery Ratio:</div>
-        <%= @s_factors %>
+        <%= @farm.s_factors %>
       </li>
       <li>
         <div class='extrawide'>Total Reductions (EOS):</div>
@@ -924,8 +924,8 @@
  <td>
 
 
-<%= number_with_precision(field.totals[:new_total_n], :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.totals[:new_total_n] / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.current_n_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_n_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)
 
 
@@ -934,8 +934,8 @@
 
    <tr><td class="review-table">Future load (EOS): </td>
  <td>
-<%= number_with_precision(field.totals[:new_total_n_future], :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.totals[:new_total_n_future] / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.future_n_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.future_n_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)
 
 
@@ -943,8 +943,8 @@
 </tr>
 
     <tr><td class="review-table">Reductions (EOS): </td>
- <td><%= number_with_precision(field.totals[:new_total_n] - field.totals[:new_total_n_future], :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_n_load - field.totals[:new_total_n_future]) / field.acres, :precision => 2, delimiter: ',') %>
+ <td><%= number_with_precision(field.current_n_load_fields - field.future_n_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_n_load_fields - field.future_n_load_fields) / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)</td>
 </tr>
 
@@ -954,7 +954,7 @@
 </tr>
 
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td> <%= number_with_precision([0, (field.totals[:new_total_n] - field.totals[:new_total_n_future])* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %> lb</td>
+ <td> <%= number_with_precision([0, (field.current_n_load_fields - field.future_n_load_fields)* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %> lb</td>
 </tr>
 
 
@@ -995,8 +995,8 @@
  <td>
 
 
-<%= number_with_precision(field.totals[:new_total_p], :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.totals[:new_total_p] / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.current_p_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_p_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)
 
 
@@ -1004,8 +1004,8 @@
 
    <tr><td class="review-table">Future load (EOS): </td>
  <td>
-<%= number_with_precision(field.totals[:new_total_p_future], :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.totals[:new_total_p_future] / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.future_p_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.future_p_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)
 
 
@@ -1013,8 +1013,8 @@
 </tr>
 
     <tr><td class="review-table">Reductions (EOS): </td>
- <td><%= number_with_precision(field.totals[:new_total_p] - field.totals[:new_total_p_future], :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.totals[:new_total_p] - field.totals[:new_total_p_future]) / field.acres, :precision => 2, delimiter: ',') %>
+ <td><%= number_with_precision(field.current_p_load_fields - field.future_p_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_p_load_fields - field.future_p_load_fields) / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)</td>
 </tr>
 
@@ -1025,7 +1025,7 @@
 
 
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td> <%= number_with_precision([0, (field.totals[:new_total_p] - field.totals[:new_total_p_future])* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %> lb</td>
+ <td> <%= number_with_precision([0, (field.current_p_load_fields - field.future_p_load_fields)* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %> lb</td>
 </tr>
 
 
@@ -1053,8 +1053,8 @@
  <td>
 
  
-<%= number_with_precision(field.totals[:new_total_sediment], :precision => 2, delimiter: ',') %> tons
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.totals[:new_total_sediment] / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.current_s_load_fields, :precision => 2, delimiter: ',') %> tons
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_s_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       tons/ac)
 
 </td></tr>
@@ -1064,15 +1064,15 @@
 
 
  
-<%= number_with_precision(field.totals[:new_total_sediment_future], :precision => 2, delimiter: ',') %> tons
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.totals[:new_total_sediment_future] / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.future_s_load_fields, :precision => 2, delimiter: ',') %> tons
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.future_s_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       tons/ac)
 
 </td></tr>
 
     <tr><td class="review-table">Reductions (EOS): </td>
- <td><%= number_with_precision(field.current_s_load - field.future_s_load, :precision => 2, delimiter: ',') %> tons
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.totals[:new_total_sediment] - field.totals[:new_total_sediment_future]) / field.acres, :precision => 2, delimiter: ',') %>
+ <td><%= number_with_precision(field.current_s_load_fields - field.future_s_load_fields, :precision => 2, delimiter: ',') %> tons
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision((field.current_s_load_fields - field.future_s_load_fields) / field.acres, :precision => 2, delimiter: ',') %>
       tons/ac)</td>
 </tr>
 
@@ -1082,7 +1082,7 @@
 </tr>
 
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td> <%= number_with_precision([0, (field.totals[:new_total_sediment] - field.totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> tons</td>
+ <td> <%= number_with_precision([0, (field.current_s_load_fields - field.future_s_load_fields)* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> tons</td>
 </tr>
 
 
