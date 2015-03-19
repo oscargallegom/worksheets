@@ -1441,9 +1441,9 @@ def wetland_area_future_fields
     fields.each do |field|
 
       if (!field.field_type.nil?)
-          credits[:total_n] += (field.totals[:new_total_n] - field.totals[:new_total_n_future])* field.watershed_segment.n_delivery_factor
-          credits[:total_p] += (field.totals[:new_total_p] - field.totals[:new_total_p_future])* field.watershed_segment.p_delivery_factor
-          credits[:total_sediment] += (field.totals[:new_total_sediment] - field.totals[:new_total_sediment_future])* field.watershed_segment.sediment_delivery_factor
+          credits[:total_n] += (field.current_n_load_fields - field.future_n_load_fields)* field.watershed_segment.n_delivery_factor
+          credits[:total_p] += (field.current_p_load_fields - field.future_p_load_fields)* field.watershed_segment.p_delivery_factor
+          credits[:total_sediment] += (field.current_s_load_fields - field.future_s_load_fields)* field.watershed_segment.sediment_delivery_factor
  
      end
 
