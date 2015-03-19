@@ -3,6 +3,7 @@ class Field < ActiveRecord::Base
   include Ntt
   include BmpCalculations
   include BaselineCheck
+  include ModelRun
 
 
   before_save :update_ntt_xml_fields
@@ -273,7 +274,27 @@ class Field < ActiveRecord::Base
         return self.totals[:new_total_n]
       end
     else
-      return 0
+      if self.ntt_xml_current
+        if self.other_land_use_conversion_acres_future
+          calculate_bmps_without_conversion(self)
+          calculate_bmps(self)
+          if @with_conversion[:sediment] > @without_conversion[:sediment]
+            self.future_s_load_fields = @without_conversion[:sediment]
+          end
+          if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
+                self.future_n_load_fields = @without_conversion[:nitrogen]
+          end
+          if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
+                self.future_p_load_fields = @without_conversion[:phosphorus]
+          end
+          return self.totals[:new_total_n]
+        else 
+          computeBmpCalculations(self)
+          return self.totals[:new_total_n]
+        end
+      else
+        return 0
+      end
     end
   end
 
