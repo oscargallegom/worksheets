@@ -1,5 +1,3 @@
-<% if @completed == true %>
-
 <div class="nn-summary sectionRest clearfix">
 <div>
   <fieldset>
@@ -1388,9 +1386,92 @@
 
 </table>
 
-<% else %>
 
-Under construction
-<% end %>
+    <div id="pop-up">
+      <h3>Farm Does Not Meet N Baseline</h3>
+        <% @farm.disp_field_errors_n.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+    </div>
 
-<!--<a class="button" href="<%= review_farm_path(@farm, {:format => :pdf}) %>">Download PDF copy</a> -->
+    <div id="p-pop-up">
+      <h3>Farm Does Not Meet P Baseline</h3>
+      <p>
+        <% @farm.disp_field_errors_p.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="s-pop-up">
+      <h3>Farm Does Not Meet S Baseline</h3>
+      <p>
+        <% @farm.disp_field_errors_s.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+
+    <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#trigger').hover(function(e) {
+    $('div#pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#pop-up').hide();
+  });
+
+  $('a#trigger').mousemove(function(e) {
+    $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
+
+        <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#ptrigger').hover(function(e) {
+    $('div#p-pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#p-pop-up').hide();
+  });
+
+  $('a#ptrigger').mousemove(function(e) {
+    $("div#p-pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
+
+
+        <script>
+    $(function() {
+  var moveLeft = 20;
+  var moveDown = 10;
+
+  $('a#strigger').hover(function(e) {
+    $('div#s-pop-up').show();
+      //.css('top', e.pageY + moveDown)
+      //.css('left', e.pageX + moveLeft)
+      //.appendTo('body');
+  }, function() {
+    $('div#s-pop-up').hide();
+  });
+
+  $('a#strigger').mousemove(function(e) {
+    $("div#s-pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+  });
+
+});
+    </script>
