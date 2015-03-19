@@ -308,6 +308,7 @@ class Field < ActiveRecord::Base
     elsif self.livestock_input_method_id
       computeLivestockBmpCalculations(self)
       computeLivestockBmpCalculationsFuture(self)
+      return self.totals[:new_total_n]
     else
       return 0
     end
