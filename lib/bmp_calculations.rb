@@ -1539,14 +1539,15 @@ def computeBmpCalculationsWithoutConversion(field)
         :poultry_eof_confined_po4p => poultry_eof_confined_po4p,
 
         :error_message => 'No error'}
-
+        field.totals = {}
         field.totals[:new_total_n] = current_load_nitrogen
         field.totals[:new_total_p] = current_load_phosphorus 
         field.totals[:new_total_sediment] = current_load_sediment 
         field.totals[:error_message] = ''
 
-        field.save
+        return field.totals
 
+        field.save
   end
 
   # TODO: merge the 2 functions

@@ -301,12 +301,13 @@ class Field < ActiveRecord::Base
   def current_n_load_animals
     if !self.totals.nil?
       if self.field_type_id == 4 #zero out non-animals
-        computeLivestockBmpCalculations(self)
-          computeLivestockBmpCalculationsFuture(self)
         return self.totals[:new_total_n]
       else
         return 0
       end
+    elsif self.livestock_input_method_id
+      computeLivestockBmpCalculations(self)
+      computeLivestockBmpCalculationsFuture(self)
     else
       return 0
     end
