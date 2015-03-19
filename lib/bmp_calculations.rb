@@ -1794,7 +1794,7 @@ def computeBmpCalculationsWithoutConversion(field)
         field.totals[:new_total_n_future] = current_load_nitrogen
         field.totals[:new_total_p_future] = current_load_phosphorus
         field.totals[:new_total_sediment_future] = current_load_sediment
-
+        return field.totals
         field.save
   end
 
