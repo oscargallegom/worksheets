@@ -278,6 +278,8 @@ class Field < ActiveRecord::Base
         if self.other_land_use_conversion_acres_future
           calculate_bmps_without_conversion(self)
           calculate_bmps(self)
+          computeLivestockBmpCalculations(self)
+          computeLivestockBmpCalculationsFuture(self)
           if @with_conversion[:sediment] > @without_conversion[:sediment]
             self.future_s_load_fields = @without_conversion[:sediment]
           end
@@ -290,6 +292,8 @@ class Field < ActiveRecord::Base
           return self.totals[:new_total_n]
         else 
           computeBmpCalculations(self)
+          computeLivestockBmpCalculations(self)
+          computeLivestockBmpCalculationsFuture(self)
           return self.totals[:new_total_n]
         end
       else
