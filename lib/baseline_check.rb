@@ -1,7 +1,5 @@
 require 'debugger'
 
-include CalculateLoads
-
 module BaselineCheck
 
 
@@ -83,10 +81,9 @@ module BaselineCheck
 
 	def check_loads(farm)
 		loads = Hash.new
-		totals = get_current_totals(farm)
-		loads[:n_below_baseline] = totals[:baseline_n_load_fields] - totals[:current_n_load_fields]
-		loads[:p_below_baseline] = totals[:baseline_p_load_fields] - totals[:current_p_load_fields]
-		loads[:sediment_below_baseline] = totals[:baseline_sediment_load_fields] - totals[:current_sediment_load_fields]
+		loads[:n_below_baseline] = self.baseline_n_load - self.current_n_load
+		loads[:p_below_baseline] = self.baseline_p_load - self.current_p_load
+		loads[:sediment_below_baseline] = self.baseline_s_load - self.current_s_load
 		return loads
 	end
 

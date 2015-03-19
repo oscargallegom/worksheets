@@ -36,17 +36,23 @@ class Farm < ActiveRecord::Base
 
   def p_factors
     watersheds = (self.fields.collect {|x| x.watershed_segment}).uniq
-    return ((watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+    if watersheds.any?
+      return ((watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+    end
   end
 
   def n_factors
     watersheds = (self.fields.collect {|x| x.watershed_segment}).uniq
-    return ((watersheds.collect {|z| z.n_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+    if watersheds.any?
+      return ((watersheds.collect {|z| z.n_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+    end
   end
 
   def s_factors
     watersheds = (self.fields.collect {|x| x.watershed_segment}).uniq
-    return ((watersheds.collect {|z| z.sediment_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+    if watersheds.any?
+      return ((watersheds.collect {|z| z.sediment_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
+    end
   end
 
   def has_animals?
@@ -56,6 +62,48 @@ class Farm < ActiveRecord::Base
   # is the selected state Maryland
   def is_maryland?
     self.site_state_id == 21
+  end
+
+  def cb_segment
+    arr = []
+    self.fields.each do |field|
+      if field.watershed_segment
+        arr << field.watershed_segment.key
+      end
+    end
+    return arr.uniq.map {|i| i.to_s }.join(", ")
+  end
+
+  def arr_watersheds
+    arr = []
+    self.fields.each do |field|
+      arr << field.watershed_name
+    end
+    return arr.uniq.map {|i| i.to_s }.join(", ")
+  end
+
+  def tmdls
+    arr = []
+    self.fields.each do |field|
+      if self.site_state_id == 47
+        arr << field.tmdl_va
+      else
+        if field.tmdl
+          arr << field.tmdl.name
+        end
+      end
+    end
+    return arr.uniq.map {|i| i.to_s }.join(", ")
+  end
+
+  def arr_majorbasins
+    arr = []
+    self.fields.each do |field|
+      if field.watershed_segment
+        arr << field.watershed_segment.major_basin
+      end
+    end
+    return arr.uniq
   end
 
 
@@ -1147,77 +1195,202 @@ def wetland_area_future_fields
 
   def baseline_n_load
     field_baselines = self.fields.map {|f| f.baseline_n_load }
-    return field_baselines.inject {|a,b| a+b}
+    n_load = field_baselines.inject {|a,b| a+b}
+    if n_load
+      return n_load
+    else
+      return 0
+    end
   end
 
   def baseline_p_load
     field_baselines = self.fields.map {|f| f.baseline_p_load }
-    return field_baselines.inject {|a,b| a+b}
+    p_load = field_baselines.inject {|a,b| a+b}
+    if p_load
+      return p_load
+    else
+      return 0
+    end
   end
 
   def baseline_s_load
     field_baselines = self.fields.map {|f| f.baseline_s_load }
-    return field_baselines.inject {|a,b| a+b}
+    s_load = field_baselines.inject {|a,b| a+b}
+    if s_load
+      return s_load
+    else
+      return 0
+    end
+  end
+
+  def baseline_s_load_lbs
+    field_baselines = self.fields.map {|f| f.baseline_s_load }
+    s_load = (field_baselines.inject {|a,b| a+b})
+    if s_load
+      return s_load * 2000
+    else
+      return 0
+    end
   end
 
   def current_n_load
     field_currents = self.fields.map {|f| f.current_n_load_fields }
-    return field_currents.inject {|a,b| a+b}
+    n_load = field_currents.inject {|a,b| a+b}
+    if n_load
+      return n_load
+    else
+      return 0
+    end
   end
 
   def current_p_load
     field_currents = self.fields.map {|f| f.current_p_load_fields }
-    return field_currents.inject {|a,b| a+b}
+    p_load = field_currents.inject {|a,b| a+b}
+    if p_load
+      return p_load
+    else
+      return 0
+    end
   end
 
   def current_s_load
     field_currents = self.fields.map {|f| f.current_s_load_fields }
-    return field_currents.inject {|a,b| a+b}
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load
+    else
+      return 0
+    end
+  end
+
+  def current_s_load_lbs
+    field_currents = self.fields.map {|f| f.current_s_load_fields }
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load * 2000
+    else
+      return 0
+    end
   end
 
   def current_n_load_animals
     field_currents = self.fields.map {|f| f.current_n_load_animals }
-    return field_currents.inject {|a,b| a+b}
+    n_load = field_currents.inject {|a,b| a+b}
+    if n_load
+      return n_load
+    else
+      return 0
+    end
   end
 
   def current_p_load_animals
     field_currents = self.fields.map {|f| f.current_p_load_animals }
-    return field_currents.inject {|a,b| a+b}
+    p_load = field_currents.inject {|a,b| a+b}
+    if p_load
+      return p_load
+    else
+      return 0
+    end
   end
 
   def current_s_load_animals
     field_currents = self.fields.map {|f| f.current_s_load_animals }
-    return field_currents.inject {|a,b| a+b}
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load
+    else
+      return 0
+    end
+  end
+
+  def current_s_load_animals_lbs
+    field_currents = self.fields.map {|f| f.current_s_load_animals }
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load * 2000
+    else
+      return 0
+    end
   end
 
   def future_n_load
     field_futures = self.fields.map {|f| f.future_n_load_fields }
-    return field_futures.inject {|a,b| a+b}
+    n_load = field_futures.inject {|a,b| a+b}
+    if n_load
+      return n_load
+    else
+      return 0
+    end
   end
 
   def future_p_load
     field_currents = self.fields.map {|f| f.future_p_load_fields }
-    return field_currents.inject {|a,b| a+b}
+    p_load = field_currents.inject {|a,b| a+b}
+    if p_load
+      return p_load
+    else
+      return 0
+    end
   end
 
   def future_s_load
     field_currents = self.fields.map {|f| f.future_s_load_fields }
-    return field_currents.inject {|a,b| a+b}
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load
+    else
+      return 0
+    end
+  end
+
+  def future_s_load_lbs
+    field_currents = self.fields.map {|f| f.future_s_load_fields }
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load * 2000
+    else
+      return 0
+    end
   end
 
   def future_n_load_animals
     field_currents = self.fields.map {|f| f.future_n_load_animals }
-    return field_currents.inject {|a,b| a+b}
+    n_load = field_currents.inject {|a,b| a+b}
+    if n_load
+      return n_load
+    else
+      return 0
+    end
   end
 
   def future_p_load_animals
     field_currents = self.fields.map {|f| f.future_p_load_animals }
-    return field_currents.inject {|a,b| a+b}
+    p_load = field_currents.inject {|a,b| a+b}
+    if p_load
+      return p_load
+    else
+      return 0
+    end
   end
 
   def future_s_load_animals
     field_currents = self.fields.map {|f| f.future_s_load_animals }
-    return field_currents.inject {|a,b| a+b}
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load
+    else
+      return 0
+    end
+  end
+
+  def future_s_load_animals_lbs
+    field_currents = self.fields.map {|f| f.future_s_load_animals }
+    s_load = field_currents.inject {|a,b| a+b}
+    if s_load
+      return s_load * 2000
+    else
+      return 0
+    end
   end
 
   def eligible_n_reductions

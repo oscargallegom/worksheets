@@ -117,18 +117,20 @@ class FieldsController < ApplicationController
 
 
     if ((@step =='5' || @step == '7') && (@field.field_type_id == 4)) # perform calculations for animal confinement
-      begin
-        @current_totals = computeLivestockBmpCalculations(@field)
-      rescue Exception => e
-        flash.now[:error] = e.message
-        @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
-      end
-      begin
-        @future_totals = computeLivestockBmpCalculationsFuture(@field)
-      rescue Exception => e
-        flash.now[:error] = e.message
-        @future_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
-      end
+      computeLivestockBmpCalculations(@field)
+      computeLivestockBmpCalculationsFuture(@field)
+      # begin
+      #   @current_totals = computeLivestockBmpCalculations(@field)
+      # rescue Exception => e
+      #   flash.now[:error] = e.message
+      #   @current_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
+      # end
+      # begin
+      #   @future_totals = computeLivestockBmpCalculationsFuture(@field)
+      # rescue Exception => e
+      #   flash.now[:error] = e.message
+      #   @future_totals = {:new_total_n => 0, :new_total_p => 0, :new_total_sediment => 0}
+      # end
 
       flash.now[:meet_baseline] = @field.does_field_meet_baseline[:errors]
 

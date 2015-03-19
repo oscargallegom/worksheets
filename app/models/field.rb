@@ -325,6 +325,19 @@ class Field < ActiveRecord::Base
     end
   end
 
+  def current_s_load_fields_lbs
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_sediment] * 2000
+      end
+    else
+      return 0
+    end
+  end
+
+
   def current_s_load_animals
     if !self.totals.nil?
       if self.field_type_id == 4 #zero out non-animals
@@ -397,10 +410,34 @@ class Field < ActiveRecord::Base
     end
   end
 
+  def future_s_load_fields_lbs
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out animals
+        return 0
+      else
+        return self.totals[:new_total_sediment_future] * 2000
+      end
+    else
+      return 0
+    end
+  end
+
   def future_s_load_animals
     if !self.totals.nil?
       if self.field_type_id == 4 #zero out non-animals
         return self.totals[:new_total_sediment_future]
+      else
+        return 0
+      end
+    else
+      return 0
+    end
+  end
+
+    def future_s_load_animals_lbs
+    if !self.totals.nil?
+      if self.field_type_id == 4 #zero out non-animals
+        return self.totals[:new_total_sediment_future] * 2000
       else
         return 0
       end
@@ -610,7 +647,7 @@ def has_cover_crop
   end
 
   def p_baseline
-    p_baseline = nil
+    p_baseline = 0
     if self.tmdl.nil?
       p_baseline = self.watershed_segment[:p_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
       p_baseline = self.watershed_segment[:p_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
@@ -622,10 +659,22 @@ def has_cover_crop
   end
 
   def sediment_baseline
-    sediment_baseline = nil
-    sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f / 2000.0 if field_type_id == 1 && !self.watershed_segment.nil?
-    sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2 && !self.watershed_segment.nil?
-    sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3 && !self.watershed_segment.nil?
+    sediment_baseline = 0
+    if self.watershed_segment
+      sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f / 2000.0 if field_type_id == 1 && !self.watershed_segment.nil?
+      sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2 && !self.watershed_segment.nil?
+      sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3 && !self.watershed_segment.nil?
+    end
+    return sediment_baseline
+  end
+
+  def sediment_baseline_lbs
+    sediment_baseline = 0
+    if self.watershed_segment
+      sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
+      sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
+      sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+    end
     return sediment_baseline
   end
 
@@ -710,42 +759,42 @@ def has_cover_crop
     def animal_current_n_load
         @current_totals = computeLivestockBmpCalculations(self)
         @ntt_results = @current_totals[:ntt_results]
-        n_load = @current_totals[:current_load_nitrogen]
+        n_load = @current_totals[:new_total_n]
         return n_load
   end
 
       def animal_future_n_load
         @future_totals = computeLivestockBmpCalculationsFuture(self)
         @ntt_results = @future_totals[:ntt_results]
-        n_load = @future_totals[:current_load_nitrogen]
+        n_load = @future_totals[:new_total_n_future]
         return n_load
   end
 
       def animal_current_p_load
         @current_totals = computeLivestockBmpCalculations(self)
         @ntt_results = @current_totals[:ntt_results]
-        p_load = @current_totals[:current_load_phosphorus]
+        p_load = @current_totals[:new_total_p]
         return p_load
   end
 
       def animal_future_p_load
         @future_totals = computeLivestockBmpCalculationsFuture(self)
         @ntt_results = @future_totals[:ntt_results]
-        p_load = @future_totals[:current_load_phosphorus]
+        p_load = @future_totals[:new_total_p_future]
         return p_load
   end
 
         def animal_current_s_load
         @current_totals = computeLivestockBmpCalculations(self)
         @ntt_results = @current_totals[:ntt_results]
-        s_load = @current_totals[:current_load_sediment]
+        s_load = @current_totals[:new_total_sediment]
         return s_load
   end
 
       def animal_future_s_load
         @future_totals = computeLivestockBmpCalculationsFuture(self)
         @ntt_results = @future_totals[:ntt_results]
-        s_load = @future_totals[:current_load_sediment]
+        s_load = @future_totals[:new_total_sediment_future]
         return s_load
   end
 
