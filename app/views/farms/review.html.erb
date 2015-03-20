@@ -1268,14 +1268,14 @@
  <td>
 
 
-<%= number_with_precision(field.current_n_load_fields, :precision => 2, delimiter: ',') %> lbs/year
+<%= number_with_precision(field.current_n_load_animals, :precision => 2, delimiter: ',') %> lbs/year
 
 
  </td></tr>
 
    <tr><td class="review-table">Future load (EOS): </td>
  <td>
-<%= number_with_precision(field.future_n_load_fields, :precision => 2, delimiter: ',') %> lbs/year
+<%= number_with_precision(field.future_n_load_animals, :precision => 2, delimiter: ',') %> lbs/year
 
 
  </td>
@@ -1283,7 +1283,7 @@
 
     <tr><td class="review-table">Reductions (EOS): </td>
  <td>
-            <%= number_with_precision(field.current_n_load_fields-field.future_n_load_fields, :precision => 2, delimiter: ',') %>
+            <%= number_with_precision(field.current_n_load_animals-field.future_n_load_animals, :precision => 2, delimiter: ',') %>
               lbs/yr
     </td>
 </tr>
@@ -1294,7 +1294,7 @@
 </tr>
 
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td> <%= number_with_precision([0, (field.current_n_load_fields - field.future_n_load_fields)* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %> lbs/year</td>
+ <td> <%= number_with_precision([0, (field.current_n_load_animals - field.future_n_load_animals)* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %> lbs/year</td>
 </tr>
 
 
@@ -1308,7 +1308,7 @@
     <tr><td class="review-table">Current load (EOS): </td>
  <td>
 
-<%= number_with_precision(field.current_p_load_fields, :precision => 2, delimiter: ',') %> lbs/year
+<%= number_with_precision(field.current_p_load_animals, :precision => 2, delimiter: ',') %> lbs/year
 
 
  </td></tr>
@@ -1316,14 +1316,14 @@
    <tr><td class="review-table">Future load (EOS): </td>
  <td>
 
-<%= number_with_precision(field.future_p_load_fields, :precision => 2, delimiter: ',') %> lbs/year
+<%= number_with_precision(field.future_p_load_animals, :precision => 2, delimiter: ',') %> lbs/year
 
  </td>
 </tr>
 
     <tr><td class="review-table">Reductions (EOS): </td>
  <td>
-            <%= number_with_precision(field.current_p_load_fields-field.future_p_load_fields, :precision => 2, delimiter: ',') %>
+            <%= number_with_precision(field.current_p_load_animals-field.future_p_load_animals, :precision => 2, delimiter: ',') %>
               lbs/yr
     </td>
 </tr>
@@ -1334,7 +1334,7 @@
 </tr>
 
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td> <%= number_with_precision([0, (field.current_p_load_fields - field.future_p_load_fields)* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %> lb
+ <td> <%= number_with_precision([0, (field.current_p_load_animals - field.future_p_load_animals)* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %> lb
  </td>
 </tr>
 
@@ -1346,7 +1346,7 @@
     <tr><td class="review-table">Current load (EOS): </td>
 
  <td>
-<%= number_with_precision(field.current_s_load_fields, :precision => 2, delimiter: ',') %> lbs/year
+<%= number_with_precision(field.current_s_load_animals, :precision => 2, delimiter: ',') %> lbs/year
 
 </td></tr>
 
@@ -1355,12 +1355,12 @@
 
 
  
-<%= number_with_precision(field.future_s_load_fields, :precision => 2, delimiter: ',') %> lbs/year
+<%= number_with_precision(field.future_s_load_animals, :precision => 2, delimiter: ',') %> lbs/year
 
 </td></tr>
 
     <tr><td class="review-table">Reductions (EOS): </td>
- <td>            <%= number_with_precision(field.current_s_load_fields-field.future_s_load_fields, :precision => 2, delimiter: ',') %>
+ <td>            <%= number_with_precision(field.current_s_load_animals-field.future_s_load_animals, :precision => 2, delimiter: ',') %>
               lbs/yr
     </td>
 </tr>
@@ -1372,7 +1372,7 @@
 
 
     <tr><td class="review-table">Reductions to  the Chesapeake bay: </td>
- <td><%= number_with_precision([0, (field.current_s_load_fields - field.future_s_load_fields)* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> lb
+ <td><%= number_with_precision([0, (field.current_s_load_animals - field.future_s_load_animals)* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %> lb
 
  </td>
 </tr>
@@ -1387,30 +1387,6 @@
 </table>
 
 
-    <div id="pop-up">
-      <h3>Farm Does Not Meet N Baseline</h3>
-        <% @farm.disp_field_errors_n.each do |i| %>
-        <%= i %><br><br>
-        <% end %>
-    </div>
-
-    <div id="p-pop-up">
-      <h3>Farm Does Not Meet P Baseline</h3>
-      <p>
-        <% @farm.disp_field_errors_p.each do |i| %>
-        <%= i %><br><br>
-        <% end %>
-      </p>
-    </div>
-
-    <div id="s-pop-up">
-      <h3>Farm Does Not Meet S Baseline</h3>
-      <p>
-        <% @farm.disp_field_errors_s.each do |i| %>
-        <%= i %><br><br>
-        <% end %>
-      </p>
-    </div>
 
     <script>
     $(function() {
