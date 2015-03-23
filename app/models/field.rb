@@ -268,32 +268,36 @@ class Field < ActiveRecord::Base
 
   def current_n_load_fields
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_n]
       end
     else
-      if self.ntt_xml_current
-        if self.other_land_use_conversion_acres_future
-          calculate_bmps_without_conversion(self)
-          calculate_bmps(self)
-          if @with_conversion[:sediment] > @without_conversion[:sediment]
-            self.future_s_load_fields = @without_conversion[:sediment]
-          end
-          if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
-                self.future_n_load_fields = @without_conversion[:nitrogen]
-          end
-          if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
-                self.future_p_load_fields = @without_conversion[:phosphorus]
-          end
-          return self.totals[:new_total_n]
-        else 
-          computeBmpCalculations(self)
-          return self.totals[:new_total_n]
-        end
-      else
+      if self.field_type_id >= 4 #zero out animals
         return 0
+      else
+        if self.ntt_xml_current
+          if self.other_land_use_conversion_acres_future
+            calculate_bmps_without_conversion(self)
+            calculate_bmps(self)
+            if @with_conversion[:sediment] > @without_conversion[:sediment]
+              self.future_s_load_fields = @without_conversion[:sediment]
+            end
+            if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
+                  self.future_n_load_fields = @without_conversion[:nitrogen]
+            end
+            if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
+                  self.future_p_load_fields = @without_conversion[:phosphorus]
+            end
+            return self.totals[:new_total_n]
+          else 
+            computeBmpCalculations(self)
+            return self.totals[:new_total_n]
+          end
+        else
+          return 0
+        end
       end
     end
   end
@@ -316,7 +320,7 @@ class Field < ActiveRecord::Base
 
   def current_p_load_fields
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_p]
@@ -340,7 +344,7 @@ class Field < ActiveRecord::Base
 
   def current_s_load_fields
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_sediment]
@@ -352,7 +356,7 @@ class Field < ActiveRecord::Base
 
   def current_s_load_fields_lbs
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_sediment] * 2000
@@ -377,7 +381,7 @@ class Field < ActiveRecord::Base
 
     def future_n_load_fields
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_n_future]
@@ -401,7 +405,7 @@ class Field < ActiveRecord::Base
 
   def future_p_load_fields
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_p_future]
@@ -425,7 +429,7 @@ class Field < ActiveRecord::Base
 
   def future_s_load_fields
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_sediment_future]
@@ -437,7 +441,7 @@ class Field < ActiveRecord::Base
 
   def future_s_load_fields_lbs
     if !self.totals.nil?
-      if self.field_type_id == 4 #zero out animals
+      if self.field_type_id >= 4 #zero out animals
         return 0
       else
         return self.totals[:new_total_sediment_future] * 2000

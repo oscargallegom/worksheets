@@ -81,9 +81,9 @@ module BaselineCheck
 
 	def check_loads(farm)
 		loads = Hash.new
-		loads[:n_below_baseline] = self.baseline_n_load - self.current_n_load
-		loads[:p_below_baseline] = self.baseline_p_load - self.current_p_load
-		loads[:sediment_below_baseline] = self.baseline_s_load - self.current_s_load
+		loads[:n_below_baseline] = farm.baseline_n_load - farm.current_n_load
+		loads[:p_below_baseline] = farm.baseline_p_load - farm.current_p_load
+		loads[:sediment_below_baseline] = farm.baseline_s_load - farm.current_s_load
 		return loads
 	end
 
