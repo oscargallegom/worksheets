@@ -60,31 +60,12 @@ class FarmsController < ApplicationController
 
   def current
 
-    @completed = true
-
     add_breadcrumb 'Projects', :farms_path
     add_breadcrumb @farm.name
 
-  @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
-
-    @watersheds = (@fields.collect {|x| x.watershed_segment}).uniq
-    @p_factors = ((@watersheds.collect {|z| z.p_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
-    @n_factors = ((@watersheds.collect {|z| z.n_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
-    @s_factors = ((@watersheds.collect {|z| z.sediment_delivery_factor.round(2)}).uniq).map {|i| i.to_s }.join(", ")
-    @arrWatersheds = Array.new
-    @arrMajorBasins = Array.new
-    @arrTMDLs = Array.new
-
-    @fields.each do |field|
-
-      @arrWatersheds << field.watershed_name unless @arrWatersheds.include?(field.watershed_name)
-      @arrMajorBasins << field.watershed_segment.major_basin unless field.watershed_segment.nil? || @arrMajorBasins.include?(field.watershed_segment.major_basin)
-      @arrTMDLs << field.tmdl.name if @farm.site_state_id != 47 && !field.tmdl.nil? && !@arrTMDLs.include?(field.tmdl.name)
-      @arrTMDLs << field.tmdl_va if @farm.site_state_id == 47 && !@arrTMDLs.include?(field.tmdl_va)
+    @fields = Naturalsorter::Sorter.sort_by_method(@farm.fields, :name, true)
 
     end
-
-  end
 
 
 

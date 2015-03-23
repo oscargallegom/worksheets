@@ -1,5 +1,3 @@
-<% if @completed == true %>
-
 <div class="nn-summary sectionRest clearfix">
 <div>
   <fieldset>
@@ -51,15 +49,17 @@
       </li>
       <li>
         <div class='extrawide'>Watershed:</div>
-        <%= @arrWatersheds.join(" / ").html_safe %>
+        <%= @farm.arr_watersheds %>
       </li>
       <li>
         <div class='extrawide'>Major basin:</div>
-        <%= @arrMajorBasins.join(" / ").html_safe %>
+        <% @farm.arr_majorbasins.each do |i| %>
+      <%= i %>
+      <% end %>
       </li>
       <li>
         <div class='extrawide'>TMDL:</div>
-        <%= @arrTMDLs.join(" / ").html_safe %>
+        <%= @farm.tmdls %>
       </li>
     </ol>
   </fieldset>
@@ -562,8 +562,8 @@
  <td>
 
 <% if field.ntt_xml_current %>
-<%= number_with_precision(field.current_n_load, :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_n_load / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.current_n_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_n_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)
 <% end %>
 
@@ -612,8 +612,8 @@
  <td>
 
 <% if field.ntt_xml_current %>
-<%= number_with_precision(field.current_p_load, :precision => 2, delimiter: ',') %> lb
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_p_load / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.current_p_load_fields, :precision => 2, delimiter: ',') %> lb
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_p_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       lb/ac)
 <% end %>
 
@@ -649,8 +649,8 @@
  <td>
 <% if field.ntt_xml_current %>
  
-<%= number_with_precision(field.current_s_load, :precision => 2, delimiter: ',') %> tons
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_s_load / field.acres, :precision => 2, delimiter: ',') %>
+<%= number_with_precision(field.current_s_load_fields, :precision => 2, delimiter: ',') %> tons
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<%= number_with_precision(field.current_s_load_fields / field.acres, :precision => 2, delimiter: ',') %>
       tons/ac)
 <% end %>
 </td></tr>
@@ -851,11 +851,6 @@
   <% end %>
 
 </table>
-
-<% else %>
-
-Under construction
-<% end %>
 
 <!--<a class="button" href="<%= review_farm_path(@farm, {:format => :pdf}) %>">Download PDF copy</a> -->
 
