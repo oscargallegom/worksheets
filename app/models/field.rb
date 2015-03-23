@@ -274,7 +274,7 @@ class Field < ActiveRecord::Base
         return self.totals[:new_total_n]
       end
     else
-      if self.field_type_id >= 4 #zero out animals
+      if self.field_type_id && self.field_type_id >= 4 #zero out animals
         return 0
       else
         if self.ntt_xml_current
