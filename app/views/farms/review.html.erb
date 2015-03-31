@@ -1387,6 +1387,30 @@
 </table>
 
 
+    <div id="pop-up">
+      <h3>Farm Does Not Meet N Baseline</h3>
+        <% @farm.disp_field_errors_n.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+    </div>
+
+    <div id="p-pop-up">
+      <h3>Farm Does Not Meet P Baseline</h3>
+      <p>
+        <% @farm.disp_field_errors_p.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="s-pop-up">
+      <h3>Farm Does Not Meet S Baseline</h3>
+      <p>
+        <% @farm.disp_field_errors_s.each do |i| %>
+        <%= i %><br><br>
+        <% end %>
+      </p>
+    </div>
 
     <script>
     $(function() {
