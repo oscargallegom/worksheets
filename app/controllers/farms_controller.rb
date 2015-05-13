@@ -1,5 +1,3 @@
-require 'debugger'
-
 class FarmsController < ApplicationController
 
   include BmpCalculations

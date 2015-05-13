@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150304171049) do
+ActiveRecord::Schema.define(:version => 20150513133234) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20150304171049) do
     t.text     "coordinates"
     t.float    "acres"
     t.integer  "generator_type_id"
+    t.string   "application_name"
   end
 
   create_table "field_livestocks", :force => true do |t|

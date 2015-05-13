@@ -29,6 +29,22 @@
               <%= f.text_field :name, :required => 'true' %>
             </td>
           </tr>
+           <tr>
+            <td>
+              <%= f.label :application_name, 'Applicant Name:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.text_field :application_name, :required => 'true' %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :generator_type_id, 'Generator type:<em>*</em>'.html_safe, :class => 'wide' %>
+            </td>
+            <td>
+              <%= f.collection_select :generator_type_id, GeneratorType.all, :id, :name, {:prompt => 'Select Generator Type', :required => true}, {:required => true} %></td>
+            </td>
+          </tr>
           <tr>
             <td colspan=2>
               <%= f.label :farm_notes, 'Project notes:', :class => 'wide' %>
@@ -47,15 +63,7 @@
           </tr>
           <tr>
             <td colspan='2'>Enter credit-generating site information. Enter the address of the site you are implementing
-              BMPs on, not your mailing address, if different.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= f.label :generator_type_id, 'Generator type:<em>*</em>'.html_safe, :class => 'wide' %>
-            </td>
-            <td>
-              <%= f.collection_select :generator_type_id, GeneratorType.all, :id, :name, {:prompt => 'Select Generator Type', :required => true}, {:required => true} %></td>
+              BMPs on, not your mailing address, if different. If the applicant is not the property owner or renter with control, enter the name of the owner or party in control of the property.
             </td>
           </tr>
           <tr>
@@ -66,6 +74,7 @@
               <%= f.text_field :site_name, :required => 'true' %>
             </td>
           </tr>
+         
           <tr>
             <td>
               <%= f.label :site_street_1, 'Street 1:', :class => 'wide' %>

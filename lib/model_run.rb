@@ -1,5 +1,3 @@
-require 'debugger'
-
 module ModelRun
 
     def model_run(field)
