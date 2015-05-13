@@ -77,7 +77,7 @@
          
           <tr>
             <td>
-              <%= f.label :site_street_1, 'Street 1:', :class => 'wide' %>
+              <%= f.label :site_street_1, 'Street 1:<em>*</em>'.html_safe, :class => 'wide' %>
             </td>
             <td>
               <%= f.text_field :site_street_1 %>
