@@ -1,3 +1,5 @@
+require 'debugger'
+
 class FarmsController < ApplicationController
 
   include BmpCalculations
@@ -320,13 +322,10 @@ class FarmsController < ApplicationController
 
         end 
 
-        logger.debug "@@@@@@@@@@@@@@@@@@@ SOIL TOTAL: #{@soil_total}"
-        @field.soils.each do |soil|
-          logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$ soil percent #{soil.percent}"
-          soil.percent = (soil.percent)/(@soil_total)
-          logger.debug "****************************** NEW soil percent #{soil.percent}"
-          soil.save
-        end
+        # @field.soils.each do |soil|
+        #   soil.percent = (soil.percent)/(@soil_total)
+        #   soil.save
+        # end
 
 
 
