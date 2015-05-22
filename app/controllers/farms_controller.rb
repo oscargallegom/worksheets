@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 
 class FarmsController < ApplicationController
 
