@@ -340,10 +340,10 @@ class FarmsController < ApplicationController
 
         end 
 
-        # @field.soils.each do |soil|
-        #   soil.percent = (soil.percent)/(@soil_total)
-        #   soil.save
-        # end
+        @field.soils.each do |soil|
+          soil.percent = (soil.percent)/(@soil_total)
+          soil.save
+        end
 
 
 
