@@ -54,6 +54,7 @@ module Ntt
 
       state = field.farm.state.abbreviation
       fips = field.watershed_segment.fips unless field.watershed_segment.nil?
+      parcelweather = field.farm.weather
       if field.watershed_segment.nil?
         raise "Field '#{field.name}' is not in watershed."
       end
@@ -62,7 +63,7 @@ module Ntt
 
       mid = 0 # management info id
 
-      xml = "<?xml version=\"1.0\" standalone=\"yes\"?><Navigation><StartInfo><SIID>start</SIID><State>#{state}</State><County>#{fips}</County><Customer>#{customer}</Customer></StartInfo>"
+      xml = "<?xml version=\"1.0\" standalone=\"yes\"?><Navigation><StartInfo><SIID>start</SIID><State>#{state}</State><County>#{fips}</County><Customer>#{customer}</Customer><weatherPath>#{parcelweather}</weatherPath></StartInfo>"
 
       # sum length of all strips
       fieldsWidth= 0

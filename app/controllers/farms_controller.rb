@@ -208,7 +208,6 @@ class FarmsController < ApplicationController
     logger.debug "$$$$$$$$$$$$$$$$$ START METHOD"
     # request.referer    TODO: check referrer for cross-site forgery
     if (session[:session_id] == params[:source_id]) then
-
       #######################
 
       # step 1: delete fields not found
@@ -231,6 +230,8 @@ class FarmsController < ApplicationController
         @field.coordinates = params["field#{i}coords"]
         @field.acres_from_map = params["field#{i}acres"]
         @field.is_acres_from_map = true
+        @field.farm.weather = params["parcelweather"]
+        @field.farm.save!
 
         @field.segment_id = params["field#{i}segment"]
 
@@ -254,29 +255,18 @@ class FarmsController < ApplicationController
         @listSoils = Array.new
         if params.has_key?("field#{i}pctsoiltype") 
           arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
-          arrFieldpctsoiltype.shift
           arrFieldmukey = params["field#{i}mukey"].split("|")
-          arrFieldmukey.shift
           arrFieldniccdcdpct = params["field#{i}niccdcdpct"].split("|")
-          arrFieldniccdcdpct.shift
           arrFieldmuname = params["field#{i}muname"].split("|")
-          arrFieldmuname.shift
           arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
-          arrFieldhydgrp.shift
           arrFieldmusym = params["field#{i}musym"].split("|")
-          arrFieldmusym.shift
           arrFieldclay = params["field#{i}clay"].split("|")
-          arrFieldclay.shift
           arrFieldsand = params["field#{i}sand"].split("|")
-          arrFieldsand.shift
           arrFieldsilt = params["field#{i}silt"].split("|")
-          arrFieldsilt.shift
           arrFieldbulkdensity = params["field#{i}bd"].split("|")
-          arrFieldbulkdensity.shift
           arrFieldom = params["field#{i}om"].split("|")
-          arrFieldom.shift
           arrFieldslope = params["field#{i}slope"].split("|")
-          arrFieldslope.shift
+          arrFieldcomponent = params["field#{i}component_name"].split("|")
 
           arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
             if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
@@ -292,7 +282,8 @@ class FarmsController < ApplicationController
                   :silt => arrFieldsilt[index],
                   :bulk_density => arrFieldbulkdensity[index],
                   :om => arrFieldom[index],
-                  :slope => arrFieldslope[index]
+                  :slope => arrFieldslope[index],
+                  :component_name => arrFieldcomponent[index]
               }
             end
           end
@@ -324,8 +315,9 @@ class FarmsController < ApplicationController
           @field.soils[i].percent_sand = @listSoils[i][:sand]
           @field.soils[i].percent_silt = @listSoils[i][:silt]
           @field.soils[i].bulk_density = @listSoils[i][:bulk_density]
-          @field.soils[i].organic_carbon = @listSoils[i][:om]
+          @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
           @field.soils[i].slope = @listSoils[i][:slope]
+          @field.soils[i].component_name = @listSoils[i][:component_name]
 
           # getSoilData(1726303, 'Meadowville', 'B') #
           # data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)

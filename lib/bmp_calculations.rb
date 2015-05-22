@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 
 module BmpCalculations
 
@@ -197,6 +197,8 @@ module BmpCalculations
     trp_sediment_conversion_future = 0
 
     # if permanent pasture and no fencing in place
+    #############################################
+    ##### TODO: account for field next to stream
     if (field.field_type_id == 2 && !field.is_streambank_fencing_in_place?)
       degraded_pasture_acres = field.fence_length.to_f * 35.0 / 43560.0
 
@@ -440,6 +442,7 @@ module BmpCalculations
 
     # 100 = forest buffer
     bmp_efficiency_for_forest = BmpEfficiencyLookup.where(:bmp_type_id => 100, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
+
 
     n_reduction_for_forest = bmp_efficiency_for_forest[:n_reduction].to_f
     p_reduction_for_forest = bmp_efficiency_for_forest[:p_reduction].to_f

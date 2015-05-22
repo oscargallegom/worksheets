@@ -16,7 +16,7 @@ class Farm < ActiveRecord::Base
   has_many :livestock, :dependent => :destroy, :inverse_of => :farm
 
 
-  attr_accessible :name, :farm_notes, :tract_number, :generator_type_id, :site_name, :site_street_1, :site_street_2, :site_description, :site_city, :site_zip, :site_state_id, :site_county_id, :coordinates, :application_name
+  attr_accessible :name, :farm_notes, :tract_number, :generator_type_id, :site_name, :site_street_1, :site_street_2, :site_description, :site_city, :site_zip, :site_state_id, :site_county_id, :coordinates, :application_name, :weather
 
   attr_accessible :livestock_attributes
   accepts_nested_attributes_for :livestock, :allow_destroy => true
