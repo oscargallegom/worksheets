@@ -254,17 +254,29 @@ class FarmsController < ApplicationController
         @listSoils = Array.new
         if params.has_key?("field#{i}pctsoiltype") 
           arrFieldpctsoiltype = params["field#{i}pctsoiltype"].split("|")
+          arrFieldpctsoiltype.shift
           arrFieldmukey = params["field#{i}mukey"].split("|")
+          arrFieldmukey.shift
           arrFieldniccdcdpct = params["field#{i}niccdcdpct"].split("|")
+          arrFieldniccdcdpct.shift
           arrFieldmuname = params["field#{i}muname"].split("|")
+          arrFieldmuname.shift
           arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
+          arrFieldhydgrp.shift
           arrFieldmusym = params["field#{i}musym"].split("|")
+          arrFieldmusym.shift
           arrFieldclay = params["field#{i}clay"].split("|")
+          arrFieldclay.shift
           arrFieldsand = params["field#{i}sand"].split("|")
+          arrFieldsand.shift
           arrFieldsilt = params["field#{i}silt"].split("|")
+          arrFieldsilt.shift
           arrFieldbulkdensity = params["field#{i}bd"].split("|")
+          arrFieldbulkdensity.shift
           arrFieldom = params["field#{i}om"].split("|")
+          arrFieldom.shift
           arrFieldslope = params["field#{i}slope"].split("|")
+          arrFieldslope.shift
 
           arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
             if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
