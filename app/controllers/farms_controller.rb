@@ -316,7 +316,7 @@ class FarmsController < ApplicationController
           @field.soils[i].percent_silt = @listSoils[i][:silt]
           @field.soils[i].bulk_density = @listSoils[i][:bulk_density]
           @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
-          @field.soils[i].slope = @listSoils[i][:slope]
+          @field.soils[i].slope = (@listSoils[i][:slope]).round(2)
           @field.soils[i].component_name = @listSoils[i][:component_name]
 
           # getSoilData(1726303, 'Meadowville', 'B') #
