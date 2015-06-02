@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150522161358) do
+ActiveRecord::Schema.define(:version => 20150602142351) do
 
   create_table "animals", :force => true do |t|
     t.string  "name"
@@ -532,7 +532,10 @@ ActiveRecord::Schema.define(:version => 20150522161358) do
     t.string  "name"
     t.float   "total_n"
     t.float   "total_p"
-    t.integer "code",    :limit => 255
+    t.integer "code",            :limit => 255
+    t.float   "total_s_crop"
+    t.float   "total_s_hay"
+    t.float   "total_s_pasture"
   end
 
   create_table "user_types", :force => true do |t|

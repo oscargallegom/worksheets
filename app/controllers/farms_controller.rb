@@ -260,13 +260,13 @@ class FarmsController < ApplicationController
           arrFieldmuname = params["field#{i}muname"].split("|")
           arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
           arrFieldmusym = params["field#{i}musym"].split("|")
-          arrFieldclay = params["field#{i}clay"].split("|")
-          arrFieldsand = params["field#{i}sand"].split("|")
-          arrFieldsilt = params["field#{i}silt"].split("|")
-          arrFieldbulkdensity = params["field#{i}bd"].split("|")
-          arrFieldom = params["field#{i}om"].split("|")
-          arrFieldslope = params["field#{i}slope"].split("|")
-          arrFieldcomponent = params["field#{i}component_name"].split("|")
+          # arrFieldclay = params["field#{i}clay"].split("|")
+          # arrFieldsand = params["field#{i}sand"].split("|")
+          # arrFieldsilt = params["field#{i}silt"].split("|")
+          # arrFieldbulkdensity = params["field#{i}bd"].split("|")
+          # arrFieldom = params["field#{i}om"].split("|")
+          # arrFieldslope = params["field#{i}slope"].split("|")
+          # arrFieldcomponent = params["field#{i}component_name"].split("|")
 
           arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
             if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
@@ -277,13 +277,13 @@ class FarmsController < ApplicationController
                   :muname => arrFieldmuname[index],
                   :hydgrpdcd => arrFieldhydgrp[index],
                   :musym => arrFieldmusym[index],
-                  :clay => arrFieldclay[index],
-                  :sand => arrFieldsand[index],
-                  :silt => arrFieldsilt[index],
-                  :bulk_density => arrFieldbulkdensity[index],
-                  :om => arrFieldom[index],
-                  :slope => arrFieldslope[index],
-                  :component_name => arrFieldcomponent[index]
+                  # :clay => arrFieldclay[index],
+                  # :sand => arrFieldsand[index],
+                  # :silt => arrFieldsilt[index],
+                  # :bulk_density => arrFieldbulkdensity[index],
+                  # :om => arrFieldom[index],
+                  # :slope => arrFieldslope[index],
+                  # :component_name => arrFieldcomponent[index]
               }
             end
           end
@@ -311,34 +311,34 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
           @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
-          @field.soils[i].percent_clay = @listSoils[i][:clay]
-          @field.soils[i].percent_sand = @listSoils[i][:sand]
-          @field.soils[i].percent_silt = @listSoils[i][:silt]
-          @field.soils[i].bulk_density = @listSoils[i][:bulk_density]
-          @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
-          @field.soils[i].slope = (@listSoils[i][:slope].to_f).round(2)
-          @field.soils[i].component_name = @listSoils[i][:component_name]
+          # @field.soils[i].percent_clay = @listSoils[i][:clay]
+          # @field.soils[i].percent_sand = @listSoils[i][:sand]
+          # @field.soils[i].percent_silt = @listSoils[i][:silt]
+          # @field.soils[i].bulk_density = @listSoils[i][:bulk_density]
+          # @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
+          # @field.soils[i].slope = (@listSoils[i][:slope].to_f).round(2)
+          # @field.soils[i].component_name = @listSoils[i][:component_name]
 
-          # getSoilData(1726303, 'Meadowville', 'B') #
-          # data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
+          getSoilData(1726303, 'Meadowville', 'B') #
+          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
 
-          # if data
-          #   @field.soils[i].component_name = data[:component_name]
-          #   @field.soils[i].percent_clay = data[:percent_clay]
-          #   @field.soils[i].percent_sand = data[:percent_sand]
-          #   @field.soils[i].percent_silt = data[:percent_silt]
-          #   @field.soils[i].bulk_density = data[:bulc_density]
-          #   @field.soils[i].organic_carbon = data[:organic_carbon]
-          #   @field.soils[i].slope = data[:slope]
-          # else
-          #   @field.soils[i].component_name = ''
-          #   @field.soils[i].percent_clay = 0
-          #   @field.soils[i].percent_sand = 0
-          #   @field.soils[i].percent_silt = 0
-          #   @field.soils[i].bulk_density = 0
-          #   @field.soils[i].organic_carbon = 0
-          #   @field.soils[i].slope = 0
-          # end
+          if data
+            @field.soils[i].component_name = data[:component_name]
+            @field.soils[i].percent_clay = data[:percent_clay]
+            @field.soils[i].percent_sand = data[:percent_sand]
+            @field.soils[i].percent_silt = data[:percent_silt]
+            @field.soils[i].bulk_density = data[:bulc_density]
+            @field.soils[i].organic_carbon = data[:organic_carbon]
+            @field.soils[i].slope = data[:slope]
+          else
+            @field.soils[i].component_name = ''
+            @field.soils[i].percent_clay = 0
+            @field.soils[i].percent_sand = 0
+            @field.soils[i].percent_silt = 0
+            @field.soils[i].bulk_density = 0
+            @field.soils[i].organic_carbon = 0
+            @field.soils[i].slope = 0
+          end
 
           # TODO: how to display errors?
 
@@ -389,28 +389,28 @@ class FarmsController < ApplicationController
   end
 
 # Web service call
-  # def getSoilData(map_unit_key, map_unit_symbol, hydrologic_group)
+  def getSoilData(map_unit_key, map_unit_symbol, hydrologic_group)
 
 
-  #   #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
-  #   #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrpdcd as hydrologic_group, component.slope_r as slope, component.niccdcdpct as niccdcdpct, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrpdcd = '#{hydrologic_group}' AND component.niccdcdpct = '#{niccdcdpct}' ORDER BY chorizon.hzdepb_r"
-  #   #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.comppct_r as component, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.comppct_r  = #{niccdcdpct} ORDER BY chorizon.hzdepb_r"
-  #   sql = "SELECT top 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.comppct_r as component, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp='#{hydrologic_group}' AND mapunit.musym='#{map_unit_symbol}' ORDER BY chorizon.hzdepb_r"
+    #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp = '#{hydrologic_group}' AND component.compname = '#{component_name}' ORDER BY chorizon.hzdepb_r"
+    #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrpdcd as hydrologic_group, component.slope_r as slope, component.niccdcdpct as niccdcdpct, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrpdcd = '#{hydrologic_group}' AND component.niccdcdpct = '#{niccdcdpct}' ORDER BY chorizon.hzdepb_r"
+    #sql = "SELECT TOP 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.comppct_r as component, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.comppct_r  = #{niccdcdpct} ORDER BY chorizon.hzdepb_r"
+    sql = "SELECT top 1 chorizon.sandtotal_r as percent_sand, chorizon.silttotal_r as percent_silt, chorizon.claytotal_r as percent_clay, round((chorizon.om_r) / 1.72, 2) as organic_carbon, chorizon.dbthirdbar_r as bulc_density, component.hydgrp as hydrologic_group, component.slope_r as slope, component.comppct_r as component, component.compname as component_name, component.mukey as map_unit_key, mapunit.musym as map_unit_symbol, mapunit.muname as map_unit_name FROM mapunit, component, chorizon WHERE mapunit.mukey = component.mukey AND component.cokey = chorizon.cokey AND component.majcompflag = 'yes' AND mapunit.mukey = #{map_unit_key} AND component.hydgrp='#{hydrologic_group}' AND mapunit.musym='#{map_unit_symbol}' ORDER BY chorizon.hzdepb_r"
 
-  #   # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
-  #   client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
-  #   logger.debug "*********************** client: #{client}"
+    # client = Savon.client(wsdl: "http://sdmdataaccess.nrcs.usda.gov/Tabular/SDMTabularService.asmx?WSDL")
+    client = Savon.client(wsdl: Rails.root.to_s + "/config/wsdl/soils_database.xml")
+    logger.debug "*********************** client: #{client}"
 
-  #   begin
-  #     response = client.call(:run_query, message: {"Query" => sql})
-  #     logger.debug ">>>>>>>>>>>>> sql #{sql}"
-  #     if response.success?
-  #       return response.to_array(:run_query_response, :run_query_result, :diffgram, :new_data_set, :table).first
-  #     end
-  #   rescue # the SOAP call failed
-  #     return nil
-  #   end
-  # end
+    begin
+      response = client.call(:run_query, message: {"Query" => sql})
+      logger.debug ">>>>>>>>>>>>> sql #{sql}"
+      if response.success?
+        return response.to_array(:run_query_response, :run_query_result, :diffgram, :new_data_set, :table).first
+      end
+    rescue # the SOAP call failed
+      return nil
+    end
+  end
 
 
   def sort_column

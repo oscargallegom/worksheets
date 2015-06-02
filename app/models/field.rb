@@ -251,12 +251,22 @@ class Field < ActiveRecord::Base
   def baseline_s_load
     watershed_segment = WatershedSegment.where(:id => self.watershed_segment_id).first
     if (!watershed_segment.nil?)
-      if self.field_type_id == 1
-          load = watershed_segment[:sediment_crop_baseline] * self.acres / 2000.0
-      elsif self.field_type_id == 2
-          load = watershed_segment[:sediment_pasture_baseline] * self.acres / 2000.0
-      elsif self.field_type_id == 3
-          load = watershed_segment[:sediment_hay_baseline] * self.acres / 2000.0
+      if self.tmdl.nil?
+        if self.field_type_id == 1
+            load = watershed_segment[:sediment_crop_baseline] * self.acres / 2000.0
+        elsif self.field_type_id == 2
+            load = watershed_segment[:sediment_pasture_baseline] * self.acres / 2000.0
+        elsif self.field_type_id == 3
+            load = watershed_segment[:sediment_hay_baseline] * self.acres / 2000.0
+        end
+      else
+        if self.field_type_id == 1
+          load = self.tmdl[:total_s_crop] * self.acres / 2000.0
+        elsif self.field_type_id == 2
+          load = self.tmdl[:total_s_pasture] * self.acres / 2000.0
+        elsif self.field_type_id == 3
+          load = self.tmdl[:total_s_hay] * self.acres / 2000.0
+        end
       end
     end
     if load.nil?
@@ -690,9 +700,19 @@ def has_cover_crop
   def sediment_baseline
     sediment_baseline = 0
     if self.watershed_segment
-      sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f / 2000.0 if field_type_id == 1 && !self.watershed_segment.nil?
-      sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2 && !self.watershed_segment.nil?
-      sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3 && !self.watershed_segment.nil?
+      if self.tmdl.nil?
+        sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f / 2000.0 if field_type_id == 1 && !self.watershed_segment.nil?
+        sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f / 2000.0 if field_type_id == 2 && !self.watershed_segment.nil?
+        sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f / 2000.0 if field_type_id == 3 && !self.watershed_segment.nil?
+      else
+        if field_type_id == 1
+          sediment_baseline = self.tmdl[:total_s_crop] / 2000.0
+        elsif field_type_id == 2
+          sediment_baseline = self.tmdl[:total_s_pasture] / 2000.0
+        elsif field_type_id == 3
+          sediment_baseline = self.tmdl[:total_s_hay] / 2000.0
+        end
+      end
     end
     return sediment_baseline
   end
@@ -700,9 +720,19 @@ def has_cover_crop
   def sediment_baseline_lbs
     sediment_baseline = 0
     if self.watershed_segment
-      sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
-      sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
-      sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+      if self.tmdl.nil?
+        sediment_baseline = self.watershed_segment[:sediment_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
+        sediment_baseline = self.watershed_segment[:sediment_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
+        sediment_baseline = self.watershed_segment[:sediment_hay_baseline].to_f if field_type_id == 3 && !self.watershed_segment.nil?
+      else
+        if field_type_id == 1
+          sediment_baseline = self.tmdl[:total_s_crop]
+        elsif field_type_id == 2
+          sediment_baseline = self.tmdl[:total_s_pasture]
+        elsif field_type_id == 3
+          sediment_baseline = self.tmdl[:total_s_hay]
+        end
+      end
     end
     return sediment_baseline
   end
