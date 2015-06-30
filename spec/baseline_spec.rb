@@ -1,7 +1,8 @@
-require "spec_helper"
+require "rails_helper"
+require "baseline_check"
 
 describe Field do
-	include Baseline
+	include BaselineCheck
 
   	describe '#checkBaseline' do
 

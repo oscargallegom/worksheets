@@ -64,10 +64,11 @@ gem "nokogiri"
 gem "rest-client", "~> 1.6.7"
 
 group :development do
-  gem 'better_errors'
+  #gem 'better_errors'
   gem 'binding_of_caller'
   gem 'sqlite3'
   #  gem 'deep_cloneable', '~> 1.5.2'         #############################      SQLLite issue with Heroku
+  gem 'rspec-rails'
 end
 
 group :assets do
@@ -91,6 +92,6 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
 
 #
