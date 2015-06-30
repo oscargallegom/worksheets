@@ -83,13 +83,13 @@ config.action_mailer.raise_delivery_errors = true
     port:                 587,
     domain:               'mail.google.com',
     user_name:            'cbnttmanager',
-    password:             'mEBGNf4r',
+    password:             'xy^N07Q4G5GX',
     authentication:       'plain',
     enable_starttls_auto: true  }
 
 
 
-RECAPTCHA_PUBLIC_KEY= '6Le0yO0SAAAAAMW-Ve1MsTCUMYsLqqeEpc_koyj5'
-RECAPTCHA_PRIVATE_KEY= '6Le0yO0SAAAAAO96MtO5s8KnuGGdzwD6jGSr9Ao8'
+RECAPTCHA_PUBLIC_KEY= '6LdNsggTAAAAAKqfQVBdVgl6bMzTZv2IvzhZBHkT'
+RECAPTCHA_PRIVATE_KEY= '6LdNsggTAAAAACRksE9JtVZruSFZW_NZRrTXVOrO'
   
 end
