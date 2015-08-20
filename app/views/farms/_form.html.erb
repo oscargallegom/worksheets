@@ -34,7 +34,7 @@
               <%= f.label :application_name, 'Applicant Name:<em>*</em>'.html_safe, :class => 'wide' %>
             </td>
             <td>
-              <%= f.text_field :application_name, :required => 'true' %>
+              <%= f.text_field :application_name, :required => 'true' %><br><br>The applicant is the owner of the credits.
             </td>
           </tr>
           <tr>
@@ -62,8 +62,8 @@
             </td>
           </tr>
           <tr>
-            <td colspan='2'>Enter credit-generating site information. Enter the address of the site you are implementing
-              BMPs on, not your mailing address, if different. If the applicant is not the property owner or renter with control, enter the name of the owner or party in control of the property.
+            <td colspan='2'>Enter credit-generating site information. The name field refers to the property owner or the lessee with the property owner’s permission. Enter the address of the site you are implementing
+              BMPs on, not your mailing address, if different. 
             </td>
           </tr>
           <tr>
