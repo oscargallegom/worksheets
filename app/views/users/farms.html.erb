@@ -59,5 +59,12 @@
 </table>
 
 
+<div style="position:relative">
+  <div style="position:absolute;top:3px;right:0;z-index:2">
+    <%= page_entries_info @farms, :model => 'Farm' %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= will_paginate @farms, :container => false %>
+  </div>
+</div>
 
 <BR/>

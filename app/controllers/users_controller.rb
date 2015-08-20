@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
     add_breadcrumb "#{@user.username}'s Projects"
 
-    @farms = Farm.where(:owner_id => @user.id)
+    @farms = Farm.where(:owner_id => @user.id).page(params[:page])
 
   end
 
