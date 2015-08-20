@@ -263,6 +263,7 @@ class FarmsController < ApplicationController
           arrFieldmuname = params["field#{i}muname"].split("|")
           arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
           arrFieldmusym = params["field#{i}musym"].split("|")
+          ####### ------> Begin Params For TIAER Map <------ #######
           # arrFieldclay = params["field#{i}clay"].split("|")
           # arrFieldsand = params["field#{i}sand"].split("|")
           # arrFieldsilt = params["field#{i}silt"].split("|")
@@ -270,6 +271,7 @@ class FarmsController < ApplicationController
           # arrFieldom = params["field#{i}om"].split("|")
           # arrFieldslope = params["field#{i}slope"].split("|")
           # arrFieldcomponent = params["field#{i}component_name"].split("|")
+          ####### ------> End Params For TIAER Map <------ #######
 
           arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
             if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
@@ -280,6 +282,7 @@ class FarmsController < ApplicationController
                   :muname => arrFieldmuname[index],
                   :hydgrpdcd => arrFieldhydgrp[index],
                   :musym => arrFieldmusym[index],
+                  ####### ------> Begin Params For TIAER Map <------ #######
                   # :clay => arrFieldclay[index],
                   # :sand => arrFieldsand[index],
                   # :silt => arrFieldsilt[index],
@@ -287,6 +290,7 @@ class FarmsController < ApplicationController
                   # :om => arrFieldom[index],
                   # :slope => arrFieldslope[index],
                   # :component_name => arrFieldcomponent[index]
+                  ####### ------> End Params For TIAER Map <------ #######
               }
             end
           end
@@ -314,6 +318,7 @@ class FarmsController < ApplicationController
           @field.soils[i].map_unit_name = @listSoils[i][:muname]
           @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
+          ####### ------> Begin Params For TIAER Map <------ #######
           # @field.soils[i].percent_clay = @listSoils[i][:clay]
           # @field.soils[i].percent_sand = @listSoils[i][:sand]
           # @field.soils[i].percent_silt = @listSoils[i][:silt]
@@ -321,6 +326,10 @@ class FarmsController < ApplicationController
           # @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
           # @field.soils[i].slope = (@listSoils[i][:slope].to_f).round(2)
           # @field.soils[i].component_name = @listSoils[i][:component_name]
+          ####### ------> End Params For TIAER Map <------ #######
+
+
+          ####### ------> Begin Params For CARES Map <------ #######
 
           getSoilData(1726303, 'Meadowville', 'B') #
           data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
@@ -342,6 +351,8 @@ class FarmsController < ApplicationController
             @field.soils[i].organic_carbon = 0
             @field.soils[i].slope = 0
           end
+
+          ####### ------> End Params For CARES Map <------ #######
 
           # TODO: how to display errors?
 
