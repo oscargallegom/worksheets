@@ -21,6 +21,17 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+
+  def farms
+
+    add_breadcrumb "#{@user.username}'s Projects"
+
+    @farms = Farm.where(:owner_id => @user.id)
+
+  end
+
+
+
   def show
     add_breadcrumb 'View'
 

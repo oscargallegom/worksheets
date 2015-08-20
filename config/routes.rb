@@ -37,6 +37,7 @@ NutrientNet::Application.routes.draw do
 
   scope "/admin" do
     resources :users do
+      get :farms, on: :member
       collection do
         put 'disable_multiple'
       end

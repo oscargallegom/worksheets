@@ -32,6 +32,9 @@ class FarmsController < ApplicationController
   # GET /farms/1.json
   def show
     add_breadcrumb 'Projects', :farms_path
+    if current_user.roles.include? Role.find(1)
+      add_breadcrumb "#{User.find(@farm.owner_id).username}", "/admin/users/#{@farm.owner_id}/farms/"
+    end
     add_breadcrumb @farm.name
 
     # sort fields 'naturally'
