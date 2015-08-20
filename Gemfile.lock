@@ -37,15 +37,11 @@ GEM
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     bcrypt-ruby (3.1.2-x86-mingw32)
-    better_errors (1.1.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     breadcrumbs_on_rails (2.3.0)
     builder (3.0.4)
     cancan (1.6.10)
-    coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -60,6 +56,7 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -121,6 +118,23 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rspec-core (3.3.1)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-mocks (3.3.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-rails (3.3.2)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
     sass (3.2.14)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -170,7 +184,6 @@ PLATFORMS
 
 DEPENDENCIES
   amoeba (~> 2.0.0)
-  better_errors
   binding_of_caller
   breadcrumbs_on_rails
   cancan
@@ -186,6 +199,7 @@ DEPENDENCIES
   rails (= 3.2.12)
   recaptcha
   rest-client (~> 1.6.7)
+  rspec-rails
   sass-rails (~> 3.2.3)
   savon (~> 2.2.0)
   sqlite3
@@ -193,3 +207,6 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   wicked_pdf
   will_paginate
+
+BUNDLED WITH
+   1.10.5
