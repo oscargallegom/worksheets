@@ -609,6 +609,31 @@
  <td><% if crop.seeding_rate == nil %>default<% else %><%= crop.seeding_rate %> <% end %></td></tr>
  <% end %>
 
+  <% a=1 %>
+<% crop.grazing_livestocks.each do |graze| %>
+<tr><td class="review-table">Grazing Livestock #<%= a %> </td>
+ <td class="review-table"></td></tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp State date: </td>
+ <td>Year <%= graze.start_date_year %>, <%= graze.display_start_month %> <%= graze.start_date_day %></td></tr>
+</tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp End date: </td>
+ <td>Year <%= graze.end_date_year %>, <%= graze.display_end_month %> <%= graze.end_date_day %></td></tr>
+</tr>
+<tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Animal type: </td>
+ <td><%= Animal.find(graze.animal_id).name %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Animal units: </td>
+ <td><%= graze.animal_units %></td></tr>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Animal units: </td>
+ <td><%= graze.hours_grazed %></td></tr>
+ <% if graze.animal_id == 2 %>
+  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Precision feeding: </td>
+ <td><% if graze.precision_feeding %>Yes<% else %>No<% end %></td></tr><% end %>
+</tr>
+ <% a +=1 %>
+<% end %>
+
+
+
 
 <% k=1 %>
 <% crop.commercial_fertilizer_applications.each do |fert| %>
