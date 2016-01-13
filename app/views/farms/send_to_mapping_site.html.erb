@@ -23,6 +23,8 @@
 
       <input type='hidden' size='80' name='parcelcoords' value='<%= @farm.coordinates %>'>
       <br/>
+      <input type='hidden' name='projectType' value=''>
+      <br/>
 
       <% @farm.fields.each_with_index do |field, index| %>
           <input type='hidden' size='80' name='<%= "field#{index+1}id" %>' value='<%= field.name %>'>
