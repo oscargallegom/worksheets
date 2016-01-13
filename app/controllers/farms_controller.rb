@@ -263,36 +263,67 @@ class FarmsController < ApplicationController
           arrFieldmuname = params["field#{i}muname"].split("|")
           arrFieldhydgrp = params["field#{i}hydgrpdcd"].split("|")
           arrFieldmusym = params["field#{i}musym"].split("|")
-          ####### ------> Begin Params For TIAER Map <------ #######
-          # arrFieldclay = params["field#{i}clay"].split("|")
-          # arrFieldsand = params["field#{i}sand"].split("|")
-          # arrFieldsilt = params["field#{i}silt"].split("|")
-          # arrFieldbulkdensity = params["field#{i}bd"].split("|")
-          # arrFieldom = params["field#{i}om"].split("|")
-          # arrFieldslope = params["field#{i}slope"].split("|")
-          # arrFieldcomponent = params["field#{i}component_name"].split("|")
-          ####### ------> End Params For TIAER Map <------ #######
+          if Rails.application.config.which_map == "ntt"
+            ####### ------> Begin Params For TIAER Map <------ #######
+            arrFieldclay = params["field#{i}clay"].split("|")
+            arrFieldsand = params["field#{i}sand"].split("|")
+            arrFieldsilt = params["field#{i}silt"].split("|")
+            arrFieldbulkdensity = params["field#{i}bd"].split("|")
+            arrFieldom = params["field#{i}om"].split("|")
+            arrFieldslope = params["field#{i}slope"].split("|")
+            arrFieldcomponent = params["field#{i}component_name"].split("|")
+            ####### ------> End Params For TIAER Map <------ #######
+          end
 
-          arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
-            if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
-              @listSoils << {
-                  :percent => arrFieldpctsoiltype[index],
-                  :mukey => arrFieldmukey[index],
-                  :niccdcdpct => arrFieldniccdcdpct[index],
-                  :muname => arrFieldmuname[index],
-                  :hydgrpdcd => arrFieldhydgrp[index],
-                  :musym => arrFieldmusym[index],
-                  ####### ------> Begin Params For TIAER Map <------ #######
-                  # :clay => arrFieldclay[index],
-                  # :sand => arrFieldsand[index],
-                  # :silt => arrFieldsilt[index],
-                  # :bulk_density => arrFieldbulkdensity[index],
-                  # :om => arrFieldom[index],
-                  # :slope => arrFieldslope[index],
-                  # :component_name => arrFieldcomponent[index]
-                  ####### ------> End Params For TIAER Map <------ #######
-              }
+          if Rails.application.config.which_map == "ntt"
+
+            arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
+              if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
+                @listSoils << {
+                    :percent => arrFieldpctsoiltype[index],
+                    :mukey => arrFieldmukey[index],
+                    :niccdcdpct => arrFieldniccdcdpct[index],
+                    :muname => arrFieldmuname[index],
+                    :hydgrpdcd => arrFieldhydgrp[index],
+                    :musym => arrFieldmusym[index],
+                      ####### ------> Begin Params For TIAER Map <------ #######
+                    :clay => arrFieldclay[index],
+                    :sand => arrFieldsand[index],
+                    :silt => arrFieldsilt[index],
+                    :bulk_density => arrFieldbulkdensity[index],
+                    :om => arrFieldom[index],
+                    :slope => arrFieldslope[index],
+                    :component_name => arrFieldcomponent[index]
+                      ####### ------> End Params For TIAER Map <------ #######
+                }
+              end
             end
+
+          else
+
+
+                        arrFieldpctsoiltype.each_with_index do |fieldpctsoiltype, index|
+              if !arrFieldmuname[index].eql?('Water') then # ignore soil if water
+                @listSoils << {
+                    :percent => arrFieldpctsoiltype[index],
+                    :mukey => arrFieldmukey[index],
+                    :niccdcdpct => arrFieldniccdcdpct[index],
+                    :muname => arrFieldmuname[index],
+                    :hydgrpdcd => arrFieldhydgrp[index],
+                    :musym => arrFieldmusym[index],
+                      ####### ------> Begin Params For TIAER Map <------ #######
+                    # :clay => arrFieldclay[index],
+                    # :sand => arrFieldsand[index],
+                    # :silt => arrFieldsilt[index],
+                    # :bulk_density => arrFieldbulkdensity[index],
+                    # :om => arrFieldom[index],
+                    # :slope => arrFieldslope[index],
+                    # :component_name => arrFieldcomponent[index]
+                      ####### ------> End Params For TIAER Map <------ #######
+                }
+              end
+            end
+
           end
         end
 
@@ -319,37 +350,40 @@ class FarmsController < ApplicationController
           @field.soils[i].hydrologic_group = @listSoils[i][:hydgrpdcd]
           @field.soils[i].map_unit_symbol = @listSoils[i][:musym]
           ####### ------> Begin Params For TIAER Map <------ #######
-          # @field.soils[i].percent_clay = @listSoils[i][:clay]
-          # @field.soils[i].percent_sand = @listSoils[i][:sand]
-          # @field.soils[i].percent_silt = @listSoils[i][:silt]
-          # @field.soils[i].bulk_density = @listSoils[i][:bulk_density]
-          # @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
-          # @field.soils[i].slope = (@listSoils[i][:slope].to_f).round(2)
-          # @field.soils[i].component_name = @listSoils[i][:component_name]
+          if Rails.application.config.which_map == "ntt"
+            @field.soils[i].percent_clay = @listSoils[i][:clay]
+            @field.soils[i].percent_sand = @listSoils[i][:sand]
+            @field.soils[i].percent_silt = @listSoils[i][:silt]
+            @field.soils[i].bulk_density = @listSoils[i][:bulk_density]
+            @field.soils[i].organic_carbon = ((@listSoils[i][:om].to_f)/1.724).round(2)
+            @field.soils[i].slope = (@listSoils[i][:slope].to_f).round(2)
+            @field.soils[i].component_name = @listSoils[i][:component_name]
+          end
           ####### ------> End Params For TIAER Map <------ #######
 
-
+          if Rails.application.config.which_map == "cares"
           ####### ------> Begin Params For CARES Map <------ #######
 
-          getSoilData(1726303, 'Meadowville', 'B') #
-          data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
+            getSoilData(1726303, 'Meadowville', 'B') #
+            data = getSoilData(@field.soils[i].map_unit_key, @field.soils[i].map_unit_symbol, @field.soils[i].hydrologic_group)
 
-          if data
-            @field.soils[i].component_name = data[:component_name]
-            @field.soils[i].percent_clay = data[:percent_clay]
-            @field.soils[i].percent_sand = data[:percent_sand]
-            @field.soils[i].percent_silt = data[:percent_silt]
-            @field.soils[i].bulk_density = data[:bulc_density]
-            @field.soils[i].organic_carbon = data[:organic_carbon]
-            @field.soils[i].slope = data[:slope]
-          else
-            @field.soils[i].component_name = ''
-            @field.soils[i].percent_clay = 0
-            @field.soils[i].percent_sand = 0
-            @field.soils[i].percent_silt = 0
-            @field.soils[i].bulk_density = 0
-            @field.soils[i].organic_carbon = 0
-            @field.soils[i].slope = 0
+            if data
+              @field.soils[i].component_name = data[:component_name]
+              @field.soils[i].percent_clay = data[:percent_clay]
+              @field.soils[i].percent_sand = data[:percent_sand]
+              @field.soils[i].percent_silt = data[:percent_silt]
+              @field.soils[i].bulk_density = data[:bulc_density]
+              @field.soils[i].organic_carbon = data[:organic_carbon]
+              @field.soils[i].slope = data[:slope]
+            else
+              @field.soils[i].component_name = ''
+              @field.soils[i].percent_clay = 0
+              @field.soils[i].percent_sand = 0
+              @field.soils[i].percent_silt = 0
+              @field.soils[i].bulk_density = 0
+              @field.soils[i].organic_carbon = 0
+              @field.soils[i].slope = 0
+            end
           end
 
           ####### ------> End Params For CARES Map <------ #######

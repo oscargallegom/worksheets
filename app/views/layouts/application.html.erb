@@ -20,13 +20,15 @@
 </head>
 
 
-<!--<style type="text/css" scoped>
+<% if Rails.application.config.which_environ == "dev" %>
+<style type="text/css" scoped>
 h1.GeneratedText {
 color:#FFFFFF;background-color:#CC0000;
 }
 </style>
 
-<h1 class="GeneratedText">DEVELOPMENT</h1>-->
+<h1 class="GeneratedText">DEVELOPMENT</h1>
+<% end %>
 
 <body>
 <div id="pageWrapper">

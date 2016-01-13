@@ -11,6 +11,11 @@ end
 
 module NutrientNet
   class Application < Rails::Application
+
+    # config.which_environ = 'dev'
+    config.which_environ = 'prod'
+    # config.which_map = 'ntt'
+    config.which_map = 'cares'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
