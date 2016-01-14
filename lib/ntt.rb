@@ -54,7 +54,7 @@ module Ntt
 
       state = field.farm.state.abbreviation
       fips = field.watershed_segment.fips unless field.watershed_segment.nil?
-      parcelweather = field.farm.weather
+      parcelweather = field.weather
       if field.watershed_segment.nil?
         raise "Field '#{field.name}' is not in watershed."
       end
@@ -370,6 +370,8 @@ module Ntt
         end
       end
       xml << "</Navigation>"
+
+      logger.debug "$$$$$$$$$$$$$ xml: #{xml}"
 
 
       return [true, xml]

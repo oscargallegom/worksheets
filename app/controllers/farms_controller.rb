@@ -231,9 +231,9 @@ class FarmsController < ApplicationController
         # find or create
         @field = @farm.fields.where(:name => params["field#{i}id"]).first || @farm.fields.build(:name => params["field#{i}id"])
         @field.coordinates = params["field#{i}coords"]
+        @field.weather = params["field#{i}parcelweather"]
         @field.acres_from_map = params["field#{i}acres"]
         @field.is_acres_from_map = true
-        @field.farm.weather = params["parcelweather"]
         @field.farm.save!
 
         @field.segment_id = params["field#{i}segment"]
@@ -423,6 +423,8 @@ class FarmsController < ApplicationController
         @farm.acres = params[:parcelacres]
         @farm.save
         #######################
+
+        logger.debug ">>>>>>>>> WEATHER: #{@farm.weather}"
 
       
         render :receive_from_mapping_site, :layout => false
