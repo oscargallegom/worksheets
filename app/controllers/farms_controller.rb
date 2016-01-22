@@ -249,6 +249,7 @@ class FarmsController < ApplicationController
 
         # get the watershed segment
         watershed_segment = WatershedSegment.where(:key => @field.segment_id).first
+		@field.watershed_name = watershed_segment.description
 
         if !watershed_segment.nil?
           @field.watershed_segment_id = watershed_segment.id
