@@ -206,6 +206,23 @@ module BaselineCheck
 					soil_conservation_bmp
 					@checked_bmp = true
 				end
+			elsif (self.is_forest_buffer? || self.is_grass_buffer?)
+				if ([10,35].include? self.grass_buffer_average_width) || ([10,35].include? self.forest_buffer_average_width)
+					if !@checked_bmp
+						soil_conservation_bmp
+						@checked_bmp = true
+					end
+				else
+					if !@checked_setback
+						@messages[:meets_baseline] = false
+						@messages[:errors] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless there is either a 10 or 35-ft setback, depending on whether a \'directed\' application method is used or not, between the field where the fertilizer is applied and adjacent surface waters and streams.'
+						@checked_setback = true
+						if !@checked_bmp
+							soil_conservation_bmp
+							@checked_bmp = true
+						end
+					end
+				end
 			else
 				if !@checked_setback
 					@messages[:meets_baseline] = false
