@@ -247,9 +247,11 @@ module BaselineCheck
 				end
 			else
 				if !@checked_hel
-					if !self.is_field_pasture?
-						@messages[:meets_baseline] = false
-						@messages[:errors] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
+					unless self.field_type_id == 3
+						if !self.is_field_pasture?
+							@messages[:meets_baseline] = false
+							@messages[:errors] << 'According to Maryland Nutrient Management regulations, baseline cannot be met unless manure is incorporated within 48 hours; exceptions apply to permanent pasture, hay production fields, and highly erodible soils (HELs).'
+						end
 					end
 					@checked_hel = true
 				end
