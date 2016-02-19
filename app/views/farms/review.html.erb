@@ -400,6 +400,11 @@
         <td><%= field.p_test_value %> <% if field.soil_p_extractant_id %><%= SoilPExtractant.find(field.soil_p_extractant_id).unit %><% end %></td>
   </tr> 
   </tr>
+      <tr>
+        <td class="review-table">Does this field contain HEL soils?</td>
+        <td><% if field.hel_soils %>Yes<% else %>No<% end %> </td>
+  </tr> 
+  </tr>
   <% i=0 %>
   <% field.soils.each do |soil| %>
   <% i+=1 %>
