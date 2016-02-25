@@ -385,6 +385,14 @@
       <td class="review-table">Irrigation:</td>
       <td><% if !field.irrigation_id.nil?%><%= Irrigation.find(field.irrigation_id).name %><% else %>None<% end %></td>
      </tr>
+         <tr>
+      <td class="review-table">Efficiency:</td>
+      <td><%= field.efficiency %></td>
+     </tr>
+             <tr>
+      <td class="review-table">N concentration in irrigation water (for fertigation):</td>
+      <td><%= field.fertigation_n %></td>
+     </tr>
            <tr>
         <td class="review-table">Tile Drainage Depth:</td>
         <td><%= field.tile_drainage_depth %></td>
