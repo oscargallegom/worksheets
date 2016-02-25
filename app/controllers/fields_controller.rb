@@ -94,12 +94,18 @@ class FieldsController < ApplicationController
         calculate_bmps(@field)
         if @with_conversion[:sediment] > @without_conversion[:sediment]
           @current_totals[:new_total_sediment_future] = @without_conversion[:sediment]
+          @field.totals[:new_total_sediment_future] = @without_conversion[:sediment]
+          @field.save!
         end
         if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
               @current_totals[:new_total_n_future] = @without_conversion[:nitrogen]
+              @field.totals[:new_total_n_future] = @without_conversion[:nitrogen]
+              @field.save!
         end
         if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
               @current_totals[:new_total_p_future] = @without_conversion[:phosphorus]
+              @field.totals[:new_total_p_future] = @without_conversion[:phosphorus]
+              @field.save!
         end
       else
         @current_totals = computeBmpCalculations(@field)
