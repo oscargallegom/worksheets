@@ -650,9 +650,6 @@ module BmpCalculations
 
     {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => ''}
 
-    field.totals = {:ntt_results => @ntt_results, :ntt_results_future => @ntt_results_future, :new_total_n => new_total_n, :new_total_p => new_total_p, :new_total_sediment => new_total_sediment, :new_total_n_future => new_total_n_future, :new_total_p_future => new_total_p_future, :new_total_sediment_future => new_total_sediment_future, :error_message => ''}
-    # field.save!
-
   end
 
 
