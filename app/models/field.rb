@@ -81,6 +81,7 @@ class Field < ActiveRecord::Base
 
 
   attr_accessible :soils_attributes
+  attr_accessible :coordinates
   accepts_nested_attributes_for :soils, :allow_destroy => true
 
   attr_accessible :strips_attributes
@@ -292,13 +293,22 @@ class Field < ActiveRecord::Base
             calculate_bmps_without_conversion(self)
             calculate_bmps(self)
             if @with_conversion[:sediment] > @without_conversion[:sediment]
-              self.future_s_load_fields = @without_conversion[:sediment]
+              self.totals[:new_total_sediment_future] = @without_conversion[:sediment]
             end
             if @with_conversion[:nitrogen] > @without_conversion[:nitrogen]
-                  self.future_n_load_fields = @without_conversion[:nitrogen]
+                  self.totals[:new_total_n_future] = @without_conversion[:nitrogen]
             end
             if @with_conversion[:phosphorus] > @without_conversion[:phosphorus]
-                  self.future_p_load_fields = @without_conversion[:phosphorus]
+                  self.totals[:new_total_p_future] = @without_conversion[:phosphorus]
+            end
+            if @with_conversion_current[:sediment] > @without_conversion_current[:sediment]
+              self.totals[:new_total_sediment] = @without_conversion_current[:sediment]
+            end
+            if @with_conversion_current[:nitrogen] > @without_conversion_current[:nitrogen]
+                  self.totals[:new_total_n] = @without_conversion_current[:nitrogen]
+            end
+            if @with_conversion_current[:phosphorus] > @without_conversion_current[:phosphorus]
+                  self.totals[:new_total_p] = @without_conversion_current[:phosphorus]
             end
             return self.totals[:new_total_n]
           else 
