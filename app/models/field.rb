@@ -311,7 +311,8 @@ class Field < ActiveRecord::Base
                   self.totals[:new_total_p] = @without_conversion_current[:phosphorus]
             end
             return self.totals[:new_total_n]
-          else 
+          else
+            logger.info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> testing: #{self.ntt_xml_current}" 
             computeBmpCalculations(self)
             return self.totals[:new_total_n]
           end
