@@ -164,7 +164,7 @@
       </li>
       <li>
         <div class='extrawide'>Current P load fields (EOS):</div>
-        <%= number_with_precision(@current_p_load_fields, :precision => 2, delimiter: ',') %>
+       <%= number_with_precision(@farm.current_p_load, :precision => 2, delimiter: ',') %>
         lbs/yr
       </li>
       <li>
@@ -343,7 +343,7 @@
  <td><%= Animal.find(graze.animal_id).name %></td></tr>
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Animal units: </td>
  <td><%= graze.animal_units %></td></tr>
- <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Animal units: </td>
+ <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Hours grazed: </td>
  <td><%= graze.hours_grazed %></td></tr>
  <% if graze.animal_id == 2 %>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Precision feeding: </td>
