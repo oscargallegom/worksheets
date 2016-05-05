@@ -244,6 +244,12 @@
       <td><% if field.is_acres_from_map %><%= number_with_precision(field.acres_from_map, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %><% else %><%= number_with_precision(field.acres_from_user, :precision => 2, :separator => '.', :delimiter => ',') + ' ac' %><% end %></td>
      </tr>
      <% unless field.field_type_id == 4 %>
+        <% if field.crop_type %>
+      <tr>
+      <td class="review-table">Tillage:</td>
+      <td><%= field.crop_type.name %></td>
+     </tr>
+     <% end %>
           <tr>
       <td class="review-table">Irrigation:</td>
       <td><% if !field.irrigation_id.nil?%><%= Irrigation.find(field.irrigation_id).name %><% else %>None<% end %></td>
