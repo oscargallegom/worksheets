@@ -888,7 +888,7 @@
    <tr><td class="review-table">Linear Feet of setback: </td>
  <td><%= field.fertilizer_application_setback_length_future %> ft</td></tr>
     <tr><td class="review-table">Planned: </td>
- <td><% if field.is_fertilizer_application_setback_planned_future %>Yes<% else %>No<% end %></td></tr>
+ <td><% if field.is_fertilizer_application_setback_planned_future == 0 %>No<% else %>Yes<% end %></td></tr>
  <% else %>
  <tr><td class="review-table">Fertilizer application setback in place: </td>
  <td>No</td></tr>
