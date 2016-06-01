@@ -1,0 +1,109 @@
+
+<table class="listingTable" width="100%" cellspacing="0" cellpadding="3" border="0">
+  <tr>
+    <th>Field</th>
+    <th>Area (ac)</th>
+    <th>Slope</th>
+    <th>Baseline</th>
+    <th>Current</th>
+    <th>Future</th>
+    <th>Reduction to Bay</th>
+    <th>Status</th>
+    <th class="actions">Action</th>
+
+  </tr>
+
+  <% @fields.each do |field| %>
+      <tr>
+        <td>
+          <%= link_to field.name, edit_farm_field_path(@farm, field) unless field.watershed_segment.nil? %>
+          <%= "Field '#{field.name}' is not in watershed." if field.watershed_segment.nil? %>
+          <br/>
+          <%= field.field_type.name unless field.field_type.nil? %>
+        </td>
+        <td><%= number_with_precision(field.acres, :precision => 2, :delimiter => ',') %></td>
+        <td>
+          <% i = 1 %>
+          <% field.soils.each do |soil| %>
+          Soil <%= i %>: <%= soil.slope %><br>
+          <% i+=1 %>
+          <% end %>
+        </td>
+        <td>
+          <% if (!field.field_type.nil? && field.field_type_id <= 3) %>
+              N: <%= number_with_precision(field.n_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+              <br/>
+              P: <%= number_with_precision(field.p_baseline, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+              <br/>
+              S: <%= number_with_precision(field.sediment_baseline_lbs, :precision => 2, :separator => '.', :delimiter => ',') %> lbs/a
+          <% end %>
+        </td>
+        <% if field.field_type_id == 4 %>
+        <td>
+          N: <%= number_with_precision((field.current_n_load_animals), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision((field.current_p_load_animals), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision((field.current_s_load_animals*2000), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+        </td>
+        <% else %>
+
+        <td>
+          N: <%= number_with_precision((field.current_n_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision((field.current_p_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision((field.current_s_load_fields*2000)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+        </td>
+        <% end %>
+        <% if (field.field_type_id && field.field_type_id <= 3) %>
+          <td>
+          N: <%= number_with_precision((field.future_n_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision((field.future_p_load_fields)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision((field.future_s_load_fields_lbs)/(field.acres), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
+          <% else %>
+          <td>
+          N: <%= number_with_precision((field.future_n_load_animals), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <%= number_with_precision((field.future_p_load_animals), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <%= number_with_precision((field.future_s_load_animals_lbs), :precision => 2, delimiter: ',') %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
+          <% end %>
+        <td>
+          N: <% if field.totals.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.totals[:new_total_n])/(field.acres) - (field.totals[:new_total_n_future])/(field.acres))* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          P: <% if field.totals.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.totals[:new_total_p])/(field.acres) - (field.totals[:new_total_p_future])/(field.acres))* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          <br/>
+          S: <% if field.totals.nil? %> 0.00 <% else %><%= number_with_precision(([0, ((field.totals[:new_total_sediment])/(field.acres) - (field.totals[:new_total_sediment_future])/(field.acres))* field.watershed_segment.sediment_delivery_factor].max)*2000, :precision => 2, delimiter: ',') %><% end %>
+          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
+        </td>
+
+        <td>
+          <!-- TODO: implement status bar -->
+          <div><%= field.percentCompleted %>%&nbsp;complete</div>
+          <div class="progressbar5px_back">
+            <img src="/images/progressbar5px.gif" class="progressbar5px" style="width: <%= field.percentCompleted %>px" alt="progress bar denoting % complete">
+          </div>
+        </td>
+        <td><%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete field'), farm_field_path(@farm, field), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+
+
+      </tr>
+  <% end %>
+</table>
