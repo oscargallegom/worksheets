@@ -685,7 +685,7 @@ def has_cover_crop
   end
 
   def n_baseline
-    n_baseline = nil
+    n_baseline = 0
     if self.tmdl.nil?
       n_baseline = self.watershed_segment[:n_crop_baseline].to_f if field_type_id == 1 && !self.watershed_segment.nil?
       n_baseline = self.watershed_segment[:n_pasture_baseline].to_f if field_type_id == 2 && !self.watershed_segment.nil?
