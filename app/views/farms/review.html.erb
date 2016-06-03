@@ -526,7 +526,7 @@
  <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Total P applied: </td>
  <td><%= fert.total_p_applied %> lbs/ac</td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp P type: </td>
- <td><%= PType.find(fert.p_type_id).name %></td></tr>
+ <td><% if fert.p_type_id %><%= PType.find(fert.p_type_id).name %><% end %></td></tr>
   <tr><td class="review-table">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Incorporation: </td>
  <td><% if fert.is_incorporated %> <%= fert.incorporation_depth %> inches on year <%= fert.incorporation_date_year %> <%= fert.incorporation_is_month %> <%= fert.incorporation_date_day %><% else %> No <% end %></td></tr>
  <% k +=1 %>
