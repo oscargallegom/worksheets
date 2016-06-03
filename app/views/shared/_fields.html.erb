@@ -84,14 +84,14 @@
           <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
           <% end %>
         <td>
-          N: <% if field.totals.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.totals[:new_total_n])/(field.acres) - (field.totals[:new_total_n_future])/(field.acres))* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          N: <%= number_with_precision([0, (field.current_n_load_fields - field.future_n_load_fields)* field.watershed_segment.n_delivery_factor].max, :precision => 2, delimiter: ',') %>
+          lbs
           <br/>
-          P: <% if field.totals.nil? %> 0.00 <% else %><%= number_with_precision([0, ((field.totals[:new_total_p])/(field.acres) - (field.totals[:new_total_p_future])/(field.acres))* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %><% end %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %>
+          P: <%= number_with_precision([0, (field.current_p_load_fields - field.future_p_load_fields)* field.watershed_segment.p_delivery_factor].max, :precision => 2, delimiter: ',') %>
+          lbs
           <br/>
-          S: <% if field.totals.nil? %> 0.00 <% else %><%= number_with_precision(([0, ((field.totals[:new_total_sediment])/(field.acres) - (field.totals[:new_total_sediment_future])/(field.acres))* field.watershed_segment.sediment_delivery_factor].max)*2000, :precision => 2, delimiter: ',') %><% end %>
-          <%= !field.field_type.nil? && field.field_type_id <= 3 ? 'lbs/a' : 'lbs' %></td>
+          S: <%= number_with_precision([0, ((field.current_s_load_fields - field.future_s_load_fields) * 2000.0)* field.watershed_segment.sediment_delivery_factor].max, :precision => 2, delimiter: ',') %>
+          lbs</td>
         </td>
 
         <td>
