@@ -332,7 +332,7 @@ module Ntt
                   lookup_p_fraction = (operation_code == 265 && manure_fertilizer_application.liquid_unit_type_id == 1) ? 0.5 : manure_fertilizer_application.manure_type.p_fraction.to_f
                   #p_fraction = manure_fertilizer_application.p_concentration.to_f / lookup_p_fraction / conversion_rate / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
                   #changed per ali/oscar june 3 2016
-                  p_fraction = manure_fertilizer_application.p_concentration.to_f / 0.4364 / conversion_rate / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
+                  p_fraction = manure_fertilizer_application.p_concentration.to_f * 0.4364 / conversion_rate / ((100 - manure_fertilizer_application.moisture_content.to_f) / 100.0)
                 end
 
                 # need to get the last 2 digits of the ID since they are shared by several animals
