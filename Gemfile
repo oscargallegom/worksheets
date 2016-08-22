@@ -58,6 +58,7 @@ gem 'savon', '~> 2.2.0'
 gem 'naturalsorter', '2.0.5'   # natural sort
 gem 'amoeba', "~> 2.0.0"
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # rest API for NTT call
 gem "nokogiri"
@@ -92,6 +93,6 @@ end
 # gem 'capistrano'
 
 # To use debugger
-#gem 'debugger'
+gem 'debugger'
 
 #
