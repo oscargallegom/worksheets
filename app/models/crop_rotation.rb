@@ -18,7 +18,7 @@ class CropRotation < ActiveRecord::Base
   has_many :end_of_seasons, :dependent => :destroy, autosave: true
 
   attr_accessible :strip_id, :crop_category_id, :crop_id, :plant_date_year, :plant_date_month, :plant_date_day, :planting_method_id, :seeding_rate
-  attr_accessible :is_cover_crop, :cover_crop_id, :cover_crop_plant_date_year, :cover_crop_plant_date_month, :cover_crop_plant_date_day, :cover_crop_planting_method_id, :mix_type_1, :mix_percent_1, :mix_type_2, :mix_percent_2, :mix_type_3, :mix_percent_3
+  attr_accessible :is_cover_crop, :cover_crop_id, :cover_crop_plant_date_year, :cover_crop_plant_date_month, :cover_crop_plant_date_day, :cover_crop_planting_method_id, :mix_type_1, :mix_percent_1, :mix_type_2, :mix_percent_2, :mix_type_3, :mix_percent_3, :ground_cover
 
   attr_accessible :grazing_livestocks_attributes
   accepts_nested_attributes_for :grazing_livestocks, :allow_destroy => true

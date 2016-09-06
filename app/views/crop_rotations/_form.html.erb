@@ -90,6 +90,11 @@
                   <%= f.text_field :mix_percent_3, :style => 'width:50px', :type => 'number', :min => 0, :step => 'any' %>%
                   <%= f.select :mix_type_3, options_for_select(listPasture, :selected => @crop_rotation.mix_type_3), {:prompt => 'Select'}, {:style => 'width:150px'} %>
             </li>
+
+            <li>
+              <%= f.label :ground_cover, 'Percent Ground Cover:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.text_field :ground_cover, :style => 'width:50px', :type => 'number', :min => 0, :step => 'any' %>%
+            </li>
             </div>
 
 
