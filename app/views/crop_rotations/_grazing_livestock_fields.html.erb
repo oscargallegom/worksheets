@@ -2,33 +2,56 @@
   <span class="grazing_livestock_index"></span> <%= f.link_to_remove ' ', :style => 'position:relative;left:-250px;', :class => 'icon-delete', data: {confirm: 'Are you sure?'}, :title => 'Delete grazing livestock' %>
 </h1></li>
 <li>
-  <%= f.label :start_date_year, 'Start date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :animal_id, 'Animal type:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.collection_select :animal_id, Animal.animal, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
+</li>
+<li>
+  <%= f.label :animal_units, 'Animal units:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.text_field :animal_units, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+</li>
+<li>
+  <%= f.label :start_date_year, 'Grazing start date:<em>*</em>'.html_safe, :class => 'extrawide' %>
   <%= f.select :start_date_year, options_for_select(listYears, :selected => f.object.start_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
   <%= f.select :start_date_month, options_for_select(listMonths, :selected => f.object.start_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
   <%= f.select :start_date_day, options_for_select(listDays, :selected => f.object.start_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
-  <%= f.label :end_date_year, 'End date:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :end_date_year, 'Grazing end date:<em>*</em>'.html_safe, :class => 'extrawide' %>
   <%= f.select :end_date_year, options_for_select(listYears, :selected => f.object.end_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
   <%= f.select :end_date_month, options_for_select(listMonths, :selected => f.object.end_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
   <%= f.select :end_date_day, options_for_select(listDays, :selected => f.object.end_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
-  <%= f.label :animal_id, 'Animal type:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.collection_select :animal_id, Animal.animal, :id, :name, {:prompt => 'Select animal'}, {:required => true} %>
-</li>
-<li>
-  <%= f.label :animal_units, 'Animal units:<em>*</em>'.html_safe, :class => 'wide' %>
-  <%= f.text_field :animal_units, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
-</li>
-<li>
-  <%= f.label :hours_grazed, 'Hours grazed:<em>*</em>'.html_safe, :class => 'wide' %>
+  <%= f.label :hours_grazed, 'Number of consecutive days grazed at a time:<em>*</em>'.html_safe, :class => 'extrawide' %>
   <%= f.text_field :hours_grazed, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+</li><br>
+<li>
+  <%= f.label :consecutive_hours, 'Number of consecutive hours per day grazed:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.text_field :consecutive_hours, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+</li><br>
+<li>
+  <%= f.label :rest_time, 'Pasture rest time (days) between grazings:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.text_field :rest_time, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+</li><br>
+<li>
+  <%= f.label :paddocks, 'Number of paddocks in field:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.text_field :paddocks, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+</li>
+<li>
+  <%= f.label :supplemental_feed, 'Is supplemental feed provided?<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.radio_button :supplemental_feed, true, :required => true %>
+              <%= f.label :supplemental_feed_true, 'Yes' %>
+              <%= f.radio_button :supplemental_feed, false, :required => true %>
+              <%= f.label :supplemental_feed_false, 'No' %>
+</li>
+<li>
+ <i> <%= f.label :round_bales, 'If yes, how many round bales are provided per year per paddock?<em>*</em>'.html_safe, :class => 'extrawide' %></i>
+  <%= f.text_field :round_bales, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
 </li>
 <li class='li_precision_feeding'
     <% if f.object.animal_id != 2 %> style="display: none;"
     <% end %> >
-  <%= f.label :precision_feeding, 'Precision feeding:', :class => 'wide' %>
+  <%= f.label :precision_feeding, 'Precision feeding:', :class => 'extrawide' %>
   <%= f.check_box :precision_feeding, :size => 5 %>
   <br/>Manure P concentrations should reflect dairy precision feeding.
 </li>
