@@ -31,4 +31,10 @@ module ApplicationHelper
         [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 11], [12, 12], [13, 13], [14, 14], [15, 15], [16, 16], [17, 17], [18, 18], [19, 19], [20, 20], [21, 21], [22, 22], [23, 23], [24, 24], [25, 25], [26, 26], [27, 27], [28, 28], [29, 29], [30, 30], [31, 31]
     ]
   end
+
+  def listPasture
+    [
+      ['Select Type'], ['Altai Wild Rice', 18], ['Annual Rye Grass', 19], ['Bromegrass: Regular', 84], ['Bromegrass: Smooth', 86], ['Buffalo Grass', 52], ['Clover: Alsike', 78], ['Clover: Red', 79], ['Clover: Sweet', 80], ['Eastern Gama Grass', 48], ['Fallow Pasture Grass', 5], ['Fescue', 41], ['Gramagrass', 50], ['Indian Grass', 67], ['Lespedeza Grass', 61], ['Love Grass', 65], ['Mixed Pasture', 90], ['Orchard Grass', 63], ['Pasture: Range', 91], ['Pasture: Summer', 92], ['Pasture: Winter', 93], ['Timothy', 16], ['Winter Peas', 11]
+    ]
+  end
 end

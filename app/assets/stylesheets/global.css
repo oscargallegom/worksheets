@@ -1223,6 +1223,12 @@ label {
     font-weight: bold;
 }
 
+.nn-form label.small {
+    display: block;
+    float: left;
+    width: 400;
+}
+
 .nn-form span.span {
     display: block;
     float: left;

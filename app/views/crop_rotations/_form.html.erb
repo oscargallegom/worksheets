@@ -67,7 +67,7 @@
             </li>
             <li>
               <%= f.label :name, 'Crop:<em>*</em>'.html_safe, :class => 'wide' %>
-              <select id="crop_rotation_crop_id" name="crop_rotation[crop_id]" disabled="disabled" required='required'>
+              <select id="crop_rotation_crop_id" name="crop_rotation[crop_id]" disabled="disabled" required='required' onchange='showDiv()'>
                 <% if @crop_rotation.crop == nil %>
                     <option>First select a crop category</option>
                 <% else %>
@@ -75,6 +75,23 @@
                 <% end %>
               </select>
             </li>
+
+            <div id="custom_mix", style="display:none;">
+
+             <li>
+              <%= f.label :name, 'Custom Mix:<em>*</em>'.html_safe, :class => 'wide' %>
+            
+                  <%= f.text_field :mix_percent_1, :style => 'width:50px', :type => 'number', :min => 0, :step => 'any' %>%
+                  <%= f.select :mix_type_1, options_for_select(listPasture, :selected => @crop_rotation.mix_type_1), {:prompt => 'Select'}, {:style => 'width:150px'} %></li>
+                  <li><label class="wide">&nbsp</label>
+                  <%= f.text_field :mix_percent_2, :style => 'width:50px', :type => 'number', :min => 0, :step => 'any' %>%
+                  <%= f.select :mix_type_2, options_for_select(listPasture, :selected => @crop_rotation.mix_type_2), {:prompt => 'Select'}, {:style => 'width:150px'} %></li>
+                  <li><label class="wide">&nbsp</label>
+                  <%= f.text_field :mix_percent_3, :style => 'width:50px', :type => 'number', :min => 0, :step => 'any' %>%
+                  <%= f.select :mix_type_3, options_for_select(listPasture, :selected => @crop_rotation.mix_type_3), {:prompt => 'Select'}, {:style => 'width:150px'} %>
+            </li>
+            </div>
+
 
             <% if (@field.field_type_id != 2 && @field.field_type_id != 3) # hide if  field type is permanent pasture    %>
                 <li>
@@ -262,3 +279,18 @@
 
 
 <% end %>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        showDiv();
+    });
+</script>   
+
+<script>
+function showDiv() {
+  if (document.getElementById('crop_rotation_crop_id').value == "999") {
+        document.getElementById('custom_mix').style.display = "block";
+    } else {
+     document.getElementById('custom_mix').style.display = "none"; }
+  }
+</script>
