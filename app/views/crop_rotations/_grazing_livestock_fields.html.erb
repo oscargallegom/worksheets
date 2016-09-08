@@ -22,7 +22,7 @@
   <%= f.select :end_date_day, options_for_select(listDays, :selected => f.object.end_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
-  <%= f.label :hours_grazed, 'Number of consecutive days grazed at a time:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.label :hours_grazed, 'Number of consecutive days grazed at a time (in each paddock):<em>*</em>'.html_safe, :class => 'extrawide' %>
   <%= f.text_field :hours_grazed, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
 </li>
 <li>
