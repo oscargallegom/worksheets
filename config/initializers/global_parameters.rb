@@ -15,7 +15,7 @@ URL_NTT = 'http://nn.tarleton.edu/nnmultiplestates/NNRestService.ashx'
 
 
 #### This is the test NTT ####
-#URL_NTT = 'http://nn.tarleton.edu/nntest1/NNRestService.ashx'
+#URL_NTT = 'http://nn.tarleton.edu/nn0806/NNRestService.ashx'
 
 #case Rails.env
 #  when "development"
