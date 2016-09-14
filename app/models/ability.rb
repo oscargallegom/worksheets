@@ -33,13 +33,11 @@ class Ability
 
     can :read, [State, County, CropCategory, Crop]
 
-    if user.role? :user_administrator
-      can [:read, :update, :destroy], User
-    end
-    if user.role? :project_administrator
+    if user.cached_role_case == 1
       can :manage, :all
-    end
-    if user.role? :basic_user
+    elsif user.cached_role_case == 2
+      can [:read, :update, :destroy], User
+    elsif user.cached_role_case == 3
       # can :manage, [Project, Field]
       # can :read, Project
       # can :manage, Project do |project|

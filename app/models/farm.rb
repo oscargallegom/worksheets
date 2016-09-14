@@ -1518,4 +1518,12 @@ def wetland_area_future_fields
 
   end
 
+  def cached_percent_completed
+    Rails.cache.fetch([self, "cached_percent_completed"]) { self.percentCompleted }
+  end
+
+  def cached_fields_length
+    Rails.cache.fetch([self, "cached_fields_length"]) { self.fields.length }
+  end
+
 end

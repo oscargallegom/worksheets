@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable
 
+  after_commit :flush_cache
+
   # just am example to filter
   # scope :user_filter, lambda {|user_id|
   # where(:id => user_id) unless user_id.nil?
@@ -103,6 +105,31 @@ class User < ActiveRecord::Base
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.titleize)
+  end
+
+  def write_role_case(n)
+    Rails.cache.write("#{self.username}_role_case", n)
+  end
+
+  def role_case
+    if self.role? :project_administrator
+      self.write_role_case(1)
+      return 1
+    elsif self.role? :user_administrator
+      self.write_role_case(2)
+      return 2
+    elsif self.role? :basic_user
+      self.write_role_case(3)
+      return 3
+    end
+  end
+
+  def cached_role_case
+    Rails.cache.fetch("#{self.username}_role_case") { self.role_case }
+  end
+
+  def flush_cache
+    Rails.cache.delete("#{self.username}_role_case")
   end
 
   def self.searchByStatus(status)

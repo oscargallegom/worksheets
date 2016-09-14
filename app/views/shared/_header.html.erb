@@ -11,8 +11,8 @@
             <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
           </li>
           <li>
-            <%= link_to('My account', edit_user_registration_path) unless current_user.role? :project_administrator %>
-            <%= link_to('User accounts', users_path) if current_user.role? :project_administrator %>
+            <%= link_to('My account', edit_user_registration_path) unless (current_user.cached_role_case == 1) %>
+            <%= link_to('User accounts', users_path) if (current_user.cached_role_case == 1) %>
           </li>
       <% else %>
           <li>

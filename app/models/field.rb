@@ -16,7 +16,7 @@ class Field < ActiveRecord::Base
 
   serialize :totals
 
-  belongs_to :farm
+  belongs_to :farm, touch: true
   belongs_to :watershed_segment
   belongs_to :irrigation
   belongs_to :field_type
