@@ -14,8 +14,12 @@ module NutrientNet
 
     # config.which_environ = 'dev'
     config.which_environ = 'prod'
-    # config.which_map = 'ntt'
-    config.which_map = 'cares'
+    config.which_map = 'ntt'
+    # config.which_map = 'cares'
+
+    #******** MAKE SURE TO CHANGE THE DATABASE FOR THE TEST DB!!!!!!!
+
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -23,6 +27,8 @@ module NutrientNet
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.autoload_paths += %W(#{config.root}/app/sweepers)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -76,6 +82,9 @@ module NutrientNet
 
     # For Heroku
     config.assets.initialize_on_precompile = false
+
+    config.active_record.observers = :farm_sweeper
+    config.active_record.observers = :field_sweeper
 
 
   end

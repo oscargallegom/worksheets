@@ -8,6 +8,9 @@ class FarmsController < ApplicationController
   include BaselineCheck
 
 
+  cache_sweeper :farm_sweeper
+
+
   load_and_authorize_resource
   helper_method :sort_column, :sort_direction
   layout "farm", :except => [:index]

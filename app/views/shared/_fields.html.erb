@@ -13,6 +13,7 @@
 
   </tr>
 
+<% cache('fields_segment') do %>
   <% @fields.each do |field| %>
       <tr>
         <td>
@@ -105,5 +106,6 @@
 
 
       </tr>
+  <% end %>
   <% end %>
 </table>

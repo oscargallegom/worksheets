@@ -5,6 +5,8 @@ class FieldsController < ApplicationController
   #include Baseline
   include ModelRun
 
+  cache_sweeper :field_sweeper
+
   load_and_authorize_resource :farm
   load_and_authorize_resource :field, :through => :farm
   layout 'farm', :only => [:index]

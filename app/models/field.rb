@@ -918,6 +918,10 @@ def has_cover_crop
 
   end
 
+  def cached_percent_completed
+    Rails.cache.fetch([self, "cached_fields_percent_completed"]) { self.percentCompleted }
+  end
+
   
   def maryland?
     self.farm.site_state_id == 21

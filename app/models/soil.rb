@@ -5,7 +5,7 @@ class Soil < ActiveRecord::Base
   #after_destroy :reset_ntt_xml
 
   # belongs_to :soil_type      # soil type old ???
-  belongs_to :field #, :inverse_of => :soils
+  belongs_to :field, touch: true #, :inverse_of => :soils
 
   attr_accessible :field_id, :percent_clay, :percent_sand, :percent_silt, :bulk_density, :organic_carbon, :slope
 
@@ -27,6 +27,10 @@ class Soil < ActiveRecord::Base
   # allow duplication
   amoeba do
     enable
+  end
+
+  def cached_slope
+    Rails.cache.fetch([self, "cached_slope"]) { self.slope }
   end
 
   #private

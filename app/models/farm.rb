@@ -481,6 +481,7 @@ def wetland_area_future_fields
     end
     area == 0 ? 'N/A' : area
   end
+
     def soil_water_management_plan_fields
     area = 0
     fields.each do |field|
@@ -1525,5 +1526,18 @@ def wetland_area_future_fields
   def cached_fields_length
     Rails.cache.fetch([self, "cached_fields_length"]) { self.fields.length }
   end
+
+  def cached_generator_name
+    Rails.cache.fetch([self, "cached_generator_name"]) { self.generator_type ? self.generator_type.name : nil }
+  end
+
+  def cached_state_name
+    Rails.cache.fetch([self, "cached_state_name"]) { self.state.name }
+  end
+
+  def cached_county
+    Rails.cache.fetch([self, "cached_county"]) { self.county.name }
+  end
+
 
 end

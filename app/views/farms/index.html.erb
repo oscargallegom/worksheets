@@ -30,6 +30,7 @@
     <th class="actions">Actions</th>
   </tr>
 
+<% cache do %>
   <% @farms.each do |farm| %>
       <tr>
         <td><%= farm.code %></td>
@@ -55,6 +56,7 @@
           <%= link_to image_tag('/images/delete.png', :alt => 'Delete', :title => 'Delete farm'), farm, method: :delete, data: {confirm: 'Are you sure?'} %>
         </td>
       </tr>
+  <% end %>
   <% end %>
 </table>
 
