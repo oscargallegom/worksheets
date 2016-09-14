@@ -17,6 +17,8 @@ class FarmSweeper < ActionController::Caching::Sweeper
   def expire_cache_for(farm)
     expire_page(:controller => 'farms', :action => 'index')
  
-    expire_fragment('all_farms')
+    expire_fragment('farm_basins')
+
+    expire_fragment('farm_show')
   end
 end

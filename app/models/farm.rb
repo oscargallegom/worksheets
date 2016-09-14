@@ -72,6 +72,10 @@ class Farm < ActiveRecord::Base
     return arr.uniq.map {|i| i.to_s }.join(", ")
   end
 
+  def cached_cb_segment
+    Rails.cache.fetch([self, "cached_cb_segment"]) { self.cb_segment }
+  end
+
   def arr_watersheds
     arr = []
     self.fields.each do |field|
@@ -92,6 +96,10 @@ class Farm < ActiveRecord::Base
       end
     end
     return arr.uniq.map {|i| i.to_s }.join(", ")
+  end
+
+  def cached_tmdls
+    Rails.cache.fetch([self, "cached_tmdls"]) { self.tmdls }
   end
 
   def arr_majorbasins

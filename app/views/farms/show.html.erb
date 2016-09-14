@@ -1,3 +1,5 @@
+<% cache('farm_show') do %>
+
 <div class="nn-summary sectionRest clearfix">
 <div>
   <fieldset>
@@ -59,17 +61,19 @@
       </li>
                   <li>
         <div class='extrawide'>CBWM Segment:</div>
-       <%= @farm.cb_segment %>
+       <%= @farm.cached_cb_segment %>
       </li>
       <li>
         <div class='extrawide'>Major basin:</div>
+        <% cache('farm_basins') do %>
         <% @farm.arr_majorbasins.each do |i| %>
       <%= i %>
+      <% end %>
       <% end %>
       </li>
       <li>
         <div class='extrawide'>TMDL:</div>
-        <%= @farm.tmdls %>
+        <%= @farm.cached_tmdls %>
       </li>
       <li></li>
       <li><h2 class='sectionHeading'>Totals</h2></li>
@@ -508,6 +512,9 @@
         <% end %>
       </p>
     </div>
+<% end %>
+
+
     <script>
     $(function() {
   var moveLeft = 20;
