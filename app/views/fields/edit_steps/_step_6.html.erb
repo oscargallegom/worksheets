@@ -20,7 +20,7 @@
 <br>
        <li>
               <%= f.label :future_field_type_id, 'Future field type:<em>*</em>'.html_safe, :class => 'wide' %>
-              <%= f.collection_select :future_field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
+              <%= f.collection_select :future_field_type_id, FieldType.convertable_fields, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
             </li>
 
       <br/>The crops in this field's current crop rotation are listed below. You may add a crop to the rotation or click
