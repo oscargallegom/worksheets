@@ -1125,6 +1125,13 @@ def computeBmpCalculationsWithoutConversion(field)
                                                               # field_type_id = 11 # default to high till until the user makes a selection
     end
 
+    future_field_type_id = field.future_field_type_id
+    if (field.future_field_type_id == 1 && !field.crop_type_id.nil?) # if crop, check for high/low till
+      future_field_type_id = field.crop_type_id + 10 # 11 = high till, 12 = low till
+                                                              # else
+                                                              # field_type_id = 11 # default to high till until the user makes a selection
+    end
+
     #logger.debug "$$$$$$$$$$$$$$$$$$ field.field_type_id: #{field.field_type_id}"
 
     hgmr_code = field.watershed_segment.hgmr_code

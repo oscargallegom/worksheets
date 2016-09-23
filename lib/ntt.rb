@@ -145,7 +145,7 @@ module Ntt
             ########################################################
             # Grazing, section only available for permanent pasture
             ########################################################
-            if [1,2].include? field.field_type_id
+            if (field.field_type_id == 2)
               start_grazing_operation = '426'
               end_grazing_operation = '427'
 
@@ -194,6 +194,17 @@ module Ntt
               seeding_rate = field.field_type_id != 2 ? crop_rotation.seeding_rate : 0
 
               is_permanent_pasture = field.field_type_id == 2 ? 1 : 0
+
+              if field.future_field_type_id == 2
+                planting_operation = 132
+                plant_date_year = 0
+                plant_date_month = 0
+                plant_date_day = 0
+
+                seeding_rate = 0
+
+                is_permanent_pasture = 1
+              end
 
               if field.field_type_id == 3
                 xml = xml + "<ManagementInfo><Operation>132</Operation><Year>#{plant_date_year}</Year><Month>#{plant_date_month}</Month><Day>#{plant_date_day}</Day><Crop>#{crop_code}</Crop><FieldId>#{strip_id}</FieldId><OpVal1>0</OpVal1><OpVal2>0</OpVal2><OpVal3>0</OpVal3><OpVal4></OpVal4><OpVal5>#{seeding_rate}</OpVal5><OpVal6></OpVal6><OpVal7></OpVal7><OpVal8>1</OpVal8><MID>#{mid}</MID></ManagementInfo>"
