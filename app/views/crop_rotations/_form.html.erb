@@ -31,6 +31,7 @@
     <% end %>
 
     <input type='hidden' id='field_type_id' name='field_type_id' value='<%= @field.field_type_id %>'>
+     <input type='hidden' id='future_field_type_id' name='future_field_type_id' value='<%= @field.future_field_type_id %>'>
     <input type='hidden' id='step' name='step' value='<%= @step %>'>
 
 
@@ -39,6 +40,7 @@
         <fieldset>
           <ol>
             <li><h2 class='sectionHeading'>Crop Category</h2></li>
+            <% if !@crop_rotation.strip.is_future %>
             <% if (@field.field_type_id == 1) # if crop    %>
                 <li>Enter the following information for the entire growing cycle of this crop, as applicable. Note that
                   some BMPs such as enhanced nutrient management, dairy feed management, and conservation tillage will
@@ -60,6 +62,30 @@
                   that some BMPs such as enhanced nutrient management and conservation tillage will be credited
                   automatically if the information entered on this page reflects any of these practices.
                 </li>
+            <% end %>
+            <% else %>
+            <% if (@field.future_field_type_id == 1) # if crop    %>
+                <li>Enter the following information for the entire growing cycle of this crop, as applicable. Note that
+                  some BMPs such as enhanced nutrient management, dairy feed management, and conservation tillage will
+                  be credited automatically if the information entered on this page reflects any of these practices. If
+                  you plant commodity cover crops, they should be added as a crop to be included in your rotation. If
+                  you plant conservation cover crops, enter this information at the bottom of the page for the crop
+                  preceding the cover crop. Enter crop management information for as many years as your crop rotation is
+                  long.
+                </li>
+            <% end %>
+            <% if (@field.future_field_type_id == 2) # if permanent pasture    %>
+                <li>Enter the following information for this pasture, as applicable. Note that some BMPs such as
+                  enhanced nutrient management will be credited automatically if the information entered on this page
+                  reflects any of these practices.
+                </li>
+            <% end %>
+            <% if (@field.future_field_type_id == 3) # if hay    %>
+                <li>Enter the following information for the entire growing cycle of this hay field, as applicable. Note
+                  that some BMPs such as enhanced nutrient management and conservation tillage will be credited
+                  automatically if the information entered on this page reflects any of these practices.
+                </li>
+            <% end %>
             <% end %>
             <li>
               <%= f.label :crop_rotation, 'Crop category:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -97,7 +123,7 @@
             </li>
             </div>
 
-
+            <% if !@crop_rotation.strip.is_future %>
             <% if (@field.field_type_id != 2 && @field.field_type_id != 3) # hide if  field type is permanent pasture    %>
                 <li>
                   <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
@@ -115,6 +141,26 @@
                   <%= f.text_field :seeding_rate, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
                   seeds/ac
                 </li>
+            <% end %>
+            <% else %>
+             <% if (@field.future_field_type_id != 2 && @field.future_field_type_id != 3) # hide if  field type is permanent pasture    %>
+                <li>
+                  <%= f.label :name, 'Plant date:<em>*</em>'.html_safe, :class => 'wide' %>
+
+                  <%= f.select :plant_date_year, options_for_select(listYears, :selected => @crop_rotation.plant_date_year), {:prompt => 'Year'}, {:required => true, :style => 'width:70px'} %>
+                  <%= f.select :plant_date_month, options_for_select(listMonths, :selected => @crop_rotation.plant_date_month), {:prompt => 'Month'}, {:required => true, :style => 'width:100px'} %>
+                  <%= f.select :plant_date_day, options_for_select(listDays, :selected => @crop_rotation.plant_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
+                </li>
+                <li>
+                  <%= f.label :planting_method_id, 'Planting method:<em>*</em>'.html_safe, :class => 'wide' %>
+                  <%= f.collection_select :planting_method_id, PlantingMethod.all, :id, :name, {:prompt => 'Select planting method'}, :required => true %>
+                </li>
+                <li>
+                  <%= f.label :seeding_rate, 'Seeding rate:', :class => 'wide' %>
+                  <%= f.text_field :seeding_rate, :class => 'textboxMedium', :type => 'number', :min => 0, :step => 'any' %>
+                  seeds/ac
+                </li>
+            <% end %>
             <% end %>
 
             <% if ([1, 2, 3].include? @field.field_type_id) # only show if  field type is pasture    %>

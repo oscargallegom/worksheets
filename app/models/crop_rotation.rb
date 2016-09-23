@@ -50,7 +50,7 @@ class CropRotation < ActiveRecord::Base
   default_scope :order => 'created_at ASC'
 
   def isPermanentPasture?
-    self.strip==nil ? false : (self.strip.field.field_type.id == 2 || self.strip.field.field_type.id == 3) # could be nil when duplicating
+    self.strip==nil ? false : (self.strip.field.field_type.id == 2 || self.strip.field.field_type.id == 3 || self.strip.field.future_field_type_id == 2 || self.strip.field.future_field_type_id == 3) # could be nil when duplicating
   end
 
   # allow duplication

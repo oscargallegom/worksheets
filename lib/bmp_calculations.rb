@@ -95,14 +95,13 @@ module BmpCalculations
     # add adjustment factor
     if field.field_type_id == 1  # crop
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_crop_adjust
-
-
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_crop_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_crop_adjust
 
+    end
+
+    if field.future_field_type_id == 1  # crop
       total_adjusted_n_per_acre_future = total_n_per_acre_future  * field.watershed_segment.n_crop_adjust
-
-
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_crop_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_crop_adjust
     end
@@ -111,7 +110,9 @@ module BmpCalculations
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_pasture_adjust
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_pasture_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_pasture_adjust
+    end
 
+    if field.future_field_type_id == 2  # pasture
       total_adjusted_n_per_acre_future = total_n_per_acre_future * field.watershed_segment.n_pasture_adjust
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_pasture_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_pasture_adjust
@@ -121,7 +122,9 @@ module BmpCalculations
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_hay_adjust
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_hay_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_hay_adjust
+    end
 
+    if field.future_field_type_id == 3  # hay
       total_adjusted_n_per_acre_future = total_n_per_acre_future * field.watershed_segment.n_hay_adjust
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_hay_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_hay_adjust
@@ -153,25 +156,17 @@ module BmpCalculations
     # if permanent pasture and fencing in place
     if (field.field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place?)
       fencing_acres = field.distance_fence_stream.to_f * field.fence_length.to_f / 43560.0
-      fencing_acres_future = field.distance_fence_stream_future.to_f * field.fence_length_future.to_f / 43560.0
 
       if (field.vegetation_type_fence_stream_id == 1) # if forest
         stream_forest_n_conversion = field.watershed_segment.total_n_forest * fencing_acres
         stream_forest_p_conversion = field.watershed_segment.total_p_forest * fencing_acres
         stream_forest_sediment_conversion = field.watershed_segment.total_sediment_forest * fencing_acres
 
-        stream_forest_n_conversion_future = field.watershed_segment.total_n_forest * fencing_acres_future
-        stream_forest_p_conversion_future = field.watershed_segment.total_p_forest * fencing_acres_future
-        stream_forest_sediment_conversion_future = field.watershed_segment.total_sediment_forest * fencing_acres_future
-
       else # grass
         stream_hyo_n_conversion = field.watershed_segment.total_n_hyo * fencing_acres
         stream_hyo_p_conversion = field.watershed_segment.total_p_hyo * fencing_acres
         stream_hyo_sediment_conversion = field.watershed_segment.total_sediment_hyo * fencing_acres
 
-        stream_hyo_n_conversion_future = field.watershed_segment.total_n_hyo * fencing_acres_future
-        stream_hyo_p_conversion_future = field.watershed_segment.total_p_hyo * fencing_acres_future
-        stream_hyo_sediment_conversion_future = field.watershed_segment.total_sediment_hyo * fencing_acres_future
       end
 
       if (!field.distance_fence_stream.nil? && field.distance_fence_stream >= 35 && field.distance_fence_stream <= 100)
@@ -179,12 +174,32 @@ module BmpCalculations
       elsif (!field.distance_fence_stream.nil? && field.distance_fence_stream > 100)
         fencing_functional_acres = field.fence_length.to_f * 100.0 / 43560.0
       end
+    end
+
+    if (field.future_field_type_id == 2 && field.is_pasture_adjacent_to_stream && field.is_streambank_fencing_in_place_future?)
+      fencing_acres_future = field.distance_fence_stream_future.to_f * field.fence_length_future.to_f / 43560.0
+
+      if (field.vegetation_type_fence_stream_id_future == 1) # if forest
+
+        stream_forest_n_conversion_future = field.watershed_segment.total_n_forest * fencing_acres_future
+        stream_forest_p_conversion_future = field.watershed_segment.total_p_forest * fencing_acres_future
+        stream_forest_sediment_conversion_future = field.watershed_segment.total_sediment_forest * fencing_acres_future
+
+      else # grass
+
+        stream_hyo_n_conversion_future = field.watershed_segment.total_n_hyo * fencing_acres_future
+        stream_hyo_p_conversion_future = field.watershed_segment.total_p_hyo * fencing_acres_future
+        stream_hyo_sediment_conversion_future = field.watershed_segment.total_sediment_hyo * fencing_acres_future
+      end
+
       if (!field.distance_fence_stream_future.nil? && field.distance_fence_stream_future >= 35 && field.distance_fence_stream_future <= 100)
         fencing_functional_acres_future = fencing_acres_future
       elsif (!field.distance_fence_stream_future.nil? && field.distance_fence_stream_future > 100)
         fencing_functional_acres_future = field.fence_length_future.to_f * 100.0 / 43560.0
       end
     end
+
+
 
     degraded_pasture_acres = 0
     degraded_pasture_acres_future = 0
@@ -207,7 +222,7 @@ module BmpCalculations
       trp_sediment_conversion = field.watershed_segment.total_sediment_trp * degraded_pasture_acres
     end
     # if permanent pasture and no fencing in place future
-    if (field.field_type_id == 2 && !field.is_streambank_fencing_in_place_future?)
+    if (field.future_field_type_id == 2 && !field.is_streambank_fencing_in_place_future?)
       #if field.ntt_xml_future.nil?
        # degraded_pasture_acres_future = 0
       #else
@@ -438,22 +453,39 @@ module BmpCalculations
       end
     end
 
+    future_field_type_id = field.future_field_type_id
+    if (field.future_field_type_id == 1 && !field.crop_type_id.nil?) # if crop, check for high/low till
+      future_field_type_id = field.crop_type_id + 10 # 11 = high till, 12 = low till
+    else
+      if future_field_type_id == 1
+        future_field_type_id = 11 # default to high till until the user makes a selection
+      end
+    end
+
     hgmr_code = field.watershed_segment.hgmr_code
 
     # 100 = forest buffer
     bmp_efficiency_for_forest = BmpEfficiencyLookup.where(:bmp_type_id => 100, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
+    bmp_efficiency_for_forest_future = BmpEfficiencyLookup.where(:bmp_type_id => 100, :field_type_id => future_field_type_id, :hgmr_code => hgmr_code).first
 
 
     n_reduction_for_forest = bmp_efficiency_for_forest[:n_reduction].to_f
     p_reduction_for_forest = bmp_efficiency_for_forest[:p_reduction].to_f
     sediment_reduction_for_forest = bmp_efficiency_for_forest[:sediment_reduction].to_f
+    n_reduction_for_forest_future = bmp_efficiency_for_forest_future[:n_reduction].to_f
+    p_reduction_for_forest_future = bmp_efficiency_for_forest_future[:p_reduction].to_f
+    sediment_reduction_for_forest_future = bmp_efficiency_for_forest_future[:sediment_reduction].to_f
 
     # 101 = grass buffer
     bmp_efficiency_for_grass = BmpEfficiencyLookup.where(:bmp_type_id => 101, :field_type_id => field_type_id, :hgmr_code => field.watershed_segment.hgmr_code).first
+    bmp_efficiency_for_grass_future = BmpEfficiencyLookup.where(:bmp_type_id => 101, :field_type_id => future_field_type_id, :hgmr_code => field.watershed_segment.hgmr_code).first
 
     n_reduction_for_grass = bmp_efficiency_for_grass[:n_reduction].to_f
     p_reduction_for_grass = bmp_efficiency_for_grass[:p_reduction].to_f
     sediment_reduction_for_grass = bmp_efficiency_for_grass[:sediment_reduction].to_f
+    n_reduction_for_grass_future = bmp_efficiency_for_grass_future[:n_reduction].to_f
+    p_reduction_for_grass_future = bmp_efficiency_for_grass_future[:p_reduction].to_f
+    sediment_reduction_for_grass_future = bmp_efficiency_for_grass_future[:sediment_reduction].to_f
 
     # streambank grass
     grass_fence_treated_upland_acres_n = [4 * fencing_functional_acres, total_unconverted_acres].min
@@ -469,27 +501,27 @@ module BmpCalculations
     grass_fence_treated_upland_acres_p_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future].min
     grass_fence_treated_upland_acres_sediment_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future].min
 
-    upland_streambank_grass_n_reduction_future = grass_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass
-    upland_streambank_grass_p_reduction_future = grass_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass
-    upland_streambank_grass_sediment_reduction_future = grass_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass
+    upland_streambank_grass_n_reduction_future = grass_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass_future
+    upland_streambank_grass_p_reduction_future = grass_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass_future
+    upland_streambank_grass_sediment_reduction_future = grass_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass_future
 
     # streambank forest
     forest_fence_treated_upland_acres_n = [4 * fencing_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_n].min
     forest_fence_treated_upland_acres_p = [2 * fencing_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_p].min
     forest_fence_treated_upland_acres_sediment = [2 * fencing_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_sediment].min
 
-    upland_streambank_forest_n_reduction = [0, forest_fence_treated_upland_acres_n * total_adjusted_n_per_acre * n_reduction_for_forest].max
-    upland_streambank_forest_p_reduction = [0, forest_fence_treated_upland_acres_p * total_adjusted_p_per_acre * p_reduction_for_forest].max
-    upland_streambank_forest_sediment_reduction = [0, forest_fence_treated_upland_acres_sediment * total_adjusted_sediment_per_acre * sediment_reduction_for_forest].max
+    upland_streambank_forest_n_reduction = [0, forest_fence_treated_upland_acres_n * total_adjusted_n_per_acre * n_reduction_for_forest_future].max
+    upland_streambank_forest_p_reduction = [0, forest_fence_treated_upland_acres_p * total_adjusted_p_per_acre * p_reduction_for_forest_future].max
+    upland_streambank_forest_sediment_reduction = [0, forest_fence_treated_upland_acres_sediment * total_adjusted_sediment_per_acre * sediment_reduction_for_forest_future].max
 
     # streambank forest future
     forest_fence_treated_upland_acres_n_future = [4 * fencing_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_n_future].min
     forest_fence_treated_upland_acres_p_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future].min
     forest_fence_treated_upland_acres_sediment_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future].min
 
-    upland_streambank_forest_n_reduction_future = [0, forest_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest].max
-    upland_streambank_forest_p_reduction_future = [0, forest_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest].max
-    upland_streambank_forest_sediment_reduction_future = [0, forest_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest].max
+    upland_streambank_forest_n_reduction_future = [0, forest_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest_future].max
+    upland_streambank_forest_p_reduction_future = [0, forest_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest_future].max
+    upland_streambank_forest_sediment_reduction_future = [0, forest_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest_future].max
 
     # grass buffer
     grass_buffer_treated_upland_acres_n = [4 * grass_buffer_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_n - forest_fence_treated_upland_acres_n].min
@@ -505,9 +537,9 @@ module BmpCalculations
     grass_buffer_treated_upland_acres_p_future = [2 * grass_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future - forest_fence_treated_upland_acres_p_future].min
     grass_buffer_treated_upland_acres_sediment_future = [2 * grass_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future - forest_fence_treated_upland_acres_sediment_future].min
 
-    upland_grass_buffer_n_reduction_future = [0, grass_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass].max
-    upland_grass_buffer_p_reduction_future = [0, grass_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass].max
-    upland_grass_buffer_sediment_reduction_future = [0, grass_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass].max
+    upland_grass_buffer_n_reduction_future = [0, grass_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass_future].max
+    upland_grass_buffer_p_reduction_future = [0, grass_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass_future].max
+    upland_grass_buffer_sediment_reduction_future = [0, grass_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass_future].max
 
     # forest buffer
     forest_buffer_treated_upland_acres_n = [4 * forest_buffer_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_n - forest_fence_treated_upland_acres_n - grass_buffer_treated_upland_acres_n].min
@@ -523,9 +555,9 @@ module BmpCalculations
     forest_buffer_treated_upland_acres_p_future = [2 * forest_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future - forest_fence_treated_upland_acres_p_future - grass_buffer_treated_upland_acres_p_future].min
     forest_buffer_treated_upland_acres_sediment_future = [2 * forest_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future - forest_fence_treated_upland_acres_sediment_future - grass_buffer_treated_upland_acres_sediment_future].min
 
-    upland_forest_buffer_n_reduction_future = [0, forest_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest].max
-    upland_forest_buffer_p_reduction_future = [0, forest_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest].max
-    upland_forest_buffer_sediment_reduction_future = [0, forest_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest].max
+    upland_forest_buffer_n_reduction_future = [0, forest_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest_future].max
+    upland_forest_buffer_p_reduction_future = [0, forest_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest_future].max
+    upland_forest_buffer_sediment_reduction_future = [0, forest_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest_future].max
 
     # 12 = wetland
     bmp_efficiency_for_wetland = BmpEfficiencyLookup.where(:bmp_type_id => 12, :hgmr_code => field.watershed_segment.hgmr_code).first
@@ -589,7 +621,7 @@ module BmpCalculations
       field.future_bmps.each do |future_bmp|
         bmp_type_id = future_bmp.bmp_type_id
 
-        bmp_efficiency_future = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
+        bmp_efficiency_future = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => future_field_type_id, :hgmr_code => hgmr_code).first
 
         n_reduction_future = bmp_efficiency_future[:n_reduction].to_f
         p_reduction_future = bmp_efficiency_future[:p_reduction].to_f
@@ -748,16 +780,15 @@ def computeBmpCalculationsWithoutConversion(field)
     #end
 
     # add adjustment factor
-    if field.field_type_id == 1  # crop
+        if field.field_type_id == 1  # crop
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_crop_adjust
-
-
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_crop_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_crop_adjust
 
+    end
+
+    if field.future_field_type_id == 1  # crop
       total_adjusted_n_per_acre_future = total_n_per_acre_future  * field.watershed_segment.n_crop_adjust
-
-
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_crop_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_crop_adjust
     end
@@ -766,7 +797,9 @@ def computeBmpCalculationsWithoutConversion(field)
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_pasture_adjust
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_pasture_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_pasture_adjust
+    end
 
+    if field.future_field_type_id == 2  # pasture
       total_adjusted_n_per_acre_future = total_n_per_acre_future * field.watershed_segment.n_pasture_adjust
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_pasture_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_pasture_adjust
@@ -776,11 +809,14 @@ def computeBmpCalculationsWithoutConversion(field)
       total_adjusted_n_per_acre = total_n_per_acre * field.watershed_segment.n_hay_adjust
       total_adjusted_p_per_acre = total_p_per_acre * field.watershed_segment.p_hay_adjust
       total_adjusted_sediment_per_acre = total_sediment_per_acre * field.watershed_segment.sediment_hay_adjust
+    end
 
+    if field.future_field_type_id == 3  # hay
       total_adjusted_n_per_acre_future = total_n_per_acre_future * field.watershed_segment.n_hay_adjust
       total_adjusted_p_per_acre_future = total_p_per_acre_future * field.watershed_segment.p_hay_adjust
       total_adjusted_sediment_per_acre_future = total_sediment_per_acre_future * field.watershed_segment.sediment_hay_adjust
     end
+
 
 
     fencing_acres = 0
@@ -926,6 +962,7 @@ def computeBmpCalculationsWithoutConversion(field)
         elsif (field.grass_buffer_average_width > 100)
           grass_buffer_functional_acres = field.grass_buffer_length * 100.0 / 43560.0
         end
+
       end
       # if grass buffer future
       if (field.is_grass_buffer_future?)
@@ -941,6 +978,7 @@ def computeBmpCalculationsWithoutConversion(field)
         elsif (field.grass_buffer_average_width_future > 100)
           grass_buffer_functional_acres_future = field.grass_buffer_length_future * 100.0 / 43560.0
         end
+        
       end
 
       # if forest buffer
@@ -1093,17 +1131,26 @@ def computeBmpCalculationsWithoutConversion(field)
 
     # 100 = forest buffer
     bmp_efficiency_for_forest = BmpEfficiencyLookup.where(:bmp_type_id => 100, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
+    bmp_efficiency_for_forest_future = BmpEfficiencyLookup.where(:bmp_type_id => 100, :field_type_id => future_field_type_id, :hgmr_code => hgmr_code).first
+
 
     n_reduction_for_forest = bmp_efficiency_for_forest[:n_reduction].to_f
     p_reduction_for_forest = bmp_efficiency_for_forest[:p_reduction].to_f
     sediment_reduction_for_forest = bmp_efficiency_for_forest[:sediment_reduction].to_f
+    n_reduction_for_forest_future = bmp_efficiency_for_forest_future[:n_reduction].to_f
+    p_reduction_for_forest_future = bmp_efficiency_for_forest_future[:p_reduction].to_f
+    sediment_reduction_for_forest_future = bmp_efficiency_for_forest_future[:sediment_reduction].to_f
 
     # 101 = grass buffer
     bmp_efficiency_for_grass = BmpEfficiencyLookup.where(:bmp_type_id => 101, :field_type_id => field_type_id, :hgmr_code => field.watershed_segment.hgmr_code).first
+    bmp_efficiency_for_grass_future = BmpEfficiencyLookup.where(:bmp_type_id => 101, :field_type_id => future_field_type_id, :hgmr_code => field.watershed_segment.hgmr_code).first
 
     n_reduction_for_grass = bmp_efficiency_for_grass[:n_reduction].to_f
     p_reduction_for_grass = bmp_efficiency_for_grass[:p_reduction].to_f
     sediment_reduction_for_grass = bmp_efficiency_for_grass[:sediment_reduction].to_f
+    n_reduction_for_grass_future = bmp_efficiency_for_grass_future[:n_reduction].to_f
+    p_reduction_for_grass_future = bmp_efficiency_for_grass_future[:p_reduction].to_f
+    sediment_reduction_for_grass_future = bmp_efficiency_for_grass_future[:sediment_reduction].to_f
 
     # streambank grass
     grass_fence_treated_upland_acres_n = [4 * fencing_functional_acres, total_unconverted_acres].min
@@ -1119,27 +1166,27 @@ def computeBmpCalculationsWithoutConversion(field)
     grass_fence_treated_upland_acres_p_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future].min
     grass_fence_treated_upland_acres_sediment_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future].min
 
-    upland_streambank_grass_n_reduction_future = grass_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass
-    upland_streambank_grass_p_reduction_future = grass_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass
-    upland_streambank_grass_sediment_reduction_future = grass_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass
+    upland_streambank_grass_n_reduction_future = grass_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass_future
+    upland_streambank_grass_p_reduction_future = grass_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass_future
+    upland_streambank_grass_sediment_reduction_future = grass_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass_future
 
     # streambank forest
     forest_fence_treated_upland_acres_n = [4 * fencing_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_n].min
     forest_fence_treated_upland_acres_p = [2 * fencing_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_p].min
     forest_fence_treated_upland_acres_sediment = [2 * fencing_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_sediment].min
 
-    upland_streambank_forest_n_reduction = [0, forest_fence_treated_upland_acres_n * total_adjusted_n_per_acre * n_reduction_for_forest].max
-    upland_streambank_forest_p_reduction = [0, forest_fence_treated_upland_acres_p * total_adjusted_p_per_acre * p_reduction_for_forest].max
-    upland_streambank_forest_sediment_reduction = [0, forest_fence_treated_upland_acres_sediment * total_adjusted_sediment_per_acre * sediment_reduction_for_forest].max
+    upland_streambank_forest_n_reduction = [0, forest_fence_treated_upland_acres_n * total_adjusted_n_per_acre * n_reduction_for_forest_future].max
+    upland_streambank_forest_p_reduction = [0, forest_fence_treated_upland_acres_p * total_adjusted_p_per_acre * p_reduction_for_forest_future].max
+    upland_streambank_forest_sediment_reduction = [0, forest_fence_treated_upland_acres_sediment * total_adjusted_sediment_per_acre * sediment_reduction_for_forest_future].max
 
     # streambank forest future
     forest_fence_treated_upland_acres_n_future = [4 * fencing_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_n_future].min
     forest_fence_treated_upland_acres_p_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future].min
     forest_fence_treated_upland_acres_sediment_future = [2 * fencing_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future].min
 
-    upland_streambank_forest_n_reduction_future = [0, forest_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest].max
-    upland_streambank_forest_p_reduction_future = [0, forest_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest].max
-    upland_streambank_forest_sediment_reduction_future = [0, forest_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest].max
+    upland_streambank_forest_n_reduction_future = [0, forest_fence_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest_future].max
+    upland_streambank_forest_p_reduction_future = [0, forest_fence_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest_future].max
+    upland_streambank_forest_sediment_reduction_future = [0, forest_fence_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest_future].max
 
     # grass buffer
     grass_buffer_treated_upland_acres_n = [4 * grass_buffer_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_n - forest_fence_treated_upland_acres_n].min
@@ -1155,9 +1202,9 @@ def computeBmpCalculationsWithoutConversion(field)
     grass_buffer_treated_upland_acres_p_future = [2 * grass_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future - forest_fence_treated_upland_acres_p_future].min
     grass_buffer_treated_upland_acres_sediment_future = [2 * grass_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future - forest_fence_treated_upland_acres_sediment_future].min
 
-    upland_grass_buffer_n_reduction_future = [0, grass_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass].max
-    upland_grass_buffer_p_reduction_future = [0, grass_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass].max
-    upland_grass_buffer_sediment_reduction_future = [0, grass_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass].max
+    upland_grass_buffer_n_reduction_future = [0, grass_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_grass_future].max
+    upland_grass_buffer_p_reduction_future = [0, grass_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_grass_future].max
+    upland_grass_buffer_sediment_reduction_future = [0, grass_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_grass_future].max
 
     # forest buffer
     forest_buffer_treated_upland_acres_n = [4 * forest_buffer_functional_acres, total_unconverted_acres - grass_fence_treated_upland_acres_n - forest_fence_treated_upland_acres_n - grass_buffer_treated_upland_acres_n].min
@@ -1173,9 +1220,9 @@ def computeBmpCalculationsWithoutConversion(field)
     forest_buffer_treated_upland_acres_p_future = [2 * forest_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_p_future - forest_fence_treated_upland_acres_p_future - grass_buffer_treated_upland_acres_p_future].min
     forest_buffer_treated_upland_acres_sediment_future = [2 * forest_buffer_functional_acres_future, total_unconverted_acres_future - grass_fence_treated_upland_acres_sediment_future - forest_fence_treated_upland_acres_sediment_future - grass_buffer_treated_upland_acres_sediment_future].min
 
-    upland_forest_buffer_n_reduction_future = [0, forest_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest].max
-    upland_forest_buffer_p_reduction_future = [0, forest_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest].max
-    upland_forest_buffer_sediment_reduction_future = [0, forest_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest].max
+    upland_forest_buffer_n_reduction_future = [0, forest_buffer_treated_upland_acres_n_future * total_adjusted_n_per_acre_future * n_reduction_for_forest_future].max
+    upland_forest_buffer_p_reduction_future = [0, forest_buffer_treated_upland_acres_p_future * total_adjusted_p_per_acre_future * p_reduction_for_forest_future].max
+    upland_forest_buffer_sediment_reduction_future = [0, forest_buffer_treated_upland_acres_sediment_future * total_adjusted_sediment_per_acre_future * sediment_reduction_for_forest_future].max
 
     # 12 = wetland
     bmp_efficiency_for_wetland = BmpEfficiencyLookup.where(:bmp_type_id => 12, :hgmr_code => field.watershed_segment.hgmr_code).first
@@ -1240,7 +1287,7 @@ def computeBmpCalculationsWithoutConversion(field)
       field.future_bmps.each do |future_bmp|
         bmp_type_id = future_bmp.bmp_type_id
 
-        bmp_efficiency_future = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => field_type_id, :hgmr_code => hgmr_code).first
+        bmp_efficiency_future = BmpEfficiencyLookup.where(:bmp_type_id => bmp_type_id, :field_type_id => future_field_type_id, :hgmr_code => hgmr_code).first
 
         n_reduction_future = bmp_efficiency_future[:n_reduction].to_f
         p_reduction_future = bmp_efficiency_future[:p_reduction].to_f

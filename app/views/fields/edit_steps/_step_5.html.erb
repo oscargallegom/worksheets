@@ -1,3 +1,5 @@
+<% cache('field_current_results') do %>
+
 <% if !flash[:error].nil? %>
     <div class="sectionRest clearfix nn-form">
 
@@ -179,5 +181,7 @@ $(function() {
             <%= link_to "Review Current Results", current_farm_path(@farm), :class => 'button', :id => 'review' %>
 
     </div>
+
+<% end %>
 
 <% end %>

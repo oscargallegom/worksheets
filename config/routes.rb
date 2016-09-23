@@ -6,6 +6,7 @@ NutrientNet::Application.routes.draw do
       post :run_model_future, on: :member
       post :export, on: :member
       post :populateFutureCropManagement, on: :member
+      put '/change_future_field' => 'fields#change_future_field'
       post :populateFutureBMPs, on: :member
       resources :strips do
         resources :crop_rotations do

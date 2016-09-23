@@ -53,7 +53,7 @@ config.action_mailer.raise_delivery_errors = true
     port:                 587,
     domain:               'mail.google.com',
     user_name:            'cbnttmanager',
-    password:             'xy^N07Q4G5GX',
+    password:             'SgSDXw35zQOd',
     authentication:       'plain',
     enable_starttls_auto: true  }
 

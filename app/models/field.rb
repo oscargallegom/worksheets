@@ -16,10 +16,11 @@ class Field < ActiveRecord::Base
 
   serialize :totals
 
-  belongs_to :farm, touch: true
+  belongs_to :farm
   belongs_to :watershed_segment
   belongs_to :irrigation
   belongs_to :field_type
+  belongs_to :future_field_type
   belongs_to :tmdl
   belongs_to :crop_type
   belongs_to :p_test_method
@@ -37,7 +38,7 @@ class Field < ActiveRecord::Base
   has_many :field_livestocks, :dependent => :destroy, autosave: true
   has_many :field_poultry, :dependent => :destroy, autosave: true
 
-  attr_accessible :step, :segment_id, :hel_soils, :current_total_n, :current_sediment_organic_n, :current_soluble_n, :tile_drained_n, :current_total_p, :current_sediment_organic_p, :current_soluble_p, :tile_drained_p, :future_total_n, :future_sediment_organic_n, :future_soluble_n, :future_tile_drained_n, :future_total_p, :future_sediment_organic_p, :future_soluble_p, :future_tile_drained_p , :current_flow, :future_flow, :current_sediment, :future_sediment, :current_carbon, :future_carbon
+  attr_accessible :step, :segment_id, :hel_soils, :current_total_n, :current_sediment_organic_n, :current_soluble_n, :tile_drained_n, :current_total_p, :current_sediment_organic_p, :current_soluble_p, :tile_drained_p, :future_total_n, :future_sediment_organic_n, :future_soluble_n, :future_tile_drained_n, :future_total_p, :future_sediment_organic_p, :future_soluble_p, :future_tile_drained_p , :current_flow, :future_flow, :current_sediment, :future_sediment, :current_carbon, :future_carbon, :future_field_type_id
   # , :area, :baseline_load, :coordinates        #  needed???
   attr_accessible :name, :field_type_id, :crop_type_id, :notes, :farm_id
   attr_accessible :acres_from_user, :acres_from_map, :is_acres_from_map, :tile_drainage_depth, :irrigation_id, :efficiency, :fertigation_n, :soil_test_laboratory_id, :soil_p_extractant_id, :p_test_value

@@ -126,7 +126,7 @@
     <!-- end only show if permanent pasture -->
 
     <!-- only show if crop or continuous hay -->
-    <% if (@field.field_type_id == 1 || @field.field_type_id == 3) then %>
+    <% if (@field.field_type_id == 1 || @field.field_type_id == 3 || @field.future_field_type_id == 1 || @field.future_field_type_id == 3) then %>
         <li><h2 class='sectionHeading'>Riparian/Conservation Buffer BMPs</h2></li>
         <li>Enter information if you have a riparian/conservation buffer BMP in place.
           Note: If the nitrogen load reduction calculated for alternative watering facility is greater than that

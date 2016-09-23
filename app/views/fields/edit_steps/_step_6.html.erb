@@ -17,6 +17,11 @@
       <%= f.hidden_field :step, :value => '6' %>
 
       <input type='hidden' name='addCropForStrip' id='addCropForStrip'>
+<br>
+       <li>
+              <%= f.label :future_field_type_id, 'Future field type:<em>*</em>'.html_safe, :class => 'wide' %>
+              <%= f.collection_select :future_field_type_id, FieldType.all, :id, :name, {:prompt => 'Select field type'}, {:required => true} %>
+            </li>
 
       <br/>The crops in this field's current crop rotation are listed below. You may add a crop to the rotation or click
       on a specific crop to edit it.<br/><br/>
@@ -65,3 +70,13 @@
 </div>
 
 
+<script>
+document.getElementById('field_future_field_type_id').addEventListener('change',function(){
+  var new_field_id = parseInt(document.getElementById('field_future_field_type_id').value)
+  $.ajax({
+    url: "change_future_field",
+    type: 'put',
+    data: {future_field_type_id: new_field_id}
+  });
+            });
+</script>

@@ -67,6 +67,13 @@ class FieldsController < ApplicationController
     @current_strips = @field.strips.where(:is_future => false)
     @future_strips = @field.strips.where(:is_future => true)
 
+    if @field.field_type_id
+      if @field.future_field_type_id == 0
+        @field.future_field_type_id = @field.field_type_id
+        @field.save!
+      end
+    end
+
     add_breadcrumb @farm.name, farm_path(@farm)
     add_breadcrumb 'Fields', farm_fields_path(@farm)
     add_breadcrumb @field.name
@@ -450,5 +457,17 @@ class FieldsController < ApplicationController
 
     redirect_to(:back)
 end
+
+
+
+  def change_future_field
+    @field = Field.find(params[:field_id])
+    @field.future_field_type_id = params[:future_field_type_id]
+    @field.save!
+    respond_to do |format|
+      format.js { render nothing: true }
+    end 
+    logger.debug "Future field id: #{@field.future_field_type_id}"
+  end
 
 end

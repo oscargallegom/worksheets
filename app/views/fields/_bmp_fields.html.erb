@@ -5,7 +5,11 @@
 
 <li>
   <%= f.label :bmp_type_id, 'BMP type:<em>*</em>'.html_safe, :class => 'wide' %>
+  <% if @step == 7 %>
   <%= f.collection_select :bmp_type_id, @field.field_type.bmp_types.all, :id, :name, {:prompt => 'Select BMP type'}, {:required => true, :class => 'class_bmp_type_id'} %>
+  <% else %>
+   <%= f.collection_select :bmp_type_id, @field.future_field_type.bmp_types.all, :id, :name, {:prompt => 'Select BMP type'}, {:required => true, :class => 'class_bmp_type_id'} %>
+  <% end %>
 </li>
 <li>
   <%= f.label :is_planned, 'Planned:', :class => 'wide' %>

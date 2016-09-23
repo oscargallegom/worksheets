@@ -17,7 +17,15 @@ updateIndexes = ->
 
 # if the field type is permanent pasture or hay then the crop category is determined
 updateCropCategory = ->
-  if ($("#field_type_id").val() is '2')
+  if ($("#future_field_type_id").val() is '2')
+    $('#crop_rotation_crop_category_id option').each () ->
+      if $(this).val() isnt '4'
+        $(this).remove() # remove all other options
+  else if($("#future_field_type_id").val() is '3')
+    $('#crop_rotation_crop_category_id option').each () ->
+      if $(this).val() isnt '5'
+        $(this).remove() # remove all other options
+  else if ($("#field_type_id").val() is '2')
     $('#crop_rotation_crop_category_id option').each () ->
       if $(this).val() isnt '4'
         $(this).remove() # remove all other options

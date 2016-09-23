@@ -145,7 +145,7 @@ module Ntt
             ########################################################
             # Grazing, section only available for permanent pasture
             ########################################################
-            if (field.field_type_id == 2)
+            if [1,2].include? field.field_type_id
               start_grazing_operation = '426'
               end_grazing_operation = '427'
 
