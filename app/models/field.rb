@@ -159,6 +159,8 @@ class Field < ActiveRecord::Base
   validates_numericality_of :streambank_restoration_length_future, :greater_than_or_equal_to => 0, :if => 'step?(7) && is_streambank_restoration_future?'
   validates_numericality_of :other_land_use_conversion_acres_future, :greater_than_or_equal_to => 0, :allow_blank => true, :if => 'step?(7)'
 
+  validates_presence_of :other_land_use_conversion_vegetation_type_id,  :if => 'other_land_use_conversion_acres && other_land_use_conversion_acres > 0'
+  validates_presence_of :other_land_use_conversion_vegetation_type_id_future,  :if => 'other_land_use_conversion_acres_future && other_land_use_conversion_acres_future > 0'
   # TODO: area of wetland < area of field
   # TODO: area of buffers < area of field (forest, grass and fence)
   # TODO: sum of all buffers < area of field
