@@ -384,7 +384,7 @@ module Ntt
       end
       xml << "</Navigation>"
 
-      logger.debug "$$$$$$$$$$$$$ xml: #{xml}"
+      logger.info "$$$$$$$$$$$$$ xml: #{xml}"
 
 
       return [true, xml]

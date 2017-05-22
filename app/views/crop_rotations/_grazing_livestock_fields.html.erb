@@ -22,31 +22,31 @@
   <%= f.select :end_date_day, options_for_select(listDays, :selected => f.object.end_date_day), {:prompt => 'Day'}, {:required => true, :style => 'width:50px'} %>
 </li>
 <li>
-  <%= f.label :hours_grazed, 'Number of consecutive days grazed at a time (in each paddock):<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%= f.label :hours_grazed, 'Number of consecutive hours per day grazed:<em>*</em>'.html_safe, :class => 'extrawide' %>
   <%= f.text_field :hours_grazed, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+</li><!--
+<li>
+  <%# f.label :consecutive_hours, 'Number of consecutive hours per day grazed:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%# f.text_field :consecutive_hours, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
 </li>
 <li>
-  <%= f.label :consecutive_hours, 'Number of consecutive hours per day grazed:<em>*</em>'.html_safe, :class => 'extrawide' %>
-  <%= f.text_field :consecutive_hours, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+  <%# f.label :rest_time, 'Pasture rest time (days) between grazings:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%# f.text_field :rest_time, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
 </li>
 <li>
-  <%= f.label :rest_time, 'Pasture rest time (days) between grazings:<em>*</em>'.html_safe, :class => 'extrawide' %>
-  <%= f.text_field :rest_time, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+  <%# f.label :paddocks, 'Number of paddocks in field&sup1;:<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%# f.text_field :paddocks, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
 </li>
 <li>
-  <%= f.label :paddocks, 'Number of paddocks in field&sup1;:<em>*</em>'.html_safe, :class => 'extrawide' %>
-  <%= f.text_field :paddocks, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
-</li>
-<li>
-  <%= f.label :supplemental_feed, 'Is supplemental feed provided?&sup2;<em>*</em>'.html_safe, :class => 'extrawide' %>
-  <%= f.radio_button :supplemental_feed, true, :required => true %>
+  <%# f.label :supplemental_feed, 'Is supplemental feed provided?&sup2;<em>*</em>'.html_safe, :class => 'extrawide' %>
+  <%# f.radio_button :supplemental_feed, true, :required => true %>
               <%= f.label :supplemental_feed_true, 'Yes' %>
               <%= f.radio_button :supplemental_feed, false, :required => true %>
               <%= f.label :supplemental_feed_false, 'No' %>
 </li>
 <li>
  <i> <label class="extrawide">If yes, how many round bales are provided per year per paddock?<em>*</em></label></i>
-  <%= f.text_field :round_bales, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
+  <%# f.text_field :round_bales, :required => 'true', :class => 'textboxMedium', :type => 'number', :min => 0, :max => 24 %>
 </li><br>
 <li>
  <label class="small">&sup1;Calculated. # paddocks = (rest days / days grazed) + 1</label>
@@ -54,7 +54,7 @@
 </li>
  <label class="small">&sup2;Supplement field assumed to be provided Dec-Feb.</label>
  &nbsp
-</li><br>
+</li><br>-->
 
 <li class='li_precision_feeding'
     <% if f.object.animal_id != 2 %> style="display: none;"

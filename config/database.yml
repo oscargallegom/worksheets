@@ -36,7 +36,7 @@ production:
   adapter: mysql2
   database: worksheets
   pool: 5
-  host: 10.209.0.199
+  host: 104.238.117.250
   username: ntt
   password: TIAER05
   ##### for test #####

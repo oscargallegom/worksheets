@@ -38,7 +38,7 @@
         <td><%= farm.cached_fields_length %></td>
         <td>
           <!-- TODO: implement status bar -->
-          <div><%= farm.cached_percent_completed %>%&nbsp;complete</div>
+          <div><%= farm.percentCompleted %>%&nbsp;complete</div>
           <div class="progressbar5px_back">
             <img src="/images/progressbar5px.gif" class="progressbar5px" style="width: <%= farm.cached_percent_completed  %>px" alt="progress bar denoting % complete">
           </div>
